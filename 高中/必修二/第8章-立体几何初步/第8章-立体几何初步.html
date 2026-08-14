@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第8章 立体几何初步 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第8章 立体几何初步 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第8章 立体几何初步</div></header>
@@ -77,7 +40,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>多面体 = "平面多边形一块块拼起来"（面是平的、棱是直的）；旋转体 = "一个平面图形绕定轴转一圈扫过的轨迹"（侧面是曲面）。<br/><strong>物理/现实含义：</strong>易拉罐是圆柱、冰淇淋筒是圆锥、漏斗是圆台、篮球是球、金字塔是正四棱锥、三脚架张开的帐篷是棱锥——现实中几乎每个物体都能抽象成某个基本立体图形，这是把世界"建模"的第一步。</div>
 
 <h2 id="s2">8.2 直观图（斜二测画法）</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <defs>
 <marker id="fig2-arr-b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,5 L0,10 Z" fill="#2563eb"/></marker>
@@ -106,7 +69,7 @@ y′</text>
 <text x="356" y="172" fill="#16a34a" font-size="12">45°</text>
 <text x="400" y="238" text-anchor="middle" fill="#6b7280" font-size="13">直观图：y 缩一半、转 45° → 平行四边形</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：斜二测画法——x 方向长度不变、y 方向缩一半并转 45°，正方形变成了平行四边形</figcaption>
+<figcaption class="fig-cap">图：斜二测画法——x 方向长度不变、y 方向缩一半并转 45°，正方形变成了平行四边形</figcaption>
 </figure>
 <p>立体图形是三维的，但要画在纸上（二维），必须借助一种约定的"投影"方法，画出来的图叫<strong>直观图</strong>。</p>
 <h3>投影的两种方式</h3>
@@ -140,7 +103,7 @@ y′</text>
 <p>直棱柱 S<sub>侧</sub> = 底面周长 × 高；正棱锥 S<sub>侧</sub> = ½ × 底面周长 × 斜高。</p>
 
 <h3>二、体积：底面积 × 高的"累积"</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <defs>
 <clipPath id="fig1-cyl"><rect x="70" y="40" width="110" height="180"/></clipPath>
@@ -162,7 +125,7 @@ y′</text>
 </g>
 <text x="260" y="245" text-anchor="middle" fill="#6b7280" font-size="12">圆锥注满 ⇔ 圆柱只到 ⅓ 高（轴截面示意）</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同底等高的圆锥体积是圆柱的 ⅓——圆锥注满时，圆柱只上升到 ⅓ 高</figcaption>
+<figcaption class="fig-cap">图：同底等高的圆锥体积是圆柱的 ⅓——圆锥注满时，圆柱只上升到 ⅓ 高</figcaption>
 </figure>
 <pre><code>柱体   V = S·h            （圆柱 V = πr²h）
 锥体   V = (1/3)·S·h      （圆锥 V = (1/3)πr²h）
@@ -279,8 +242,8 @@ y′</text>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h3 style="margin:0 0 10px;color:#b45309">一、练习题</h3>
+<div class="paper">
+<h3 class="paper-head">一、练习题</h3>
 <ol>
 <li>说出下列实物各近似于哪种基本立体图形：课本、漏斗、篮球、帐篷（四棱锥形），并指出它们的共同特征。</li>
 <li>用斜二测画法画一个边长为 4 的正方形的直观图。平行于 y 轴的线段长度变为多少？直观图面积是原图面积的多少倍？</li>
@@ -289,21 +252,21 @@ y′</text>
 <li>在正方体 ABCD–A′B′C′D′ 中：① AB 与 CC′ 是何种位置关系？② A′B′ 与 CD 呢？③ 求异面直线 A′B 与 B′C 所成的角。</li>
 <li>证明：若一条直线 l 与平面 α 平行，则过 l 的任一平面 β 与 α 的交线 m 必与 l 平行（线面平行的性质定理）。</li>
 </ol>
-<h3 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>课本 ≈ 长方体（特殊四棱柱），漏斗 ≈ 圆台，篮球 ≈ 球，帐篷 ≈ 四棱锥。共同特征：都是封闭的几何体，都由面（平面或曲面）围成；其中长方体、四棱锥是多面体（面为平面多边形），圆台、球是旋转体（由平面图形绕轴旋转而成）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>平行于 y 轴的线段缩短为原来的一半，即 4 → 2；平行于 x 轴的线段长度不变，仍为 4。直观图是一个夹角 45° 的平行四边形，其面积 = 底 × 高 = 4 × (2·sin45°) = 4√2，而原正方形面积为 16，所以直观图面积是原图的 4√2/16 = √2/4 倍。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>侧面积 S侧 = 2πrh = 2π·2·5 = 20π；底面积 2 个 = 2·πr² = 8π；全面积 S = 20π + 8π = 28π。体积 V = πr²h = π·4·5 = 20π。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>母线 l = √(r² + h²) = √(3² + 4²) = 5。侧面积 S侧 = πrl = π·3·5 = 15π；全面积 S = πr(r + l) = π·3·(3 + 5) = 24π；体积 V = (1/3)πr²h = (1/3)π·9·4 = 12π。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>① AB 与 CC′ 异面（不同在任何一个平面内，既不相交也不平行）。② A′B′ 与 CD 平行（都在底面内且同为棱，方向一致、无公共点）。③ 平移 B′C 到 A′D（或平移 A′B 到 DC′），则 A′B 与 B′C 所成的角等于正三角形 A′BD（或 A′C′B）的内角，故为 60°。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>证明：设 l ∥ α，β 为过 l 的任一平面，β ∩ α = m。要证 l ∥ m。反证：若 l 与 m 相交于 P，则 P ∈ m ⊂ α，又 P ∈ l，于是 l 与 α 有公共点 P，与 l ∥ α（无公共点）矛盾。又 l 与 m 同在平面 β 内、无公共点，故 l ∥ m。这正说明“线面平行 ⇒ 线线平行”：过该直线的平面与已知平面的交线必与它平行。</p></details>
+<h3 class="paper-head">二、参考答案（点击展开）</h3>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>课本 ≈ 长方体（特殊四棱柱），漏斗 ≈ 圆台，篮球 ≈ 球，帐篷 ≈ 四棱锥。共同特征：都是封闭的几何体，都由面（平面或曲面）围成；其中长方体、四棱锥是多面体（面为平面多边形），圆台、球是旋转体（由平面图形绕轴旋转而成）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>平行于 y 轴的线段缩短为原来的一半，即 4 → 2；平行于 x 轴的线段长度不变，仍为 4。直观图是一个夹角 45° 的平行四边形，其面积 = 底 × 高 = 4 × (2·sin45°) = 4√2，而原正方形面积为 16，所以直观图面积是原图的 4√2/16 = √2/4 倍。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>侧面积 S侧 = 2πrh = 2π·2·5 = 20π；底面积 2 个 = 2·πr² = 8π；全面积 S = 20π + 8π = 28π。体积 V = πr²h = π·4·5 = 20π。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>母线 l = √(r² + h²) = √(3² + 4²) = 5。侧面积 S侧 = πrl = π·3·5 = 15π；全面积 S = πr(r + l) = π·3·(3 + 5) = 24π；体积 V = (1/3)πr²h = (1/3)π·9·4 = 12π。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>① AB 与 CC′ 异面（不同在任何一个平面内，既不相交也不平行）。② A′B′ 与 CD 平行（都在底面内且同为棱，方向一致、无公共点）。③ 平移 B′C 到 A′D（或平移 A′B 到 DC′），则 A′B 与 B′C 所成的角等于正三角形 A′BD（或 A′C′B）的内角，故为 60°。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>证明：设 l ∥ α，β 为过 l 的任一平面，β ∩ α = m。要证 l ∥ m。反证：若 l 与 m 相交于 P，则 P ∈ m ⊂ α，又 P ∈ l，于是 l 与 α 有公共点 P，与 l ∥ α（无公共点）矛盾。又 l 与 m 同在平面 β 内、无公共点，故 l ∥ m。这正说明“线面平行 ⇒ 线线平行”：过该直线的平面与已知平面的交线必与它平行。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第7章-复数/第7章-复数.html">← 上一章：第7章 复数</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第9章-统计/第9章-统计.html">下一章：第9章 统计 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学必修第二册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中数学必修第二册</footer>
 </body>
 </html>

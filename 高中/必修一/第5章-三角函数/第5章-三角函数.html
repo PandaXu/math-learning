@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第5章 三角函数 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第5章 三角函数 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第一册 › 第5章 三角函数</div></header>
@@ -81,7 +44,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理/工程含义：</strong>弧度制的核心好处是"角 × 半径 = 弧长"这个线性关系。<strong>线速度与角速度</strong>之间才有简洁关系 v = ω·r、向心加速度 a = ω²r，简谐振动、交流电、波动方程里所有 ω 都是弧度制。用弧度制，三角函数求导公式 sin'x = cos x 才成立（没有任何系数污染），因此高等数学几乎只用弧度制。</div>
 
 <h2 id="s2">5.2 三角函数的概念</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="250" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <text x="20" y="28" font-size="14" font-weight="700" fill="#0f172a">图1　单位圆：正弦 = 纵坐标，余弦 = 横坐标</text>
   <line x1="40" y1="135" x2="220" y2="135" stroke="#94a3b8" stroke-width="2"/>
@@ -110,7 +73,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <text x="338" y="124" font-size="12" fill="#6b7280">半径 r = 1（单位圆）</text>
   <text x="338" y="146" font-size="12" fill="#6b7280">x² + y² = 1（勾股定理）</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：单位圆上旋转的点 P，横坐标是 cos α（绿色投影）、纵坐标是 sin α（蓝色投影），随角 α 一周往返伸缩——恒有 x² + y² = 1</figcaption>
+<figcaption class="fig-cap">图：单位圆上旋转的点 P，横坐标是 cos α（绿色投影）、纵坐标是 sin α（蓝色投影），随角 α 一周往返伸缩——恒有 x² + y² = 1</figcaption>
 </figure>
 <h3>从"直角三角形的边比"到"单位圆上的坐标"</h3>
 <p>初中在直角三角形里定义：sin A = 对边/斜边，cos A = 邻边/斜边，tan A = 对边/邻边。这只能处理 0°～90° 的锐角。高中用<strong>单位圆</strong>把它推广到任意角：</p>
@@ -182,7 +145,7 @@ sin(π/2 + α) = cos α      cos(π/2 + α) = −sin α</code></pre>
 
 <h2 id="s4">5.4 三角函数的图象与性质</h2>
 <h3>正弦曲线：旋转投影在时间轴上的展开</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="220" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <text x="20" y="26" font-size="14" font-weight="700" fill="#0f172a">图2　正弦波：波向右传播，质点只原地上下振动</text>
   <line x1="0" y1="100" x2="560" y2="100" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 5"/>
@@ -205,7 +168,7 @@ sin(π/2 + α) = cos α      cos(π/2 + α) = −sin α</code></pre>
   <line x1="270" y1="192" x2="270" y2="200" stroke="#16a34a" stroke-width="2"/>
   <text x="196" y="190" font-size="12" fill="#16a34a" text-anchor="middle">周期 T（一个波长）</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：正弦波是圆周运动在竖直方向的投影展开——波向右传播，固定位置的质点只在原地做简谐振动，振幅 A、周期 T</figcaption>
+<figcaption class="fig-cap">图：正弦波是圆周运动在竖直方向的投影展开——波向右传播，固定位置的质点只在原地做简谐振动，振幅 A、周期 T</figcaption>
 </figure>
 <p>把角 α 当作自变量 x（用弧度），把 sin x 的值画成曲线，就得到<strong>正弦曲线</strong>。它可以用"五点法"作出一个周期内的图象：</p>
 <pre><code>关键五点： (0,0)  (π/2,1)  (π,0)  (3π/2,−1)  (2π,0)</code></pre>
@@ -334,7 +297,7 @@ A  —— 振幅（最大偏离平衡位置的距离），值域为 [−A, A]
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>把 −570° 化成弧度，并写成 0 ≤ θ &lt; 2π 的形式；再写出所有与 750° 终边相同的角的集合。</li>
@@ -345,19 +308,19 @@ A  —— 振幅（最大偏离平衡位置的距离），值域为 [−A, A]
 <li>把 f(x) = √3 sin x + cos x 化为 y = A sin(x + φ) 的形式，并求它的最大值与取得最大值时的 x 的集合。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>−570° = −570 × π/180 = −19π/6。加 2π（即 12π/6）的整数倍化到 [0, 2π)：−19π/6 + 4π = −19π/6 + 24π/6 = 5π/6，所以 θ = 5π/6。与 750° 终边相同的角：750° − 360° × 2 = 30°，故集合为 { β | β = 30° + k·360°, k ∈ Z }（弧度制为 β = π/6 + 2kπ）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>先求 r = √((−3)² + 4²) = 5。由比值定义：sin α = y/r = 4/5，cos α = x/r = −3/5，tan α = y/x = 4/(−3) = −4/3。几何含义：点 P 在第二象限，纵坐标为正、横坐标为负，故 sin 正、cos 负、tan 负，与符号口诀"二正弦"一致。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由平方关系 sin²α + cos²α = 1 得 cos²α = 1 − (3/5)² = 16/25，即 cos α = ±4/5。因 α 在第二象限，cos α &lt; 0，故 cos α = −4/5；再由商数关系 tan α = sin α / cos α = (3/5) / (−4/5) = −3/4。几何含义：第二象限横坐标（cos）为负、纵坐标（sin）为正。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>逐项用诱导公式：sin(π + α) = −sin α；cos(−α) = cos α（cos 是偶函数）；sin(π/2 − α) = cos α（余角互换）；cos(π − α) = −cos α。原式 = (−sin α)·cos α + cos α·(−cos α) = −sin α cos α − cos²α = −cos α (sin α + cos α)。（若按教材常见版本取 sin(π/2 − α)·cos(π − α) = cos α·(−cos α)，结果即 −cos α(sin α + cos α)。）</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>对照 y = A sin(ωx + φ)：振幅 A = 2；ω = 3，周期 T = 2π/ω = 2π/3；初相 φ = −π/6。五点法：令 3x − π/6 依次取 0, π/2, π, 3π/2, 2π，解得 x 依次为 π/18, 2π/9, 7π/18, 5π/9, 13π/18，对应函数值 0, 2, 0, −2, 0。五点为 (π/18,0)、(2π/9,2)、(7π/18,0)、(5π/9,−2)、(13π/18,0)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>辅助角公式：a = √3, b = 1，则 √(a² + b²) = √(3 + 1) = 2，tan φ = b/a = 1/√3，取 φ = π/6（此时 cos φ = √3/2、sin φ = 1/2）。故 f(x) = 2 sin(x + π/6)。最大值 2，在 x + π/6 = π/2 + 2kπ，即 x = π/3 + 2kπ (k ∈ Z) 时取得。几何含义：两个相差 90° 相位的振动合成为一个振幅为 2、初相为 π/6 的同频振动。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>−570° = −570 × π/180 = −19π/6。加 2π（即 12π/6）的整数倍化到 [0, 2π)：−19π/6 + 4π = −19π/6 + 24π/6 = 5π/6，所以 θ = 5π/6。与 750° 终边相同的角：750° − 360° × 2 = 30°，故集合为 { β | β = 30° + k·360°, k ∈ Z }（弧度制为 β = π/6 + 2kπ）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>先求 r = √((−3)² + 4²) = 5。由比值定义：sin α = y/r = 4/5，cos α = x/r = −3/5，tan α = y/x = 4/(−3) = −4/3。几何含义：点 P 在第二象限，纵坐标为正、横坐标为负，故 sin 正、cos 负、tan 负，与符号口诀"二正弦"一致。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>由平方关系 sin²α + cos²α = 1 得 cos²α = 1 − (3/5)² = 16/25，即 cos α = ±4/5。因 α 在第二象限，cos α &lt; 0，故 cos α = −4/5；再由商数关系 tan α = sin α / cos α = (3/5) / (−4/5) = −3/4。几何含义：第二象限横坐标（cos）为负、纵坐标（sin）为正。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>逐项用诱导公式：sin(π + α) = −sin α；cos(−α) = cos α（cos 是偶函数）；sin(π/2 − α) = cos α（余角互换）；cos(π − α) = −cos α。原式 = (−sin α)·cos α + cos α·(−cos α) = −sin α cos α − cos²α = −cos α (sin α + cos α)。（若按教材常见版本取 sin(π/2 − α)·cos(π − α) = cos α·(−cos α)，结果即 −cos α(sin α + cos α)。）</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>对照 y = A sin(ωx + φ)：振幅 A = 2；ω = 3，周期 T = 2π/ω = 2π/3；初相 φ = −π/6。五点法：令 3x − π/6 依次取 0, π/2, π, 3π/2, 2π，解得 x 依次为 π/18, 2π/9, 7π/18, 5π/9, 13π/18，对应函数值 0, 2, 0, −2, 0。五点为 (π/18,0)、(2π/9,2)、(7π/18,0)、(5π/9,−2)、(13π/18,0)。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>辅助角公式：a = √3, b = 1，则 √(a² + b²) = √(3 + 1) = 2，tan φ = b/a = 1/√3，取 φ = π/6（此时 cos φ = √3/2、sin φ = 1/2）。故 f(x) = 2 sin(x + π/6)。最大值 2，在 x + π/6 = π/2 + 2kπ，即 x = π/3 + 2kπ (k ∈ Z) 时取得。几何含义：两个相差 90° 相位的振动合成为一个振幅为 2、初相为 π/6 的同频振动。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第4章-指数函数与对数函数/第4章-指数函数与对数函数.html">← 上一章：第4章 指数函数与对数函数</a>
 <a href="../../../index.html">回目录</a>
 <a href="../../必修二/第6章-平面向量及其应用/第6章-平面向量及其应用.html">下一章：第6章 平面向量及其应用 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中数学到高中数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初中数学到高中数学</footer>
 </body>
 </html>

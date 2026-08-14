@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第1章 空间向量与立体几何 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第1章 空间向量与立体几何 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第一册 › 第1章 空间向量与立体几何</div></header>
@@ -97,7 +60,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>两个不共线向量只能"张成"一个平面，它们的所有线性组合 <code>xa⃗ + yb⃗</code> 都躺在这个平面内——共面性 = "是否只由两个方向就能表示"。<strong>物理含义：</strong>同一平面内所有力的合力，总能用其中两个不共线的力表示出来（平面汇交力系）。</div>
 
 <h3>向量的数量积（点积 / 内积）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="40" y1="150" x2="490" y2="150" stroke="#cbd5e1" stroke-width="1"/>
   <line x1="80" y1="150" x2="200" y2="150" stroke="#16a34a" stroke-width="7" opacity="0.35">
@@ -125,7 +88,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <text x="185" y="185" fill="#16a34a" font-size="13" text-anchor="middle">投影 = |b⃗|·cosθ（随 θ 增大而变短）</text>
   <text x="472" y="120" fill="#64748b" font-size="12" text-anchor="end">θ → 90° 时投影为 0</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图① 数量积：b⃗ 在 a⃗ 方向上的投影 × |a⃗|；b⃗ 转到与 a⃗ 垂直（θ = 90°）时投影为 0、数量积为 0——这正是功 W = F⃗·s⃗ = |F⃗||s⃗|cosθ 的几何来源</figcaption>
+<figcaption class="fig-cap">图① 数量积：b⃗ 在 a⃗ 方向上的投影 × |a⃗|；b⃗ 转到与 a⃗ 垂直（θ = 90°）时投影为 0、数量积为 0——这正是功 W = F⃗·s⃗ = |F⃗||s⃗|cosθ 的几何来源</figcaption>
 </figure>
 <p><strong>定义</strong>：设 〈a⃗, b⃗〉 为两向量 a⃗、b⃗ 的夹角（0 ≤ θ ≤ π），则</p>
 <pre><code>a⃗ · b⃗ = |a⃗| · |b⃗| · cos〈a⃗, b⃗〉</code></pre>
@@ -148,7 +111,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>数量积是"一个向量在另一个向量方向上的<strong>投影</strong>与后者长度的乘积"；它用一个数度量了"两个方向有多一致"——点积为正说明夹角是锐角、为零说明垂直、为负说明是钝角。<strong>物理含义：</strong>恒力做功 <code>W = F⃗ · s⃗ = |F⃗||s⃗|cosθ</code>：力与位移同向做正功、垂直不做功、反向做负功——"力在位移方向上的投影 × 位移"正是功。</div>
 
 <h2 id="s2">1.2 空间向量基本定理</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <polygon points="170,200 260,200 290,230 200,230" fill="#2563eb" opacity="0.06"/>
   <polygon points="170,200 170,132.5 200,162.5 200,230" fill="#16a34a" opacity="0.05"/>
@@ -202,7 +165,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <circle cx="170" cy="200" r="3" fill="#334155"/>
   <text x="160" y="215" fill="#64748b" font-size="12" text-anchor="middle">O</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图② 空间向量基本定理：任一向量沿三个不共面方向（x、y、z 轴）被唯一分解为 a⃗ = xi⃗ + yj⃗ + zk⃗，三个分量恰好就是它的坐标 (x, y, z)</figcaption>
+<figcaption class="fig-cap">图② 空间向量基本定理：任一向量沿三个不共面方向（x、y、z 轴）被唯一分解为 a⃗ = xi⃗ + yj⃗ + zk⃗，三个分量恰好就是它的坐标 (x, y, z)</figcaption>
 </figure>
 <h3>从共线、共面到空间</h3>
 <p>先回顾两条"降维"定理：</p>
@@ -346,7 +309,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li><strong>概念辨析</strong>：下列说法正确的是（　）① 空间向量由大小和方向唯一确定，与起点位置无关（自由向量）；② 单位向量的模为 1，零向量的模为 0 且方向任意；③ 两个向量相等是指它们的大小相等；④ 力、速度、位移、电场强度都是向量，因为它们"既有大小又有方向"。<br/>A. ①②③　B. ①②④　C. ②③④　D. 全部正确</li>
@@ -357,16 +320,16 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li><strong>综合应用（平行、垂直与夹角）</strong>：(1) 在棱长为 1 的正方体 ABCD–A₁B₁C₁D₁ 中，以 D 为原点、DA、DC、DD₁ 分别为 x、y、z 轴正方向建立空间直角坐标系，用向量证明 <code>BD₁ ⊥ AC</code>。(2) 在长方体 ABCD–A₁B₁C₁D₁ 中，AB = 2、AD = 1、AA₁ = 3，求异面直线 AB₁ 与 BC 所成角，以及直线 AC₁ 与平面 ABCD 所成角的正弦值。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><strong>选 B</strong>。③ 错：向量相等必须"大小相等且方向相同"（平移后可重合），只比大小不够；①②④ 正确。要点：自由向量是向量法可以平移分解的根本前提；力、速度、位移、电场强度等都是"既有大小又有方向"的典型向量。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>AC₁⃗ = AB⃗ + BC⃗ + CC₁⃗ = a⃗ + b⃗ + c⃗</code>；<code>BD₁⃗ = BA⃗ + AA₁⃗ + A₁D₁⃗ = −a⃗ + c⃗ + b⃗ = −a⃗ + b⃗ + c⃗</code>。几何含义：从 A 出发先后沿 <code>a⃗</code>、<code>b⃗</code>、<code>c⃗</code> 三次平移，总效果等于直接沿和向量 <code>AC₁⃗</code> 平移——"首尾相接，总位移为和"。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>(1) 共线：<code>b⃗ = 2a⃗</code>（对应坐标成比例 2/1 = 4/2 = 6/3），存在 λ = 2 使 <code>b⃗ = λa⃗</code>。(2) 共面：<code>OA⃗ = (1,2,3)</code>、<code>OC⃗ = (1,1,1)</code> 不共线，而 <code>OB⃗ = (2,4,6) = 2·OA⃗ + 0·OC⃗</code>，即 <code>OB⃗</code> 可由 <code>OA⃗</code>、<code>OC⃗</code> 线性表示，故四点共面（实际 O、A、B 三点共线）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>(1) <code>a⃗ · b⃗ = 1×(−1) + 2×1 + 3×2 = −1 + 2 + 6 = 7</code>。(2) <code>|a⃗| = √(1² + 2² + 3²) = √14</code>。(3) <code>cos〈a⃗, b⃗〉 = 7 / (√14 × √6) = 7 / (2√21)</code>；因 <code>a⃗ · b⃗ = 7 ≠ 0</code>，故不垂直。(4) 当力与位移垂直（θ = 90°，cosθ = 0）时 W = 0，例如手提重物沿水平方向匀速移动时，重力与位移垂直，重力不做功。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>平面内取 <code>AB⃗ = B − A = (−1, 1, 0)</code>、<code>AC⃗ = C − A = (−1, 0, 1)</code>。设法向量 <code>n⃗ = (x, y, z)</code>，由 <code>n⃗ · AB⃗ = 0</code> 得 −x + y = 0 → y = x；由 <code>n⃗ · AC⃗ = 0</code> 得 −x + z = 0 → z = x。取 x = 1，得 <code>n⃗ = (1, 1, 1)</code>（法向量不唯一，任取一组非零解即可）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(1) 建系得 B(1,1,0)、D₁(0,0,1)、A(1,0,0)、C(0,1,0)，<code>BD₁⃗ = (−1, −1, 1)</code>、<code>AC⃗ = (−1, 1, 0)</code>，<code>BD₁⃗ · AC⃗ = 1 − 1 + 0 = 0</code>，故 <code>BD₁ ⊥ AC</code>。(2) 建系：D(0,0,0)、A(2,0,0)、B(2,1,0)、C(0,1,0)、B₁(2,1,3)、C₁(0,1,3)。<code>AB₁⃗ = (0,1,3)</code>、<code>BC⃗ = (−2,0,0)</code>，<code>cosθ = |AB₁⃗ · BC⃗| / (|AB₁⃗|·|BC⃗|) = 0 / (√10 × 2) = 0</code>，故异面直线所成角为 90°；平面 ABCD 的法向量取 <code>n⃗ = (0,0,1)</code>，<code>AC₁⃗ = (−2,1,3)</code>，<code>|AC₁⃗| = √14</code>，<code>sinθ = |AC₁⃗ · n⃗| / (|AC₁⃗|·|n⃗|) = 3 / √14</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p><strong>选 B</strong>。③ 错：向量相等必须"大小相等且方向相同"（平移后可重合），只比大小不够；①②④ 正确。要点：自由向量是向量法可以平移分解的根本前提；力、速度、位移、电场强度等都是"既有大小又有方向"的典型向量。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><code>AC₁⃗ = AB⃗ + BC⃗ + CC₁⃗ = a⃗ + b⃗ + c⃗</code>；<code>BD₁⃗ = BA⃗ + AA₁⃗ + A₁D₁⃗ = −a⃗ + c⃗ + b⃗ = −a⃗ + b⃗ + c⃗</code>。几何含义：从 A 出发先后沿 <code>a⃗</code>、<code>b⃗</code>、<code>c⃗</code> 三次平移，总效果等于直接沿和向量 <code>AC₁⃗</code> 平移——"首尾相接，总位移为和"。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>(1) 共线：<code>b⃗ = 2a⃗</code>（对应坐标成比例 2/1 = 4/2 = 6/3），存在 λ = 2 使 <code>b⃗ = λa⃗</code>。(2) 共面：<code>OA⃗ = (1,2,3)</code>、<code>OC⃗ = (1,1,1)</code> 不共线，而 <code>OB⃗ = (2,4,6) = 2·OA⃗ + 0·OC⃗</code>，即 <code>OB⃗</code> 可由 <code>OA⃗</code>、<code>OC⃗</code> 线性表示，故四点共面（实际 O、A、B 三点共线）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>(1) <code>a⃗ · b⃗ = 1×(−1) + 2×1 + 3×2 = −1 + 2 + 6 = 7</code>。(2) <code>|a⃗| = √(1² + 2² + 3²) = √14</code>。(3) <code>cos〈a⃗, b⃗〉 = 7 / (√14 × √6) = 7 / (2√21)</code>；因 <code>a⃗ · b⃗ = 7 ≠ 0</code>，故不垂直。(4) 当力与位移垂直（θ = 90°，cosθ = 0）时 W = 0，例如手提重物沿水平方向匀速移动时，重力与位移垂直，重力不做功。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>平面内取 <code>AB⃗ = B − A = (−1, 1, 0)</code>、<code>AC⃗ = C − A = (−1, 0, 1)</code>。设法向量 <code>n⃗ = (x, y, z)</code>，由 <code>n⃗ · AB⃗ = 0</code> 得 −x + y = 0 → y = x；由 <code>n⃗ · AC⃗ = 0</code> 得 −x + z = 0 → z = x。取 x = 1，得 <code>n⃗ = (1, 1, 1)</code>（法向量不唯一，任取一组非零解即可）。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>(1) 建系得 B(1,1,0)、D₁(0,0,1)、A(1,0,0)、C(0,1,0)，<code>BD₁⃗ = (−1, −1, 1)</code>、<code>AC⃗ = (−1, 1, 0)</code>，<code>BD₁⃗ · AC⃗ = 1 − 1 + 0 = 0</code>，故 <code>BD₁ ⊥ AC</code>。(2) 建系：D(0,0,0)、A(2,0,0)、B(2,1,0)、C(0,1,0)、B₁(2,1,3)、C₁(0,1,3)。<code>AB₁⃗ = (0,1,3)</code>、<code>BC⃗ = (−2,0,0)</code>，<code>cosθ = |AB₁⃗ · BC⃗| / (|AB₁⃗|·|BC⃗|) = 0 / (√10 × 2) = 0</code>，故异面直线所成角为 90°；平面 ABCD 的法向量取 <code>n⃗ = (0,0,1)</code>，<code>AC₁⃗ = (−2,1,3)</code>，<code>|AC₁⃗| = √14</code>，<code>sinθ = |AC₁⃗ · n⃗| / (|AC₁⃗|·|n⃗|) = 3 / √14</code>。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../../必修二/第10章-概率/第10章-概率.html">← 上一章：第10章 概率</a><a href="../../../index.html">回目录</a><a href="../第2章-直线和圆的方程/第2章-直线和圆的方程.html">下一章：第2章 直线和圆的方程 →</a></nav>
+<nav class="pager"><a href="../../必修二/第10章-概率/第10章-概率.html">← 上一章：第10章 概率</a><a href="../../../index.html">回目录</a><a href="../第2章-直线和圆的方程/第2章-直线和圆的方程.html">下一章：第2章 直线和圆的方程 →</a></nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 选择性必修第一册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 选择性必修第一册</footer>
 </body>
 </html>

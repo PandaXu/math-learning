@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第12章 全等三角形 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第12章 全等三角形 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第12章 全等三角形</div></header>
@@ -57,7 +20,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <h2 id="s1">12.1 全等三角形的概念与性质</h2>
 <h3>什么是全等？</h3>
 <p><strong>全等形</strong>：能够完全重合的两个图形叫做全等形。用符号 <code>≌</code> 表示，读作"全等于"。两个三角形全等，记作 <code>△ABC ≌ △DEF</code>。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="660" height="240" viewBox="0 0 660 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 平移 --><g transform="translate(75,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="translate" values="-75,-75;0,0;0,0;-75,-75" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 旋转 --><g transform="translate(295,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="rotate" values="180 35 -3.3;0 35 -3.3;0 35 -3.3;180 35 -3.3" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 翻折 --><g transform="translate(550,135)"><line x1="0" y1="-70" x2="0" y2="40" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 4"/><polygon points="-35,-60 0,30 -70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="scale" values="1 1;-1 1;-1 1;1 1" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><g fill="#334155" font-size="14" text-anchor="middle"><text x="110" y="212">平移</text><text x="330" y="212">旋转</text><text x="550" y="212">翻折</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同一个三角形经平移、旋转、翻折后都能与虚线三角形完全重合——全等是"刚体运动"下的不变性</figcaption></figure>
+<figure class="fig"><svg width="660" height="240" viewBox="0 0 660 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 平移 --><g transform="translate(75,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="translate" values="-75,-75;0,0;0,0;-75,-75" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 旋转 --><g transform="translate(295,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="rotate" values="180 35 -3.3;0 35 -3.3;0 35 -3.3;180 35 -3.3" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 翻折 --><g transform="translate(550,135)"><line x1="0" y1="-70" x2="0" y2="40" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 4"/><polygon points="-35,-60 0,30 -70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="scale" values="1 1;-1 1;-1 1;1 1" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><g fill="#334155" font-size="14" text-anchor="middle"><text x="110" y="212">平移</text><text x="330" y="212">旋转</text><text x="550" y="212">翻折</text></g></svg><figcaption class="fig-cap">图：同一个三角形经平移、旋转、翻折后都能与虚线三角形完全重合——全等是"刚体运动"下的不变性</figcaption></figure>
 <div class="insight"><strong>几何含义：</strong>全等 = 形状相同 <strong>且</strong> 大小相同。"完全重合"意味着两个图形之间只相差一次<strong>刚体运动</strong>——平移、旋转、翻折（轴对称）中的一种或组合。所以全等三角形是"同一个三角形换了位置、朝向或正反面"。</div>
 <div class="insight"><strong>物理含义：</strong>全等对应"<strong>刚体不变性</strong>"。一块不会变形的硬纸片、一块钢板、一个机械零件，无论你怎么搬（平移）、怎么转（旋转）、怎么翻面（镜面反射），它的形状和大小都不变。工程上两个"全等"的零件可以互相替换、互换安装；物理里"刚体"就是内部任意两点距离永远不变的物体——全等正是"距离保持不变"这一刚性条件的图形化表达。</div>
 <h3>对应顶点、对应边、对应角</h3>
@@ -81,7 +44,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   CA = FD</code></pre>
 <div class="insight"><strong>几何含义：</strong>三条边的长度一旦确定，三角形就<strong>被完全锁死</strong>了——形状和大小都唯一。三条边是"刚性三角"的全部信息：给你三根确定长度的木条，只能拼出<strong>一种</strong>三角形（最多差一个翻面）。</div>
 <div class="insight"><strong>物理含义：</strong>这就是<strong>三角形的稳定性</strong>。三根杆件两端铆接后，框架<strong>不会变形</strong>，因为三边长度固定 ⟹ 三个角度也自动固定。所以自行车的车架、屋顶的桁架、起重机的吊臂、桥梁的钢架都用三角形结构来抗变形。而四边形只有四边确定时仍可被压扁（平行四边形可活动），所以窗框、伸缩门要加斜撑（对角线）拆成三角形才能稳固。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="620" height="230" viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 三角形：三边锁死 --><polygon points="95,75 45,180 145,180" fill="#2563eb" fill-opacity="0.10"/><line x1="95" y1="75" x2="45" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="45" y1="180" x2="145" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="145" y1="180" x2="95" y2="75" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><g stroke="#dc2626" stroke-width="3" fill="#dc2626"><animateTransform attributeName="transform" type="translate" values="0,-6;0,6;0,-6" dur="1.8s" repeatCount="indefinite"/><line x1="95" y1="26" x2="95" y2="52"/><polygon points="90,46 100,46 95,58"/></g><text x="95" y="208" fill="#334155" font-size="14" text-anchor="middle">三角形（稳定，压不动）</text><!-- 四边形：可压扁 --><polygon fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" points="270,180 310,90 450,90 410,180"><animate attributeName="points" values="270,180 310,90 450,90 410,180;270,180 270,90 410,90 410,180;270,180 350,90 490,90 410,180;270,180 310,90 450,90 410,180" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/></polygon><text x="355" y="208" fill="#334155" font-size="14" text-anchor="middle">四边形（可压扁、变形）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：三边长度固定时三角形被"锁死"、压不动；四边形只有四边固定时仍可左右压扁——这就是三角形的稳定性</figcaption></figure>
+<figure class="fig"><svg width="620" height="230" viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 三角形：三边锁死 --><polygon points="95,75 45,180 145,180" fill="#2563eb" fill-opacity="0.10"/><line x1="95" y1="75" x2="45" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="45" y1="180" x2="145" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="145" y1="180" x2="95" y2="75" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><g stroke="#dc2626" stroke-width="3" fill="#dc2626"><animateTransform attributeName="transform" type="translate" values="0,-6;0,6;0,-6" dur="1.8s" repeatCount="indefinite"/><line x1="95" y1="26" x2="95" y2="52"/><polygon points="90,46 100,46 95,58"/></g><text x="95" y="208" fill="#334155" font-size="14" text-anchor="middle">三角形（稳定，压不动）</text><!-- 四边形：可压扁 --><polygon fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" points="270,180 310,90 450,90 410,180"><animate attributeName="points" values="270,180 310,90 450,90 410,180;270,180 270,90 410,90 410,180;270,180 350,90 490,90 410,180;270,180 310,90 450,90 410,180" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/></polygon><text x="355" y="208" fill="#334155" font-size="14" text-anchor="middle">四边形（可压扁、变形）</text></svg><figcaption class="fig-cap">图：三边长度固定时三角形被"锁死"、压不动；四边形只有四边固定时仍可左右压扁——这就是三角形的稳定性</figcaption></figure>
 
 <h2 id="s3">12.3 判定：SAS（边角边）</h2>
 <p><strong>定理</strong>：两边和它们的<strong>夹角</strong>分别相等的两个三角形全等，简写为 <strong>SAS</strong>（Side-Angle-Side）。</p>
@@ -141,7 +104,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <pre><code>若 OC 是 ∠AOB 的平分线，P 在 OC 上，
 PD ⊥ OA 于 D，PE ⊥ OB 于 E，
 则 PD = PE。</code>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="320" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 角的两边与平分线 --><line x1="280" y1="260" x2="100" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="460" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="280" y2="20" stroke="#334155" stroke-width="2"/><path d="M 254.3 229.4 A 40 40 0 0 1 280 220" fill="none" stroke="#94a3b8" stroke-width="1.5"/><path d="M 280 220 A 40 40 0 0 1 305.7 229.4" fill="none" stroke="#94a3b8" stroke-width="1.5"/><!-- P 沿平分线滑动：整体以 O 为中心按比例缩放 --><g transform="translate(280,260)"><g><animateTransform attributeName="transform" type="scale" values="1.35;0.7;1.35" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite"/><circle cx="0" cy="-120" r="77.1" fill="none" stroke="#16a34a" stroke-dasharray="4 4" stroke-opacity="0.45" stroke-width="1.5"/><line x1="0" y1="-120" x2="-59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><line x1="0" y1="-120" x2="59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><polyline points="-65.5,-78.1 -57.9,-84.5 -51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><polyline points="65.5,-78.1 57.9,-84.5 51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><circle cx="0" cy="-120" r="5" fill="#2563eb"/><circle cx="-59.1" cy="-70.4" r="4" fill="#16a34a"/><circle cx="59.1" cy="-70.4" r="4" fill="#16a34a"/></g></g><!-- 标注 --><g fill="#334155" font-size="14"><text x="286" y="26">C</text><text x="92" y="40">A</text><text x="468" y="40">B</text><text x="286" y="277">O</text><text x="270" y="130">P</text><text x="204" y="201">D</text><text x="356" y="201">E</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：P 在角平分线 OC 上滑动，到两边 OA、OB 的垂线距离 PD = PE 始终相等（虚线圆过 D、E 两点）</figcaption></figure></pre>
+<figure class="fig"><svg width="560" height="320" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 角的两边与平分线 --><line x1="280" y1="260" x2="100" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="460" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="280" y2="20" stroke="#334155" stroke-width="2"/><path d="M 254.3 229.4 A 40 40 0 0 1 280 220" fill="none" stroke="#94a3b8" stroke-width="1.5"/><path d="M 280 220 A 40 40 0 0 1 305.7 229.4" fill="none" stroke="#94a3b8" stroke-width="1.5"/><!-- P 沿平分线滑动：整体以 O 为中心按比例缩放 --><g transform="translate(280,260)"><g><animateTransform attributeName="transform" type="scale" values="1.35;0.7;1.35" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite"/><circle cx="0" cy="-120" r="77.1" fill="none" stroke="#16a34a" stroke-dasharray="4 4" stroke-opacity="0.45" stroke-width="1.5"/><line x1="0" y1="-120" x2="-59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><line x1="0" y1="-120" x2="59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><polyline points="-65.5,-78.1 -57.9,-84.5 -51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><polyline points="65.5,-78.1 57.9,-84.5 51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><circle cx="0" cy="-120" r="5" fill="#2563eb"/><circle cx="-59.1" cy="-70.4" r="4" fill="#16a34a"/><circle cx="59.1" cy="-70.4" r="4" fill="#16a34a"/></g></g><!-- 标注 --><g fill="#334155" font-size="14"><text x="286" y="26">C</text><text x="92" y="40">A</text><text x="468" y="40">B</text><text x="286" y="277">O</text><text x="270" y="130">P</text><text x="204" y="201">D</text><text x="356" y="201">E</text></g></svg><figcaption class="fig-cap">图：P 在角平分线 OC 上滑动，到两边 OA、OB 的垂线距离 PD = PE 始终相等（虚线圆过 D、E 两点）</figcaption></figure></pre>
 <div class="insight"><strong>几何含义：</strong>角平分线是"<strong>到角两边距离相等的点的集合（轨迹）</strong>"。它把角"等分"成两个相等的角，而"到两边距离相等"这条性质，让角平分线成为角内部的<strong>等距线</strong>。</div>
 <div class="insight"><strong>物理含义：</strong>角平分线是一条<strong>对称轴</strong>（把一个角沿角平分线对折，两边完全重合）。在光学里，平面镜反射满足"入射角 = 反射角"，而<strong>法线正是入射线与反射线夹角的角平分线</strong>；在机械里，楔形、锥形、刀具的对称刃口都沿角平分线分布，保证两侧受力对称。</div>
 <h3>判定定理（逆定理）</h3>
@@ -196,7 +159,7 @@ PD ⊥ OA 于 D，PE ⊥ OB 于 E，
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>（对应元素）若 <code>△ABC ≌ △DEF</code>，且 ∠A = 40°，∠B = 60°，AB = 5 cm。请写出 ∠D、∠E 的度数以及边 DE 的长度，并说明依据。</li>
@@ -207,20 +170,20 @@ PD ⊥ OA 于 D，PE ⊥ OB 于 E，
 <li>（角平分线性质）OC 是 ∠AOB 的平分线，P 在 OC 上，PD ⊥ OA 于 D，PE ⊥ OB 于 E。若 PD = 4，求 PE，并说明依据。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>∠D = 40°，∠E = 60°，DE = 5 cm。依据：全等三角形的<strong>对应角相等</strong>、<strong>对应边相等</strong>；△ABC ≌ △DEF 时 A 对 D、B 对 E、AB 对 DE。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>一定全等。三边分别相等（3、4、5 对 3、4、5），由 <strong>SSS</strong>（边边边）可判定全等。三边一旦确定，三角形的形状和大小就被唯一锁死——这正是<strong>三角形的稳定性</strong>：三根定长木条只能拼出一种三角形。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① ∠A = ∠D 能判定（两边 6、5 与它们的<strong>夹角</strong> ∠A 对应相等，用 <strong>SAS</strong>）；② ∠B = ∠E 不能判定——此时相等的角是边 AC 的对角，属于 <strong>SSA（边边角）</strong>，会产生两个不同三角形，不能判定全等。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>由 ∠B = ∠E、BC = EF（两角的<strong>夹边</strong>）、∠C = ∠F，满足 <strong>ASA</strong>，故 △ABC ≌ △DEF。对应边：AB = DE、BC = EF、AC = DF。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由勾股定理：AC = √(13² − 5²) = √(169 − 25) = √144 = 12。两个三角形全等，依据 <strong>HL</strong>（斜边和一条直角边分别相等的两个直角三角形全等）；全等后对应直角边 AC = DF = 12。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>PE = 4。依据角平分线性质定理：<strong>角平分线上的点到角两边的距离相等</strong>。P 在平分线 OC 上，PD、PE 分别是到 OA、OB 的距离，故 PD = PE。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>∠D = 40°，∠E = 60°，DE = 5 cm。依据：全等三角形的<strong>对应角相等</strong>、<strong>对应边相等</strong>；△ABC ≌ △DEF 时 A 对 D、B 对 E、AB 对 DE。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>一定全等。三边分别相等（3、4、5 对 3、4、5），由 <strong>SSS</strong>（边边边）可判定全等。三边一旦确定，三角形的形状和大小就被唯一锁死——这正是<strong>三角形的稳定性</strong>：三根定长木条只能拼出一种三角形。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>① ∠A = ∠D 能判定（两边 6、5 与它们的<strong>夹角</strong> ∠A 对应相等，用 <strong>SAS</strong>）；② ∠B = ∠E 不能判定——此时相等的角是边 AC 的对角，属于 <strong>SSA（边边角）</strong>，会产生两个不同三角形，不能判定全等。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>由 ∠B = ∠E、BC = EF（两角的<strong>夹边</strong>）、∠C = ∠F，满足 <strong>ASA</strong>，故 △ABC ≌ △DEF。对应边：AB = DE、BC = EF、AC = DF。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>由勾股定理：AC = √(13² − 5²) = √(169 − 25) = √144 = 12。两个三角形全等，依据 <strong>HL</strong>（斜边和一条直角边分别相等的两个直角三角形全等）；全等后对应直角边 AC = DF = 12。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>PE = 4。依据角平分线性质定理：<strong>角平分线上的点到角两边的距离相等</strong>。P 在平分线 OC 上，PD、PE 分别是到 OA、OB 的距离，故 PD = PE。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第11章-三角形/第11章-三角形.html">← 上一章：第11章 三角形</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第13章-轴对称/第13章-轴对称.html">下一章：第13章 轴对称 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初二数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初二数学开始</footer>
 </body>
 </html>

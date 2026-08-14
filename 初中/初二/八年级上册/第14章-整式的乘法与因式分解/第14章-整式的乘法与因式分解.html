@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第14章 整式的乘法与因式分解 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第14章 整式的乘法与因式分解 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第14章 整式的乘法与因式分解</div></header>
@@ -110,7 +73,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
      └─────────┴─────────┘
   (a+b)(c+d) = ac + ad + bc + bd</code></pre>
 这就是「数与形的统一」：代数式展开的每一项，都对应图里的一块小面积；合并同类项，就是把「形状相同、只是位置不同」的小块拼到一起。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="250" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <style>
 .vl{transform-box:fill-box;transform-origin:top;animation:drawV 8s ease-in-out infinite}
@@ -145,7 +108,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
 </g>
 <text x="255" y="224" fill="#0f172a" font-size="16" text-anchor="middle" font-weight="bold">(a+b)(c+d) = ac + ad + bc + bd</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：多项式乘法即把「长为 a+b、宽为 c+d」的大矩形切成四块，逐项相乘就是四块小面积之和</figcaption>
+<figcaption class="fig-cap">图：多项式乘法即把「长为 a+b、宽为 c+d」的大矩形切成四块，逐项相乘就是四块小面积之和</figcaption>
 </figure>
 <div class="insight"><strong>物理含义：多项式乘法 = 两个独立量的「组合放大」。</strong>若速度 <code>v = a+b</code>、时间 <code>t = c+d</code>，则路程 <code>s = (a+b)(c+d) = ac+ad+bc+bd</code>，四个交叉项正是「a 段速度 × c 段时间、a 段速度 × d 段时间、……」四段路程之和。乘法分配律在物理上就是「<strong>整体 = 各部分贡献之和</strong>」。</div>
 
@@ -171,7 +134,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
   └───────┴────┘
   切一刀 → 拼成 (a+b) × (a−b) 的长方形</code></pre>
 平方差公式的几何本质就是：<strong>「面积之差」可以等价地写成「两个新边长的乘积」</strong>。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="310" viewBox="0 0 560 310" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <style>
 .pa{transform-box:fill-box;transform-origin:center;animation:splitA 8s ease-in-out infinite}
@@ -199,7 +162,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
 </g>
 <text x="165" y="296" fill="#0f172a" font-size="16" text-anchor="middle" font-weight="bold">(a+b)² = a² + 2ab + b²</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：边长为 a+b 的正方形切成四块，两个 ab 长条成对出现，正是交叉项系数为 2 的由来</figcaption>
+<figcaption class="fig-cap">图：边长为 a+b 的正方形切成四块，两个 ab 长条成对出现，正是交叉项系数为 2 的由来</figcaption>
 </figure>
 <div class="insight"><strong>物理含义：</strong>平方差常用于「消除误差项」的近似与化简。例如物体动能 <code>½mv²</code> 的变化量 <code>½m(v₂² − v₁²)</code> 可写成 <code>½m(v₂+v₁)(v₂−v₁)</code>；再如估算 <code>401² − 399² = (401+399)(401−399) = 800×2 = 1600</code>，两个大数的平方差瞬间化为乘法，<strong>把「差」转成「积」是化简运算的利器</strong>。</div>
 
@@ -221,7 +184,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
      └─────────┴──────┘
   (a+b)² = a² + 2ab + b²</code></pre>
 而 <code>(a−b)²</code> 就是「边长为 a 的大正方形，去掉两个 ab 长条后，又重复减掉了一个 b² 小方块，再加回来」：<code>a² − ab − ab + b² = a² − 2ab + b²</code>。中间的 <code>2ab</code> 之所以是「2 倍」，正是因为正方形里总有两块对称的 ab。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="230" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <style>
 .rm{transform-box:fill-box;transform-origin:100% 100%;animation:cut 9s ease-in-out infinite}
@@ -242,7 +205,7 @@ x⁷ ÷ x³ = x^(7−3) = x⁴
 <g fill="#16a34a" font-size="14" text-anchor="end"><text x="330" y="118">a−b</text></g>
 <text x="260" y="120" fill="#94a3b8" font-size="22" text-anchor="middle">→</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：大正方形挖掉 b² 的角，剩下的 L 形切一刀、转 90° 就拼成 (a+b)×(a−b) 的长方形</figcaption>
+<figcaption class="fig-cap">图：大正方形挖掉 b² 的角，剩下的 L 形切一刀、转 90° 就拼成 (a+b)×(a−b) 的长方形</figcaption>
 </figure>
 <div class="insight"><strong>物理含义：完全平方 = 「平方和」与「交叉项的 2 倍」。</strong>这是物理中展开 <code>(x+Δ)²</code> 的标准动作：如长度从 <code>L</code> 热胀到 <code>L+ΔL</code>，面积 <code>(L+ΔL)² = L² + 2LΔL + ΔL²</code>，其中 <code>2LΔL</code> 是面积的一阶增量（两条细长条），<code>ΔL²</code> 是二阶小量（可忽略的角落）。理解 <code>2ab</code> 的来源，就理解了「为什么微小变化的平方项可以忽略」。</div>
 
@@ -327,7 +290,7 @@ x² − 10x + 25 = x² − 2·x·5 + 5² = (x − 5)²</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>计算并说明指数规则：<code>x³ · x⁴</code>、<code>(x²)⁵</code>、<code>(−2a²b)³</code>、<code>x⁸ ÷ x²</code>、<code>7⁰</code>、<code>2⁻³</code>。（提示：分清「相乘」与「乘方」时指数如何变化）</li>
@@ -338,19 +301,19 @@ x² − 10x + 25 = x² − 2·x·5 + 5² = (x − 5)²</code></pre>
 <li>已知 <code>(a+b)² = 49</code>，<code>ab = 12</code>，求 <code>a² + b²</code> 的值；再结合「长度由 L 热胀到 L+ΔL 时面积的变化」说明 <code>2LΔL</code> 这一项的实际含义。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>x³·x⁴ = x⁷</code>（指数相加 3+4）；<code>(x²)⁵ = x¹⁰</code>（指数相乘 2×5）；<code>(−2a²b)³ = (−2)³·(a²)³·b³ = −8a⁶b³</code>；<code>x⁸ ÷ x² = x⁶</code>（指数相减 8−2）；<code>7⁰ = 1</code>；<code>2⁻³ = 1/2³ = 1/8</code>。口诀：同底数幂<strong>相乘</strong>指数<strong>相加</strong>，幂的<strong>乘方</strong>指数<strong>相乘</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>把 <code>2x</code> 当作矩形的公共宽，把 <code>(x+3)</code> 当作底边分成的两段 <code>x</code> 与 <code>3</code>。两块小矩形面积分别为 <code>2x·x = 2x²</code> 和 <code>2x·3 = 6x</code>，总面积 <code>2x² + 6x</code>。这正是分配律 <code>a(b+c) = ab + ac</code> 的面积模型：公共宽 × 各段底边之和。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>99×101 = (100−1)(100+1) = 100² − 1² = 9999</code>（平方差公式）；<code>201²−199² = (201+199)(201−199) = 400×2 = 800</code>（把「平方之差」转成「两数之积」）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>边长为 <code>a+b</code> 的正方形可切成四块：一块 <code>a²</code>、一块 <code>b²</code>，以及<strong>两块</strong> <code>ab</code> 的长方形（沿两个方向各一块、对角对称）。所以总面积为 <code>a² + ab + ab + b² = a² + 2ab + b²</code>，交叉项系数是 2 正因为有两块对称的 ab。若误写成 <code>a² + b²</code> 就漏掉了这两块。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>3x²−27 = 3(x²−9) = 3(x+3)(x−3)</code>：先提公因式 3，再套平方差。<code>x²+8x+16 = x²+2·x·4+4² = (x+4)²</code>：中间项 8x 对应 2·x·4，符合完全平方。分解顺序：一提公因式 → 二套公式 → 三检查是否分解到底。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>由 <code>(a+b)² = a² + 2ab + b²</code> 得 <code>a² + b² = (a+b)² − 2ab = 49 − 2×12 = 25</code>。面积展开 <code>(L+ΔL)² = L² + 2LΔL + ΔL²</code> 中，<code>2LΔL</code> 是两条细长条带来的一阶面积增量，<code>ΔL²</code> 是二阶小量（ΔL 很小时可忽略），这解释了「微小变化的平方项为何可以忽略」。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p><code>x³·x⁴ = x⁷</code>（指数相加 3+4）；<code>(x²)⁵ = x¹⁰</code>（指数相乘 2×5）；<code>(−2a²b)³ = (−2)³·(a²)³·b³ = −8a⁶b³</code>；<code>x⁸ ÷ x² = x⁶</code>（指数相减 8−2）；<code>7⁰ = 1</code>；<code>2⁻³ = 1/2³ = 1/8</code>。口诀：同底数幂<strong>相乘</strong>指数<strong>相加</strong>，幂的<strong>乘方</strong>指数<strong>相乘</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>把 <code>2x</code> 当作矩形的公共宽，把 <code>(x+3)</code> 当作底边分成的两段 <code>x</code> 与 <code>3</code>。两块小矩形面积分别为 <code>2x·x = 2x²</code> 和 <code>2x·3 = 6x</code>，总面积 <code>2x² + 6x</code>。这正是分配律 <code>a(b+c) = ab + ac</code> 的面积模型：公共宽 × 各段底边之和。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p><code>99×101 = (100−1)(100+1) = 100² − 1² = 9999</code>（平方差公式）；<code>201²−199² = (201+199)(201−199) = 400×2 = 800</code>（把「平方之差」转成「两数之积」）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>边长为 <code>a+b</code> 的正方形可切成四块：一块 <code>a²</code>、一块 <code>b²</code>，以及<strong>两块</strong> <code>ab</code> 的长方形（沿两个方向各一块、对角对称）。所以总面积为 <code>a² + ab + ab + b² = a² + 2ab + b²</code>，交叉项系数是 2 正因为有两块对称的 ab。若误写成 <code>a² + b²</code> 就漏掉了这两块。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p><code>3x²−27 = 3(x²−9) = 3(x+3)(x−3)</code>：先提公因式 3，再套平方差。<code>x²+8x+16 = x²+2·x·4+4² = (x+4)²</code>：中间项 8x 对应 2·x·4，符合完全平方。分解顺序：一提公因式 → 二套公式 → 三检查是否分解到底。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>由 <code>(a+b)² = a² + 2ab + b²</code> 得 <code>a² + b² = (a+b)² − 2ab = 49 − 2×12 = 25</code>。面积展开 <code>(L+ΔL)² = L² + 2LΔL + ΔL²</code> 中，<code>2LΔL</code> 是两条细长条带来的一阶面积增量，<code>ΔL²</code> 是二阶小量（ΔL 很小时可忽略），这解释了「微小变化的平方项为何可以忽略」。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第13章-轴对称/第13章-轴对称.html">← 上一章：第13章 轴对称</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第15章-分式/第15章-分式.html">下一章：第15章 分式 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

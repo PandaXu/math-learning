@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第1章 集合与常用逻辑用语 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第1章 集合与常用逻辑用语 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第一册 › 第1章 集合与常用逻辑用语</div></header>
@@ -103,7 +66,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 
 <h2 id="s3">1.3 并集、交集、补集</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="185" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><circle cx="315" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><ellipse cx="250" cy="115" rx="17" ry="50" fill="#16a34a"><animate attributeName="opacity" values="0.15;0.55;0.15" dur="4s" repeatCount="indefinite"/></ellipse><text x="165" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">A</text><text x="335" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">B</text><circle cx="165" cy="115" r="6" fill="#2563eb"><animate attributeName="cx" values="165;250;165" dur="5s" repeatCount="indefinite"/><animate attributeName="fill" values="#2563eb;#16a34a;#2563eb" dur="5s" repeatCount="indefinite"/></circle><text x="250" y="96" fill="#16a34a" font-size="13" font-weight="bold" text-anchor="middle">A ∩ B</text><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">交集 = 两圈公共重叠部分：点进入 A∩B 才同时属于 A 与 B</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：交集是两圈的公共重叠部分——点滑入重叠区才同时属于 A 和 B</figcaption></figure>
+<figure class="fig"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="185" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><circle cx="315" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><ellipse cx="250" cy="115" rx="17" ry="50" fill="#16a34a"><animate attributeName="opacity" values="0.15;0.55;0.15" dur="4s" repeatCount="indefinite"/></ellipse><text x="165" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">A</text><text x="335" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">B</text><circle cx="165" cy="115" r="6" fill="#2563eb"><animate attributeName="cx" values="165;250;165" dur="5s" repeatCount="indefinite"/><animate attributeName="fill" values="#2563eb;#16a34a;#2563eb" dur="5s" repeatCount="indefinite"/></circle><text x="250" y="96" fill="#16a34a" font-size="13" font-weight="bold" text-anchor="middle">A ∩ B</text><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">交集 = 两圈公共重叠部分：点进入 A∩B 才同时属于 A 与 B</text></svg><figcaption class="fig-cap">图：交集是两圈的公共重叠部分——点滑入重叠区才同时属于 A 和 B</figcaption></figure>
 <h3>三种运算的定义</h3>
 <ul>
 <li><strong>并集</strong>：<code>A ∪ B = { x | x ∈ A 或 x ∈ B }</code>——由所有属于 A <strong>或</strong>属于 B 的元素组成（"或"是可兼的：两者都算）。</li>
@@ -123,7 +86,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>例：U = {1,2,3,4,5}，A = {1,2,3}，B = {3,4}。则 A ∪ B = {1,2,3,4}，A ∩ B = {3}，∁<sub>U</sub>A = {4,5}。</p>
 
 <h2 id="s4">1.4 充分条件与必要条件</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="118" r="95" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="2.5"/><text x="260" y="34" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">Q（大圈）</text><g><animateTransform attributeName="transform" type="translate" values="0,0; 34,-26; 0,0; -34,26; 0,0" dur="8s" repeatCount="indefinite"/><circle cx="260" cy="118" r="44" fill="rgba(22,163,74,0.20)" stroke="#16a34a" stroke-width="2.5"/><circle cx="260" cy="118" r="5" fill="#16a34a"/><text x="260" y="122" fill="#16a34a" font-size="14" font-weight="bold" text-anchor="middle">P</text></g><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">P ⊆ Q ⟺ p ⇒ q：小圈在哪儿，圈内点都始终在大圈里</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：充分条件是「小圈套大圈」——小圈 P 在大圈 Q 内滑动，圈内点永远落在大圈里</figcaption></figure>
+<figure class="fig"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="118" r="95" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="2.5"/><text x="260" y="34" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">Q（大圈）</text><g><animateTransform attributeName="transform" type="translate" values="0,0; 34,-26; 0,0; -34,26; 0,0" dur="8s" repeatCount="indefinite"/><circle cx="260" cy="118" r="44" fill="rgba(22,163,74,0.20)" stroke="#16a34a" stroke-width="2.5"/><circle cx="260" cy="118" r="5" fill="#16a34a"/><text x="260" y="122" fill="#16a34a" font-size="14" font-weight="bold" text-anchor="middle">P</text></g><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">P ⊆ Q ⟺ p ⇒ q：小圈在哪儿，圈内点都始终在大圈里</text></svg><figcaption class="fig-cap">图：充分条件是「小圈套大圈」——小圈 P 在大圈 Q 内滑动，圈内点永远落在大圈里</figcaption></figure>
 <h3>命题与推出关系 ⇒</h3>
 <p>若命题"若 p，则 q"为真，记作 <code>p ⇒ q</code>（读作 p 推出 q）。此时：</p>
 <ul>
@@ -204,7 +167,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>用列举法表示集合 <code>{ x | x ∈ N, 1 ≤ x ≤ 5 }</code>，写出它的元素；该集合有多少个子集？并判断 <code>0</code> 是否属于它、<code>∅</code> 是否是它的子集。</li>
@@ -215,15 +178,15 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>写出下列命题的否定并判断真假：① <code>∀x ∈ R, x² ≥ 0</code>；② <code>∃x ∈ Z, x² = 2</code>；③ "所有自然数都大于 0"。并用"全称否定变存在、结论一起否"的口诀解释。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>列举法：{1, 2, 3, 4, 5}。子集个数 2⁵ = 32（每个元素"取或不取"两种选择）。0 ∉ 该集合（0 不满足 1 ≤ x ≤ 5，也不在 {1..5} 中）。∅ 是它的子集（空集是任何集合的子集）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>所有子集：∅、{a}、{b}、{a, b}，共 4 个；所有真子集：∅、{a}、{b}，共 3 个。几何直觉：元素 a 有"取 / 不取"两种选择，元素 b 也两种，故 2×2 = 4 个子集；去掉 A 自身即得真子集 4 − 1 = 3。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>A ∪ B = {1, 2, 3, 4, 5}（两个圈全部盖住的区域）；A ∩ B = {3}（两个圈的公共重叠部分）；∁<sub>U</sub>A = {4, 5, 6}（全集大圈挖去 A 后剩下的月牙）；∁<sub>U</sub>(A ∩ B) = ∁<sub>U</sub>{3} = {1, 2, 4, 5, 6}。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>设 P = {x | x &gt; 2}，Q = {x | x &gt; 1}，有 P ⊂ Q（P 是小圈、Q 是大圈，小圈完全套在大圈内）。故"x &gt; 2"是"x &gt; 1"的<strong>充分不必要</strong>条件（有 x &gt; 2 必有 x &gt; 1，反之不行）；反过来"x &gt; 1"是"x &gt; 2"的<strong>必要不充分</strong>条件。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>"全等 ⇒ 面积相等"（全等三角形面积必相等），但"面积相等 ⇏ 全等"（底与高不同、乘积相同的三角形面积相等）。所以"全等"是"面积相等"的<strong>充分不必要</strong>条件。物理类比："下雨 ⇒ 地面湿"，下雨是充分条件（有它够）、地面湿是必要条件（没它不行），方向与"全等 ⇒ 面积相等"一致。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>① 否定：∃x ∈ R, x² &lt; 0，为<strong>假</strong>（原命题真：任何实数的平方 ≥ 0）。② 否定：∀x ∈ Z, x² ≠ 2，为<strong>真</strong>（原命题假：√2 不是整数）。③ 原命题"所有自然数都大于 0"为<strong>假</strong>（0 是自然数但不大于 0），其否定"存在一个自然数不大于 0"为<strong>真</strong>。规则：量词 ∀ ↔ ∃ 互换，同时结论取反，二者缺一不可。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>列举法：{1, 2, 3, 4, 5}。子集个数 2⁵ = 32（每个元素"取或不取"两种选择）。0 ∉ 该集合（0 不满足 1 ≤ x ≤ 5，也不在 {1..5} 中）。∅ 是它的子集（空集是任何集合的子集）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>所有子集：∅、{a}、{b}、{a, b}，共 4 个；所有真子集：∅、{a}、{b}，共 3 个。几何直觉：元素 a 有"取 / 不取"两种选择，元素 b 也两种，故 2×2 = 4 个子集；去掉 A 自身即得真子集 4 − 1 = 3。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>A ∪ B = {1, 2, 3, 4, 5}（两个圈全部盖住的区域）；A ∩ B = {3}（两个圈的公共重叠部分）；∁<sub>U</sub>A = {4, 5, 6}（全集大圈挖去 A 后剩下的月牙）；∁<sub>U</sub>(A ∩ B) = ∁<sub>U</sub>{3} = {1, 2, 4, 5, 6}。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>设 P = {x | x &gt; 2}，Q = {x | x &gt; 1}，有 P ⊂ Q（P 是小圈、Q 是大圈，小圈完全套在大圈内）。故"x &gt; 2"是"x &gt; 1"的<strong>充分不必要</strong>条件（有 x &gt; 2 必有 x &gt; 1，反之不行）；反过来"x &gt; 1"是"x &gt; 2"的<strong>必要不充分</strong>条件。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>"全等 ⇒ 面积相等"（全等三角形面积必相等），但"面积相等 ⇏ 全等"（底与高不同、乘积相同的三角形面积相等）。所以"全等"是"面积相等"的<strong>充分不必要</strong>条件。物理类比："下雨 ⇒ 地面湿"，下雨是充分条件（有它够）、地面湿是必要条件（没它不行），方向与"全等 ⇒ 面积相等"一致。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>① 否定：∃x ∈ R, x² &lt; 0，为<strong>假</strong>（原命题真：任何实数的平方 ≥ 0）。② 否定：∀x ∈ Z, x² ≠ 2，为<strong>真</strong>（原命题假：√2 不是整数）。③ 原命题"所有自然数都大于 0"为<strong>假</strong>（0 是自然数但不大于 0），其否定"存在一个自然数不大于 0"为<strong>真</strong>。规则：量词 ∀ ↔ ∃ 互换，同时结论取反，二者缺一不可。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../../../初中/初三/九年级下册/第29章-投影与视图/第29章-投影与视图.html">← 上一章：第29章 投影与视图</a><a href="../../../index.html">回目录</a><a href="../第2章-一元二次函数方程和不等式/第2章-一元二次函数方程和不等式.html">下一章：第2章 一元二次函数方程和不等式 →</a></nav>
+<nav class="pager"><a href="../../../初中/初三/九年级下册/第29章-投影与视图/第29章-投影与视图.html">← 上一章：第29章 投影与视图</a><a href="../../../index.html">回目录</a><a href="../第2章-一元二次函数方程和不等式/第2章-一元二次函数方程和不等式.html">下一章：第2章 一元二次函数方程和不等式 →</a></nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中必修第一册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中必修第一册</footer>
 </body>
 </html>

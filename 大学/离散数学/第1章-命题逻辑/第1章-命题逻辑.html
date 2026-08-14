@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第1章 命题逻辑 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第1章 命题逻辑 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第1章 命题逻辑</div></header>
@@ -140,7 +103,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>设 A、B 是命题公式，若 <code>A ↔ B</code> 是<strong>重言式</strong>（即对所有赋值 A、B 真值完全相同），则称 A 与 B <strong>等值（等价）</strong>，记作 <code>A ⇔ B</code>。</p>
 <p>注意区别：<code>↔</code> 是公式内部的<strong>联结词</strong>；<code>⇔</code> 是两个公式之间的<strong>关系</strong>（"恒等"）。</p>
 <h3>基本等值式（代换的"乘法口诀表"）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="135" y="18" text-anchor="middle" font-size="14" fill="#1e3a8a">¬(p ∨ q)</text><text x="395" y="18" text-anchor="middle" font-size="14" fill="#1e3a8a">¬p ∧ ¬q</text><text x="270" y="84" text-anchor="middle" font-size="24" fill="#334155">=</text><g fill="#2563eb"><circle cx="105" cy="75" r="42"/><circle cx="165" cy="75" r="42"/><animate attributeName="opacity" values="0.3;0.3;0;0;0;0.3" keyTimes="0;0.3;0.42;0.6;0.9;1" dur="6s" repeatCount="indefinite"/></g><path d="M55,25 H215 V125 H55 Z M147,75 a42,42 0 1,0 -0.01,0 Z M207,75 a42,42 0 1,0 -0.01,0 Z" fill="#16a34a" fill-rule="evenodd"><animate attributeName="opacity" values="0;0;0;0.15;0.7;0.15;0;0" keyTimes="0;0.45;0.5;0.55;0.72;0.82;0.95;1" dur="6s" repeatCount="indefinite"/></path><circle cx="105" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="165" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><text x="86" y="79" font-size="13" fill="#334155" font-weight="700">P</text><text x="182" y="79" font-size="13" fill="#334155" font-weight="700">Q</text><g fill="#2563eb"><circle cx="365" cy="75" r="42"/><circle cx="425" cy="75" r="42"/><animate attributeName="opacity" values="0.3;0.3;0;0;0;0.3" keyTimes="0;0.3;0.42;0.6;0.9;1" dur="6s" repeatCount="indefinite"/></g><path d="M315,25 H475 V125 H315 Z M407,75 a42,42 0 1,0 -0.01,0 Z M467,75 a42,42 0 1,0 -0.01,0 Z" fill="#16a34a" fill-rule="evenodd"><animate attributeName="opacity" values="0;0;0;0.15;0.7;0.15;0;0" keyTimes="0;0.45;0.5;0.55;0.72;0.82;0.95;1" dur="6s" repeatCount="indefinite"/></path><circle cx="365" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="425" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><text x="346" y="79" font-size="13" fill="#334155" font-weight="700">P</text><text x="442" y="79" font-size="13" fill="#334155" font-weight="700">Q</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：德摩根律——并集的补 = 补集的交，¬(p∨q) 与 ¬p∧¬q 标亮的都是两圆之外、同一块绿色区域</figcaption></figure>
+<figure class="fig"><svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="135" y="18" text-anchor="middle" font-size="14" fill="#1e3a8a">¬(p ∨ q)</text><text x="395" y="18" text-anchor="middle" font-size="14" fill="#1e3a8a">¬p ∧ ¬q</text><text x="270" y="84" text-anchor="middle" font-size="24" fill="#334155">=</text><g fill="#2563eb"><circle cx="105" cy="75" r="42"/><circle cx="165" cy="75" r="42"/><animate attributeName="opacity" values="0.3;0.3;0;0;0;0.3" keyTimes="0;0.3;0.42;0.6;0.9;1" dur="6s" repeatCount="indefinite"/></g><path d="M55,25 H215 V125 H55 Z M147,75 a42,42 0 1,0 -0.01,0 Z M207,75 a42,42 0 1,0 -0.01,0 Z" fill="#16a34a" fill-rule="evenodd"><animate attributeName="opacity" values="0;0;0;0.15;0.7;0.15;0;0" keyTimes="0;0.45;0.5;0.55;0.72;0.82;0.95;1" dur="6s" repeatCount="indefinite"/></path><circle cx="105" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="165" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><text x="86" y="79" font-size="13" fill="#334155" font-weight="700">P</text><text x="182" y="79" font-size="13" fill="#334155" font-weight="700">Q</text><g fill="#2563eb"><circle cx="365" cy="75" r="42"/><circle cx="425" cy="75" r="42"/><animate attributeName="opacity" values="0.3;0.3;0;0;0;0.3" keyTimes="0;0.3;0.42;0.6;0.9;1" dur="6s" repeatCount="indefinite"/></g><path d="M315,25 H475 V125 H315 Z M407,75 a42,42 0 1,0 -0.01,0 Z M467,75 a42,42 0 1,0 -0.01,0 Z" fill="#16a34a" fill-rule="evenodd"><animate attributeName="opacity" values="0;0;0;0.15;0.7;0.15;0;0" keyTimes="0;0.45;0.5;0.55;0.72;0.82;0.95;1" dur="6s" repeatCount="indefinite"/></path><circle cx="365" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="425" cy="75" r="42" fill="none" stroke="#2563eb" stroke-width="2"/><text x="346" y="79" font-size="13" fill="#334155" font-weight="700">P</text><text x="442" y="79" font-size="13" fill="#334155" font-weight="700">Q</text></svg><figcaption class="fig-cap">图：德摩根律——并集的补 = 补集的交，¬(p∨q) 与 ¬p∧¬q 标亮的都是两圆之外、同一块绿色区域</figcaption></figure>
 <pre><code>双重否定律   ¬¬p ⇔ p
 幂等律       p ∨ p ⇔ p          p ∧ p ⇔ p
 交换律       p ∨ q ⇔ q ∨ p      p ∧ q ⇔ q ∧ p
@@ -193,7 +156,7 @@ m2 = p ∧ ¬q    (10 时为真)       M2 = ¬p ∨ q     (10 时为假)
 m3 = p ∧ q     (11 时为真)       M3 = ¬p ∨ ¬q    (11 时为假)</code></pre>
 <p>基本关系：<code>mᵢ = ¬Mᵢ</code>，<code>Mᵢ = ¬mᵢ</code>；任意两个不同极小项相矛盾（mᵢ∧mⱼ = 0），全部极小项相析取为 1。</p>
 <h3>主析取范式与主合取范式</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="22" text-anchor="middle" font-size="15" fill="#1e3a8a">p → q 在布尔超立方体 {0,1}² 上的黑白染色</text><rect x="160" y="40" width="150" height="150" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><circle cx="160" cy="190" r="11" fill="#cbd5e1"/><circle cx="310" cy="190" r="11" fill="#cbd5e1"/><circle cx="160" cy="40" r="11" fill="#cbd5e1"/><circle cx="310" cy="40" r="11" fill="#cbd5e1"/><g><circle cx="160" cy="190" r="11" fill="#16a34a"/><text x="160" y="194" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.04;0.10;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="160" cy="40" r="11" fill="#16a34a"/><text x="160" y="44" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.13;0.19;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="310" cy="40" r="11" fill="#16a34a"/><text x="310" y="44" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.22;0.28;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="310" cy="190" r="11" fill="#dc2626"/><text x="310" y="194" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">F</text><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.32;0.40;0.55;0.56;1" dur="8s" repeatCount="indefinite"/></g><circle cx="160" cy="190" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><circle cx="160" cy="40" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><circle cx="310" cy="40" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><text x="160" y="208" text-anchor="middle" font-size="11" fill="#6b7280">00 = m0</text><text x="310" y="208" text-anchor="middle" font-size="11" fill="#6b7280">10 = m2</text><text x="138" y="46" text-anchor="end" font-size="11" fill="#6b7280">01 = m1</text><text x="332" y="46" text-anchor="start" font-size="11" fill="#6b7280">11 = m3</text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#2563eb">① 依次点亮真顶点：00、01、11<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.28;0.32;1" dur="8s" repeatCount="indefinite"/></text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#dc2626">② 10 是唯一为假的顶点（F）<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.30;0.34;0.52;1" dur="8s" repeatCount="indefinite"/></text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#16a34a">③ 主析取范式 = m0 ∨ m1 ∨ m3 = Σ(0,1,3)<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.52;0.56;0.82;1" dur="8s" repeatCount="indefinite"/></text><circle cx="438" cy="34" r="7" fill="#16a34a"/><text x="452" y="38" font-size="12" fill="#334155">真 (1)</text><circle cx="438" cy="56" r="7" fill="#94a3b8"/><text x="452" y="60" font-size="12" fill="#334155">假 (0)</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：极小项就是 {0,1}² 的一个顶点；p→q 的染色 = 三个真顶点 {00,01,11} 的并集（主析取范式 Σ(0,1,3)）</figcaption></figure>
+<figure class="fig"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="22" text-anchor="middle" font-size="15" fill="#1e3a8a">p → q 在布尔超立方体 {0,1}² 上的黑白染色</text><rect x="160" y="40" width="150" height="150" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><circle cx="160" cy="190" r="11" fill="#cbd5e1"/><circle cx="310" cy="190" r="11" fill="#cbd5e1"/><circle cx="160" cy="40" r="11" fill="#cbd5e1"/><circle cx="310" cy="40" r="11" fill="#cbd5e1"/><g><circle cx="160" cy="190" r="11" fill="#16a34a"/><text x="160" y="194" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.04;0.10;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="160" cy="40" r="11" fill="#16a34a"/><text x="160" y="44" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.13;0.19;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="310" cy="40" r="11" fill="#16a34a"/><text x="310" y="44" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">T</text><animate attributeName="opacity" values="0;0;1;1;1;0" keyTimes="0;0.22;0.28;0.80;0.90;1" dur="8s" repeatCount="indefinite"/></g><g><circle cx="310" cy="190" r="11" fill="#dc2626"/><text x="310" y="194" text-anchor="middle" font-size="12" fill="#ffffff" font-weight="700">F</text><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.32;0.40;0.55;0.56;1" dur="8s" repeatCount="indefinite"/></g><circle cx="160" cy="190" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><circle cx="160" cy="40" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><circle cx="310" cy="40" r="17" fill="none" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;0;0.9;0.9;0" keyTimes="0;0.50;0.58;0.70;0.80;0.88" dur="8s" repeatCount="indefinite"/></circle><text x="160" y="208" text-anchor="middle" font-size="11" fill="#6b7280">00 = m0</text><text x="310" y="208" text-anchor="middle" font-size="11" fill="#6b7280">10 = m2</text><text x="138" y="46" text-anchor="end" font-size="11" fill="#6b7280">01 = m1</text><text x="332" y="46" text-anchor="start" font-size="11" fill="#6b7280">11 = m3</text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#2563eb">① 依次点亮真顶点：00、01、11<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.28;0.32;1" dur="8s" repeatCount="indefinite"/></text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#dc2626">② 10 是唯一为假的顶点（F）<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.30;0.34;0.52;1" dur="8s" repeatCount="indefinite"/></text><text x="260" y="228" text-anchor="middle" font-size="13" fill="#16a34a">③ 主析取范式 = m0 ∨ m1 ∨ m3 = Σ(0,1,3)<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.52;0.56;0.82;1" dur="8s" repeatCount="indefinite"/></text><circle cx="438" cy="34" r="7" fill="#16a34a"/><text x="452" y="38" font-size="12" fill="#334155">真 (1)</text><circle cx="438" cy="56" r="7" fill="#94a3b8"/><text x="452" y="60" font-size="12" fill="#334155">假 (0)</text></svg><figcaption class="fig-cap">图：极小项就是 {0,1}² 的一个顶点；p→q 的染色 = 三个真顶点 {00,01,11} 的并集（主析取范式 Σ(0,1,3)）</figcaption></figure>
 <ul>
 <li><strong>主析取范式（主 DNF）</strong>：由<strong>成真赋值</strong>对应的极小项析取而成，记 <code>Σ(i₁, i₂, …)</code>。</li>
 <li><strong>主合取范式（主 CNF）</strong>：由<strong>成假赋值</strong>对应的极大项合取而成，记 <code>Π(i₁, i₂, …)</code>。</li>
@@ -291,7 +254,7 @@ m3 = p ∧ q     (11 时为真)       M3 = ¬p ∨ ¬q    (11 时为假)</code><
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>判断下列语句是否是命题，若是请指出其真值：(a) 3 是偶数；(b) 请把门关上；(c) x + 1 = 3；(d) 5 大于 2。</li>
@@ -302,19 +265,19 @@ m3 = p ∧ q     (11 时为真)       M3 = ¬p ∨ ¬q    (11 时为假)</code><
 <li>判断推理是否有效，并写出自然推理证明：前提 p → q、r → ¬q、r，结论 ¬p。再从几何与物理角度各用一句话解释其含义。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>(a) 是命题，真值为假；(b) 祈使句，不是命题；(c) 含自由变项 x，真值不确定，不是命题；(d) 是命题，真值为真。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>(a)「只有 p 才 q」表示 p 是 q 的必要条件：q → p；(b)「除非 p 否则 ¬q」即 ¬p → ¬q，等价于 q → p；(c) 充分条件：p → q。几何上 (a) 是 q ⊆ p（带伞区域落在下雨区域内），(c) 是 p ⊆ q（下雨区域落在带伞区域内），两者包含方向相反。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>按优先级 (p → q) ∧ p → q 即 ((p → q) ∧ p) → q。列真值表：使「前提 (p → q) ∧ p 为真」的只有 p=1、q=1 一行，此时结论 q=1 也为真；其余行前提为假，蕴含为真（空真）。故整列全为 1，是<strong>重言式</strong>（正是假言推理 MP 的有效性形式）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>p → (q → r) ⇔ ¬p ∨ (¬q ∨ r)（蕴含等值式，两次）⇔ (¬p ∨ ¬q) ∨ r（结合律）⇔ ¬(p ∧ q) ∨ r（德摩根律）⇔ (p ∧ q) → r（蕴含等值式）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>列三变项真值表，成真赋值为 001、011、110、111（即 (p∧q) 为真或 (¬p∧r) 为真）。故主析取范式 Σ(1,3,6,7) = (¬p∧¬q∧r)∨(¬p∧q∧r)∨(p∧q∧¬r)∨(p∧q∧r)；主合取范式 Π(0,2,4,5) = (p∨q∨r)∧(p∨¬q∨r)∧(¬p∨q∨r)∧(¬p∨q∨¬r)。几何上主析取范式就是布尔立方体 {0,1}³ 中这四个「染 1」顶点的并集。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>推理有效。证明：(1) r → ¬q 前提引入；(2) r 前提引入；(3) ¬q 假言推理 (1)(2)；(4) p → q 前提引入；(5) ¬p 拒取式 (4)(3)，得证。几何：使三个前提同时为真的区域 ⊆ 结论 ¬p 的区域（p 的补集），即子集链成立；物理：r 为高电平 ⇒ ¬q 为高电平 ⇒ 由 p → q 知 q 为低迫使 p 为低，即 ¬p 必然为高电平。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>(a) 是命题，真值为假；(b) 祈使句，不是命题；(c) 含自由变项 x，真值不确定，不是命题；(d) 是命题，真值为真。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>(a)「只有 p 才 q」表示 p 是 q 的必要条件：q → p；(b)「除非 p 否则 ¬q」即 ¬p → ¬q，等价于 q → p；(c) 充分条件：p → q。几何上 (a) 是 q ⊆ p（带伞区域落在下雨区域内），(c) 是 p ⊆ q（下雨区域落在带伞区域内），两者包含方向相反。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>按优先级 (p → q) ∧ p → q 即 ((p → q) ∧ p) → q。列真值表：使「前提 (p → q) ∧ p 为真」的只有 p=1、q=1 一行，此时结论 q=1 也为真；其余行前提为假，蕴含为真（空真）。故整列全为 1，是<strong>重言式</strong>（正是假言推理 MP 的有效性形式）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>p → (q → r) ⇔ ¬p ∨ (¬q ∨ r)（蕴含等值式，两次）⇔ (¬p ∨ ¬q) ∨ r（结合律）⇔ ¬(p ∧ q) ∨ r（德摩根律）⇔ (p ∧ q) → r（蕴含等值式）。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>列三变项真值表，成真赋值为 001、011、110、111（即 (p∧q) 为真或 (¬p∧r) 为真）。故主析取范式 Σ(1,3,6,7) = (¬p∧¬q∧r)∨(¬p∧q∧r)∨(p∧q∧¬r)∨(p∧q∧r)；主合取范式 Π(0,2,4,5) = (p∨q∨r)∧(p∨¬q∨r)∧(¬p∨q∨r)∧(¬p∨q∨¬r)。几何上主析取范式就是布尔立方体 {0,1}³ 中这四个「染 1」顶点的并集。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>推理有效。证明：(1) r → ¬q 前提引入；(2) r 前提引入；(3) ¬q 假言推理 (1)(2)；(4) p → q 前提引入；(5) ¬p 拒取式 (4)(3)，得证。几何：使三个前提同时为真的区域 ⊆ 结论 ¬p 的区域（p 的补集），即子集链成立；物理：r 为高电平 ⇒ ¬q 为高电平 ⇒ 由 p → q 知 q 为低迫使 p 为低，即 ¬p 必然为高电平。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../../线性代数/第6章-线性空间与线性变换/第6章-线性空间与线性变换.html">← 上一章：第6章 线性空间与线性变换</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第2章-谓词逻辑/第2章-谓词逻辑.html">下一章：第2章 谓词逻辑 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
 </body>
 </html>

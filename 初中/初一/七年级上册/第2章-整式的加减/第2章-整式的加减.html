@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第2章 整式的加减 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第2章 整式的加减 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级上册 › 第2章 整式的加减</div></header>
@@ -73,7 +36,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li><strong>次数</strong>：所有字母的<strong>指数之和</strong>。3x²：次数 2；−2/3·ab：次数 1 + 1 = 2；7（不含字母）：次数为 0，叫"零次单项式"。</li>
 </ol>
 <div class="insight"><strong>几何直觉：</strong>x² 的"次数 2"对应<strong>面积</strong>（平方），x³ 对应<strong>体积</strong>（立方）。系数是"缩放倍数"，次数是"维数"。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="210" viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="50" y1="150" x2="500" y2="150" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 5"/>
 <text x="100" y="30" text-anchor="middle" font-size="15" fill="#334155"><tspan font-weight="bold" fill="#2563eb">x</tspan> · 1次（长度）</text>
@@ -101,7 +64,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </g>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：次数 = 维数——同一个 x 变大时，长度(x)线性变长、面积(x²)平方扩张、体积(x³)立方扩张</figcaption>
+<figcaption class="fig-cap">图：次数 = 维数——同一个 x 变大时，长度(x)线性变长、面积(x²)平方扩张、体积(x³)立方扩张</figcaption>
 </figure>
 <h3>多项式（polynomial）</h3>
 <p><strong>定义</strong>：几个单项式的<strong>和</strong>。每个单项式叫多项式的<strong>项</strong>，不含字母的项叫<strong>常数项</strong>。例：3x² − 5x + 7 有 3 项：3x²、−5x、+7（符号跟着项走，7 是常数项）。</p>
@@ -122,7 +85,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <pre><code>3x² + 5x² = (3+5)x² = 8x²
 −4ab + 2ab = (−4+2)ab = −2ab</code></pre>
 <p>口诀：<strong>系数相加，字母照抄</strong>。本质：把同品种的物品"数个数"合起来。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="190" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g fill="#2563eb">
 <rect x="40" y="60" width="26" height="26" rx="3"/>
@@ -144,7 +107,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="295" y="82" text-anchor="middle" font-size="24" fill="#334155"><animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.27;0.4;0.72;0.85" dur="7s" repeatCount="indefinite"/>+</text>
 <text x="145" y="150" text-anchor="middle" font-size="22" font-weight="bold" fill="#0f172a" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.32;0.42;0.68;0.78" dur="7s" repeatCount="indefinite"/>= 8x²</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：合并同类项 = 把同品种的方块（3x² 与 5x²）拼到一起数个数，系数相加、字母部分不变</figcaption>
+<figcaption class="fig-cap">图：合并同类项 = 把同品种的方块（3x² 与 5x²）拼到一起数个数，系数相加、字母部分不变</figcaption>
 </figure>
 <h3>去括号（重要法则！）</h3>
 <ol>
@@ -154,7 +117,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <pre><code>a − (b − c) = a − b + c</code></pre></li>
 </ol>
 <div class="insight"><strong>为什么括号前是负号要全部变号？</strong>a − (b − c) 里的 "−" 相当于"乘以 −1"分配到括号里：−(b − c) = (−1)×b + (−1)×(−c) = −b + c。回到第1章的"乘以 −1 = 关于原点翻转"，括号前负号 = 把括号内整体<strong>翻个方向</strong>。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="210" viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="40" y1="110" x2="520" y2="110" stroke="#94a3b8" stroke-width="2"/>
 <polygon points="520,110 512,104 512,116" fill="#94a3b8"/>
@@ -179,7 +142,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="350" y="80" text-anchor="middle" font-size="17" font-weight="bold" fill="#16a34a" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.25;0.45;0.85;1" dur="8s" repeatCount="indefinite"/>+c</text>
 <text x="280" y="180" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.25;0.5;0.85;1" dur="8s" repeatCount="indefinite"/>= −b + c</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：括号前是负号 = 乘以 −1，把括号内每一项都"翻个方向"（关于原点翻转）</figcaption>
+<figcaption class="fig-cap">图：括号前是负号 = 乘以 −1，把括号内每一项都"翻个方向"（关于原点翻转）</figcaption>
 </figure>
 <h3>整式加减的完整步骤</h3>
 <ol>
@@ -226,8 +189,8 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h3 style="color:#b45309;margin:0 0 10px">一、练习题</h3>
+<div class="paper">
+<h3 class="paper-head">一、练习题</h3>
 <ol style="margin:0;padding-left:26px">
 <li style="margin:8px 0">写出单项式 <strong>−4a²b</strong> 的系数和次数；再写出多项式 <strong>2x³ − 3x² + x − 5</strong> 的项数、次数和常数项。</li>
 <li style="margin:8px 0">判断 <strong>3x²y</strong> 与 <strong>−5yx²</strong> 是不是同类项，并说明理由（想一想：判断同类项只看什么，不看什么？）。</li>
@@ -237,20 +200,20 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li style="margin:8px 0">某仓库原有 <strong>(3x² + 4x − 5)</strong> 件货物，第一次运进 <strong>(x² − 2x + 8)</strong> 件，第二次运出 <strong>(2x² + x − 3)</strong> 件。用整式表示运完后仓库的存货，并化简（提示：运出相当于减去，注意去括号时符号）。</li>
 </ol>
 
-<h3 style="color:#b45309;margin:18px 0 10px">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>系数是 <strong>−4</strong>，次数是 <strong>2 + 1 = 3</strong>（字母 a²、b 的指数之和）。多项式 2x³ − 3x² + x − 5：共 <strong>4 项</strong>（2x³、−3x²、+x、−5），次数取最高项 2x³ 的次数 <strong>3</strong>，常数项是 <strong>−5</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><strong>是同类项</strong>。判断只看<strong>所含字母</strong>和<strong>相同字母的指数</strong>，不看字母的排列顺序，也不看系数。3x²y 与 −5yx² 都含字母 x、y，且 x 的指数都是 2、y 的指数都是 1，所以是同类项。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>把同品种归到一起：5a − 3b + 2a + 4b = (5a + 2a) + (−3b + 4b) = <strong>7a + b</strong>。口诀：系数相加，字母照抄。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>第一个括号前是负号，各项变号：−(2x − 3y) = −2x + 3y；2(x − y) = 2x − 2y。合起来：−2x + 3y + 2x − 2y = (−2x + 2x) + (3y − 2y) = <strong>y</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>周长 C = 2×[(2a+3) + a] = 2×(3a + 3) = <strong>6a + 6</strong>（m）；面积 S = (2a + 3)·a = <strong>2a² + 3a</strong>（m²）。当 a = 2：周长 = 6×2 + 6 = <strong>18 m</strong>，面积 = 2×2² + 3×2 = 8 + 6 = <strong>14 m²</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>存货 = (3x² + 4x − 5) + (x² − 2x + 8) − (2x² + x − 3)。先去括号（注意第三个括号前是负号，变号）：= 3x² + 4x − 5 + x² − 2x + 8 − 2x² − x + 3。合并同类项：(3x² + x² − 2x²) + (4x − 2x − x) + (−5 + 8 + 3) = <strong>2x² + x + 6</strong>（件）。</p></details>
+<h3 class="paper-head">二、参考答案（点击展开）</h3>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>系数是 <strong>−4</strong>，次数是 <strong>2 + 1 = 3</strong>（字母 a²、b 的指数之和）。多项式 2x³ − 3x² + x − 5：共 <strong>4 项</strong>（2x³、−3x²、+x、−5），次数取最高项 2x³ 的次数 <strong>3</strong>，常数项是 <strong>−5</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><strong>是同类项</strong>。判断只看<strong>所含字母</strong>和<strong>相同字母的指数</strong>，不看字母的排列顺序，也不看系数。3x²y 与 −5yx² 都含字母 x、y，且 x 的指数都是 2、y 的指数都是 1，所以是同类项。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>把同品种归到一起：5a − 3b + 2a + 4b = (5a + 2a) + (−3b + 4b) = <strong>7a + b</strong>。口诀：系数相加，字母照抄。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>第一个括号前是负号，各项变号：−(2x − 3y) = −2x + 3y；2(x − y) = 2x − 2y。合起来：−2x + 3y + 2x − 2y = (−2x + 2x) + (3y − 2y) = <strong>y</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>周长 C = 2×[(2a+3) + a] = 2×(3a + 3) = <strong>6a + 6</strong>（m）；面积 S = (2a + 3)·a = <strong>2a² + 3a</strong>（m²）。当 a = 2：周长 = 6×2 + 6 = <strong>18 m</strong>，面积 = 2×2² + 3×2 = 8 + 6 = <strong>14 m²</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>存货 = (3x² + 4x − 5) + (x² − 2x + 8) − (2x² + x − 3)。先去括号（注意第三个括号前是负号，变号）：= 3x² + 4x − 5 + x² − 2x + 8 − 2x² − x + 3。合并同类项：(3x² + x² − 2x²) + (4x − 2x − x) + (−5 + 8 + 3) = <strong>2x² + x + 6</strong>（件）。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第1章-有理数/第1章-有理数.html">← 上一章：第1章 有理数</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第3章-一元一次方程/第3章-一元一次方程.html">下一章：第3章 一元一次方程 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

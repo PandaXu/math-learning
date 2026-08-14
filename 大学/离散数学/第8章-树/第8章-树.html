@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第8章 树 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第8章 树 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第8章 树</div></header>
@@ -104,7 +67,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>生成树就是从一张密密麻麻的网里<strong>抽出一棵覆盖所有结点的"骨架"</strong>——把每个环都剪开一条边，剩下 <code>n − 1</code> 条边而不出现任何环。<strong>物理含义：</strong>现实中网络往往有冗余（备用线路、环状供电），生成树就是其中<strong>必须保留的最少骨干线路</strong>；弦则是"备用的、剪掉也不影响连通"的冗余边。电网的环网、地铁的环线都可"剪"成一棵生成树来分析与故障定位。</div>
 
 <h2 id="s3">8.3 最小生成树</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="260" y="26" font-size="14" fill="#1d4ed8" text-anchor="middle" font-weight="700"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4778;0.489;1" dur="9s" repeatCount="indefinite"/>总权 = 1 + 1 + 2 + 3 = 7（共 4 = 5−1 条边）</text>
 <g stroke="#cbd5e1" stroke-width="2.5">
@@ -133,7 +96,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <circle cx="80" cy="220" r="9" fill="#2563eb" stroke="#fff" stroke-width="1.5"/><text x="80" y="224">E</text>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：最小生成树（MST）——在密网中按权从小到大贪心选边 A-B(1)→D-E(1)→C-D(2)→B-C(3)，把 n 个点连成整体且总长度最短；红闪的是「加进去会成环」被丢弃的冗余边（A-C、B-D、C-E）。这就是布线/光缆的最低成本方案。</figcaption>
+<figcaption class="fig-cap">图：最小生成树（MST）——在密网中按权从小到大贪心选边 A-B(1)→D-E(1)→C-D(2)→B-C(3)，把 n 个点连成整体且总长度最短；红闪的是「加进去会成环」被丢弃的冗余边（A-C、B-D、C-E）。这就是布线/光缆的最低成本方案。</figcaption>
 </figure>
 <h3>定义</h3>
 <p>给图 <code>G</code> 的每条边赋一个权 <code>w(e)</code>（理解为长度、成本、时间），得到<strong>带权图</strong>。一棵生成树 T 的权 <code>W(T)</code> 定义为它所有边权之和：</p>
@@ -209,7 +172,7 @@ MST 边 = { A-B, B-C, C-D, D-E }，总权 = 1+3+2+1 = 7</code></pre>
 <div class="insight"><strong>几何含义：</strong>二叉树的"每个分叉最多两路"使它天然对应<strong>二分</strong>：左/右、是/否、小/大。<strong>物理含义：</strong>二叉树是计算机中最重要的结构之一——表达式求值、二叉搜索树（查找）、二叉堆（优先队列）、决策树（分类）、Huffman 编码，全都建立在"左右两分"之上。</div>
 
 <h2 id="s5">8.5 哈夫曼树</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="540" height="320" viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g stroke="#cbd5e1" stroke-width="2.5">
 <line x1="465" y1="195" x2="420" y2="275"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.1111;0.1333;1" dur="9s" repeatCount="indefinite"/></line>
@@ -240,7 +203,7 @@ MST 边 = { A-B, B-C, C-D, D-E }，总权 = 1+3+2+1 = 7</code></pre>
 <circle cx="270" cy="40" r="6" fill="#16a34a" stroke="#fff" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4778;0.489;1" dur="9s" repeatCount="indefinite"/><animateMotion path="M270,40 L405,115 L465,195 L420,275 L465,195 L405,115 L270,40" dur="3.8s" begin="4.3s" repeatCount="indefinite"/></circle>
 <circle cx="270" cy="40" r="6" fill="#16a34a" stroke="#fff" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.4778;0.489;1" dur="9s" repeatCount="indefinite"/><animateMotion path="M270,40 L405,115 L465,195 L510,275 L465,195 L405,115 L270,40" dur="3.8s" begin="4.3s" repeatCount="indefinite"/></circle>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：哈夫曼树（最优二叉树）——每次合并权最小的两棵（2+3=5、4+5=9、6+9=15）；绿点沿根到叶往返，路径段数就是码长：权最大的叶 6 离根最近（码长 1），权最小的叶 2、3 离根最远（码长 3），整棵树「重心下沉」，带权路径长度 WPL=29 最小。</figcaption>
+<figcaption class="fig-cap">图：哈夫曼树（最优二叉树）——每次合并权最小的两棵（2+3=5、4+5=9、6+9=15）；绿点沿根到叶往返，路径段数就是码长：权最大的叶 6 离根最近（码长 1），权最小的叶 2、3 离根最远（码长 3），整棵树「重心下沉」，带权路径长度 WPL=29 最小。</figcaption>
 </figure>
 <h3>带权路径长度 WPL</h3>
 <p>设一棵二叉树有 n 个带权叶结点，权分别为 <code>w<sub>1</sub>, …, w<sub>n</sub></code>，第 i 个叶到根的<strong>路径长度（= 经过的边数 = 编码位数）</strong>为 <code>l<sub>i</sub></code>，定义<strong>带权路径长度</strong>：</p>
@@ -322,7 +285,7 @@ WPL = 45·1 + 13·3 + 12·3 + 16·3 + 9·4 + 5·4 = 224 比特
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>一棵树有 8 个顶点。它有几条边？它至少有几个叶？请用本章的等价定义解释为什么边数一定是 7。</li>
@@ -333,20 +296,20 @@ WPL = 45·1 + 13·3 + 12·3 + 16·3 + 9·4 + 5·4 = 224 比特
 <li>字符频率为 a:0.4，b:0.2，c:0.2，d:0.1，e:0.1。构造哈夫曼树并求 WPL（以 100 个字符为总频，即 40/20/20/10/10），再说明为什么「高频字符给短码」能压缩数据。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>边数 m = n − 1 = 7 条。理由：树的等价定义②说「无回路且 m = n − 1」，等价定义③说「连通且 m = n − 1」，所以任何一棵 n 阶树的边数固定为 n − 1。叶至少 2 个（非平凡树至少有两个叶），本题最多可有 7 个叶（退化成一条链时两端各 1 个叶，中间点度数均为 2，故叶 = 2；要叶最多，需尽量多度数为 1 的点，8 个顶点连成一条链时恰有 2 个叶）。注意：任意 8 阶树的叶数在 2 与 7 之间。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>(a) 是树：树的原始定义就是「连通且无回路」；(b) 是森林：森林是「无回路但可以不连通」的图，每个连通分支是一棵树。物理含义：树用最少的 n−1 条边把 n 个点连成整体，因此没有冗余——任何一条边都是「桥」，剪断它整张网就裂成两半（单点故障），这正是「没有冗余」的代价。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>生成树边数（树枝）= n − 1 = 5 条；弦 = m − (n − 1) = 9 − 5 = 4 条。物理含义：生成树是从 9 条边的密网里抽出的、覆盖全部 6 个顶点的 5 条「必留骨干线路」；剩下的 4 条弦是「备用冗余线路」，剪掉也不影响连通，加回去每条都会形成一个基本回路。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>按权从小到大排序：A-C(1)、A-B(2)、B-C(3)、C-D(4)、B-D(5)。依次选：A-C(1) 选入 → A-B(2) 选入 → B-C(3) 会与 A-C、A-B 构成回路 A-B-C-A，丢弃 → C-D(4) 选入 → B-D(5) 会与已选边构成回路，丢弃（已凑满 3 = 4−1 条边，停止）。最小生成树边 = {A-C, A-B, C-D}，总权 = 1 + 2 + 4 = 7。（用 Prim 或破圈法可得同样总权 7。）</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>正则 m 叉树公式 t = (m−1)·i + 1。m = 2 时退化为 t = i + 1，故叶子数 t = 7 + 1 = 8。验证：t = (2−1)·7 + 1 = 8，即叶子数 = 内部结点数 + 1。物理含义：二叉树每个内部结点「分叉两路」，每多一个分叉点就多出一个末端，所以叶子永远比内部结点多 1。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>以总频 100 计：a:40, b:20, c:20, d:10, e:10。哈夫曼算法：10(d)+10(e)=20 → 20+20(b)=40（或 20+20(c)）→ 20(c)+40=60 → 40(a)+60=100。令 a 码长为 1、b 与 c 码长为 3、d 与 e 码长为 4（一种最优安排），则 WPL = 40·1 + 20·3 + 20·3 + 10·4 + 10·4 = 40 + 60 + 60 + 40 + 40 = 240 比特，平均码长 = 240/100 = 2.4 位/字符。物理含义：频率高的字符离根近、码短，频率低的字符离根远、码长，使总码长（加权和）最短，这就是「高频短码」实现数据压缩的本质。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>边数 m = n − 1 = 7 条。理由：树的等价定义②说「无回路且 m = n − 1」，等价定义③说「连通且 m = n − 1」，所以任何一棵 n 阶树的边数固定为 n − 1。叶至少 2 个（非平凡树至少有两个叶），本题最多可有 7 个叶（退化成一条链时两端各 1 个叶，中间点度数均为 2，故叶 = 2；要叶最多，需尽量多度数为 1 的点，8 个顶点连成一条链时恰有 2 个叶）。注意：任意 8 阶树的叶数在 2 与 7 之间。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>(a) 是树：树的原始定义就是「连通且无回路」；(b) 是森林：森林是「无回路但可以不连通」的图，每个连通分支是一棵树。物理含义：树用最少的 n−1 条边把 n 个点连成整体，因此没有冗余——任何一条边都是「桥」，剪断它整张网就裂成两半（单点故障），这正是「没有冗余」的代价。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>生成树边数（树枝）= n − 1 = 5 条；弦 = m − (n − 1) = 9 − 5 = 4 条。物理含义：生成树是从 9 条边的密网里抽出的、覆盖全部 6 个顶点的 5 条「必留骨干线路」；剩下的 4 条弦是「备用冗余线路」，剪掉也不影响连通，加回去每条都会形成一个基本回路。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>按权从小到大排序：A-C(1)、A-B(2)、B-C(3)、C-D(4)、B-D(5)。依次选：A-C(1) 选入 → A-B(2) 选入 → B-C(3) 会与 A-C、A-B 构成回路 A-B-C-A，丢弃 → C-D(4) 选入 → B-D(5) 会与已选边构成回路，丢弃（已凑满 3 = 4−1 条边，停止）。最小生成树边 = {A-C, A-B, C-D}，总权 = 1 + 2 + 4 = 7。（用 Prim 或破圈法可得同样总权 7。）</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>正则 m 叉树公式 t = (m−1)·i + 1。m = 2 时退化为 t = i + 1，故叶子数 t = 7 + 1 = 8。验证：t = (2−1)·7 + 1 = 8，即叶子数 = 内部结点数 + 1。物理含义：二叉树每个内部结点「分叉两路」，每多一个分叉点就多出一个末端，所以叶子永远比内部结点多 1。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>以总频 100 计：a:40, b:20, c:20, d:10, e:10。哈夫曼算法：10(d)+10(e)=20 → 20+20(b)=40（或 20+20(c)）→ 20(c)+40=60 → 40(a)+60=100。令 a 码长为 1、b 与 c 码长为 3、d 与 e 码长为 4（一种最优安排），则 WPL = 40·1 + 20·3 + 20·3 + 10·4 + 10·4 = 40 + 60 + 60 + 40 + 40 = 240 比特，平均码长 = 240/100 = 2.4 位/字符。物理含义：频率高的字符离根近、码短，频率低的字符离根远、码长，使总码长（加权和）最短，这就是「高频短码」实现数据压缩的本质。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第7章-图论/第7章-图论.html">← 上一章：第7章 图论</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第9章-组合计数/第9章-组合计数.html">下一章：第9章 组合计数 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
 </body>
 </html>

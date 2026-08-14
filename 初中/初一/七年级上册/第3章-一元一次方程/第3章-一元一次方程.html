@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第3章 一元一次方程 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第3章 一元一次方程 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级上册 › 第3章 一元一次方程</div></header>
@@ -65,7 +28,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p><strong>方程的解</strong>：使方程左右两边相等的未知数的值，也叫<strong>根</strong>。例：x = 3 是方程 x + 4 = 7 的解（因为 3 + 4 = 7）。<strong>解方程</strong>：求方程解的过程。</p>
 <div class="insight"><strong>物理含义：</strong>方程 = 天平平衡。左边 = 右边 相当于天平两端放上砝码后平衡；未知数 x = 一个"不知道多重、但已知平衡关系"的砝码。</div>
 
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="250" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="560" height="250" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="280" y1="84" x2="280" y2="168" stroke="#64748b" stroke-width="4"/>
   <line x1="238" y1="168" x2="322" y2="168" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
   <polygon points="280,84 266,102 294,102" fill="#94a3b8"/>
@@ -96,7 +59,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
     <text x="496" y="129" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
   </g>
   <text x="280" y="205" font-size="14" font-weight="bold" fill="#16a34a" text-anchor="middle">两边同时拿走 3，天平仍平衡<animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：等式的性质 = 天平两边同步操作仍平衡（x + 3 = 7 → x = 4）</figcaption></figure>
+</svg><figcaption class="fig-cap">图：等式的性质 = 天平两边同步操作仍平衡（x + 3 = 7 → x = 4）</figcaption></figure>
 <h3>等式的性质（解方程的"合法操作"）</h3>
 <ol>
 <li><strong>等式两边加（或减）同一个数（或式子），结果仍相等</strong>：
@@ -116,7 +79,7 @@ x = 7 − 3      （把 +3 移到右边，变成 −3）
 x = 4</code></pre>
 <div class="insight"><strong>为什么移项要变号？</strong>其实移项 = 等式性质1（两边同时减 3）：x + 3 − 3 = 7 − 3，即 x = 7 − 3。表面看是"+3 跑到右边变成 −3"，本质是"两边同时拿走 3"。</div>
 
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="210" viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="560" height="210" viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <rect x="24" y="40" width="512" height="56" rx="12" fill="#f1f5f9"/>
   <rect x="60" y="52" width="46" height="32" rx="6" fill="#16a34a"/>
   <text x="83" y="73" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">x</text>
@@ -131,7 +94,7 @@ x = 4</code></pre>
   </g>
   <text x="280" y="150" font-size="20" font-weight="bold" fill="#16a34a" text-anchor="middle">x = 7 − 3 = 4<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.25;0.55;0.85;1" dur="6s" repeatCount="indefinite"/></text>
   <text x="408" y="130" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">变号！<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.25;0.55;0.85;1" dur="6s" repeatCount="indefinite"/></text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：移项 —— “+3 跨过等号变成 −3”（本质是两边同时减 3）</figcaption></figure>
+</svg><figcaption class="fig-cap">图：移项 —— “+3 跨过等号变成 −3”（本质是两边同时减 3）</figcaption></figure>
 <h3>方法二：去括号</h3>
 <pre><code>3(x + 2) = 15
 3x + 6 = 15      （分配律去括号）
@@ -185,7 +148,7 @@ x = 6</code></pre>
 </table>
 <div class="insight"><strong>更高观点的几何含义（为将来埋伏笔）：</strong>方程 ax + b = 0 可以看成"函数 y = ax + b 的值为 0"，它的解 x = −b/a 就是直线 y = ax + b 与 x 轴交点的横坐标。到"一次函数"（初二）时你会重新认识它。</div>
 
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="40" y1="280" x2="500" y2="280" stroke="#94a3b8" stroke-width="2"/>
   <polygon points="500,280 490,275 490,285" fill="#94a3b8"/>
   <line x1="80" y1="340" x2="80" y2="40" stroke="#94a3b8" stroke-width="2"/>
@@ -215,7 +178,7 @@ x = 6</code></pre>
     <animate attributeName="cy" values="40;40;280;280;40" keyTimes="0;0.2;0.6;0.85;1" dur="6s" repeatCount="indefinite"/>
   </circle>
   <text x="220" y="322" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">交点 (2, 0)<animate attributeName="opacity" values="0.3;1;0.3" dur="1.6s" repeatCount="indefinite"/></text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：方程 2x − 4 = 0 的解 x = 2，正是直线 y = 2x − 4 与 x 轴交点的横坐标</figcaption></figure>
+</svg><figcaption class="fig-cap">图：方程 2x − 4 = 0 的解 x = 2，正是直线 y = 2x − 4 与 x 轴交点的横坐标</figcaption></figure>
 
 <h2 id="s5">典型例题（自测）</h2>
 <div class="ex">
@@ -240,7 +203,7 @@ x = 6</code></pre>
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong>（由易到难，先独立完成再看答案）</p>
 <ol>
 <li>判断：下列哪些是<strong>一元一次方程</strong>？① 3x = 6；② x² = 9；③ x + y = 5；④ 2x − 1 = 0。</li>
@@ -251,20 +214,20 @@ x = 6</code></pre>
 <li>应用题：甲、乙两地相距 120 km，一辆车以 40 km/h 匀速行驶，几小时到达？请设未知数并列方程求解。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>一元一次方程要求：只含<strong>一个</strong>未知数、次数为 <strong>1</strong>、两边都是整式。① 3x = 6 是；④ 2x − 1 = 0 是。② x² = 9 次数为 2，③ x + y = 5 含两个未知数，均<strong>不是</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>移项：5x − 2x = 6 + 3 → 3x = 9 → x = 3。检验：左 = 5×3 − 3 = 12，右 = 2×3 + 6 = 12，相等，x = 3 正确。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>去括号：3x + 6 = 15 → 移项：3x = 15 − 6 = 9 → 系数化为 1：x = 3。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>去分母：两边同乘 6（2、3 的最小公倍数）→ 3x + 2x = 30 → 5x = 30 → x = 6。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>去分母：两边同乘 6 → 2(x + 2) − 3(x − 1) = 6 → 2x + 4 − 3x + 3 = 6 → −x + 7 = 6 → −x = −1 → x = 1。注意去括号时“−3(x−1)”要变号。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设需 x 小时，由“路程 = 速度 × 时间”列方程：40x = 120 → x = 3。答：3 小时到达。检验：40 × 3 = 120，符合题意。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>一元一次方程要求：只含<strong>一个</strong>未知数、次数为 <strong>1</strong>、两边都是整式。① 3x = 6 是；④ 2x − 1 = 0 是。② x² = 9 次数为 2，③ x + y = 5 含两个未知数，均<strong>不是</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>移项：5x − 2x = 6 + 3 → 3x = 9 → x = 3。检验：左 = 5×3 − 3 = 12，右 = 2×3 + 6 = 12，相等，x = 3 正确。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>去括号：3x + 6 = 15 → 移项：3x = 15 − 6 = 9 → 系数化为 1：x = 3。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>去分母：两边同乘 6（2、3 的最小公倍数）→ 3x + 2x = 30 → 5x = 30 → x = 6。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>去分母：两边同乘 6 → 2(x + 2) − 3(x − 1) = 6 → 2x + 4 − 3x + 3 = 6 → −x + 7 = 6 → −x = −1 → x = 1。注意去括号时“−3(x−1)”要变号。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>设需 x 小时，由“路程 = 速度 × 时间”列方程：40x = 120 → x = 3。答：3 小时到达。检验：40 × 3 = 120，符合题意。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第2章-整式的加减/第2章-整式的加减.html">← 上一章：第2章 整式的加减</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第4章-几何图形初步/第4章-几何图形初步.html">下一章：第4章 几何图形初步 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

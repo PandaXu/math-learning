@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第9章 不等式与不等式组 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第9章 不等式与不等式组 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级下册 › 第9章 不等式与不等式组</div></header>
@@ -85,7 +48,7 @@ x ≥ 4 的解集（实心 ●，向右延伸）：
         ●————————————————→
   -2  -1   0   1   2   3   4   5   6</code></pre>
 <div class="insight"><strong>几何含义：</strong>等式 <code>x = 4</code> 在数轴上只是一个<strong>点</strong>；而不等式 <code>x &lt; 4</code>、<code>x ≥ 4</code> 在数轴上是<strong>半条数轴（一条射线）</strong>。一句话：<strong>等号切出一个点，不等号切出半个数轴</strong>，解集就是其中一半。空心与实心，就是"这条半线要不要把自己的端点算进去"。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="180" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="52" y="34" fill="#2563eb" font-size="13" font-weight="bold">x &lt; 4：空心 ○，向左无限延伸</text>
 <line x1="40" y1="55" x2="480" y2="55" stroke="#94a3b8" stroke-width="2"/>
@@ -102,7 +65,7 @@ x ≥ 4 的解集（实心 ●，向右延伸）：
 <circle cx="360" cy="135" r="7" fill="#16a34a"/>
 <circle cx="364" cy="135" r="5" fill="#f59e0b"><animate attributeName="cx" values="364;462;364" dur="3.5s" repeatCount="indefinite"/></circle>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：不等号把数轴“切”成两半——x &lt; 4 是空心点向左的半条数轴，x ≥ 4 是实心点向右的半条数轴</figcaption>
+<figcaption class="fig-cap">图：不等号把数轴“切”成两半——x &lt; 4 是空心点向左的半条数轴，x ≥ 4 是实心点向右的半条数轴</figcaption>
 </figure>
 <div class="insight"><strong>物理含义：</strong>不等式是"阈值 / 界限"的数学表达——只规定一个<strong>临界值</strong>和一个<strong>方向</strong>，不规定具体数值。例："电梯载重不超过 1000 kg" → <code>m ≤ 1000</code>；"冲奶粉水温不低于 40℃" → <code>t ≥ 40</code>；"车速不得超过 120 km/h" → <code>v ≤ 120</code>。</div>
 
@@ -117,7 +80,7 @@ x ≥ 4 的解集（实心 ●，向右延伸）：
 <li><strong>性质3</strong>：不等号两边同时乘（或除以）同一个<strong>负数</strong>，不等号方向<strong>改变</strong>（"&lt;" 变 "&gt;"，"&gt;" 变 "&lt;"）。</li>
 </ul>
 <div class="insight"><strong>为什么性质3要变号？</strong>用具体数看：<code>3 &gt; 2</code> 成立。两边同乘 -1，得 <code>-3</code> 与 <code>-2</code>；在数轴上 -3 比 -2 更靠左，所以 <code>-3 &lt; -2</code>。即 <code>3 &gt; 2</code> 乘 -1 之后变成了 <code>-3 &lt; -2</code>，方向必须反过来。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="150" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="260" y="20" fill="#16a34a" font-size="15" font-weight="bold" text-anchor="middle">3 &gt; 2<animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></text>
 <text x="260" y="20" fill="#dc2626" font-size="15" font-weight="bold" text-anchor="middle">-3 &lt; -2，左右顺序颠倒！<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></text>
@@ -128,7 +91,7 @@ x ≥ 4 的解集（实心 ●，向右延伸）：
 <g fill="#2563eb"><circle cx="360" cy="95" r="7"><animate attributeName="cx" values="360;360;160;160;360" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></circle><text x="360" y="78" font-size="13" font-weight="bold" text-anchor="middle">2<animate attributeName="x" values="360;360;160;160;360" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></text></g>
 <g fill="#16a34a"><circle cx="410" cy="95" r="7"><animate attributeName="cx" values="410;410;110;110;410" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></circle><text x="410" y="78" font-size="13" font-weight="bold" text-anchor="middle">3<animate attributeName="x" values="410;410;110;110;410" keyTimes="0;0.4;0.5;0.9;1" dur="6s" repeatCount="indefinite"/></text></g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两边同乘 -1 就是关于原点 O 的镜像翻转，3 与 2 翻到左侧后左右顺序颠倒，所以 3 &gt; 2 变成 -3 &lt; -2</figcaption>
+<figcaption class="fig-cap">图：两边同乘 -1 就是关于原点 O 的镜像翻转，3 与 2 翻到左侧后左右顺序颠倒，所以 3 &gt; 2 变成 -3 &lt; -2</figcaption>
 </figure>
 <div class="insight"><strong>几何含义：</strong>性质1是<strong>平移</strong>——把两个点同时向左/右平移相同距离，左右顺序不变；性质2是<strong>拉伸/压缩</strong>——以原点为中心均匀放大或缩小整条数轴，正数之间的顺序不变；性质3是<strong>关于原点的镜像翻转</strong>——乘以负数把每个点翻到原点另一侧，原来在右边的点翻到了左边，左右顺序整体颠倒，所以不等号方向反转。</div>
 <div class="insight"><strong>物理含义：</strong>乘负数 = "方向反转"。向东 +3 m/s 与向西 -3 m/s 大小关系本来相反；若把"向东"重新规定为负方向，原来"谁快谁慢"的大小关系就整体翻转一次——这正是"乘负数变号"。</div>
@@ -186,7 +149,7 @@ x ≥ 4 的解集（实心 ●，向右延伸）：
 
 x &gt; -1 与 x &lt; 3 在数轴上的重叠是中间一段：
       -1 &lt; x &lt; 3</code></pre>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="175" viewBox="0 0 520 175" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="30" y1="95" x2="490" y2="95" stroke="#94a3b8" stroke-width="2"/>
 <g fill="#334155" font-size="12" text-anchor="middle"><text x="40" y="116">-3</text><text x="90" y="116">-2</text><text x="140" y="116">-1</text><text x="190" y="116">0</text><text x="240" y="116">1</text><text x="290" y="116">2</text><text x="340" y="116">3</text><text x="390" y="116">4</text><text x="440" y="116">5</text></g>
@@ -203,7 +166,7 @@ x &gt; -1 与 x &lt; 3 在数轴上的重叠是中间一段：
 <circle cx="336" cy="126" r="5" fill="#f59e0b"><animate attributeName="cx" values="336;50;336" dur="3.5s" repeatCount="indefinite"/></circle>
 <text x="190" y="150" fill="#2563eb" font-size="13" font-weight="bold" text-anchor="middle">x &lt; 3（向左延伸）</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两条射线的重叠部分就是不等式组的公共解集，-1 &lt; x &lt; 3 是数轴上的一段线段（开区间）</figcaption>
+<figcaption class="fig-cap">图：两条射线的重叠部分就是不等式组的公共解集，-1 &lt; x &lt; 3 是数轴上的一段线段（开区间）</figcaption>
 </figure>
 <h3>四种情形（口诀）</h3>
 <table>
@@ -259,7 +222,7 @@ x &gt; 2 与 x &lt; 1 没有公共部分 → 无解（解集为空集 ∅）</co
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>用不等号表示下列语句，并指出每个边界点在数轴上应画空心圆圈还是实心圆点：a 是正数；b 是非负数；c 不大于 5；d 不小于 -3。</li>
@@ -270,19 +233,19 @@ x &gt; 2 与 x &lt; 1 没有公共部分 → 无解（解集为空集 ∅）</co
 <li>某班有 x 名学生，每人发 5 本练习册，手头只有 48 本且不够发。列不等式并求 x 的最小整数值，再说明这个临界值对应数轴上的哪种边界点。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>a 是正数 → <code>a &gt; 0</code>；b 是非负数 → <code>b ≥ 0</code>；c 不大于 5 → <code>c ≤ 5</code>；d 不小于 -3 → <code>d ≥ -3</code>。边界点画法：<code>a &gt; 0</code> 在 0 处画空心圆圈（不包含 0）；<code>b ≥ 0</code> 在 0 处画实心圆点（包含 0）；<code>c ≤ 5</code> 在 5 处画实心圆点；<code>d ≥ -3</code> 在 -3 处画实心圆点。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>由 <code>a &gt; b</code>：两边同乘负数 -3，方向改变，故 <code>-3a &lt; -3b</code>；除以 -2 即乘负数 -1/2，方向改变，故 <code>a/(-2) &lt; b/(-2)</code>；两边同加 5（性质1，平移），方向不变，故 <code>a + 5 &gt; b + 5</code>。核心：乘 / 除以负数要变号（关于原点翻转），加减与乘正数不变号。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>3(x - 2) ≥ x + 4</code> → 去括号 <code>3x - 6 ≥ x + 4</code> → 移项 <code>3x - x ≥ 4 + 6</code> → <code>2x ≥ 10</code> → 两边除以正数 2，不变号，<code>x ≥ 5</code>。数轴上在 5 处画实心圆点并向右无限延伸。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>两边同乘正数 3，不变号：<code>-(2x - 3) &lt; 3</code> → <code>-2x + 3 &lt; 3</code> → 两边减 3：<code>-2x &lt; 0</code> → 两边除以负数 -2，<strong>方向改变</strong>：<code>x &gt; 0</code>。检验：取 x = 1，得 -(2-3)/3 = 1/3 &lt; 1 成立，方向正确。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>x - 1 &gt; 0</code> → <code>x &gt; 1</code>；<code>2x + 1 ≤ 7</code> → <code>2x ≤ 6</code> → <code>x ≤ 3</code>。两解集在数轴上的公共部分是 <code>1 &lt; x ≤ 3</code>，即开区间 (1, 3] 对应的一段线段：1 处空心、3 处实心。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>5x 本超过 48 本仍不够发 → <code>5x &gt; 48</code> → 两边除以正数 5，不变号，<code>x &gt; 9.6</code>。x 为整数，最小整数值是 <code>10</code>。临界点 9.6 用空心圆圈表示（不包含 9.6 本身），解集从 9.6 向右无限延伸。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>a 是正数 → <code>a &gt; 0</code>；b 是非负数 → <code>b ≥ 0</code>；c 不大于 5 → <code>c ≤ 5</code>；d 不小于 -3 → <code>d ≥ -3</code>。边界点画法：<code>a &gt; 0</code> 在 0 处画空心圆圈（不包含 0）；<code>b ≥ 0</code> 在 0 处画实心圆点（包含 0）；<code>c ≤ 5</code> 在 5 处画实心圆点；<code>d ≥ -3</code> 在 -3 处画实心圆点。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>由 <code>a &gt; b</code>：两边同乘负数 -3，方向改变，故 <code>-3a &lt; -3b</code>；除以 -2 即乘负数 -1/2，方向改变，故 <code>a/(-2) &lt; b/(-2)</code>；两边同加 5（性质1，平移），方向不变，故 <code>a + 5 &gt; b + 5</code>。核心：乘 / 除以负数要变号（关于原点翻转），加减与乘正数不变号。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p><code>3(x - 2) ≥ x + 4</code> → 去括号 <code>3x - 6 ≥ x + 4</code> → 移项 <code>3x - x ≥ 4 + 6</code> → <code>2x ≥ 10</code> → 两边除以正数 2，不变号，<code>x ≥ 5</code>。数轴上在 5 处画实心圆点并向右无限延伸。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>两边同乘正数 3，不变号：<code>-(2x - 3) &lt; 3</code> → <code>-2x + 3 &lt; 3</code> → 两边减 3：<code>-2x &lt; 0</code> → 两边除以负数 -2，<strong>方向改变</strong>：<code>x &gt; 0</code>。检验：取 x = 1，得 -(2-3)/3 = 1/3 &lt; 1 成立，方向正确。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p><code>x - 1 &gt; 0</code> → <code>x &gt; 1</code>；<code>2x + 1 ≤ 7</code> → <code>2x ≤ 6</code> → <code>x ≤ 3</code>。两解集在数轴上的公共部分是 <code>1 &lt; x ≤ 3</code>，即开区间 (1, 3] 对应的一段线段：1 处空心、3 处实心。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>5x 本超过 48 本仍不够发 → <code>5x &gt; 48</code> → 两边除以正数 5，不变号，<code>x &gt; 9.6</code>。x 为整数，最小整数值是 <code>10</code>。临界点 9.6 用空心圆圈表示（不包含 9.6 本身），解集从 9.6 向右无限延伸。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第8章-二元一次方程组/第8章-二元一次方程组.html">← 上一章：第8章 二元一次方程组</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第10章-数据的收集整理与描述/第10章-数据的收集整理与描述.html">下一章：第10章 数据的收集整理与描述 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

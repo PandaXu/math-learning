@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第9章 组合计数 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第9章 组合计数 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第9章 组合计数</div></header>
@@ -108,7 +71,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p><strong>帕斯卡恒等式</strong>（生成帕斯卡三角形的递推关系）：</p>
 <pre><code>C(n, k) = C(n−1, k−1) + C(n−1, k)   （1 ≤ k ≤ n−1）</code></pre>
 <h3>帕斯卡三角形与格点路径</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="230" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#cbd5e1" stroke-width="1"><line x1="40" y1="50" x2="40" y2="170"/><line x1="130" y1="50" x2="130" y2="170"/><line x1="220" y1="50" x2="220" y2="170"/><line x1="310" y1="50" x2="310" y2="170"/><line x1="40" y1="170" x2="310" y2="170"/><line x1="40" y1="110" x2="310" y2="110"/><line x1="40" y1="50" x2="310" y2="50"/></g><g fill="#94a3b8"><circle cx="40" cy="170" r="2.5"/><circle cx="130" cy="170" r="2.5"/><circle cx="220" cy="170" r="2.5"/><circle cx="310" cy="170" r="2.5"/><circle cx="40" cy="110" r="2.5"/><circle cx="130" cy="110" r="2.5"/><circle cx="220" cy="110" r="2.5"/><circle cx="310" cy="110" r="2.5"/><circle cx="40" cy="50" r="2.5"/><circle cx="130" cy="50" r="2.5"/><circle cx="220" cy="50" r="2.5"/><circle cx="310" cy="50" r="2.5"/></g><g fill="#334155" font-size="11" text-anchor="middle"><text x="40" y="188">1</text><text x="130" y="188">1</text><text x="220" y="188">1</text><text x="310" y="188">1</text><text x="40" y="102">1</text><text x="130" y="102">2</text><text x="220" y="102">3</text><text x="310" y="102">4</text><text x="40" y="42">1</text><text x="130" y="42">3</text><text x="220" y="42">6</text><text x="310" y="42">10</text></g><path id="lp" d="M40,170 H220 V110 H310 V50" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="390" stroke-dashoffset="390"><animate attributeName="stroke-dashoffset" values="390;0" dur="6s" repeatCount="indefinite"/></path><circle r="7" fill="#16a34a"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#lp"/></animateMotion></circle><text x="40" y="202" font-size="12" fill="#6b7280" text-anchor="middle">起点 (0,0)</text><text x="310" y="30" font-size="12" fill="#6b7280" text-anchor="middle">终点 (3,2)</text><g font-size="13" fill="#334155"><rect x="340" y="56" width="14" height="14" rx="3" fill="#2563eb"/><text x="362" y="68">向右走 3 步</text><rect x="340" y="82" width="14" height="14" rx="3" fill="#16a34a"/><text x="362" y="94">向上走 2 步</text><text x="340" y="124">总步数 = 3 + 2 = 5</text><text x="340" y="146" font-weight="700" fill="#2563eb">最短路数 = C(5,3) = 10</text><text x="340" y="168" font-size="12" fill="#6b7280">格点数字 = 到该点的路径数</text><text x="340" y="184" font-size="12" fill="#6b7280">（每个 = 左邻 + 下邻）</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图1（二项式系数）：C(n,k) 就是格点图上从 (0,0) 走到 (k,n−k) 的最短路条数——每一步只能<strong>向右(蓝)</strong>或<strong>向上(绿)</strong>；每个格点上的数字 = 到达它的路径数（左邻 + 下邻），绿色圆点沿一条最短路（右右上右上）行走。</figcaption></figure>
+<figure class="fig"><svg width="560" height="230" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#cbd5e1" stroke-width="1"><line x1="40" y1="50" x2="40" y2="170"/><line x1="130" y1="50" x2="130" y2="170"/><line x1="220" y1="50" x2="220" y2="170"/><line x1="310" y1="50" x2="310" y2="170"/><line x1="40" y1="170" x2="310" y2="170"/><line x1="40" y1="110" x2="310" y2="110"/><line x1="40" y1="50" x2="310" y2="50"/></g><g fill="#94a3b8"><circle cx="40" cy="170" r="2.5"/><circle cx="130" cy="170" r="2.5"/><circle cx="220" cy="170" r="2.5"/><circle cx="310" cy="170" r="2.5"/><circle cx="40" cy="110" r="2.5"/><circle cx="130" cy="110" r="2.5"/><circle cx="220" cy="110" r="2.5"/><circle cx="310" cy="110" r="2.5"/><circle cx="40" cy="50" r="2.5"/><circle cx="130" cy="50" r="2.5"/><circle cx="220" cy="50" r="2.5"/><circle cx="310" cy="50" r="2.5"/></g><g fill="#334155" font-size="11" text-anchor="middle"><text x="40" y="188">1</text><text x="130" y="188">1</text><text x="220" y="188">1</text><text x="310" y="188">1</text><text x="40" y="102">1</text><text x="130" y="102">2</text><text x="220" y="102">3</text><text x="310" y="102">4</text><text x="40" y="42">1</text><text x="130" y="42">3</text><text x="220" y="42">6</text><text x="310" y="42">10</text></g><path id="lp" d="M40,170 H220 V110 H310 V50" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="390" stroke-dashoffset="390"><animate attributeName="stroke-dashoffset" values="390;0" dur="6s" repeatCount="indefinite"/></path><circle r="7" fill="#16a34a"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#lp"/></animateMotion></circle><text x="40" y="202" font-size="12" fill="#6b7280" text-anchor="middle">起点 (0,0)</text><text x="310" y="30" font-size="12" fill="#6b7280" text-anchor="middle">终点 (3,2)</text><g font-size="13" fill="#334155"><rect x="340" y="56" width="14" height="14" rx="3" fill="#2563eb"/><text x="362" y="68">向右走 3 步</text><rect x="340" y="82" width="14" height="14" rx="3" fill="#16a34a"/><text x="362" y="94">向上走 2 步</text><text x="340" y="124">总步数 = 3 + 2 = 5</text><text x="340" y="146" font-weight="700" fill="#2563eb">最短路数 = C(5,3) = 10</text><text x="340" y="168" font-size="12" fill="#6b7280">格点数字 = 到该点的路径数</text><text x="340" y="184" font-size="12" fill="#6b7280">（每个 = 左邻 + 下邻）</text></g></svg><figcaption class="fig-cap">图1（二项式系数）：C(n,k) 就是格点图上从 (0,0) 走到 (k,n−k) 的最短路条数——每一步只能<strong>向右(蓝)</strong>或<strong>向上(绿)</strong>；每个格点上的数字 = 到达它的路径数（左邻 + 下邻），绿色圆点沿一条最短路（右右上右上）行走。</figcaption></figure>
 <pre><code>              1
             1   1
           1   2   1
@@ -158,7 +121,7 @@ A(x) = Σ_{n≥0} aₙ xⁿ = a₀ + a₁x + a₂x² + a₃x³ + ⋯</code></pre
 <p><strong>隔板法</strong>：方程 x₁ + x₂ + ⋯ + xₙ = k（xᵢ ≥ 0 整数）的解，等价于把 k 个相同的球放进 n 个不同的盒，用 n−1 块隔板分隔 k 个球，共有 <code>C(n+k−1, k)</code> 种（在 k+n−1 个位置里选 n−1 个放隔板）。例：x₁+x₂+x₃ = 4 的解有 C(6,4) = 15 个。</p>
 
 <h2 id="s6">9.6 容斥原理（排容原理）</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="285" viewBox="0 0 560 285" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g font-size="14" text-anchor="middle" font-weight="700"><text x="280" y="20" fill="#2563eb">+ |A| + |B| + |C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#dc2626">− |A∩B| − |A∩C| − |B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#16a34a">+ |A∩B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/></text></g><circle cx="165" cy="115" r="80" fill="rgba(37,99,235,0.16)" stroke="#2563eb" stroke-width="2"/><circle cx="315" cy="115" r="80" fill="rgba(22,163,74,0.16)" stroke="#16a34a" stroke-width="2"/><circle cx="240" cy="180" r="80" fill="rgba(217,119,6,0.16)" stroke="#d97706" stroke-width="2"/><g font-size="15" font-weight="700"><text x="165" y="60" fill="#2563eb" text-anchor="middle">A</text><text x="315" y="60" fill="#16a34a" text-anchor="middle">B</text><text x="240" y="218" fill="#d97706" text-anchor="middle">C</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/><circle cx="108" cy="90" r="14" fill="#fff" stroke="#2563eb" stroke-width="2"/><text x="108" y="95" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">+</text><circle cx="372" cy="90" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="372" y="95" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text><circle cx="240" cy="245" r="14" fill="#fff" stroke="#d97706" stroke-width="2"/><text x="240" y="250" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">+</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="92" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="240" y="97" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="190" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="190" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="290" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="290" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="128" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="240" y="133" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text></g><text x="280" y="282" font-size="12" fill="#6b7280" text-anchor="middle">规律：奇数个集合的交取 + ，偶数个取 − ，符号交错</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图2（容斥原理）：韦恩图上"奇加偶减"——先加三个集合(+)，再减去两两交集(−)，最后加回三者交集(+)，使每个点恰好被数 1 次，重叠区不再重复计数。</figcaption></figure>
+<figure class="fig"><svg width="560" height="285" viewBox="0 0 560 285" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g font-size="14" text-anchor="middle" font-weight="700"><text x="280" y="20" fill="#2563eb">+ |A| + |B| + |C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#dc2626">− |A∩B| − |A∩C| − |B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#16a34a">+ |A∩B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/></text></g><circle cx="165" cy="115" r="80" fill="rgba(37,99,235,0.16)" stroke="#2563eb" stroke-width="2"/><circle cx="315" cy="115" r="80" fill="rgba(22,163,74,0.16)" stroke="#16a34a" stroke-width="2"/><circle cx="240" cy="180" r="80" fill="rgba(217,119,6,0.16)" stroke="#d97706" stroke-width="2"/><g font-size="15" font-weight="700"><text x="165" y="60" fill="#2563eb" text-anchor="middle">A</text><text x="315" y="60" fill="#16a34a" text-anchor="middle">B</text><text x="240" y="218" fill="#d97706" text-anchor="middle">C</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/><circle cx="108" cy="90" r="14" fill="#fff" stroke="#2563eb" stroke-width="2"/><text x="108" y="95" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">+</text><circle cx="372" cy="90" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="372" y="95" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text><circle cx="240" cy="245" r="14" fill="#fff" stroke="#d97706" stroke-width="2"/><text x="240" y="250" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">+</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="92" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="240" y="97" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="190" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="190" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="290" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="290" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="128" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="240" y="133" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text></g><text x="280" y="282" font-size="12" fill="#6b7280" text-anchor="middle">规律：奇数个集合的交取 + ，偶数个取 − ，符号交错</text></svg><figcaption class="fig-cap">图2（容斥原理）：韦恩图上"奇加偶减"——先加三个集合(+)，再减去两两交集(−)，最后加回三者交集(+)，使每个点恰好被数 1 次，重叠区不再重复计数。</figcaption></figure>
 <p>当要数的东西有<strong>重叠</strong>时，加法原理失效（不能把重叠部分算两遍），容斥原理就是"扣掉重叠、补回多扣"的精确方法。</p>
 <h3>两个集合</h3>
 <pre><code>|A ∪ B| = |A| + |B| − |A ∩ B|</code></pre>
@@ -215,7 +178,7 @@ A(x) = Σ_{n≥0} aₙ xⁿ = a₀ + a₁x + a₂x² + a₃x³ + ⋯</code></pre
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>（加法/乘法原理）从甲地到乙地有 3 条公路、2 条铁路；从乙地到丙地有 4 条公路、1 条铁路。问：从甲地经乙地到丙地共有多少种走法？</li>
@@ -226,20 +189,20 @@ A(x) = Σ_{n≥0} aₙ xⁿ = a₀ + a₁x + a₂x² + a₃x³ + ⋯</code></pre
 <li>（容斥原理）求 1 到 100 中能被 2 或 3 整除的数有多少个。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>甲→乙：公路或铁路互斥，用加法，3 + 2 = 5 种；乙→丙：4 + 1 = 5 种；全程两步都要走完，用乘法：5 × 5 = <strong>25</strong> 种。（先"加"后"乘"，正是两条原理叠加。）</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>① 金银铜是三个不同位置，顺序重要，用排列：P(8,3) = 8 × 7 × 6 = <strong>336</strong> 种。② 只挑人不排座，顺序不重要，用组合：C(8,3) = 336 / 3! = 336 / 6 = <strong>56</strong> 种。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>一般项为 C(6,k)·(2x)^k·(−1)^(6−k)。要得到 x⁴，取 k = 4：C(6,4)·(2x)⁴·(−1)² = 15 × 16x⁴ × 1 = 240x⁴。故系数为 <strong>240</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>模 4 的余数只有 0、1、2、3 共 4 种，相当于 4 个"抽屉"；把 5 个整数放进去，由鸽笼原理，必有两个数落在同一个余数类中，即模 4 同余，它们的差能被 4 整除。（注意：原理只保证"存在"，不指明具体是哪两个数。）</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>令 yᵢ = xᵢ − 1（≥ 0），则原方程化为 y₁ + y₂ + y₃ + y₄ = 12 − 4 = 8 的<strong>非负</strong>整数解，用隔板法：C(4+8−1, 8) = C(11, 8) = C(11, 3) = <strong>165</strong> 个。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设 A 为被 2 整除的数、B 为被 3 整除的数。|A| = ⌊100/2⌋ = 50，|B| = ⌊100/3⌋ = 33，|A ∩ B| = ⌊100/6⌋ = 16（被 6 整除即被两者同时整除）。由容斥原理：|A ∪ B| = 50 + 33 − 16 = <strong>67</strong> 个。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>甲→乙：公路或铁路互斥，用加法，3 + 2 = 5 种；乙→丙：4 + 1 = 5 种；全程两步都要走完，用乘法：5 × 5 = <strong>25</strong> 种。（先"加"后"乘"，正是两条原理叠加。）</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>① 金银铜是三个不同位置，顺序重要，用排列：P(8,3) = 8 × 7 × 6 = <strong>336</strong> 种。② 只挑人不排座，顺序不重要，用组合：C(8,3) = 336 / 3! = 336 / 6 = <strong>56</strong> 种。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>一般项为 C(6,k)·(2x)^k·(−1)^(6−k)。要得到 x⁴，取 k = 4：C(6,4)·(2x)⁴·(−1)² = 15 × 16x⁴ × 1 = 240x⁴。故系数为 <strong>240</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>模 4 的余数只有 0、1、2、3 共 4 种，相当于 4 个"抽屉"；把 5 个整数放进去，由鸽笼原理，必有两个数落在同一个余数类中，即模 4 同余，它们的差能被 4 整除。（注意：原理只保证"存在"，不指明具体是哪两个数。）</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>令 yᵢ = xᵢ − 1（≥ 0），则原方程化为 y₁ + y₂ + y₃ + y₄ = 12 − 4 = 8 的<strong>非负</strong>整数解，用隔板法：C(4+8−1, 8) = C(11, 8) = C(11, 3) = <strong>165</strong> 个。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>设 A 为被 2 整除的数、B 为被 3 整除的数。|A| = ⌊100/2⌋ = 50，|B| = ⌊100/3⌋ = 33，|A ∩ B| = ⌊100/6⌋ = 16（被 6 整除即被两者同时整除）。由容斥原理：|A ∪ B| = 50 + 33 − 16 = <strong>67</strong> 个。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第8章-树/第8章-树.html">← 上一章：第8章 树</a>
 <a href="../../../index.html">回目录</a>
-<span style="color:#9ca3af">已是最后一章</span>
+<span class="pager-dim">已是最后一章</span>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
 </body>
 </html>

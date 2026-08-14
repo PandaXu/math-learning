@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第7章 图论 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第7章 图论 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第7章 图论</div></header>
@@ -72,7 +35,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 
 <h3>顶点的度与握手定理（本章第一根"柱子"）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="245" viewBox="0 0 520 245" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="20" y="26" font-size="14" fill="#64748b">握手定理：Σ deg(v) = 2m</text><g stroke="#334155" stroke-width="2.5"><line x1="260" y1="55" x2="120" y2="150"/><line x1="260" y1="55" x2="400" y2="150"/><line x1="120" y1="150" x2="400" y2="150"/><line x1="260" y1="55" x2="260" y2="200"/></g><g fill="#16a34a"><circle r="4.5"><animate attributeName="cx" values="260;120;260" dur="2.8s" repeatCount="indefinite"/><animate attributeName="cy" values="55;150;55" dur="2.8s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="260;400;260" dur="2.8s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="cy" values="55;150;55" dur="2.8s" begin="0.7s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="120;400;120" dur="3.4s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="3.4s" begin="1.4s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="260;260;260" dur="2.2s" begin="2.1s" repeatCount="indefinite"/><animate attributeName="cy" values="55;200;55" dur="2.2s" begin="2.1s" repeatCount="indefinite"/></circle></g><g><circle cx="260" cy="55" r="18" fill="#2563eb"/><circle cx="120" cy="150" r="18" fill="#2563eb"/><circle cx="400" cy="150" r="18" fill="#2563eb"/><circle cx="260" cy="200" r="18" fill="#2563eb"/></g><g fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700"><text x="260" y="60">A</text><text x="120" y="155">B</text><text x="400" y="155">C</text><text x="260" y="205">D</text></g><g><circle cx="298" cy="40" r="11" fill="#16a34a"/><circle cx="82" cy="130" r="11" fill="#16a34a"/><circle cx="438" cy="130" r="11" fill="#16a34a"/><circle cx="298" cy="212" r="11" fill="#16a34a"/></g><g fill="#ffffff" font-size="12" text-anchor="middle" font-weight="700"><text x="298" y="44">3</text><text x="82" y="134">2</text><text x="438" y="134">2</text><text x="298" y="216">1</text></g><text x="260" y="237" font-size="14" text-anchor="middle" fill="#334155">Σ deg(v) = 3 + 2 + 2 + 1 = 8 = <tspan fill="#16a34a" font-weight="700">2 × 4</tspan> 条边（恒为偶数）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：握手定理——每条边有两个端点，把所有顶点伸出的「线头数」（度）加起来，每条边被数两次，故 Σ deg(v) = 2×边数 = 8，恒为偶数。绿色光点沿边在两端之间往返，正是「一边计入两端」的计数过程。</figcaption></figure>
+<figure class="fig"><svg width="520" height="245" viewBox="0 0 520 245" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="20" y="26" font-size="14" fill="#64748b">握手定理：Σ deg(v) = 2m</text><g stroke="#334155" stroke-width="2.5"><line x1="260" y1="55" x2="120" y2="150"/><line x1="260" y1="55" x2="400" y2="150"/><line x1="120" y1="150" x2="400" y2="150"/><line x1="260" y1="55" x2="260" y2="200"/></g><g fill="#16a34a"><circle r="4.5"><animate attributeName="cx" values="260;120;260" dur="2.8s" repeatCount="indefinite"/><animate attributeName="cy" values="55;150;55" dur="2.8s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="260;400;260" dur="2.8s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="cy" values="55;150;55" dur="2.8s" begin="0.7s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="120;400;120" dur="3.4s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="3.4s" begin="1.4s" repeatCount="indefinite"/></circle><circle r="4.5"><animate attributeName="cx" values="260;260;260" dur="2.2s" begin="2.1s" repeatCount="indefinite"/><animate attributeName="cy" values="55;200;55" dur="2.2s" begin="2.1s" repeatCount="indefinite"/></circle></g><g><circle cx="260" cy="55" r="18" fill="#2563eb"/><circle cx="120" cy="150" r="18" fill="#2563eb"/><circle cx="400" cy="150" r="18" fill="#2563eb"/><circle cx="260" cy="200" r="18" fill="#2563eb"/></g><g fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700"><text x="260" y="60">A</text><text x="120" y="155">B</text><text x="400" y="155">C</text><text x="260" y="205">D</text></g><g><circle cx="298" cy="40" r="11" fill="#16a34a"/><circle cx="82" cy="130" r="11" fill="#16a34a"/><circle cx="438" cy="130" r="11" fill="#16a34a"/><circle cx="298" cy="212" r="11" fill="#16a34a"/></g><g fill="#ffffff" font-size="12" text-anchor="middle" font-weight="700"><text x="298" y="44">3</text><text x="82" y="134">2</text><text x="438" y="134">2</text><text x="298" y="216">1</text></g><text x="260" y="237" font-size="14" text-anchor="middle" fill="#334155">Σ deg(v) = 3 + 2 + 2 + 1 = 8 = <tspan fill="#16a34a" font-weight="700">2 × 4</tspan> 条边（恒为偶数）</text></svg><figcaption class="fig-cap">图：握手定理——每条边有两个端点，把所有顶点伸出的「线头数」（度）加起来，每条边被数两次，故 Σ deg(v) = 2×边数 = 8，恒为偶数。绿色光点沿边在两端之间往返，正是「一边计入两端」的计数过程。</figcaption></figure>
 <p>顶点 v 的<strong>度（degree）</strong>记作 <code>deg(v)</code>，等于<strong>与 v 相连的边的条数</strong>（有向图再分<strong>入度</strong> <code>deg⁻(v)</code> 与<strong>出度</strong> <code>deg⁺(v)</code>）。孤立点度为 0，悬挂点度为 1，环对度的贡献为 2。</p>
 <p>图的最小度记作 <code>δ(G)</code>，最大度记作 <code>Δ(G)</code>。</p>
 <p><strong>握手定理（Handshaking Lemma）</strong>：设图 G 有 m 条边，则</p>
@@ -160,7 +123,7 @@ Ore  定理：若任意一对不相邻顶点 u, v 满足 deg(u) + deg(v) ≥ n�
 
 <h2 id="s5">7.5 平面图与着色</h2>
 <h3>平面图与面</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="18" text-anchor="middle" font-size="15" fill="#0f172a">欧拉公式　<tspan fill="#2563eb" font-weight="700">v − e + f</tspan> = 4 − 6 + 4 = <tspan fill="#16a34a" font-weight="700">2</tspan></text><rect x="80" y="32" width="360" height="200" rx="14" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-20" dur="1.6s" repeatCount="indefinite"/></rect><text x="96" y="226" font-size="12" fill="#16a34a">f₄（外部面 · 无界）</text><g><polygon points="260,60 140,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="0s" repeatCount="indefinite"/></polygon><polygon points="260,60 380,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="3s" repeatCount="indefinite"/></polygon><polygon points="140,205 380,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="6s" repeatCount="indefinite"/></polygon></g><g stroke="#334155" stroke-width="2.5"><line x1="260" y1="60" x2="140" y2="205"/><line x1="260" y1="60" x2="380" y2="205"/><line x1="140" y1="205" x2="380" y2="205"/><line x1="260" y1="60" x2="260" y2="150"/><line x1="140" y1="205" x2="260" y2="150"/><line x1="380" y1="205" x2="260" y2="150"/></g><g fill="#2563eb"><circle cx="260" cy="60" r="6"/><circle cx="140" cy="205" r="6"/><circle cx="380" cy="205" r="6"/><circle cx="260" cy="150" r="6"/></g><g fill="#065f46" font-size="12" font-weight="700" text-anchor="middle"><text x="222" y="141">f₁</text><text x="298" y="141">f₂</text><text x="260" y="189">f₃</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：欧拉公式 v − e + f = 2——这张平面图（四面体 K4 的平面嵌入）有 4 个顶点、6 条边、4 个面（3 个内部三角形面 + 1 个外部面），满足「点 − 线 + 面」恒等式 4 − 6 + 4 = 2。内部三个面轮流高亮，外部面无界（虚线框外的整个平面）。</figcaption></figure>
+<figure class="fig"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="18" text-anchor="middle" font-size="15" fill="#0f172a">欧拉公式　<tspan fill="#2563eb" font-weight="700">v − e + f</tspan> = 4 − 6 + 4 = <tspan fill="#16a34a" font-weight="700">2</tspan></text><rect x="80" y="32" width="360" height="200" rx="14" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="6 4"><animate attributeName="stroke-dashoffset" values="0;-20" dur="1.6s" repeatCount="indefinite"/></rect><text x="96" y="226" font-size="12" fill="#16a34a">f₄（外部面 · 无界）</text><g><polygon points="260,60 140,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="0s" repeatCount="indefinite"/></polygon><polygon points="260,60 380,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="3s" repeatCount="indefinite"/></polygon><polygon points="140,205 380,205 260,150" fill="#16a34a"><animate attributeName="fill-opacity" values="0;0.30;0" dur="9s" begin="6s" repeatCount="indefinite"/></polygon></g><g stroke="#334155" stroke-width="2.5"><line x1="260" y1="60" x2="140" y2="205"/><line x1="260" y1="60" x2="380" y2="205"/><line x1="140" y1="205" x2="380" y2="205"/><line x1="260" y1="60" x2="260" y2="150"/><line x1="140" y1="205" x2="260" y2="150"/><line x1="380" y1="205" x2="260" y2="150"/></g><g fill="#2563eb"><circle cx="260" cy="60" r="6"/><circle cx="140" cy="205" r="6"/><circle cx="380" cy="205" r="6"/><circle cx="260" cy="150" r="6"/></g><g fill="#065f46" font-size="12" font-weight="700" text-anchor="middle"><text x="222" y="141">f₁</text><text x="298" y="141">f₂</text><text x="260" y="189">f₃</text></g></svg><figcaption class="fig-cap">图：欧拉公式 v − e + f = 2——这张平面图（四面体 K4 的平面嵌入）有 4 个顶点、6 条边、4 个面（3 个内部三角形面 + 1 个外部面），满足「点 − 线 + 面」恒等式 4 − 6 + 4 = 2。内部三个面轮流高亮，外部面无界（虚线框外的整个平面）。</figcaption></figure>
 <p>若一个图能画在平面上，使<strong>任意两条边只在公共端点处相交</strong>（边与边不交叉），则称它为<strong>平面图</strong>，这种画法叫<strong>平面嵌入</strong>。平面嵌入把平面分割成若干区域，每个区域叫一个<strong>面（face）</strong>；唯一那个无界的区域叫<strong>外部面</strong>。</p>
 <p><strong>欧拉公式</strong>（本章第三根"柱子"）：设连通平面图有 v 个顶点、e 条边、f 个面，则</p>
 <pre><code>v − e + f = 2</code></pre>
@@ -231,7 +194,7 @@ Ore  定理：若任意一对不相邻顶点 u, v 满足 deg(u) + deg(v) ≥ n�
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p style="margin:0 0 6px"><strong>一、练习题</strong></p>
 <ol>
 <li>一个无向图 G 有 5 条边、6 个顶点。求所有顶点的度数之和；并说明：能否存在恰有 3 个奇度顶点的图？结合一次握手的物理场景解释。</li>
@@ -242,19 +205,19 @@ Ore  定理：若任意一对不相邻顶点 u, v 满足 deg(u) + deg(v) ≥ n�
 <li>求下列图的色数：<code>χ(K4)</code>、<code>χ(C5)</code>、<code>χ(K3,3)</code>。并说明为什么四色定理不能给 <code>K5</code> 上 4 色。</li>
 </ol>
 <p style="margin:16px 0 6px"><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>度数之和 = 2m = 2×5 = 10。任何图中奇度顶点个数必为偶数（握手定理的推论），故不可能恰有 3 个奇度顶点。物理含义：一次握手要两个人各伸一只手，一共伸出的「手」数恒为偶数，所以「有奇数个好友的人」必然成对出现。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>桥是连接两个三角形的唯一那条边；这条边的两个端点是割点。删去该桥后，图由 1 个连通分量裂成 2 个（两个彼此孤立的三角形），连通分量数由 1 变为 2（+1）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>①对：路径（path）的顶点与边都不可重复。②错：通路（walk）允许重复边；不允许重复边的是迹（trail）。③对：圈是起点=终点且中间顶点不重复的路径。④对：通路长度 = 经过的边的条数。故正确的是 ①、③、④。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>奇度顶点有 2 个（即两个度数为 3 的顶点），所以：不存在欧拉回路（欧拉回路要求每个顶点度数都为偶数）；存在欧拉通路（恰有 2 个奇度顶点），且这条欧拉通路的两个端点就是那两个度数为 3 的顶点。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由欧拉公式 v − e + f = 2，得 6 − 12 + f = 2，故 f = 8。检验必要条件：12 ≤ 3×6 − 6 = 12，恰好取等，说明它可以是简单平面图（且此时每个面都是三角形，属于「最大平面图」）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>χ(K4) = 4（任意两点都相邻，需 4 色）；χ(C5) = 3（五边形是奇圈，奇圈需 3 色，偶圈才 2 色）；χ(K3,3) = 2（二部图，左右两侧各用一种颜色）。四色定理只对<strong>平面图</strong>成立，而 K5 是非平面图（10 条边 > 3×5−6 = 9），不受四色定理约束，所以 K5 需要 5 色。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>度数之和 = 2m = 2×5 = 10。任何图中奇度顶点个数必为偶数（握手定理的推论），故不可能恰有 3 个奇度顶点。物理含义：一次握手要两个人各伸一只手，一共伸出的「手」数恒为偶数，所以「有奇数个好友的人」必然成对出现。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>桥是连接两个三角形的唯一那条边；这条边的两个端点是割点。删去该桥后，图由 1 个连通分量裂成 2 个（两个彼此孤立的三角形），连通分量数由 1 变为 2（+1）。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>①对：路径（path）的顶点与边都不可重复。②错：通路（walk）允许重复边；不允许重复边的是迹（trail）。③对：圈是起点=终点且中间顶点不重复的路径。④对：通路长度 = 经过的边的条数。故正确的是 ①、③、④。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>奇度顶点有 2 个（即两个度数为 3 的顶点），所以：不存在欧拉回路（欧拉回路要求每个顶点度数都为偶数）；存在欧拉通路（恰有 2 个奇度顶点），且这条欧拉通路的两个端点就是那两个度数为 3 的顶点。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>由欧拉公式 v − e + f = 2，得 6 − 12 + f = 2，故 f = 8。检验必要条件：12 ≤ 3×6 − 6 = 12，恰好取等，说明它可以是简单平面图（且此时每个面都是三角形，属于「最大平面图」）。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>χ(K4) = 4（任意两点都相邻，需 4 色）；χ(C5) = 3（五边形是奇圈，奇圈需 3 色，偶圈才 2 色）；χ(K3,3) = 2（二部图，左右两侧各用一种颜色）。四色定理只对<strong>平面图</strong>成立，而 K5 是非平面图（10 条边 > 3×5−6 = 9），不受四色定理约束，所以 K5 需要 5 色。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第6章-代数系统/第6章-代数系统.html">← 上一章：第6章 代数系统</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第8章-树/第8章-树.html">下一章：第8章 树 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
 </body>
 </html>

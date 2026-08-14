@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第27章 相似 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第27章 相似 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第27章 相似</div></header>
@@ -176,7 +139,7 @@ AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
 <pre><code>C(△ABC) / C(△A′B′C′) = k
 （因为周长 = 三边之和，三边各乘 k，和也乘 k）</code></pre>
 <h3>④ 面积比 = 相似比的平方</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="260" viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <defs>
 <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
@@ -199,7 +162,7 @@ AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
 <text x="230" y="226" font-size="13" fill="#334155" text-anchor="middle">底 = 2a</text>
 <text x="230" y="250" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">面积 = 4S = k²·S</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：面积比 = 相似比的平方——边长放大 2 倍（k = 2）时，大三角形恰好被 4 个全等小三角形铺满，面积放大 2² = 4 倍</figcaption>
+<figcaption class="fig-cap">图：面积比 = 相似比的平方——边长放大 2 倍（k = 2）时，大三角形恰好被 4 个全等小三角形铺满，面积放大 2² = 4 倍</figcaption>
 </figure>
 <pre><code>S(△ABC) / S(△A′B′C′) = k²
 （因为 S = ½·底·高，底乘 k、高乘 k，故面积乘 k²）</code></pre>
@@ -230,7 +193,7 @@ AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
 <div class="insight"><strong>物理含义：</strong>测高问题的共同点是"用光线作边、用角度作形状、用相似比作尺子"。太阳（平行光）、镜子（反射）、视线（瞄准）提供了相等角，相似三角形把"角相等"翻译成"边成比例"，从而完成测量。</div>
 
 <h2 id="s6">27.6 位似</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="300" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <circle cx="70" cy="160" r="5" fill="#2563eb"/>
 <text x="70" y="140" font-size="13" fill="#334155" text-anchor="middle">O（位似中心）</text>
@@ -250,7 +213,7 @@ AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
 <text x="350" y="130" font-size="14" fill="#334155" text-anchor="middle">OA′ : OA = 2 : 1 = k</text>
 <text x="350" y="156" font-size="14" fill="#16a34a" text-anchor="middle">对应边 AB ∥ A′B′</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：位似 = 中心投影——图形沿过位似中心 O 的射线同比例放大（k = 2），对应点与 O 共线、对应边互相平行</figcaption>
+<figcaption class="fig-cap">图：位似 = 中心投影——图形沿过位似中心 O 的射线同比例放大（k = 2），对应点与 O 共线、对应边互相平行</figcaption>
 </figure>
 <h3>位似的定义</h3>
 <p>两个图形不仅<strong>相似</strong>，而且<strong>对应顶点的连线都相交于同一点</strong>，对应边<strong>互相平行（或在同一条直线上）</strong>，这样的两个图形叫做<strong>位似图形</strong>，这个交点叫做<strong>位似中心</strong>，此时相似比也叫<strong>位似比</strong>。</p>
@@ -328,8 +291,8 @@ P(x, y)  →  P″(−kx, −ky)    （在位似中心异侧，关于原点对�
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h4 style="margin:0 0 10px;color:#b45309">一、练习题</h4>
+<div class="paper">
+<h4 class="paper-head">一、练习题</h4>
 <ol style="margin:8px 0;padding-left:24px">
 <li style="margin:8px 0"><strong>（相似图形的定义）</strong>判断下列各组图形是否一定相似，并简述理由：①两个正方形；②两个矩形；③两个菱形；④两个等边三角形；⑤两个圆。</li>
 <li style="margin:8px 0"><strong>（相似比与对应边）</strong>已知 △ABC ∽ △DEF，相似比 k = 2（即 △ABC 的各边是 △DEF 对应边的 2 倍）。若 BC = 8，求对应边 EF 的长。</li>
@@ -338,20 +301,20 @@ P(x, y)  →  P″(−kx, −ky)    （在位似中心异侧，关于原点对�
 <li style="margin:8px 0"><strong>（性质：周长比与面积比）</strong>若 △ABC ∽ △DEF，相似比 k = 3，△ABC 的周长为 36 cm、面积为 27 cm²，求 △DEF 的周长与面积。</li>
 <li style="margin:8px 0"><strong>（位似与坐标系）</strong>以原点 O 为位似中心、相似比 k = 2，写出点 P(3, −2) 的同侧与异侧对应点坐标；再把点 Q(−1, 4) 按相似比 1/2 缩小，写出同侧对应点坐标。</li>
 </ol>
-<h4 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h4>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p style="margin:6px 0">①一定相似：所有正方形的角都是 90°、边成比例；②不一定相似：矩形角都相等（都是 90°），但邻边之比未必相等，即边不一定成比例；③不一定相似：菱形四条边可成比例（边长比相同），但角不一定相等；④一定相似：等边三角形三个角都是 60°，边成比例；⑤一定相似：所有圆彼此相似。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p style="margin:6px 0">相似比 k = AB/DE = BC/EF = 2，即 △ABC 的边是对应边的 2 倍，所以 EF = BC ÷ 2 = 8 ÷ 2 = 4。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p style="margin:6px 0">因为 DE ∥ BC，∠ADE = ∠B（同位角）、∠AED = ∠C（同位角），且 ∠A 为公共角，由 AA 判定得 △ADE ∽ △ABC；对应边比例式为 AD/AB = AE/AC = DE/BC。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p style="margin:6px 0">①相似：3/6 = 4/8 = 5/10 = 1/2，三边成比例（SSS 判定）；②相似：4/8 = 6/12 = 1/2，且夹角都是 60°，两边成比例且夹角相等（SAS 判定）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p style="margin:6px 0">周长比 = 相似比 = 3，故 △DEF 的周长 = 36 ÷ 3 = 12 cm；面积比 = 相似比的平方 = 3² = 9，故 △DEF 的面积 = 27 ÷ 9 = 3 cm²。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p style="margin:6px 0">P(3, −2) 按 k = 2 放大：同侧 P′(6, −4)，异侧 P″(−6, 4)；Q(−1, 4) 按 k = 1/2 缩小：同侧 Q′(−1/2, 2)。</p></details>
+<h4 class="paper-head">二、参考答案（点击展开）</h4>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p style="margin:6px 0">①一定相似：所有正方形的角都是 90°、边成比例；②不一定相似：矩形角都相等（都是 90°），但邻边之比未必相等，即边不一定成比例；③不一定相似：菱形四条边可成比例（边长比相同），但角不一定相等；④一定相似：等边三角形三个角都是 60°，边成比例；⑤一定相似：所有圆彼此相似。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p style="margin:6px 0">相似比 k = AB/DE = BC/EF = 2，即 △ABC 的边是对应边的 2 倍，所以 EF = BC ÷ 2 = 8 ÷ 2 = 4。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p style="margin:6px 0">因为 DE ∥ BC，∠ADE = ∠B（同位角）、∠AED = ∠C（同位角），且 ∠A 为公共角，由 AA 判定得 △ADE ∽ △ABC；对应边比例式为 AD/AB = AE/AC = DE/BC。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p style="margin:6px 0">①相似：3/6 = 4/8 = 5/10 = 1/2，三边成比例（SSS 判定）；②相似：4/8 = 6/12 = 1/2，且夹角都是 60°，两边成比例且夹角相等（SAS 判定）。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p style="margin:6px 0">周长比 = 相似比 = 3，故 △DEF 的周长 = 36 ÷ 3 = 12 cm；面积比 = 相似比的平方 = 3² = 9，故 △DEF 的面积 = 27 ÷ 9 = 3 cm²。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p style="margin:6px 0">P(3, −2) 按 k = 2 放大：同侧 P′(6, −4)，异侧 P″(−6, 4)；Q(−1, 4) 按 k = 1/2 缩小：同侧 Q′(−1/2, 2)。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第26章-反比例函数/第26章-反比例函数.html">← 上一章：第26章 反比例函数</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第28章-锐角三角函数/第28章-锐角三角函数.html">下一章：第28章 锐角三角函数 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

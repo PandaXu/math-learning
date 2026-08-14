@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第7章 复数 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第7章 复数 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第7章 复数</div></header>
@@ -83,7 +46,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 
 <h3>共轭复数（实轴的“镜像”）</h3>
 <p>把虚部变号，得到 <code>z = a + bi</code> 的<strong>共轭复数</strong>，记作 <code>z̄</code>（读作「z 共轭」）：</p>
-<pre><code>z = a + bi   ⟶   z̄ = a − bi</code></pre><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="140" x2="490" y2="140" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="30" x2="170" y2="250" stroke="#94a3b8" stroke-width="2"/><text x="478" y="130" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="48" font-size="13" fill="#334155">虚轴</text><text x="150" y="158" font-size="13" fill="#334155">O</text><line x1="305" y1="50" x2="305" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"><animate attributeName="stroke-dashoffset" values="0;-20" dur="1.2s" repeatCount="indefinite"/></line><circle cx="305" cy="50" r="6" fill="#2563eb"/><text x="316" y="46" font-size="14" fill="#2563eb" font-weight="700">z = 3 + 2i</text><circle cx="305" cy="230" r="6" fill="#16a34a"/><text x="316" y="246" font-size="14" fill="#16a34a" font-weight="700">z̄ = 3 − 2i</text><circle cx="305" cy="50" r="7" fill="none" stroke="#2563eb" stroke-width="3"><animate attributeName="cy" values="50;230;50" dur="4s" repeatCount="indefinite"/><animate attributeName="stroke" values="#2563eb;#16a34a;#2563eb" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：共轭 z̄ 是 z 关于实轴（横轴）的镜像，只有虚部变号、上下翻转</figcaption></figure>
+<pre><code>z = a + bi   ⟶   z̄ = a − bi</code></pre><figure class="fig"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="140" x2="490" y2="140" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="30" x2="170" y2="250" stroke="#94a3b8" stroke-width="2"/><text x="478" y="130" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="48" font-size="13" fill="#334155">虚轴</text><text x="150" y="158" font-size="13" fill="#334155">O</text><line x1="305" y1="50" x2="305" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"><animate attributeName="stroke-dashoffset" values="0;-20" dur="1.2s" repeatCount="indefinite"/></line><circle cx="305" cy="50" r="6" fill="#2563eb"/><text x="316" y="46" font-size="14" fill="#2563eb" font-weight="700">z = 3 + 2i</text><circle cx="305" cy="230" r="6" fill="#16a34a"/><text x="316" y="246" font-size="14" fill="#16a34a" font-weight="700">z̄ = 3 − 2i</text><circle cx="305" cy="50" r="7" fill="none" stroke="#2563eb" stroke-width="3"><animate attributeName="cy" values="50;230;50" dur="4s" repeatCount="indefinite"/><animate attributeName="stroke" values="#2563eb;#16a34a;#2563eb" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption class="fig-cap">图：共轭 z̄ 是 z 关于实轴（横轴）的镜像，只有虚部变号、上下翻转</figcaption></figure>
 <ul>
 <li><code>z + z̄ = 2a</code>（两倍的实部，是实数）；<code>z − z̄ = 2bi</code>（两倍的虚部，是纯虚数）</li>
 <li><code>z · z̄ = a² + b² = |z|²</code>（这个结论贯穿全章，务必记住）</li>
@@ -105,13 +68,13 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <pre><code>(a + bi)(c + di) = ac + adi + bci + bdi²
                 = (ac − bd) + (ad + bc)i</code></pre>
 <p>例：<code>(3 + 2i)(1 − 4i) = 3 − 12i + 2i − 8i² = 3 − 10i + 8 = 11 − 10i</code>。</p>
-<div class="insight"><strong>几何含义（本章核心）：</strong>两个复数相乘 = <strong>模相乘、辐角相加</strong>，也就是「<strong>旋转 + 伸缩</strong>」。设 <code>z₁ = r₁(cos θ₁ + i sin θ₁)</code>、<code>z₂ = r₂(cos θ₂ + i sin θ₂)</code>，则<br/><code>z₁z₂ = r₁r₂ [ cos(θ₁+θ₂) + i sin(θ₁+θ₂) ]</code>。长度变为 <code>r₁r₂</code>，角度变为 <code>θ₁+θ₂</code>。</div><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="300" x2="500" y2="300" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="330" x2="170" y2="40" stroke="#94a3b8" stroke-width="2"/><text x="488" y="290" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="55" font-size="13" fill="#334155">虚轴</text><text x="148" y="320" font-size="13" fill="#334155">O</text><path d="M 273.9 240 A 120 120 0 0 0 170 180" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M 325.9 210 A 180 180 0 0 0 170 120" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><text x="300" y="236" font-size="12" fill="#94a3b8">r₁ = 2</text><text x="344" y="176" font-size="12" fill="#94a3b8">r₁r₂ = 3</text><line x1="170" y1="300" x2="273.9" y2="240" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="6 4"/><path d="M 204.6 280 A 40 40 0 0 0 170 260" fill="none" stroke="#16a34a" stroke-width="2"/><text x="216" y="282" font-size="12" fill="#16a34a">θ: 30°→90°</text><g transform="translate(170,300)"><g><animateTransform attributeName="transform" type="rotate" values="-30;-90;-30" dur="6s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="scale" values="1 1;1.5 1.5;1 1" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="120" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="120,0 106,-7 106,7" fill="#2563eb"/></g></g></g><text x="282" y="238" font-size="14" fill="#0f172a" font-weight="700">z₁</text><text x="108" y="114" font-size="14" fill="#2563eb" font-weight="700">z₁·z₂</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：复数相乘 = 模相乘、辐角相加——向量同时「旋转」并「伸缩」</figcaption></figure>
+<div class="insight"><strong>几何含义（本章核心）：</strong>两个复数相乘 = <strong>模相乘、辐角相加</strong>，也就是「<strong>旋转 + 伸缩</strong>」。设 <code>z₁ = r₁(cos θ₁ + i sin θ₁)</code>、<code>z₂ = r₂(cos θ₂ + i sin θ₂)</code>，则<br/><code>z₁z₂ = r₁r₂ [ cos(θ₁+θ₂) + i sin(θ₁+θ₂) ]</code>。长度变为 <code>r₁r₂</code>，角度变为 <code>θ₁+θ₂</code>。</div><figure class="fig"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="300" x2="500" y2="300" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="330" x2="170" y2="40" stroke="#94a3b8" stroke-width="2"/><text x="488" y="290" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="55" font-size="13" fill="#334155">虚轴</text><text x="148" y="320" font-size="13" fill="#334155">O</text><path d="M 273.9 240 A 120 120 0 0 0 170 180" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M 325.9 210 A 180 180 0 0 0 170 120" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><text x="300" y="236" font-size="12" fill="#94a3b8">r₁ = 2</text><text x="344" y="176" font-size="12" fill="#94a3b8">r₁r₂ = 3</text><line x1="170" y1="300" x2="273.9" y2="240" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="6 4"/><path d="M 204.6 280 A 40 40 0 0 0 170 260" fill="none" stroke="#16a34a" stroke-width="2"/><text x="216" y="282" font-size="12" fill="#16a34a">θ: 30°→90°</text><g transform="translate(170,300)"><g><animateTransform attributeName="transform" type="rotate" values="-30;-90;-30" dur="6s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="scale" values="1 1;1.5 1.5;1 1" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="120" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="120,0 106,-7 106,7" fill="#2563eb"/></g></g></g><text x="282" y="238" font-size="14" fill="#0f172a" font-weight="700">z₁</text><text x="108" y="114" font-size="14" fill="#2563eb" font-weight="700">z₁·z₂</text></svg><figcaption class="fig-cap">图：复数相乘 = 模相乘、辐角相加——向量同时「旋转」并「伸缩」</figcaption></figure>
 <div class="insight"><strong>物理含义：</strong>「辐角相加」就是<strong>相位相加</strong>。信号通过一个电路或滤波环节，输出相对输入的相位差 θ 用「乘一个单位模复数 <code>e^(iθ)</code>」来表示；而「模相乘」表示增益（放大或衰减）。乘法把「放大/衰减」与「移相」一次完成。</div>
 
 <h3>i 的幂：周期为 4 的循环</h3>
 <pre><code>i¹ = i，  i² = −1，  i³ = −i，  i⁴ = 1，  然后 i⁵ = i … 每 4 次循环一次</code></pre>
 <p>因此求 <code>iⁿ</code>，只需看 n 除以 4 的余数：<code>i²⁰²⁵</code>：2025 ÷ 4 余 1，所以 <code>i²⁰²⁵ = i</code>。</p>
-<div class="insight"><strong>几何含义：</strong>每乘一次 i，就把向量<strong>逆时针旋转 90°</strong>。乘 4 次正好转回原位（旋转 360°），所以 i 的幂以 4 为周期循环。</div><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="160" r="90" fill="none" stroke="#94a3b8" stroke-width="1.5"/><line x1="120" y1="160" x2="400" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="40" x2="260" y2="280" stroke="#94a3b8" stroke-width="2"/><text x="388" y="150" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="272" y="55" font-size="13" fill="#334155">虚轴</text><text x="242" y="178" font-size="13" fill="#334155">O</text><text x="366" y="164" font-size="15" fill="#2563eb" font-weight="700">1<animate attributeName="opacity" values="1;0;0;0;1" keyTimes="0;0.1;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="48" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.1;0.25;0.4;1" dur="6s" repeatCount="indefinite"/></text><text x="154" y="164" font-size="15" fill="#2563eb" font-weight="700" text-anchor="end">−1<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.35;0.5;0.65;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="284" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">−i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.6;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><g transform="translate(260,160)"><g><animateTransform attributeName="transform" type="rotate" values="0;-360" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="90" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="90,0 78,-6 78,6" fill="#2563eb"/></g></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：每乘一次 i 就逆时针旋转 90°，乘 4 次正好回到原位</figcaption></figure>
+<div class="insight"><strong>几何含义：</strong>每乘一次 i，就把向量<strong>逆时针旋转 90°</strong>。乘 4 次正好转回原位（旋转 360°），所以 i 的幂以 4 为周期循环。</div><figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="160" r="90" fill="none" stroke="#94a3b8" stroke-width="1.5"/><line x1="120" y1="160" x2="400" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="40" x2="260" y2="280" stroke="#94a3b8" stroke-width="2"/><text x="388" y="150" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="272" y="55" font-size="13" fill="#334155">虚轴</text><text x="242" y="178" font-size="13" fill="#334155">O</text><text x="366" y="164" font-size="15" fill="#2563eb" font-weight="700">1<animate attributeName="opacity" values="1;0;0;0;1" keyTimes="0;0.1;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="48" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.1;0.25;0.4;1" dur="6s" repeatCount="indefinite"/></text><text x="154" y="164" font-size="15" fill="#2563eb" font-weight="700" text-anchor="end">−1<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.35;0.5;0.65;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="284" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">−i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.6;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><g transform="translate(260,160)"><g><animateTransform attributeName="transform" type="rotate" values="0;-360" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="90" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="90,0 78,-6 78,6" fill="#2563eb"/></g></g></svg><figcaption class="fig-cap">图：每乘一次 i 就逆时针旋转 90°，乘 4 次正好回到原位</figcaption></figure>
 
 <h3>共轭运算的性质（共轭“穿过”四则运算）</h3>
 <pre><code>z₁ ± z₂ 的共轭 = z̄₁ ± z̄₂
@@ -230,7 +193,7 @@ z̄̄ = z（取两次共轭回到自身）</code></pre>
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3 style="margin:6px 0 10px">一、练习题</h3>
 <ol>
 <li>设 <code>z = 4 − 3i</code>，写出它的实部、虚部、共轭 <code>z̄</code> 与模 <code>|z|</code>；判断它是实数、虚数还是纯虚数，并说明 <code>z</code> 与 <code>z̄</code> 在复平面上的位置关系。</li>
@@ -241,16 +204,16 @@ z̄̄ = z（取两次共轭回到自身）</code></pre>
 <li>两个同频信号用相量 <code>u₁ = 3 + 4i</code>、<code>u₂ = 5 − 12i</code> 表示，求合成相量 <code>u = u₁ + u₂</code> 及其模与辐角正切；又设 <code>z = 2(cos 60° + i sin 60°)</code>，用棣莫弗定理求 <code>z³</code> 的模与辐角。</li>
 </ol>
 <h3 style="margin:16px 0 10px">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>实部 <code>Re(z) = 4</code>、虚部 <code>Im(z) = −3</code>；<code>z̄ = 4 + 3i</code>；<code>|z| = √(4² + (−3)²) = 5</code>。因为 <code>b = −3 ≠ 0</code> 且 <code>a = 4 ≠ 0</code>，它是虚数（但不是纯虚数）。几何上，<code>z</code> 与 <code>z̄</code> 关于实轴（横轴）上下对称。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>i</code> 的幂以 4 为周期循环。<code>2026 ÷ 4</code> 余 2，故 <code>i²⁰²⁶ = i² = −1</code>；<code>2027 ÷ 4</code> 余 3，故 <code>i²⁰²⁷ = i³ = −i</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由复数相等的充要条件，实部相等、虚部相等：<code>x + y = 5</code>，<code>x − y = 1</code>。两式相加得 <code>2x = 6</code>，故 <code>x = 3</code>；代回得 <code>y = 2</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>z₁·z₂ = (1+i)(3−4i) = 3 − 4i + 3i − 4i² = 3 − i + 4 = 7 − i</code>。<br/><code>z₁/z₂ = (1+i)(3+4i)/(3²+4²) = (3 + 4i + 3i + 4i²)/25 = (−1 + 7i)/25 = −1/25 + (7/25)i</code>。<br/>几何意义：<code>1 + i</code> 的模为 <code>√(1²+1²) = √2</code>、辐角为 <code>45°</code>，故「乘以 <code>1+i</code>」就是把向量模放大 √2 倍、辐角加 45°，即旋转 45° 并放大 √2 倍。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>每乘一次 <code>i</code> 即绕原点逆时针旋转 90°。<code>i³</code> 从 1 出发连续乘三次 <code>i</code>：转 90° 到 <code>i</code>，再转 90° 到 <code>−1</code>，再转 90° 到 <code>−i</code>，故 <code>i³ = −i</code>。<br/><code>(1+i)² = 1 + 2i + i² = 2i</code>；几何上 <code>1+i</code> 模为 √2、辐角 45°，平方后模变 2、辐角变 90°，正好落在正虚轴上，即 <code>2i</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>合成相量 <code>u = (3+5) + (4−12)i = 8 − 8i</code>；模 <code>|u| = √(8² + (−8)²) = 8√2</code>；<code>tan θ = −8/8 = −1</code>，且 <code>u</code> 在第四象限，故 <code>θ = −45°</code>（即 315°）。<br/>由棣莫弗定理：<code>z³</code> 的模为 <code>2³ = 8</code>、辐角为 <code>3 × 60° = 180°</code>，故 <code>z³ = 8(cos 180° + i sin 180°) = −8</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>实部 <code>Re(z) = 4</code>、虚部 <code>Im(z) = −3</code>；<code>z̄ = 4 + 3i</code>；<code>|z| = √(4² + (−3)²) = 5</code>。因为 <code>b = −3 ≠ 0</code> 且 <code>a = 4 ≠ 0</code>，它是虚数（但不是纯虚数）。几何上，<code>z</code> 与 <code>z̄</code> 关于实轴（横轴）上下对称。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><code>i</code> 的幂以 4 为周期循环。<code>2026 ÷ 4</code> 余 2，故 <code>i²⁰²⁶ = i² = −1</code>；<code>2027 ÷ 4</code> 余 3，故 <code>i²⁰²⁷ = i³ = −i</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>由复数相等的充要条件，实部相等、虚部相等：<code>x + y = 5</code>，<code>x − y = 1</code>。两式相加得 <code>2x = 6</code>，故 <code>x = 3</code>；代回得 <code>y = 2</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p><code>z₁·z₂ = (1+i)(3−4i) = 3 − 4i + 3i − 4i² = 3 − i + 4 = 7 − i</code>。<br/><code>z₁/z₂ = (1+i)(3+4i)/(3²+4²) = (3 + 4i + 3i + 4i²)/25 = (−1 + 7i)/25 = −1/25 + (7/25)i</code>。<br/>几何意义：<code>1 + i</code> 的模为 <code>√(1²+1²) = √2</code>、辐角为 <code>45°</code>，故「乘以 <code>1+i</code>」就是把向量模放大 √2 倍、辐角加 45°，即旋转 45° 并放大 √2 倍。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>每乘一次 <code>i</code> 即绕原点逆时针旋转 90°。<code>i³</code> 从 1 出发连续乘三次 <code>i</code>：转 90° 到 <code>i</code>，再转 90° 到 <code>−1</code>，再转 90° 到 <code>−i</code>，故 <code>i³ = −i</code>。<br/><code>(1+i)² = 1 + 2i + i² = 2i</code>；几何上 <code>1+i</code> 模为 √2、辐角 45°，平方后模变 2、辐角变 90°，正好落在正虚轴上，即 <code>2i</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>合成相量 <code>u = (3+5) + (4−12)i = 8 − 8i</code>；模 <code>|u| = √(8² + (−8)²) = 8√2</code>；<code>tan θ = −8/8 = −1</code>，且 <code>u</code> 在第四象限，故 <code>θ = −45°</code>（即 315°）。<br/>由棣莫弗定理：<code>z³</code> 的模为 <code>2³ = 8</code>、辐角为 <code>3 × 60° = 180°</code>，故 <code>z³ = 8(cos 180° + i sin 180°) = −8</code>。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第6章-平面向量及其应用/第6章-平面向量及其应用.html">← 上一章：第6章 平面向量及其应用</a><a href="../../../index.html">回目录</a><a href="../第8章-立体几何初步/第8章-立体几何初步.html">下一章：第8章 立体几何初步 →</a></nav>
+<nav class="pager"><a href="../第6章-平面向量及其应用/第6章-平面向量及其应用.html">← 上一章：第6章 平面向量及其应用</a><a href="../../../index.html">回目录</a><a href="../第8章-立体几何初步/第8章-立体几何初步.html">下一章：第8章 立体几何初步 →</a></nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中的完整脉络</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中的完整脉络</footer>
 </body>
 </html>

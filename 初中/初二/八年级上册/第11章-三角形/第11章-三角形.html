@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第11章 三角形 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第11章 三角形 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第11章 三角形</div></header>
@@ -55,7 +18,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="s1">11.1 三角形的边（三边关系）</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="340" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g font-size="12" fill="#334155">
 <line x1="20" y1="20" x2="50" y2="20" stroke="#2563eb" stroke-width="4"/>
@@ -88,7 +51,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </circle>
 <text x="280" y="315" text-anchor="middle" font-size="13" fill="#334155">转动中：第三边 c 从 |a−b|（并拢）变到 a+b（伸直），只有 c 小于 a+b（两边之和大于第三边）才能围成三角形</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：一边绕顶点转动，第三边的长度在 |a−b| 与 a+b 之间变化——「两边之和大于第三边」是三条线段能围成三角形的条件。</figcaption>
+<figcaption class="fig-cap">图：一边绕顶点转动，第三边的长度在 |a−b| 与 a+b 之间变化——「两边之和大于第三边」是三条线段能围成三角形的条件。</figcaption>
 </figure>
 <h3>什么是三角形？</h3>
 <p><strong>定义</strong>：由<strong>不在同一条直线上</strong>的三条线段<strong>首尾顺次相接</strong>所组成的图形叫做三角形。</p>
@@ -131,7 +94,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 
 <h2 id="s2">11.2 三角形的角（内角和与外角）</h2>
 <h3>三角形内角和定理</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="560" height="330" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <polygon points="280,45 100,185 460,185" fill="none" stroke="#2563eb" stroke-width="2.5"/>
 <g fill="#334155" font-size="14">
@@ -170,7 +133,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </g>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：把三个内角 ∠A、∠B、∠C 搬到同一条直线上，恰好拼成一个平角——这就是「三角形内角和恒等于 180°」。</figcaption>
+<figcaption class="fig-cap">图：把三个内角 ∠A、∠B、∠C 搬到同一条直线上，恰好拼成一个平角——这就是「三角形内角和恒等于 180°」。</figcaption>
 </figure>
 <p><strong>定理</strong>：三角形的三个内角之和等于 180°。</p>
 <pre><code>∠A + ∠B + ∠C = 180°</code></pre>
@@ -314,7 +277,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3 style="margin:0 0 10px">一、练习题</h3>
 <ol>
 <li>下列三条线段能否组成三角形？为什么？① 2 cm、3 cm、6 cm；② 4 cm、6 cm、9 cm。</li>
@@ -325,19 +288,19 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>求正十二边形的内角和、每个内角、每个外角；若一个多边形的内角和等于 1980°，它是几边形？它的外角和是多少？</li>
 </ol>
 <h3 style="margin:18px 0 10px">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 不能。2 + 3 = 5 &lt; 6，较短两边之和小于最长边，围不成封闭图形（短边「够不着」）。② 能。4 + 6 = 10 &gt; 9，满足「短 + 短 &gt; 长」。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>第三边满足 |7 − 3| &lt; c &lt; 7 + 3，即 4 &lt; c &lt; 10；c 为整数，故 c = 5、6、7、8、9。物理含义：三根杆只有「较短两根之和 &gt; 最长一根」时才能首尾相接围成一个圈，否则最短两根够不着、结构塌成一条直线。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>∠C = 180° − 80° − 45° = 55°。∠C 处外角 = 180° − 55° = 125°（也等于不相邻两内角之和：80° + 45° = 125°）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>另一个锐角 = 90° − 28° = 62°。因内角和恒为 180°，直角占去 90°，两锐角互余。测量时只要测出两个角，第三个角 = 180° − 前两角之和，被「锁定」，无需再测。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>C 处外角 = ∠A + ∠B = 35° + 55° = 90°。该外角大于 ∠A（35°）和 ∠B（55°），即外角大于任何一个不相邻内角。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>正十二边形：内角和 = (12 − 2) × 180° = 1800°；每个内角 = 1800° ÷ 12 = 150°；每个外角 = 360° ÷ 12 = 30°。若内角和 1980°，则 (n − 2) × 180° = 1980°，n − 2 = 11，n = 13，是十三边形；外角和恒为 360°。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>① 不能。2 + 3 = 5 &lt; 6，较短两边之和小于最长边，围不成封闭图形（短边「够不着」）。② 能。4 + 6 = 10 &gt; 9，满足「短 + 短 &gt; 长」。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>第三边满足 |7 − 3| &lt; c &lt; 7 + 3，即 4 &lt; c &lt; 10；c 为整数，故 c = 5、6、7、8、9。物理含义：三根杆只有「较短两根之和 &gt; 最长一根」时才能首尾相接围成一个圈，否则最短两根够不着、结构塌成一条直线。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>∠C = 180° − 80° − 45° = 55°。∠C 处外角 = 180° − 55° = 125°（也等于不相邻两内角之和：80° + 45° = 125°）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>另一个锐角 = 90° − 28° = 62°。因内角和恒为 180°，直角占去 90°，两锐角互余。测量时只要测出两个角，第三个角 = 180° − 前两角之和，被「锁定」，无需再测。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>C 处外角 = ∠A + ∠B = 35° + 55° = 90°。该外角大于 ∠A（35°）和 ∠B（55°），即外角大于任何一个不相邻内角。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>正十二边形：内角和 = (12 − 2) × 180° = 1800°；每个内角 = 1800° ÷ 12 = 150°；每个外角 = 360° ÷ 12 = 30°。若内角和 1980°，则 (n − 2) × 180° = 1980°，n − 2 = 11，n = 13，是十三边形；外角和恒为 360°。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../../../初一/七年级下册/第10章-数据的收集整理与描述/第10章-数据的收集整理与描述.html">← 上一章：第10章 数据的收集整理与描述</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第12章-全等三角形/第12章-全等三角形.html">下一章：第12章 全等三角形 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

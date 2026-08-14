@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第16章 二次根式 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第16章 二次根式 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第16章 二次根式</div></header>
@@ -56,7 +19,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 
 <h2 id="s1">16.1 二次根式的概念</h2>
 <h3>什么是二次根式</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="260" y="18" text-anchor="middle" font-size="14" fill="#334155">面积为 a 的正方形，边长 = √a</text>
 <rect x="235" y="75" width="50" height="50" rx="2" fill="#2563eb" fill-opacity="0.14" stroke="#2563eb" stroke-width="2.5">
@@ -82,7 +45,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="260" y="204" opacity="0">边长 = √a = 3<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.375;0.625;1" dur="9s" repeatCount="indefinite"/></text>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：√a 是「面积为 a 的正方形的边长」——面积从 1→4→9，边长 √a 从 1→2→3，绿色边就是 √a 这把「尺子」</figcaption>
+<figcaption class="fig-cap">图：√a 是「面积为 a 的正方形的边长」——面积从 1→4→9，边长 √a 从 1→2→3，绿色边就是 √a 这把「尺子」</figcaption>
 </figure>
 <p><strong>定义</strong>：一般地，形如 <code>√a</code>（a ≥ 0）的式子叫做<strong>二次根式</strong>。其中「√」叫做<strong>二次根号</strong>，a 叫做<strong>被开方数</strong>。</p>
 <ul>
@@ -101,7 +64,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 (√3)² = 3， (√0.5)² = 0.5</code></pre>
 <div class="insight"><strong>几何含义：</strong>把「面积为 a 的正方形」的边长 √a 取出来，再以它为边长重新拼一个正方形，面积又变回 a——<strong>边长 → 面积</strong>的逆过程。</div>
 <h3>性质二：√(a²) = |a|（这是本章最易错的一条！）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="180" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="20" y="24" font-size="15" font-weight="700" fill="#2563eb">√(a²) = |a|　=　点 a 到原点 0 的距离</text>
 <line x1="20" y1="90" x2="500" y2="90" stroke="#94a3b8" stroke-width="2"/>
@@ -124,7 +87,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="260" y="46" fill="#0f172a" opacity="0">a = −3　→　√(a²) = |a| = 3<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.375;0.625;1" dur="8s" repeatCount="indefinite"/></text>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：√(a²) = |a| 是「点 a 到原点 0 的距离」——a 从 +3 滑到 −3，绿色距离始终非负，取的是 |a|</figcaption>
+<figcaption class="fig-cap">图：√(a²) = |a| 是「点 a 到原点 0 的距离」——a 从 +3 滑到 −3，绿色距离始终非负，取的是 |a|</figcaption>
 </figure>
 <pre><code>            ┌  a    (a &gt; 0)
  √(a²) = |a| ├  0    (a = 0)
@@ -249,7 +212,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>当 x 取何值时，<code>√(x−3)</code> 有意义？请结合「面积为 a 的正方形的边长」这一几何含义，说明为什么被开方数必须是非负数。</li>
@@ -260,21 +223,21 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>用勾股定理说明 <code>√2</code> 是边长为 1 的正方形的对角线长；再说明 <code>√2 + √2 = 2√2</code> 表示什么样的几何量。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>由被开方数 x−3 ≥ 0，得 x ≥ 3。几何上，√a 是「面积为 a 的正方形的边长」，边长只能是正的长度（或 0），而面积也不可能为负——不存在「面积为负」的正方形，所以被开方数必须 ≥ 0，√a 才有意义。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>√((−9)²) = |−9| = 9</code>。因为 a = −9 是负数，√(a²) = |a|：先平方得 81，再取算术平方根只能取非负的 9，不能取 −9。而 <code>(√9)² = 9</code> 是「先开方、后平方」互相抵消，直接回到 a = 9（此时 a 本身 ≥ 0）。区别：√(a²) 的结果是 |a|（去掉符号后的距离/大小），(√a)² 的结果是 a（前提 a ≥ 0）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>边长 = <code>√18 = √(9×2) = 3√2</code>（米）。几何含义：√18 是面积为 18 的正方形的边长，把它换算成「以 √2 为最小尺子」来量，正好是 3 段 √2 的长度——√2 是不可再拆的基本尺子，3 是尺子用了多少次。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>原边长 = √2，新边长 = √8 = 2√2，所以边长变为原来的 2 倍。因为面积从 2 变成 8，放大了 8÷2 = 4 倍，边长就放大 √4 = 2 倍，即 <code>√8 ÷ √2 = √(8/2) = √4 = 2</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>√8 + √18 = 2√2 + 3√2 = (2+3)√2 = 5√2</code>。√8 和 √18 表面被开方数不同，但化简后都是 √2 的整数倍——它们共用「同一把 √2 尺子」。于是 2 段 √2 接上 3 段 √2，总共 5 段 √2。不化简就看不出它们是同类（同一把尺子），也就无法合并。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>边长为 1 的正方形，其对角线 c 满足 <code>c² = 1² + 1² = 2</code>，取正的算术平方根得 <code>c = √2</code>。而 <code>√2 + √2 = 2√2</code> 表示「两条 √2 长的线段首尾拼接」——也就是把这条对角线长度接成原来的 2 倍（2 段 √2 尺子的拼接）。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>由被开方数 x−3 ≥ 0，得 x ≥ 3。几何上，√a 是「面积为 a 的正方形的边长」，边长只能是正的长度（或 0），而面积也不可能为负——不存在「面积为负」的正方形，所以被开方数必须 ≥ 0，√a 才有意义。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><code>√((−9)²) = |−9| = 9</code>。因为 a = −9 是负数，√(a²) = |a|：先平方得 81，再取算术平方根只能取非负的 9，不能取 −9。而 <code>(√9)² = 9</code> 是「先开方、后平方」互相抵消，直接回到 a = 9（此时 a 本身 ≥ 0）。区别：√(a²) 的结果是 |a|（去掉符号后的距离/大小），(√a)² 的结果是 a（前提 a ≥ 0）。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>边长 = <code>√18 = √(9×2) = 3√2</code>（米）。几何含义：√18 是面积为 18 的正方形的边长，把它换算成「以 √2 为最小尺子」来量，正好是 3 段 √2 的长度——√2 是不可再拆的基本尺子，3 是尺子用了多少次。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>原边长 = √2，新边长 = √8 = 2√2，所以边长变为原来的 2 倍。因为面积从 2 变成 8，放大了 8÷2 = 4 倍，边长就放大 √4 = 2 倍，即 <code>√8 ÷ √2 = √(8/2) = √4 = 2</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p><code>√8 + √18 = 2√2 + 3√2 = (2+3)√2 = 5√2</code>。√8 和 √18 表面被开方数不同，但化简后都是 √2 的整数倍——它们共用「同一把 √2 尺子」。于是 2 段 √2 接上 3 段 √2，总共 5 段 √2。不化简就看不出它们是同类（同一把尺子），也就无法合并。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>边长为 1 的正方形，其对角线 c 满足 <code>c² = 1² + 1² = 2</code>，取正的算术平方根得 <code>c = √2</code>。而 <code>√2 + √2 = 2√2</code> 表示「两条 √2 长的线段首尾拼接」——也就是把这条对角线长度接成原来的 2 倍（2 段 √2 尺子的拼接）。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../../八年级上册/第15章-分式/第15章-分式.html">← 上一章：第15章 分式</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第17章-勾股定理/第17章-勾股定理.html">下一章：第17章 勾股定理 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第3章 微分中值定理与导数的应用 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第3章 微分中值定理与导数的应用 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第3章 微分中值定理与导数的应用</div></header>
@@ -76,7 +39,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 
 <h2 id="s2">3.2 拉格朗日中值定理</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="40" y1="290" x2="500" y2="290" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="60" y1="24" x2="60" y2="290" stroke="#94a3b8" stroke-width="1.5"/>
@@ -98,7 +61,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <circle r="5.5" fill="#16a34a" stroke="#ffffff" stroke-width="1.5"/>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图1 拉格朗日中值定理：光滑曲线上总有一点 ξ，其切线平行于两端点连线（弦 AB）——整段"平均变化率"等于某点"瞬时变化率"</figcaption>
+<figcaption class="fig-cap">图1 拉格朗日中值定理：光滑曲线上总有一点 ξ，其切线平行于两端点连线（弦 AB）——整段"平均变化率"等于某点"瞬时变化率"</figcaption>
 </figure>
 <p>罗尔定理要求"两端等高"很苛刻，拉格朗日把这条限制去掉，得到微分学里<strong>最常用、最核心</strong>的定理。</p>
 <h3>定理内容</h3>
@@ -196,7 +159,7 @@ ln(1+x) = x − x²/2 + x³/3 − x⁴/4 + … + (−1)ⁿ⁻¹ xⁿ/n + o(xⁿ)
 <div class="insight"><strong>物理含义：</strong>竖直上抛运动中，位移 f(t) 在最高点达到极大值，此时瞬时速度 f′=0；而速度函数 v(t) 的极值点出现在加速度 a(t)=v′(t)=0 的时刻（速度的增减发生转折）。求极值 = 找"运动状态的转折瞬间"。</div>
 
 <h2 id="s7">3.7 凹凸性与拐点</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="20" y1="160" x2="500" y2="160" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="260" y1="20" x2="260" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
@@ -211,7 +174,7 @@ ln(1+x) = x − x²/2 + x³/3 − x⁴/4 + … + (−1)ⁿ⁻¹ xⁿ/n + o(xⁿ)
 <circle r="5.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"/>
 </g>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图2 凹凸性与拐点：切线沿 S 形曲线滑动，拐点处 f″=0、切线穿过曲线，弯曲方向由"∩"翻转为"∪"</figcaption>
+<figcaption class="fig-cap">图2 凹凸性与拐点：切线沿 S 形曲线滑动，拐点处 f″=0、切线穿过曲线，弯曲方向由"∩"翻转为"∪"</figcaption>
 </figure>
 <p>一阶导看"升降"，二阶导看"弯曲"。凹凸性描述曲线是"向上弯（碗）"还是"向下弯（帽）"。</p>
 <h3>凹凸性判定定理</h3>
@@ -289,7 +252,7 @@ ln(1+x) = x − x²/2 + x³/3 − x⁴/4 + … + (−1)ⁿ⁻¹ xⁿ/n + o(xⁿ)
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li><strong>罗尔定理的几何含义</strong>：设 f(x)=x²−2x 在区间 [0,2] 上。验证它是否满足罗尔定理的三个条件；若满足，求出使 f′(ξ)=0 的 ξ，并用"切线水平"解释其几何含义。</li>
@@ -300,21 +263,21 @@ ln(1+x) = x − x²/2 + x³/3 − x⁴/4 + … + (−1)ⁿ⁻¹ xⁿ/n + o(xⁿ)
 <li><strong>泰勒公式</strong>：写出 f(x)=eˣ 在 x=0 处的带皮亚诺余项的麦克劳林公式（展开到 x³ 项），并据此估算 e^0.1 的近似值（保留 4 位小数）。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>f(x)=x²−2x 是多项式，在闭区间 [0,2] 上连续，在开区间 (0,2) 内可导；又 f(0)=0，f(2)=4−4=0，两端函数值相等，满足罗尔定理全部三个条件。f′(x)=2x−2，令 f′(ξ)=0 得 ξ=1∈(0,2)。几何含义：曲线两端点 (0,0) 与 (2,0) 等高，因此在顶点 (1,−1) 处存在一条水平的切线（切线平行于 x 轴，即平行于两端点连线所在的水平线）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>平均速度 = [f(2)−f(0)]/(2−0) = (8−0)/2 = 4 km/h。由拉格朗日中值定理，存在 ξ∈(0,2) 使 f′(ξ)=4。而 f′(t)=2t+2，令 2t+2=4 得 t=1。即 t=1 小时那一刻的瞬时速度恰等于整段平均速度 4 km/h。物理含义：物体在一段时间内必有一个瞬间，其瞬时速度等于这段的平均速度。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>x→0 时 1−cos x→0、x²→0，是 0/0 型未定式，且分子分母都可导、分母导数 x→0 时不为 0，故可用洛必达法则。第一次洛必达：lim (1−cos x)/x² = lim sin x/(2x)。再由重要极限 sin x/x→1，得原极限 = 1/2。也可对 sin x/(2x) 再用一次洛必达得 lim cos x/2 = 1/2。答案：1/2。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>f′(x)=3x²−3=3(x−1)(x+1)。由 f′&gt;0 得 x&lt;−1 或 x&gt;1，故在 (−∞,−1) 与 (1,+∞) 上单调递增；由 f′&lt;0 得 −1&lt;x&lt;1，故在 (−1,1) 上单调递减。在 x=−1 处 f′ 由正变负，取得极大值 f(−1)=2；在 x=1 处 f′ 由负变正，取得极小值 f(1)=−2。几何含义：x=−1 是曲线的"峰顶"（左升右降），x=1 是"谷底"（左降右升），这两处切线都是水平的（f′=0）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>y′=3x²−3，y″=6x。当 x&lt;0 时 y″&lt;0，曲线是凸（向下凹，像倒扣的帽子 ∩）；当 x&gt;0 时 y″&gt;0，曲线是凹（向上凹，像盛水的碗 ∪）。y″ 在 x=0 两侧由负变正，凹凸性发生翻转，故 (0,0) 是拐点。直观上曲线从"向下弯"翻成"向上弯"，S 形翻转的中心正是原点。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>eˣ 的各阶导数都是 eˣ，在 x=0 处全为 1，故 eˣ = 1 + x + x²/2! + x³/3! + o(x³)。取 x=0.1 得 e^0.1 ≈ 1 + 0.1 + 0.1²/2 + 0.1³/6 = 1 + 0.1 + 0.005 + 0.0001667 ≈ 1.1052。泰勒公式的意义：在 x=0 附近用多项式"切触"逼近曲线，项数越多贴合越紧，越小的 |x| 近似越准。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>f(x)=x²−2x 是多项式，在闭区间 [0,2] 上连续，在开区间 (0,2) 内可导；又 f(0)=0，f(2)=4−4=0，两端函数值相等，满足罗尔定理全部三个条件。f′(x)=2x−2，令 f′(ξ)=0 得 ξ=1∈(0,2)。几何含义：曲线两端点 (0,0) 与 (2,0) 等高，因此在顶点 (1,−1) 处存在一条水平的切线（切线平行于 x 轴，即平行于两端点连线所在的水平线）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>平均速度 = [f(2)−f(0)]/(2−0) = (8−0)/2 = 4 km/h。由拉格朗日中值定理，存在 ξ∈(0,2) 使 f′(ξ)=4。而 f′(t)=2t+2，令 2t+2=4 得 t=1。即 t=1 小时那一刻的瞬时速度恰等于整段平均速度 4 km/h。物理含义：物体在一段时间内必有一个瞬间，其瞬时速度等于这段的平均速度。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>x→0 时 1−cos x→0、x²→0，是 0/0 型未定式，且分子分母都可导、分母导数 x→0 时不为 0，故可用洛必达法则。第一次洛必达：lim (1−cos x)/x² = lim sin x/(2x)。再由重要极限 sin x/x→1，得原极限 = 1/2。也可对 sin x/(2x) 再用一次洛必达得 lim cos x/2 = 1/2。答案：1/2。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>f′(x)=3x²−3=3(x−1)(x+1)。由 f′&gt;0 得 x&lt;−1 或 x&gt;1，故在 (−∞,−1) 与 (1,+∞) 上单调递增；由 f′&lt;0 得 −1&lt;x&lt;1，故在 (−1,1) 上单调递减。在 x=−1 处 f′ 由正变负，取得极大值 f(−1)=2；在 x=1 处 f′ 由负变正，取得极小值 f(1)=−2。几何含义：x=−1 是曲线的"峰顶"（左升右降），x=1 是"谷底"（左降右升），这两处切线都是水平的（f′=0）。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>y′=3x²−3，y″=6x。当 x&lt;0 时 y″&lt;0，曲线是凸（向下凹，像倒扣的帽子 ∩）；当 x&gt;0 时 y″&gt;0，曲线是凹（向上凹，像盛水的碗 ∪）。y″ 在 x=0 两侧由负变正，凹凸性发生翻转，故 (0,0) 是拐点。直观上曲线从"向下弯"翻成"向上弯"，S 形翻转的中心正是原点。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>eˣ 的各阶导数都是 eˣ，在 x=0 处全为 1，故 eˣ = 1 + x + x²/2! + x³/3! + o(x³)。取 x=0.1 得 e^0.1 ≈ 1 + 0.1 + 0.1²/2 + 0.1³/6 = 1 + 0.1 + 0.005 + 0.0001667 ≈ 1.1052。泰勒公式的意义：在 x=0 附近用多项式"切触"逼近曲线，项数越多贴合越紧，越小的 |x| 近似越准。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第2章-导数与微分/第2章-导数与微分.html">← 上一章：第2章 导数与微分</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第4章-不定积分/第4章-不定积分.html">下一章：第4章 不定积分 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第6章 定积分的应用 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第6章 定积分的应用 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第6章 定积分的应用</div></header>
@@ -78,7 +41,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>由曲线 <code>y = f(x)</code>、<code>y = g(x)</code>（在 [a,b] 上 f(x) ≥ g(x)）与直线 x = a、x = b 围成的图形，面积为</p>
 <pre><code>  A = ∫<sub>a</sub><sup>b</sup> [ f(x) − g(x) ] dx</code></pre>
 <p><strong>微元</strong>：<code>dA = [ f(x) − g(x) ] dx</code>——宽 dx、高为"上减下"的<strong>窄竖条矩形</strong>。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrUp1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,8 Z" fill="#16a34a"/></marker></defs><line x1="50" y1="292" x2="492" y2="292" stroke="#94a3b8" stroke-width="1.5"/><line x1="50" y1="30" x2="50" y2="292" stroke="#94a3b8" stroke-width="1.5"/><text x="34" y="36" fill="#334155" font-size="13" text-anchor="end">y</text><path d="M70,120 L460,60" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="466" y="52" fill="#2563eb" font-size="14" font-style="italic">y=f(x)</text><path d="M70,240 L460,200" fill="none" stroke="#16a34a" stroke-width="2.5"/><text x="466" y="196" fill="#16a34a" font-size="14" font-style="italic">y=g(x)</text><rect x="70" y="120" width="9" height="120" fill="#2563eb" fill-opacity="0.20" stroke="#2563eb" stroke-width="1.2"><animate attributeName="x" values="70;451;70" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="height" values="120;140;120" dur="6s" repeatCount="indefinite"/></rect><line x1="74" y1="120" x2="74" y2="240" stroke="#16a34a" stroke-width="2" marker-start="url(#arrUp1)" marker-end="url(#arrUp1)"><animate attributeName="x1" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="y1" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="240;200;240" dur="6s" repeatCount="indefinite"/></line><text x="86" y="185" font-size="13" fill="#16a34a">f(x)−g(x)<animate attributeName="x" values="86;467;86" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="185;132;185" dur="6s" repeatCount="indefinite"/></text><g fill="#334155" font-size="13"><text x="70" y="312" text-anchor="middle">a</text><text x="460" y="312" text-anchor="middle">b</text><text x="260" y="312" text-anchor="middle">x</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：面积微元 dA=[f(x)−g(x)]dx——一条宽 dx、高为"上减下"的窄竖条，从 a 扫到 b 累加成平面图形面积</figcaption></figure>
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrUp1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,8 Z" fill="#16a34a"/></marker></defs><line x1="50" y1="292" x2="492" y2="292" stroke="#94a3b8" stroke-width="1.5"/><line x1="50" y1="30" x2="50" y2="292" stroke="#94a3b8" stroke-width="1.5"/><text x="34" y="36" fill="#334155" font-size="13" text-anchor="end">y</text><path d="M70,120 L460,60" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="466" y="52" fill="#2563eb" font-size="14" font-style="italic">y=f(x)</text><path d="M70,240 L460,200" fill="none" stroke="#16a34a" stroke-width="2.5"/><text x="466" y="196" fill="#16a34a" font-size="14" font-style="italic">y=g(x)</text><rect x="70" y="120" width="9" height="120" fill="#2563eb" fill-opacity="0.20" stroke="#2563eb" stroke-width="1.2"><animate attributeName="x" values="70;451;70" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="height" values="120;140;120" dur="6s" repeatCount="indefinite"/></rect><line x1="74" y1="120" x2="74" y2="240" stroke="#16a34a" stroke-width="2" marker-start="url(#arrUp1)" marker-end="url(#arrUp1)"><animate attributeName="x1" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="y1" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="240;200;240" dur="6s" repeatCount="indefinite"/></line><text x="86" y="185" font-size="13" fill="#16a34a">f(x)−g(x)<animate attributeName="x" values="86;467;86" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="185;132;185" dur="6s" repeatCount="indefinite"/></text><g fill="#334155" font-size="13"><text x="70" y="312" text-anchor="middle">a</text><text x="460" y="312" text-anchor="middle">b</text><text x="260" y="312" text-anchor="middle">x</text></g></svg><figcaption class="fig-cap">图：面积微元 dA=[f(x)−g(x)]dx——一条宽 dx、高为"上减下"的窄竖条，从 a 扫到 b 累加成平面图形面积</figcaption></figure>
 <p>特例：若只有曲线 y = f(x)（f ≥ 0）、x 轴、x = a、x = b 围成，则 g(x) = 0，得</p>
 <pre><code>  A = ∫<sub>a</sub><sup>b</sup> f(x) dx</code></pre>
 <h3>(2) 直角坐标：Y 型区域（"左右型"，对 y 积分）</h3>
@@ -102,7 +65,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>曲线 y = f(x)（a ≤ x ≤ b，f ≥ 0）绕 x 轴旋转一周所得旋转体体积：</p>
 <pre><code>  V = π ∫<sub>a</sub><sup>b</sup> [ f(x) ]² dx</code></pre>
 <p><strong>微元</strong>：<code>dV = π [f(x)]² dx</code>——半径 f(x)、厚度 dx 的<strong>薄圆盘（圆柱）</strong>。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="500" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="500" y2="260" stroke="#94a3b8" stroke-width="1.5"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240 L450,280 L380,400 L320,460 L260,480 L190,453 L130,386 L70,280 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M70,280 L130,386 L190,453 L260,480 L320,460 L380,400 L450,280" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/><ellipse cx="70" cy="260" rx="6.4" ry="20" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="1.5"><animate attributeName="cx" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="rx" values="6.4;40;62;70;64;45;6.4;45;64;70;62;40;6.4" dur="8s" repeatCount="indefinite"/><animate attributeName="ry" values="20;126;193;220;200;140;20;140;200;220;193;126;20" dur="8s" repeatCount="indefinite"/></ellipse><line x1="70" y1="260" x2="70" y2="240" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x1" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="240;134;67;40;60;120;240;120;60;40;67;134;240" dur="8s" repeatCount="indefinite"/></line><text x="260" y="28" fill="#2563eb" font-size="14" font-style="italic" text-anchor="middle">y=f(x)</text><text x="500" y="246" fill="#334155" font-size="13" text-anchor="end">旋转轴 (x 轴)</text><text x="78" y="250" font-size="13" fill="#16a34a">半径 f(x)<animate attributeName="x" values="78;138;198;268;328;388;458;388;328;268;198;138;78" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="250;197;164;150;160;190;250;190;160;150;164;197;250" dur="8s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：圆盘法——曲线 y=f(x) 绕 x 轴旋转，每个薄圆盘半径 f(x)、厚 dx，体积 V=π∫[f(x)]²dx</figcaption></figure>
+<figure class="fig"><svg width="520" height="500" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="500" y2="260" stroke="#94a3b8" stroke-width="1.5"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240 L450,280 L380,400 L320,460 L260,480 L190,453 L130,386 L70,280 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M70,280 L130,386 L190,453 L260,480 L320,460 L380,400 L450,280" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/><ellipse cx="70" cy="260" rx="6.4" ry="20" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="1.5"><animate attributeName="cx" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="rx" values="6.4;40;62;70;64;45;6.4;45;64;70;62;40;6.4" dur="8s" repeatCount="indefinite"/><animate attributeName="ry" values="20;126;193;220;200;140;20;140;200;220;193;126;20" dur="8s" repeatCount="indefinite"/></ellipse><line x1="70" y1="260" x2="70" y2="240" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x1" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="240;134;67;40;60;120;240;120;60;40;67;134;240" dur="8s" repeatCount="indefinite"/></line><text x="260" y="28" fill="#2563eb" font-size="14" font-style="italic" text-anchor="middle">y=f(x)</text><text x="500" y="246" fill="#334155" font-size="13" text-anchor="end">旋转轴 (x 轴)</text><text x="78" y="250" font-size="13" fill="#16a34a">半径 f(x)<animate attributeName="x" values="78;138;198;268;328;388;458;388;328;268;198;138;78" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="250;197;164;150;160;190;250;190;160;150;164;197;250" dur="8s" repeatCount="indefinite"/></text></svg><figcaption class="fig-cap">图：圆盘法——曲线 y=f(x) 绕 x 轴旋转，每个薄圆盘半径 f(x)、厚 dx，体积 V=π∫[f(x)]²dx</figcaption></figure>
 <h3>(3) 旋转体：垫圈法（Washer Method）</h3>
 <p>由 y = R(x) 与 y = r(x)（a ≤ x ≤ b，且 R(x) ≥ r(x) ≥ 0）围成的区域绕 x 轴旋转一周所得"空心"旋转体体积：</p>
 <pre><code>  V = π ∫<sub>a</sub><sup>b</sup> ( [R(x)]² − [r(x)]² ) dx</code></pre>
@@ -120,7 +83,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>弧长元素来自<strong>勾股定理 + 以切线代弧线</strong>：在微小区间上，弧段 Δs 可用切线段近似，于是</p>
 <pre><code>  ds² = dx² + dy²   ⟹   ds = √( dx² + dy² )</code></pre>
 <p>不同坐标系只是把 ds 换成相应变量的形式。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><path d="M60,215 Q 290,120 470,185" fill="none" stroke="#cbd5e1" stroke-width="2"/><circle cx="60" cy="215" r="6" fill="#2563eb"><animateMotion dur="6s" repeatCount="indefinite" path="M60,215 Q 290,120 470,185"/></circle><path d="M230,170 Q 290,150 350,210" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"><animate attributeName="opacity" values="1;0.15;1" dur="4s" repeatCount="indefinite"/></path><line x1="230" y1="170" x2="350" y2="210" stroke="#0f172a" stroke-width="2.5"/><line x1="230" y1="170" x2="350" y2="170" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,4"/><line x1="350" y1="170" x2="350" y2="210" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,4"/><path d="M338,170 L338,182 L350,182" fill="none" stroke="#94a3b8" stroke-width="1.5"/><text x="286" y="160" fill="#2563eb" font-size="14" text-anchor="middle">dx</text><text x="360" y="194" fill="#16a34a" font-size="14">dy</text><text x="282" y="226" fill="#0f172a" font-size="14" text-anchor="middle">ds</text><text x="150" y="140" fill="#334155" font-size="13">ds² = dx² + dy²</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：弧微分——以切线微元 ds 代替弧线微元，由勾股定理得 ds=√(dx²+dy²)</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><path d="M60,215 Q 290,120 470,185" fill="none" stroke="#cbd5e1" stroke-width="2"/><circle cx="60" cy="215" r="6" fill="#2563eb"><animateMotion dur="6s" repeatCount="indefinite" path="M60,215 Q 290,120 470,185"/></circle><path d="M230,170 Q 290,150 350,210" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"><animate attributeName="opacity" values="1;0.15;1" dur="4s" repeatCount="indefinite"/></path><line x1="230" y1="170" x2="350" y2="210" stroke="#0f172a" stroke-width="2.5"/><line x1="230" y1="170" x2="350" y2="170" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,4"/><line x1="350" y1="170" x2="350" y2="210" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,4"/><path d="M338,170 L338,182 L350,182" fill="none" stroke="#94a3b8" stroke-width="1.5"/><text x="286" y="160" fill="#2563eb" font-size="14" text-anchor="middle">dx</text><text x="360" y="194" fill="#16a34a" font-size="14">dy</text><text x="282" y="226" fill="#0f172a" font-size="14" text-anchor="middle">ds</text><text x="150" y="140" fill="#334155" font-size="13">ds² = dx² + dy²</text></svg><figcaption class="fig-cap">图：弧微分——以切线微元 ds 代替弧线微元，由勾股定理得 ds=√(dx²+dy²)</figcaption></figure>
 <h3>(1) 直角坐标</h3>
 <p>曲线 y = f(x)，a ≤ x ≤ b，f′(x) 连续，则</p>
 <pre><code>  L = ∫<sub>a</sub><sup>b</sup> √( 1 + [f′(x)]² ) dx</code></pre>
@@ -209,8 +172,8 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<p style="margin:0 0 10px;font-weight:700;color:#b45309">一、练习题</p>
+<div class="paper">
+<p class="paper-head">一、练习题</p>
 <ol style="margin:6px 0 16px">
 <li>求抛物线 <code>y = x²</code> 与直线 <code>y = 2x</code> 所围图形的面积。</li>
 <li>求极坐标曲线 <code>r = 2sinθ</code>（圆）所围成区域的面积。</li>
@@ -219,20 +182,20 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>用 10 N 的力恰好把某弹簧从自然长度拉长 0.1 m，求把该弹簧从自然长度拉长 0.2 m 时克服弹力所做的功。</li>
 <li>一竖直放置的等腰三角形闸门，底边在上且宽 2 m、恰在水面处，高 3 m、顶点朝下。求水对闸门的总压力（取 ρ = 1000 kg/m³，g = 9.8 m/s²）。</li>
 </ol>
-<p style="margin:0 0 6px;font-weight:700;color:#b45309">二、参考答案（点击展开）</p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 1 题答案</summary><p>交点：<code>x² = 2x ⟹ x = 0, 2</code>；在 [0,2] 上 <code>2x ≥ x²</code>，故 A = ∫<sub>0</sub><sup>2</sup> (2x − x²) dx = [ x² − x³/3 ]<sub>0</sub><sup>2</sup> = 4 − 8/3 = <strong>4/3</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 2 题答案</summary><p><code>r = 2sinθ</code> 是半径 1 的圆（θ ∈ [0,π]）。A = ½∫<sub>0</sub><sup>π</sup> (2sinθ)² dθ = 2∫<sub>0</sub><sup>π</sup> sin²θ dθ = 2 · (π/2) = <strong>π</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 3 题答案</summary><p>与 x 轴交点：<code>x − x² = x(1 − x) = 0 ⟹ x = 0, 1</code>。绕竖直 y 轴用<strong>柱壳法</strong>：V = 2π∫<sub>0</sub><sup>1</sup> x·(x − x²) dx = 2π∫<sub>0</sub><sup>1</sup> (x² − x³) dx = 2π( 1/3 − 1/4 ) = <strong>π/6</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 4 题答案</summary><p>y′ = x，弧长 L = ∫<sub>0</sub><sup>1</sup> √(1 + x²) dx = ½[ x√(1+x²) + ln(x + √(1+x²)) ]<sub>0</sub><sup>1</sup> = <strong>½[ √2 + ln(1 + √2) ]</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 5 题答案</summary><p>胡克定律 <code>F = kx</code>，由 10 = k·0.1 得 <code>k = 100 N/m</code>。克服弹力做功 W = ∫<sub>0</sub><sup>0.2</sup> 100x dx = 50x² |<sub>0</sub><sup>0.2</sup> = 50 × 0.04 = <strong>2 J</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 6 题答案</summary><p>取水面为深度 h = 0，竖直向下为 h 轴。深度 h 处闸门宽度 W(h) = 2 − (2/3)h（h ∈ [0,3]）。压强 p = ρgh，故 F = ∫<sub>0</sub><sup>3</sup> ρg h·W(h) dh = ρg∫<sub>0</sub><sup>3</sup> h(2 − (2/3)h) dh = ρg[ h² − (2/9)h³ ]<sub>0</sub><sup>3</sup> = ρg(9 − 6) = 3ρg = 3 × 1000 × 9.8 = <strong>29400 N</strong>。</p></details>
+<p class="paper-head">二、参考答案（点击展开）</p>
+<details class="qa"><summary class="qa-s">查看第 1 题答案</summary><p>交点：<code>x² = 2x ⟹ x = 0, 2</code>；在 [0,2] 上 <code>2x ≥ x²</code>，故 A = ∫<sub>0</sub><sup>2</sup> (2x − x²) dx = [ x² − x³/3 ]<sub>0</sub><sup>2</sup> = 4 − 8/3 = <strong>4/3</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第 2 题答案</summary><p><code>r = 2sinθ</code> 是半径 1 的圆（θ ∈ [0,π]）。A = ½∫<sub>0</sub><sup>π</sup> (2sinθ)² dθ = 2∫<sub>0</sub><sup>π</sup> sin²θ dθ = 2 · (π/2) = <strong>π</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第 3 题答案</summary><p>与 x 轴交点：<code>x − x² = x(1 − x) = 0 ⟹ x = 0, 1</code>。绕竖直 y 轴用<strong>柱壳法</strong>：V = 2π∫<sub>0</sub><sup>1</sup> x·(x − x²) dx = 2π∫<sub>0</sub><sup>1</sup> (x² − x³) dx = 2π( 1/3 − 1/4 ) = <strong>π/6</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第 4 题答案</summary><p>y′ = x，弧长 L = ∫<sub>0</sub><sup>1</sup> √(1 + x²) dx = ½[ x√(1+x²) + ln(x + √(1+x²)) ]<sub>0</sub><sup>1</sup> = <strong>½[ √2 + ln(1 + √2) ]</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第 5 题答案</summary><p>胡克定律 <code>F = kx</code>，由 10 = k·0.1 得 <code>k = 100 N/m</code>。克服弹力做功 W = ∫<sub>0</sub><sup>0.2</sup> 100x dx = 50x² |<sub>0</sub><sup>0.2</sup> = 50 × 0.04 = <strong>2 J</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第 6 题答案</summary><p>取水面为深度 h = 0，竖直向下为 h 轴。深度 h 处闸门宽度 W(h) = 2 − (2/3)h（h ∈ [0,3]）。压强 p = ρgh，故 F = ∫<sub>0</sub><sup>3</sup> ρg h·W(h) dh = ρg∫<sub>0</sub><sup>3</sup> h(2 − (2/3)h) dh = ρg[ h² − (2/9)h³ ]<sub>0</sub><sup>3</sup> = ρg(9 − 6) = 3ρg = 3 × 1000 × 9.8 = <strong>29400 N</strong>。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第5章-定积分/第5章-定积分.html">← 上一章：第5章 定积分</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第7章-微分方程/第7章-微分方程.html">下一章：第7章 微分方程 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学高等数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学高等数学</footer>
 </body>
 </html>

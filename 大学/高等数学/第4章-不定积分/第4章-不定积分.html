@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第4章 不定积分 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第4章 不定积分 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第4章 不定积分</div></header>
@@ -61,7 +24,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>则称 F(x) 是 f(x) 在区间 I 上的一个<strong>原函数</strong>。</p>
 <p>例：因为 (x²)' = 2x，所以 x² 是 2x 的一个原函数；因为 (sin x)' = cos x，所以 sin x 是 cos x 的一个原函数；因为 (eˣ)' = eˣ，所以 eˣ 是 eˣ 的一个原函数。</p>
 <h3>4.1.2 原函数的存在性与不唯一性</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto">
 <line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="260" y1="28" x2="260" y2="272" stroke="#94a3b8" stroke-width="1.5"/>
 <text x="468" y="142" font-size="13" fill="#64748b">x</text>
@@ -141,7 +104,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <line x1="-18" y1="0" x2="18" y2="0" stroke="#16a34a" stroke-width="3"/>
   <circle cx="0" cy="0" r="5" fill="#2563eb"/>
 </g>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">方向场：每点按斜率 f(x)=cos x 画一小段线；积分曲线 y=sin x+C 处处与这些小线段相切，即沿方向场「顺流而下」的轨迹</figcaption></figure>
+</svg><figcaption class="fig-cap">方向场：每点按斜率 f(x)=cos x 画一小段线；积分曲线 y=sin x+C 处处与这些小线段相切，即沿方向场「顺流而下」的轨迹</figcaption></figure>
 <p><strong>存在性定理</strong>：若 f(x) 在区间 I 上<strong>连续</strong>，则 f(x) 在 I 上必有原函数。（注意：连续是充分条件而非必要条件，某些不连续函数也可能有原函数。）</p>
 <p><strong>不唯一性</strong>：若 F(x) 是 f(x) 的一个原函数，则对任意常数 C，F(x) + C 也是 f(x) 的原函数，因为常数的导数为 0：</p>
 <pre><code>[F(x) + C]' = F'(x) = f(x)</code></pre>
@@ -149,7 +112,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义（积分曲线族）：</strong>把 F(x) + C 画在坐标系里，得到的是<strong>彼此「沿 y 轴方向平移」的一族曲线</strong>——任取两条曲线，它们在同一个 x 处的切线斜率都等于 f(x)，所以曲线族在每一铅直方向上是「平行」的（切线互相平行）。<strong>已知导数 f(x) 只能确定曲线的形状与倾斜趋势，不能确定它上下落在哪个高度</strong>；那个「任意常数 C」就是整族曲线上下平移的幅度。</div>
 <div class="insight"><strong>物理含义（运动学）：</strong>若已知速度函数 v(t) = f(t)，则位移 s(t) = F(t) + C 是 v(t) 的原函数。但仅凭速度无法确定<strong>初始位置</strong>——这正是常数 C 的物理意义：<strong>C = 初始条件（起点位置）</strong>。给定 s(t₀) = s₀ 才能把 C 定下来。同理，已知加速度求速度，也会多出一个「初速度」常数。</div>
 <h3>4.1.3 不定积分的定义与记号</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="40" y1="250" x2="480" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
 <line x1="260" y1="60" x2="260" y2="315" stroke="#94a3b8" stroke-width="1.5"/>
 <text x="468" y="242" font-size="13" fill="#64748b">x</text>
@@ -190,7 +153,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
   <animate attributeName="cy" values="88.6;103.6;117.4;130;141.4;151.6;160.6;168.4;175;180.4;184.6;187.6;189.4;190;189.4;187.6;184.6;180.4;175;168.4;160.6;151.6;141.4;130;117.4;103.6;88.6" dur="8s" repeatCount="indefinite"/>
 </circle>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">∫2x dx = x² + C 是一族沿 y 轴平移的抛物线：同一 x 处各曲线的切线互相平行，斜率都等于 f(x)=2x（绿线为中间曲线的切线）</figcaption></figure>
+</svg><figcaption class="fig-cap">∫2x dx = x² + C 是一族沿 y 轴平移的抛物线：同一 x 处各曲线的切线互相平行，斜率都等于 f(x)=2x（绿线为中间曲线的切线）</figcaption></figure>
 <p><strong>定义</strong>：f(x) 在区间 I 上的全体原函数，称为 f(x) 在 I 上的<strong>不定积分</strong>，记作</p>
 <pre><code>∫ f(x) dx = F(x) + C</code></pre>
 <p>其中 <code>∫</code> 称为<strong>积分号</strong>（是拉长的 S，源自 sum「求和」），f(x) 称为<strong>被积函数</strong>，f(x) dx 称为<strong>被积表达式</strong>，x 称为<strong>积分变量</strong>，C 称为<strong>积分常数</strong>。</p>
@@ -363,7 +326,7 @@ sec²x dx = d(tan x)              (1/(1+x²)) dx = d(arctan x)
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>验证：x²、x² + 1、x² − 5 都是 2x 的原函数，并写出 ∫ 2x dx 的一般结果。为什么答案必须带上 +C？</li>
@@ -374,21 +337,21 @@ sec²x dx = d(tan x)              (1/(1+x²)) dx = d(arctan x)
 <li>把 (3x + 5)/(x² − 1) 分解为部分分式，并求其不定积分。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>因为 (x²)' = (x² + 1)' = (x² − 5)' = 2x，所以 x²、x² + 1、x² − 5 都是 2x 的原函数；∫ 2x dx = x² + C。+C 表示「相差任意常数的一族函数」：同一个导数对应沿 y 轴上下平移的一整族曲线，若不加 C 就会漏掉无穷多个原函数。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>y = ∫ 2x dx = x² + C。代入点 (1, 3)：3 = 1 + C，得 C = 2，故曲线为 y = x² + 2。仅凭斜率 f(x) 只能确定曲线的「形状/倾斜趋势」（一族互相平移的曲线），「过点」给出的是初始高度（初始条件），用来把任意常数 C 定下来。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>令 u = x²，则 du = 2x dx。∫ 2x·e^(x²) dx = ∫ eᵘ du = eᵘ + C = e^(x²) + C。关键是把 2x dx 凑成 d(x²)，即「凑微分」。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>s(t) = ∫ 3t² dt = t³ + C。由 s(0) = 1 得 C = 1，故 s(t) = t³ + 1。这里的 C 就是初始位置：只知速度只能还原出「相差一个常数的全部运动」，初始条件 s(0) 才能确定唯一轨迹。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>取 u = x、dv = sin x dx，则 du = dx、v = −cos x。∫ x·sin x dx = −x cos x − ∫ (−cos x) dx = −x cos x + sin x + C。按 LIATE 顺序，幂函数 x 优先当 u，三角函数 sin x 凑成 dv。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>x² − 1 = (x − 1)(x + 1)。设 (3x + 5)/(x² − 1) = A/(x − 1) + B/(x + 1)，通分得 3x + 5 = A(x + 1) + B(x − 1)。令 x = 1：8 = 2A → A = 4；令 x = −1：2 = −2B → B = −1。于是原式 = ∫ [4/(x − 1) − 1/(x + 1)] dx = 4ln|x − 1| − ln|x + 1| + C。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>因为 (x²)' = (x² + 1)' = (x² − 5)' = 2x，所以 x²、x² + 1、x² − 5 都是 2x 的原函数；∫ 2x dx = x² + C。+C 表示「相差任意常数的一族函数」：同一个导数对应沿 y 轴上下平移的一整族曲线，若不加 C 就会漏掉无穷多个原函数。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>y = ∫ 2x dx = x² + C。代入点 (1, 3)：3 = 1 + C，得 C = 2，故曲线为 y = x² + 2。仅凭斜率 f(x) 只能确定曲线的「形状/倾斜趋势」（一族互相平移的曲线），「过点」给出的是初始高度（初始条件），用来把任意常数 C 定下来。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>令 u = x²，则 du = 2x dx。∫ 2x·e^(x²) dx = ∫ eᵘ du = eᵘ + C = e^(x²) + C。关键是把 2x dx 凑成 d(x²)，即「凑微分」。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>s(t) = ∫ 3t² dt = t³ + C。由 s(0) = 1 得 C = 1，故 s(t) = t³ + 1。这里的 C 就是初始位置：只知速度只能还原出「相差一个常数的全部运动」，初始条件 s(0) 才能确定唯一轨迹。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>取 u = x、dv = sin x dx，则 du = dx、v = −cos x。∫ x·sin x dx = −x cos x − ∫ (−cos x) dx = −x cos x + sin x + C。按 LIATE 顺序，幂函数 x 优先当 u，三角函数 sin x 凑成 dv。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>x² − 1 = (x − 1)(x + 1)。设 (3x + 5)/(x² − 1) = A/(x − 1) + B/(x + 1)，通分得 3x + 5 = A(x + 1) + B(x − 1)。令 x = 1：8 = 2A → A = 4；令 x = −1：2 = −2B → B = −1。于是原式 = ∫ [4/(x − 1) − 1/(x + 1)] dx = 4ln|x − 1| − ln|x + 1| + C。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第3章-微分中值定理与导数的应用/第3章-微分中值定理与导数的应用.html">← 上一章：第3章 微分中值定理与导数的应用</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第5章-定积分/第5章-定积分.html">下一章：第5章 定积分 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学到高等数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学到高等数学</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第2章 矩阵及其运算 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第2章 矩阵及其运算 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第2章 矩阵及其运算</div></header>
@@ -70,7 +33,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 
 <h3>矩阵 vs 行列式（务必分清）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <polygon points="60,160 110,160 110,110 60,110" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
 <text x="85" y="102" fill="#94a3b8" font-size="12" text-anchor="middle">单位正方形</text>
@@ -90,7 +53,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="135" y="85" fill="#334155" font-size="13" font-weight="bold" text-anchor="middle">面积 = |A| = 3<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;0.55;0.65;1"/></text>
 <text x="260" y="26" fill="#334155" font-size="13" text-anchor="middle">矩阵 A = [2 1; 1 2]，det A = 2×2 − 1×1 = 3</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：行列式 |A| 是单位面积经矩阵 A 变换后放大的倍数（面积 1 → 3）</figcaption>
+<figcaption class="fig-cap">图：行列式 |A| 是单位面积经矩阵 A 变换后放大的倍数（面积 1 → 3）</figcaption>
 </figure>
 <table>
 <tr><th>对象</th><th>本质</th><th>记号</th><th>是否算出一个数</th></tr>
@@ -138,7 +101,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>数乘 = <strong>把变换整体按比例缩放</strong>。作用在向量上：(kA)x = k(Ax)，即「先变换、再拉伸到 k 倍」。<br/><strong>物理含义：</strong>把一张数据表整体放大/缩小，如把某个量纲（单位）整体换算、把整个系统的响应统一放大 k 倍。</div>
 
 <h3>2.2.3 矩阵乘法（本章核心）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="40" y1="110" x2="500" y2="110" stroke="#cbd5e1" stroke-width="1.5"/>
 <line x1="150" y1="18" x2="150" y2="185" stroke="#cbd5e1" stroke-width="1.5"/>
@@ -158,7 +121,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="260" y="178" fill="#334155" font-size="13" text-anchor="middle">① 先绕原点旋转 90°（左乘 R）<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="1;1;0;0" keyTimes="0;0.45;0.55;1"/></text>
 <text x="260" y="178" fill="#16a34a" font-size="13" text-anchor="middle">② 再沿 x 轴拉伸 2 倍（左乘 S，合成 SR）<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;0.55;0.65;1"/></text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：矩阵乘法即线性变换的复合——先旋转 90°、再沿 x 轴拉伸 2 倍，箭头为 SR·v 的作用轨迹</figcaption>
+<figcaption class="fig-cap">图：矩阵乘法即线性变换的复合——先旋转 90°、再沿 x 轴拉伸 2 倍，箭头为 SR·v 的作用轨迹</figcaption>
 </figure>
 <p><strong>定义</strong>：设 A 是 <code>m × s</code> 矩阵，B 是 <code>s × n</code> 矩阵，则乘积 <code>C = AB</code> 是 <code>m × n</code> 矩阵，且</p>
 <pre><code>cᵢⱼ = aᵢ₁b₁ⱼ + aᵢ₂b₂ⱼ + ⋯ + aᵢₛbₛⱼ = Σₖ aᵢₖ bₖⱼ</code></pre>
@@ -331,7 +294,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3 style="margin-top:0">一、练习题</h3>
 <ol>
 <li><strong>（概念辨析）</strong>判断题：设 A 是 2×3 矩阵。"A 是数表，|A| 也是数"这句话对吗？请说明矩阵与行列式的本质区别。</li>
@@ -342,19 +305,19 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li><strong>（分块矩阵）</strong>设 A = ⎡2 1 0 0⎤，用分块法（分成两个 2×2 对角块）求 |A| 与 A⁻¹，并从"空间直和分解"的角度说明分块对角矩阵的优势。<br/>　　　　　　　　⎢0 2 0 0⎥<br/>　　　　　　　　⎢0 0 3 1⎥<br/>　　　　　　　　⎣0 0 1 2⎦</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>错。矩阵是一张<strong>数表</strong>（本身不是数），行列式只是对<strong>方阵</strong>按规则算出的<strong>一个数</strong>。2×3 矩阵 A 不是方阵，根本不存在 |A|；两者本质不同，不可混用。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>复合矩阵写作 <strong>SR</strong>。矩阵乘法表示线性变换的复合，<strong>从右往左先后作用</strong>：SR 表示"先作用 R（旋转），再作用 S（拉伸）"。计算 SR = ⎡0 −2⎤；若写成 RS 则顺序颠倒，表示"先拉伸后旋转"，一般结果不同。<br/>　　　　　　　⎣1 0⎦</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>AB = ⎡19 22⎤，(AB)ᵀ = ⎡19 43⎤；BᵀAᵀ = ⎡19 43⎤，两者相等 ✓。转置是<strong>行、列视角互换</strong>，在数据表中对应"行记录 ↔ 列记录"的角色互换。<br/>　　　⎣43 50⎦　　　　　⎣22 50⎦　　　⎣22 50⎦</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>|AB| = |A|·|B| = 2×(−3) = <strong>−6</strong>；|Aᵀ| = |A| = <strong>2</strong>；|2A| = 2³|A| = 8×2 = <strong>16</strong>。几何上，|A| 表示 A 对有向体积的缩放倍率；2A 把<strong>每个列向量都放大 2 倍</strong>，三维空间三个方向各自翻倍，体积变为 2³ = 8 倍（再乘原倍率 2），所以是 16 而不是 2。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>|A| = 1×4 − 2×3 = −2。A⁻¹ = (1/|A|)⎡ d −b⎤ = (−1/2)⎡4 −2⎤ = ⎡−2 1⎤。验证 AA⁻¹ = E ✓。<br/>　　　　　　　　　　　　　　⎣−c a⎦　　　　　⎣−3 1⎦　　⎣3/2 −1/2⎦<br/>x = A⁻¹y = ⎡1⎤。含义：已知输出 y 反推输入 x，即"反演"——逆矩阵把线性变换倒回去，由结果恢复原因。<br/>　　　　　　⎣2⎦</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>分块 A = diag(B₁, B₂)，其中 B₁ = ⎡2 1⎤、B₂ = ⎡3 1⎤。|A| = |B₁|·|B₂| = 4×5 = <strong>20</strong>。<br/>　　　　　　　　　　　　　　　　　　　　　⎣0 2⎦　　　⎣1 2⎦<br/>B₁⁻¹ = ⎡1/2 −1/4⎤，B₂⁻¹ = ⎡2/5 −1/5⎤，故 A⁻¹ = 分块对角 ⎡B₁⁻¹ 0⎤。优势：把 4 维问题拆成两个独立的 2 维子问题，各子空间互不影响，实现"解耦"。<br/>　　　　⎣ 0 1/2⎦　　　　⎣−1/5 3/5⎦　　　　　　　　⎣ 0 B₂⁻¹⎦</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>错。矩阵是一张<strong>数表</strong>（本身不是数），行列式只是对<strong>方阵</strong>按规则算出的<strong>一个数</strong>。2×3 矩阵 A 不是方阵，根本不存在 |A|；两者本质不同，不可混用。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>复合矩阵写作 <strong>SR</strong>。矩阵乘法表示线性变换的复合，<strong>从右往左先后作用</strong>：SR 表示"先作用 R（旋转），再作用 S（拉伸）"。计算 SR = ⎡0 −2⎤；若写成 RS 则顺序颠倒，表示"先拉伸后旋转"，一般结果不同。<br/>　　　　　　　⎣1 0⎦</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>AB = ⎡19 22⎤，(AB)ᵀ = ⎡19 43⎤；BᵀAᵀ = ⎡19 43⎤，两者相等 ✓。转置是<strong>行、列视角互换</strong>，在数据表中对应"行记录 ↔ 列记录"的角色互换。<br/>　　　⎣43 50⎦　　　　　⎣22 50⎦　　　⎣22 50⎦</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>|AB| = |A|·|B| = 2×(−3) = <strong>−6</strong>；|Aᵀ| = |A| = <strong>2</strong>；|2A| = 2³|A| = 8×2 = <strong>16</strong>。几何上，|A| 表示 A 对有向体积的缩放倍率；2A 把<strong>每个列向量都放大 2 倍</strong>，三维空间三个方向各自翻倍，体积变为 2³ = 8 倍（再乘原倍率 2），所以是 16 而不是 2。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>|A| = 1×4 − 2×3 = −2。A⁻¹ = (1/|A|)⎡ d −b⎤ = (−1/2)⎡4 −2⎤ = ⎡−2 1⎤。验证 AA⁻¹ = E ✓。<br/>　　　　　　　　　　　　　　⎣−c a⎦　　　　　⎣−3 1⎦　　⎣3/2 −1/2⎦<br/>x = A⁻¹y = ⎡1⎤。含义：已知输出 y 反推输入 x，即"反演"——逆矩阵把线性变换倒回去，由结果恢复原因。<br/>　　　　　　⎣2⎦</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>分块 A = diag(B₁, B₂)，其中 B₁ = ⎡2 1⎤、B₂ = ⎡3 1⎤。|A| = |B₁|·|B₂| = 4×5 = <strong>20</strong>。<br/>　　　　　　　　　　　　　　　　　　　　　⎣0 2⎦　　　⎣1 2⎦<br/>B₁⁻¹ = ⎡1/2 −1/4⎤，B₂⁻¹ = ⎡2/5 −1/5⎤，故 A⁻¹ = 分块对角 ⎡B₁⁻¹ 0⎤。优势：把 4 维问题拆成两个独立的 2 维子问题，各子空间互不影响，实现"解耦"。<br/>　　　　⎣ 0 1/2⎦　　　　⎣−1/5 3/5⎦　　　　　　　　⎣ 0 B₂⁻¹⎦</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第1章-行列式/第1章-行列式.html">← 上一章：第1章 行列式</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第3章-矩阵的初等变换与线性方程组/第3章-矩阵的初等变换与线性方程组.html">下一章：第3章 矩阵的初等变换与线性方程组 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 线性代数</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 线性代数</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第2章 直线和圆的方程 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第2章 直线和圆的方程 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第一册 › 第2章 直线和圆的方程</div></header>
@@ -75,7 +38,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>过两点 P₁(x₁, y₁)、P₂(x₂, y₂)（x₁ ≠ x₂）的直线斜率为：</p>
 <pre><code>k = (y₂ − y₁) / (x₂ − x₁) = Δy / Δx</code></pre>
 <p>它表示：<strong>x 每增加 1，y 变化 k</strong>。这是本章最重要的一个"物理直觉"。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="60" y1="210" x2="500" y2="210" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="210" x2="70" y2="40" stroke="#94a3b8" stroke-width="2"/><polygon points="500,210 491,205 491,215" fill="#94a3b8"/><polygon points="70,40 65,49 75,49" fill="#94a3b8"/><g fill="#334155" font-size="13" text-anchor="middle"><text x="500" y="233">x</text><text x="58" y="45">y</text><text x="60" y="229">O</text></g><line x1="60" y1="220" x2="360" y2="20" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="120" y1="180" x2="300" y2="60" stroke="#475569" stroke-width="2.5"/><line x1="120" y1="180" x2="120" y2="180" stroke="#16a34a" stroke-width="4"><animate attributeName="x2" values="120;300;120" dur="5s" repeatCount="indefinite"/></line><line x1="120" y1="180" x2="120" y2="180" stroke="#2563eb" stroke-width="4"><animate attributeName="x1" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="x2" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="y2" values="180;60;180" dur="5s" repeatCount="indefinite"/></line><circle cx="120" cy="180" r="6" fill="#2563eb"><animate attributeName="cx" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="cy" values="180;60;180" dur="5s" repeatCount="indefinite"/></circle><g fill="#334155" font-size="14"><text x="106" y="200">P₁</text><text x="310" y="52">P₂</text><text x="206" y="200" fill="#16a34a">Δx = 180</text><text x="322" y="126" fill="#2563eb">Δy = 120</text></g><text x="150" y="30" fill="#1f2937" font-size="15" font-weight="700">k = Δy/Δx = 2/3</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：斜率 k = Δy/Δx——水平每前进 Δx，竖直就上升 Δy，坡度（变化率）恒定</figcaption></figure>
+<figure class="fig"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="60" y1="210" x2="500" y2="210" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="210" x2="70" y2="40" stroke="#94a3b8" stroke-width="2"/><polygon points="500,210 491,205 491,215" fill="#94a3b8"/><polygon points="70,40 65,49 75,49" fill="#94a3b8"/><g fill="#334155" font-size="13" text-anchor="middle"><text x="500" y="233">x</text><text x="58" y="45">y</text><text x="60" y="229">O</text></g><line x1="60" y1="220" x2="360" y2="20" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="120" y1="180" x2="300" y2="60" stroke="#475569" stroke-width="2.5"/><line x1="120" y1="180" x2="120" y2="180" stroke="#16a34a" stroke-width="4"><animate attributeName="x2" values="120;300;120" dur="5s" repeatCount="indefinite"/></line><line x1="120" y1="180" x2="120" y2="180" stroke="#2563eb" stroke-width="4"><animate attributeName="x1" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="x2" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="y2" values="180;60;180" dur="5s" repeatCount="indefinite"/></line><circle cx="120" cy="180" r="6" fill="#2563eb"><animate attributeName="cx" values="120;300;120" dur="5s" repeatCount="indefinite"/><animate attributeName="cy" values="180;60;180" dur="5s" repeatCount="indefinite"/></circle><g fill="#334155" font-size="14"><text x="106" y="200">P₁</text><text x="310" y="52">P₂</text><text x="206" y="200" fill="#16a34a">Δx = 180</text><text x="322" y="126" fill="#2563eb">Δy = 120</text></g><text x="150" y="30" fill="#1f2937" font-size="15" font-weight="700">k = Δy/Δx = 2/3</text></svg><figcaption class="fig-cap">图：斜率 k = Δy/Δx——水平每前进 Δx，竖直就上升 Δy，坡度（变化率）恒定</figcaption></figure>
 <div class="insight"><strong>物理含义：斜率 = 变化率。</strong>位移—时间图 (s–t 图) 上，直线的斜率就是<strong>速度</strong>；速度—时间图 (v–t 图) 上，直线的斜率就是<strong>加速度</strong>；山坡、楼梯、斜坡的"坡度"（铅直高度 ÷ 水平距离）本质上就是斜率。<strong>k 大 = 陡 = 变化快；k = 0 = 平 = 不变化；k 为负 = 下降 = 反方向变化。</strong></div>
 <div class="insight"><strong>几何含义：斜率只由"方向"决定，与直线在平面中的位置无关。</strong>不管直线画在高处还是低处，只要倾斜角相同，斜率就相同；平移一条直线，斜率不变。</div>
 
@@ -132,7 +95,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <h3>② 点到直线的距离</h3>
 <pre><code>d = |Ax₀ + By₀ + C| / √(A² + B²)</code></pre>
 <p>点 P(x₀, y₀) 到直线 l：Ax + By + C = 0 的距离。分子是把点坐标代入直线方程后取绝对值，分母是系数向量 (A, B) 的长度。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="80" y1="225" x2="470" y2="135" stroke="#475569" stroke-width="2.5"/><text x="478" y="128" fill="#334155" font-size="15" font-weight="700">l</text><line x1="250" y1="65" x2="80" y2="225" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6 4"><animate attributeName="x2" values="80;470;80" dur="7s" repeatCount="indefinite"/><animate attributeName="y2" values="225;135;225" dur="7s" repeatCount="indefinite"/></line><circle cx="80" cy="225" r="6" fill="#16a34a"><animate attributeName="cx" values="80;470;80" dur="7s" repeatCount="indefinite"/><animate attributeName="cy" values="225;135;225" dur="7s" repeatCount="indefinite"/></circle><line x1="250" y1="65" x2="276" y2="180" stroke="#2563eb" stroke-width="4"><animate attributeName="stroke-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/></line><polyline points="287.7,177.3 285,165.6 273.3,168.3" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="250" cy="65" r="6" fill="#2563eb"/><text x="236" y="50" fill="#2563eb" font-size="14" font-weight="700">P</text><text x="288" y="198" fill="#2563eb" font-size="13">H（垂足）</text><text x="236" y="130" fill="#2563eb" font-size="15" font-weight="700">d</text><text x="150" y="30" fill="#1f2937" font-size="14" font-weight="700">绿虚线 |PQ| 随 Q 滑动而变化，恒有 |PQ| ≥ d</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：点到直线的距离是垂线段——线上动点 Q 移到任何位置，|PQ| 都不小于 |PH|</figcaption></figure>
+<figure class="fig"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="80" y1="225" x2="470" y2="135" stroke="#475569" stroke-width="2.5"/><text x="478" y="128" fill="#334155" font-size="15" font-weight="700">l</text><line x1="250" y1="65" x2="80" y2="225" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6 4"><animate attributeName="x2" values="80;470;80" dur="7s" repeatCount="indefinite"/><animate attributeName="y2" values="225;135;225" dur="7s" repeatCount="indefinite"/></line><circle cx="80" cy="225" r="6" fill="#16a34a"><animate attributeName="cx" values="80;470;80" dur="7s" repeatCount="indefinite"/><animate attributeName="cy" values="225;135;225" dur="7s" repeatCount="indefinite"/></circle><line x1="250" y1="65" x2="276" y2="180" stroke="#2563eb" stroke-width="4"><animate attributeName="stroke-opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/></line><polyline points="287.7,177.3 285,165.6 273.3,168.3" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="250" cy="65" r="6" fill="#2563eb"/><text x="236" y="50" fill="#2563eb" font-size="14" font-weight="700">P</text><text x="288" y="198" fill="#2563eb" font-size="13">H（垂足）</text><text x="236" y="130" fill="#2563eb" font-size="15" font-weight="700">d</text><text x="150" y="30" fill="#1f2937" font-size="14" font-weight="700">绿虚线 |PQ| 随 Q 滑动而变化，恒有 |PQ| ≥ d</text></svg><figcaption class="fig-cap">图：点到直线的距离是垂线段——线上动点 Q 移到任何位置，|PQ| 都不小于 |PH|</figcaption></figure>
 <div class="insight"><strong>几何含义：</strong>点到直线的距离 = 该点到直线上<strong>最近一点</strong>的距离，垂线段最短。<strong>物理含义：</strong>物体到一条"约束轨道"（直线）的最近距离；分子 |Ax₀+By₀+C| 正比于"偏离轨道多少"，当点在直线上时分子为 0、距离为 0。</div>
 <h3>③ 两条平行线间的距离</h3>
 <p>两条平行直线 Ax + By + C₁ = 0 与 Ax + By + C₂ = 0（A、B 相同）之间的距离：</p>
@@ -149,7 +112,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>它逐字翻译了定义：<strong>"到圆心 (a, b) 的距离平方 = r²"</strong>。</li>
 <li>圆心在原点时简化为 <code>x² + y² = r²</code>。</li>
 </ul>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="260" y1="295" x2="260" y2="5" stroke="#e2e8f0" stroke-width="1"/><line x1="15" y1="150" x2="505" y2="150" stroke="#e2e8f0" stroke-width="1"/><circle cx="260" cy="150" r="110" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/><circle cx="260" cy="150" r="4" fill="#334155"/><text x="260" y="288" fill="#334155" font-size="14" text-anchor="middle">圆心 C(a, b)</text><g><animateTransform attributeName="transform" type="rotate" values="0 260 150;360 260 150" dur="7s" repeatCount="indefinite"/><line x1="260" y1="150" x2="370" y2="150" stroke="#2563eb" stroke-width="3"/><circle cx="370" cy="150" r="7" fill="#2563eb"/><circle cx="370" cy="150" r="11" fill="none" stroke="#16a34a" stroke-width="2"><animate attributeName="r" values="11;15;11" dur="1.4s" repeatCount="indefinite"/></circle></g><text x="322" y="146" fill="#2563eb" font-size="13" font-weight="700">r（定长）</text><text x="150" y="28" fill="#1f2937" font-size="14" font-weight="700">(x − a)² + (y − b)² = r² ⇔ 到圆心的距离恒等于 r</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：圆上每一点到圆心的距离都等于定长 r——"到定点距离为定值"正是圆的定义</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="260" y1="295" x2="260" y2="5" stroke="#e2e8f0" stroke-width="1"/><line x1="15" y1="150" x2="505" y2="150" stroke="#e2e8f0" stroke-width="1"/><circle cx="260" cy="150" r="110" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/><circle cx="260" cy="150" r="4" fill="#334155"/><text x="260" y="288" fill="#334155" font-size="14" text-anchor="middle">圆心 C(a, b)</text><g><animateTransform attributeName="transform" type="rotate" values="0 260 150;360 260 150" dur="7s" repeatCount="indefinite"/><line x1="260" y1="150" x2="370" y2="150" stroke="#2563eb" stroke-width="3"/><circle cx="370" cy="150" r="7" fill="#2563eb"/><circle cx="370" cy="150" r="11" fill="none" stroke="#16a34a" stroke-width="2"><animate attributeName="r" values="11;15;11" dur="1.4s" repeatCount="indefinite"/></circle></g><text x="322" y="146" fill="#2563eb" font-size="13" font-weight="700">r（定长）</text><text x="150" y="28" fill="#1f2937" font-size="14" font-weight="700">(x − a)² + (y − b)² = r² ⇔ 到圆心的距离恒等于 r</text></svg><figcaption class="fig-cap">图：圆上每一点到圆心的距离都等于定长 r——"到定点距离为定值"正是圆的定义</figcaption></figure>
 <h3>一般方程</h3>
 <pre><code>x² + y² + Dx + Ey + F = 0</code></pre>
 <p>配方可得：<code>(x + D/2)² + (y + E/2)² = (D² + E² − 4F) / 4</code>。</p>
@@ -228,7 +191,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>求过点 P(1, 2)、Q(3, 8) 的直线的斜率，并说明：这条直线上 x 每增加 1，y 变化多少？</li>
@@ -239,19 +202,19 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>已知圆 (x − 1)² + (y − 2)² = 9 与直线 x + y − 1 = 0 相交，求弦长（提示：先求圆心到直线的距离 d，再用 弦长 = 2√(r² − d²)）。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>斜率 k = (8 − 2) / (3 − 1) = 6 / 2 = <strong>3</strong>。它表示 x 每增加 1，y 就增加 3——斜率就是这条直线的"变化率"。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>斜截式：y = −2x + 4。与 y 轴交点令 x = 0，得 y = 4，即纵截距为 4；与 x 轴交点令 y = 0，得 x = 2，即横截距为 2。故交点为 (0, 4) 与 (2, 0)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>两直线斜率都为 2（方向相同），但纵截距分别为 1 与 −3（位置不同），故<strong>平行</strong>。距离 d = |1 − (−3)| / √(2² + (−1)²) = 4 / √5 = <strong>4√5 / 5</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>原直线斜率为 1/2，与其垂直的直线斜率 k = −1 / (1/2) = <strong>−2</strong>。由点斜式：y − 3 = −2(x − 2)，整理得 y = −2x + 7（一般式 2x + y − 7 = 0）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>标准方程：(x − 2)² + (y + 1)² = 16。圆心到直线距离 d = |3·2 + 4·(−1) − 12| / √(3² + 4²) = |6 − 4 − 12| / 5 = 10 / 5 = <strong>2</strong>。因为 2 &lt; 4（即 d &lt; r），所以直线与圆<strong>相交</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>圆心 (1, 2) 到直线 x + y − 1 = 0 的距离 d = |1 + 2 − 1| / √(1² + 1²) = 2 / √2 = <strong>√2</strong>。弦长 = 2√(r² − d²) = 2√(9 − 2) = <strong>2√7</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>斜率 k = (8 − 2) / (3 − 1) = 6 / 2 = <strong>3</strong>。它表示 x 每增加 1，y 就增加 3——斜率就是这条直线的"变化率"。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>斜截式：y = −2x + 4。与 y 轴交点令 x = 0，得 y = 4，即纵截距为 4；与 x 轴交点令 y = 0，得 x = 2，即横截距为 2。故交点为 (0, 4) 与 (2, 0)。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>两直线斜率都为 2（方向相同），但纵截距分别为 1 与 −3（位置不同），故<strong>平行</strong>。距离 d = |1 − (−3)| / √(2² + (−1)²) = 4 / √5 = <strong>4√5 / 5</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>原直线斜率为 1/2，与其垂直的直线斜率 k = −1 / (1/2) = <strong>−2</strong>。由点斜式：y − 3 = −2(x − 2)，整理得 y = −2x + 7（一般式 2x + y − 7 = 0）。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>标准方程：(x − 2)² + (y + 1)² = 16。圆心到直线距离 d = |3·2 + 4·(−1) − 12| / √(3² + 4²) = |6 − 4 − 12| / 5 = 10 / 5 = <strong>2</strong>。因为 2 &lt; 4（即 d &lt; r），所以直线与圆<strong>相交</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>圆心 (1, 2) 到直线 x + y − 1 = 0 的距离 d = |1 + 2 − 1| / √(1² + 1²) = 2 / √2 = <strong>√2</strong>。弦长 = 2√(r² − d²) = 2√(9 − 2) = <strong>2√7</strong>。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第1章-空间向量与立体几何/第1章-空间向量与立体几何.html">← 上一章：第1章 空间向量与立体几何</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第3章-圆锥曲线的方程/第3章-圆锥曲线的方程.html">下一章：第3章 圆锥曲线的方程 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第3章 圆锥曲线的方程 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第3章 圆锥曲线的方程 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第一册 › 第3章 圆锥曲线的方程</div></header>
@@ -83,7 +46,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>方程是「点的集合」的代数名字——满足同一关系的所有点拼成一条曲线。<strong>物理含义：</strong>方程刻画的是动点<strong>运动所受的约束</strong>，例如"到两枚图钉的距离之和恒定"，正是用一根定长的绳子、两端钉住、笔尖绷紧画出的轨迹。</div>
 
 <h2 id="s2">3.2 椭圆</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">|MF₁| + |MF₂| = 2a（恒定）</text><ellipse cx="260" cy="130" rx="180" ry="100" fill="none" stroke="#cbd5e1" stroke-width="2"/><line x1="110" y1="130" x2="440" y2="130" stroke="#2563eb" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><line x1="410" y1="130" x2="440" y2="130" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><circle cx="110" cy="130" r="5" fill="#2563eb"/><circle cx="410" cy="130" r="5" fill="#16a34a"/><text x="110" y="154" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">F₁</text><text x="410" y="154" text-anchor="middle" fill="#16a34a" font-size="13" font-weight="700">F₂</text><circle cx="440" cy="130" r="6" fill="#2563eb"><animate attributeName="cx" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="cy" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></circle><text x="440" y="220" text-anchor="middle" fill="#6b7280" font-size="12">蓝 + 绿 = 2a</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：椭圆上任意点 M 到两焦点 F₁、F₂ 的距离之和恒为常数 2a（绳子画椭圆、行星轨道）</figcaption></figure>
+<figure class="fig"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">|MF₁| + |MF₂| = 2a（恒定）</text><ellipse cx="260" cy="130" rx="180" ry="100" fill="none" stroke="#cbd5e1" stroke-width="2"/><line x1="110" y1="130" x2="440" y2="130" stroke="#2563eb" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><line x1="410" y1="130" x2="440" y2="130" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><circle cx="110" cy="130" r="5" fill="#2563eb"/><circle cx="410" cy="130" r="5" fill="#16a34a"/><text x="110" y="154" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">F₁</text><text x="410" y="154" text-anchor="middle" fill="#16a34a" font-size="13" font-weight="700">F₂</text><circle cx="440" cy="130" r="6" fill="#2563eb"><animate attributeName="cx" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="cy" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></circle><text x="440" y="220" text-anchor="middle" fill="#6b7280" font-size="12">蓝 + 绿 = 2a</text></svg><figcaption class="fig-cap">图：椭圆上任意点 M 到两焦点 F₁、F₂ 的距离之和恒为常数 2a（绳子画椭圆、行星轨道）</figcaption></figure>
 <h3>椭圆的定义（几何）</h3>
 <p><strong>定义：</strong>平面内与两个定点 <code>F₁、F₂</code> 的距离的<strong>和</strong>等于常数（大于 <code>|F₁F₂|</code>）的点的轨迹叫做<strong>椭圆</strong>。这两个定点叫做椭圆的<strong>焦点</strong>，两焦点间的距离 <code>|F₁F₂|</code> 叫做<strong>焦距</strong>，记作 <code>2c</code>。</p>
 <pre><code>|MF₁| + |MF₂| = 2a    （常数 2a &gt; 焦距 2c，即 a &gt; c）</code></pre>
@@ -194,7 +157,7 @@ x²/a² + y²/b² = 1   （a &gt; b &gt; 0，c² = a² − b²，焦点 F(±c, 0
 <tr><td>通径</td><td>过焦点且垂直于对称轴的弦，长为 2p（可用来快速比较开口大小）</td></tr>
 </table>
 <h3>抛物线的反射性质与应用（物理含义）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="50" y1="130" x2="430" y2="130" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/><line x1="60" y1="28" x2="60" y2="232" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/><text x="60" y="252" text-anchor="middle" fill="#16a34a" font-size="13">准线</text><path d="M 100,130 L 100.22,124 L 100.9,118 L 102.03,112 L 103.6,106 L 105.63,100 L 108.1,94 L 111.03,88 L 114.4,82 L 118.22,76 L 122.5,70 L 127.22,64 L 132.4,58 L 138.03,52 L 144.1,46 L 150.63,40 L 157.6,34 L 165.03,28 L 172.9,22" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M 100,130 L 100.22,136 L 100.9,142 L 102.03,148 L 103.6,154 L 105.63,160 L 108.1,166 L 111.03,172 L 114.4,178 L 118.22,184 L 122.5,190 L 127.22,196 L 132.4,202 L 138.03,208 L 144.1,214 L 150.63,220 L 157.6,226 L 165.03,232 L 172.9,238" fill="none" stroke="#2563eb" stroke-width="2.5"/><circle cx="140" cy="130" r="5" fill="#2563eb"/><text x="140" y="118" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">焦点 F</text><line x1="140" y1="130" x2="122.5" y2="70" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="122.5" y1="70" x2="242.5" y2="70" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;122.5;242.5" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="130;70;70" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="162.5" y2="30" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="162.5" y1="30" x2="282.5" y2="30" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;162.5;282.5" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="cy" values="130;30;30" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="135.16" y2="205" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="135.16" y1="205" x2="255.16" y2="205" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;135.16;255.16" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="cy" values="130;205;205" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/></circle><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">焦点光 → 平行光</text><text x="452" y="240" text-anchor="middle" fill="#6b7280" font-size="12">反射后平行于轴</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：从焦点射出的光经抛物线反射后都平行于对称轴（探照灯 / 抛物面天线原理）</figcaption></figure>
+<figure class="fig"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="50" y1="130" x2="430" y2="130" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/><line x1="60" y1="28" x2="60" y2="232" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/><text x="60" y="252" text-anchor="middle" fill="#16a34a" font-size="13">准线</text><path d="M 100,130 L 100.22,124 L 100.9,118 L 102.03,112 L 103.6,106 L 105.63,100 L 108.1,94 L 111.03,88 L 114.4,82 L 118.22,76 L 122.5,70 L 127.22,64 L 132.4,58 L 138.03,52 L 144.1,46 L 150.63,40 L 157.6,34 L 165.03,28 L 172.9,22" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M 100,130 L 100.22,136 L 100.9,142 L 102.03,148 L 103.6,154 L 105.63,160 L 108.1,166 L 111.03,172 L 114.4,178 L 118.22,184 L 122.5,190 L 127.22,196 L 132.4,202 L 138.03,208 L 144.1,214 L 150.63,220 L 157.6,226 L 165.03,232 L 172.9,238" fill="none" stroke="#2563eb" stroke-width="2.5"/><circle cx="140" cy="130" r="5" fill="#2563eb"/><text x="140" y="118" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">焦点 F</text><line x1="140" y1="130" x2="122.5" y2="70" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="122.5" y1="70" x2="242.5" y2="70" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;122.5;242.5" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="130;70;70" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="162.5" y2="30" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="162.5" y1="30" x2="282.5" y2="30" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;162.5;282.5" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="cy" values="130;30;30" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="135.16" y2="205" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="135.16" y1="205" x2="255.16" y2="205" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;135.16;255.16" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="cy" values="130;205;205" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/></circle><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">焦点光 → 平行光</text><text x="452" y="240" text-anchor="middle" fill="#6b7280" font-size="12">反射后平行于轴</text></svg><figcaption class="fig-cap">图：从焦点射出的光经抛物线反射后都平行于对称轴（探照灯 / 抛物面天线原理）</figcaption></figure>
 <p>抛物线有极其重要的<strong>反射（光学）性质</strong>：</p>
 <ul>
 <li><strong>焦点 → 平行</strong>：从焦点发出的光线，经抛物线反射后，变成<strong>平行于对称轴</strong>的一束平行光。<strong>应用</strong>：探照灯、手电筒、汽车大灯——把光源（灯泡）放在焦点处，就能射出平行光束。</li>
@@ -283,7 +246,7 @@ x²/a² + y²/b² = 1   （a &gt; b &gt; 0，c² = a² − b²，焦点 F(±c, 0
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong>（由易到难，紧扣本章的几何/物理含义）</p>
 <ol>
 <li>已知椭圆的标准方程为 <code>x²/25 + y²/16 = 1</code>，求它的长轴长、短轴长、焦距、焦点坐标与离心率，并说明焦点落在哪条坐标轴上。</li>
@@ -294,19 +257,19 @@ x²/a² + y²/b² = 1   （a &gt; b &gt; 0，c² = a² − b²，焦点 F(±c, 0
 <li>动圆 M 与圆 <code>C₁: (x+4)² + y² = 4</code> 外切，又与圆 <code>C₂: (x−4)² + y² = 100</code> 内切，求动圆圆心 M 的轨迹方程，并判断它是哪类曲线。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>分母 25 &gt; 16，故焦点在 <strong>x 轴</strong>：a = 5，b = 4，c = √(25−16) = 3。长轴长 2a = <strong>10</strong>，短轴长 2b = <strong>8</strong>，焦距 2c = <strong>6</strong>，焦点 <strong>(±3, 0)</strong>，离心率 e = c/a = <strong>3/5</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>a = 3，b = 4，c = √(9+16) = 5。实轴长 2a = <strong>6</strong>，虚轴长 2b = <strong>8</strong>，焦距 2c = <strong>10</strong>，焦点 <strong>(±5, 0)</strong>，渐近线 <strong>y = ±(4/3)x</strong>，离心率 e = c/a = <strong>5/3</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>y² = 8x 中 2p = 8，得 p = 4。开口<strong>向右</strong>，焦点 <strong>(2, 0)</strong>，准线 <strong>x = −2</strong>，通径长 2p = <strong>8</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><strong>抛物线：</strong>从焦点发出的光线，经抛物线反射后变成<strong>平行于对称轴</strong>的平行光束，所以把灯泡放在焦点处能射出照得更远、更集中的平行光。<strong>椭圆：</strong>从一个焦点发出的声波，经椭圆周反射后<strong>必定通过另一个焦点</strong>，因此一个焦点处的低声细语会汇聚到另一个焦点，那里的人听得清清楚楚。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>距离之比 e = 3/5 &lt; 1，是<strong>椭圆</strong>。焦点 (3, 0) → c = 3；准线 x = a²/c = 25/3 → a² = 25，a = 5；b² = a² − c² = 25 − 9 = 16。轨迹为 <strong>x²/25 + y²/16 = 1</strong>，离心率 e = <strong>3/5</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设动圆 M 半径为 r。外切：|MC₁| = r + 2；内切：|MC₂| = 10 − r。两式相加得 |MC₁| + |MC₂| = <strong>12</strong>（常数）。C₁(−4, 0)、C₂(4, 0)，2c = 8 → c = 4；2a = 12 → a = 6；b² = a² − c² = 36 − 16 = 20。轨迹为<strong>椭圆 x²/36 + y²/20 = 1</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>分母 25 &gt; 16，故焦点在 <strong>x 轴</strong>：a = 5，b = 4，c = √(25−16) = 3。长轴长 2a = <strong>10</strong>，短轴长 2b = <strong>8</strong>，焦距 2c = <strong>6</strong>，焦点 <strong>(±3, 0)</strong>，离心率 e = c/a = <strong>3/5</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>a = 3，b = 4，c = √(9+16) = 5。实轴长 2a = <strong>6</strong>，虚轴长 2b = <strong>8</strong>，焦距 2c = <strong>10</strong>，焦点 <strong>(±5, 0)</strong>，渐近线 <strong>y = ±(4/3)x</strong>，离心率 e = c/a = <strong>5/3</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>y² = 8x 中 2p = 8，得 p = 4。开口<strong>向右</strong>，焦点 <strong>(2, 0)</strong>，准线 <strong>x = −2</strong>，通径长 2p = <strong>8</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p><strong>抛物线：</strong>从焦点发出的光线，经抛物线反射后变成<strong>平行于对称轴</strong>的平行光束，所以把灯泡放在焦点处能射出照得更远、更集中的平行光。<strong>椭圆：</strong>从一个焦点发出的声波，经椭圆周反射后<strong>必定通过另一个焦点</strong>，因此一个焦点处的低声细语会汇聚到另一个焦点，那里的人听得清清楚楚。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>距离之比 e = 3/5 &lt; 1，是<strong>椭圆</strong>。焦点 (3, 0) → c = 3；准线 x = a²/c = 25/3 → a² = 25，a = 5；b² = a² − c² = 25 − 9 = 16。轨迹为 <strong>x²/25 + y²/16 = 1</strong>，离心率 e = <strong>3/5</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>设动圆 M 半径为 r。外切：|MC₁| = r + 2；内切：|MC₂| = 10 − r。两式相加得 |MC₁| + |MC₂| = <strong>12</strong>（常数）。C₁(−4, 0)、C₂(4, 0)，2c = 8 → c = 4；2a = 12 → a = 6；b² = a² − c² = 36 − 16 = 20。轨迹为<strong>椭圆 x²/36 + y²/20 = 1</strong>。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第2章-直线和圆的方程/第2章-直线和圆的方程.html">← 上一章：第2章 直线和圆的方程</a>
 <a href="../../../index.html">回目录</a>
 <a href="../../选择性必修二/第4章-数列/第4章-数列.html">下一章：第4章 数列 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第一册 · 圆锥曲线的方程</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第一册 · 圆锥曲线的方程</footer>
 </body>
 </html>

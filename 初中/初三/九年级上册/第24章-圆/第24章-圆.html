@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第24章 圆 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第24章 圆 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第24章 圆</div></header>
@@ -123,7 +86,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 <div class="insight"><strong>几何含义：</strong>圆心角是"绕圆心转过的角度"，弧是"圆周上走过的路程"，弦是"两端的直线距离"。因为圆是旋转对称的，<strong>转过的角越大，走过的弧越长，两端的弦越长</strong>——三者被同一个旋转角统一起来。</div>
 <h3>圆周角定理</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="130" r="95" fill="none" stroke="#94a3b8" stroke-width="2"/><path d="M 177.7 82.5 A 95 95 0 0 1 342.3 82.5" fill="none" stroke="#cbd5e1" stroke-width="4"/><path d="M 260 130 L 234 115 A 30 30 0 0 1 286 115 Z" fill="#dbeafe"/><line x1="260" y1="130" x2="177.7" y2="82.5" stroke="#2563eb" stroke-width="3"/><line x1="260" y1="130" x2="342.3" y2="82.5" stroke="#2563eb" stroke-width="3"/><text x="260" y="103" fill="#2563eb" font-size="15" font-weight="bold" text-anchor="middle">2α</text><line x1="177.7" y1="82.5" x2="177.7" y2="177.5" stroke="#16a34a" stroke-width="3"><animate attributeName="x2" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y2" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></line><line x1="342.3" y1="82.5" x2="177.7" y2="177.5" stroke="#16a34a" stroke-width="3"><animate attributeName="x2" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y2" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></line><circle cx="177.7" cy="177.5" r="6" fill="#16a34a"><animate attributeName="cx" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="cy" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></circle><text x="168" y="78" fill="#334155" font-size="14">A</text><text x="352" y="78" fill="#334155" font-size="14">B</text><text x="260" y="146" fill="#334155" font-size="14" text-anchor="middle">O</text><text x="177.7" y="153.5" fill="#16a34a" font-size="15" font-weight="bold" text-anchor="middle"><animate attributeName="x" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y" values="153.5;173.2;188.3;197.8;201.0;197.8;188.3;173.2;153.5;173.2;188.3;197.8;201.0;197.8;188.3;173.2;153.5" dur="9s" repeatCount="indefinite"/>α</text><text x="177.7" y="197.5" fill="#334155" font-size="14" text-anchor="middle"><animate attributeName="x" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y" values="197.5;217.2;232.3;241.8;245.0;241.8;232.3;217.2;197.5;217.2;232.3;241.8;245.0;241.8;232.3;217.2;197.5" dur="9s" repeatCount="indefinite"/>P</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同一段弧 AB 所对的圆周角 ∠APB = α 恒为圆心角 ∠AOB = 2α 的一半——站在圆周上看到的视角，是站在圆心看到的视角的一半。</figcaption></figure>
+<figure class="fig"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="130" r="95" fill="none" stroke="#94a3b8" stroke-width="2"/><path d="M 177.7 82.5 A 95 95 0 0 1 342.3 82.5" fill="none" stroke="#cbd5e1" stroke-width="4"/><path d="M 260 130 L 234 115 A 30 30 0 0 1 286 115 Z" fill="#dbeafe"/><line x1="260" y1="130" x2="177.7" y2="82.5" stroke="#2563eb" stroke-width="3"/><line x1="260" y1="130" x2="342.3" y2="82.5" stroke="#2563eb" stroke-width="3"/><text x="260" y="103" fill="#2563eb" font-size="15" font-weight="bold" text-anchor="middle">2α</text><line x1="177.7" y1="82.5" x2="177.7" y2="177.5" stroke="#16a34a" stroke-width="3"><animate attributeName="x2" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y2" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></line><line x1="342.3" y1="82.5" x2="177.7" y2="177.5" stroke="#16a34a" stroke-width="3"><animate attributeName="x2" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y2" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></line><circle cx="177.7" cy="177.5" r="6" fill="#16a34a"><animate attributeName="cx" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="cy" values="177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5;197.2;212.3;221.8;225.0;221.8;212.3;197.2;177.5" dur="9s" repeatCount="indefinite"/></circle><text x="168" y="78" fill="#334155" font-size="14">A</text><text x="352" y="78" fill="#334155" font-size="14">B</text><text x="260" y="146" fill="#334155" font-size="14" text-anchor="middle">O</text><text x="177.7" y="153.5" fill="#16a34a" font-size="15" font-weight="bold" text-anchor="middle"><animate attributeName="x" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y" values="153.5;173.2;188.3;197.8;201.0;197.8;188.3;173.2;153.5;173.2;188.3;197.8;201.0;197.8;188.3;173.2;153.5" dur="9s" repeatCount="indefinite"/>α</text><text x="177.7" y="197.5" fill="#334155" font-size="14" text-anchor="middle"><animate attributeName="x" values="177.7;192.8;212.5;235.4;260.0;284.6;307.5;327.2;342.3;327.2;307.5;284.6;260.0;235.4;212.5;192.8;177.7" dur="9s" repeatCount="indefinite"/><animate attributeName="y" values="197.5;217.2;232.3;241.8;245.0;241.8;232.3;217.2;197.5;217.2;232.3;241.8;245.0;241.8;232.3;217.2;197.5" dur="9s" repeatCount="indefinite"/>P</text></svg><figcaption class="fig-cap">图：同一段弧 AB 所对的圆周角 ∠APB = α 恒为圆心角 ∠AOB = 2α 的一半——站在圆周上看到的视角，是站在圆心看到的视角的一半。</figcaption></figure>
 <p><strong>圆周角定理</strong>：一条弧所对的<strong>圆周角等于它所对圆心角的一半</strong>。</p>
 <pre><code>∠APB = ½ ∠AOB      （∠AOB 是弧 AB 所对的圆心角）</code></pre>
 <p>证明思想（分三种位置：圆心在角内、在角的一边上、在角外）都归结为一句话：连半径，用"等边对等角 + 外角等于不相邻两内角之和"。</p>
@@ -151,7 +114,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>直线与圆相交时，两个交点之间的线段是<strong>弦</strong>。求弦长，先求弦心距 d，再用 <code>r² = d² + (a/2)²</code>。若 d = 0（直线过圆心），弦就是直径。</p>
 
 <h2 id="s5">24.5 切线</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="200" cy="130" r="90" fill="none" stroke="#94a3b8" stroke-width="2"/><circle cx="200" cy="130" r="4" fill="#2563eb"/><text x="200" y="150" fill="#334155" font-size="14" text-anchor="middle">O</text><g><animateTransform attributeName="transform" type="rotate" from="0 200 130" to="360 200 130" dur="8s" repeatCount="indefinite"/><line x1="200" y1="130" x2="290" y2="130" stroke="#2563eb" stroke-width="3"/><line x1="290" y1="50" x2="290" y2="210" stroke="#16a34a" stroke-width="3"/><path d="M 278 130 L 278 118 L 290 118" fill="none" stroke="#64748b" stroke-width="2"/><line x1="290" y1="130" x2="290" y2="92" stroke="#16a34a" stroke-width="3"/><polygon points="290,84 285,96 295,96" fill="#16a34a"/><circle cx="290" cy="130" r="5" fill="#0f172a"/></g><text x="260" y="248" fill="#334155" font-size="13" text-anchor="middle">蓝＝半径 r　绿＝切线（⊥ r）＋速度 v（瞬时方向）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：切线过切点 M 且始终垂直于半径 r——速度 v 沿切线方向，正是圆周运动的瞬时方向（甩出的雨滴、断绳的石头都沿切线飞出）。</figcaption></figure>
+<figure class="fig"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="200" cy="130" r="90" fill="none" stroke="#94a3b8" stroke-width="2"/><circle cx="200" cy="130" r="4" fill="#2563eb"/><text x="200" y="150" fill="#334155" font-size="14" text-anchor="middle">O</text><g><animateTransform attributeName="transform" type="rotate" from="0 200 130" to="360 200 130" dur="8s" repeatCount="indefinite"/><line x1="200" y1="130" x2="290" y2="130" stroke="#2563eb" stroke-width="3"/><line x1="290" y1="50" x2="290" y2="210" stroke="#16a34a" stroke-width="3"/><path d="M 278 130 L 278 118 L 290 118" fill="none" stroke="#64748b" stroke-width="2"/><line x1="290" y1="130" x2="290" y2="92" stroke="#16a34a" stroke-width="3"/><polygon points="290,84 285,96 295,96" fill="#16a34a"/><circle cx="290" cy="130" r="5" fill="#0f172a"/></g><text x="260" y="248" fill="#334155" font-size="13" text-anchor="middle">蓝＝半径 r　绿＝切线（⊥ r）＋速度 v（瞬时方向）</text></svg><figcaption class="fig-cap">图：切线过切点 M 且始终垂直于半径 r——速度 v 沿切线方向，正是圆周运动的瞬时方向（甩出的雨滴、断绳的石头都沿切线飞出）。</figcaption></figure>
 <h3>切线的判定与性质</h3>
 <p><strong>切线的定义</strong>：直线与圆有<strong>唯一公共点</strong>（相切）时，这条直线叫圆的<strong>切线</strong>，公共点叫<strong>切点</strong>。</p>
 <p><strong>判定定理</strong>：经过半径的外端，并且<strong>垂直于这条半径</strong>的直线，是圆的切线。</p>
@@ -238,7 +201,7 @@ S = ½ l r                    （用弧长 l 表示，很像三角形面积）</
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong>（由易到难，紧扣本章知识点）</p>
 <ol>
 <li><strong>圆的定义</strong>：⊙O 的半径为 5，平面内三点 P、Q、R 满足 OP = 5、OQ = 3、OR = 7。分别判断 P、Q、R 与 ⊙O 的位置关系（圆上 / 圆内 / 圆外），并说明判断依据。</li>
@@ -249,20 +212,20 @@ S = ½ l r                    （用弧长 l 表示，很像三角形面积）</
 <li><strong>弧长、扇形与圆锥展开</strong>：圆锥的底面半径为 3，母线长为 5。求 (1) 其侧面展开扇形的圆心角 n；(2) 该扇形的弧长和侧面面积。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><strong>答：</strong>P 在圆上（OP = r = 5），Q 在圆内（OQ = 3 &lt; 5），R 在圆外（OR = 7 &gt; 5）。依据：圆的集合定义——到圆心距离等于半径的点在圆上，小于半径在圆内，大于半径在圆外。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><strong>答：</strong>弦心距 d = √(r² − (a/2)²) = √(13² − 12²) = √(169 − 144) = √25 = <strong>5 cm</strong>。步骤：过圆心 O 作弦 AB 的垂线，垂足为 E，由垂径定理知垂足平分弦，故 AE = BE = 12 cm；在直角三角形 OEA 中用勾股定理 d² + 12² = 13²，解得 d = 5 cm。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><strong>答：</strong>(1) 圆周角等于同弧所对圆心角的一半，∠ACB = ½ × 100° = <strong>50°</strong>。(2) 同弧（或等弧）所对的圆周角相等，所以 ∠ADB = ∠ACB = <strong>50°</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><strong>答：</strong>(1) d = 5 = r，<strong>相切</strong>——圆心到直线的距离等于半径，直线与圆有唯一公共点（切点）。(2) d = 4 &lt; r，<strong>相交</strong>，有两个交点；弦长 a = 2√(r² − d²) = 2√(25 − 16) = 2√9 = <strong>6</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><strong>答：</strong>由切线长定理，<strong>PA = PB</strong>；∠AOB = <strong>120°</strong>。理由：OA ⊥ PA、OB ⊥ PB，四边形 OAPB 中 ∠OAP = ∠OBP = 90°，四内角和为 360°，故 ∠AOB = 360° − 90° − 90° − 60° = 120°。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p><strong>答：</strong>(1) 侧面展开扇形半径 = 母线长 5，弧长 = 底面周长 2π × 3 = 6π；由 n/360 × 2π × 5 = 6π，得 n = 360° × 3/5 = <strong>216°</strong>。(2) 弧长 l = <strong>6π</strong>；侧面面积 S = ½ · l · 母线 = ½ × 6π × 5 = <strong>15π</strong>（也可用 πrl = π × 3 × 5 = 15π）。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p><strong>答：</strong>P 在圆上（OP = r = 5），Q 在圆内（OQ = 3 &lt; 5），R 在圆外（OR = 7 &gt; 5）。依据：圆的集合定义——到圆心距离等于半径的点在圆上，小于半径在圆内，大于半径在圆外。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><strong>答：</strong>弦心距 d = √(r² − (a/2)²) = √(13² − 12²) = √(169 − 144) = √25 = <strong>5 cm</strong>。步骤：过圆心 O 作弦 AB 的垂线，垂足为 E，由垂径定理知垂足平分弦，故 AE = BE = 12 cm；在直角三角形 OEA 中用勾股定理 d² + 12² = 13²，解得 d = 5 cm。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p><strong>答：</strong>(1) 圆周角等于同弧所对圆心角的一半，∠ACB = ½ × 100° = <strong>50°</strong>。(2) 同弧（或等弧）所对的圆周角相等，所以 ∠ADB = ∠ACB = <strong>50°</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p><strong>答：</strong>(1) d = 5 = r，<strong>相切</strong>——圆心到直线的距离等于半径，直线与圆有唯一公共点（切点）。(2) d = 4 &lt; r，<strong>相交</strong>，有两个交点；弦长 a = 2√(r² − d²) = 2√(25 − 16) = 2√9 = <strong>6</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p><strong>答：</strong>由切线长定理，<strong>PA = PB</strong>；∠AOB = <strong>120°</strong>。理由：OA ⊥ PA、OB ⊥ PB，四边形 OAPB 中 ∠OAP = ∠OBP = 90°，四内角和为 360°，故 ∠AOB = 360° − 90° − 90° − 60° = 120°。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p><strong>答：</strong>(1) 侧面展开扇形半径 = 母线长 5，弧长 = 底面周长 2π × 3 = 6π；由 n/360 × 2π × 5 = 6π，得 n = 360° × 3/5 = <strong>216°</strong>。(2) 弧长 l = <strong>6π</strong>；侧面面积 S = ½ · l · 母线 = ½ × 6π × 5 = <strong>15π</strong>（也可用 πrl = π × 3 × 5 = 15π）。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第23章-旋转/第23章-旋转.html">← 上一章：第23章 旋转</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第25章-概率初步/第25章-概率初步.html">下一章：第25章 概率初步 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初三数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初三数学开始</footer>
 </body>
 </html>

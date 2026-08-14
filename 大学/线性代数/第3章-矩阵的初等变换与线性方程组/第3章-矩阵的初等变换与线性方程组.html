@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第3章 矩阵的初等变换与线性方程组 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第3章 矩阵的初等变换与线性方程组 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第3章 矩阵的初等变换与线性方程组</div></header>
@@ -65,7 +28,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </table>
 <p>三种操作同样定义在<strong>列</strong>上（记号写作 <code>cᵢ</code>）。习惯上，解方程组只用<strong>行变换</strong>；行变换与列变换一起用时，可以求秩、化简矩阵，但<strong>不能混用于解方程组</strong>（列变换会打乱未知量的对应关系）。</p>
 <div class="insight"><strong>几何含义：</strong>一个 m×n 方程组本质上是 m 个超平面（每个方程一个超平面）的交集。①交换两行 = 把 m 个超平面重新编号，交集不变；②某行乘 k = 用 <code>k·(平面方程)</code> 换掉原来的平面，<strong>k ≠ 0 时描述的是同一个超平面</strong>（同一个几何对象），交集不变；③倍加行 = 用"两个平面的线性组合"换掉其中一个，这个新平面<strong>一定经过原两个平面的交线</strong>，所以交线（进而整个交集）被保留下来。一句话：<strong>初等行变换只"换方程组的写法"，不"动解集这个几何对象"。</strong></div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#e2e8f0" stroke-width="1"><line x1="40" y1="260" x2="500" y2="260"/><line x1="80" y1="20" x2="80" y2="300"/></g><text x="80" y="278" text-anchor="middle" fill="#94a3b8" font-size="12">O</text><line x1="40" y1="300" x2="280" y2="60" stroke="#2563eb" stroke-width="3"/><text x="286" y="58" fill="#2563eb" font-size="14" font-weight="700">L₁ (r₁)</text><line x1="80" y1="100" x2="240" y2="260" stroke="#16a34a" stroke-width="3"/><text x="80" y="92" fill="#16a34a" font-size="14" font-weight="700">L₂ (r₂)</text><text x="60" y="44" fill="#15803d" font-size="13" font-weight="700">L₂′ = L₂ + k·L₁</text><line x1="89" y1="251" x2="231" y2="109" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="7 6" opacity="0.85"><animateTransform attributeName="transform" type="rotate" values="-25 160 180;25 160 180;-25 160 180" dur="5s" repeatCount="indefinite"/></line><circle cx="160" cy="180" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><text x="172" y="174" fill="#dc2626" font-size="13" font-weight="700">P（解，不变）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：倍加行变换 L₂′ = L₂ + k·L₁ 得到的新直线始终经过原交点 P——初等行变换只改写方程组的写法，不改变解集（交点）</figcaption></figure>
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#e2e8f0" stroke-width="1"><line x1="40" y1="260" x2="500" y2="260"/><line x1="80" y1="20" x2="80" y2="300"/></g><text x="80" y="278" text-anchor="middle" fill="#94a3b8" font-size="12">O</text><line x1="40" y1="300" x2="280" y2="60" stroke="#2563eb" stroke-width="3"/><text x="286" y="58" fill="#2563eb" font-size="14" font-weight="700">L₁ (r₁)</text><line x1="80" y1="100" x2="240" y2="260" stroke="#16a34a" stroke-width="3"/><text x="80" y="92" fill="#16a34a" font-size="14" font-weight="700">L₂ (r₂)</text><text x="60" y="44" fill="#15803d" font-size="13" font-weight="700">L₂′ = L₂ + k·L₁</text><line x1="89" y1="251" x2="231" y2="109" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="7 6" opacity="0.85"><animateTransform attributeName="transform" type="rotate" values="-25 160 180;25 160 180;-25 160 180" dur="5s" repeatCount="indefinite"/></line><circle cx="160" cy="180" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><text x="172" y="174" fill="#dc2626" font-size="13" font-weight="700">P（解，不变）</text></svg><figcaption class="fig-cap">图：倍加行变换 L₂′ = L₂ + k·L₁ 得到的新直线始终经过原交点 P——初等行变换只改写方程组的写法，不改变解集（交点）</figcaption></figure>
 <div class="insight"><strong>物理含义：</strong>方程组常用来描述静态平衡或约束系统（如电路的基尔霍夫方程、桁架的力平衡方程）。①交换方程 = 换一换约束的书写顺序；②倍乘 = 换量纲（把"牛"换成"千牛"），物理约束不变；③倍加 = 把两个约束"叠加/消去某个变量"，相当于从一个约束里解出一个量再代入另一个约束——这正是物理上"消元代入法"的矩阵形式。初等行变换保证：<strong>物理系统的真实解（平衡点、电流、受力）一个不多、一个不少。</strong></div>
 
 <h2 id="s2">3.2 初等矩阵与矩阵的等价</h2>
@@ -144,7 +107,7 @@ r(A + B) ≤ r(A) + r(B)
 若 A 为 n 阶方阵：A 可逆 ⇔ r(A) = n（满秩）⇔ |A| ≠ 0
 r(AᵀA) = r(A)</code></pre>
 <div class="insight"><strong>几何含义：</strong>把 A 看作线性变换 x ↦ Ax，则 <strong>r(A) = 像空间（列空间）的维数</strong> = 变换后"实际铺开"的空间维数。满秩（r = n）时变换是一一对应的（不压缩、不塌缩）；r &lt; n 时变换把 n 维空间"压扁"到 r 维，有 n−r 个方向被映射成 0。行秩=列秩的几何事实是：<strong>变换后像的维数 = 原空间中"有效方向"（不被映射成 0 的方向）的个数。</strong></div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="150" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=2（满秩）：像仍是二维平面</text><text x="390" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=1：像被压成一条线</text><polygon fill="#2563eb" opacity="0.7" stroke="#1d4ed8" stroke-width="2"><animate attributeName="points" values="110,90 190,90 190,170 110,170;110,90 200,80 180,170 90,180;110,90 190,90 190,170 110,170" dur="5s" repeatCount="indefinite"/></polygon><text x="150" y="245" text-anchor="middle" fill="#64748b" font-size="12">原二维平面 → 二维（不塌缩，面积保持）</text><polygon fill="#16a34a" opacity="0.7" stroke="#15803d" stroke-width="2"><animate attributeName="points" values="350,90 430,90 430,170 350,170;350,130 430,130 430,130 350,130;350,90 430,90 430,170 350,170" dur="5s" repeatCount="indefinite"/></polygon><text x="390" y="245" text-anchor="middle" fill="#64748b" font-size="12">压扁成一条线（1 维，面积 → 0）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：r(A) 是线性变换后像空间的维数——满秩把平面仍映成平面，秩亏（r=1）把整个平面压扁成一条线</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="150" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=2（满秩）：像仍是二维平面</text><text x="390" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=1：像被压成一条线</text><polygon fill="#2563eb" opacity="0.7" stroke="#1d4ed8" stroke-width="2"><animate attributeName="points" values="110,90 190,90 190,170 110,170;110,90 200,80 180,170 90,180;110,90 190,90 190,170 110,170" dur="5s" repeatCount="indefinite"/></polygon><text x="150" y="245" text-anchor="middle" fill="#64748b" font-size="12">原二维平面 → 二维（不塌缩，面积保持）</text><polygon fill="#16a34a" opacity="0.7" stroke="#15803d" stroke-width="2"><animate attributeName="points" values="350,90 430,90 430,170 350,170;350,130 430,130 430,130 350,130;350,90 430,90 430,170 350,170" dur="5s" repeatCount="indefinite"/></polygon><text x="390" y="245" text-anchor="middle" fill="#64748b" font-size="12">压扁成一条线（1 维，面积 → 0）</text></svg><figcaption class="fig-cap">图：r(A) 是线性变换后像空间的维数——满秩把平面仍映成平面，秩亏（r=1）把整个平面压扁成一条线</figcaption></figure>
 <div class="insight"><strong>物理含义：</strong>秩 = 系统<strong>独立信息/独立约束</strong>的个数。一个含 m 个方程、n 个未知量的方程组，真正"管用"（不能由其他方程推出）的方程个数正是 r(A)。r(A) &lt; m 表示有 m−r 个方程是"冗余"的（多余的测量、重复的约束）；r(A) &lt; n 表示有 n−r 个未知量是"自由"的（未被约束住，可任意取值）。</div>
 
 <h2 id="s5">3.5 用初等变换求逆矩阵</h2>
@@ -172,7 +135,7 @@ r(AᵀA) = r(A)</code></pre>
 <li>当 m = n 且 |A| ≠ 0（A 可逆）时，方程组有<strong>唯一解</strong> <code>x = A⁻¹b</code>（克拉默法则的特殊情形）。</li>
 </ul>
 <div class="insight"><strong>几何含义：</strong>每个方程是一个超平面，解集是这些超平面的交集。唯一解 = 所有超平面<strong>恰好交于一点</strong>；无穷多解 = 超平面们<strong>交成一条直线/一个平面/一个 r 维子空间</strong>（存在 n−r 个"可自由滑动"的方向）；无解 = 至少有一个超平面<strong>与其余超平面的交集平行而不相交</strong>（"矛盾"），交集为空。秩正是"这些超平面究竟张出几维独立约束"的度量。</div>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="100" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">唯一解（交于一点）</text><text x="260" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无穷多解（两线重合）</text><text x="420" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无解（平行不相交）</text><line x1="60" y1="230" x2="180" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="60" y1="70" x2="180" y2="230" stroke="#16a34a" stroke-width="2.5"/><circle cx="120" cy="150" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><line x1="220" y1="230" x2="340" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="220" y1="230" x2="340" y2="70" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="10 8"><animateTransform attributeName="transform" type="translate" values="0 0;-12 16;0 0" dur="3s" repeatCount="indefinite"/></line><line x1="380" y1="90" x2="480" y2="200" stroke="#2563eb" stroke-width="2.5"/><line x1="380" y1="130" x2="480" y2="240" stroke="#16a34a" stroke-width="2.5"/><circle r="4" fill="#2563eb"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="90;200;90" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="130;240;130" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两个方程（两条直线）解集的三类几何形态——交于一点（唯一解）、完全重合（无穷多解）、平行不相交（无解）</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="100" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">唯一解（交于一点）</text><text x="260" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无穷多解（两线重合）</text><text x="420" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无解（平行不相交）</text><line x1="60" y1="230" x2="180" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="60" y1="70" x2="180" y2="230" stroke="#16a34a" stroke-width="2.5"/><circle cx="120" cy="150" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><line x1="220" y1="230" x2="340" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="220" y1="230" x2="340" y2="70" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="10 8"><animateTransform attributeName="transform" type="translate" values="0 0;-12 16;0 0" dur="3s" repeatCount="indefinite"/></line><line x1="380" y1="90" x2="480" y2="200" stroke="#2563eb" stroke-width="2.5"/><line x1="380" y1="130" x2="480" y2="240" stroke="#16a34a" stroke-width="2.5"/><circle r="4" fill="#2563eb"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="90;200;90" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="130;240;130" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption class="fig-cap">图：两个方程（两条直线）解集的三类几何形态——交于一点（唯一解）、完全重合（无穷多解）、平行不相交（无解）</figcaption></figure>
 <div class="insight"><strong>物理含义：</strong>r(A) = 独立约束数，n = 未知量（自由度）数。唯一解 = <strong>约束刚好把自由度全部锁死</strong>（静定结构）；无穷多解 = <strong>约束不足</strong>（n−r 个自由度自由，如欠约束机构、静不定系统有多组可行状态）；无解 = <strong>约束互相矛盾</strong>（如两个要求彼此冲突的力平衡条件，无任何状态能满足）。</div>
 
 <h2 id="s7">3.7 齐次方程组与基础解系</h2>
@@ -242,7 +205,7 @@ Ax = 0 只有零解   ⇔ r(A) = n（当 m = n 时即 |A| ≠ 0）</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>写出三种初等行变换，并对应到"对方程组做的三件等价操作"；任选其中一种（如倍加行变换），用<strong>几何含义</strong>解释它为什么不会改变方程组的解集。</li>
@@ -253,19 +216,19 @@ Ax = 0 只有零解   ⇔ r(A) = n（当 m = n 时即 |A| ≠ 0）</code></pre>
 <li>设 r(A) = 2，n = 4，且 Ax = b 有解。问：解的自由度是多少？通解如何书写？并解释"非齐次通解 = 特解 + 齐次通解"的<strong>几何意义</strong>。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>三种初等行变换：① 交换两行 <code>rᵢ ↔ rⱼ</code>（交换两个方程）；② 倍乘 <code>rᵢ × k</code>（k ≠ 0，方程两边同乘非零数）；③ 倍加 <code>rᵢ + k·rⱼ</code>（一个方程的 k 倍加到另一个方程上）。以倍加为例的几何解释：每个方程是一个超平面，用"两个平面的线性组合"替换其中一个，得到的<strong>新平面一定经过原两个平面的交线</strong>，因此交线（进而整个交集，即解集）被保留，解集不变。物理上它对应"消元代入法"，不增不减真实解。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>P₁ = E(1,2) = [0 1 0; 1 0 0; 0 0 1]；P₂ = E(31(−2)) = [1 0 0; 0 1 0; −2 0 1]（把第 1 行的 −2 倍加到第 3 行）；P₃ = E(2(1/3)) = [1 0 0; 0 1/3 0; 0 0 1]。总变换矩阵 P = P₃P₂P₁，左乘依次作用，即先 P₁、再 P₂、最后 P₃。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>对 A 作行变换：r₂ − 2r₁、r₃ − r₁ 得 [1 2 3; 0 0 0; 0 −1 −2]，交换 r₂、r₃ 得行阶梯形 [1 2 3; 0 −1 −2; 0 0 0]。非零行有 2 个，故 r(A) = 2。几何含义：把 A 看作线性变换 x ↦ Ax，r(A) = 像空间（列空间）的维数 = 2，即三维空间被"压扁"到二维平面，有一个方向被映射成 0。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>[A | E] = [1 2 | 1 0; 3 4 | 0 1]；r₂ − 3r₁ → [1 2 | 1 0; 0 −2 | −3 1]；r₂ × (−1/2) → [1 2 | 1 0; 0 1 | 3/2 −1/2]；r₁ − 2r₂ → [1 0 | −2 1; 0 1 | 3/2 −1/2]。故 A⁻¹ = [−2 1; 3/2 −1/2]（验证：|A| = −2 ≠ 0，可逆）。物理含义：矩阵不可逆意味着系统存在"不可逆的信息损失"——某个方向被压成 0，无法由结果还原原因。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>增广矩阵 (A,b) = [1 1 1 | 1; 1 2 3 | 3; 2 3 4 | 5]。行变换：r₂ − r₁、r₃ − 2r₁ 得 [1 1 1 | 1; 0 1 2 | 2; 0 1 2 | 3]；r₃ − r₂ 得 [1 1 1 | 1; 0 1 2 | 2; 0 0 0 | 1]。出现矛盾行 0 = 1，故 r(A) = 2、r(A,b) = 3，r(A) &lt; r(A,b)，<strong>无解</strong>。几何含义：三个超平面（平面）中，第三个与其余两个的交线<strong>平行而不相交</strong>，交集为空。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>r(A) = r(A,b) = 2 &lt; n = 4，有解且有无穷多解，自由度 = n − r = 4 − 2 = 2。通解 x = x* + k₁η₁ + k₂η₂，其中 x* 是 Ax = b 的一个特解，η₁、η₂ 是 Ax = 0 的基础解系。几何意义：解集是零空间（过原点、维数 n−r = 2 的子空间）<strong>沿特解 x* 平移</strong>得到的仿射子空间——一个不经过原点的二维平面；其"形状"由齐次部分决定，"位置"由特解决定。物理上对应"强迫响应（特解）+ 自由响应（齐次通解）"。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>三种初等行变换：① 交换两行 <code>rᵢ ↔ rⱼ</code>（交换两个方程）；② 倍乘 <code>rᵢ × k</code>（k ≠ 0，方程两边同乘非零数）；③ 倍加 <code>rᵢ + k·rⱼ</code>（一个方程的 k 倍加到另一个方程上）。以倍加为例的几何解释：每个方程是一个超平面，用"两个平面的线性组合"替换其中一个，得到的<strong>新平面一定经过原两个平面的交线</strong>，因此交线（进而整个交集，即解集）被保留，解集不变。物理上它对应"消元代入法"，不增不减真实解。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>P₁ = E(1,2) = [0 1 0; 1 0 0; 0 0 1]；P₂ = E(31(−2)) = [1 0 0; 0 1 0; −2 0 1]（把第 1 行的 −2 倍加到第 3 行）；P₃ = E(2(1/3)) = [1 0 0; 0 1/3 0; 0 0 1]。总变换矩阵 P = P₃P₂P₁，左乘依次作用，即先 P₁、再 P₂、最后 P₃。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>对 A 作行变换：r₂ − 2r₁、r₃ − r₁ 得 [1 2 3; 0 0 0; 0 −1 −2]，交换 r₂、r₃ 得行阶梯形 [1 2 3; 0 −1 −2; 0 0 0]。非零行有 2 个，故 r(A) = 2。几何含义：把 A 看作线性变换 x ↦ Ax，r(A) = 像空间（列空间）的维数 = 2，即三维空间被"压扁"到二维平面，有一个方向被映射成 0。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>[A | E] = [1 2 | 1 0; 3 4 | 0 1]；r₂ − 3r₁ → [1 2 | 1 0; 0 −2 | −3 1]；r₂ × (−1/2) → [1 2 | 1 0; 0 1 | 3/2 −1/2]；r₁ − 2r₂ → [1 0 | −2 1; 0 1 | 3/2 −1/2]。故 A⁻¹ = [−2 1; 3/2 −1/2]（验证：|A| = −2 ≠ 0，可逆）。物理含义：矩阵不可逆意味着系统存在"不可逆的信息损失"——某个方向被压成 0，无法由结果还原原因。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>增广矩阵 (A,b) = [1 1 1 | 1; 1 2 3 | 3; 2 3 4 | 5]。行变换：r₂ − r₁、r₃ − 2r₁ 得 [1 1 1 | 1; 0 1 2 | 2; 0 1 2 | 3]；r₃ − r₂ 得 [1 1 1 | 1; 0 1 2 | 2; 0 0 0 | 1]。出现矛盾行 0 = 1，故 r(A) = 2、r(A,b) = 3，r(A) &lt; r(A,b)，<strong>无解</strong>。几何含义：三个超平面（平面）中，第三个与其余两个的交线<strong>平行而不相交</strong>，交集为空。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>r(A) = r(A,b) = 2 &lt; n = 4，有解且有无穷多解，自由度 = n − r = 4 − 2 = 2。通解 x = x* + k₁η₁ + k₂η₂，其中 x* 是 Ax = b 的一个特解，η₁、η₂ 是 Ax = 0 的基础解系。几何意义：解集是零空间（过原点、维数 n−r = 2 的子空间）<strong>沿特解 x* 平移</strong>得到的仿射子空间——一个不经过原点的二维平面；其"形状"由齐次部分决定，"位置"由特解决定。物理上对应"强迫响应（特解）+ 自由响应（齐次通解）"。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第2章-矩阵及其运算/第2章-矩阵及其运算.html">← 上一章：第2章 矩阵及其运算</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">下一章：第4章 向量组的线性相关性 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
 </body>
 </html>

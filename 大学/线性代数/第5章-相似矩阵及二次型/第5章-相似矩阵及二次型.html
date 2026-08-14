@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第5章 相似矩阵及二次型 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第5章 相似矩阵及二次型 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第5章 相似矩阵及二次型</div></header>
@@ -101,7 +64,7 @@ f(λ) = |λE − A|      （特征多项式）</code></pre>
 <div class="insight"><strong>几何反例（为什么特征向量不一定存在）：</strong>平面旋转 90° 的矩阵 <code>A = [[0,−1],[1,0]]</code>，其特征方程 <code>λ² + 1 = 0</code> 只有复根 <code>λ = ±i</code>，没有实特征值。几何上这是显然的：一个旋转会把<strong>每一个</strong>方向都转走，不存在「方向不变」的直线，所以没有实特征向量。它暗示：<strong>要讨论特征向量，最好在复数域里；而实对称矩阵保证有实特征值与实特征向量。</strong></div>
 
 <h2 id="s2">5.2 相似矩阵与相似对角化</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><line x1="175" y1="235" x2="345" y2="65" stroke="#bfdbfe" stroke-width="1" stroke-dasharray="4 4"/><line x1="175" y1="65" x2="345" y2="235" stroke="#a7f3d0" stroke-width="1" stroke-dasharray="4 4"/><line x1="260" y1="150" x2="281.2" y2="128.8" stroke="#2563eb" stroke-width="4" stroke-linecap="round"><animate attributeName="x2" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="y2" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></line><circle r="6" fill="#2563eb"><animate attributeName="cx" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></circle><line x1="260" y1="150" x2="281.2" y2="171.2" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/><circle cx="281.2" cy="171.2" r="6" fill="#16a34a"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite"/></circle><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="352" y="50" fill="#475569" font-size="12" text-anchor="middle">方向 (1,1)</text><text x="352" y="252" fill="#475569" font-size="12" text-anchor="middle">方向 (1,−1)</text><text x="430" y="82" fill="#2563eb" font-size="13" text-anchor="middle">λ=3：方向不变，拉伸 3 倍</text><text x="430" y="222" fill="#16a34a" font-size="13" text-anchor="middle">λ=1：不伸缩</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：特征向量是线性变换的「不变方向」——沿 (1,1) 方向只被拉伸 3 倍、沿 (1,−1) 方向长度不变，方向始终保持在同一直线上</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><line x1="175" y1="235" x2="345" y2="65" stroke="#bfdbfe" stroke-width="1" stroke-dasharray="4 4"/><line x1="175" y1="65" x2="345" y2="235" stroke="#a7f3d0" stroke-width="1" stroke-dasharray="4 4"/><line x1="260" y1="150" x2="281.2" y2="128.8" stroke="#2563eb" stroke-width="4" stroke-linecap="round"><animate attributeName="x2" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="y2" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></line><circle r="6" fill="#2563eb"><animate attributeName="cx" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></circle><line x1="260" y1="150" x2="281.2" y2="171.2" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/><circle cx="281.2" cy="171.2" r="6" fill="#16a34a"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite"/></circle><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="352" y="50" fill="#475569" font-size="12" text-anchor="middle">方向 (1,1)</text><text x="352" y="252" fill="#475569" font-size="12" text-anchor="middle">方向 (1,−1)</text><text x="430" y="82" fill="#2563eb" font-size="13" text-anchor="middle">λ=3：方向不变，拉伸 3 倍</text><text x="430" y="222" fill="#16a34a" font-size="13" text-anchor="middle">λ=1：不伸缩</text></svg><figcaption class="fig-cap">图：特征向量是线性变换的「不变方向」——沿 (1,1) 方向只被拉伸 3 倍、沿 (1,−1) 方向长度不变，方向始终保持在同一直线上</figcaption></figure>
 <h3>相似的定义与不变量</h3>
 <p>设 A、B 为 n 阶方阵，若存在<strong>可逆矩阵 P</strong>，使得</p>
 <pre><code>B = P⁻¹ A P</code></pre>
@@ -135,7 +98,7 @@ f(λ) = |λE − A|      （特征多项式）</code></pre>
 <div class="insight"><strong>几何含义再概括：</strong>对 Aᵏ 来说，对角化把「k 次复合变换」拆成「换到主轴 → 每根轴伸缩 λᵏ 倍 → 换回来」。λ 的绝对值决定该主轴方向是<strong>增长（|λ| &gt; 1）、衰减（|λ| &lt; 1）还是保持（|λ| = 1）</strong>——这正是动力系统稳定性的几何判据。</div>
 
 <h2 id="s3">5.3 二次型及其标准形</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><ellipse cx="260" cy="150" rx="80" ry="46" fill="#eff6ff" stroke="#2563eb" stroke-width="2" transform="rotate(45 260 150)"/><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 150;45 260 150;0 260 150" dur="8s" repeatCount="indefinite"/><line x1="165" y1="150" x2="355" y2="150" stroke="#16a34a" stroke-width="3"/><polygon points="355,150 343,142 343,158" fill="#16a34a"/><line x1="260" y1="220" x2="260" y2="80" stroke="#2563eb" stroke-width="3"/><polygon points="260,80 252,92 268,92" fill="#2563eb"/></g><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="150" y="42" fill="#334155" font-size="13">f = 2x₁² + 2x₁x₂ + 2x₂² = 1</text><text x="150" y="286" fill="#475569" font-size="12">旋转 45°（x = Qy）消交叉项：f = y₁² + 3y₂²</text><text x="405" y="230" fill="#16a34a" font-size="13" text-anchor="middle">长轴（λ=1）</text><text x="372" y="58" fill="#2563eb" font-size="13" text-anchor="middle">短轴（λ=3）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：二次型 f = 2x₁² + 2x₁x₂ + 2x₂² 的等值线 f=1 是斜放的椭圆，正交变换把坐标轴旋转 45° 到主轴，交叉项消失、椭圆「摆正」为标准形 f = y₁² + 3y₂²</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><ellipse cx="260" cy="150" rx="80" ry="46" fill="#eff6ff" stroke="#2563eb" stroke-width="2" transform="rotate(45 260 150)"/><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 150;45 260 150;0 260 150" dur="8s" repeatCount="indefinite"/><line x1="165" y1="150" x2="355" y2="150" stroke="#16a34a" stroke-width="3"/><polygon points="355,150 343,142 343,158" fill="#16a34a"/><line x1="260" y1="220" x2="260" y2="80" stroke="#2563eb" stroke-width="3"/><polygon points="260,80 252,92 268,92" fill="#2563eb"/></g><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="150" y="42" fill="#334155" font-size="13">f = 2x₁² + 2x₁x₂ + 2x₂² = 1</text><text x="150" y="286" fill="#475569" font-size="12">旋转 45°（x = Qy）消交叉项：f = y₁² + 3y₂²</text><text x="405" y="230" fill="#16a34a" font-size="13" text-anchor="middle">长轴（λ=1）</text><text x="372" y="58" fill="#2563eb" font-size="13" text-anchor="middle">短轴（λ=3）</text></svg><figcaption class="fig-cap">图：二次型 f = 2x₁² + 2x₁x₂ + 2x₂² 的等值线 f=1 是斜放的椭圆，正交变换把坐标轴旋转 45° 到主轴，交叉项消失、椭圆「摆正」为标准形 f = y₁² + 3y₂²</figcaption></figure>
 <h3>二次型与对称矩阵的一一对应</h3>
 <p>只含平方项与交叉乘积项、每项都是 2 次的 n 元齐次多项式，称为<strong>二次型</strong>。任何二次型都可唯一地写成</p>
 <pre><code>f(x₁, x₂, …, xₙ) = xᵀ A x     （要求 A 为对称矩阵）</code></pre>
@@ -249,7 +212,7 @@ f(λ) = |λE − A|      （特征多项式）</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>设 <code>A = [[2,1],[1,2]]</code>，判断向量 <code>α₁=(1,1)ᵀ</code>、<code>α₂=(1,−1)ᵀ</code> 是否为 A 的特征向量；若是，写出对应特征值，并说明其几何含义（「不变方向」与「伸缩因子」）。</li>
@@ -260,15 +223,15 @@ f(λ) = |λE − A|      （特征多项式）</code></pre>
 <li>判断矩阵 <code>B = [[2,−1],[−1,2]]</code> 与 <code>C = [[1,2],[2,1]]</code> 是否正定（分别用顺序主子式与特征值两种方法），并从物理角度解释「正定 ⟺ 稳定平衡、原点为严格极小」。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>α₁=(1,1)ᵀ</code> 是特征向量：<code>Aα₁ = (3,3)ᵀ = 3·(1,1)ᵀ</code>，对应 <code>λ = 3</code>；<code>α₂=(1,−1)ᵀ</code> 也是：<code>Aα₂ = (1,−1)ᵀ = 1·(1,−1)ᵀ</code>，对应 <code>λ = 1</code>。几何上，沿这两个方向线性变换只做伸缩（分别拉伸 3 倍、1 倍）而不改变方向，即它们是该变换的「不变方向（主轴）」，特征值即伸缩因子。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>tr(A) = 2 + (−1) + 3 = 4</code>；<code>det(A) = 2 × (−1) × 3 = −6 ≠ 0</code>，故 A 可逆；<code>A²</code> 的特征值为各特征值的平方：<code>2²=4</code>、<code>(−1)²=1</code>、<code>3²=9</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>特征方程为 <code>λ² + 1 = 0</code>，只有复根 <code>λ = ±i</code>。几何上，旋转 90° 把<strong>每一个</strong>方向都转走，不存在「方向不变」的直线，故没有实特征向量（也就没有实特征值）。这不矛盾：实对称矩阵才保证有实特征值，一般的实矩阵可以有复特征值。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>特征多项式 <code>|λE−A| = (λ−3)(λ−2)</code>，故 <code>λ₁ = 3</code>、<code>λ₂ = 2</code>。对 <code>λ=3</code>：解 <code>(3E−A)x=0</code> 得 <code>x₂=0</code>，取 <code>x = t(1,0)ᵀ</code>；对 <code>λ=2</code>：得 <code>x₁+x₂=0</code>，取 <code>x = t(−1,1)ᵀ</code>。两个特征向量线性无关，故 A 可对角化：<code>P = [[1,−1],[0,1]]</code>，<code>Λ = diag(3,2)</code>，且 <code>P⁻¹AP = Λ</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>二次型对应对称矩阵 <code>A = [[3,1],[1,3]]</code>，特征值 <code>λ₁ = 2</code>、<code>λ₂ = 4</code>，对应的正交单位特征向量为 <code>(1/√2)(1,−1)ᵀ</code> 与 <code>(1/√2)(1,1)ᵀ</code>。取 <code>Q = (1/√2)[[1,1],[−1,1]]</code>，则 <code>x = Qy</code> 化为标准形 <code>f = 2y₁² + 4y₂²</code>。曲线 <code>f = 1</code> 是<strong>椭圆</strong>，主轴沿 <code>(1,−1)</code> 与 <code>(1,1)</code> 方向（相对坐标轴旋转 45°），半轴长分别为 <code>1/√2</code> 与 <code>1/2</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>B：顺序主子式 <code>Δ₁=2&gt;0</code>、<code>Δ₂=4−1=3&gt;0</code> ⇒ 正定（特征值 1、3 均 &gt; 0）。C：<code>Δ₁=1&gt;0</code>、<code>Δ₂=1−4=−3&lt;0</code> ⇒ 不定（特征值 3、−1，一正一负）。物理上，正定二次型的图像是原点处开口向上的「碗」，原点为严格极小，能量正定 ⟺ 稳定平衡；不定二次型对应马鞍面，原点为鞍点，平衡不稳定。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p><code>α₁=(1,1)ᵀ</code> 是特征向量：<code>Aα₁ = (3,3)ᵀ = 3·(1,1)ᵀ</code>，对应 <code>λ = 3</code>；<code>α₂=(1,−1)ᵀ</code> 也是：<code>Aα₂ = (1,−1)ᵀ = 1·(1,−1)ᵀ</code>，对应 <code>λ = 1</code>。几何上，沿这两个方向线性变换只做伸缩（分别拉伸 3 倍、1 倍）而不改变方向，即它们是该变换的「不变方向（主轴）」，特征值即伸缩因子。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><code>tr(A) = 2 + (−1) + 3 = 4</code>；<code>det(A) = 2 × (−1) × 3 = −6 ≠ 0</code>，故 A 可逆；<code>A²</code> 的特征值为各特征值的平方：<code>2²=4</code>、<code>(−1)²=1</code>、<code>3²=9</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>特征方程为 <code>λ² + 1 = 0</code>，只有复根 <code>λ = ±i</code>。几何上，旋转 90° 把<strong>每一个</strong>方向都转走，不存在「方向不变」的直线，故没有实特征向量（也就没有实特征值）。这不矛盾：实对称矩阵才保证有实特征值，一般的实矩阵可以有复特征值。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>特征多项式 <code>|λE−A| = (λ−3)(λ−2)</code>，故 <code>λ₁ = 3</code>、<code>λ₂ = 2</code>。对 <code>λ=3</code>：解 <code>(3E−A)x=0</code> 得 <code>x₂=0</code>，取 <code>x = t(1,0)ᵀ</code>；对 <code>λ=2</code>：得 <code>x₁+x₂=0</code>，取 <code>x = t(−1,1)ᵀ</code>。两个特征向量线性无关，故 A 可对角化：<code>P = [[1,−1],[0,1]]</code>，<code>Λ = diag(3,2)</code>，且 <code>P⁻¹AP = Λ</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>二次型对应对称矩阵 <code>A = [[3,1],[1,3]]</code>，特征值 <code>λ₁ = 2</code>、<code>λ₂ = 4</code>，对应的正交单位特征向量为 <code>(1/√2)(1,−1)ᵀ</code> 与 <code>(1/√2)(1,1)ᵀ</code>。取 <code>Q = (1/√2)[[1,1],[−1,1]]</code>，则 <code>x = Qy</code> 化为标准形 <code>f = 2y₁² + 4y₂²</code>。曲线 <code>f = 1</code> 是<strong>椭圆</strong>，主轴沿 <code>(1,−1)</code> 与 <code>(1,1)</code> 方向（相对坐标轴旋转 45°），半轴长分别为 <code>1/√2</code> 与 <code>1/2</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>B：顺序主子式 <code>Δ₁=2&gt;0</code>、<code>Δ₂=4−1=3&gt;0</code> ⇒ 正定（特征值 1、3 均 &gt; 0）。C：<code>Δ₁=1&gt;0</code>、<code>Δ₂=1−4=−3&lt;0</code> ⇒ 不定（特征值 3、−1，一正一负）。物理上，正定二次型的图像是原点处开口向上的「碗」，原点为严格极小，能量正定 ⟺ 稳定平衡；不定二次型对应马鞍面，原点为鞍点，平衡不稳定。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">← 上一章：第4章 向量组的线性相关性</a><a href="../../../index.html">回目录</a><a href="../第6章-线性空间与线性变换/第6章-线性空间与线性变换.html">下一章：第6章 线性空间与线性变换 →</a></nav>
+<nav class="pager"><a href="../第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">← 上一章：第4章 向量组的线性相关性</a><a href="../../../index.html">回目录</a><a href="../第6章-线性空间与线性变换/第6章-线性空间与线性变换.html">下一章：第6章 线性空间与线性变换 →</a></nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
 </body>
 </html>

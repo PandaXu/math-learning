@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第28章 锐角三角函数 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第28章 锐角三角函数 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第28章 锐角三角函数</div></header>
@@ -100,7 +63,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理含义：</strong>任何斜着的量都可以用 sin、cos 拆成「竖直分量 + 水平分量」。例如斜面上物体的重力 G 沿斜面下滑的分力是 <code>G·sinθ</code>、垂直压着斜面的分力是 <code>G·cosθ</code>；一个斜向拉力 F 与水平成 θ 角，则水平分力 <code>F·cosθ</code>、竖直分力 <code>F·sinθ</code>。三角函数是「力的分解」的语言。</div>
 
 <h3>取值范围与基本性质</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">单位圆：sin²A + cos²A = 1</text><line x1="40" y1="150" x2="322" y2="150" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="18" x2="170" y2="292" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="150" r="120" fill="none" stroke="#cbd5e1" stroke-width="2"/><text x="294" y="144" font-size="12" fill="#64748b">1</text><text x="176" y="30" font-size="12" fill="#64748b">1</text><text x="158" y="168" font-size="12" fill="#64748b">O</text><line x1="170" y1="150" x2="290" y2="150" stroke="#2563eb" stroke-width="3"><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/></line><line x1="290" y1="150" x2="290" y2="150" stroke="#16a34a" stroke-width="3"><animate attributeName="x1" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="150;90;46.1;30;46.1;90;150;210;253.9;270;253.9;210;150" dur="8s" repeatCount="indefinite"/></line><g><animateTransform attributeName="transform" type="rotate" from="0 170 150" to="360 170 150" dur="8s" repeatCount="indefinite"/><line x1="170" y1="150" x2="290" y2="150" stroke="#1d4ed8" stroke-width="3"/><circle cx="290" cy="150" r="6" fill="#2563eb"/><text x="298" y="142" font-size="13" font-weight="700" fill="#0f172a">P</text></g><g font-size="12" fill="#334155"><line x1="356" y1="64" x2="386" y2="64" stroke="#2563eb" stroke-width="3"/><text x="392" y="68">cosA（水平投影）</text><line x1="356" y1="88" x2="386" y2="88" stroke="#16a34a" stroke-width="3"/><text x="392" y="92">sinA（竖直投影）</text><line x1="356" y1="112" x2="386" y2="112" stroke="#1d4ed8" stroke-width="3"/><text x="392" y="116">斜边（半径＝1）</text></g><text x="260" y="284" text-anchor="middle" font-size="13" fill="#1e3a8a">勾股定理的比值版：cos²A + sin²A = 1（两投影平方和 = 半径²）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：单位圆中斜边（半径 1）投影成竖直 sinA、水平 cosA，两投影的平方和恒等于 1——这就是 sin²A + cos²A = 1</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">单位圆：sin²A + cos²A = 1</text><line x1="40" y1="150" x2="322" y2="150" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="18" x2="170" y2="292" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="150" r="120" fill="none" stroke="#cbd5e1" stroke-width="2"/><text x="294" y="144" font-size="12" fill="#64748b">1</text><text x="176" y="30" font-size="12" fill="#64748b">1</text><text x="158" y="168" font-size="12" fill="#64748b">O</text><line x1="170" y1="150" x2="290" y2="150" stroke="#2563eb" stroke-width="3"><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/></line><line x1="290" y1="150" x2="290" y2="150" stroke="#16a34a" stroke-width="3"><animate attributeName="x1" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="150;90;46.1;30;46.1;90;150;210;253.9;270;253.9;210;150" dur="8s" repeatCount="indefinite"/></line><g><animateTransform attributeName="transform" type="rotate" from="0 170 150" to="360 170 150" dur="8s" repeatCount="indefinite"/><line x1="170" y1="150" x2="290" y2="150" stroke="#1d4ed8" stroke-width="3"/><circle cx="290" cy="150" r="6" fill="#2563eb"/><text x="298" y="142" font-size="13" font-weight="700" fill="#0f172a">P</text></g><g font-size="12" fill="#334155"><line x1="356" y1="64" x2="386" y2="64" stroke="#2563eb" stroke-width="3"/><text x="392" y="68">cosA（水平投影）</text><line x1="356" y1="88" x2="386" y2="88" stroke="#16a34a" stroke-width="3"/><text x="392" y="92">sinA（竖直投影）</text><line x1="356" y1="112" x2="386" y2="112" stroke="#1d4ed8" stroke-width="3"/><text x="392" y="116">斜边（半径＝1）</text></g><text x="260" y="284" text-anchor="middle" font-size="13" fill="#1e3a8a">勾股定理的比值版：cos²A + sin²A = 1（两投影平方和 = 半径²）</text></svg><figcaption class="fig-cap">图：单位圆中斜边（半径 1）投影成竖直 sinA、水平 cosA，两投影的平方和恒等于 1——这就是 sin²A + cos²A = 1</figcaption></figure>
 <p>因为直角三角形的直角边总比斜边短，所以对锐角 A（0° &lt; A &lt; 90°）恒有：</p>
 <pre><code>0 &lt; sinA &lt; 1，  0 &lt; cosA &lt; 1，  tanA &gt; 0（可任意大）</code></pre>
 <p><strong>同角关系（三条黄金公式）</strong>：</p>
@@ -173,7 +136,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 <div class="insight"><strong>物理含义：</strong>测旗杆高、测楼高、测飞机高度，用的都是「仰角 + 水平距离」这条直角三角形：<code>高度 = 水平距离 × tan(仰角)</code>。雷达、测距仪也是靠仰角 + 斜距，用 <code>高度 = 斜距 × sin(仰角)</code> 换算。</div>
 <h3>② 坡度与坡角</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">正切 tanα = 坡度（对边 h ÷ 邻边 l）</text><line x1="40" y1="210" x2="440" y2="210" stroke="#94a3b8" stroke-width="2"/><text x="448" y="214" font-size="12" fill="#64748b">地面</text><line x1="60" y1="224" x2="320" y2="224" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 4"/><text x="184" y="242" text-anchor="middle" font-size="13" fill="#2563eb">水平宽度 l（固定）</text><line x1="60" y1="210" x2="320" y2="210" stroke="#1d4ed8" stroke-width="3"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><line x1="320" y1="210" x2="320" y2="210" stroke="#16a34a" stroke-width="4"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><circle cx="320" cy="210" r="6" fill="#16a34a"><animate attributeName="cy" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></circle><text x="330" y="210" font-size="13" font-weight="700" fill="#16a34a"><animate attributeName="y" values="210;190;170;150;130;150;170;190;210" dur="8s" repeatCount="indefinite"/>h</text><g><animateTransform attributeName="transform" type="rotate" values="0 60 210;8.7 60 210;17.1 60 210;24.8 60 210;31.6 60 210;24.8 60 210;17.1 60 210;8.7 60 210;0 60 210" dur="8s" repeatCount="indefinite"/><line x1="60" y1="210" x2="98" y2="210" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 3"/></g><text x="104" y="204" font-size="13" fill="#b45309">α</text><text x="60" y="44" font-size="13" fill="#334155">坡度 i = tanα = h / l（正切就是坡度，量化「陡」的程度）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同一水平宽度下坡越陡、高度 h 越大，正切 tanα = h/l 越大——正切是「坡度（陡峭程度）」的量化</figcaption></figure>
+<figure class="fig"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">正切 tanα = 坡度（对边 h ÷ 邻边 l）</text><line x1="40" y1="210" x2="440" y2="210" stroke="#94a3b8" stroke-width="2"/><text x="448" y="214" font-size="12" fill="#64748b">地面</text><line x1="60" y1="224" x2="320" y2="224" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 4"/><text x="184" y="242" text-anchor="middle" font-size="13" fill="#2563eb">水平宽度 l（固定）</text><line x1="60" y1="210" x2="320" y2="210" stroke="#1d4ed8" stroke-width="3"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><line x1="320" y1="210" x2="320" y2="210" stroke="#16a34a" stroke-width="4"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><circle cx="320" cy="210" r="6" fill="#16a34a"><animate attributeName="cy" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></circle><text x="330" y="210" font-size="13" font-weight="700" fill="#16a34a"><animate attributeName="y" values="210;190;170;150;130;150;170;190;210" dur="8s" repeatCount="indefinite"/>h</text><g><animateTransform attributeName="transform" type="rotate" values="0 60 210;8.7 60 210;17.1 60 210;24.8 60 210;31.6 60 210;24.8 60 210;17.1 60 210;8.7 60 210;0 60 210" dur="8s" repeatCount="indefinite"/><line x1="60" y1="210" x2="98" y2="210" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 3"/></g><text x="104" y="204" font-size="13" fill="#b45309">α</text><text x="60" y="44" font-size="13" fill="#334155">坡度 i = tanα = h / l（正切就是坡度，量化「陡」的程度）</text></svg><figcaption class="fig-cap">图：同一水平宽度下坡越陡、高度 h 越大，正切 tanα = h/l 越大——正切是「坡度（陡峭程度）」的量化</figcaption></figure>
 <ul>
 <li><strong>坡角 α</strong>：坡面与水平面的夹角。</li>
 <li><strong>坡度（坡比）i</strong>：坡面的<strong>铅直高度 h 与水平宽度 l 的比</strong>，记作 <code>i = h : l = h/l</code>。</li>
@@ -251,8 +214,8 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h3 style="margin:6px 0 12px;color:#b45309">一、练习题</h3>
+<div class="paper">
+<h3 class="paper-head">一、练习题</h3>
 <ol>
 <li>在 Rt△ABC 中，∠C=90°，∠A=30°，斜边 c=10，求两条直角边 a、b（保留精确值）。</li>
 <li>求值：sin²45° + cos²45°，并说明结果为什么恒等于 1。</li>
@@ -261,16 +224,16 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>一段坡的坡度 i = 1:2（即 tanα = 1/2），某人沿坡面走了 50 m，求他上升了多少米。</li>
 <li>一艘船朝「北偏东 30°」方向航行 20 km，求它向东、向北各走了多少千米；这个方向用方位角表示是多少度？</li>
 </ol>
-<h3 style="margin:18px 0 12px;color:#b45309">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>由「30° 所对的直角边等于斜边的一半」：a = c·sin30° = 10 × 1/2 = 5；b = c·cos30° = 10 × √3/2 = 5√3。答：a = 5，b = 5√3。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>sin45° = cos45° = √2/2，故 sin²45° + cos²45° = 1/2 + 1/2 = 1。它恒等于 1，是因为 sin²A + cos²A = 1 就是勾股定理的「比值版」：单位斜边在竖直、水平方向的投影平方和恒为 1。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>sinA = 对边/斜边 = 3/5，设对边 = 3k、斜边 = 5k，则邻边 = √((5k)² − (3k)²) = 4k。故 cosA = 邻边/斜边 = 4/5，tanA = 对边/邻边 = 3/4。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>旗杆高 = 水平距离 × tan(仰角) = 20 × tan60° = 20√3 m。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>坡度 tanα = 1/2，即「高 : 水平 = 1 : 2」。设上升 x m，则水平前进 2x m，坡面长 = √(x² + (2x)²) = x√5 = 50，得 x = 50/√5 = 10√5 m。答：上升 10√5 m。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>「北偏东 30°」= 从正北向东偏 30°，向北方向分量更大：向北 = 20 × cos30° = 10√3 km，向东 = 20 × sin30° = 10 km。方位角是从正北顺时针转过的角度，此处恰好就是 30°。</p></details>
+<h3 class="paper-head">二、参考答案（点击展开）</h3>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>由「30° 所对的直角边等于斜边的一半」：a = c·sin30° = 10 × 1/2 = 5；b = c·cos30° = 10 × √3/2 = 5√3。答：a = 5，b = 5√3。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>sin45° = cos45° = √2/2，故 sin²45° + cos²45° = 1/2 + 1/2 = 1。它恒等于 1，是因为 sin²A + cos²A = 1 就是勾股定理的「比值版」：单位斜边在竖直、水平方向的投影平方和恒为 1。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>sinA = 对边/斜边 = 3/5，设对边 = 3k、斜边 = 5k，则邻边 = √((5k)² − (3k)²) = 4k。故 cosA = 邻边/斜边 = 4/5，tanA = 对边/邻边 = 3/4。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>旗杆高 = 水平距离 × tan(仰角) = 20 × tan60° = 20√3 m。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>坡度 tanα = 1/2，即「高 : 水平 = 1 : 2」。设上升 x m，则水平前进 2x m，坡面长 = √(x² + (2x)²) = x√5 = 50，得 x = 50/√5 = 10√5 m。答：上升 10√5 m。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>「北偏东 30°」= 从正北向东偏 30°，向北方向分量更大：向北 = 20 × cos30° = 10√3 km，向东 = 20 × sin30° = 10 km。方位角是从正北顺时针转过的角度，此处恰好就是 30°。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第27章-相似/第27章-相似.html">← 上一章：第27章 相似</a><a href="../../../../index.html">回目录</a><a href="../第29章-投影与视图/第29章-投影与视图.html">下一章：第29章 投影与视图 →</a></nav>
+<nav class="pager"><a href="../第27章-相似/第27章-相似.html">← 上一章：第27章 相似</a><a href="../../../../index.html">回目录</a><a href="../第29章-投影与视图/第29章-投影与视图.html">下一章：第29章 投影与视图 →</a></nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

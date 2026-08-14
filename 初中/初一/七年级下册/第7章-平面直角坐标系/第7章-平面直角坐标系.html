@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第7章 平面直角坐标系 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第7章 平面直角坐标系 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级下册 › 第7章 平面直角坐标系</div></header>
@@ -91,7 +54,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
           第三象限</code></pre>
 <h3>点的坐标：给点发"门牌号"</h3>
 <p>对平面内任意一点 P，过 P 分别向 x 轴、y 轴作<strong>垂线</strong>：垂足在 x 轴上对应的数叫点 P 的<strong>横坐标</strong>（记作 x），垂足在 y 轴上对应的数叫点 P 的<strong>纵坐标</strong>（记作 y）。这样点 P 就对应一对有序数 <code>(x, y)</code>，叫做点 P 的<strong>坐标</strong>，记作 <code>P(x, y)</code>。</p>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g stroke="#e2e8f0" stroke-width="1">
 <line x1="225" y1="30" x2="225" y2="250"/><line x1="280" y1="30" x2="280" y2="250"/><line x1="335" y1="30" x2="335" y2="250"/><line x1="390" y1="30" x2="390" y2="250"/>
 <line x1="30" y1="195" x2="500" y2="195"/><line x1="30" y1="140" x2="500" y2="140"/>
@@ -120,7 +83,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="353" y="130" fill="#0f172a" font-size="15" font-weight="bold">P(3, 2)</text>
 <text x="335" y="298" fill="#16a34a" font-size="13" text-anchor="middle">横坐标 x = 3</text>
 <text x="168" y="128" fill="#2563eb" font-size="13" text-anchor="end">纵坐标 y = 2</text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：过点 P 分别向 x 轴、y 轴作垂线，垂足对应的数就是横坐标 3 与纵坐标 2</figcaption></figure>
+</svg><figcaption class="fig-cap">图：过点 P 分别向 x 轴、y 轴作垂线，垂足对应的数就是横坐标 3 与纵坐标 2</figcaption></figure>
 <p><strong>读法</strong>：点 P 的坐标是 (x, y)，其中 x 是横坐标（写在前面），y 是纵坐标（写在后面）。<strong>先横后纵，先 x 后 y</strong>，顺序绝不可错。</p>
 <div class="insight"><strong>几何含义（本章最核心的定理）：</strong>平面直角坐标系建立了<strong>平面上的点 与 有序实数对 之间的一一对应</strong>。每一个点有唯一坐标，每一对坐标对应唯一一个点。这和第1章"数轴上的点与有理数一一对应"是同一个思想，只是从一维推广到了二维——<strong>用数字精确描述图形</strong>，这就是解析几何的起点。</div>
 <div class="insight"><strong>物理含义：</strong>坐标系 = 给空间装上的"参照系"。(x, y) 就是物体相对原点的<strong>位置读数</strong>：横坐标回答"在原点东边还是西边多远"，纵坐标回答"在北边还是南边多远"。测量位置、画运动轨迹、做导航，第一步都是先"建立坐标系"。</div>
@@ -159,7 +122,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>点 P(x, y) 到坐标轴的距离，就是过该点作垂线后<strong>垂线段的长度</strong>（永远是正数或 0）：</p>
 <pre><code>点 P(x, y) 到 x 轴的距离 = |y|   （竖着量的高度）
 点 P(x, y) 到 y 轴的距离 = |x|   （横着量的宽度）</code></pre>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g stroke="#e2e8f0" stroke-width="1">
 <line x1="150" y1="30" x2="150" y2="260"/><line x1="190" y1="30" x2="190" y2="260"/><line x1="230" y1="30" x2="230" y2="260"/><line x1="270" y1="30" x2="270" y2="260"/><line x1="310" y1="30" x2="310" y2="260"/>
 <line x1="30" y1="220" x2="500" y2="220"/><line x1="30" y1="180" x2="500" y2="180"/><line x1="30" y1="140" x2="500" y2="140"/><line x1="30" y1="100" x2="500" y2="100"/>
@@ -188,7 +151,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="128" y="92" fill="#0f172a" font-size="15" font-weight="bold">P(−3, 4)</text>
 <text x="110" y="298" fill="#16a34a" font-size="13" text-anchor="middle">到 x 轴距离 = |y| = |4| = 4</text>
 <text x="218" y="120" fill="#2563eb" font-size="13" text-anchor="end">到 y 轴距离 = |x| = |−3| = 3</text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：距离只取长度——到 x 轴看 |y|（竖高 4），到 y 轴看 |x|（横宽 3），坐标虽负、距离恒正</figcaption></figure>
+</svg><figcaption class="fig-cap">图：距离只取长度——到 x 轴看 |y|（竖高 4），到 y 轴看 |x|（横宽 3），坐标虽负、距离恒正</figcaption></figure>
 <div class="insight"><strong>几何含义：</strong>坐标是"带方向的读数"，距离是"去掉方向只留长度"。所以求距离必须加绝对值：点到 x 轴的距离看纵坐标的绝对值，点到 y 轴的距离看横坐标的绝对值。<strong>坐标可正可负，距离恒非负。</strong>这与第1章"绝对值 = 到原点的距离"一脉相承。</div>
 <div class="insight"><strong>物理含义：</strong>距离 = 长度的度量，不关心方向。一个点无论在东边还是西边、北边还是南边，它"离 y 轴（或 x 轴）多远"是一个只取正值的长度，所以用绝对值。</div>
 <h3>4.4.4 关于坐标轴、原点的对称点（几何：对称！）</h3>
@@ -235,7 +198,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <pre><code>点 P(x, y)
   向右平移 a 个单位 →  P&#39;(x + a, y)    向左平移 a 个单位 →  P&#39;(x − a, y)
   向上平移 b 个单位 →  P&#39;(x, y + b)    向下平移 b 个单位 →  P&#39;(x, y − b)</code></pre>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="330" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="520" height="330" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <g stroke="#e2e8f0" stroke-width="1">
 <line x1="180" y1="30" x2="180" y2="260"/><line x1="220" y1="30" x2="220" y2="260"/><line x1="260" y1="30" x2="260" y2="260"/><line x1="300" y1="30" x2="300" y2="260"/><line x1="340" y1="30" x2="340" y2="260"/>
 <line x1="30" y1="220" x2="500" y2="220"/><line x1="30" y1="180" x2="500" y2="180"/><line x1="30" y1="140" x2="500" y2="140"/><line x1="30" y1="100" x2="500" y2="100"/>
@@ -269,7 +232,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <circle cx="180" cy="220" r="7" fill="#16a34a"/>
 <text x="180" y="206" fill="#0f172a" font-size="13" text-anchor="middle">P</text>
 </g>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：点 P(1,1) 先向右平移 4 格（横坐标 +4），再向上平移 3 格（纵坐标 +3），得到 P′(5,4)</figcaption></figure>
+</svg><figcaption class="fig-cap">图：点 P(1,1) 先向右平移 4 格（横坐标 +4），再向上平移 3 格（纵坐标 +3），得到 P′(5,4)</figcaption></figure>
 <div class="insight"><strong>几何含义：</strong>平移 = 整个图形沿某方向<strong>整体滑动</strong>，每一点移动的距离和方向都相同，所以图形的大小、形状、朝向全都不变（只"搬了个地方"）。在坐标语言里，平移就是"给所有点的对应坐标同时加上同一个数"。</div>
 <div class="insight"><strong>物理含义：</strong>平移就是<strong>位移</strong>。一个物体整体向东移动，它的每一个点的横坐标都增加相同的量；整体向北移动，每一个点的纵坐标都增加相同的量。坐标的加减精确地记录了"移动了多少、朝哪个方向"。</div>
 <h3>图形的平移 = 所有关键点一起平移</h3>
@@ -320,7 +283,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li><strong>（象限与坐标符号）</strong>写出点 A(3, 5)、B(−4, 2)、C(−3, −6)、D(0, −2)、E(−5, 0) 分别位于第几象限（或哪条坐标轴上），并说明理由。</li>
@@ -331,20 +294,20 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li><strong>（用坐标表示地理位置）</strong>以学校为原点，正东为 x 轴正方向、正北为 y 轴正方向建立平面直角坐标系（1 格代表 100 米）。小明家在学校东边 200 米、北边 300 米处；图书馆在学校西边 100 米、北边 200 米处。分别写出小明家和图书馆的坐标，并判断它们各在第几象限。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>A(3, 5) 横、纵坐标均为正 → 第一象限；B(−4, 2) 横负纵正 → 第二象限；C(−3, −6) 横、纵均为负 → 第三象限；D(0, −2) 横坐标为 0 → 在 y 轴上（不属于任何象限）；E(−5, 0) 纵坐标为 0 → 在 x 轴上（不属于任何象限）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>到 x 轴的距离 = |纵坐标| = |4| = 4；到 y 轴的距离 = |横坐标| = |−3| = 3。Q(4, −3) 与 P(−3, 4) 横纵坐标对调且符号变化，二者位置不同：P 在第二象限（西北方向），Q 在第四象限（东南方向），说明有序数对顺序不能颠倒，坐标可正可负、距离恒非负。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>第一、三象限角平分线上的点满足 横坐标 = 纵坐标，即 a = b；到 y 轴的距离 = |a| = 5，故 a = 5 或 −5。因此点 M 可能是 (5, 5) 或 (−5, −5)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>关于 x 轴对称：横坐标不变、纵坐标变号 → (2, 3)，在第一象限；关于 y 轴对称：纵坐标不变、横坐标变号 → (−2, −3)，在第三象限；关于原点对称：横、纵坐标都变号 → (−2, 3)，在第二象限。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>点 P 平移后的坐标是 (−2, 4)，逆推：向右平移 5 个单位是横坐标 +5，向下平移 3 个单位是纵坐标 −3，所以原坐标 P = (−2 − 5, 4 + 3) = (−7, 7)。三角形平移：向上 2、向左 3 即纵坐标 +2、横坐标 −3，得 A′(−2, 4)、B′(0, 1)、C′(−5, 2)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>东 200 米 = 横坐标 +2，北 300 米 = 纵坐标 +3，小明家坐标 (2, 3)，在第一象限；西 100 米 = 横坐标 −1，北 200 米 = 纵坐标 +2，图书馆坐标 (−1, 2)，在第二象限。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>A(3, 5) 横、纵坐标均为正 → 第一象限；B(−4, 2) 横负纵正 → 第二象限；C(−3, −6) 横、纵均为负 → 第三象限；D(0, −2) 横坐标为 0 → 在 y 轴上（不属于任何象限）；E(−5, 0) 纵坐标为 0 → 在 x 轴上（不属于任何象限）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>到 x 轴的距离 = |纵坐标| = |4| = 4；到 y 轴的距离 = |横坐标| = |−3| = 3。Q(4, −3) 与 P(−3, 4) 横纵坐标对调且符号变化，二者位置不同：P 在第二象限（西北方向），Q 在第四象限（东南方向），说明有序数对顺序不能颠倒，坐标可正可负、距离恒非负。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>第一、三象限角平分线上的点满足 横坐标 = 纵坐标，即 a = b；到 y 轴的距离 = |a| = 5，故 a = 5 或 −5。因此点 M 可能是 (5, 5) 或 (−5, −5)。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>关于 x 轴对称：横坐标不变、纵坐标变号 → (2, 3)，在第一象限；关于 y 轴对称：纵坐标不变、横坐标变号 → (−2, −3)，在第三象限；关于原点对称：横、纵坐标都变号 → (−2, 3)，在第二象限。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>点 P 平移后的坐标是 (−2, 4)，逆推：向右平移 5 个单位是横坐标 +5，向下平移 3 个单位是纵坐标 −3，所以原坐标 P = (−2 − 5, 4 + 3) = (−7, 7)。三角形平移：向上 2、向左 3 即纵坐标 +2、横坐标 −3，得 A′(−2, 4)、B′(0, 1)、C′(−5, 2)。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>东 200 米 = 横坐标 +2，北 300 米 = 纵坐标 +3，小明家坐标 (2, 3)，在第一象限；西 100 米 = 横坐标 −1，北 200 米 = 纵坐标 +2，图书馆坐标 (−1, 2)，在第二象限。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第6章-实数/第6章-实数.html">← 上一章：第6章 实数</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第8章-二元一次方程组/第8章-二元一次方程组.html">下一章：第8章 二元一次方程组 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

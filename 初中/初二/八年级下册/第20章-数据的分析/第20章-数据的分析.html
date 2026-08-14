@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第20章 数据的分析 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第20章 数据的分析 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第20章 数据的分析</div></header>
@@ -55,7 +18,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="s1">20.1 平均数与加权平均数</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">平均数 = 等质量质点的重心（平衡支点）</text><g><animateTransform attributeName="transform" type="rotate" values="-4 280 110;4 280 110;-4 280 110" dur="5s" repeatCount="indefinite"/><rect x="150" y="100" width="260" height="10" rx="5" fill="#64748b"/><line x1="170" y1="110" x2="170" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="280" y1="110" x2="280" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="390" y1="110" x2="390" y2="122" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="280" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="390" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><text x="170" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text><text x="280" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">5</text><text x="390" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">7</text></g><polygon points="280,110 258,152 302,152" fill="#16a34a"/><text x="280" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（支点）</text><line x1="60" y1="210" x2="500" y2="210" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="232">1</text><text x="115" y="232">2</text><text x="170" y="232">3</text><text x="225" y="232">4</text><text x="280" y="232">5</text><text x="335" y="232">6</text><text x="390" y="232">7</text><text x="445" y="232">8</text><text x="500" y="232">9</text></g><line x1="280" y1="210" x2="170" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;170;170;280;280" dur="5s" repeatCount="indefinite"/></line><line x1="280" y1="210" x2="390" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;390;390;280;280" dur="5s" repeatCount="indefinite"/></line><text x="225" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">−2</text><text x="335" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">+2</text><text x="280" y="200" text-anchor="middle" font-size="12" fill="#64748b">0</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：平均数 x̄ 是数轴上等质量质点的重心（平衡支点）——偏离量之和 (−2)+0+(+2)=0，杠杆恰好水平平衡</figcaption></figure>
+<figure class="fig"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">平均数 = 等质量质点的重心（平衡支点）</text><g><animateTransform attributeName="transform" type="rotate" values="-4 280 110;4 280 110;-4 280 110" dur="5s" repeatCount="indefinite"/><rect x="150" y="100" width="260" height="10" rx="5" fill="#64748b"/><line x1="170" y1="110" x2="170" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="280" y1="110" x2="280" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="390" y1="110" x2="390" y2="122" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="280" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="390" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><text x="170" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text><text x="280" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">5</text><text x="390" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">7</text></g><polygon points="280,110 258,152 302,152" fill="#16a34a"/><text x="280" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（支点）</text><line x1="60" y1="210" x2="500" y2="210" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="232">1</text><text x="115" y="232">2</text><text x="170" y="232">3</text><text x="225" y="232">4</text><text x="280" y="232">5</text><text x="335" y="232">6</text><text x="390" y="232">7</text><text x="445" y="232">8</text><text x="500" y="232">9</text></g><line x1="280" y1="210" x2="170" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;170;170;280;280" dur="5s" repeatCount="indefinite"/></line><line x1="280" y1="210" x2="390" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;390;390;280;280" dur="5s" repeatCount="indefinite"/></line><text x="225" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">−2</text><text x="335" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">+2</text><text x="280" y="200" text-anchor="middle" font-size="12" fill="#64748b">0</text></svg><figcaption class="fig-cap">图：平均数 x̄ 是数轴上等质量质点的重心（平衡支点）——偏离量之和 (−2)+0+(+2)=0，杠杆恰好水平平衡</figcaption></figure>
 <h3>算术平均数（通常说的"平均数"）</h3>
 <p><strong>定义</strong>：n 个数据 x₁, x₂, …, xₙ 的<strong>算术平均数</strong>（简称平均数），等于这 n 个数的和除以 n，记作 <code>x̄</code>（读作"x 拔"）：</p>
 <pre><code>x̄ = (x₁ + x₂ + ⋯ + xₙ) / n</code></pre>
@@ -104,7 +67,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </table>
 
 <h2 id="s4">20.4 方差</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">方差 = 各点到重心距离²的平均（散开程度）</text><line x1="280" y1="60" x2="280" y2="185" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"/><text x="280" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（重心）</text><line x1="60" y1="180" x2="500" y2="180" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="202">1</text><text x="115" y="202">2</text><text x="170" y="202">3</text><text x="225" y="202">4</text><text x="280" y="202">5</text><text x="335" y="202">6</text><text x="390" y="202">7</text><text x="445" y="202">8</text><text x="500" y="202">9</text></g><line x1="280" y1="180" x2="225" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><line x1="280" y1="180" x2="335" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="280" cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#16a34a">方差小 → 点挤向重心：集中、稳定<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">方差大 → 点散向两边：波动大<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：方差刻画各数据点到重心 x̄=5 的散开程度——点越挤向重心方差越小、越稳定；越散向两边方差越大、波动越大</figcaption></figure>
+<figure class="fig"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">方差 = 各点到重心距离²的平均（散开程度）</text><line x1="280" y1="60" x2="280" y2="185" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"/><text x="280" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（重心）</text><line x1="60" y1="180" x2="500" y2="180" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="202">1</text><text x="115" y="202">2</text><text x="170" y="202">3</text><text x="225" y="202">4</text><text x="280" y="202">5</text><text x="335" y="202">6</text><text x="390" y="202">7</text><text x="445" y="202">8</text><text x="500" y="202">9</text></g><line x1="280" y1="180" x2="225" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><line x1="280" y1="180" x2="335" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="280" cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#16a34a">方差小 → 点挤向重心：集中、稳定<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">方差大 → 点散向两边：波动大<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text></svg><figcaption class="fig-cap">图：方差刻画各数据点到重心 x̄=5 的散开程度——点越挤向重心方差越小、越稳定；越散向两边方差越大、波动越大</figcaption></figure>
 <h3>为什么需要"波动程度"指标？</h3>
 <p>两组数据可以有<strong>相同的平均数，却完全不同</strong>。例如甲乙两人各 5 次射击成绩：</p>
 <pre><code>甲：8, 8, 9, 9, 10      平均数 x̄ = 8.8
@@ -164,7 +127,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>求数据 5, 8, 8, 9, 10 的平均数、中位数和众数。</li>
@@ -175,15 +138,15 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>对数据 1, 2, 3, 4, 100，平均数和中位数哪一个更能代表"大多数数据"？结合"重心"与"抗极端值"的几何/物理含义说明理由。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>平均数 = (5+8+8+9+10) ÷ 5 = 40 ÷ 5 = 8；从小到大排序为 5, 8, 8, 9, 10，第 3 个数是中位数，即 8；出现次数最多的是 8（出现 2 次），所以众数为 8。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>加权总评 = 80×0.3 + 90×0.3 + 85×0.4 = 24 + 27 + 34 = 85 分。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>排序后为 3, 4, 5, 7，中间两个数是 4 和 5，中位数 = (4+5) ÷ 2 = 4.5。规则：数据个数为偶数时，取排序后中间两个数的平均数。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>平均数 x̄ = (3+5+7) ÷ 3 = 5；方差 s² = [(3−5)² + (5−5)² + (7−5)²] ÷ 3 = (4+0+4) ÷ 3 = 8/3 ≈ 2.67；标准差 s = √(8/3) ≈ 1.63。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>甲、乙的平均数都是 8.8。甲方差 = [(8−8.8)²+(8−8.8)²+(9−8.8)²+(9−8.8)²+(10−8.8)²] ÷ 5 = 0.56；乙方差 = [(6−8.8)²+(8−8.8)²+(9−8.8)²+(10−8.8)²+(11−8.8)²] ÷ 5 = 2.96。0.56 &lt; 2.96，故甲更稳定。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>平均数 = (1+2+3+4+100) ÷ 5 = 22，中位数 = 3。中位数更能代表大多数数据：平均数作为"重心"会被极端值 100 拉偏，而中位数只看位置次序、抗极端值，因此更稳健。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>平均数 = (5+8+8+9+10) ÷ 5 = 40 ÷ 5 = 8；从小到大排序为 5, 8, 8, 9, 10，第 3 个数是中位数，即 8；出现次数最多的是 8（出现 2 次），所以众数为 8。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>加权总评 = 80×0.3 + 90×0.3 + 85×0.4 = 24 + 27 + 34 = 85 分。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>排序后为 3, 4, 5, 7，中间两个数是 4 和 5，中位数 = (4+5) ÷ 2 = 4.5。规则：数据个数为偶数时，取排序后中间两个数的平均数。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>平均数 x̄ = (3+5+7) ÷ 3 = 5；方差 s² = [(3−5)² + (5−5)² + (7−5)²] ÷ 3 = (4+0+4) ÷ 3 = 8/3 ≈ 2.67；标准差 s = √(8/3) ≈ 1.63。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>甲、乙的平均数都是 8.8。甲方差 = [(8−8.8)²+(8−8.8)²+(9−8.8)²+(9−8.8)²+(10−8.8)²] ÷ 5 = 0.56；乙方差 = [(6−8.8)²+(8−8.8)²+(9−8.8)²+(10−8.8)²+(11−8.8)²] ÷ 5 = 2.96。0.56 &lt; 2.96，故甲更稳定。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>平均数 = (1+2+3+4+100) ÷ 5 = 22，中位数 = 3。中位数更能代表大多数数据：平均数作为"重心"会被极端值 100 拉偏，而中位数只看位置次序、抗极端值，因此更稳健。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第19章-一次函数/第19章-一次函数.html">← 上一章：第19章 一次函数</a><a href="../../../../index.html">回目录</a><a href="../../../初三/九年级上册/第21章-一元二次方程/第21章-一元二次方程.html">下一章：第21章 一元二次方程 →</a></nav>
+<nav class="pager"><a href="../第19章-一次函数/第19章-一次函数.html">← 上一章：第19章 一次函数</a><a href="../../../../index.html">回目录</a><a href="../../../初三/九年级上册/第21章-一元二次方程/第21章-一元二次方程.html">下一章：第21章 一元二次方程 →</a></nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第6章 代数系统 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第6章 代数系统 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第6章 代数系统</div></header>
@@ -93,7 +56,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p>设 <code>(A, *)</code> 与 <code>(B, ∘)</code> 是两个代数系统，映射 <code>φ : A → B</code> 若满足 <code>φ(a*b) = φ(a)∘φ(b)</code>，则称 <code>φ</code> 为<strong>同态</strong>；若 <code>φ</code> 还是双射，则称<strong>同构</strong>。同构的两个系统"结构完全相同"，只是换了符号。例如 <code>(R⁺, ×)</code> 与 <code>(R, +)</code> 通过对数/指数 <code>φ(x) = ln x</code> 建立同构：<code>ln(x·y) = ln x + ln y</code>——乘法被"翻译"成了加法。</p>
 
 <h2 id="s2">6.2 群：对称性的数学</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr1" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><polygon points="260,36 308.5,120 211.5,120" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 92;120 260 92;120 260 92;240 260 92;240 260 92;360 260 92;360 260 92" keyTimes="0;0.22;0.34;0.56;0.68;0.9;1" dur="7s" repeatCount="indefinite"/><polygon points="260,36 308.5,120 211.5,120" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="3"/><circle cx="260" cy="36" r="7" fill="#16a34a"/></g><circle cx="260" cy="92" r="4" fill="#334155"/><path d="M 302 58 C 324 44, 326 66, 306 80" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr1)"/><text x="338" y="64" font-size="13" fill="#16a34a">旋转 120°</text><text x="260" y="158" font-size="13" fill="#334155" text-anchor="middle">绿色顶点随旋转依次落到另外两个顶点，三角形轮廓与虚线原位置完全重合</text><text x="260" y="180" font-size="12" fill="#6b7280" text-anchor="middle">e（恒等）· r（转 120°）· r²（转 240°）在复合下构成循环群 C₃ ⊆ D₃</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：正三角形旋转 120° 后与原位置重合——群是「对称变换」的抽象，这些变换在复合下封闭、可逆且满足结合律</figcaption></figure>
+<figure class="fig"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr1" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><polygon points="260,36 308.5,120 211.5,120" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 92;120 260 92;120 260 92;240 260 92;240 260 92;360 260 92;360 260 92" keyTimes="0;0.22;0.34;0.56;0.68;0.9;1" dur="7s" repeatCount="indefinite"/><polygon points="260,36 308.5,120 211.5,120" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="3"/><circle cx="260" cy="36" r="7" fill="#16a34a"/></g><circle cx="260" cy="92" r="4" fill="#334155"/><path d="M 302 58 C 324 44, 326 66, 306 80" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr1)"/><text x="338" y="64" font-size="13" fill="#16a34a">旋转 120°</text><text x="260" y="158" font-size="13" fill="#334155" text-anchor="middle">绿色顶点随旋转依次落到另外两个顶点，三角形轮廓与虚线原位置完全重合</text><text x="260" y="180" font-size="12" fill="#6b7280" text-anchor="middle">e（恒等）· r（转 120°）· r²（转 240°）在复合下构成循环群 C₃ ⊆ D₃</text></svg><figcaption class="fig-cap">图：正三角形旋转 120° 后与原位置重合——群是「对称变换」的抽象，这些变换在复合下封闭、可逆且满足结合律</figcaption></figure>
 <h3>从半群到群：四个条件的层层递进</h3>
 <table>
 <tr><th>结构</th><th>满足条件</th><th>例</th></tr>
@@ -160,7 +123,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理含义：</strong>多项式环是"函数/曲线的代数化"——两个多项式相加、相乘仍得多项式，对应信号与系统里的<strong>卷积与滤波</strong>（多项式系数相乘正是卷积系数）。矩阵环对应<strong>线性映射</strong>；矩阵乘法非交换对应"先旋转再拉伸 ≠ 先拉伸再旋转"的物理事实。零因子在物理中对应"非零操作的复合结果为零"——例如两个非零的投影算符相乘可能得零（投影到互相垂直的子空间）。</div>
 
 <h2 id="s4">6.4 域：可四则运算的数系</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="220" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="vec2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker><marker id="arr2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><line x1="90" y1="100" x2="430" y2="100" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="24" x2="260" y2="176" stroke="#94a3b8" stroke-width="1.5"/><circle cx="260" cy="100" r="56" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 100;-90 260 100;-90 260 100;-180 260 100;-180 260 100;-270 260 100;-270 260 100;-360 260 100;-360 260 100" keyTimes="0;0.15;0.25;0.4;0.5;0.65;0.75;0.9;1" dur="8s" repeatCount="indefinite"/><line x1="260" y1="100" x2="312" y2="100" stroke="#2563eb" stroke-width="3" marker-end="url(#vec2)"/><circle cx="318" cy="100" r="6" fill="#16a34a"/></g><text x="324" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">1</text><text x="260" y="26" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">i</text><text x="196" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−1</text><text x="260" y="178" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−i</text><path d="M 298 64 C 310 56, 306 44, 290 46" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr2)"/><text x="330" y="46" font-size="13" fill="#16a34a">× i 逆时针 90°</text><text x="260" y="206" font-size="13" fill="#334155" text-anchor="middle">向量沿单位圆走一圈：1 → i → −1 → −i → 1，即「乘以 i 就是逆时针旋转 90°」</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：复数域中乘以 i 即逆时针旋转 90°——复数乘法 = 旋转 + 缩放，这是域的结构赋予平面的几何操作</figcaption></figure>
+<figure class="fig"><svg width="520" height="220" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="vec2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker><marker id="arr2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><line x1="90" y1="100" x2="430" y2="100" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="24" x2="260" y2="176" stroke="#94a3b8" stroke-width="1.5"/><circle cx="260" cy="100" r="56" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 100;-90 260 100;-90 260 100;-180 260 100;-180 260 100;-270 260 100;-270 260 100;-360 260 100;-360 260 100" keyTimes="0;0.15;0.25;0.4;0.5;0.65;0.75;0.9;1" dur="8s" repeatCount="indefinite"/><line x1="260" y1="100" x2="312" y2="100" stroke="#2563eb" stroke-width="3" marker-end="url(#vec2)"/><circle cx="318" cy="100" r="6" fill="#16a34a"/></g><text x="324" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">1</text><text x="260" y="26" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">i</text><text x="196" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−1</text><text x="260" y="178" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−i</text><path d="M 298 64 C 310 56, 306 44, 290 46" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr2)"/><text x="330" y="46" font-size="13" fill="#16a34a">× i 逆时针 90°</text><text x="260" y="206" font-size="13" fill="#334155" text-anchor="middle">向量沿单位圆走一圈：1 → i → −1 → −i → 1，即「乘以 i 就是逆时针旋转 90°」</text></svg><figcaption class="fig-cap">图：复数域中乘以 i 即逆时针旋转 90°——复数乘法 = 旋转 + 缩放，这是域的结构赋予平面的几何操作</figcaption></figure>
 <h3>域的定义</h3>
 <p>代数系统 <code>(F, +, ×)</code> 称为<strong>域</strong>，如果：</p>
 <pre><code>① (F, +) 是阿贝尔群，加法幺元记 0
@@ -290,8 +253,8 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h3 style="margin:8px 0 10px;color:#b45309">一、练习题</h3>
+<div class="paper">
+<h3 class="paper-head">一、练习题</h3>
 <ol>
 <li><strong>封闭性（易）</strong>：在自然数集 <code>N</code> 上，减法是不是二元运算？在整数集 <code>Z</code> 上呢？由此说明"封闭性"在什么意义上决定了"这套运算能不能一直算下去"。</li>
 <li><strong>群的定义（易）</strong>：判断 <code>(Z, −)</code>（整数连同普通减法）是否构成群。若否，逐条指出它违反了群的哪一条公理。</li>
@@ -300,20 +263,20 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li><strong>有限域（中偏难）</strong>：验证 <code>GF(7)</code> 中 3 的乘法逆元是 5（即 <code>3 × 5 ≡ 1 (mod 7)</code>），并计算 <code>4 × 5 mod 7</code>。结合"乘以 i 就是旋转 90°"，说明为什么"域的结构决定了空间能做哪些几何操作"。</li>
 <li><strong>布尔代数（难）</strong>：用布尔代数定律化简 <code>F = ab + ab′ + a′b</code>（提示：先提公因子，再吸收），并写出 <code>(a∨b)′</code> 的德摩根对偶式。结合"与/或/非门"，说明化简对数字电路有什么现实意义。</li>
 </ol>
-<h3 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>在 <code>N</code> 上减法<strong>不是</strong>二元运算，因为 <code>2 − 3 = −1 ∉ N</code>，不满足封闭性；在 <code>Z</code> 上是，因为任意两个整数之差仍是整数。封闭性保证"运算结果永远留在集合内"，一旦不封闭，算着算着就会"越出"这个数系，也就无法在它上面建立群、环等结构。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><strong>不是群</strong>。① 不满足<strong>结合律</strong>：<code>(5−3)−1 = 1</code>，而 <code>5−(3−1) = 3</code>；② <strong>没有幺元</strong>：不存在 <code>e</code> 使 <code>a − e = e − a = a</code> 对一切 <code>a</code> 成立；③ 因而更谈不上每个元素有逆元。减法只封闭，但"运算顺序"与"操作数顺序"都乱，故连半群都不是。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>幺元是<strong>恒等变换 e</strong>（什么都不做）；"旋转 120°"记 <code>r</code>，其逆元是"旋转 240°"<code>r²</code>，因为 <code>r ∘ r² = r³ = e</code> 回到原位（转过去还能转回来）。<code>D₃</code> 满足封闭、结合、有幺元、每元素有逆元，所以是群；而"对称"的本质正是"一组能搬动图形、搬完又与原位重合、且能撤销的操作"，群的公理恰好把它形式化。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>2×3 = 6 ≡ 0</code>、<code>4×3 = 12 ≡ 0</code>（且 2、3、4 均非零），故零因子为 <strong>2、3、4</strong>。因为 <code>Z₆</code> 中存在零因子，无法保证每个非零元有乘法逆元，所以不是域。零因子的"操作"含义：两个非零的<strong>投影算符</strong>若投影到互相垂直的子空间，相乘（复合）得零矩阵——例如 <code>A = [[0,1],[0,0]]</code> 满足 <code>A² = 0</code> 但 <code>A ≠ 0</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>3 × 5 = 15 ≡ 1 (mod 7)</code>，所以 <code>3⁻¹ = 5</code>；<code>4 × 5 = 20 ≡ 6 (mod 7)</code>。域保证加、减、乘、除（除数非零）都封闭，于是在其上可以自由"缩放坐标"：实数域张成数轴，复数域张成复平面，乘以 <code>i</code> 即逆时针旋转 90°、乘以 <code>e^{iθ}</code> 即旋转 θ 角——域能做的运算决定了这个空间里哪些几何操作有意义。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>化简：<code>ab + ab′ = a(b+b′) = a·1 = a</code>，故 <code>F = a + a′b = (a+a′)(a+b) = 1·(a+b) = a+b</code>。德摩根对偶式：<code>(a∨b)′ = a′ ∧ b′</code>（即"非(a 或 b) = 非 a 且非 b"）。现实意义：逻辑表达式越短，需要的<strong>逻辑门越少、芯片面积越小、功耗越低</strong>，同一功能可用更省的电路实现——布尔化简是数字电路设计的日常工序。</p></details>
+<h3 class="paper-head">二、参考答案（点击展开）</h3>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>在 <code>N</code> 上减法<strong>不是</strong>二元运算，因为 <code>2 − 3 = −1 ∉ N</code>，不满足封闭性；在 <code>Z</code> 上是，因为任意两个整数之差仍是整数。封闭性保证"运算结果永远留在集合内"，一旦不封闭，算着算着就会"越出"这个数系，也就无法在它上面建立群、环等结构。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p><strong>不是群</strong>。① 不满足<strong>结合律</strong>：<code>(5−3)−1 = 1</code>，而 <code>5−(3−1) = 3</code>；② <strong>没有幺元</strong>：不存在 <code>e</code> 使 <code>a − e = e − a = a</code> 对一切 <code>a</code> 成立；③ 因而更谈不上每个元素有逆元。减法只封闭，但"运算顺序"与"操作数顺序"都乱，故连半群都不是。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>幺元是<strong>恒等变换 e</strong>（什么都不做）；"旋转 120°"记 <code>r</code>，其逆元是"旋转 240°"<code>r²</code>，因为 <code>r ∘ r² = r³ = e</code> 回到原位（转过去还能转回来）。<code>D₃</code> 满足封闭、结合、有幺元、每元素有逆元，所以是群；而"对称"的本质正是"一组能搬动图形、搬完又与原位重合、且能撤销的操作"，群的公理恰好把它形式化。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p><code>2×3 = 6 ≡ 0</code>、<code>4×3 = 12 ≡ 0</code>（且 2、3、4 均非零），故零因子为 <strong>2、3、4</strong>。因为 <code>Z₆</code> 中存在零因子，无法保证每个非零元有乘法逆元，所以不是域。零因子的"操作"含义：两个非零的<strong>投影算符</strong>若投影到互相垂直的子空间，相乘（复合）得零矩阵——例如 <code>A = [[0,1],[0,0]]</code> 满足 <code>A² = 0</code> 但 <code>A ≠ 0</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p><code>3 × 5 = 15 ≡ 1 (mod 7)</code>，所以 <code>3⁻¹ = 5</code>；<code>4 × 5 = 20 ≡ 6 (mod 7)</code>。域保证加、减、乘、除（除数非零）都封闭，于是在其上可以自由"缩放坐标"：实数域张成数轴，复数域张成复平面，乘以 <code>i</code> 即逆时针旋转 90°、乘以 <code>e^{iθ}</code> 即旋转 θ 角——域能做的运算决定了这个空间里哪些几何操作有意义。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>化简：<code>ab + ab′ = a(b+b′) = a·1 = a</code>，故 <code>F = a + a′b = (a+a′)(a+b) = 1·(a+b) = a+b</code>。德摩根对偶式：<code>(a∨b)′ = a′ ∧ b′</code>（即"非(a 或 b) = 非 a 且非 b"）。现实意义：逻辑表达式越短，需要的<strong>逻辑门越少、芯片面积越小、功耗越低</strong>，同一功能可用更省的电路实现——布尔化简是数字电路设计的日常工序。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第5章-函数/第5章-函数.html">← 上一章：第5章 函数</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第7章-图论/第7章-图论.html">下一章：第7章 图论 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第8章 成对数据的统计分析 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第8章 成对数据的统计分析 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第三册 › 第8章 成对数据的统计分析</div></header>
@@ -87,7 +50,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
              x                    x                   x</code></pre>
 
 <h3>样本相关系数 r：定量刻画线性相关的强弱</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="230" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="260" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">样本相关系数 r：散点云的形态</text>
 <line x1="30" y1="200" x2="505" y2="200" stroke="#cbd5e1" stroke-width="1"/>
@@ -108,7 +71,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <text x="260" y="222" text-anchor="middle" font-size="13" fill="#6b7280">|r| ≈ 0：散点散成圆盘，看不到线性方向<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></text>
 <text x="260" y="222" text-anchor="middle" font-size="13" fill="#16a34a">|r| ≈ 1：散点紧贴一条上升直线<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：|r| 越接近 1，散点越紧贴一条直线；越接近 0，散点越散成圆盘——r 正是两组离差向量「夹角余弦」的标准化</figcaption>
+<figcaption class="fig-cap">图：|r| 越接近 1，散点越紧贴一条直线；越接近 0，散点越散成圆盘——r 正是两组离差向量「夹角余弦」的标准化</figcaption>
 </figure>
 <p>散点图只能「看个大概」，要精确度量两个变量<strong>线性相关</strong>的方向与强弱，引入<strong>样本相关系数 r</strong>：</p>
 <pre><code>           Σ (xᵢ − x̄)(yᵢ − ȳ)
@@ -144,7 +107,7 @@ e 是随机误差，满足 E(e) = 0，D(e) = σ²（方差恒定）。</code></p
 （b̂、â 分别是 b、a 的最小二乘估计）</code></pre>
 
 <h3>最小二乘法：竖直距离平方和最小</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">最小二乘法：竖直距离平方和最小</text>
 <line x1="40" y1="230" x2="500" y2="230" stroke="#cbd5e1" stroke-width="1"/>
@@ -171,7 +134,7 @@ e 是随机误差，满足 E(e) = 0，D(e) = σ²（方差恒定）。</code></p
 </g>
 <text x="260" y="246" text-anchor="middle" font-size="13" fill="#16a34a">回归直线过质心，Q = Σ(竖直距离)² 最小<animate attributeName="opacity" values="1;0;1;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：回归直线绕样本中心 (x̄,ȳ) 转动，各点竖直残差（绿虚线）随之伸缩——直线摆到最佳位置时竖直距离平方和 Q 最小</figcaption>
+<figcaption class="fig-cap">图：回归直线绕样本中心 (x̄,ȳ) 转动，各点竖直残差（绿虚线）随之伸缩——直线摆到最佳位置时竖直距离平方和 Q 最小</figcaption>
 </figure>
 <p>对于第 i 个点，它的<strong>残差</strong>（观测值与回归直线上预测值的竖直偏差）是：</p>
 <pre><code>eᵢ = yᵢ − ŷᵢ = yᵢ − (b̂xᵢ + â)</code></pre>
@@ -314,8 +277,8 @@ R² = 1 − ──────────────  = 1 − ─────�
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<h3 style="margin:0 0 12px;color:#b45309">一、练习题</h3>
+<div class="paper">
+<h3 class="paper-head">一、练习题</h3>
 <ol>
 <li>判断题：①「函数关系」与「相关关系」的本质区别是什么？②「样本相关系数 r 越接近 0，说明两个变量没有任何关系」这句话对吗？请说明理由。</li>
 <li>给出三组数据，其散点图分别是：A. 从左下到右上的细窄直线带；B. 呈开口向上的抛物线状点云；C. 均匀散开的圆形点云。请分别说出每组数据的线性相关方向与强弱（或说明 r 的大致取值），并指出哪一组「没有线性相关，但可能存在曲线相关」。</li>
@@ -324,21 +287,21 @@ R² = 1 − ──────────────  = 1 − ─────�
 <li>某回归模型的决定系数 R² = 0.81。请用「波动」的语言解释这个数值的含义：y 的波动中有多少比例能被 x 的线性变化解释？剩余部分来自哪里？</li>
 <li>为研究「性别与是否喜欢某运动是否有关」，调查 100 人：男且喜欢 35 人，男且不喜欢 15 人，女且喜欢 25 人，女且不喜欢 25 人。①列出 2×2 列联表；②写出 χ² 计算公式并算出数值；③在显著性水平 α = 0.05（临界值 3.841）下给出结论。</li>
 </ol>
-<h3 style="margin:20px 0 12px;color:#b45309">二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>①函数关系是「给定 x 就能唯一确定 y」，相关关系是「有关联但不唯一确定」，即点不在一条曲线上、只在某一趋势附近波动。②不对。r 接近 0 只说明<strong>没有线性相关</strong>；两个变量仍可能存在曲线相关（如 y = x² 取对称样本时 r 可为 0，但完全相关）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>A：正相关且线性相关很强，r 接近 +1（细窄上升带）；B：线性相关很弱，r 接近 0，但存在明显的<strong>非线性（曲线）相关</strong>，正是「没有线性相关但存在曲线相关」的一组；C：无明显相关，r 接近 0，点云均匀散开，任何方向都看不到趋势。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由最小二乘解 â = ȳ − b̂x̄ 可知，当 x = x̄ 时代入 ŷ = b̂x + â 得 ŷ = b̂x̄ + ȳ − b̂x̄ = ȳ，即点 (x̄, ȳ) 必在回归直线上。几何上，(x̄, ȳ) 是整片散点云的「质心/重心」，最佳拟合直线必须穿过这个重心，才能保证它从「平均意义」上贴合整片点云。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>x̄ = (1+2+3+4)/4 = 2.5，ȳ = (3+5+6+8)/4 = 5.5。b̂ = (Σxᵢyᵢ − n·x̄·ȳ)/(Σxᵢ² − n·x̄²) = (63 − 4×2.5×5.5)/(30 − 4×6.25) = (63 − 55)/(30 − 25) = 8/5 = 1.6。â = ȳ − b̂x̄ = 5.5 − 1.6×2.5 = 5.5 − 4 = 1.5。经验回归方程为 ŷ = 1.6x + 1.5。预测 x = 5 时 ŷ = 1.6×5 + 1.5 = 9.5。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>R² = 0.81 表示：y 的波动中有约 <strong>81%</strong> 能被 x 的线性变化解释，剩下约 19% 来自随机误差或其他未纳入模型的因素。R² 越接近 1，拟合优度越高、直线比水平线 y = ȳ 多解释的波动比例越大。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>①列联表：男喜欢 35、男不喜欢 15（合计 50）；女喜欢 25、女不喜欢 25（合计 50）；列合计 60、40，总数 100。②χ² = n(ad−bc)² / [(a+b)(c+d)(a+c)(b+d)] = 100×(35×25 − 15×25)² / (50×50×60×40) = 100×(875 − 375)² / 6000000 = 100×500²/6000000 = 25000000/6000000 ≈ 4.17。③因为 4.17 ≥ 3.841，所以在 α = 0.05 下有充分证据拒绝 H₀，认为「性别与是否喜欢该运动有关联」。</p></details>
+<h3 class="paper-head">二、参考答案（点击展开）</h3>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>①函数关系是「给定 x 就能唯一确定 y」，相关关系是「有关联但不唯一确定」，即点不在一条曲线上、只在某一趋势附近波动。②不对。r 接近 0 只说明<strong>没有线性相关</strong>；两个变量仍可能存在曲线相关（如 y = x² 取对称样本时 r 可为 0，但完全相关）。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>A：正相关且线性相关很强，r 接近 +1（细窄上升带）；B：线性相关很弱，r 接近 0，但存在明显的<strong>非线性（曲线）相关</strong>，正是「没有线性相关但存在曲线相关」的一组；C：无明显相关，r 接近 0，点云均匀散开，任何方向都看不到趋势。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>由最小二乘解 â = ȳ − b̂x̄ 可知，当 x = x̄ 时代入 ŷ = b̂x + â 得 ŷ = b̂x̄ + ȳ − b̂x̄ = ȳ，即点 (x̄, ȳ) 必在回归直线上。几何上，(x̄, ȳ) 是整片散点云的「质心/重心」，最佳拟合直线必须穿过这个重心，才能保证它从「平均意义」上贴合整片点云。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>x̄ = (1+2+3+4)/4 = 2.5，ȳ = (3+5+6+8)/4 = 5.5。b̂ = (Σxᵢyᵢ − n·x̄·ȳ)/(Σxᵢ² − n·x̄²) = (63 − 4×2.5×5.5)/(30 − 4×6.25) = (63 − 55)/(30 − 25) = 8/5 = 1.6。â = ȳ − b̂x̄ = 5.5 − 1.6×2.5 = 5.5 − 4 = 1.5。经验回归方程为 ŷ = 1.6x + 1.5。预测 x = 5 时 ŷ = 1.6×5 + 1.5 = 9.5。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>R² = 0.81 表示：y 的波动中有约 <strong>81%</strong> 能被 x 的线性变化解释，剩下约 19% 来自随机误差或其他未纳入模型的因素。R² 越接近 1，拟合优度越高、直线比水平线 y = ȳ 多解释的波动比例越大。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>①列联表：男喜欢 35、男不喜欢 15（合计 50）；女喜欢 25、女不喜欢 25（合计 50）；列合计 60、40，总数 100。②χ² = n(ad−bc)² / [(a+b)(c+d)(a+c)(b+d)] = 100×(35×25 − 15×25)² / (50×50×60×40) = 100×(875 − 375)² / 6000000 = 100×500²/6000000 = 25000000/6000000 ≈ 4.17。③因为 4.17 ≥ 3.841，所以在 α = 0.05 下有充分证据拒绝 H₀，认为「性别与是否喜欢该运动有关联」。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第7章-随机变量及其分布/第7章-随机变量及其分布.html">← 上一章：第7章 随机变量及其分布</a>
 <a href="../../../index.html">回目录</a>
 <a href="../../../大学/高等数学/第1章-函数与极限/第1章-函数与极限.html">下一章：第1章 函数与极限 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第三册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第三册</footer>
 </body>
 </html>

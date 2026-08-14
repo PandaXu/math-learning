@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第9章 多元函数微分法及其应用 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第9章 多元函数微分法及其应用 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第9章 多元函数微分法及其应用</div></header>
@@ -120,7 +83,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>几何含义：</strong>混合偏导 f_xy 衡量"沿 x 方向的斜率，随 y 变化有多快"；f_yx 衡量"沿 y 方向的斜率，随 x 变化有多快"。次序无关性说明：<strong>曲面的"扭曲"无论先沿哪个方向度量都一样</strong>——这保证了二阶偏导数矩阵（Hessian 矩阵）是<strong>对称矩阵</strong>，是后面极值判别的几何基础。</div>
 
 <h2 id="s3">9.3 全微分</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="400" y2="260" stroke="#94a3b8" stroke-width="1.5"/><line x1="200" y1="300" x2="200" y2="40" stroke="#94a3b8" stroke-width="1.5"/><polygon points="400,260 392,254 392,266" fill="#94a3b8"/><polygon points="200,40 194,50 206,50" fill="#94a3b8"/><text x="404" y="266" font-size="12" fill="#64748b">x</text><text x="206" y="40" font-size="12" fill="#64748b">z</text><path d="M54,54 L78,110 L102,150 L126,174 L150,182 L174,174 L198,150 L222,110 L246,54" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="54" y1="54" x2="104" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><line x1="246" y1="54" x2="296" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><path d="M104,132 L128,188 L152,228 L176,248 L200,260 L224,248 L248,228 L272,188 L296,132" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="22" y="170" font-size="12" fill="#2563eb">曲面 z=f(x,y)</text><text x="355" y="80" font-size="12" fill="#16a34a">切平面</text><polygon fill="#16a34a" fill-opacity="0.15" stroke="#16a34a" stroke-width="2"><animate attributeName="points" dur="8s" repeatCount="indefinite" values="248,252.5 332,42.5 282,14.5 198,224.5;158,260 242,260 192,232 108,232;68,42.5 152,252.5 102,224.5 18,14.5;158,260 242,260 192,232 108,232;248,252.5 332,42.5 282,14.5 198,224.5"/></polygon><line stroke="#16a34a" stroke-width="3"><animate attributeName="x1" dur="8s" repeatCount="indefinite" values="248;158;68;158;248"/><animate attributeName="y1" dur="8s" repeatCount="indefinite" values="252.5;260;42.5;260;252.5"/><animate attributeName="x2" dur="8s" repeatCount="indefinite" values="332;242;152;242;332"/><animate attributeName="y2" dur="8s" repeatCount="indefinite" values="42.5;260;252.5;260;42.5"/></line><circle r="5" fill="#2563eb"><animate attributeName="cx" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="cy" dur="8s" repeatCount="indefinite" values="147.5;260;147.5;260;147.5"/></circle><text font-size="13" fill="#0f172a" text-anchor="middle"><animate attributeName="x" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="y" dur="8s" repeatCount="indefinite" values="137;249;137;249;137"/>P</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：全微分/切平面的几何意义——曲面在切点 P 附近可用切平面（绿色，方程 dz=f_x dx+f_y dy）线性逼近；P 沿曲面滑动时切平面随之倾斜，切点附近曲面 ≈ 切平面。</figcaption></figure>
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="400" y2="260" stroke="#94a3b8" stroke-width="1.5"/><line x1="200" y1="300" x2="200" y2="40" stroke="#94a3b8" stroke-width="1.5"/><polygon points="400,260 392,254 392,266" fill="#94a3b8"/><polygon points="200,40 194,50 206,50" fill="#94a3b8"/><text x="404" y="266" font-size="12" fill="#64748b">x</text><text x="206" y="40" font-size="12" fill="#64748b">z</text><path d="M54,54 L78,110 L102,150 L126,174 L150,182 L174,174 L198,150 L222,110 L246,54" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="54" y1="54" x2="104" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><line x1="246" y1="54" x2="296" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><path d="M104,132 L128,188 L152,228 L176,248 L200,260 L224,248 L248,228 L272,188 L296,132" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="22" y="170" font-size="12" fill="#2563eb">曲面 z=f(x,y)</text><text x="355" y="80" font-size="12" fill="#16a34a">切平面</text><polygon fill="#16a34a" fill-opacity="0.15" stroke="#16a34a" stroke-width="2"><animate attributeName="points" dur="8s" repeatCount="indefinite" values="248,252.5 332,42.5 282,14.5 198,224.5;158,260 242,260 192,232 108,232;68,42.5 152,252.5 102,224.5 18,14.5;158,260 242,260 192,232 108,232;248,252.5 332,42.5 282,14.5 198,224.5"/></polygon><line stroke="#16a34a" stroke-width="3"><animate attributeName="x1" dur="8s" repeatCount="indefinite" values="248;158;68;158;248"/><animate attributeName="y1" dur="8s" repeatCount="indefinite" values="252.5;260;42.5;260;252.5"/><animate attributeName="x2" dur="8s" repeatCount="indefinite" values="332;242;152;242;332"/><animate attributeName="y2" dur="8s" repeatCount="indefinite" values="42.5;260;252.5;260;42.5"/></line><circle r="5" fill="#2563eb"><animate attributeName="cx" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="cy" dur="8s" repeatCount="indefinite" values="147.5;260;147.5;260;147.5"/></circle><text font-size="13" fill="#0f172a" text-anchor="middle"><animate attributeName="x" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="y" dur="8s" repeatCount="indefinite" values="137;249;137;249;137"/>P</text></svg><figcaption class="fig-cap">图：全微分/切平面的几何意义——曲面在切点 P 附近可用切平面（绿色，方程 dz=f_x dx+f_y dy）线性逼近；P 沿曲面滑动时切平面随之倾斜，切点附近曲面 ≈ 切平面。</figcaption></figure>
 <h3>全增量与全微分的定义</h3>
 <p>当 x、y <strong>同时</strong>变化时，函数值的总变化称为<strong>全增量</strong>：</p>
 <pre><code>Δz = f(x₀+Δx, y₀+Δy) − f(x₀, y₀)</code></pre>
@@ -177,7 +140,7 @@ dx     F_y</code></pre>
 <div class="insight"><strong>几何含义：</strong><code>F(x, y, z) = 0</code> 是空间中的一张曲面（如球面 x² + y² + z² = R²）。∂z/∂x 是"固定 y 后，曲面沿 x 方向的高度变化率"，即曲面与平面 y = 常数的交线切线斜率。而梯度 ∇F = (F_x, F_y, F_z) 处处<strong>垂直于等值面</strong>，隐函数求导公式本质上来自"沿曲面走时 F 保持不变"这一约束。</div>
 
 <h2 id="s5">9.5 方向导数与梯度</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="20" x2="260" y2="285" stroke="#94a3b8" stroke-width="1.5"/><polygon points="480,150 472,144 472,156" fill="#94a3b8"/><polygon points="260,20 254,30 266,30" fill="#94a3b8"/><text x="472" y="142" font-size="12" fill="#64748b">x</text><text x="268" y="26" font-size="12" fill="#64748b">y</text><circle cx="260" cy="150" r="35" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="70" fill="none" stroke="#93c5fd" stroke-width="2"/><circle cx="260" cy="150" r="105" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="140" fill="none" stroke="#93c5fd" stroke-width="2"/><text x="300" y="146" font-size="12" fill="#64748b">f=1</text><text x="186" y="146" font-size="12" fill="#64748b">f=4</text><text x="150" y="146" font-size="12" fill="#64748b">f=9</text><text x="115" y="146" font-size="12" fill="#64748b">f=16</text><text x="400" y="205" font-size="12" fill="#16a34a">f 增大 →</text><g><animateTransform attributeName="transform" type="rotate" from="0 260 150" to="360 260 150" dur="8s" repeatCount="indefinite"/><circle cx="330" cy="150" r="5" fill="#2563eb"/><line x1="330" y1="150" x2="388" y2="150" stroke="#2563eb" stroke-width="3"/><polygon points="394,150 384,144 384,156" fill="#2563eb"/><line x1="330" y1="150" x2="330" y2="106" stroke="#16a34a" stroke-width="3"/><polygon points="330,100 324,110 336,110" fill="#16a34a"/></g><text x="260" y="296" font-size="12" fill="#64748b" text-anchor="middle">等高线：f(x,y)=x²+y²=c（同心圆）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：梯度 ∇f（蓝）处处与等高线垂直、指向外侧（f 增大），即函数增长最快的方向；沿等高线切线（绿）走，方向导数为 0。</figcaption></figure>
+<figure class="fig"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="20" x2="260" y2="285" stroke="#94a3b8" stroke-width="1.5"/><polygon points="480,150 472,144 472,156" fill="#94a3b8"/><polygon points="260,20 254,30 266,30" fill="#94a3b8"/><text x="472" y="142" font-size="12" fill="#64748b">x</text><text x="268" y="26" font-size="12" fill="#64748b">y</text><circle cx="260" cy="150" r="35" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="70" fill="none" stroke="#93c5fd" stroke-width="2"/><circle cx="260" cy="150" r="105" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="140" fill="none" stroke="#93c5fd" stroke-width="2"/><text x="300" y="146" font-size="12" fill="#64748b">f=1</text><text x="186" y="146" font-size="12" fill="#64748b">f=4</text><text x="150" y="146" font-size="12" fill="#64748b">f=9</text><text x="115" y="146" font-size="12" fill="#64748b">f=16</text><text x="400" y="205" font-size="12" fill="#16a34a">f 增大 →</text><g><animateTransform attributeName="transform" type="rotate" from="0 260 150" to="360 260 150" dur="8s" repeatCount="indefinite"/><circle cx="330" cy="150" r="5" fill="#2563eb"/><line x1="330" y1="150" x2="388" y2="150" stroke="#2563eb" stroke-width="3"/><polygon points="394,150 384,144 384,156" fill="#2563eb"/><line x1="330" y1="150" x2="330" y2="106" stroke="#16a34a" stroke-width="3"/><polygon points="330,100 324,110 336,110" fill="#16a34a"/></g><text x="260" y="296" font-size="12" fill="#64748b" text-anchor="middle">等高线：f(x,y)=x²+y²=c（同心圆）</text></svg><figcaption class="fig-cap">图：梯度 ∇f（蓝）处处与等高线垂直、指向外侧（f 增大），即函数增长最快的方向；沿等高线切线（绿）走，方向导数为 0。</figcaption></figure>
 <h3>方向导数：沿任意方向的变化率</h3>
 <p>偏导数只衡量沿坐标轴方向的变化率。更一般地，我们想知道函数沿<strong>任意方向</strong>变化有多快，这就是<strong>方向导数</strong>。</p>
 <p>设 <strong>单位方向</strong> <code>u = (cos α, cos β)</code>（二维，α、β 是方向角，cos²α + cos²β = 1），则 f 在 P₀ 沿 u 的方向导数为</p>
@@ -300,7 +263,7 @@ dx     F_y</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>设 z = x³ + 3xy + y²，求 ∂z/∂x 与 ∂z/∂y。</li>
@@ -311,19 +274,19 @@ dx     F_y</code></pre>
 <li>求 f(x, y) = xy 在约束 x² + y² = 1 下的最大值与最小值（用拉格朗日乘数法），并结合几何含义说明极值点在何处。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>把 y 当常数对 x 求导：∂z/∂x = 3x² + 3y；把 x 当常数对 y 求导：∂z/∂y = 3x + 2y。注意"冻结"的是变量本身，不是把它当成 0。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>f_x = 2x/(x²+y²)，f_y = 2y/(x²+y²)，故 dz = (2x·dx + 2y·dy)/(x²+y²)。在 (1,1) 处 f_x = f_y = 1，所以 Δz ≈ dz = dx + dy，即 z ≈ ln 2 + (x−1) + (y−1)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>偏导数 f_x(x₀,y₀) 是"用平面 y = y₀ 截曲面 z = f(x,y) 所得交线（一条曲线）在 x = x₀ 处的切线斜率"，即沿 x 正方向走时曲面的陡峭程度；f_y 同理是沿 y 方向的切线斜率。两者只给出两个坐标轴方向的斜率，并不保证整张切平面存在（可微要求四面八方都能被同一平面逼近）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>链式法则：∂z/∂x = ∂z/∂u · ∂u/∂x + ∂z/∂v · ∂v/∂x = v·e^(uv)·2x + u·e^(uv)·y = e^(uv)·(2xv + uy)。要点：把从 z 到 x 的每一条路径的偏导之积相加，不要漏掉任何中间变量。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>方向 (3,4) 单位化得 u = (3/5, 4/5)。f_x = 2x = 2，f_y = 2y = 4，故方向导数 = ∇f·u = 2·(3/5) + 4·(4/5) = 22/5 = 4.4。增长最快的方向即梯度方向 ∇f = (2, 4)（单位化为 (1/√5, 2/√5)），最大增长率 = |∇f| = √(2²+4²) = 2√5。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>构造 L = xy + λ(x²+y²−1)。∂L/∂x = y + 2λx = 0，∂L/∂y = x + 2λy = 0，∂L/∂λ = x²+y²−1 = 0。由前两式得 y = −2λx、x = −2λy，消去 λ 得 x² = y²，结合 x²+y² = 1 得 x² = y² = 1/2，即 x = ±1/√2、y = ±1/√2。f = xy：同号时取最大值 1/2，异号时取最小值 −1/2。几何上，这四点正是 f 的等值线（双曲线 xy = c）与单位圆相切的位置，即 ∇f ∥ ∇g 处。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>把 y 当常数对 x 求导：∂z/∂x = 3x² + 3y；把 x 当常数对 y 求导：∂z/∂y = 3x + 2y。注意"冻结"的是变量本身，不是把它当成 0。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>f_x = 2x/(x²+y²)，f_y = 2y/(x²+y²)，故 dz = (2x·dx + 2y·dy)/(x²+y²)。在 (1,1) 处 f_x = f_y = 1，所以 Δz ≈ dz = dx + dy，即 z ≈ ln 2 + (x−1) + (y−1)。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>偏导数 f_x(x₀,y₀) 是"用平面 y = y₀ 截曲面 z = f(x,y) 所得交线（一条曲线）在 x = x₀ 处的切线斜率"，即沿 x 正方向走时曲面的陡峭程度；f_y 同理是沿 y 方向的切线斜率。两者只给出两个坐标轴方向的斜率，并不保证整张切平面存在（可微要求四面八方都能被同一平面逼近）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>链式法则：∂z/∂x = ∂z/∂u · ∂u/∂x + ∂z/∂v · ∂v/∂x = v·e^(uv)·2x + u·e^(uv)·y = e^(uv)·(2xv + uy)。要点：把从 z 到 x 的每一条路径的偏导之积相加，不要漏掉任何中间变量。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>方向 (3,4) 单位化得 u = (3/5, 4/5)。f_x = 2x = 2，f_y = 2y = 4，故方向导数 = ∇f·u = 2·(3/5) + 4·(4/5) = 22/5 = 4.4。增长最快的方向即梯度方向 ∇f = (2, 4)（单位化为 (1/√5, 2/√5)），最大增长率 = |∇f| = √(2²+4²) = 2√5。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>构造 L = xy + λ(x²+y²−1)。∂L/∂x = y + 2λx = 0，∂L/∂y = x + 2λy = 0，∂L/∂λ = x²+y²−1 = 0。由前两式得 y = −2λx、x = −2λy，消去 λ 得 x² = y²，结合 x²+y² = 1 得 x² = y² = 1/2，即 x = ±1/√2、y = ±1/√2。f = xy：同号时取最大值 1/2，异号时取最小值 −1/2。几何上，这四点正是 f 的等值线（双曲线 xy = c）与单位圆相切的位置，即 ∇f ∥ ∇g 处。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第8章-空间解析几何与向量代数/第8章-空间解析几何与向量代数.html">← 上一章：第8章 空间解析几何与向量代数</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第10章-重积分/第10章-重积分.html">下一章：第10章 重积分 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
 </body>
 </html>

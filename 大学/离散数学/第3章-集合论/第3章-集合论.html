@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第3章 集合论 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第3章 集合论 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第3章 集合论</div></header>
@@ -186,7 +149,7 @@ A − B = {1,2}            B − A = {4,5}
 <li><strong>乘法原理</strong>：一件事分<strong>依次</strong>的若干步，则总数 = 各步选择数之积。例：A 有 3 元素、B 有 4 元素，则有序对 (a, b) 共 3 × 4 = 12 种。</li>
 </ul>
 <h3>容斥原理（Inclusion–Exclusion，计数核心）</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="clipB1"><circle cx="310" cy="110" r="80"/></clipPath></defs><rect x="40" y="20" width="440" height="180" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8"/><text x="52" y="42" font-size="13" fill="#94a3b8">全集 U</text><circle cx="210" cy="110" r="80" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2.5"/><circle cx="310" cy="110" r="80" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="2.5"/><g clip-path="url(#clipB1)"><circle cx="210" cy="110" r="80" fill="#f59e0b"><animate attributeName="fill-opacity" values="0.1;0.55;0.1" dur="2.5s" repeatCount="indefinite"/></circle></g><text x="168" y="78" font-size="17" font-weight="700" fill="#2563eb">A</text><text x="342" y="78" font-size="17" font-weight="700" fill="#16a34a">B</text><text x="260" y="106" font-size="14" font-weight="700" fill="#b45309" text-anchor="middle">A∩B</text><text x="260" y="224" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">|A ∪ B| = |A| + |B| − |A ∩ B|</text><text x="260" y="244" font-size="12" fill="#92400e" text-anchor="middle">重叠区（A∩B）被数了 2 次，须扣掉 1 次</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：容斥原理——两圆重叠的“透镜区”被数了两次，必须扣掉一次才不重复。</figcaption></figure>
+<figure class="fig"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="clipB1"><circle cx="310" cy="110" r="80"/></clipPath></defs><rect x="40" y="20" width="440" height="180" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8"/><text x="52" y="42" font-size="13" fill="#94a3b8">全集 U</text><circle cx="210" cy="110" r="80" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2.5"/><circle cx="310" cy="110" r="80" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="2.5"/><g clip-path="url(#clipB1)"><circle cx="210" cy="110" r="80" fill="#f59e0b"><animate attributeName="fill-opacity" values="0.1;0.55;0.1" dur="2.5s" repeatCount="indefinite"/></circle></g><text x="168" y="78" font-size="17" font-weight="700" fill="#2563eb">A</text><text x="342" y="78" font-size="17" font-weight="700" fill="#16a34a">B</text><text x="260" y="106" font-size="14" font-weight="700" fill="#b45309" text-anchor="middle">A∩B</text><text x="260" y="224" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">|A ∪ B| = |A| + |B| − |A ∩ B|</text><text x="260" y="244" font-size="12" fill="#92400e" text-anchor="middle">重叠区（A∩B）被数了 2 次，须扣掉 1 次</text></svg><figcaption class="fig-cap">图：容斥原理——两圆重叠的“透镜区”被数了两次，必须扣掉一次才不重复。</figcaption></figure>
 <p>两个集合相加时，<strong>交集被数了两次</strong>，要扣掉一次：</p>
 <pre><code>|A ∪ B| = |A| + |B| − |A ∩ B|</code></pre>
 <p>三个集合：先加单集，再减两两交集，最后加回三交集：</p>
@@ -196,7 +159,7 @@ A − B = {1,2}            B − A = {4,5}
 <div class="insight"><strong>几何含义：</strong>容斥原理就是“<strong>文氏图里不重复地数点数</strong>”。三圆情形：先数三个圆（重叠区被多数），减掉三片“两圆重叠”的透镜区（三重重叠芯被减过头了），再加回最中心的三重芯。口诀：<strong>“加单、减双、加三”——奇数次加、偶数次减</strong>。</div>
 <div class="insight"><strong>物理含义：</strong>统计“至少满足一个条件”的人数/事件数时，直接相加会<strong>重复计算</strong>同时满足多项的对象。例：某班 40 人，20 人学英语、15 人学日语、8 人两者都学，则学英语<strong>或</strong>日语的人数为 20 + 15 − 8 = 27，其余 40 − 27 = 13 人两门都不学。容斥原理就是<strong>“去重计数”</strong>的标准工具。</div>
 <h3>笛卡尔积与有序对</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="266" viewBox="0 0 520 266" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="70" y1="220" x2="470" y2="220" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="220" x2="70" y2="30" stroke="#94a3b8" stroke-width="2"/><text x="470" y="238" font-size="13" fill="#334155" text-anchor="end">A（横坐标）</text><text x="60" y="36" font-size="13" fill="#334155" text-anchor="end">B（纵坐标）</text><line x1="200" y1="60" x2="200" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="360" y1="60" x2="360" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="70" x2="370" y2="70" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="140" x2="370" y2="140" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="210" x2="370" y2="210" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><text x="200" y="240" font-size="13" fill="#334155" text-anchor="middle">1</text><text x="360" y="240" font-size="13" fill="#334155" text-anchor="middle">2</text><text x="180" y="74" font-size="13" fill="#334155" text-anchor="end">x</text><text x="180" y="144" font-size="13" fill="#334155" text-anchor="end">y</text><text x="180" y="214" font-size="13" fill="#334155" text-anchor="end">z</text><circle cx="200" cy="70" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.0667;0.1167;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="70" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.1833;0.2333;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="140" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.3;0.35;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="140" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.4167;0.4667;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="210" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.5333;0.5833;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="210" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.65;0.7;0.92;1" dur="6s" repeatCount="indefinite"/></circle><text x="260" y="256" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">|A × B| = |A| · |B| = 2 × 3 = 6 个有序对</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：笛卡尔积 A×B 是横坐标取 A、纵坐标取 B 的矩形格点阵，共 |A|×|B| 个有序对（本例 2×3=6）。</figcaption></figure>
+<figure class="fig"><svg width="520" height="266" viewBox="0 0 520 266" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="70" y1="220" x2="470" y2="220" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="220" x2="70" y2="30" stroke="#94a3b8" stroke-width="2"/><text x="470" y="238" font-size="13" fill="#334155" text-anchor="end">A（横坐标）</text><text x="60" y="36" font-size="13" fill="#334155" text-anchor="end">B（纵坐标）</text><line x1="200" y1="60" x2="200" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="360" y1="60" x2="360" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="70" x2="370" y2="70" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="140" x2="370" y2="140" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="210" x2="370" y2="210" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><text x="200" y="240" font-size="13" fill="#334155" text-anchor="middle">1</text><text x="360" y="240" font-size="13" fill="#334155" text-anchor="middle">2</text><text x="180" y="74" font-size="13" fill="#334155" text-anchor="end">x</text><text x="180" y="144" font-size="13" fill="#334155" text-anchor="end">y</text><text x="180" y="214" font-size="13" fill="#334155" text-anchor="end">z</text><circle cx="200" cy="70" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.0667;0.1167;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="70" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.1833;0.2333;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="140" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.3;0.35;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="140" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.4167;0.4667;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="210" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.5333;0.5833;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="210" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.65;0.7;0.92;1" dur="6s" repeatCount="indefinite"/></circle><text x="260" y="256" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">|A × B| = |A| · |B| = 2 × 3 = 6 个有序对</text></svg><figcaption class="fig-cap">图：笛卡尔积 A×B 是横坐标取 A、纵坐标取 B 的矩形格点阵，共 |A|×|B| 个有序对（本例 2×3=6）。</figcaption></figure>
 <p>A、B 的<strong>笛卡尔积（Cartesian product）</strong>是所有有序对的集合：</p>
 <pre><code>A × B = { (a, b) | a ∈ A, b ∈ B }        |A × B| = |A| · |B|</code></pre>
 <p>例：A = {1, 2}，B = {x, y, z}，则 <code>A × B = {(1,x),(1,y),(1,z),(2,x),(2,y),(2,z)}</code>，共 2 × 3 = 6 个有序对。</p>
@@ -258,7 +221,7 @@ A − B = {1,2}            B − A = {4,5}
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>设 A = {1, {2}, 3}。判断下列命题的真假：<code>1 ∈ A</code>、<code>{2} ∈ A</code>、<code>2 ∈ A</code>、<code>∅ ⊆ A</code>、<code>{1, 3} ⊆ A</code>、<code>|A| = 3</code>。结合“元素 vs 子集”的几何含义说明理由。</li>
@@ -269,20 +232,20 @@ A − B = {1,2}            B − A = {4,5}
 <li>某班 100 人中，会 Java 的 60 人、会 Python 的 50 人、会 C 的 40 人；同时会 Java 和 Python 的 20 人、Java 和 C 的 15 人、Python 和 C 的 10 人；三门都会的 5 人。求至少会一门语言的人数（用三集合容斥）。再设 |A| = 3，|B| = 4，求 |A × B|、|P(A)|、|P(A × B)|。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>1 ∈ A</code> 真（1 是 A 的元素）；<code>{2} ∈ A</code> 真（{2} 是 A 的元素，注意它是“集合”整体作为元素）；<code>2 ∈ A</code> 假（2 不是元素，{2} 才是）；<code>∅ ⊆ A</code> 真（空集是任何集合的子集）；<code>{1, 3} ⊆ A</code> 真（两个元素都在 A 内）；<code>|A| = 3</code> 真（元素是 1、{2}、3 三个）。几何上：∈ 是“点落在区域里”，⊆ 是“一块区域整个套在另一块里”——{2} 作为“一个对象”落在 A 内，但 2 本身不是 A 的点。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>A ∪ B = {1,2,3,4,5,6}（两圆全部涂满）；A ∩ B = {3,4}（重叠芯）；A − B = {1,2}（只属于 A 的月牙）；∁A = {5,6,7,8}（全集矩形里 A 之外的背景）；A ⊕ B = {1,2,5,6}（两圆交叠形成的左右两片月牙，不含重叠芯）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>P(A) = { ∅, {a}, {b}, {a,b} }，共 4 = 2² 个子集，正好是 A 的所有“圈选方案”（一个都不圈、只圈 a、只圈 b、全圈）。对 A = {a, b, c} 按顺序 (a, b, c)，{a, c} 对应位串 101（a 圈、b 不圈、c 圈）。每个位置 0/1 二选一，n 个位置共 2ⁿ 种，与 n 位二进制数 000…0 到 111…1 一一对应。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>成员表（1=属于，0=不属于）：A、B 取 00/01/10/11 四种情况。A∩B 列依次为 0,0,0,1，故 ∁(A∩B) 为 1,1,1,0；∁A 为 1,1,0,0，∁B 为 1,0,1,0，∁A ∪ ∁B 为 1,1,1,0。两列完全相同，恒等式成立。现实含义：“不是（会唱歌 且 会跳舞）”等价于“不会唱歌 或 不会跳舞”——否定穿过括号时“且”变“或”。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>(a) |E ∪ J| = 20 + 15 − 8 = 27（两门都学的 8 人被数了两次，必须扣掉一次）；(b) 40 − 27 = 13 人两门都不学。不能直接 20 + 15 相加，因为交集 E ∩ J 被重复计数，这正是容斥原理“去重”的作用。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>至少会一门：|J ∪ P ∪ C| = 60 + 50 + 40 − 20 − 15 − 10 + 5 = 110？不对——先加单集 150，减两两交集 45，再加三交集 5，得 150 − 45 + 5 = 110，但人数不能超过 100，说明题目数据自相矛盾（交集数据偏小导致“至少一门”超过总人数），应重新核对原始数据。计数的正确公式是 |A ∪ B ∪ C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|。笛卡尔积部分：|A × B| = 3 × 4 = 12；|P(A)| = 2³ = 8；|P(A × B)| = 2¹² = 4096。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p><code>1 ∈ A</code> 真（1 是 A 的元素）；<code>{2} ∈ A</code> 真（{2} 是 A 的元素，注意它是“集合”整体作为元素）；<code>2 ∈ A</code> 假（2 不是元素，{2} 才是）；<code>∅ ⊆ A</code> 真（空集是任何集合的子集）；<code>{1, 3} ⊆ A</code> 真（两个元素都在 A 内）；<code>|A| = 3</code> 真（元素是 1、{2}、3 三个）。几何上：∈ 是“点落在区域里”，⊆ 是“一块区域整个套在另一块里”——{2} 作为“一个对象”落在 A 内，但 2 本身不是 A 的点。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>A ∪ B = {1,2,3,4,5,6}（两圆全部涂满）；A ∩ B = {3,4}（重叠芯）；A − B = {1,2}（只属于 A 的月牙）；∁A = {5,6,7,8}（全集矩形里 A 之外的背景）；A ⊕ B = {1,2,5,6}（两圆交叠形成的左右两片月牙，不含重叠芯）。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>P(A) = { ∅, {a}, {b}, {a,b} }，共 4 = 2² 个子集，正好是 A 的所有“圈选方案”（一个都不圈、只圈 a、只圈 b、全圈）。对 A = {a, b, c} 按顺序 (a, b, c)，{a, c} 对应位串 101（a 圈、b 不圈、c 圈）。每个位置 0/1 二选一，n 个位置共 2ⁿ 种，与 n 位二进制数 000…0 到 111…1 一一对应。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>成员表（1=属于，0=不属于）：A、B 取 00/01/10/11 四种情况。A∩B 列依次为 0,0,0,1，故 ∁(A∩B) 为 1,1,1,0；∁A 为 1,1,0,0，∁B 为 1,0,1,0，∁A ∪ ∁B 为 1,1,1,0。两列完全相同，恒等式成立。现实含义：“不是（会唱歌 且 会跳舞）”等价于“不会唱歌 或 不会跳舞”——否定穿过括号时“且”变“或”。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>(a) |E ∪ J| = 20 + 15 − 8 = 27（两门都学的 8 人被数了两次，必须扣掉一次）；(b) 40 − 27 = 13 人两门都不学。不能直接 20 + 15 相加，因为交集 E ∩ J 被重复计数，这正是容斥原理“去重”的作用。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>至少会一门：|J ∪ P ∪ C| = 60 + 50 + 40 − 20 − 15 − 10 + 5 = 110？不对——先加单集 150，减两两交集 45，再加三交集 5，得 150 − 45 + 5 = 110，但人数不能超过 100，说明题目数据自相矛盾（交集数据偏小导致“至少一门”超过总人数），应重新核对原始数据。计数的正确公式是 |A ∪ B ∪ C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|。笛卡尔积部分：|A × B| = 3 × 4 = 12；|P(A)| = 2³ = 8；|P(A × B)| = 2¹² = 4096。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第2章-谓词逻辑/第2章-谓词逻辑.html">← 上一章：第2章 谓词逻辑</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第4章-二元关系/第4章-二元关系.html">下一章：第4章 二元关系 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从集合论开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从集合论开始</footer>
 </body>
 </html>

@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第2章 一元二次函数、方程和不等式 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第2章 一元二次函数、方程和不等式 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第一册 › 第2章 一元二次函数方程和不等式</div></header>
@@ -86,7 +49,7 @@ a − b &lt; 0   ⇔   a &lt; b</code></pre>
 <div class="insight"><strong>物理含义：</strong>例如海拔：若甲比乙高（a &gt; b），两人同时再上升相同高度 c，甲仍比乙高（方向不变）；但若把"高"重新定义为"向下为正"（相当于乘 −1），则甲反而比乙"低"（方向反转）。</div>
 
 <h2 id="s2">2.2 基本不等式</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <circle cx="260" cy="120" r="70" fill="none" stroke="#cbd5e1" stroke-width="2"/>
 <line x1="190" y1="120" x2="330" y2="120" stroke="#94a3b8" stroke-width="2"/>
@@ -138,7 +101,7 @@ C
 <rect x="245" y="221" width="14" height="10" fill="#16a34a"/>
 <text x="265" y="230" font-size="12" fill="#334155">半弦 CD = √(ab)</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：基本不等式 √(ab) ≤ (a+b)/2 的圆内证明 —— 点 C 在直径 AB 上滑动，半弦 CD = √(ab)（绿）永远不超过半径 OD = (a+b)/2（蓝），当 C 与圆心 O 重合（a=b）时等号成立</figcaption>
+<figcaption class="fig-cap">图：基本不等式 √(ab) ≤ (a+b)/2 的圆内证明 —— 点 C 在直径 AB 上滑动，半弦 CD = √(ab)（绿）永远不超过半径 OD = (a+b)/2（蓝），当 C 与圆心 O 重合（a=b）时等号成立</figcaption>
 </figure>
 <h3>基本不等式的内容</h3>
 <p>对任意两个<strong>正数</strong> a、b，有：</p>
@@ -165,7 +128,7 @@ a + b ≥ 2√(ab)，即 √(ab) ≤ (a+b)/2</code></pre>
 <div class="insight"><strong>关键口诀：</strong><strong>一正</strong>（两数都为正，才能用）、<strong>二定</strong>（乘积为定值，和才有最小；和为定值，积才有最大）、<strong>三相等</strong>（必须验证等号能否取到，取不到就不能说"最小/最大"）。</div>
 
 <h2 id="s3">2.3 二次函数与一元二次方程、不等式</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="2"/>
 <line x1="260" y1="30" x2="260" y2="270" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
@@ -193,7 +156,7 @@ a + b ≥ 2√(ab)，即 √(ab) ≤ (a+b)/2</code></pre>
 <rect x="20" y="262" width="14" height="10" fill="#16a34a"/>
 <text x="40" y="271" font-size="12" fill="#334155">绿点 = 抛物线与 x 轴的交点（方程的根）</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：判别式 Δ 的几何意义 —— 抛物线上下平移时与 x 轴的交点个数，正是 Δ&lt;0 无交点、Δ=0 相切、Δ&gt;0 两个交点</figcaption>
+<figcaption class="fig-cap">图：判别式 Δ 的几何意义 —— 抛物线上下平移时与 x 轴的交点个数，正是 Δ&lt;0 无交点、Δ=0 相切、Δ&gt;0 两个交点</figcaption>
 </figure>
 <h3>二次函数 y = ax² + bx + c（a ≠ 0）的图象</h3>
 <ul>
@@ -283,8 +246,8 @@ a + b ≥ 2√(ab)，即 √(ab) ≤ (a+b)/2</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
-<p style="margin:4px 0 10px;font-weight:700;color:#b45309;font-size:1.05rem">一、练习题</p>
+<div class="paper">
+<p class="paper-head">一、练习题</p>
 <ol style="margin:8px 0;padding-left:24px">
 <li>用作差法比较 <code>2x² − x + 1</code> 与 <code>x² + x</code> 的大小（x 为任意实数），并说明“作差”在数轴上代表什么几何含义。</li>
 <li>判断下列说法的对错，并简要说明理由（重点体会“乘负数”带来的变化）：① 若 a &gt; b，则 ac² &gt; bc²；② 若 ac &gt; bc，则 a &gt; b；③ 若 a &gt; b 且 c &lt; 0，则 ac &lt; bc。</li>
@@ -293,22 +256,22 @@ a + b ≥ 2√(ab)，即 √(ab) ≤ (a+b)/2</code></pre>
 <li>解不等式 <code>−x² + 4x − 3 &gt; 0</code>（先化二次项系数为正），并说明解集对应抛物线的哪一段（x 轴上方还是下方）。</li>
 <li>已知二次函数 <code>y = x² − 2x − 3</code>：① 求它与 x 轴的交点、顶点、对称轴；② 写出 <code>y &gt; 0</code> 与 <code>y &lt; 0</code> 的解集；③ 若把 y 看作“高度”、x 看作“水平位移”，方程 <code>x² − 2x − 3 = 0</code> 与不等式 <code>x² − 2x − 3 &lt; 0</code> 分别回答了什么实际问题？</li>
 </ol>
-<hr style="border:none;border-top:1px dashed #fde68a;margin:16px 0"/>
-<p style="margin:4px 0 10px;font-weight:700;color:#b45309;font-size:1.05rem">二、参考答案（点击展开）</p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>作差：<code>(2x² − x + 1) − (x² + x) = x² − 2x + 1 = (x − 1)² ≥ 0</code>，所以 <code>2x² − x + 1 ≥ x² + x</code>，当且仅当 <code>x = 1</code> 时取等号。<strong>几何含义：</strong><code>a − b</code> 是数轴上从点 b 到点 a 的有向位移，差为正表示结果在右边（大），差为负表示在左边（小），差为 0 表示两点重合。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>① 错。当 <code>c = 0</code> 时 <code>ac² = bc² = 0</code>，不成立（“乘平方”未必保序，c = 0 时变成相等）。② 错。若 <code>c &lt; 0</code>，两边同除负数要反向，应得 <code>a &lt; b</code>。③ 对。乘负数等于在数轴上做关于原点的镜像翻转，两点左右位置对调，不等号必须反向。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>x + 9/x ≥ 2√(x · 9/x) = 6</code>，当且仅当 <code>x = 9/x</code> 即 <code>x = 3</code> 时取等号，最小值为 6。<strong>几何意义：</strong>在圆直径 AB 上取点 C，令 <code>AC = a</code>、<code>CB = b</code>，半径等于 <code>(a+b)/2</code>，过 C 作垂线交圆所得半弦长等于 <code>√(ab)</code>；半弦永远不超过半径，故 <code>√(ab) ≤ (a+b)/2</code>，且当 C 与圆心重合（a = b）时等号成立。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>面积 <code>S = ab</code>，由基本不等式 <code>ab ≤ ((a+b)/2)² = (p/2)²</code>（两正数 a、b 的几何平均数不超过算术平均数）。等号当且仅当 <code>a = b</code> 时成立，即长宽相等（正方形）时面积最大，最大值为 <code>p²/4</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>两边同乘 −1（不等号反向）：<code>x² − 4x + 3 &lt; 0</code>，即 <code>(x − 1)(x − 3) &lt; 0</code>，得 <code>1 &lt; x &lt; 3</code>。抛物线 <code>y = −x² + 4x − 3</code> 开口向下，与 x 轴交于 1、3 两点，故在两交点之间的这段图象位于 x 轴<strong>上方</strong>，解集正是这段横坐标范围 <code>{ x | 1 &lt; x &lt; 3 }</code>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>① <code>x² − 2x − 3 = (x − 3)(x + 1)</code>，与 x 轴交点为 <code>(−1, 0)</code> 与 <code>(3, 0)</code>；对称轴 <code>x = 1</code>；顶点 <code>(1, −4)</code>。② 开口向上，<code>y &gt; 0</code> 的解集为 <code>{ x | x &lt; −1 或 x &gt; 3 }</code>，<code>y &lt; 0</code> 的解集为 <code>{ x | −1 &lt; x &lt; 3 }</code>。③ 方程求的是“何时落地”（高度为 0 时的水平位置 x = −1 或 x = 3）；不等式 <code>y &lt; 0</code> 求的是“在哪些水平位置物体低于出发水平面（高度为负）”，即 −1 到 3 之间。</p></details>
+<hr/>
+<p class="paper-head">二、参考答案（点击展开）</p>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>作差：<code>(2x² − x + 1) − (x² + x) = x² − 2x + 1 = (x − 1)² ≥ 0</code>，所以 <code>2x² − x + 1 ≥ x² + x</code>，当且仅当 <code>x = 1</code> 时取等号。<strong>几何含义：</strong><code>a − b</code> 是数轴上从点 b 到点 a 的有向位移，差为正表示结果在右边（大），差为负表示在左边（小），差为 0 表示两点重合。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>① 错。当 <code>c = 0</code> 时 <code>ac² = bc² = 0</code>，不成立（“乘平方”未必保序，c = 0 时变成相等）。② 错。若 <code>c &lt; 0</code>，两边同除负数要反向，应得 <code>a &lt; b</code>。③ 对。乘负数等于在数轴上做关于原点的镜像翻转，两点左右位置对调，不等号必须反向。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p><code>x + 9/x ≥ 2√(x · 9/x) = 6</code>，当且仅当 <code>x = 9/x</code> 即 <code>x = 3</code> 时取等号，最小值为 6。<strong>几何意义：</strong>在圆直径 AB 上取点 C，令 <code>AC = a</code>、<code>CB = b</code>，半径等于 <code>(a+b)/2</code>，过 C 作垂线交圆所得半弦长等于 <code>√(ab)</code>；半弦永远不超过半径，故 <code>√(ab) ≤ (a+b)/2</code>，且当 C 与圆心重合（a = b）时等号成立。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>面积 <code>S = ab</code>，由基本不等式 <code>ab ≤ ((a+b)/2)² = (p/2)²</code>（两正数 a、b 的几何平均数不超过算术平均数）。等号当且仅当 <code>a = b</code> 时成立，即长宽相等（正方形）时面积最大，最大值为 <code>p²/4</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>两边同乘 −1（不等号反向）：<code>x² − 4x + 3 &lt; 0</code>，即 <code>(x − 1)(x − 3) &lt; 0</code>，得 <code>1 &lt; x &lt; 3</code>。抛物线 <code>y = −x² + 4x − 3</code> 开口向下，与 x 轴交于 1、3 两点，故在两交点之间的这段图象位于 x 轴<strong>上方</strong>，解集正是这段横坐标范围 <code>{ x | 1 &lt; x &lt; 3 }</code>。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>① <code>x² − 2x − 3 = (x − 3)(x + 1)</code>，与 x 轴交点为 <code>(−1, 0)</code> 与 <code>(3, 0)</code>；对称轴 <code>x = 1</code>；顶点 <code>(1, −4)</code>。② 开口向上，<code>y &gt; 0</code> 的解集为 <code>{ x | x &lt; −1 或 x &gt; 3 }</code>，<code>y &lt; 0</code> 的解集为 <code>{ x | −1 &lt; x &lt; 3 }</code>。③ 方程求的是“何时落地”（高度为 0 时的水平位置 x = −1 或 x = 3）；不等式 <code>y &lt; 0</code> 求的是“在哪些水平位置物体低于出发水平面（高度为负）”，即 −1 到 3 之间。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第1章-集合与常用逻辑用语/第1章-集合与常用逻辑用语.html">← 上一章：第1章 集合与常用逻辑用语</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第3章-函数的概念与性质/第3章-函数的概念与性质.html">下一章：第3章 函数的概念与性质 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

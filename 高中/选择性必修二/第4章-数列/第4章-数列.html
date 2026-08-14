@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第4章 数列 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第4章 数列 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第二册 › 第4章 数列</div></header>
@@ -74,7 +37,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理含义：</strong>数列是"等时间间隔采样"的记录，是连续过程的<strong>离散快照</strong>。例如每隔 1 秒记录一次小车的位置 → 位置序列 x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, …；每隔一年记录一次存款余额 → 本利和序列；每天记录一次气温 → 温度序列。物理世界是连续的，而"测量/记账"总是离散的，数列正是这种离散化之后的数学模型。</div>
 
 <h2 id="s2">4.2 等差数列</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="60" y1="260" x2="500" y2="260" stroke="#94a3b8" stroke-width="2"/>
   <line x1="60" y1="260" x2="60" y2="20" stroke="#94a3b8" stroke-width="2"/>
@@ -109,7 +72,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
     <animate attributeName="cy" values="240;200;160;120;80;120;160;200;240" dur="6s" repeatCount="indefinite"/>
   </circle>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：等差数列 = 斜率为 d 的直线上的等距点列——公差 d 就是每一步固定不变的「步长」</figcaption>
+<figcaption class="fig-cap">图：等差数列 = 斜率为 d 的直线上的等距点列——公差 d 就是每一步固定不变的「步长」</figcaption>
 </figure>
 <h3>定义</h3>
 <p>从第 2 项起，<strong>每一项与它前一项的差等于同一个常数</strong>，这个数列叫等差数列，这个常数叫<strong>公差 d</strong>：</p>
@@ -140,7 +103,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理含义（求和）：</strong>匀加速（匀减速）直线运动中，位移 = 平均速度 × 时间：<code>s = (v₀ + vₜ)/2 · t</code>。这与 <code>S<sub>n</sub> = (a<sub>1</sub> + a<sub>n</sub>)/2 · n</code> 完全同构——首项、末项的平均值 × 项数。在速度—时间图像里，位移正是速度曲线下的梯形面积，等差求和就是这条"速度折线"下的面积。</div>
 
 <h2 id="s3">4.3 等比数列</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="60" y1="260" x2="500" y2="260" stroke="#94a3b8" stroke-width="2"/>
   <line x1="60" y1="260" x2="60" y2="20" stroke="#94a3b8" stroke-width="2"/>
@@ -178,7 +141,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
     <animate attributeName="cy" values="230;200;140;20;140;200;230" dur="7s" repeatCount="indefinite"/>
   </circle>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：等比数列 = 公比 q 的指数曲线上的点——每向右一步高度「翻 q 倍」，点越拉越开（此处 q=2）</figcaption>
+<figcaption class="fig-cap">图：等比数列 = 公比 q 的指数曲线上的点——每向右一步高度「翻 q 倍」，点越拉越开（此处 q=2）</figcaption>
 </figure>
 <h3>定义</h3>
 <p>从第 2 项起，<strong>每一项与它前一项的比等于同一个非零常数</strong>，这个数列叫等比数列，这个常数叫<strong>公比 q</strong>（要求 a<sub>1</sub> ≠ 0，q ≠ 0）：</p>
@@ -284,7 +247,7 @@ Sₙ = aₙ + aₙ₋₁ + … + a₂ + a₁
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>判断「数列就是集合」这句话是否正确，并说明理由；再写出数列 1, 3, 5, 7, … 的通项公式与第 20 项。</li>
@@ -295,22 +258,22 @@ Sₙ = aₙ + aₙ₋₁ + … + a₂ + a₁
 <li>用裂项相消法求 Σ(k=1→100) 1/[k(k+1)]，并说明它的几何/物理含义。</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>这句话<strong>错误</strong>。数列有<strong>顺序</strong>且项可<strong>重复</strong>，集合无序且元素互异，所以 1,2,3 与 3,2,1 是两个不同的数列。通项公式 a<sub>n</sub> = 2n − 1；第 20 项 a<sub>20</sub> = 2×20 − 1 = 39。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>通项 a<sub>n</sub> = 2 + (n−1)×3 = 3n − 1。公差 d = 3 是这些离散点所在直线的<strong>斜率</strong>，表示每向右走一步（项数 +1），项的值就上升 3，即每一步的固定「步长」。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>S<sub>10</sub> = n(a<sub>1</sub> + a<sub>n</sub>)/2 = 10×(3 + 21)/2 = 120。几何上这就是「上底 a<sub>1</sub>=3、下底 a<sub>n</sub>=21、高 n=10」的梯形面积：(上底 + 下底) × 高 ÷ 2。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>a<sub>4</sub> = a<sub>1</sub>·q<sup>3</sup> = 2×27 = 54；S<sub>4</sub> = a<sub>1</sub>(1−q<sup>4</sup>)/(1−q) = 2×(1−81)/(1−3) = 2×(−80)/(−2) = 80。q = 3 相当于每期都变为上一期的 3 倍（增长率 200%），正如复利中「利滚利」的等倍率增长。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>这是<strong>等比数列</strong>：a<sub>1</sub> = 1，公比 q = 2，末项 512 = 2<sup>9</sup>，故共有 10 项。S = a<sub>1</sub>(1−q<sup>n</sup>)/(1−q) = 1×(1−2<sup>10</sup>)/(1−2) = 1023。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>1/[k(k+1)] = 1/k − 1/(k+1)，裂项后中间各项两两抵消：原式 = (1 − 1/2) + (1/2 − 1/3) + … + (1/100 − 1/101) = 1 − 1/101 = 100/101。几何上是「望远镜求和」——像伸缩望远镜一样中间重叠抵消、只剩首尾两端；物理含义是总量只由起点与终点决定，与中间路径无关。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>这句话<strong>错误</strong>。数列有<strong>顺序</strong>且项可<strong>重复</strong>，集合无序且元素互异，所以 1,2,3 与 3,2,1 是两个不同的数列。通项公式 a<sub>n</sub> = 2n − 1；第 20 项 a<sub>20</sub> = 2×20 − 1 = 39。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>通项 a<sub>n</sub> = 2 + (n−1)×3 = 3n − 1。公差 d = 3 是这些离散点所在直线的<strong>斜率</strong>，表示每向右走一步（项数 +1），项的值就上升 3，即每一步的固定「步长」。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>S<sub>10</sub> = n(a<sub>1</sub> + a<sub>n</sub>)/2 = 10×(3 + 21)/2 = 120。几何上这就是「上底 a<sub>1</sub>=3、下底 a<sub>n</sub>=21、高 n=10」的梯形面积：(上底 + 下底) × 高 ÷ 2。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>a<sub>4</sub> = a<sub>1</sub>·q<sup>3</sup> = 2×27 = 54；S<sub>4</sub> = a<sub>1</sub>(1−q<sup>4</sup>)/(1−q) = 2×(1−81)/(1−3) = 2×(−80)/(−2) = 80。q = 3 相当于每期都变为上一期的 3 倍（增长率 200%），正如复利中「利滚利」的等倍率增长。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>这是<strong>等比数列</strong>：a<sub>1</sub> = 1，公比 q = 2，末项 512 = 2<sup>9</sup>，故共有 10 项。S = a<sub>1</sub>(1−q<sup>n</sup>)/(1−q) = 1×(1−2<sup>10</sup>)/(1−2) = 1023。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>1/[k(k+1)] = 1/k − 1/(k+1)，裂项后中间各项两两抵消：原式 = (1 − 1/2) + (1/2 − 1/3) + … + (1/100 − 1/101) = 1 − 1/101 = 100/101。几何上是「望远镜求和」——像伸缩望远镜一样中间重叠抵消、只剩首尾两端；物理含义是总量只由起点与终点决定，与中间路径无关。</p></details>
 </div>
 
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../../选择性必修一/第3章-圆锥曲线的方程/第3章-圆锥曲线的方程.html">← 上一章：第3章 圆锥曲线的方程</a>
 <a href="../../../index.html">回目录</a>
 <a href="../第5章-一元函数的导数及其应用/第5章-一元函数的导数及其应用.html">下一章：第5章 一元函数的导数及其应用 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 选择性必修第二册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 选择性必修第二册</footer>
 </body>
 </html>

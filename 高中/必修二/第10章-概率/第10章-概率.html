@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第10章 概率 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第10章 概率 · 数学学习</title>
+<link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第10章 概率</div></header>
@@ -55,7 +18,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="s1">10.1 随机事件与概率（样本空间 · 随机事件 · 事件的关系与运算）</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="lens"><circle cx="190" cy="120" r="85"/><circle cx="310" cy="120" r="85"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle></clipPath></defs><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">容斥原理：重叠区域被算了两次</text><circle cx="190" cy="120" r="85" fill="#2563eb" opacity="0.35" stroke="#2563eb" stroke-width="2"/><circle cx="310" cy="120" r="85" fill="#16a34a" opacity="0.35" stroke="#16a34a" stroke-width="2"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle><rect x="0" y="0" width="520" height="280" fill="#2563eb" clip-path="url(#lens)"><animate attributeName="opacity" values="0;0.6;0.6;0;0" dur="8s" repeatCount="indefinite"/></rect><text x="190" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#1e40af">A</text><text x="310" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#15803d">B<animate attributeName="x" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></text><text x="250" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">A∩B<animate attributeName="opacity" values="0;1;1;0;0" dur="8s" repeatCount="indefinite"/></text><text x="260" y="242" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</text><text x="260" y="266" text-anchor="middle" font-size="13" fill="#6b7280">并集面积 = 两块面积之和 − 重叠面积（重叠多算了一次）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：容斥原理——两圆靠近后出现重叠 A∩B，并集面积要减去被算了两次的重叠部分</figcaption></figure>
+<figure class="fig"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="lens"><circle cx="190" cy="120" r="85"/><circle cx="310" cy="120" r="85"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle></clipPath></defs><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">容斥原理：重叠区域被算了两次</text><circle cx="190" cy="120" r="85" fill="#2563eb" opacity="0.35" stroke="#2563eb" stroke-width="2"/><circle cx="310" cy="120" r="85" fill="#16a34a" opacity="0.35" stroke="#16a34a" stroke-width="2"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle><rect x="0" y="0" width="520" height="280" fill="#2563eb" clip-path="url(#lens)"><animate attributeName="opacity" values="0;0.6;0.6;0;0" dur="8s" repeatCount="indefinite"/></rect><text x="190" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#1e40af">A</text><text x="310" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#15803d">B<animate attributeName="x" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></text><text x="250" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">A∩B<animate attributeName="opacity" values="0;1;1;0;0" dur="8s" repeatCount="indefinite"/></text><text x="260" y="242" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</text><text x="260" y="266" text-anchor="middle" font-size="13" fill="#6b7280">并集面积 = 两块面积之和 − 重叠面积（重叠多算了一次）</text></svg><figcaption class="fig-cap">图：容斥原理——两圆靠近后出现重叠 A∩B，并集面积要减去被算了两次的重叠部分</figcaption></figure>
 <h3>随机现象与随机试验</h3>
 <p>先分清两类现象：</p>
 <ul>
@@ -94,7 +57,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <p><strong>两个易混点</strong>：① 对立事件一定是互斥事件，但互斥事件<strong>不一定</strong>对立（互斥只要求"不能同时发生"，还须"并起来是全集"才是对立）。② 三个及以上的事件"两两互斥"与"互斥"要注意：两两互斥指任意两个都互斥。</p>
 
 <h2 id="s2">10.2 古典概型（等可能概型）</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="272" viewBox="0 0 520 272" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">古典概型：每个格子等面积（等可能性）</text><rect x="20" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></rect><rect x="90" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.25s" repeatCount="indefinite"/></rect><rect x="160" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite"/></rect><rect x="230" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.75s" repeatCount="indefinite"/></rect><rect x="20" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="90" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="160" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="230" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><circle cx="51" cy="77" r="10" fill="#16a34a" stroke="#ffffff" stroke-width="2"><animate attributeName="cx" values="51;121;191;261;51;121;191;261;51" dur="8s" calcMode="discrete" repeatCount="indefinite"/><animate attributeName="cy" values="77;77;77;77;151;151;151;151;77" dur="8s" calcMode="discrete" repeatCount="indefinite"/></circle><rect x="20" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="60" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="100" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="140" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="180" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="220" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="260" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="300" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><text x="260" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A) = 有利格子 4 ÷ 总格子 8 = 1/2</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：古典概型是「有利区域面积 ÷ 总面积」——蓝格为事件 A，绿点代表一次试验的结果落进某个格子</figcaption></figure>
+<figure class="fig"><svg width="520" height="272" viewBox="0 0 520 272" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">古典概型：每个格子等面积（等可能性）</text><rect x="20" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></rect><rect x="90" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.25s" repeatCount="indefinite"/></rect><rect x="160" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite"/></rect><rect x="230" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.75s" repeatCount="indefinite"/></rect><rect x="20" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="90" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="160" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="230" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><circle cx="51" cy="77" r="10" fill="#16a34a" stroke="#ffffff" stroke-width="2"><animate attributeName="cx" values="51;121;191;261;51;121;191;261;51" dur="8s" calcMode="discrete" repeatCount="indefinite"/><animate attributeName="cy" values="77;77;77;77;151;151;151;151;77" dur="8s" calcMode="discrete" repeatCount="indefinite"/></circle><rect x="20" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="60" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="100" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="140" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="180" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="220" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="260" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="300" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><text x="260" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A) = 有利格子 4 ÷ 总格子 8 = 1/2</text></svg><figcaption class="fig-cap">图：古典概型是「有利区域面积 ÷ 总面积」——蓝格为事件 A，绿点代表一次试验的结果落进某个格子</figcaption></figure>
 <h3>定义</h3>
 <p>若一个试验同时满足两个条件：</p>
 <ol>
@@ -212,7 +175,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3>一、练习题</h3>
 <ol>
 <li>掷一颗均匀骰子，写出样本空间 Ω。设 A = {1，2，3}（点数不大于 3），B = {2，3，4}，求 A ∩ B 与 A ∪ B，并判断 A 与 B 是否互斥。</li>
@@ -223,19 +186,19 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>甲、乙两人独立射击同一目标，命中率分别为 0.7 与 0.8。求：（1）两人都未命中；（2）至少一人命中；（3）恰有一人命中。</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>Ω = {1，2，3，4，5，6}。A ∩ B = {2，3}（同时属于 A、B 的公共部分）；A ∪ B = {1，2，3，4}（两块区域的并集）。因为 A ∩ B = {2，3} ≠ ∅，A 与 B 有公共样本点，能同时发生，所以<strong>不互斥</strong>。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>样本空间共 8 个样本点（红×4、白×3、蓝×1），每个球等可能。红球占 4 个「格子」，故 P = 4/8 = 1/2。几何含义：把每个球看成地图上一个等面积的格子，「有利区域（红球）的面积 ÷ 总面积」= 4 ÷ 8 = 1/2。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0.6 + 0.5 − 0.3 = 0.8。不能直接相加，是因为「两科都喜欢」的人在 P(A) 与 P(B) 里被算了两次，须减去一次重叠部分——正如两区域并集的面积 = 面积A + 面积B − 重叠面积（容斥原理）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>「点数不小于 2」= {2，3，4，5，6}，其对立事件是「点数等于 1」= {1}。P(不小于 2) = 1 − P(点数等于 1) = 1 − 1/6 = 5/6。几何含义：直接数「有利区域」要数 5 格，而「空白区域（补集）只有 1 格」，用「1 − 阴影外面积」更快。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>Ω = {正正，正反，反正，反反}，共 4 个样本点。P(A) = 2/4 = 1/2，P(B) = 2/4 = 1/2，A ∩ B = {正正}，P(A ∩ B) = 1/4。验证：P(A)·P(B) = 1/2 × 1/2 = 1/4 = P(A ∩ B)，故 A 与 B 相互独立。几何含义：第一次结果对应横轴、第二次对应纵轴，A ∩ B 是长 × 宽 = 1/2 × 1/2 的矩形，两维正交可分离相乘，正是「两次试验互不影响」。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>甲未命中 = 0.3，乙未命中 = 0.2，且独立。（1）都未命中 = 0.3 × 0.2 = 0.06；（2）至少一人命中 = 1 − 都未命中 = 1 − 0.06 = 0.94（用对立事件，避开分类）；（3）恰有一人命中 = 甲中乙不中 + 甲不中乙中 = 0.7 × 0.2 + 0.3 × 0.8 = 0.14 + 0.24 = 0.38。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>Ω = {1，2，3，4，5，6}。A ∩ B = {2，3}（同时属于 A、B 的公共部分）；A ∪ B = {1，2，3，4}（两块区域的并集）。因为 A ∩ B = {2，3} ≠ ∅，A 与 B 有公共样本点，能同时发生，所以<strong>不互斥</strong>。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>样本空间共 8 个样本点（红×4、白×3、蓝×1），每个球等可能。红球占 4 个「格子」，故 P = 4/8 = 1/2。几何含义：把每个球看成地图上一个等面积的格子，「有利区域（红球）的面积 ÷ 总面积」= 4 ÷ 8 = 1/2。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0.6 + 0.5 − 0.3 = 0.8。不能直接相加，是因为「两科都喜欢」的人在 P(A) 与 P(B) 里被算了两次，须减去一次重叠部分——正如两区域并集的面积 = 面积A + 面积B − 重叠面积（容斥原理）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>「点数不小于 2」= {2，3，4，5，6}，其对立事件是「点数等于 1」= {1}。P(不小于 2) = 1 − P(点数等于 1) = 1 − 1/6 = 5/6。几何含义：直接数「有利区域」要数 5 格，而「空白区域（补集）只有 1 格」，用「1 − 阴影外面积」更快。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>Ω = {正正，正反，反正，反反}，共 4 个样本点。P(A) = 2/4 = 1/2，P(B) = 2/4 = 1/2，A ∩ B = {正正}，P(A ∩ B) = 1/4。验证：P(A)·P(B) = 1/2 × 1/2 = 1/4 = P(A ∩ B)，故 A 与 B 相互独立。几何含义：第一次结果对应横轴、第二次对应纵轴，A ∩ B 是长 × 宽 = 1/2 × 1/2 的矩形，两维正交可分离相乘，正是「两次试验互不影响」。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>甲未命中 = 0.3，乙未命中 = 0.2，且独立。（1）都未命中 = 0.3 × 0.2 = 0.06；（2）至少一人命中 = 1 − 都未命中 = 1 − 0.06 = 0.94（用对立事件，避开分类）；（3）恰有一人命中 = 甲中乙不中 + 甲不中乙中 = 0.7 × 0.2 + 0.3 × 0.8 = 0.14 + 0.24 = 0.38。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第9章-统计/第9章-统计.html">← 上一章：第9章 统计</a>
 <a href="../../../index.html">回目录</a>
 <a href="../../选择性必修一/第1章-空间向量与立体几何/第1章-空间向量与立体几何.html">下一章：第1章 空间向量与立体几何 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 高中数学</footer>
 </body>
 </html>

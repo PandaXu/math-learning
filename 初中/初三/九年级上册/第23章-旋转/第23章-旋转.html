@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第23章 旋转 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第23章 旋转 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第23章 旋转</div></header>
@@ -55,7 +18,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="s1">23.1 旋转</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="135" r="4" fill="#0f172a"/><text x="260" y="120" font-size="13" fill="#334155" text-anchor="middle">O</text><circle cx="260" cy="135" r="80" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="340" cy="135" r="4" fill="#2563eb"/><text x="340" y="158" font-size="13" fill="#2563eb" text-anchor="middle">P</text><circle cx="220" cy="65.72" r="4" fill="#16a34a"/><text x="220" y="52" font-size="13" fill="#16a34a" text-anchor="middle">P′</text><line x1="260" y1="135" x2="220" y2="65.72" stroke="#16a34a" stroke-width="2"/><path d="M 340 135 A 80 80 0 0 1 220 65.72" fill="none" stroke="#16a34a" stroke-width="2"/><text x="308" y="60" font-size="15" fill="#16a34a" text-anchor="middle">α</text><g><animateTransform attributeName="transform" type="rotate" values="0 260 135;120 260 135;0 260 135" dur="6s" repeatCount="indefinite"/><line x1="260" y1="135" x2="340" y2="135" stroke="#2563eb" stroke-width="3"/><circle cx="340" cy="135" r="6" fill="#2563eb"/></g><text x="303" y="128" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="234" y="104" font-size="12" fill="#16a34a" text-anchor="middle">r</text><text x="260" y="238" font-size="14" fill="#334155" text-anchor="middle">OP = OP′ = r，∠POP′ = α</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：绕中心 O 旋转 α，对应点到中心的距离相等（OP = OP′ = r），∠POP′ 就是旋转角</figcaption></figure>
+<figure class="fig"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="135" r="4" fill="#0f172a"/><text x="260" y="120" font-size="13" fill="#334155" text-anchor="middle">O</text><circle cx="260" cy="135" r="80" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="340" cy="135" r="4" fill="#2563eb"/><text x="340" y="158" font-size="13" fill="#2563eb" text-anchor="middle">P</text><circle cx="220" cy="65.72" r="4" fill="#16a34a"/><text x="220" y="52" font-size="13" fill="#16a34a" text-anchor="middle">P′</text><line x1="260" y1="135" x2="220" y2="65.72" stroke="#16a34a" stroke-width="2"/><path d="M 340 135 A 80 80 0 0 1 220 65.72" fill="none" stroke="#16a34a" stroke-width="2"/><text x="308" y="60" font-size="15" fill="#16a34a" text-anchor="middle">α</text><g><animateTransform attributeName="transform" type="rotate" values="0 260 135;120 260 135;0 260 135" dur="6s" repeatCount="indefinite"/><line x1="260" y1="135" x2="340" y2="135" stroke="#2563eb" stroke-width="3"/><circle cx="340" cy="135" r="6" fill="#2563eb"/></g><text x="303" y="128" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="234" y="104" font-size="12" fill="#16a34a" text-anchor="middle">r</text><text x="260" y="238" font-size="14" fill="#334155" text-anchor="middle">OP = OP′ = r，∠POP′ = α</text></svg><figcaption class="fig-cap">图：绕中心 O 旋转 α，对应点到中心的距离相等（OP = OP′ = r），∠POP′ 就是旋转角</figcaption></figure>
 <h3>旋转的定义</h3>
 <p>在平面内，把一个平面图形绕着平面内某一点 <code>O</code> 转动一个角度，叫做图形的<strong>旋转</strong>（rotation）。点 <code>O</code> 叫做<strong>旋转中心</strong>，转动的角叫做<strong>旋转角</strong>。如果图形上的点 <code>P</code> 经过旋转变为点 <code>P′</code>，那么 <code>P</code> 与 <code>P′</code> 叫做这个旋转的<strong>对应点</strong>。</p>
 <p>旋转与<strong>平移</strong>、<strong>轴对称</strong>并列，是初中阶段必须掌握的<strong>三大全等变换（刚体变换）</strong>之一。</p>
@@ -88,7 +51,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ol>
 
 <h2 id="s2">23.2 中心对称</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="105" r="4" fill="#0f172a"/><text x="260" y="92" font-size="13" fill="#334155" text-anchor="middle">O</text><path d="M 330 105 A 70 70 0 0 1 190 105" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="120" y1="105" x2="400" y2="105" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="2.5"/><line x1="260" y1="105" x2="190" y2="105" stroke="#16a34a" stroke-width="2.5"/><circle cx="330" cy="105" r="4" fill="#2563eb"/><text x="330" y="128" font-size="13" fill="#2563eb" text-anchor="middle">A</text><circle cx="190" cy="105" r="4" fill="#16a34a"/><text x="190" y="128" font-size="13" fill="#16a34a" text-anchor="middle">A′</text><text x="295" y="98" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="225" y="98" font-size="12" fill="#16a34a" text-anchor="middle">r</text><line x1="260" y1="96" x2="260" y2="114" stroke="#0f172a" stroke-width="1.5"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 105;180 260 105;0 260 105" dur="6s" repeatCount="indefinite"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="3" opacity="0.55"/><circle cx="330" cy="105" r="6" fill="#2563eb"/></g><text x="260" y="196" font-size="14" fill="#334155" text-anchor="middle">A、O、A′ 三点共线，且 OA = OA′（O 是中点）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：中心对称就是绕 O 转 180°，对称点 A、O、A′ 三点共线且 O 是 AA′ 的中点</figcaption></figure>
+<figure class="fig"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="105" r="4" fill="#0f172a"/><text x="260" y="92" font-size="13" fill="#334155" text-anchor="middle">O</text><path d="M 330 105 A 70 70 0 0 1 190 105" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="120" y1="105" x2="400" y2="105" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="2.5"/><line x1="260" y1="105" x2="190" y2="105" stroke="#16a34a" stroke-width="2.5"/><circle cx="330" cy="105" r="4" fill="#2563eb"/><text x="330" y="128" font-size="13" fill="#2563eb" text-anchor="middle">A</text><circle cx="190" cy="105" r="4" fill="#16a34a"/><text x="190" y="128" font-size="13" fill="#16a34a" text-anchor="middle">A′</text><text x="295" y="98" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="225" y="98" font-size="12" fill="#16a34a" text-anchor="middle">r</text><line x1="260" y1="96" x2="260" y2="114" stroke="#0f172a" stroke-width="1.5"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 105;180 260 105;0 260 105" dur="6s" repeatCount="indefinite"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="3" opacity="0.55"/><circle cx="330" cy="105" r="6" fill="#2563eb"/></g><text x="260" y="196" font-size="14" fill="#334155" text-anchor="middle">A、O、A′ 三点共线，且 OA = OA′（O 是中点）</text></svg><figcaption class="fig-cap">图：中心对称就是绕 O 转 180°，对称点 A、O、A′ 三点共线且 O 是 AA′ 的中点</figcaption></figure>
 <h3>定义</h3>
 <p>把一个图形绕着某一点旋转 <strong>180°</strong>，如果它能够与<strong>另一个图形</strong>重合，那么就说这两个图形关于这个点对称，或<strong>中心对称</strong>（central symmetry），这个点叫做<strong>对称中心</strong>（简称中心）。这两个图形在旋转后能重合的对应点叫做<strong>关于中心的对称点</strong>。</p>
 <p><strong>本质：</strong>中心对称就是"旋转角恰好等于 180°"的特殊旋转。它完全继承旋转的三要素与全部性质，只是方向固定为"转半圈"。</p>
@@ -198,7 +161,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong></p>
 <ol>
 <li>（旋转三要素）把 △ABC 绕点 O 沿逆时针方向旋转 60° 得到 △A′B′C′。请指出这次旋转的旋转中心、旋转方向和旋转角。</li>
@@ -209,19 +172,19 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>（综合应用）分别举出一个"既是轴对称图形又是中心对称图形"和一个"是中心对称图形但不是轴对称图形"的例子；并说明：正三角形绕它的中心旋转多少度能与自身重合？它是中心对称图形吗？为什么？</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>旋转中心是点 O，旋转方向是逆时针，旋转角是 60°。描述一次旋转必须同时说清"中心、方向、角度"三个要素，缺一不可。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>OP′ = OP = 4（对应点到旋转中心的距离相等）；∠QOQ′ 等于旋转角（对应点与旋转中心连线所成的夹角等于旋转角）；旋转前后的图形全等，因为旋转是保距保形的等距变换，形状、大小都不变。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>AA′ = 2AO = 10。A、O、A′ 三点共线，且点 O 是线段 AA′ 的中点（对称点连线经过对称中心且被对称中心平分）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>作法：① 连接 AO；② 延长 AO 到 A′，使 OA′ = OA；③ 点 A′ 即为所求。一句话概括：连点 → 延长 → 取等长。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>是中心对称图形的有：线段（对称中心为线段中点）、平行四边形（对角线交点）、圆（圆心）、正六边形（图形中心）。等腰三角形、正三角形不是中心对称图形（它们只是轴对称图形）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>"既是轴对称又是中心对称"的例子：线段（轴为垂直平分线、中心为中点）或圆、正方形；"是中心对称但不是轴对称"的例子：一般的平行四边形。正三角形绕中心旋转 120°（或 240°、360°）能与自身重合；它不是中心对称图形，因为绕中心转 180° 后不能与自身重合。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>旋转中心是点 O，旋转方向是逆时针，旋转角是 60°。描述一次旋转必须同时说清"中心、方向、角度"三个要素，缺一不可。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>OP′ = OP = 4（对应点到旋转中心的距离相等）；∠QOQ′ 等于旋转角（对应点与旋转中心连线所成的夹角等于旋转角）；旋转前后的图形全等，因为旋转是保距保形的等距变换，形状、大小都不变。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>AA′ = 2AO = 10。A、O、A′ 三点共线，且点 O 是线段 AA′ 的中点（对称点连线经过对称中心且被对称中心平分）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>作法：① 连接 AO；② 延长 AO 到 A′，使 OA′ = OA；③ 点 A′ 即为所求。一句话概括：连点 → 延长 → 取等长。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>是中心对称图形的有：线段（对称中心为线段中点）、平行四边形（对角线交点）、圆（圆心）、正六边形（图形中心）。等腰三角形、正三角形不是中心对称图形（它们只是轴对称图形）。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>"既是轴对称又是中心对称"的例子：线段（轴为垂直平分线、中心为中点）或圆、正方形；"是中心对称但不是轴对称"的例子：一般的平行四边形。正三角形绕中心旋转 120°（或 240°、360°）能与自身重合；它不是中心对称图形，因为绕中心转 180° 后不能与自身重合。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第22章-二次函数/第22章-二次函数.html">← 上一章：第22章 二次函数</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第24章-圆/第24章-圆.html">下一章：第24章 圆 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 九年级上册</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 九年级上册</footer>
 </body>
 </html>

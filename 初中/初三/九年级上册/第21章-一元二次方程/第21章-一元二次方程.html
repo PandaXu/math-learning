@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第21章 一元二次方程 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第21章 一元二次方程 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第21章 一元二次方程</div></header>
@@ -93,7 +56,7 @@ x = 3 ± 4   →  x = 7 或 x = -1</code></pre>
 <div class="insight"><strong>物理含义：</strong>初速度为 0 的匀加速直线运动，位移公式 <code>s = ½at²</code>。已知位移 s 和加速度 a 求时间 t：<code>t² = 2s/a</code>，开平方得 <code>t = ±√(2s/a)</code>——负号对应"往回追溯的过去时刻"，通常只取正根 t &gt; 0 作为物理上合理的时间。</div>
 
 <h2 id="s3">21.3 配方法</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <defs>
 <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
@@ -130,7 +93,7 @@ x = 3 ± 4   →  x = 7 或 x = -1</code></pre>
 <text x="330" y="118" fill="#2563eb" font-size="22" text-anchor="middle" font-weight="700">(x + 3)²</text>
 <text x="260" y="255" fill="#1e3a8a" font-size="17" text-anchor="middle">x² + 6x + 9 = (x + 3)²</text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：配方法——把缺一角的矩形补成完整正方形，补上的正是 3²</figcaption>
+<figcaption class="fig-cap">图：配方法——把缺一角的矩形补成完整正方形，补上的正是 3²</figcaption>
 </figure>
 <h3>思想：把"一般式"变成"能直接开平方的形式"</h3>
 <p>配方法的本质是<strong>把 ax² + bx + c = 0 化为 (x + m)² = n</strong>，再回到直接开平方。这是所有方法里最"原理化"的一种，求根公式正是由它推出来的。</p>
@@ -153,7 +116,7 @@ x = -3 ± 2  →  x = -1 或 x = -5</code></pre>
 <div class="insight"><strong>物理含义：</strong>把匀变速运动的高度式 <code>h = -½gt² + v₀t + h₀</code> 配成 <code>h = -½g(t - t顶)² + h顶</code> 的形式后，能直接读出"顶点"：<code>t顶 = v₀/g</code> 是到达最高点的时刻，<code>h顶 = h₀ + v₀²/(2g)</code> 是最高点高度。配方法把"一团二次式"整理成"一眼看出极值"的形状。</div>
 
 <h2 id="s4">21.4 公式法与判别式</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<figure class="fig">
 <svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
 <line x1="80" y1="180" x2="440" y2="180" stroke="#94a3b8" stroke-width="2"/>
 <text x="446" y="184" fill="#334155" font-size="13">x 轴</text>
@@ -187,7 +150,7 @@ x = -3 ± 2  →  x = -1 或 x = -5</code></pre>
   x₂
 </text>
 </svg>
-<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：判别式 Δ——抛物线上下平移，与 x 轴交点由 2 个 → 1 个（相切）→ 0 个</figcaption>
+<figcaption class="fig-cap">图：判别式 Δ——抛物线上下平移，与 x 轴交点由 2 个 → 1 个（相切）→ 0 个</figcaption>
 </figure>
 <h3>求根公式：万能解法</h3>
 <p>对一般式 <code>ax² + bx + c = 0（a≠0）</code> 配方，可直接导出适用于<strong>所有</strong>一元二次方程的求根公式：</p>
@@ -328,7 +291,7 @@ h = 20t - 5t²
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <h3 style="margin-top:0">一、练习题</h3>
 <ol>
 <li>判断下列哪些是一元二次方程，并把属于一元二次方程的整理成一般式 <code>ax² + bx + c = 0</code>，指出 a、b、c：① <code>3x² - 2x - 1 = 0</code>；② <code>x² = 0</code>；③ <code>2x - 1 = 0</code>；④ <code>(x - 1)(x + 2) = 0</code>。</li>
@@ -339,20 +302,20 @@ h = 20t - 5t²
 <li>一小球以 20 m/s 竖直上抛（g = 10 m/s²），高度 <code>h = 20t - 5t²</code>。求：小球何时回到地面（h = 0）？何时到达最高点？最高点的高度是多少？</li>
 </ol>
 <h3>二、参考答案（点击展开）</h3>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>①②④ 是一元二次方程，③ 是一次方程。① 已是一般式：a = 3，b = -2，c = -1；② x² = 0：a = 1，b = 0，c = 0；④ 展开得 x² + x - 2 = 0：a = 1，b = 1，c = -2。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>x² = 25 → x = ±5。几何上，面积为 25 的正方形边长为 5，但数轴上「距原点 5」的点有 +5 和 -5 两个，二者关于原点对称，所以有两个根。(x - 3)² = 16 → x - 3 = ±4 → x = 7 或 x = -1。而 x² = -4 无实数根：任何实数的平方都 ≥ 0，「面积为负」的正方形不存在。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>x² + 8x - 9 = 0 → x² + 8x = 9 → x² + 8x + 16 = 9 + 16 → (x + 4)² = 25 → x + 4 = ±5 → x = 1 或 x = -9。加 16 是因为一次项系数 8 的一半是 4，4² = 16，补上它左边才能凑成完全平方式 (x + 4)²（相当于把缺角的矩形补成完整正方形）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>2x² - 5x + 2 = 0：a = 2，b = -5，c = 2，Δ = b² - 4ac = 25 - 16 = 9 &gt; 0，x = [-(-5) ± √9]/(2×2) = (5 ± 3)/4，故 x = 2 或 x = 1/2。对于 x² - 4x + 5 = 0：Δ = 16 - 20 = -4 &lt; 0，无实数根；抛物线 y = x² - 4x + 5 开口向上且顶点在 x 轴上方，与 x 轴没有交点（0 个交点）。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>x² - 7x + 12 = 0 → (x - 3)(x - 4) = 0 → x = 3 或 x = 4。验证韦达定理：x₁ + x₂ = 3 + 4 = 7 = -(-7)/1，x₁·x₂ = 3 × 4 = 12 = 12/1，与「两根之和 = -b/a、两根之积 = c/a」完全一致。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>回到地面即 h = 0：20t - 5t² = 0 → 5t(4 - t) = 0 → t = 0（出发时刻）或 t = 4 s（回到地面）。到达最高点时刻在对称轴（两根 0 与 4 的中点）处：t = -b/(2a) = 20/(2×5) = 2 s；最高点高度 h(2) = 20×2 - 5×2² = 40 - 20 = 20 m。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>①②④ 是一元二次方程，③ 是一次方程。① 已是一般式：a = 3，b = -2，c = -1；② x² = 0：a = 1，b = 0，c = 0；④ 展开得 x² + x - 2 = 0：a = 1，b = 1，c = -2。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>x² = 25 → x = ±5。几何上，面积为 25 的正方形边长为 5，但数轴上「距原点 5」的点有 +5 和 -5 两个，二者关于原点对称，所以有两个根。(x - 3)² = 16 → x - 3 = ±4 → x = 7 或 x = -1。而 x² = -4 无实数根：任何实数的平方都 ≥ 0，「面积为负」的正方形不存在。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>x² + 8x - 9 = 0 → x² + 8x = 9 → x² + 8x + 16 = 9 + 16 → (x + 4)² = 25 → x + 4 = ±5 → x = 1 或 x = -9。加 16 是因为一次项系数 8 的一半是 4，4² = 16，补上它左边才能凑成完全平方式 (x + 4)²（相当于把缺角的矩形补成完整正方形）。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>2x² - 5x + 2 = 0：a = 2，b = -5，c = 2，Δ = b² - 4ac = 25 - 16 = 9 &gt; 0，x = [-(-5) ± √9]/(2×2) = (5 ± 3)/4，故 x = 2 或 x = 1/2。对于 x² - 4x + 5 = 0：Δ = 16 - 20 = -4 &lt; 0，无实数根；抛物线 y = x² - 4x + 5 开口向上且顶点在 x 轴上方，与 x 轴没有交点（0 个交点）。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>x² - 7x + 12 = 0 → (x - 3)(x - 4) = 0 → x = 3 或 x = 4。验证韦达定理：x₁ + x₂ = 3 + 4 = 7 = -(-7)/1，x₁·x₂ = 3 × 4 = 12 = 12/1，与「两根之和 = -b/a、两根之积 = c/a」完全一致。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>回到地面即 h = 0：20t - 5t² = 0 → 5t(4 - t) = 0 → t = 0（出发时刻）或 t = 4 s（回到地面）。到达最高点时刻在对称轴（两根 0 与 4 的中点）处：t = -b/(2a) = 20/(2×5) = 2 s；最高点高度 h(2) = 20×2 - 5×2² = 40 - 20 = 20 m。</p></details>
 </div>
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../../../初二/八年级下册/第20章-数据的分析/第20章-数据的分析.html">← 上一章：第20章 数据的分析</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第22章-二次函数/第22章-二次函数.html">下一章：第22章 二次函数 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

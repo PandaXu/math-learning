@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第29章 投影与视图 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第29章 投影与视图 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第29章 投影与视图</div></header>
@@ -69,7 +32,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
           └─ 中心投影（投影线从同一点发出，如灯光）</code></pre>
 
 <h2 id="s2">29.2 平行投影与中心投影</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="500" y1="30" x2="500" y2="250" stroke="#94a3b8" stroke-width="3"/><text x="500" y="22" font-size="13" fill="#334155" text-anchor="middle">屏幕</text><polygon points="40,140 500,68 500,212" fill="#fbbf24" opacity="0.15"><animate attributeName="points" values="40,140 500,68 500,212;40,140 500,96 500,184;40,140 500,108 500,172;40,140 500,96 500,184;40,140 500,68 500,212" dur="8s" repeatCount="indefinite"/></polygon><circle cx="40" cy="140" r="16" fill="#f59e0b" opacity="0.25"><animate attributeName="r" values="16;22;16" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.1;0.25" dur="2s" repeatCount="indefinite"/></circle><circle cx="40" cy="140" r="7" fill="#f59e0b"><animate attributeName="r" values="7;10;7" dur="2s" repeatCount="indefinite"/></circle><text x="40" y="116" font-size="13" fill="#b45309" text-anchor="middle">点光源</text><line x1="40" y1="140" x2="500" y2="68" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/></line><line x1="40" y1="140" x2="500" y2="212" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line><rect x="193" y="115" width="14" height="50" rx="3" fill="#2563eb"><animate attributeName="x" values="193;293;393;293;193" dur="8s" repeatCount="indefinite"/></rect><text x="200" y="102" font-size="12" fill="#2563eb" text-anchor="middle">物体<animate attributeName="x" values="200;300;400;300;200" dur="8s" repeatCount="indefinite"/></text><line x1="500" y1="68" x2="500" y2="212" stroke="#16a34a" stroke-width="5" stroke-linecap="round"><animate attributeName="y1" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图 1：中心投影（灯光）——物体离点光源越近，屏幕上的影子越大（近大远小），本质是光的直线传播</figcaption></figure>
+<figure class="fig"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="500" y1="30" x2="500" y2="250" stroke="#94a3b8" stroke-width="3"/><text x="500" y="22" font-size="13" fill="#334155" text-anchor="middle">屏幕</text><polygon points="40,140 500,68 500,212" fill="#fbbf24" opacity="0.15"><animate attributeName="points" values="40,140 500,68 500,212;40,140 500,96 500,184;40,140 500,108 500,172;40,140 500,96 500,184;40,140 500,68 500,212" dur="8s" repeatCount="indefinite"/></polygon><circle cx="40" cy="140" r="16" fill="#f59e0b" opacity="0.25"><animate attributeName="r" values="16;22;16" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.1;0.25" dur="2s" repeatCount="indefinite"/></circle><circle cx="40" cy="140" r="7" fill="#f59e0b"><animate attributeName="r" values="7;10;7" dur="2s" repeatCount="indefinite"/></circle><text x="40" y="116" font-size="13" fill="#b45309" text-anchor="middle">点光源</text><line x1="40" y1="140" x2="500" y2="68" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/></line><line x1="40" y1="140" x2="500" y2="212" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line><rect x="193" y="115" width="14" height="50" rx="3" fill="#2563eb"><animate attributeName="x" values="193;293;393;293;193" dur="8s" repeatCount="indefinite"/></rect><text x="200" y="102" font-size="12" fill="#2563eb" text-anchor="middle">物体<animate attributeName="x" values="200;300;400;300;200" dur="8s" repeatCount="indefinite"/></text><line x1="500" y1="68" x2="500" y2="212" stroke="#16a34a" stroke-width="5" stroke-linecap="round"><animate attributeName="y1" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line></svg><figcaption class="fig-cap">图 1：中心投影（灯光）——物体离点光源越近，屏幕上的影子越大（近大远小），本质是光的直线传播</figcaption></figure>
 <h3>平行投影</h3>
 <p>由<strong>平行光线</strong>形成的投影叫做<strong>平行投影</strong>。太阳光离我们极远，可以近似看成平行光，所以<strong>太阳光下的投影是平行投影</strong>。</p>
 <ul>
@@ -156,7 +119,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <div class="insight"><strong>物理含义：</strong>三视图是<strong>工程图纸的标准语言</strong>——工厂里工人不看实物，只看图纸（主视图、俯视图、左视图）就能知道零件长什么样、多大尺寸，从而把零件加工出来。建筑、机械、产品设计都靠三视图交流。</div>
 
 <h2 id="s5">29.5 长对正、高平齐、宽相等</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="110" y="40" width="140" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="110" y="190" width="140" height="60" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="290" y="40" width="60" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><text x="180" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">主视图</text><text x="180" y="116" text-anchor="middle" font-size="11" fill="#334155">长 L × 高 H</text><text x="180" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">俯视图</text><text x="180" y="243" text-anchor="middle" font-size="11" fill="#334155">长 L × 宽 D</text><text x="320" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">左视图</text><text x="320" y="116" text-anchor="middle" font-size="11" fill="#334155">宽 D × 高 H</text><g stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4"><line x1="110" y1="152" x2="110" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="250" y1="152" x2="250" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="40" x2="288" y2="40"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="150" x2="288" y2="150"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line></g><line x1="350" y1="190" x2="290" y2="250" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><circle r="4" fill="#2563eb"><animate attributeName="cx" values="250;250;250" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="152;188;152" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#2563eb"><animate attributeName="cx" values="252;288;252" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="350;290;350" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="190;250;190" dur="4s" repeatCount="indefinite"/></circle><text x="258" y="176" font-size="11" fill="#2563eb">长对正</text><text x="270" y="30" font-size="11" fill="#2563eb">高平齐</text><text x="314" y="238" font-size="11" fill="#16a34a">宽相等</text><text x="260" y="296" font-size="12" fill="#334155" text-anchor="middle">蓝色虚线＝长对正（主↔俯）、高平齐（主↔左）；绿色虚线＝宽相等（俯↔左）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图 2：三视图「长对正、高平齐、宽相等」——主、俯、左三个正投影共享同一组长 L、高 H、宽 D，三张图拼起来唯一确定立体</figcaption></figure>
+<figure class="fig"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="110" y="40" width="140" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="110" y="190" width="140" height="60" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="290" y="40" width="60" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><text x="180" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">主视图</text><text x="180" y="116" text-anchor="middle" font-size="11" fill="#334155">长 L × 高 H</text><text x="180" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">俯视图</text><text x="180" y="243" text-anchor="middle" font-size="11" fill="#334155">长 L × 宽 D</text><text x="320" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">左视图</text><text x="320" y="116" text-anchor="middle" font-size="11" fill="#334155">宽 D × 高 H</text><g stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4"><line x1="110" y1="152" x2="110" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="250" y1="152" x2="250" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="40" x2="288" y2="40"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="150" x2="288" y2="150"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line></g><line x1="350" y1="190" x2="290" y2="250" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><circle r="4" fill="#2563eb"><animate attributeName="cx" values="250;250;250" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="152;188;152" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#2563eb"><animate attributeName="cx" values="252;288;252" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="350;290;350" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="190;250;190" dur="4s" repeatCount="indefinite"/></circle><text x="258" y="176" font-size="11" fill="#2563eb">长对正</text><text x="270" y="30" font-size="11" fill="#2563eb">高平齐</text><text x="314" y="238" font-size="11" fill="#16a34a">宽相等</text><text x="260" y="296" font-size="12" fill="#334155" text-anchor="middle">蓝色虚线＝长对正（主↔俯）、高平齐（主↔左）；绿色虚线＝宽相等（俯↔左）</text></svg><figcaption class="fig-cap">图 2：三视图「长对正、高平齐、宽相等」——主、俯、左三个正投影共享同一组长 L、高 H、宽 D，三张图拼起来唯一确定立体</figcaption></figure>
 <p>三个视图不是三张孤立的图，它们之间有三个相等关系，合称「<strong>长对正、高平齐、宽相等</strong>」：</p>
 <table>
 <tr><th>关系</th><th>哪两个视图</th><th>含义</th></tr>
@@ -268,7 +231,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p style="margin:6px 0"><strong>一、练习题</strong></p>
 <ol>
 <li>判断下列投影分别属于平行投影还是中心投影，并指出各自的投影线和投影面：① 阳光下旗杆投在地面上的影子；② 路灯下行人投在马路上的影子；③ 皮影戏里灯光把纸人投在幕布上的影子。</li>
@@ -279,20 +242,20 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 <li>用小正方体（棱长 1）搭几何体，俯视图是 2×2 方格（上方为后、下方为前），标数为：后行 1、1，前行 2、1。求：(1) 小正方体的总数；(2) 主视图从左到右两列的高度分别是多少？</li>
 </ol>
 <p style="margin:14px 0 6px"><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 平行投影（太阳光近似平行光），投影线是太阳光线，投影面是地面；② 中心投影（灯光从一点发出），投影线是灯光，投影面是马路；③ 中心投影（灯光从一点发出），投影线是灯光，投影面是幕布。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>设树高为 x。太阳光下是平行投影，同一时刻影长与物高成正比：1.5/1.2 = x/4.8，解得 x = 6 m。灯光是中心投影，物体离光源远近不同影子大小就不同（近大远小），影长不与物高成正比，不能按比例直接算。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① 正投影为与原圆全等的圆（形状、大小都不变）；② 正投影为椭圆（形状改变）；③ 正投影为一条线段（长度等于直径）。垂直于投影面的线段，其正投影为一个点。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>几何体是圆柱（竖放）。俯视图圆的直径 6 与主视图矩形的宽 6 相等，即「长对正」；主视图与左视图的高都是 4，即「高平齐」；俯视图与左视图的宽都反映底面直径 6，即「宽相等」。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>几何体是圆锥（俯视图圆心处有一点，是锥顶的投影，这是区分圆锥与圆柱的关键）。底面半径 r = 3，高 h = 4，V = (1/3)πr²h = (1/3)π×3²×4 = 12π。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(1) 总数 = 1+1+2+1 = 5 个；(2) 主视图从左到右每列取该列的最大高度：左列 max(1,2) = 2，右列 max(1,1) = 1，所以主视图两列高度为 2、1。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>① 平行投影（太阳光近似平行光），投影线是太阳光线，投影面是地面；② 中心投影（灯光从一点发出），投影线是灯光，投影面是马路；③ 中心投影（灯光从一点发出），投影线是灯光，投影面是幕布。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>设树高为 x。太阳光下是平行投影，同一时刻影长与物高成正比：1.5/1.2 = x/4.8，解得 x = 6 m。灯光是中心投影，物体离光源远近不同影子大小就不同（近大远小），影长不与物高成正比，不能按比例直接算。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>① 正投影为与原圆全等的圆（形状、大小都不变）；② 正投影为椭圆（形状改变）；③ 正投影为一条线段（长度等于直径）。垂直于投影面的线段，其正投影为一个点。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>几何体是圆柱（竖放）。俯视图圆的直径 6 与主视图矩形的宽 6 相等，即「长对正」；主视图与左视图的高都是 4，即「高平齐」；俯视图与左视图的宽都反映底面直径 6，即「宽相等」。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>几何体是圆锥（俯视图圆心处有一点，是锥顶的投影，这是区分圆锥与圆柱的关键）。底面半径 r = 3，高 h = 4，V = (1/3)πr²h = (1/3)π×3²×4 = 12π。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>(1) 总数 = 1+1+2+1 = 5 个；(2) 主视图从左到右每列取该列的最大高度：左列 max(1,2) = 2，右列 max(1,1) = 1，所以主视图两列高度为 2、1。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第28章-锐角三角函数/第28章-锐角三角函数.html">← 上一章：第28章 锐角三角函数</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../../../../高中/必修一/第1章-集合与常用逻辑用语/第1章-集合与常用逻辑用语.html">下一章：第1章 集合与常用逻辑用语 →</a>
 </nav>
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
 </body>
 </html>

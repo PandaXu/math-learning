@@ -3,45 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>第17章 勾股定理 · 数据学习</title>
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
-.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
-.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
-.crumb a{color:#2563eb;text-decoration:none}
-.crumb a:hover{text-decoration:underline}
-.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
-h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
-.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
-h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
-h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
-p{margin:12px 0}
-strong{color:#0f172a}
-a{color:#2563eb}
-.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
-.summary .tag{font-weight:700;color:#1d4ed8}
-.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
-.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
-.warn h4{margin:0 0 8px;color:#b91c1c}
-.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
-.ex h4{margin:0 0 8px;color:#b45309}
-table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
-th{background:#f1f5f9;color:#0f172a;font-weight:600}
-tr:nth-child(even) td{background:#fafbfc}
-pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
-pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
-:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
-ul,ol{margin:12px 0;padding-left:26px}
-li{margin:5px 0}
-hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
-.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
-.toc b{display:block;margin-bottom:6px;color:#334155}
-.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
-.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
-</style>
+<title>第17章 勾股定理 · 数学学习</title>
+<link rel="stylesheet" href="../../../../style.css">
 </head>
 <body>
 <header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第17章 勾股定理</div></header>
@@ -55,7 +18,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
 </div>
 
 <h2 id="s1">17.1 勾股定理</h2>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="480" height="440" viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="480" height="440" viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <polygon points="170,130 290,130 170,290" fill="#2563eb" fill-opacity="0.10" stroke="#1e293b" stroke-width="2"/>
   <path d="M170,148 L188,148 L188,130" fill="none" stroke="#64748b" stroke-width="1.5"/>
   <path d="M170,130 L290,130 L290,10 L170,10 Z" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="2">
@@ -78,7 +41,7 @@ hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
   <text x="90" y="214" fill="#16a34a" font-size="14" text-anchor="middle" font-weight="bold">b² = 16</text>
   <text x="310" y="274" fill="#1e293b" font-size="14" text-anchor="middle" font-weight="bold">c² = 25</text>
   <text x="240" y="430" fill="#334155" font-size="14" text-anchor="middle">a² + b² = c²　⇒　9 + 16 = 25</text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：勾股定理的面积含义——两条直角边上的正方形面积之和等于斜边上的正方形面积，即 3² + 4² = 5²</figcaption></figure>
+</svg><figcaption class="fig-cap">图：勾股定理的面积含义——两条直角边上的正方形面积之和等于斜边上的正方形面积，即 3² + 4² = 5²</figcaption></figure>
 <h3>定理内容</h3>
 <p><strong>直角三角形</strong>的两条<strong>直角边</strong>的平方和，等于<strong>斜边</strong>的平方。</p>
 <pre><code>       A
@@ -202,7 +165,7 @@ c = m² + n²      （m &gt; n 为正整数）</code></pre>
 大树原高 = 4 + 5 = 9（米）</code></pre>
 
 <h3>延伸：平面直角坐标系中的两点距离公式</h3>
-<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<figure class="fig"><svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
   <line x1="80" y1="120" x2="380" y2="120" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4">
     <animate attributeName="x2" values="380;230;380" dur="6s" repeatCount="indefinite"/>
   </line>
@@ -245,7 +208,7 @@ c = m² + n²      （m &gt; n 为正整数）</code></pre>
     d
   </text>
   <text x="220" y="330" fill="#334155" font-size="13" text-anchor="middle">d = √(Δx² + Δy²)，即位移向量的模（长度）</text>
-</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两点距离公式——把斜距分解为水平和竖直两个垂直分量，斜边即合位移的大小（向量的模）</figcaption></figure>
+</svg><figcaption class="fig-cap">图：两点距离公式——把斜距分解为水平和竖直两个垂直分量，斜边即合位移的大小（向量的模）</figcaption></figure>
 <p>把勾股定理放到坐标系里，就得到<strong>两点间距离公式</strong>：平面上 A(x₁, y₁)、B(x₂, y₂)，则</p>
 <pre><code>AB = √((x₂ − x₁)² + (y₂ − y₁)²)</code></pre>
 <p>其中 (x₂ − x₁) 是水平差、(y₂ − y₁) 是竖直差。这正是"垂直分量平方和再开方"的坐标版，物理上就是<strong>位移向量的模（长度）</strong>。</p>
@@ -290,7 +253,7 @@ c = m² + n²      （m &gt; n 为正整数）</code></pre>
 </ul>
 </div>
 <h2 id="practice">本章练习卷（含答案）</h2>
-<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<div class="paper">
 <p><strong>一、练习题</strong>（由易到难，共 6 题，紧扣本章知识点）</p>
 <ol>
 <li>直角三角形的两条直角边分别是 6 和 8，求斜边长，并指出斜边是哪条边。</li>
@@ -301,21 +264,21 @@ c = m² + n²      （m &gt; n 为正整数）</code></pre>
 <li>一架长 10 米的梯子斜靠在墙上，底端离墙脚 6 米，求梯子顶端离地高度；若顶端下滑 1 米，底端会外移多少米（结果保留根号）？</li>
 </ol>
 <p><strong>二、参考答案（点击展开）</strong></p>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>斜边 c = √(6² + 8²) = √100 = 10。斜边是直角所对的那条最长边。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>① 7² + 24² = 49 + 576 = 625 = 25²，是直角三角形，边长 25 所对的角是直角；② 4² + 5² = 41 ≠ 36 = 6²，不满足平方和关系，不是直角三角形。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>5² + 12² = 25 + 144 = 169 = 13²，故 (5, 12, 13) 是勾股数。取 m = 3、n = 1：a = 3² − 1² = 8，b = 2×3×1 = 6，c = 3² + 1² = 10，得勾股数 (8, 6, 10)，即 (6, 8, 10)。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>蚂蚁在表面爬，需把相邻两面展开成平面。三种展开方式的斜边分别是：√(8² + 9²) = √145，√(6² + 11²) = √157，√(3² + 14²) = √205。取最小，最短路程 = √145 ≈ 12.04。不能直接走空间对角线。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由折叠对称得 ∠EAC = ∠ECA，故 △AEC 为等腰三角形，AE = CE。设 AE = CE = x，则 DE = 8 − x。在 Rt△ADE 中：x² = 6² + (8 − x)² → x² = 100 − 16x + x² → x = 25/4 = 6.25。所以 AE = 6.25。</p></details>
-<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>顶端高度 h = √(10² − 6²) = √64 = 8（米）。下滑 1 米后高度为 7 米，新底端距墙 = √(10² − 7²) = √51 ≈ 7.14（米），故底端外移 = √51 − 6 ≈ 1.14（米）。注意下滑 1 米不等于外移 1 米。</p></details>
+<details class="qa"><summary class="qa-s">查看第1题答案</summary><p>斜边 c = √(6² + 8²) = √100 = 10。斜边是直角所对的那条最长边。</p></details>
+<details class="qa"><summary class="qa-s">查看第2题答案</summary><p>① 7² + 24² = 49 + 576 = 625 = 25²，是直角三角形，边长 25 所对的角是直角；② 4² + 5² = 41 ≠ 36 = 6²，不满足平方和关系，不是直角三角形。</p></details>
+<details class="qa"><summary class="qa-s">查看第3题答案</summary><p>5² + 12² = 25 + 144 = 169 = 13²，故 (5, 12, 13) 是勾股数。取 m = 3、n = 1：a = 3² − 1² = 8，b = 2×3×1 = 6，c = 3² + 1² = 10，得勾股数 (8, 6, 10)，即 (6, 8, 10)。</p></details>
+<details class="qa"><summary class="qa-s">查看第4题答案</summary><p>蚂蚁在表面爬，需把相邻两面展开成平面。三种展开方式的斜边分别是：√(8² + 9²) = √145，√(6² + 11²) = √157，√(3² + 14²) = √205。取最小，最短路程 = √145 ≈ 12.04。不能直接走空间对角线。</p></details>
+<details class="qa"><summary class="qa-s">查看第5题答案</summary><p>由折叠对称得 ∠EAC = ∠ECA，故 △AEC 为等腰三角形，AE = CE。设 AE = CE = x，则 DE = 8 − x。在 Rt△ADE 中：x² = 6² + (8 − x)² → x² = 100 − 16x + x² → x = 25/4 = 6.25。所以 AE = 6.25。</p></details>
+<details class="qa"><summary class="qa-s">查看第6题答案</summary><p>顶端高度 h = √(10² − 6²) = √64 = 8（米）。下滑 1 米后高度为 7 米，新底端距墙 = √(10² − 7²) = √51 ≈ 7.14（米），故底端外移 = √51 − 6 ≈ 1.14（米）。注意下滑 1 米不等于外移 1 米。</p></details>
 </div>
 
-<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<nav class="pager">
 <a href="../第16章-二次根式/第16章-二次根式.html">← 上一章：第16章 二次根式</a>
 <a href="../../../../index.html">回目录</a>
 <a href="../第18章-平行四边形/第18章-平行四边形.html">下一章：第18章 平行四边形 →</a>
 </nav>
 
 </main>
-<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中数学开始</footer>
+<footer class="foot">数学学习 · 数学重学（几何含义 + 物理含义） · 从初中数学开始</footer>
 </body>
 </html>
