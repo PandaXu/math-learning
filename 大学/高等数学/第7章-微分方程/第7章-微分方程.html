@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第7章 微分方程 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第7章 微分方程</div></header>
+<main class="container">
+<h1>第7章 微分方程</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>微分方程 = 「用<strong>变化率</strong>写成的方程」。它的解不是几个数，而是<strong>一条（或一族）曲线</strong>——几何上，你是在一张"方向场"里沿着处处与它相切的积分曲线行走；物理上，你在追踪一个系统（弹簧、电路、温度、种群）随时间的演化轨迹。学完本章，你要能对每一个方程"看"出它曲线的形状与背后的动力学。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">7.1 微分方程的概念</a><a href="#s2">7.2 可分离变量方程</a><a href="#s3">7.3 一阶线性方程</a><a href="#s4">7.4 可降阶方程</a><a href="#s5">7.5 二阶常系数线性方程</a><a href="#s6">7.6 应用</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">7.1 微分方程的概念</h2>
+<h3>什么是微分方程</h3>
+<p><strong>定义</strong>：含有<strong>未知函数</strong>及其<strong>导数（或微分）</strong>的方程，叫做微分方程。未知函数是一元函数的，称为<strong>常微分方程</strong>（本章只讨论常微分方程）；含多元函数偏导数的，称为偏微分方程。</p>
+<pre><code>y' = 2x                 （一阶，可直接积分）
+y' + y = 0              （一阶线性）
+y'' - 3y' + 2y = 0      （二阶常系数线性）
+y'' = -g                （二阶可降阶，自由落体）</code></pre>
+<p>其中 <code>y</code> 是未知函数 <code>y(x)</code>，<code>y'</code>、<code>y''</code> 是它关于 <code>x</code> 的一、二阶导数。</p>
+<h3>阶、线性、次数</h3>
+<ul>
+<li><strong>阶</strong>：方程中出现的<strong>最高阶导数</strong>的阶数。上面前两个是一阶，后两个是二阶。</li>
+<li><strong>线性</strong>：若未知函数及其各阶导数都只以<strong>一次幂</strong>出现、且彼此不相乘，则称线性方程。如 <code>y' + P(x)y = Q(x)</code> 是一阶线性；<code>y'' + p y' + q y = f(x)</code> 是二阶线性。出现 <code>y·y'</code>、<code>sin y</code>、<code>(y')²</code> 等就是非线性。</li>
+<li><strong>次数</strong>：对可化为多项式型的方程，指<strong>最高阶导数项的最高幂次</strong>。如 <code>(y'')² + y = 0</code> 是二阶、二次。</li>
+</ul>
+<div class="insight"><strong>记牢："阶"看导数的阶，纵向数几次求导；"线性"看未知函数是否一次；"次数"看最高阶导数项的幂。三者是三个不同的维度，别混。</strong></div>
+<h3>解、通解、特解、初值条件</h3>
+<ul>
+<li><strong>解</strong>：代入方程能使之在某个区间上恒成立的函数 <code>y = φ(x)</code>。</li>
+<li><strong>通解</strong>：含<strong>相互独立</strong>的任意常数、且常数个数等于方程<strong>阶数</strong>的解。它代表"一整族"解。例：<code>y' = 2x</code> 的通解是 <code>y = x² + C</code>（一个常数，对应一阶）。</li>
+<li><strong>特解</strong>：给通解里的常数取了具体值后得到的某一个解。</li>
+<li><strong>初值条件（定解条件）</strong>：指定解在某个点的取值（及若干阶导数取值），从而从"一族解"里挑出唯一的一条。例：<code>y' = 2x，y(0) = 1</code> 唯一确定 <code>y = x² + 1</code>。</li>
+</ul>
+<h3>几何含义：方向场与积分曲线</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto"><line x1="64" y1="180" x2="456" y2="180" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="26" x2="260" y2="334" stroke="#94a3b8" stroke-width="2"/><text x="450" y="174" font-size="12" fill="#94a3b8">x</text><text x="266" y="30" font-size="12" fill="#94a3b8">y</text><text x="266" y="198" font-size="11" fill="#94a3b8">O</text><text x="20" y="22" font-size="13" fill="#334155" font-weight="600">y' = x + y：方向场（短线段）+ 处处相切的积分曲线</text><line x1="90.2" y1="281.18" x2="93.8" y2="298.82" stroke="#94a3b8" stroke-width="1.5"/><line x1="89.78" y1="226.28" x2="94.22" y2="243.72" stroke="#94a3b8" stroke-width="1.5"/><line x1="89.11" y1="171.48" x2="94.89" y2="188.52" stroke="#94a3b8" stroke-width="1.5"/><line x1="87.92" y1="116.98" x2="96.08" y2="133.02" stroke="#94a3b8" stroke-width="1.5"/><line x1="85.58" y1="63.69" x2="98.42" y2="76.31" stroke="#94a3b8" stroke-width="1.5"/><line x1="145.78" y1="281.28" x2="150.22" y2="298.72" stroke="#94a3b8" stroke-width="1.5"/><line x1="145.11" y1="226.48" x2="150.89" y2="243.52" stroke="#94a3b8" stroke-width="1.5"/><line x1="143.92" y1="171.98" x2="152.08" y2="188.02" stroke="#94a3b8" stroke-width="1.5"/><line x1="141.58" y1="118.69" x2="154.42" y2="131.31" stroke="#94a3b8" stroke-width="1.5"/><line x1="139" y1="70" x2="157" y2="70" stroke="#94a3b8" stroke-width="1.5"/><line x1="201.11" y1="281.48" x2="206.89" y2="298.52" stroke="#94a3b8" stroke-width="1.5"/><line x1="199.92" y1="226.98" x2="208.08" y2="243.02" stroke="#94a3b8" stroke-width="1.5"/><line x1="197.58" y1="173.69" x2="210.42" y2="186.31" stroke="#94a3b8" stroke-width="1.5"/><line x1="195" y1="125" x2="213" y2="125" stroke="#94a3b8" stroke-width="1.5"/><line x1="197.58" y1="76.31" x2="210.42" y2="63.69" stroke="#94a3b8" stroke-width="1.5"/><line x1="255.92" y1="281.98" x2="264.08" y2="298.02" stroke="#94a3b8" stroke-width="1.5"/><line x1="253.58" y1="228.69" x2="266.42" y2="241.31" stroke="#94a3b8" stroke-width="1.5"/><line x1="251" y1="180" x2="269" y2="180" stroke="#94a3b8" stroke-width="1.5"/><line x1="253.58" y1="131.31" x2="266.42" y2="118.69" stroke="#94a3b8" stroke-width="1.5"/><line x1="255.92" y1="78.02" x2="264.08" y2="61.98" stroke="#94a3b8" stroke-width="1.5"/><line x1="309.58" y1="283.69" x2="322.42" y2="296.31" stroke="#94a3b8" stroke-width="1.5"/><line x1="307" y1="235" x2="325" y2="235" stroke="#94a3b8" stroke-width="1.5"/><line x1="309.58" y1="186.31" x2="322.42" y2="173.69" stroke="#94a3b8" stroke-width="1.5"/><line x1="311.92" y1="133.02" x2="320.08" y2="116.98" stroke="#94a3b8" stroke-width="1.5"/><line x1="313.11" y1="78.52" x2="318.89" y2="61.48" stroke="#94a3b8" stroke-width="1.5"/><line x1="363" y1="290" x2="381" y2="290" stroke="#94a3b8" stroke-width="1.5"/><line x1="365.58" y1="241.31" x2="378.42" y2="228.69" stroke="#94a3b8" stroke-width="1.5"/><line x1="367.92" y1="188.02" x2="376.08" y2="171.98" stroke="#94a3b8" stroke-width="1.5"/><line x1="369.11" y1="133.52" x2="374.89" y2="116.48" stroke="#94a3b8" stroke-width="1.5"/><line x1="369.78" y1="78.72" x2="374.22" y2="61.28" stroke="#94a3b8" stroke-width="1.5"/><line x1="421.58" y1="296.31" x2="434.42" y2="283.69" stroke="#94a3b8" stroke-width="1.5"/><line x1="423.92" y1="243.02" x2="432.08" y2="226.98" stroke="#94a3b8" stroke-width="1.5"/><line x1="425.11" y1="188.52" x2="430.89" y2="171.48" stroke="#94a3b8" stroke-width="1.5"/><line x1="425.78" y1="133.72" x2="430.22" y2="116.28" stroke="#94a3b8" stroke-width="1.5"/><line x1="426.2" y1="78.82" x2="429.8" y2="61.18" stroke="#94a3b8" stroke-width="1.5"/><path id="icm1" d="M64,44.16 L66.8,47 L69.6,49.84 L72.4,52.68 L75.2,55.53 L78,58.38 L80.8,61.24 L83.6,64.11 L86.4,66.98 L89.2,69.85 L92,72.74 L94.8,75.63 L97.6,78.53 L100.4,81.43 L103.2,84.34 L106,87.27 L108.8,90.2 L111.6,93.14 L114.4,96.09 L117.2,99.04 L120,102.01 L122.8,105 L125.6,107.99 L128.4,111 L131.2,114.01 L134,117.05 L136.8,120.09 L139.6,123.16 L142.4,126.24 L145.2,129.33 L148,132.44 L150.8,135.58 L153.6,138.73 L156.4,141.9 L159.2,145.09 L162,148.31 L164.8,151.55 L167.6,154.81 L170.4,158.1 L173.2,161.42 L176,164.77 L178.8,168.15 L181.6,171.56 L184.4,175.01 L187.2,178.49 L190,182.01 L192.8,185.57 L195.6,189.17 L198.4,192.81 L201.2,196.5 L204,200.23 L206.8,204.02 L209.6,207.86 L212.4,211.76 L215.2,215.71 L218,219.73 L220.8,223.81 L223.6,227.96 L226.4,232.18 L229.2,236.48 L232,240.86 L234.8,245.32 L237.6,249.87 L240.4,254.51 L243.2,259.25 L246,264.08 L248.8,269.03 L251.6,274.09 L254.4,279.27 L257.2,284.57 L260,290 L262.8,295.57 L265.6,301.28 L268.4,307.15 L271.2,313.18 L274,319.37 L276.8,325.74 L279.6,332.3" fill="none" stroke="#cbd5e1" stroke-width="1.6"/><path id="ic0" d="M64,42.5 L66.8,45.25 L69.6,48 L72.4,50.75 L75.2,53.5 L78,56.25 L80.8,59 L83.6,61.75 L86.4,64.5 L89.2,67.25 L92,70 L94.8,72.75 L97.6,75.5 L100.4,78.25 L103.2,81 L106,83.75 L108.8,86.5 L111.6,89.25 L114.4,92 L117.2,94.75 L120,97.5 L122.8,100.25 L125.6,103 L128.4,105.75 L131.2,108.5 L134,111.25 L136.8,114 L139.6,116.75 L142.4,119.5 L145.2,122.25 L148,125 L150.8,127.75 L153.6,130.5 L156.4,133.25 L159.2,136 L162,138.75 L164.8,141.5 L167.6,144.25 L170.4,147 L173.2,149.75 L176,152.5 L178.8,155.25 L181.6,158 L184.4,160.75 L187.2,163.5 L190,166.25 L192.8,169 L195.6,171.75 L198.4,174.5 L201.2,177.25 L204,180 L206.8,182.75 L209.6,185.5 L212.4,188.25 L215.2,191 L218,193.75 L220.8,196.5 L223.6,199.25 L226.4,202 L229.2,204.75 L232,207.5 L234.8,210.25 L237.6,213 L240.4,215.75 L243.2,218.5 L246,221.25 L248.8,224 L251.6,226.75 L254.4,229.5 L257.2,232.25 L260,235 L262.8,237.75 L265.6,240.5 L268.4,243.25 L271.2,246 L274,248.75 L276.8,251.5 L279.6,254.25 L282.4,257 L285.2,259.75 L288,262.5 L290.8,265.25 L293.6,268 L296.4,270.75 L299.2,273.5 L302,276.25 L304.8,279 L307.6,281.75 L310.4,284.5 L313.2,287.25 L316,290 L318.8,292.75 L321.6,295.5 L324.4,298.25 L327.2,301 L330,303.75 L332.8,306.5 L335.6,309.25 L338.4,312 L341.2,314.75 L344,317.5 L346.8,320.25 L349.6,323 L352.4,325.75 L355.2,328.5 L358,331.25 L360.8,334" fill="none" stroke="#16a34a" stroke-width="1.6" opacity="0.55"/><path id="ic1" d="M64,40.84 L66.8,43.5 L69.6,46.16 L72.4,48.82 L75.2,51.47 L78,54.12 L80.8,56.76 L83.6,59.39 L86.4,62.02 L89.2,64.65 L92,67.26 L94.8,69.87 L97.6,72.47 L100.4,75.07 L103.2,77.66 L106,80.23 L108.8,82.8 L111.6,85.36 L114.4,87.91 L117.2,90.46 L120,92.99 L122.8,95.5 L125.6,98.01 L128.4,100.5 L131.2,102.99 L134,105.45 L136.8,107.91 L139.6,110.34 L142.4,112.76 L145.2,115.17 L148,117.56 L150.8,119.92 L153.6,122.27 L156.4,124.6 L159.2,126.91 L162,129.19 L164.8,131.45 L167.6,133.69 L170.4,135.9 L173.2,138.08 L176,140.23 L178.8,142.35 L181.6,144.44 L184.4,146.49 L187.2,148.51 L190,150.49 L192.8,152.43 L195.6,154.33 L198.4,156.19 L201.2,158 L204,159.77 L206.8,161.48 L209.6,163.14 L212.4,164.74 L215.2,166.29 L218,167.77 L220.8,169.19 L223.6,170.54 L226.4,171.82 L229.2,173.02 L232,174.14 L234.8,175.18 L237.6,176.13 L240.4,176.99 L243.2,177.75 L246,178.42 L248.8,178.97 L251.6,179.41 L254.4,179.73 L257.2,179.93 L260,180 L262.8,179.93 L265.6,179.72 L268.4,179.35 L271.2,178.82 L274,178.13 L276.8,177.26 L279.6,176.2 L282.4,174.95 L285.2,173.49 L288,171.82 L290.8,169.92 L293.6,167.78 L296.4,165.4 L299.2,162.74 L302,159.81 L304.8,156.6 L307.6,153.07 L310.4,149.22 L313.2,145.04 L316,140.49 L318.8,135.58 L321.6,130.27 L324.4,124.55 L327.2,118.39 L330,111.78 L332.8,104.69 L335.6,97.09 L338.4,88.96 L341.2,80.28 L344,71.01 L346.8,61.12 L349.6,50.58 L352.4,39.37 L355.2,27.43" fill="none" stroke="#2563eb" stroke-width="2.4"/><circle r="6" fill="#2563eb"><animateMotion dur="8s" repeatCount="indefinite"><mpath xlink:href="#ic1"/></animateMotion></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：解曲线处处与方向场相切——通解是一族积分曲线，初值条件从中挑出过定点的那一条</figcaption></figure>
+<p>一阶方程 <code>y' = f(x, y)</code> 的右端给的是"在某点 <code>(x, y)</code> 处曲线应当具有的<strong>斜率</strong>"。于是：</p>
+<pre><code>在平面每一点 (x, y) 处，画出斜率为 f(x, y) 的一小段短线
+          ↓ 得到
+     方向场（斜率场、线素场）
+          ↓ 满足
+     解曲线处处与这些短线相切 = 积分曲线</code></pre>
+<div class="insight"><strong>几何含义：</strong>微分方程不直接告诉你曲线"长什么样"，而是告诉你<strong>每一点上的方向（切线斜率）</strong>。通解就是整个方向场里那一<strong>族处处相切的积分曲线</strong>；初值条件就是"指定这条曲线必须经过哪个点"，从而从一族里挑出一条。<strong>方程的阶数 = 曲线族的参数个数 = 需要多少个初值才能定出一条。</strong></div>
+<h3>物理含义：变化率的语言</h3>
+<div class="insight"><strong>物理含义：</strong>自然界的大多数定律说的不是"量是多少"，而是"量变化得有多快"——速度是位置的导数，加速度是速度的导数，电流是电荷的导数，增长率是种群数的导数，降温速度是温差的函数……微分方程就是把这些<strong>变化率之间的因果关系</strong>写下来。所以"解微分方程" = "由变化规律反推出量的演化轨迹"，这正是牛顿用微积分描述运动的方式。</div>
+
+<h2 id="s2">7.2 可分离变量方程</h2>
+<h3>标准形式</h3>
+<pre><code>dy/dx = f(x) · g(y)     （右端可写成"只含 x"与"只含 y"两部分之积）</code></pre>
+<h3>解法三步</h3>
+<ol>
+<li><strong>分离变量</strong>：把含 <code>y</code> 的项搬到 <code>dy</code> 一边，含 <code>x</code> 的项搬到 <code>dx</code> 一边。</li>
+<li><strong>两边积分</strong>：分别求不定积分。</li>
+<li><strong>解出 y</strong>：尽量化成显式 <code>y = φ(x, C)</code>；化不出就保留隐式 <code>Φ(x, y) = C</code>。</li>
+</ol>
+<pre><code>dy/dx = f(x)·g(y)
+→  (1/g(y)) dy = f(x) dx          （当 g(y) ≠ 0）
+→  ∫ (1/g(y)) dy = ∫ f(x) dx
+→  G(y) = F(x) + C</code></pre>
+<h3>典型例题：指数律</h3>
+<pre><code>dy/dx = k y
+→ dy/y = k dx
+→ ln|y| = kx + C1
+→ |y| = e^(kx + C1) = e^C1 · e^(kx)
+→ y = C e^(kx)     （C = ±e^C1，任意非零常数）
+注意：y = 0 也是解，可并入 C = 0 的情况，故通解 y = C e^(kx)</code></pre>
+<div class="insight"><strong>几何含义：</strong>可分离变量意味着方向场的<strong>等倾线（斜率相同的点的连线）恰好是"竖直线 x = 常数"与"水平线 y = 常数"组成的矩形网格</strong>——斜率被"拆成"x 部分与 y 部分的乘积。因此解曲线族在不同高度 y 上的"生长趋势"彼此成比例，图形呈层状。</div>
+<div class="insight"><strong>物理含义：</strong><code>y' = ky</code> 是一切"<strong>增长速度与当前量成正比</strong>"现象的共同模型：种群增长、放射性衰变（k 为负）、复利、传热温差。它的解 <code>y = Ce^(kx)</code> 就是指数增长（k &gt; 0）或指数衰减（k &lt; 0）。<strong>k 决定"翻倍/减半"的快慢，C 是初始量 y(0)。</strong></div>
+<h3>容易踩的坑：丢解</h3>
+<p>分离变量时除以了 <code>g(y)</code>，就必须<strong>单独检查</strong> <code>g(y) = 0</code> 给出的常数解是否被遗漏（如上面 <code>y = 0</code>）。这些"额外"的解若不在通解中，称为<strong>奇解（奇异解）</strong>——它是方向场里被一族积分曲线"包络"的那条特殊曲线。</p>
+
+<h2 id="s3">7.3 一阶线性方程</h2>
+<h3>标准形式</h3>
+<pre><code>y' + P(x) y = Q(x)      （y 与 y' 都只一次，不交叉相乘）</code></pre>
+<ul>
+<li><strong>齐次</strong>：<code>Q(x) ≡ 0</code>，即 <code>y' + P(x) y = 0</code>（可分离，直接得通解）。</li>
+<li><strong>非齐次</strong>：<code>Q(x) ≠ 0</code>。</li>
+</ul>
+<h3>方法一：积分因子法（最常用）</h3>
+<pre><code>积分因子： μ(x) = e^(∫ P(x) dx)
+两边同乘 μ：
+   μ y' + μ P y = μ Q
+即 (μ y)' = μ Q          （因为 μ' = μ P）
+积分：  μ y = ∫ μ Q dx + C
+通解：  y = (1/μ) [ ∫ μ Q dx + C ]
+     = e^(-∫P dx) [ ∫ Q · e^(∫P dx) dx + C ]</code></pre>
+<div class="insight"><strong>为什么乘 μ？</strong>我们要把左边"凑"成某个乘积的导数。μ 的作用就像一个"补全因子"，使 <code>μy' + μPy</code> 恰好是 <code>(μy)'</code>。条件是 <code>μ' = μP</code>，解之即得 <code>μ = e^(∫P dx)</code>。</div>
+<h3>方法二：常数变易法（理解"叠加"的钥匙）</h3>
+<ol>
+<li>先解<strong>齐次</strong>方程 <code>y' + P y = 0</code>，得 <code>y = C e^(-∫P dx)</code>。</li>
+<li>把常数 <code>C</code> "变"成待定函数 <code>u(x)</code>：设 <code>y = u(x) e^(-∫P dx)</code>。</li>
+<li>代回原方程，解出 <code>u'(x)</code>，再积分得 <code>u(x)</code>，即得非齐次通解。</li>
+</ol>
+<div class="insight"><strong>几何含义（叠加原理）：</strong>一阶线性方程的通解 = <strong>齐次通解 y_c（一族）+ 非齐次一个特解 y_p（一条）</strong>。几何上，这是"<strong>仿射结构</strong>"：把齐次解族整体"平移"一下（平移量 = y_p）就得到非齐次解族。任何两条解曲线之差，都是齐次方程的解。</div>
+<div class="insight"><strong>物理含义：</strong>非齐次项 <code>Q(x)</code> 是"<strong>外强迫/驱动</strong>"，齐次通解是系统的"<strong>固有响应（自然衰减）</strong>"，特解是"<strong>受迫响应</strong>"。例如 <code>L di/dt + R i = E(t)</code>（RL 电路）：电流 = 由电感储能决定的暂态衰减 + 由电压源决定的稳态响应。总响应 = 暂态 + 稳态。</div>
+
+<h2 id="s4">7.4 可降阶方程</h2>
+<p>高阶方程可以通过<strong>换元把阶降下来</strong>，降到一阶（甚至直接积分）再解。三种典型类型：</p>
+<h3>类型一：y^(n) = f(x)（右端只含 x）</h3>
+<pre><code>y'' = f(x)
+→ y' = ∫ f(x) dx + C1
+→ y  = ∫ [∫ f(x) dx] dx + C1 x + C2       （积分两次）</code></pre>
+<p>例：自由落体 <code>y'' = -g</code>，积分两次得 <code>y = y0 + v0 t - (1/2) g t²</code>。</p>
+<h3>类型二：y'' = f(x, y')（缺 y）</h3>
+<pre><code>令 p = y'，则 y'' = p' = dp/dx
+原方程化为： p' = f(x, p)      （关于 p 的一阶方程）
+解出 p = φ(x, C1) 后，再积一次： y = ∫ φ(x, C1) dx + C2</code></pre>
+<h3>类型三：y'' = f(y, y')（缺 x）</h3>
+<pre><code>令 p = y'，并把 y 当作自变量：
+   y'' = dp/dx = (dp/dy)·(dy/dx) = p·(dp/dy)
+原方程化为： p·(dp/dy) = f(y, p)   （关于 p 的一阶方程）
+解出 p = ψ(y, C1)，再分离变量积出 x 与 y 的关系。</code></pre>
+<div class="insight"><strong>几何含义：</strong>类型二"缺 y"意味着方程里没有出现函数值本身，只出现斜率与二阶导数，所以<strong>解曲线族沿竖直方向平移（y → y + C）后仍是解</strong>——一族解是另一族解上下平移得到的"平行"族。类型三"缺 x"（自治方程）意味着演化规律<strong>不显含自变量</strong>，所以解族沿水平方向平移（x → x + C）不变，即"<strong>时间平移不变性</strong>"。</div>
+<div class="insight"><strong>物理含义：</strong>类型一是"加速度只随时刻变化"的运动（如给定力 F(t)/m）；类型二是"加速度只由时刻和速度决定、与位置无关"的运动；类型三（自治）是"加速度只由位置和速度决定、与时刻无关"的运动——机械能守恒的保守系统多属此类，其解可用<strong>相平面（y, y'）</strong>上的轨线来刻画。</div>
+
+<h2 id="s5">7.5 二阶常系数线性方程</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto"><line x1="50" y1="130" x2="500" y2="130" stroke="#94a3b8" stroke-width="1.5"/><text x="496" y="124" font-size="12" fill="#94a3b8" text-anchor="end">t</text><text x="20" y="24" font-size="13" fill="#334155" font-weight="600">欠阻尼：y = e^(αx)·cos βx（α &lt; 0，包络 e^(αx) 不断收缩）</text><path d="M50,67.5 L52.81,68.58 L55.63,69.65 L58.44,70.7 L61.25,71.73 L64.06,72.74 L66.88,73.73 L69.69,74.71 L72.5,75.67 L75.31,76.61 L78.13,77.53 L80.94,78.44 L83.75,79.34 L86.56,80.22 L89.38,81.08 L92.19,81.93 L95,82.76 L97.81,83.58 L100.63,84.39 L103.44,85.18 L106.25,85.96 L109.06,86.72 L111.88,87.47 L114.69,88.21 L117.5,88.93 L120.31,89.65 L123.13,90.35 L125.94,91.03 L128.75,91.71 L131.56,92.38 L134.38,93.03 L137.19,93.67 L140,94.3 L142.81,94.92 L145.63,95.53 L148.44,96.13 L151.25,96.71 L154.06,97.29 L156.88,97.86 L159.69,98.42 L162.5,98.96 L165.31,99.5 L168.13,100.03 L170.94,100.55 L173.75,101.06 L176.56,101.56 L179.38,102.06 L182.19,102.54 L185,103.02 L187.81,103.49 L190.62,103.95 L193.44,104.4 L196.25,104.84 L199.06,105.28 L201.87,105.71 L204.69,106.13 L207.5,106.54 L210.31,106.95 L213.12,107.35 L215.94,107.74 L218.75,108.13 L221.56,108.51 L224.37,108.88 L227.19,109.25 L230,109.61 L232.81,109.96 L235.62,110.31 L238.44,110.65 L241.25,110.99 L244.06,111.32 L246.87,111.64 L249.69,111.96 L252.5,112.27 L255.31,112.58 L258.12,112.88 L260.94,113.18 L263.75,113.47 L266.56,113.76 L269.37,114.04 L272.19,114.32 L275,114.59 L277.81,114.86 L280.62,115.12 L283.44,115.38 L286.25,115.63 L289.06,115.88 L291.87,116.12 L294.69,116.36 L297.5,116.6 L300.31,116.83 L303.12,117.06 L305.94,117.29 L308.75,117.51 L311.56,117.72 L314.37,117.94 L317.19,118.15 L320,118.35 L322.81,118.55 L325.62,118.75 L328.44,118.95 L331.25,119.14 L334.06,119.33 L336.87,119.51 L339.69,119.69 L342.5,119.87 L345.31,120.05 L348.12,120.22 L350.94,120.39 L353.75,120.56 L356.56,120.72 L359.37,120.88 L362.19,121.04 L365,121.2 L367.81,121.35 L370.62,121.5 L373.44,121.65 L376.25,121.79 L379.06,121.93 L381.87,122.07 L384.69,122.21 L387.5,122.35 L390.31,122.48 L393.12,122.61 L395.94,122.74 L398.75,122.86 L401.56,122.99 L404.37,123.11 L407.19,123.23 L410,123.35 L412.81,123.46 L415.62,123.58 L418.44,123.69 L421.25,123.8 L424.06,123.9 L426.87,124.01 L429.69,124.11 L432.5,124.22 L435.31,124.32 L438.12,124.41 L440.94,124.51 L443.75,124.61 L446.56,124.7 L449.37,124.79 L452.19,124.88 L455,124.97 L457.81,125.06 L460.62,125.14 L463.44,125.23 L466.25,125.31 L469.06,125.39 L471.87,125.47 L474.69,125.55 L477.5,125.63 L480.31,125.7 L483.12,125.78 L485.94,125.85 L488.75,125.92 L491.56,125.99 L494.37,126.06 L497.19,126.13 L500,126.2" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="6 5"/><path d="M50,192.5 L52.81,191.42 L55.63,190.35 L58.44,189.3 L61.25,188.27 L64.06,187.26 L66.88,186.27 L69.69,185.29 L72.5,184.33 L75.31,183.39 L78.13,182.47 L80.94,181.56 L83.75,180.66 L86.56,179.78 L89.38,178.92 L92.19,178.07 L95,177.24 L97.81,176.42 L100.63,175.61 L103.44,174.82 L106.25,174.04 L109.06,173.28 L111.88,172.53 L114.69,171.79 L117.5,171.07 L120.31,170.35 L123.13,169.65 L125.94,168.97 L128.75,168.29 L131.56,167.62 L134.38,166.97 L137.19,166.33 L140,165.7 L142.81,165.08 L145.63,164.47 L148.44,163.87 L151.25,163.29 L154.06,162.71 L156.88,162.14 L159.69,161.58 L162.5,161.04 L165.31,160.5 L168.13,159.97 L170.94,159.45 L173.75,158.94 L176.56,158.44 L179.38,157.94 L182.19,157.46 L185,156.98 L187.81,156.51 L190.62,156.05 L193.44,155.6 L196.25,155.16 L199.06,154.72 L201.87,154.29 L204.69,153.87 L207.5,153.46 L210.31,153.05 L213.12,152.65 L215.94,152.26 L218.75,151.87 L221.56,151.49 L224.37,151.12 L227.19,150.75 L230,150.39 L232.81,150.04 L235.62,149.69 L238.44,149.35 L241.25,149.01 L244.06,148.68 L246.87,148.36 L249.69,148.04 L252.5,147.73 L255.31,147.42 L258.12,147.12 L260.94,146.82 L263.75,146.53 L266.56,146.24 L269.37,145.96 L272.19,145.68 L275,145.41 L277.81,145.14 L280.62,144.88 L283.44,144.62 L286.25,144.37 L289.06,144.12 L291.87,143.88 L294.69,143.64 L297.5,143.4 L300.31,143.17 L303.12,142.94 L305.94,142.71 L308.75,142.49 L311.56,142.28 L314.37,142.06 L317.19,141.85 L320,141.65 L322.81,141.45 L325.62,141.25 L328.44,141.05 L331.25,140.86 L334.06,140.67 L336.87,140.49 L339.69,140.31 L342.5,140.13 L345.31,139.95 L348.12,139.78 L350.94,139.61 L353.75,139.44 L356.56,139.28 L359.37,139.12 L362.19,138.96 L365,138.8 L367.81,138.65 L370.62,138.5 L373.44,138.35 L376.25,138.21 L379.06,138.07 L381.87,137.93 L384.69,137.79 L387.5,137.65 L390.31,137.52 L393.12,137.39 L395.94,137.26 L398.75,137.14 L401.56,137.01 L404.37,136.89 L407.19,136.77 L410,136.65 L412.81,136.54 L415.62,136.42 L418.44,136.31 L421.25,136.2 L424.06,136.1 L426.87,135.99 L429.69,135.89 L432.5,135.78 L435.31,135.68 L438.12,135.59 L440.94,135.49 L443.75,135.39 L446.56,135.3 L449.37,135.21 L452.19,135.12 L455,135.03 L457.81,134.94 L460.62,134.86 L463.44,134.77 L466.25,134.69 L469.06,134.61 L471.87,134.53 L474.69,134.45 L477.5,134.37 L480.31,134.3 L483.12,134.22 L485.94,134.15 L488.75,134.08 L491.56,134.01 L494.37,133.94 L497.19,133.87 L500,133.8" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="6 5"/><path id="damp" d="M50,67.5 L52.81,68.89 L55.63,70.85 L58.44,73.35 L61.25,76.33 L64.06,79.75 L66.88,83.56 L69.69,87.71 L72.5,92.14 L75.31,96.81 L78.13,101.65 L80.94,106.61 L83.75,111.64 L86.56,116.68 L89.38,121.69 L92.19,126.6 L95,131.38 L97.81,135.98 L100.63,140.36 L103.44,144.49 L106.25,148.33 L109.06,151.85 L111.88,155.03 L114.69,157.84 L117.5,160.28 L120.31,162.33 L123.13,163.98 L125.94,165.23 L128.75,166.08 L131.56,166.53 L134.38,166.6 L137.19,166.3 L140,165.64 L142.81,164.64 L145.63,163.33 L148.44,161.72 L151.25,159.85 L154.06,157.74 L156.88,155.42 L159.69,152.93 L162.5,150.29 L165.31,147.53 L168.13,144.69 L170.94,141.8 L173.75,138.89 L176.56,135.99 L179.38,133.13 L182.19,130.34 L185,127.64 L187.81,125.05 L190.62,122.61 L193.44,120.32 L196.25,118.21 L199.06,116.3 L201.87,114.58 L204.69,113.08 L207.5,111.81 L210.31,110.76 L213.12,109.94 L215.94,109.36 L218.75,109 L221.56,108.87 L224.37,108.95 L227.19,109.25 L230,109.75 L232.81,110.43 L235.62,111.29 L238.44,112.31 L241.25,113.47 L244.06,114.76 L246.87,116.16 L249.69,117.65 L252.5,119.21 L255.31,120.84 L258.12,122.49 L260.94,124.17 L263.75,125.85 L266.56,127.51 L269.37,129.14 L272.19,130.72 L275,132.24 L277.81,133.69 L280.62,135.05 L283.44,136.31 L286.25,137.46 L289.06,138.5 L291.87,139.42 L294.69,140.21 L297.5,140.87 L300.31,141.39 L303.12,141.79 L305.94,142.05 L308.75,142.18 L311.56,142.18 L314.37,142.06 L317.19,141.82 L320,141.47 L322.81,141.02 L325.62,140.47 L328.44,139.83 L331.25,139.11 L334.06,138.33 L336.87,137.49 L339.69,136.6 L342.5,135.68 L345.31,134.73 L348.12,133.77 L350.94,132.8 L353.75,131.83 L356.56,130.89 L359.37,129.96 L362.19,129.07 L365,128.21 L367.81,127.41 L370.62,126.65 L373.44,125.96 L376.25,125.34 L379.06,124.78 L381.87,124.29 L384.69,123.88 L387.5,123.54 L390.31,123.28 L393.12,123.1 L395.94,122.99 L398.75,122.96 L401.56,123 L404.37,123.11 L407.19,123.29 L410,123.53 L412.81,123.82 L415.62,124.17 L418.44,124.56 L421.25,125 L424.06,125.47 L426.87,125.97 L429.69,126.5 L432.5,127.04 L435.31,127.59 L438.12,128.15 L440.94,128.71 L443.75,129.26 L446.56,129.8 L449.37,130.33 L452.19,130.83 L455,131.31 L457.81,131.75 L460.62,132.17 L463.44,132.55 L466.25,132.89 L469.06,133.18 L471.87,133.44 L474.69,133.65 L477.5,133.82 L480.31,133.94 L483.12,134.02 L485.94,134.06 L488.75,134.05 L491.56,134.01 L494.37,133.92 L497.19,133.8 L500,133.64" fill="none" stroke="#2563eb" stroke-width="2.4"/><circle r="6" fill="#2563eb"><animateMotion dur="10s" repeatCount="indefinite"><mpath xlink:href="#damp"/></animateMotion></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：复根 ↔ 振荡、实部 α ↔ 指数包络——α&lt;0 时振幅按 e^(αx) 衰减（阻尼弹簧振子）</figcaption></figure>
+<h3>齐次方程与特征方程</h3>
+<pre><code>y'' + p y' + q y = 0        （p、q 为常数）
+特征方程： r² + p r + q = 0，判别式 Δ = p² - 4q</code></pre>
+<p>设解形如 <code>y = e^(rx)</code> 代入，就得到特征方程。它的根决定了解的结构，分三种情形：</p>
+<pre><code>Δ &gt; 0：两不等实根 r1 ≠ r2
+      → y = C1 e^(r1 x) + C2 e^(r2 x)
+
+Δ = 0：重根 r（= -p/2）
+      → y = (C1 + C2 x) e^(r x)
+
+Δ &lt; 0：共轭复根 r = α ± βi   （α = -p/2，β = √(4q - p²)/2）
+      → y = e^(αx) ( C1 cos βx + C2 sin βx )</code></pre>
+<div class="insight"><strong>几何含义：</strong>特征根是解曲线的"<strong>基本增长模式</strong>"。实根对应<strong>纯指数</strong>：r &gt; 0 发散增长、r &lt; 0 衰减、r = 0 是常数；重根多出一个 <code>x</code> 因子，使曲线"压着指数走"但仍与另一个线性独立；复根对应<strong>振荡</strong>：<code>cos/sin</code> 给出往复波形，前面的 <code>e^(αx)</code> 是"<strong>包络</strong>"——α &gt; 0 振荡越来越大（发散），α = 0 等幅振荡，α &lt; 0 振荡越来越小（衰减）。</div>
+<div class="insight"><strong>物理含义（弹簧振子/阻尼振动）：</strong><code>m y'' + c y' + k y = 0</code> 中，m 是质量、c 是阻尼、k 是弹性系数。判别式 <code>Δ = c² - 4mk</code> 的符号对应三种运动：<code>c² &gt; 4mk</code> <strong>过阻尼</strong>（两实根，缓慢爬回平衡、不振荡）；<code>c² = 4mk</code> <strong>临界阻尼</strong>（重根，最快回到平衡且不振荡）；<code>c² &lt; 4mk</code> <strong>欠阻尼</strong>（复根，来回振荡且振幅按 <code>e^(αx)</code> 衰减，α = -c/(2m) &lt; 0）。这就是"复根 ↔ 振动、实部 ↔ 衰减/发散、虚部 ↔ 角频率"的物理图像。</div>
+<h3>非齐次方程：通解 = 齐次通解 + 一个特解</h3>
+<pre><code>y'' + p y' + q y = f(x)
+通解 y = y_c + y_p
+      （y_c：对应齐次方程的通解；y_p：非齐次的任一特解）</code></pre>
+<h3>求特解：待定系数法（右端为常见函数时）</h3>
+<table>
+<tr><th>f(x) 的形式</th><th>试解 y_p 的形式</th><th>备注</th></tr>
+<tr><td>n 次多项式</td><td>同次的<strong>完全</strong>多项式（含所有低次项）</td><td>缺项也照写全</td></tr>
+<tr><td>A e^(kx)</td><td>B e^(kx)</td><td>若 k 是特征根，试解乘 x（重根乘 x²）</td></tr>
+<tr><td>A cos ωx 或 A sin ωx</td><td>B cos ωx + C sin ωx</td><td>正弦余弦必须成对出现；若 ±iω 是特征根，试解乘 x</td></tr>
+<tr><td>上述的和/积</td><td>对应试解的和/积</td><td>叠加原理逐项猜</td></tr>
+</table>
+<div class="insight"><strong>物理含义（共振）：</strong>当 <code>f(x)</code> 的"频率/指数"与齐次解同型（即 k 或 ±iω 是特征根）时，试解必须<strong>乘 x（升幂）</strong>——对应物理上的<strong>共振</strong>：驱动力频率等于系统固有频率，振幅随时间线性增大（<code>x·sin ωx</code> 项）。</div>
+<h3>求特解：常数变易法（对任意 f(x) 通用）</h3>
+<pre><code>设齐次通解 y_c = C1 y1 + C2 y2
+令特解 y_p = u1(x) y1 + u2(x) y2，其中 u1、u2 满足：
+   u1' y1 + u2' y2 = 0
+   u1' y1' + u2' y2' = f(x)
+解此二元一次线性方程组得 u1'、u2'，再积分即得 y_p。</code></pre>
+
+<h2 id="s6">7.6 应用</h2>
+<h3>建模三步曲</h3>
+<ol>
+<li><strong>找变化率</strong>：把自然定律翻译成"某量的导数 = 什么"。</li>
+<li><strong>建方程 + 初值</strong>：写出微分方程与定解条件。</li>
+<li><strong>解并解释</strong>：求通解、代初值、说明各参数含义。</li>
+</ol>
+<h3>应用一：牛顿冷却定律（可分离 + 一阶线性）</h3>
+<pre><code>物体温度 T(t)，环境温度 T_a（常数）：
+dT/dt = -k (T - T_a)，k &gt; 0        （降温速度与温差成正比）
+解： T(t) = T_a + (T0 - T_a) e^(-kt)</code></pre>
+<div class="insight"><strong>几何/物理：</strong>解是"<strong>从 T0 指数地逼近水平渐近线 T = T_a</strong>"的曲线；k 越大降温越快。法医根据尸体温度推算死亡时刻、热咖啡放凉，都是同一模型。</div>
+<h3>应用二：指数增长与放射性衰变</h3>
+<pre><code>种群/原子核数 N(t)：
+dN/dt = k N
+解： N = N0 e^(kt)
+   k &gt; 0 增长；k &lt; 0 衰变；半衰期 τ = ln2/|k|</code></pre>
+<h3>应用三：自由落体（可降阶）</h3>
+<pre><code>y'' = -g，y(0) = y0，y'(0) = v0
+→ y' = v0 - g t
+→ y = y0 + v0 t - (1/2) g t²</code></pre>
+<h3>应用四：弹簧振子 / 阻尼振动（二阶常系数）</h3>
+<pre><code>m y'' + c y' + k y = 0
+特征方程 m r² + c r + k = 0
+欠阻尼 (c² &lt; 4mk)：y = e^(-(c/2m)t) (C1 cos ωt + C2 sin ωt)，
+                   ω = √(4mk - c²) / (2m)</code></pre>
+<h3>应用五：RL 电路（一阶线性）</h3>
+<pre><code>L di/dt + R i = E(t)
+积分因子 e^(Rt/L)：
+i(t) = e^(-Rt/L) [ (1/L)∫ E(t) e^(Rt/L) dt + C ]
+右端为常数 E 时：i = E/R + C e^(-Rt/L)  →  稳态 E/R + 暂态衰减。</code></pre>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>微分方程 y' = f(x,y)</td><td>方向场（斜率场）：每点一根小短线</td><td>每个状态点上的瞬时变化率（速度场、力场）</td></tr>
+<tr><td>解（积分曲线）</td><td>处处与方向场相切的曲线</td><td>系统随时间的实际演化轨迹</td></tr>
+<tr><td>通解 / 特解</td><td>一族曲线 / 过定点的某一条曲线</td><td>一族可能状态 / 给定初值后的唯一演化</td></tr>
+<tr><td>初值条件</td><td>指定曲线经过的点（与方向）</td><td>指定初始位置、初始速度等初始状态</td></tr>
+<tr><td>可分离变量</td><td>等倾线为竖直 + 水平线组成的矩形网格</td><td>增长只取决于自身量（指数律）</td></tr>
+<tr><td>一阶线性</td><td>齐次解族 + 特解平移（仿射结构）</td><td>固有响应（暂态）+ 受迫响应（稳态）</td></tr>
+<tr><td>可降阶（缺 y）</td><td>解族沿竖直方向平移不变</td><td>运动只由位置/速度决定，与"高度基准"无关</td></tr>
+<tr><td>可降阶（缺 x，自治）</td><td>解族沿水平方向平移不变</td><td>演化规律不随时间改变（时间平移不变）</td></tr>
+<tr><td>二阶常系数</td><td>特征根决定曲线：指数 / 振荡包络</td><td>弹簧振子、阻尼振动、RLC 电路</td></tr>
+<tr><td>特征根</td><td>解曲线的基本"增长/振荡模式"</td><td>系统固有频率与衰减（或发散）因子</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>求 <code>dy/dx = -2xy</code> 满足 <code>y(0) = 3</code> 的解。</li>
+<li>求一阶线性方程 <code>y' + 2y = e^(-x)</code> 的通解。</li>
+<li>求 <code>y'' - 5y' + 6y = 0</code> 的通解。</li>
+<li>求 <code>y'' + 4y = 0</code> 满足 <code>y(0) = 1, y'(0) = 0</code> 的解。</li>
+<li>解可降阶方程 <code>y'' = 6x</code>。</li>
+<li>一杯 90℃ 的咖啡放在 20℃ 的房间里，1 分钟后降到 80℃。用牛顿冷却定律求任意时刻温度 T(t)。</li>
+</ol>
+<p><strong>参考答案/提示：</strong></p>
+<ol>
+<li>分离变量得 <code>y = 3 e^(-x²)</code>（钟形曲线，x→∞ 时衰减到 0）。</li>
+<li>积分因子 <code>μ = e^(2x)</code>，通解 <code>y = e^(-x) + C e^(-2x)</code>（特解 + 齐次衰减）。</li>
+<li>特征根 2、3，通解 <code>y = C1 e^(2x) + C2 e^(3x)</code>。</li>
+<li>复根 ±2i，<code>y = cos 2x</code>（等幅振荡，周期 π）。</li>
+<li>积分两次：<code>y = x³ + C1 x + C2</code>。</li>
+<li><code>dT/dt = -k(T - 20)</code>，解得 <code>T = 20 + 70 e^(-kt)</code>；由 T(1)=80 得 <code>e^(-k) = 6/7</code>，故 <code>T(t) = 20 + 70·(6/7)^t</code>。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<h4>⚠️ 高频错误自查</h4>
+<ul>
+<li>❌ 分离变量时除以 <code>g(y)</code>，忘了检查 <code>g(y) = 0</code> 的常数解 → 可能丢失<strong>奇解</strong>。</li>
+<li>❌ 把"阶"与"次数"混为一谈 → 阶看最高阶导数是几阶；次数看该最高阶导数项的幂。</li>
+<li>❌ 重根情形写成 <code>y = (C1 + C2) e^(rx)</code>（两个常数合并成一个，实质只剩一个独立常数）→ 应写 <code>y = (C1 + C2 x) e^(rx)</code>。</li>
+<li>❌ 复根情形漏掉包络 <code>e^(αx)</code>，只写 <code>C1 cos βx + C2 sin βx</code> → 漏了衰减/发散因子，图像完全不对。</li>
+<li>❌ 待定系数法：当 <code>f(x)</code> 与齐次解"同型"（共振）时不升幂，导致猜不出特解 → 应把试解乘 <code>x</code>（重根乘 <code>x²</code>）。</li>
+<li>❌ 一阶线性方程积分因子丢常数、或乘 μ 后不写成 <code>(μy)'</code> 就去积分 → 记牢 <code>(μy)' = μQ</code> 之后两边才对 x 积分。</li>
+<li>❌ 以为 <code>y' = y</code> 的解是直线 → 实际是 <code>y = Ce^x</code>，是指数曲线（增长率正比于自身）。</li>
+<li>❌ 通解里任意常数的个数随手写 → 相互独立的常数个数必须等于方程的<strong>阶数</strong>。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>设一阶微分方程 <code>y' = x + y</code>。在点 <code>(0, 1)</code> 处，解曲线的切线斜率是多少？并简述"方向场"与"积分曲线"的关系。</li>
+<li>求可分离变量方程 <code>dy/dx = y/x</code>（<code>x ≠ 0</code>）的通解，并说明这些解在几何上是什么图形。</li>
+<li>方程 <code>y' = ky</code> 中，<code>k &gt; 0</code> 与 <code>k &lt; 0</code> 两种情形解曲线的走势有何不同？分别对应哪些现实现象？</li>
+<li>求一阶线性方程 <code>y' + y = 2</code> 的通解，并指出当 <code>x → ∞</code> 时解的极限（稳态）是多少、哪一项是"暂态"。</li>
+<li>求二阶常系数方程 <code>y'' - 3y' + 2y = 0</code> 的通解，并说明特征根如何决定解曲线是发散还是衰减。</li>
+<li>解方程 <code>y'' + 4y = 0</code>，说明它对应怎样的物理运动，并写出周期。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>在点 <code>(0, 1)</code> 处斜率 <code>y' = 0 + 1 = 1</code>。方向场是在平面每一点 <code>(x, y)</code> 处按右端 <code>f(x, y)</code> 画出的短线段（指示该处切线斜率）；积分曲线就是处处与这些短线相切的曲线，即微分方程的解曲线。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>分离变量 <code>dy/y = dx/x</code>，两边积分得 <code>ln|y| = ln|x| + C1</code>，即 <code>|y| = e^(C1)|x|</code>，故通解为 <code>y = Cx</code>（<code>C</code> 为任意常数）。几何上是一族过原点的直线。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>通解为 <code>y = C e^(kx)</code>。<code>k &gt; 0</code> 时指数增长（种群增长、复利），<code>k &lt; 0</code> 时指数衰减（放射性衰变、温差冷却）；<code>|k|</code> 决定翻倍或减半的快慢。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>乘积分因子 <code>e^x</code> 得 <code>(e^x y)' = 2e^x</code>，积分得 <code>e^x y = 2e^x + C</code>，故通解 <code>y = 2 + C e^(-x)</code>。当 <code>x → ∞</code> 时 <code>C e^(-x) → 0</code>，稳态极限为 <code>2</code>；<code>C e^(-x)</code> 是暂态（固有响应），<code>2</code> 是稳态（受迫响应）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>特征方程 <code>r² - 3r + 2 = 0</code>，得两不等实根 <code>r1 = 1, r2 = 2</code>，通解 <code>y = C1 e^(x) + C2 e^(2x)</code>。两根均为正，故 <code>x → ∞</code> 时解发散，且由较大的根 <code>r = 2</code> 主导；若实根为负则衰减，若为复根则振荡。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>特征方程 <code>r² + 4 = 0</code>，得共轭复根 <code>±2i</code>，通解 <code>y = C1 cos 2x + C2 sin 2x</code>。它是等幅简谐振动（无阻尼弹簧振子），角频率 <code>ω = 2</code>，周期 <code>T = 2π/2 = π</code>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第6章-定积分的应用/第6章-定积分的应用.html">← 上一章：第6章 定积分的应用</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第8章-空间解析几何与向量代数/第8章-空间解析几何与向量代数.html">下一章：第8章 空间解析几何与向量代数 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+</body>
+</html>

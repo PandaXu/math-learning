@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第4章 不定积分 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第4章 不定积分</div></header>
+<main class="container">
+<h1>第4章 不定积分</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>不定积分是<strong>微分的逆运算</strong>——由「导数/变化率 f(x)」反推「原函数 F(x)」，得到的是<strong>相差任意常数的一族函数 F(x) + C</strong>；它在几何上是「由切线斜率还原整族曲线」，在物理上是「由速度还原位移、由加速度还原速度」。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">4.1 不定积分的概念与性质</a><a href="#s2">4.2 换元积分法</a><a href="#s3">4.3 分部积分法</a><a href="#s4">4.4 有理函数的积分</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">4.1 不定积分的概念与性质</h2>
+<h3>4.1.1 原函数</h3>
+<p><strong>定义</strong>：设函数 f(x) 在区间 I 上有定义，若存在可导函数 F(x)，使得对区间 I 上每一点 x 都有</p>
+<pre><code>F'(x) = f(x)     (或  dF(x) = f(x) dx)</code></pre>
+<p>则称 F(x) 是 f(x) 在区间 I 上的一个<strong>原函数</strong>。</p>
+<p>例：因为 (x²)' = 2x，所以 x² 是 2x 的一个原函数；因为 (sin x)' = cos x，所以 sin x 是 cos x 的一个原函数；因为 (eˣ)' = eˣ，所以 eˣ 是 eˣ 的一个原函数。</p>
+<h3>4.1.2 原函数的存在性与不唯一性</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto">
+<line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="260" y1="28" x2="260" y2="272" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="468" y="142" font-size="13" fill="#64748b">x</text>
+<text x="272" y="40" font-size="13" fill="#64748b">y</text>
+<text x="46" y="44" font-size="13" fill="#2563eb" font-weight="700">斜率场 f(x)=cos x</text>
+<line x1="62.54" y1="235.41" x2="75.65" y2="244.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="62.54" y1="199.41" x2="75.65" y2="208.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="62.54" y1="163.41" x2="75.65" y2="172.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="62.54" y1="127.41" x2="75.65" y2="136.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="62.54" y1="91.41" x2="75.65" y2="100.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="62.54" y1="55.41" x2="75.65" y2="64.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="236.3" x2="114.37" y2="243.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="200.3" x2="114.37" y2="207.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="164.3" x2="114.37" y2="171.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="128.3" x2="114.37" y2="135.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="92.3" x2="114.37" y2="99.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100.18" y1="56.3" x2="114.37" y2="63.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="238.73" x2="153.35" y2="241.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="202.73" x2="153.35" y2="205.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="166.73" x2="153.35" y2="169.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="130.73" x2="153.35" y2="133.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="94.73" x2="153.35" y2="97.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="137.56" y1="58.73" x2="153.35" y2="61.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="241.99" x2="191.39" y2="238.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="205.99" x2="191.39" y2="202.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="169.99" x2="191.39" y2="166.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="133.99" x2="191.39" y2="130.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="97.99" x2="191.39" y2="94.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="175.89" y1="61.99" x2="191.39" y2="58.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="244.03" x2="228.73" y2="235.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="208.03" x2="228.73" y2="199.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="172.03" x2="228.73" y2="163.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="136.03" x2="228.73" y2="127.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="100.03" x2="228.73" y2="91.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="214.91" y1="64.03" x2="228.73" y2="55.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="244.62" x2="266.53" y2="235.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="208.62" x2="266.53" y2="199.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="172.62" x2="266.53" y2="163.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="136.62" x2="266.53" y2="127.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="100.62" x2="266.53" y2="91.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="253.47" y1="64.62" x2="266.53" y2="55.38" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="244.03" x2="305.09" y2="235.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="208.03" x2="305.09" y2="199.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="172.03" x2="305.09" y2="163.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="136.03" x2="305.09" y2="127.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="100.03" x2="305.09" y2="91.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="291.27" y1="64.03" x2="305.09" y2="55.97" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="241.99" x2="344.11" y2="238.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="205.99" x2="344.11" y2="202.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="169.99" x2="344.11" y2="166.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="133.99" x2="344.11" y2="130.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="97.99" x2="344.11" y2="94.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="328.61" y1="61.99" x2="344.11" y2="58.01" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="238.73" x2="382.44" y2="241.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="202.73" x2="382.44" y2="205.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="166.73" x2="382.44" y2="169.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="130.73" x2="382.44" y2="133.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="94.73" x2="382.44" y2="97.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="366.65" y1="58.73" x2="382.44" y2="61.27" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="236.3" x2="419.82" y2="243.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="200.3" x2="419.82" y2="207.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="164.3" x2="419.82" y2="171.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="128.3" x2="419.82" y2="135.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="92.3" x2="419.82" y2="99.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="405.63" y1="56.3" x2="419.82" y2="63.7" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="235.41" x2="457.46" y2="244.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="199.41" x2="457.46" y2="208.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="163.41" x2="457.46" y2="172.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="127.41" x2="457.46" y2="136.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="91.41" x2="457.46" y2="100.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="444.35" y1="55.41" x2="457.46" y2="64.59" stroke="#cbd5e1" stroke-width="1.5"/>
+<path d="M56.36 192.37 L59.55 194.62 L62.73 196.87 L65.91 199.12 L69.09 201.35 L72.27 203.57 L75.46 205.77 L78.64 207.94 L81.82 210.07 L85 212.17 L88.18 214.23 L91.36 216.24 L94.55 218.2 L97.73 220.1 L100.91 221.93 L104.09 223.7 L107.27 225.4 L110.46 227.02 L113.64 228.56 L116.82 230.01 L120 231.38 L123.18 232.66 L126.36 233.84 L129.55 234.93 L132.73 235.92 L135.91 236.8 L139.09 237.58 L142.27 238.26 L145.46 238.82 L148.64 239.28 L151.82 239.62 L155 239.86 L158.18 239.98 L161.36 239.99 L164.55 239.89 L167.73 239.67 L170.91 239.35 L174.09 238.91 L177.27 238.36 L180.45 237.7 L183.64 236.94 L186.82 236.07 L190 235.1 L193.18 234.03 L196.36 232.87 L199.55 231.6 L202.73 230.25 L205.91 228.81 L209.09 227.28 L212.27 225.67 L215.45 223.99 L218.64 222.23 L221.82 220.41 L225 218.52 L228.18 216.57 L231.36 214.57 L234.55 212.52 L237.73 210.43 L240.91 208.3 L244.09 206.13 L247.27 203.94 L250.45 201.72 L253.64 199.49 L256.82 197.25 L260 195 L263.18 192.75 L266.36 190.51 L269.55 188.28 L272.73 186.06 L275.91 183.87 L279.09 181.7 L282.27 179.57 L285.45 177.48 L288.64 175.43 L291.82 173.43 L295 171.48 L298.18 169.59 L301.36 167.77 L304.55 166.01 L307.73 164.33 L310.91 162.72 L314.09 161.19 L317.27 159.75 L320.45 158.4 L323.64 157.13 L326.82 155.97 L330 154.9 L333.18 153.93 L336.36 153.06 L339.54 152.3 L342.73 151.64 L345.91 151.09 L349.09 150.65 L352.27 150.33 L355.45 150.11 L358.64 150.01 L361.82 150.02 L365 150.14 L368.18 150.38 L371.36 150.72 L374.54 151.18 L377.73 151.74 L380.91 152.42 L384.09 153.2 L387.27 154.08 L390.45 155.07 L393.64 156.16 L396.82 157.34 L400 158.62 L403.18 159.99 L406.36 161.44 L409.54 162.98 L412.73 164.6 L415.91 166.3 L419.09 168.07 L422.27 169.9 L425.45 171.8 L428.64 173.76 L431.82 175.77 L435 177.83 L438.18 179.93 L441.36 182.06 L444.54 184.23 L447.73 186.43 L450.91 188.65 L454.09 190.88 L457.27 193.13 L460.45 195.38 L463.64 197.63" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<path d="M56.36 147.37 L59.55 149.62 L62.73 151.87 L65.91 154.12 L69.09 156.35 L72.27 158.57 L75.46 160.77 L78.64 162.94 L81.82 165.07 L85 167.17 L88.18 169.23 L91.36 171.24 L94.55 173.2 L97.73 175.1 L100.91 176.93 L104.09 178.7 L107.27 180.4 L110.46 182.02 L113.64 183.56 L116.82 185.01 L120 186.38 L123.18 187.66 L126.36 188.84 L129.55 189.93 L132.73 190.92 L135.91 191.8 L139.09 192.58 L142.27 193.26 L145.46 193.82 L148.64 194.28 L151.82 194.62 L155 194.86 L158.18 194.98 L161.36 194.99 L164.55 194.89 L167.73 194.67 L170.91 194.35 L174.09 193.91 L177.27 193.36 L180.45 192.7 L183.64 191.94 L186.82 191.07 L190 190.1 L193.18 189.03 L196.36 187.87 L199.55 186.6 L202.73 185.25 L205.91 183.81 L209.09 182.28 L212.27 180.67 L215.45 178.99 L218.64 177.23 L221.82 175.41 L225 173.52 L228.18 171.57 L231.36 169.57 L234.55 167.52 L237.73 165.43 L240.91 163.3 L244.09 161.13 L247.27 158.94 L250.45 156.72 L253.64 154.49 L256.82 152.25 L260 150 L263.18 147.75 L266.36 145.51 L269.55 143.28 L272.73 141.06 L275.91 138.87 L279.09 136.7 L282.27 134.57 L285.45 132.48 L288.64 130.43 L291.82 128.43 L295 126.48 L298.18 124.59 L301.36 122.77 L304.55 121.01 L307.73 119.33 L310.91 117.72 L314.09 116.19 L317.27 114.75 L320.45 113.4 L323.64 112.13 L326.82 110.97 L330 109.9 L333.18 108.93 L336.36 108.06 L339.54 107.3 L342.73 106.64 L345.91 106.09 L349.09 105.65 L352.27 105.33 L355.45 105.11 L358.64 105.01 L361.82 105.02 L365 105.14 L368.18 105.38 L371.36 105.72 L374.54 106.18 L377.73 106.74 L380.91 107.42 L384.09 108.2 L387.27 109.08 L390.45 110.07 L393.64 111.16 L396.82 112.34 L400 113.62 L403.18 114.99 L406.36 116.44 L409.54 117.98 L412.73 119.6 L415.91 121.3 L419.09 123.07 L422.27 124.9 L425.45 126.8 L428.64 128.76 L431.82 130.77 L435 132.83 L438.18 134.93 L441.36 137.06 L444.54 139.23 L447.73 141.43 L450.91 143.65 L454.09 145.88 L457.27 148.13 L460.45 150.38 L463.64 152.63" fill="none" stroke="#2563eb" stroke-width="3" id="sine0"/>
+<path d="M56.36 102.37 L59.55 104.62 L62.73 106.87 L65.91 109.12 L69.09 111.35 L72.27 113.57 L75.46 115.77 L78.64 117.94 L81.82 120.07 L85 122.17 L88.18 124.23 L91.36 126.24 L94.55 128.2 L97.73 130.1 L100.91 131.93 L104.09 133.7 L107.27 135.4 L110.46 137.02 L113.64 138.56 L116.82 140.01 L120 141.38 L123.18 142.66 L126.36 143.84 L129.55 144.93 L132.73 145.92 L135.91 146.8 L139.09 147.58 L142.27 148.26 L145.46 148.82 L148.64 149.28 L151.82 149.62 L155 149.86 L158.18 149.98 L161.36 149.99 L164.55 149.89 L167.73 149.67 L170.91 149.35 L174.09 148.91 L177.27 148.36 L180.45 147.7 L183.64 146.94 L186.82 146.07 L190 145.1 L193.18 144.03 L196.36 142.87 L199.55 141.6 L202.73 140.25 L205.91 138.81 L209.09 137.28 L212.27 135.67 L215.45 133.99 L218.64 132.23 L221.82 130.41 L225 128.52 L228.18 126.57 L231.36 124.57 L234.55 122.52 L237.73 120.43 L240.91 118.3 L244.09 116.13 L247.27 113.94 L250.45 111.72 L253.64 109.49 L256.82 107.25 L260 105 L263.18 102.75 L266.36 100.51 L269.55 98.28 L272.73 96.06 L275.91 93.87 L279.09 91.7 L282.27 89.57 L285.45 87.48 L288.64 85.43 L291.82 83.43 L295 81.48 L298.18 79.59 L301.36 77.77 L304.55 76.01 L307.73 74.33 L310.91 72.72 L314.09 71.19 L317.27 69.75 L320.45 68.4 L323.64 67.13 L326.82 65.97 L330 64.9 L333.18 63.93 L336.36 63.06 L339.54 62.3 L342.73 61.64 L345.91 61.09 L349.09 60.65 L352.27 60.33 L355.45 60.11 L358.64 60.01 L361.82 60.02 L365 60.14 L368.18 60.38 L371.36 60.72 L374.54 61.18 L377.73 61.74 L380.91 62.42 L384.09 63.2 L387.27 64.08 L390.45 65.07 L393.64 66.16 L396.82 67.34 L400 68.62 L403.18 69.99 L406.36 71.44 L409.54 72.98 L412.73 74.6 L415.91 76.3 L419.09 78.07 L422.27 79.9 L425.45 81.8 L428.64 83.76 L431.82 85.77 L435 87.83 L438.18 89.93 L441.36 92.06 L444.54 94.23 L447.73 96.43 L450.91 98.65 L454.09 100.88 L457.27 103.13 L460.45 105.38 L463.64 107.63" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<g>
+  <animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#sine0" xlink:href="#sine0"/></animateMotion>
+  <line x1="-18" y1="0" x2="18" y2="0" stroke="#16a34a" stroke-width="3"/>
+  <circle cx="0" cy="0" r="5" fill="#2563eb"/>
+</g>
+</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">方向场：每点按斜率 f(x)=cos x 画一小段线；积分曲线 y=sin x+C 处处与这些小线段相切，即沿方向场「顺流而下」的轨迹</figcaption></figure>
+<p><strong>存在性定理</strong>：若 f(x) 在区间 I 上<strong>连续</strong>，则 f(x) 在 I 上必有原函数。（注意：连续是充分条件而非必要条件，某些不连续函数也可能有原函数。）</p>
+<p><strong>不唯一性</strong>：若 F(x) 是 f(x) 的一个原函数，则对任意常数 C，F(x) + C 也是 f(x) 的原函数，因为常数的导数为 0：</p>
+<pre><code>[F(x) + C]' = F'(x) = f(x)</code></pre>
+<p>反过来，<strong>同一区间上</strong> f(x) 的任意两个原函数只相差一个常数。于是 f(x) 的全部原函数构成<strong>一族函数</strong> {F(x) + C | C 为任意常数}。</p>
+<div class="insight"><strong>几何含义（积分曲线族）：</strong>把 F(x) + C 画在坐标系里，得到的是<strong>彼此「沿 y 轴方向平移」的一族曲线</strong>——任取两条曲线，它们在同一个 x 处的切线斜率都等于 f(x)，所以曲线族在每一铅直方向上是「平行」的（切线互相平行）。<strong>已知导数 f(x) 只能确定曲线的形状与倾斜趋势，不能确定它上下落在哪个高度</strong>；那个「任意常数 C」就是整族曲线上下平移的幅度。</div>
+<div class="insight"><strong>物理含义（运动学）：</strong>若已知速度函数 v(t) = f(t)，则位移 s(t) = F(t) + C 是 v(t) 的原函数。但仅凭速度无法确定<strong>初始位置</strong>——这正是常数 C 的物理意义：<strong>C = 初始条件（起点位置）</strong>。给定 s(t₀) = s₀ 才能把 C 定下来。同理，已知加速度求速度，也会多出一个「初速度」常数。</div>
+<h3>4.1.3 不定积分的定义与记号</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="40" y1="250" x2="480" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="260" y1="60" x2="260" y2="315" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="468" y="242" font-size="13" fill="#64748b">x</text>
+<text x="272" y="72" font-size="13" fill="#64748b">y</text>
+<text x="46" y="78" font-size="13" fill="#2563eb" font-weight="700">y = x² + C</text>
+<path d="M64 192.4 L71 200.65 L78 208.6 L85 216.25 L92 223.6 L99 230.65 L106 237.4 L113 243.85 L120 250 L127 255.85 L134 261.4 L141 266.65 L148 271.6 L155 276.25 L162 280.6 L169 284.65 L176 288.4 L183 291.85 L190 295 L197 297.85 L204 300.4 L211 302.65 L218 304.6 L225 306.25 L232 307.6 L239 308.65 L246 309.4 L253 309.85 L260 310 L267 309.85 L274 309.4 L281 308.65 L288 307.6 L295 306.25 L302 304.6 L309 302.65 L316 300.4 L323 297.85 L330 295 L337 291.85 L344 288.4 L351 284.65 L358 280.6 L365 276.25 L372 271.6 L379 266.65 L386 261.4 L393 255.85 L400 250 L407 243.85 L414 237.4 L421 230.65 L428 223.6 L435 216.25 L442 208.6 L449 200.65 L456 192.4" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<path d="M64 162.4 L71 170.65 L78 178.6 L85 186.25 L92 193.6 L99 200.65 L106 207.4 L113 213.85 L120 220 L127 225.85 L134 231.4 L141 236.65 L148 241.6 L155 246.25 L162 250.6 L169 254.65 L176 258.4 L183 261.85 L190 265 L197 267.85 L204 270.4 L211 272.65 L218 274.6 L225 276.25 L232 277.6 L239 278.65 L246 279.4 L253 279.85 L260 280 L267 279.85 L274 279.4 L281 278.65 L288 277.6 L295 276.25 L302 274.6 L309 272.65 L316 270.4 L323 267.85 L330 265 L337 261.85 L344 258.4 L351 254.65 L358 250.6 L365 246.25 L372 241.6 L379 236.65 L386 231.4 L393 225.85 L400 220 L407 213.85 L414 207.4 L421 200.65 L428 193.6 L435 186.25 L442 178.6 L449 170.65 L456 162.4" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<path d="M64 132.4 L71 140.65 L78 148.6 L85 156.25 L92 163.6 L99 170.65 L106 177.4 L113 183.85 L120 190 L127 195.85 L134 201.4 L141 206.65 L148 211.6 L155 216.25 L162 220.6 L169 224.65 L176 228.4 L183 231.85 L190 235 L197 237.85 L204 240.4 L211 242.65 L218 244.6 L225 246.25 L232 247.6 L239 248.65 L246 249.4 L253 249.85 L260 250 L267 249.85 L274 249.4 L281 248.65 L288 247.6 L295 246.25 L302 244.6 L309 242.65 L316 240.4 L323 237.85 L330 235 L337 231.85 L344 228.4 L351 224.65 L358 220.6 L365 216.25 L372 211.6 L379 206.65 L386 201.4 L393 195.85 L400 190 L407 183.85 L414 177.4 L421 170.65 L428 163.6 L435 156.25 L442 148.6 L449 140.65 L456 132.4" fill="none" stroke="#2563eb" stroke-width="3"/>
+<path d="M64 102.4 L71 110.65 L78 118.6 L85 126.25 L92 133.6 L99 140.65 L106 147.4 L113 153.85 L120 160 L127 165.85 L134 171.4 L141 176.65 L148 181.6 L155 186.25 L162 190.6 L169 194.65 L176 198.4 L183 201.85 L190 205 L197 207.85 L204 210.4 L211 212.65 L218 214.6 L225 216.25 L232 217.6 L239 218.65 L246 219.4 L253 219.85 L260 220 L267 219.85 L274 219.4 L281 218.65 L288 217.6 L295 216.25 L302 214.6 L309 212.65 L316 210.4 L323 207.85 L330 205 L337 201.85 L344 198.4 L351 194.65 L358 190.6 L365 186.25 L372 181.6 L379 176.65 L386 171.4 L393 165.85 L400 160 L407 153.85 L414 147.4 L421 140.65 L428 133.6 L435 126.25 L442 118.6 L449 110.65 L456 102.4" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<path d="M64 72.4 L71 80.65 L78 88.6 L85 96.25 L92 103.6 L99 110.65 L106 117.4 L113 123.85 L120 130 L127 135.85 L134 141.4 L141 146.65 L148 151.6 L155 156.25 L162 160.6 L169 164.65 L176 168.4 L183 171.85 L190 175 L197 177.85 L204 180.4 L211 182.65 L218 184.6 L225 186.25 L232 187.6 L239 188.65 L246 189.4 L253 189.85 L260 190 L267 189.85 L274 189.4 L281 188.65 L288 187.6 L295 186.25 L302 184.6 L309 182.65 L316 180.4 L323 177.85 L330 175 L337 171.85 L344 168.4 L351 164.65 L358 160.6 L365 156.25 L372 151.6 L379 146.65 L386 141.4 L393 135.85 L400 130 L407 123.85 L414 117.4 L421 110.65 L428 103.6 L435 96.25 L442 88.6 L449 80.65 L456 72.4" fill="none" stroke="#93c5fd" stroke-width="2" opacity="0.75"/>
+<line x1="78" y1="60" x2="78" y2="315" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.8">
+  <animate attributeName="x1" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="x2" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+</line>
+<line x1="41.26" y1="107.67" x2="114.74" y2="189.53" stroke="#16a34a" stroke-width="3">
+  <animate attributeName="x1" values="41.26;53.66;65.98;78.24;90.45;102.64;114.84;127.09;139.45;151.97;164.73;177.79;191.2;205;219.2;233.79;248.73;263.97;279.45;295.09;310.84;326.64;342.45;358.24;373.98;389.66;405.26" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="y1" values="107.67;124.17;139.67;154.21;167.81;180.5;192.3;203.25;213.33;222.56;230.9;238.31;244.7;250;254.1;256.89;258.3;258.24;256.67;253.55;248.9;242.7;234.99;225.79;215.13;203.03;189.53" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="x2" values="114.74;130.34;146.02;161.76;177.55;193.36;209.16;224.91;240.55;256.03;271.27;286.21;300.8;315;328.8;342.21;355.27;368.03;380.55;392.91;405.16;417.36;429.55;441.76;454.02;466.34;478.74" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="y2" values="189.53;203.03;215.13;225.79;234.99;242.7;248.9;253.55;256.67;258.24;258.3;256.89;254.1;250;244.7;238.31;230.9;222.56;213.33;203.25;192.3;180.5;167.81;154.21;139.67;124.17;107.67" dur="8s" repeatCount="indefinite"/>
+</line>
+<circle cx="78" cy="208.6" r="3" fill="#93c5fd" opacity="0.85">
+  <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="208.6;223.6;237.4;250;261.4;271.6;280.6;288.4;295;300.4;304.6;307.6;309.4;310;309.4;307.6;304.6;300.4;295;288.4;280.6;271.6;261.4;250;237.4;223.6;208.6" dur="8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="78" cy="178.6" r="3" fill="#93c5fd" opacity="0.85">
+  <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="178.6;193.6;207.4;220;231.4;241.6;250.6;258.4;265;270.4;274.6;277.6;279.4;280;279.4;277.6;274.6;270.4;265;258.4;250.6;241.6;231.4;220;207.4;193.6;178.6" dur="8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="78" cy="148.6" r="5" fill="#2563eb">
+  <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="148.6;163.6;177.4;190;201.4;211.6;220.6;228.4;235;240.4;244.6;247.6;249.4;250;249.4;247.6;244.6;240.4;235;228.4;220.6;211.6;201.4;190;177.4;163.6;148.6" dur="8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="78" cy="118.6" r="3" fill="#93c5fd" opacity="0.85">
+  <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="118.6;133.6;147.4;160;171.4;181.6;190.6;198.4;205;210.4;214.6;217.6;219.4;220;219.4;217.6;214.6;210.4;205;198.4;190.6;181.6;171.4;160;147.4;133.6;118.6" dur="8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="78" cy="88.6" r="3" fill="#93c5fd" opacity="0.85">
+  <animate attributeName="cx" values="78;92;106;120;134;148;162;176;190;204;218;232;246;260;274;288;302;316;330;344;358;372;386;400;414;428;442" dur="8s" repeatCount="indefinite"/>
+  <animate attributeName="cy" values="88.6;103.6;117.4;130;141.4;151.6;160.6;168.4;175;180.4;184.6;187.6;189.4;190;189.4;187.6;184.6;180.4;175;168.4;160.6;151.6;141.4;130;117.4;103.6;88.6" dur="8s" repeatCount="indefinite"/>
+</circle>
+</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">∫2x dx = x² + C 是一族沿 y 轴平移的抛物线：同一 x 处各曲线的切线互相平行，斜率都等于 f(x)=2x（绿线为中间曲线的切线）</figcaption></figure>
+<p><strong>定义</strong>：f(x) 在区间 I 上的全体原函数，称为 f(x) 在 I 上的<strong>不定积分</strong>，记作</p>
+<pre><code>∫ f(x) dx = F(x) + C</code></pre>
+<p>其中 <code>∫</code> 称为<strong>积分号</strong>（是拉长的 S，源自 sum「求和」），f(x) 称为<strong>被积函数</strong>，f(x) dx 称为<strong>被积表达式</strong>，x 称为<strong>积分变量</strong>，C 称为<strong>积分常数</strong>。</p>
+<p>记号 <code>dx</code> 不是摆设：它指明「对哪个变量积分」，并来自微分 <code>dF = F'dx = f dx</code> 的逆过程。例：</p>
+<pre><code>∫ 2x dx = x² + C        （因为 (x² + C)' = 2x）
+∫ cos x dx = sin x + C   （因为 (sin x + C)' = cos x）
+∫ 1/x dx = ln|x| + C     （注意 x ≠ 0，绝对值保证对数有意义）</code></pre>
+<h3>4.1.4 基本积分表</h3>
+<p>基本积分表就是基本导数公式「倒着读」，必须熟记（其中 α ≠ −1，且每行省略常数 C）：</p>
+<pre><code>1.  ∫ 0 dx = C
+2.  ∫ xᵅ dx = xᵅ⁺¹/(α+1) + C        (α ≠ −1)
+3.  ∫ 1/x dx = ln|x| + C
+4.  ∫ eˣ dx = eˣ + C
+5.  ∫ aˣ dx = aˣ/ln a + C            (a &gt; 0, a ≠ 1)
+6.  ∫ sin x dx = −cos x + C
+7.  ∫ cos x dx = sin x + C
+8.  ∫ sec²x dx = tan x + C
+9.  ∫ csc²x dx = −cot x + C
+10. ∫ sec x·tan x dx = sec x + C
+11. ∫ csc x·cot x dx = −csc x + C
+12. ∫ 1/(1+x²) dx = arctan x + C
+13. ∫ 1/√(1−x²) dx = arcsin x + C</code></pre>
+<p>记忆要点：这些公式都是「谁的导数是它」。比如第 3 行对应 (ln|x|)' = 1/x；第 12 行对应 (arctan x)' = 1/(1+x²)；第 13 行对应 (arcsin x)' = 1/√(1−x²)。</p>
+<h3>4.1.5 不定积分的性质</h3>
+<p><strong>（1）线性性质</strong>：积分可逐项进行，常数因子可提出：</p>
+<pre><code>∫ [k₁f(x) + k₂g(x)] dx = k₁∫ f(x) dx + k₂∫ g(x) dx</code></pre>
+<p>例：∫ (3x² + 2cos x) dx = 3·(x³/3) + 2sin x + C = x³ + 2sin x + C。</p>
+<p><strong>（2）微分与积分互逆</strong>（两种次序，结果略有差别）：</p>
+<pre><code>先积后微：  d/dx [ ∫ f(x) dx ] = f(x)       （求导还原被积函数）
+先微后积：  ∫ F'(x) dx = F(x) + C           （积分比原函数多一个常数 C）</code></pre>
+<p>或写成微分形式：<code>d∫ f(x)dx = f(x)dx</code>、<code>∫ dF(x) = F(x) + C</code>。<strong>「先微后积」多出一个任意常数</strong>，这是理解不定积分一切性质的关键。</p>
+<div class="insight"><strong>几何含义（方向场 / 斜率场）：</strong>把 f(x) 在平面上每一点 (x, y) 处画一段斜率为 f(x) 的小线段，得到的图形叫<strong>斜率场（方向场）</strong>。求 ∫f(x)dx 就是找一条处处与这些线段相切的光滑曲线；因为斜率场只规定「倾斜方向」而不管「高低」，所以解是一整族互相平移的曲线——<strong>不定积分 = 沿方向场「顺流而下」的全部轨迹</strong>。</div>
+<div class="insight"><strong>物理含义（从变化率到总量）：</strong>不定积分是「已知变化率反推总量」的通用工具：速度 → 位移、加速度 → 速度、电流 i(t) → 电荷量 Q(t)（因 Q'(t) = i(t)）、边际成本 C'(x) → 总成本 C(x)、功率 → 功。凡是「某量的导数已知」的还原问题，都归结为求不定积分。</div>
+
+<h2 id="s2">4.2 换元积分法</h2>
+<p>换元积分法的本质是<strong>复合函数求导（链式法则）的逆运算</strong>。链式法则 d[F(φ(x))]/dx = F'(φ(x))·φ'(x)，倒过来读，就得到换元积分。</p>
+<h3>4.2.1 第一换元法（凑微分法）</h3>
+<p>若被积表达式能凑成 f(φ(x))·φ'(x) dx 的形式，而 f 的原函数 F 已知，则</p>
+<pre><code>∫ f(φ(x))·φ'(x) dx = [ ∫ f(u) du ]  u=φ(x)  = F(φ(x)) + C</code></pre>
+<p>核心动作：把 φ'(x) dx「凑」成 dφ(x)，即令 u = φ(x)，dx 换为 du/dφ' 的形式。常用的凑微分公式：</p>
+<pre><code>dx = d(x + a)                    x dx = (1/2) d(x²)
+eˣ dx = d(eˣ)                    (1/x) dx = d(ln|x|)
+sin x dx = −d(cos x)             cos x dx = d(sin x)
+sec²x dx = d(tan x)              (1/(1+x²)) dx = d(arctan x)
+(1/√(1−x²)) dx = d(arcsin x)     (1/(2√x)) dx = d(√x)</code></pre>
+<p><strong>例 1</strong>：∫ 2x·e^(x²) dx。令 u = x²，则 du = 2x dx，于是</p>
+<pre><code>∫ 2x·e^(x²) dx = ∫ eᵘ du = eᵘ + C = e^(x²) + C</code></pre>
+<p><strong>例 2</strong>：∫ sin x·cos x dx。令 u = sin x，则 du = cos x dx：</p>
+<pre><code>∫ sin x·cos x dx = ∫ u du = u²/2 + C = (sin²x)/2 + C</code></pre>
+<div class="insight"><strong>几何含义（换视角再还原）：</strong>第一换元法相当于把「沿 x 轴的度量」换到「沿 u = φ(x) 的度量」上——用 φ(x) 做新的横坐标，把弯曲的坐标轴「拉直」，算出原函数后再换回 x。被积函数里那个 φ'(x) 正是两种坐标尺度之间的<strong>比例因子（尺度换算）</strong>，类似地图上「比例尺」的变换。</div>
+<div class="insight"><strong>物理含义（换单位 / 换参考量）：</strong>把自变量从 x 换成 u = φ(x)，在物理上常对应<strong>更换测量单位或参考量</strong>。例如把对时间 t 的积分换成对温度 T、对角度 θ、对能量 E 的积分，只要知道两者间的变化率 φ'(x)（即「单位换算率」），就能在新物理量下完成积分再还原。</div>
+<h3>4.2.2 第二换元法</h3>
+<p>第一换元是「令 u = φ(x) 作新变量」；第二换元反过来，主动令 x = ψ(t)（把 x 表示成新变量 t 的函数），则 dx = ψ'(t) dt，于是</p>
+<pre><code>∫ f(x) dx = ∫ f(ψ(t))·ψ'(t) dt = G(t) + C = G(ψ⁻¹(x)) + C</code></pre>
+<p>最后要把 t 用 x 表示回来（回代 t = ψ⁻¹(x)）。第二换元主要对付<strong>根式</strong>，三种典型代换：</p>
+<p><strong>（1）三角代换</strong>——利用平方和/差恒等式去掉根号：</p>
+<pre><code>含 √(a² − x²)：令 x = a·sin t   （利用 1 − sin²t = cos²t）
+含 √(a² + x²)：令 x = a·tan t   （利用 1 + tan²t = sec²t）
+含 √(x² − a²)：令 x = a·sec t   （利用 sec²t − 1 = tan²t）</code></pre>
+<p><strong>例 3</strong>：求 ∫ 1/√(a² − x²) dx。令 x = a·sin t（−π/2 &lt; t &lt; π/2），dx = a·cos t dt，√(a²−x²) = a·cos t：</p>
+<pre><code>∫ 1/√(a²−x²) dx = ∫ (a·cos t)/(a·cos t) dt = ∫ 1 dt = t + C = arcsin(x/a) + C</code></pre>
+<p><strong>（2）根式代换</strong>：被积函数含 ⁿ√(ax+b) 时，令 t = ⁿ√(ax+b)，把根号整体设成新变量。例：∫ √(x−1) dx，令 t = √(x−1)，则 x = t²+1，dx = 2t dt。</p>
+<p><strong>（3）倒代换</strong>：x = 1/t，适用于分母次数远高于分子的情形，可降低分母次数。</p>
+<div class="insight"><strong>几何含义（重新参数化曲线）：</strong>第二换元 x = ψ(t) 就是把曲线用新参数 t 重新描述。三角代换的本质是<strong>把圆 x² + y² = a² 参数化成 x = a cos t、y = a sin t</strong>：根式 √(a²−x²) 正是圆上一点的纵坐标 y，换成角度参数 t 后，根号就「消掉了」——因为半径 a 在极坐标里是常数。这相当于把直角坐标下的曲线问题搬到<strong>极坐标/参数坐标</strong>下，让对称性显形。</div>
+<div class="insight"><strong>物理含义（换坐标系 / 换参考系）：</strong>三角代换对应「从直角坐标换到极坐标/角度描述」：求一个圆周运动相关的量，用角度 θ 比用直角坐标 x 更自然。倒代换 x = 1/t 对应「把无穷远与原点对调」，处理远场（x 很大）问题时把大距离折算成小量。</div>
+
+<h2 id="s3">4.3 分部积分法</h2>
+<p>分部积分法源自<strong>乘积的导数法则</strong>：(uv)' = u'v + uv'，移项并积分：</p>
+<pre><code>∫ uv' dx = uv − ∫ u'v dx         即        ∫ u dv = uv − ∫ v du</code></pre>
+<p>其中 u = u(x)、v = v(x)。要点：把被积函数拆成 <code>u</code> 与 <code>dv</code> 两部分，让 <code>dv</code> 容易积出 v，并且新积分 <code>∫ v du</code> 比原积分更简单。</p>
+<h3>4.3.1 u 的选取顺序（LIATE / 反—对—幂—三—指）</h3>
+<p>当被积函数是两类不同函数相乘时，按下列优先级选 <code>u</code>（越靠前越优先当 u，其余部分凑成 dv）：</p>
+<pre><code>反三角函数  &gt;  对数函数  &gt;  幂函数（代数）  &gt;  三角函数  &gt;  指数函数
+（Anti）      （Log）      （Algebra）       （Trig）       （Exp）</code></pre>
+<p>直觉：<strong>「好积分」的部分留给 dv，先积分掉；「好求导」的部分当 u，让它在下一步被求导降下来</strong>。指数函数、三角函数求导不降复杂度，幂函数求导降次数，而对数、反三角求导会「变得简单」（ln x → 1/x，arctan x → 1/(1+x²)），所以对数和反三角优先当 u。</p>
+<p><strong>例 4</strong>：∫ x·eˣ dx。按 LIATE，幂函数 x 优先于指数 eˣ，取 u = x、dv = eˣ dx，则 du = dx、v = eˣ：</p>
+<pre><code>∫ x·eˣ dx = x·eˣ − ∫ eˣ dx = x·eˣ − eˣ + C = (x − 1)eˣ + C</code></pre>
+<p><strong>例 5</strong>：∫ ln x dx。对数函数优先当 u，取 u = ln x、dv = dx，则 du = (1/x)dx、v = x：</p>
+<pre><code>∫ ln x dx = x·ln x − ∫ x·(1/x) dx = x·ln x − x + C = x(ln x − 1) + C</code></pre>
+<h3>4.3.2 三种典型情形</h3>
+<p><strong>（1）降幂型</strong>：∫ xⁿ·eˣ dx、∫ xⁿ·sin x dx 等，取 u = xⁿ，每做一次分部积分，幂次降 1，重复 n 次即可。例：∫ x²·eˣ dx 做两次分部积分得 (x² − 2x + 2)eˣ + C。</p>
+<p><strong>（2）循环型</strong>：被积函数含有 eˣ 与 sin x（或 cos x）相乘时，两次分部积分后原积分会「重现」，把它当作未知量移项解出。例：</p>
+<pre><code>∫ eˣ·sin x dx = (eˣ sin x − eˣ cos x)/2 + C   （两次分部后移项解出）</code></pre>
+<p><strong>（3）递推型</strong>：∫ sinⁿx dx、∫ (x²+a²)⁻ⁿ dx 等，用分部积分建立「Iₙ 与 Iₙ₋₁（或 Iₙ₊₁）」之间的递推公式，从低次逐步算出高次。例：∫ sinⁿx dx 的递推可逐步化到 ∫ sin x dx = −cos x + C。</p>
+<div class="insight"><strong>几何含义（面积的守恒分配）：</strong>由 (uv)' = u'v + uv' 积分得 uv = ∫u'v dx + ∫uv' dx，即 <code>uv = ∫v du + ∫u dv</code>。在几何上，乘积 uv 是一个「矩形总面积」，分部积分就是把这个矩形面积拆成两块互补的部分 ∫v du 与 ∫u dv，<strong>把难算的那块（∫u dv）转化为总面积 uv 减去好算的那块（∫v du）</strong>——本质是一种「面积守恒 + 补形」技巧。</div>
+<div class="insight"><strong>物理含义（功与能量、分部与分配）：</strong>若 v 表示速度、u 表示某个随时间变化的量（如力或质量），则 ∫u dv 可理解为「力随位移积累的功」。分部积分把「对 dv（位移）的积累」换成「uv 的整体量减去对 du 的积累」，对应物理中<strong>把总能量拆成两部分再重组</strong>的配分思想，例如 d(mv) = m·dv + v·dm 是变质量问题的核心。</div>
+
+<h2 id="s4">4.4 有理函数的积分</h2>
+<p>有理函数是两个多项式之商 R(x) = P(x)/Q(x)（P、Q 为多项式，Q ≠ 0）。<strong>任何有理函数的原函数都是初等函数</strong>，因此有理函数积分有系统化的通用算法。</p>
+<h3>4.4.1 化假分式为「多项式 + 真分式」</h3>
+<p>若分子次数 ≥ 分母次数（假分式），先做<strong>多项式长除法</strong>，写成</p>
+<pre><code>P(x)/Q(x) = 多项式 + 真分式</code></pre>
+<p>其中真分式分子次数 &lt; 分母次数。多项式部分逐项直接积分。</p>
+<h3>4.4.2 真分式的部分分式分解</h3>
+<p>把分母 Q(x) 在实数范围内分解为<strong>一次因式</strong>与<strong>不可约二次因式</strong>的幂的乘积，再按下列规则把真分式拆成<strong>部分分式</strong>之和：</p>
+<pre><code>（一）Q(x) 含单因子 (x − a)：拆出  A/(x − a)
+（二）Q(x) 含重因子 (x − a)ᵏ：拆出  A₁/(x−a) + A₂/(x−a)² + … + Aₖ/(x−a)ᵏ
+（三）Q(x) 含不可约二次因子 (x² + px + q)（Δ = p²−4q &lt; 0）：
+        拆出  (Mx + N)/(x² + px + q)
+（四）Q(x) 含重二次因子 (x² + px + q)ᵏ：
+        拆出  (M₁x+N₁)/(x²+px+q) + … + (Mₖx+Nₖ)/(x²+px+q)ᵏ</code></pre>
+<p>系数 A、M、N 由<strong>通分后比较分子系数</strong>（或代入特殊 x 值）解出。</p>
+<h3>4.4.3 四种基本类型的不定积分</h3>
+<p>部分分式分解后，积分归结为下面四种标准型：</p>
+<pre><code>(Ⅰ)  ∫ A/(x − a) dx = A·ln|x − a| + C
+
+(Ⅱ)  ∫ A/(x − a)ᵏ dx = A/(1−k)·(x − a)^(1−k) + C    (k &gt; 1)
+
+(Ⅲ)  ∫ (Mx + N)/(x² + px + q) dx
+        = (M/2)·ln(x² + px + q) + (N − Mp/2)·(2/√(4q−p²))·arctan((2x+p)/√(4q−p²)) + C
+        （先凑分子为 (2x+p) 的倍数 + 常数，再配方用 arctan）
+
+(Ⅳ)  ∫ (Mx + N)/(x² + px + q)ᵏ dx    （k &gt; 1）
+        = 用配方、换元 t = x + p/2 化为 (t² + a²)⁻ᵏ 与 t(t²+a²)⁻ᵏ 之和，
+          前者由递推公式计算</code></pre>
+<p>其中第 (Ⅲ) 型的配方细节最常用：x² + px + q = (x + p/2)² + (q − p²/4)，令 t = x + p/2、a² = q − p²/4，则</p>
+<pre><code>∫ 1/(x² + px + q) dx = ∫ 1/(t² + a²) dt = (1/a)·arctan(t/a) + C</code></pre>
+<h3>4.4.4 可化为有理函数的积分</h3>
+<p>（1）<strong>三角有理式</strong> ∫ R(sin x, cos x) dx（R 为有理函数）：用<strong>万能代换</strong> t = tan(x/2)，则</p>
+<pre><code>sin x = 2t/(1+t²)，  cos x = (1−t²)/(1+t²)，  dx = 2/(1+t²) dt</code></pre>
+<p>代入后化为 t 的有理函数积分。当被积函数关于 sin x、cos x 有奇偶对称性时，可先用更简单的代换（如 t = tan x 或 t = cos x）。</p>
+<p>（2）含简单根式 ⁿ√(ax+b) 或 ⁿ√((ax+b)/(cx+d)) 的积分：令 t = ⁿ√(…)，化为有理函数。</p>
+<div class="insight"><strong>几何含义（复杂曲线拆成基本曲线）：</strong>部分分式分解在几何上相当于把一条「复杂的有理曲线 y = R(x)」拆成若干条<strong>最简单曲线</strong>的叠加：<code>A/(x−a)</code> 对应双曲型曲线（积出对数），<code>(Mx+N)/(x²+px+q)</code> 对应「钟形 + 反正切型」曲线（积出 ln 与 arctan）。<strong>任何有理函数的面积都可以由这些基本形状线性叠加而成</strong>——这是「分解再合成」的分析思想。</div>
+<div class="insight"><strong>物理含义（系统响应与叠加原理）：</strong>在电路、控制系统、信号处理中，有理函数常是<strong>传递函数</strong>。分母的一次因式 (x−a) 对应<strong>一阶惯性环节（指数衰减 eᵃᵗ）</strong>，二次因式对应<strong>二阶振荡环节（eᵖᵗ sin/cos 型振荡）</strong>。部分分式分解就是把系统总响应拆成这些基本环节响应的<strong>线性叠加</strong>——这正是线性系统的<strong>叠加原理</strong>。</div>
+
+<hr>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>原函数 F(x)</td><td>一条处处以 f(x) 为切线斜率的曲线</td><td>由变化率还原出的「总量」函数</td></tr>
+<tr><td>不定积分 ∫f dx</td><td>积分曲线族：沿 y 轴平移的一族曲线</td><td>含未知初始条件的全部解</td></tr>
+<tr><td>积分常数 C</td><td>曲线族上下平移的高度</td><td>初始条件（初位置、初速度、初电荷）</td></tr>
+<tr><td>方向场（斜率场）</td><td>每点按 f(x) 画斜率线段的场</td><td>已知速度场、力场时求轨迹</td></tr>
+<tr><td>基本积分表</td><td>常见形状曲线的「反向斜率识别」</td><td>常见变化率→总量的对照手册</td></tr>
+<tr><td>第一换元（凑微分）</td><td>换坐标轴尺度，把曲线拉直再还原</td><td>换单位/换参考量，乘上换算因子</td></tr>
+<tr><td>第二换元（三角代换）</td><td>用极坐标/参数坐标重新描述曲线，消去根号</td><td>换坐标系/参考系，圆周运动改用角度</td></tr>
+<tr><td>分部积分</td><td>矩形面积 uv 拆成两块互补面积</td><td>功/能量按部分分配（如变质量 d(mv)）</td></tr>
+<tr><td>有理函数部分分式</td><td>复杂曲线拆成基本形状（对数、反正切）叠加</td><td>传递函数拆成基本环节响应的叠加原理</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li>求 ∫ (3x² + 5/x − 2sin x) dx。</li>
+<li>用第一换元法求 ∫ x·cos(x²) dx 与 ∫ eˣ/(1+eˣ) dx。</li>
+<li>用第二换元法（三角代换）求 ∫ 1/√(a² + x²) dx（提示：令 x = a·tan t）。</li>
+<li>用分部积分法求 ∫ x·sin x dx 与 ∫ arctan x dx。</li>
+<li>用循环型分部积分求 ∫ e²ˣ·cos 3x dx。</li>
+<li>把 (3x + 5)/(x² − 1) 分解为部分分式，并求其不定积分。</li>
+<li>求 ∫ 1/(x² + 2x + 5) dx（提示：配方后化为 arctan 型）。</li>
+<li>用万能代换 t = tan(x/2) 求 ∫ 1/(1 + cos x) dx。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<h4>常见误区</h4>
+<ul>
+<li>❌ 「忘了加积分常数 C」 → ❌ 不定积分是一族函数，丢 C 就是丢掉无穷多个解；「先微后积」必多一个 C。</li>
+<li>❌ 「∫ 1/x dx = ln x + C」 → ❌ 应为 <code>ln|x| + C</code>，x 为负时也必须有意义。</li>
+<li>❌ 「∫ xᵅ dx = xᵅ⁺¹/(α+1) 对一切 α 成立」 → ❌ 当 α = −1 时是 ln|x|，不能套幂公式。</li>
+<li>❌ 「换元后忘了回代」 → ❌ 第二换元 x = ψ(t) 求出 G(t) 后必须代回 t = ψ⁻¹(x)，否则结果含新变量 t 是错的。</li>
+<li>❌ 「三角代换 x = a·sin t 时 √(a²−x²) = a·sin t」 → ❌ 应为 a·cos t（用 1 − sin²t = cos²t，且取 t ∈ (−π/2, π/2) 保证 cos t ≥ 0）。</li>
+<li>❌ 「分部积分时 u 与 dv 随便拆」 → ❌ 拆错方向会让 ∫ v du 越来越复杂；应按 LIATE 顺序，对数、反三角优先当 u。</li>
+<li>❌ 「假分式直接分解部分分式」 → ❌ 必须先用长除法化为「多项式 + 真分式」，只有真分式才能做部分分式分解。</li>
+<li>❌ 「二次因式部分分式分子写成 A」 → ❌ 不可约二次因式对应的部分分式分子必须是<strong>一次式</strong> Mx + N，不是常数。</li>
+<li>❌ 「循环型分部积分遇到原积分重现就以为无解」 → ❌ 此时应把原积分当未知量移项解出（系数相减），而不是死循环。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>验证：x²、x² + 1、x² − 5 都是 2x 的原函数，并写出 ∫ 2x dx 的一般结果。为什么答案必须带上 +C？</li>
+<li>（几何含义）已知某曲线的切线斜率处处为 f(x) = 2x，且该曲线过点 (1, 3)。求曲线方程，并说明为什么必须给出这个「过点」条件才能定出唯一曲线。</li>
+<li>用第一换元法（凑微分）求 ∫ 2x·e^(x²) dx。</li>
+<li>（物理含义）质点沿直线运动，速度 v(t) = 3t²，且 t = 0 时位移 s = 1。求位移函数 s(t)，并指出常数 C 的物理意义。</li>
+<li>用分部积分法求 ∫ x·sin x dx。</li>
+<li>把 (3x + 5)/(x² − 1) 分解为部分分式，并求其不定积分。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>因为 (x²)' = (x² + 1)' = (x² − 5)' = 2x，所以 x²、x² + 1、x² − 5 都是 2x 的原函数；∫ 2x dx = x² + C。+C 表示「相差任意常数的一族函数」：同一个导数对应沿 y 轴上下平移的一整族曲线，若不加 C 就会漏掉无穷多个原函数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>y = ∫ 2x dx = x² + C。代入点 (1, 3)：3 = 1 + C，得 C = 2，故曲线为 y = x² + 2。仅凭斜率 f(x) 只能确定曲线的「形状/倾斜趋势」（一族互相平移的曲线），「过点」给出的是初始高度（初始条件），用来把任意常数 C 定下来。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>令 u = x²，则 du = 2x dx。∫ 2x·e^(x²) dx = ∫ eᵘ du = eᵘ + C = e^(x²) + C。关键是把 2x dx 凑成 d(x²)，即「凑微分」。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>s(t) = ∫ 3t² dt = t³ + C。由 s(0) = 1 得 C = 1，故 s(t) = t³ + 1。这里的 C 就是初始位置：只知速度只能还原出「相差一个常数的全部运动」，初始条件 s(0) 才能确定唯一轨迹。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>取 u = x、dv = sin x dx，则 du = dx、v = −cos x。∫ x·sin x dx = −x cos x − ∫ (−cos x) dx = −x cos x + sin x + C。按 LIATE 顺序，幂函数 x 优先当 u，三角函数 sin x 凑成 dv。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>x² − 1 = (x − 1)(x + 1)。设 (3x + 5)/(x² − 1) = A/(x − 1) + B/(x + 1)，通分得 3x + 5 = A(x + 1) + B(x − 1)。令 x = 1：8 = 2A → A = 4；令 x = −1：2 = −2B → B = −1。于是原式 = ∫ [4/(x − 1) − 1/(x + 1)] dx = 4ln|x − 1| − ln|x + 1| + C。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第3章-微分中值定理与导数的应用/第3章-微分中值定理与导数的应用.html">← 上一章：第3章 微分中值定理与导数的应用</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第5章-定积分/第5章-定积分.html">下一章：第5章 定积分 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学到高等数学</footer>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第3章 微分中值定理与导数的应用 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第3章 微分中值定理与导数的应用</div></header>
+<main class="container">
+<h1>第3章 微分中值定理与导数的应用</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>导数是"瞬时变化率"，本章所有结论都来自同一个核心图像——<strong>把曲线在一点附近"拉直"成切线</strong>：中值定理说"全局的平均变化 = 某一点的瞬时变化"，洛必达法则用"变化快慢之比"求极限，泰勒公式用"多项式切触"逼近曲线，单调性/极值/凹凸/拐点用"一阶、二阶导数的符号"读曲线形状，曲率用"切线方向角的变化率"量弯曲程度。学完本章，你要能在心里"看见"每一条光滑曲线在每一点上的切线，并用切线这把尺子读懂函数的升降、弯曲与转折。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">3.1 罗尔中值定理</a><a href="#s2">3.2 拉格朗日中值定理</a><a href="#s3">3.3 柯西中值定理</a><a href="#s4">3.4 洛必达法则</a><a href="#s5">3.5 泰勒公式</a><a href="#s6">3.6 单调性与极值</a><a href="#s7">3.7 凹凸性与拐点</a><a href="#s8">3.8 曲率</a><a href="#s9">本章·几何与物理含义总结</a><a href="#s10">典型例题</a><a href="#s11">常见误区</a>
+</div>
+
+<h2 id="s1">3.1 罗尔中值定理</h2>
+<p>罗尔定理是整个"微分中值定理"的起点，也是一切"导数与函数性质"之间的桥梁。它说的是：<strong>如果一段光滑曲线两端点一样高，那么中间一定有一点的切线是水平的</strong>。</p>
+<h3>定理内容</h3>
+<p>设函数 <code>f(x)</code> 满足三个条件：</p>
+<ol>
+<li><code>f(x)</code> 在<strong>闭区间</strong> <code>[a, b]</code> 上<strong>连续</strong>；</li>
+<li><code>f(x)</code> 在<strong>开区间</strong> <code>(a, b)</code> 内<strong>可导</strong>；</li>
+<li><code>f(a) = f(b)</code>（两端点函数值相等）。</li>
+</ol>
+<p>则<strong>至少存在一点</strong> <code>ξ ∈ (a, b)</code>，使得</p>
+<pre><code>f′(ξ) = 0</code></pre>
+<div class="insight"><strong>几何含义：</strong>在连续、光滑（可导）且两端等高的曲线弧上，<strong>至少存在一点 ξ，其切线水平（平行于 x 轴）</strong>。直观地想：一条从 P(a) 出发、又回到同一高度的光滑绳子，要么中间完全水平（处处切斜率为 0），要么先升后降（或先降后升），那么"升转降"的最高点（或"降转升"的最低点）处的切线必然是水平的。最高点、最低点处的导数就是 0。</div>
+<div class="insight"><strong>物理含义：</strong>把 f(t) 看成物体在 t 时刻的位置（沿直线运动）。若物体在 t=a 与 t=b 两个时刻<strong>处于同一位置</strong>（位移为 0），则在运动过程中<strong>至少存在某一时刻 ξ，瞬时速度为 0</strong>（物体瞬时静止）。例如竖直上抛一个球，它从手中抛出又落回同一高度时，最高点那一瞬间速度恰好为 0。</div>
+<h3>三个条件缺一不可</h3>
+<p>罗尔定理的每个条件都必不可少，丢掉任何一个都可能找不到使 f′(ξ)=0 的点：</p>
+<ul>
+<li><strong>缺"连续性"</strong>：在 [0,1] 上令 f(0)=f(1)=1，而 f(x)=x（0&lt;x≤1），端点处"断"了一下（不连续）。虽然 f(0)=f(1)，但 (0,1) 内 f′(x)=1 恒不为 0。</li>
+<li><strong>缺"可导性"</strong>：f(x)=|x| 在 [−1,1] 上连续且 f(−1)=f(1)=1，但 x=0 处不可导（尖点）。尽管两端等高，(0,1) 与 (−1,0) 内导数恒为 ±1，没有导数为 0 的点。</li>
+<li><strong>缺"端点等高"</strong>：f(x)=x 在 [0,1] 上连续可导，但 f(0)=0≠1=f(1)，f′(x)=1 恒不为 0。</li>
+</ul>
+
+<h2 id="s2">3.2 拉格朗日中值定理</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="40" y1="290" x2="500" y2="290" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="60" y1="24" x2="60" y2="290" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M 60 250 C 170 250, 330 80, 460 70" fill="none" stroke="#475569" stroke-width="2.5"/>
+<circle cx="60" cy="250" r="4.5" fill="#2563eb"/>
+<circle cx="460" cy="70" r="4.5" fill="#2563eb"/>
+<text x="40" y="272" font-size="14" font-style="italic" fill="#334155">A</text>
+<text x="470" y="64" font-size="14" font-style="italic" fill="#334155">B</text>
+<line x1="60" y1="250" x2="460" y2="70" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="7 5"/>
+<g font-size="13" fill="#334155">
+<line x1="86" y1="40" x2="122" y2="40" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="130" y="44">弦 AB（平均变化率）</text>
+<line x1="86" y1="64" x2="122" y2="64" stroke="#2563eb" stroke-width="2.5"/>
+<text x="130" y="68">切线 f′(ξ)</text>
+</g>
+<g>
+<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" path="M 60 250 C 170 250, 330 80, 460 70"/>
+<line x1="-100" y1="0" x2="100" y2="0" stroke="#2563eb" stroke-width="3"/>
+<circle r="5.5" fill="#16a34a" stroke="#ffffff" stroke-width="1.5"/>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图1 拉格朗日中值定理：光滑曲线上总有一点 ξ，其切线平行于两端点连线（弦 AB）——整段"平均变化率"等于某点"瞬时变化率"</figcaption>
+</figure>
+<p>罗尔定理要求"两端等高"很苛刻，拉格朗日把这条限制去掉，得到微分学里<strong>最常用、最核心</strong>的定理。</p>
+<h3>定理内容</h3>
+<p>设函数 <code>f(x)</code> 满足：在闭区间 <code>[a, b]</code> 上连续，在开区间 <code>(a, b)</code> 内可导。则<strong>至少存在一点</strong> <code>ξ ∈ (a, b)</code>，使得</p>
+<pre><code>f′(ξ) = [ f(b) − f(a) ] / (b − a)</code></pre>
+<p>等价地写成 <code>f(b) − f(a) = f′(ξ)(b − a)</code>，也叫<strong>有限增量公式</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>连接曲线两端点 A(a, f(a))、B(b, f(b)) 的<strong>割线（弦）</strong>，其斜率为 <code>[f(b)−f(a)]/(b−a)</code>。拉格朗日中值定理说：<strong>曲线上至少存在一点 ξ，该点切线平行于这条弦</strong>。也就是说，光滑曲线的某一段上，总有一点的切线方向等于"整段的平均方向"。罗尔定理正是"弦水平（斜率为 0）"时的特例。</div>
+<div class="insight"><strong>物理含义：</strong>把 f(t) 看成 t 时刻的位置，则 <code>[f(b)−f(a)]/(b−a)</code> 就是 <code>[a,b]</code> 时间段内的<strong>平均速度</strong>。定理断言：<strong>运动过程中至少存在某一时刻 ξ，其瞬时速度恰好等于这段时间的平均速度</strong>。比如你从家开车到公司 60 公里用了 1 小时，平均速度 60 km/h，那么途中至少有一瞬间，仪表盘指针正好指在 60 km/h。</div>
+<h3>两个重要推论（证明恒等式、判断常数的利器）</h3>
+<ol>
+<li><strong>推论一</strong>：若在区间 I 内恒有 <code>f′(x) ≡ 0</code>，则 f(x) 在 I 上是一个<strong>常数</strong>。逆命题也成立。</li>
+<li><strong>推论二</strong>：若在区间 I 内恒有 <code>f′(x) = g′(x)</code>，则 <code>f(x) − g(x) ≡ C</code>（相差一个常数）。这正是<strong>不定积分</strong>里"两个原函数只差一个常数"的理论依据。</li>
+</ol>
+<div class="insight"><strong>为什么"导数处处为 0 ⇔ 函数为常数"？</strong>物理上：瞬时速度恒为 0，意味着物体任何瞬间都不动，位置自然不变。几何上：切线处处水平，曲线就"贴"在一条水平线上，不升也不降，只能是常数函数。</div>
+
+<h2 id="s3">3.3 柯西中值定理</h2>
+<p>柯西中值定理把拉格朗日定理从"一条曲线"推广到"参数方程描述的一条曲线"，是证明洛必达法则的直接工具。</p>
+<h3>定理内容</h3>
+<p>设 <code>f(x)</code>、<code>g(x)</code> 在 <code>[a, b]</code> 上连续，在 <code>(a, b)</code> 内可导，且 <code>g′(x) ≠ 0</code>。则至少存在一点 <code>ξ ∈ (a, b)</code>，使得</p>
+<pre><code>[ f(b) − f(a) ] / [ g(b) − g(a) ] = f′(ξ) / g′(ξ)</code></pre>
+<p>当 <code>g(x) = x</code> 时，<code>g′(ξ)=1</code>，<code>g(b)−g(a)=b−a</code>，柯西定理就退化成了拉格朗日定理。所以三者关系是：<strong>罗尔 ⊂ 拉格朗日 ⊂ 柯西</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>把曲线写成参数形式 x=g(t)、y=f(t)，那么该曲线上某点切线斜率为 <code>dy/dx = f′(t)/g′(t)</code>，连接参数 t=a 与 t=b 两点割线的斜率为 <code>[f(b)−f(a)]/[g(b)−g(a)]</code>。柯西定理说：<strong>参数曲线上总存在一点，其切线与这段参数弧的弦平行</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>把 g(t)、f(t) 分别看成两个质点的位置，则 <code>f′(t)/g′(t)</code> 是二者的<strong>瞬时速度之比</strong>，<code>[f(b)−f(a)]/[g(b)−g(a)]</code> 是二者的<strong>平均速度之比</strong>。定理断言：两质点同时间运动时，<strong>存在某一时刻，它们的瞬时速度之比等于整段的平均速度之比</strong>。</div>
+
+<h2 id="s4">3.4 洛必达法则</h2>
+<p>洛必达法则把"求两个量之比（且都趋于 0 或都趋于 ∞）的极限"转化为"求它们导数之比的极限"，是处理 <code>0/0</code> 与 <code>∞/∞</code> 型未定式的核心工具。</p>
+<h3>法则内容（0/0 与 ∞/∞ 型）</h3>
+<p>设 <code>lim f(x) = 0</code> 且 <code>lim g(x) = 0</code>（或二者都趋于 ∞），且 f、g 在 x₀ 的某去心邻域内可导、<code>g′(x) ≠ 0</code>。若 <code>lim f′(x)/g′(x)</code> 存在（或为 ∞），则</p>
+<pre><code>lim f(x)/g(x) = lim f′(x)/g′(x)</code></pre>
+<p>一个最典型的例子：</p>
+<pre><code>lim(x→0) sin x / x = lim(x→0) cos x / 1 = 1</code></pre>
+<div class="insight"><strong>几何/极限含义：</strong>当 x→x₀ 时，f(x) 与 g(x) 都趋于 0，此时直接比"大小"是 0/0 无法判断。但二者"趋于 0 的快慢"不同：在 x₀ 附近，f(x) ≈ f′(x₀)(x−x₀)、g(x) ≈ g′(x₀)(x−x₀)（切线近似），所以比值取决于<strong>切线斜率之比 f′(x₀)/g′(x₀)</strong>。洛必达法则本质上就是"用切线近似替代曲线"来比较两个无穷小量的阶。</div>
+<div class="insight"><strong>物理含义：</strong>若 f(t)、g(t) 分别表示两个物体在同一时刻从同一点出发后、经过很短时间 Δt 走过的位移（都趋于 0），那么 <code>f/g</code> 的极限就是二者<strong>瞬时速度之比</strong>：谁"起速"更快，谁的位移增长就更占主导。</div>
+<h3>其他未定式的转化</h3>
+<p>洛必达法则只能直接用于 <code>0/0</code> 与 <code>∞/∞</code>。其余五种未定式须先变形：</p>
+<table>
+<tr><th>未定式</th><th>转化方法</th><th>示例</th></tr>
+<tr><td><code>0·∞</code></td><td>把其中一个因子取倒数移到分母，化成 0/0 或 ∞/∞</td><td><code>x·ln x（x→0⁺）= ln x / (1/x)</code></td></tr>
+<tr><td><code>∞ − ∞</code></td><td>通分、有理化、提公因子，化为商式</td><td><code>1/x − 1/sin x（x→0）</code></td></tr>
+<tr><td><code>1^∞</code>、<code>0^0</code>、<code>∞^0</code></td><td>先取对数：<code>u^v = e^(v·ln u)</code>，再求 <code>v·ln u</code> 的极限</td><td><code>(1 + 1/x)^x（x→∞）</code></td></tr>
+</table>
+<h3>使用洛必达法则的三个关键注意点</h3>
+<ol>
+<li><strong>先验证再使用</strong>：必须确认当前是 0/0 或 ∞/∞ 型，否则直接用会得出错误结果。</li>
+<li><strong>可反复使用</strong>：若 f′/g′ 仍是 0/0 或 ∞/∞，可继续洛必达，直到求出极限。</li>
+<li><strong>失效不等于极限不存在</strong>：若 <code>lim f′/g′</code> 不存在（且不为 ∞），洛必达法则<strong>失效</strong>，但原极限 <code>lim f/g</code> 可能仍然存在，需要换其他方法（夹逼、等价无穷小、泰勒等）。洛必达是"充分条件"而非"必要条件"。</li>
+</ol>
+
+<h2 id="s5">3.5 泰勒公式</h2>
+<p>泰勒公式回答了一个深刻的问题：<strong>能否用多项式（人类最会算的函数）去逼近任意光滑函数？</strong>答案是：在一点附近，用多项式"贴合"得越来越好，其系数由函数在该点的各阶导数决定。</p>
+<h3>带皮亚诺余项的泰勒公式（局部逼近）</h3>
+<p>设 f(x) 在 x₀ 处具有 n 阶导数，则</p>
+<pre><code>f(x) = f(x₀) + f′(x₀)(x−x₀) + f″(x₀)/2!·(x−x₀)² + … + f⁽ⁿ⁾(x₀)/n!·(x−x₀)ⁿ + o((x−x₀)ⁿ)</code></pre>
+<p>余项 <code>o((x−x₀)ⁿ)</code> 表示当 x→x₀ 时，误差比 (x−x₀)ⁿ 趋于 0 得更快。</p>
+<h3>带拉格朗日余项的泰勒公式（定量估计误差）</h3>
+<p>若 f(x) 在 x₀ 的某邻域内具有 (n+1) 阶导数，则存在 ξ 介于 x 与 x₀ 之间，使</p>
+<pre><code>f(x) = f(x₀) + f′(x₀)(x−x₀) + … + f⁽ⁿ⁾(x₀)/n!·(x−x₀)ⁿ + f⁽ⁿ⁺¹⁾(ξ)/(n+1)!·(x−x₀)ⁿ⁺¹</code></pre>
+<p>最后一项就是<strong>拉格朗日余项</strong>，给出了误差的<strong>上界估计</strong>（拉格朗日中值定理正是 n=0 时的特例）。</p>
+<h3>麦克劳林公式（x₀ = 0 的泰勒公式）</h3>
+<p>令 x₀ = 0，得最常用的五个展开式（务必牢记）：</p>
+<pre><code>eˣ    = 1 + x + x²/2! + x³/3! + … + xⁿ/n! + o(xⁿ)
+sin x = x − x³/3! + x⁵/5! − x⁷/7! + … + (−1)ᵏ x²ᵏ⁺¹/(2k+1)! + o(x²ᵏ⁺²)
+cos x = 1 − x²/2! + x⁴/4! − x⁶/6! + … + (−1)ᵏ x²ᵏ/(2k)! + o(x²ᵏ⁺¹)
+ln(1+x) = x − x²/2 + x³/3 − x⁴/4 + … + (−1)ⁿ⁻¹ xⁿ/n + o(xⁿ)
+(1+x)^α = 1 + αx + α(α−1)/2!·x² + … + α(α−1)…(α−n+1)/n!·xⁿ + o(xⁿ)</code></pre>
+<div class="insight"><strong>几何含义：</strong>n 阶泰勒多项式 Tₙ(x) 与曲线 y=f(x) 在 x₀ 处<strong>"切触"到 n 阶</strong>：它们在该点有相同的函数值、相同的一阶导、二阶导、……、n 阶导。n=1 时就是切线（一阶贴合）；n 越大，多项式与曲线"贴"得越紧。直观上是"<strong>用一个弯曲程度可控的抛物线、三次曲线……去贴合原曲线</strong>"。</div>
+<div class="insight"><strong>物理含义：</strong>泰勒公式是"局部近似"的核心。经典例子：<code>sin θ ≈ θ</code>（θ 很小时）让单摆小角度振动退化为简谐运动；<code>(1+x)^α ≈ 1+αx</code> 是低速相对论、微小形变里的一阶近似。它把复杂的非线性运动，在"附近"简化为最容易处理的线性或多项式模型。</div>
+
+<h2 id="s6">3.6 单调性与极值</h2>
+<p>一阶导数的符号，直接告诉我们函数是"上升"还是"下降"。</p>
+<h3>单调性判定定理</h3>
+<p>设 f(x) 在 [a,b] 上连续，在 (a,b) 内可导：</p>
+<ul>
+<li>若在 (a,b) 内 <code>f′(x) &gt; 0</code>，则 f(x) 在 [a,b] 上<strong>单调递增</strong>；</li>
+<li>若在 (a,b) 内 <code>f′(x) &lt; 0</code>，则 f(x) 在 [a,b] 上<strong>单调递减</strong>；</li>
+<li>若 <code>f′(x) ≥ 0</code>（或 ≤ 0），且等号只在个别点成立，结论仍然成立。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>切线斜率（f′）为正 → 切线向右上方倾斜 → 曲线随 x 增大而上升；斜率为负 → 切线向右下方倾斜 → 曲线下降。导数符号就是曲线在每一点"朝向"的读数。</div>
+<div class="insight"><strong>物理含义：</strong>若 f(t) 是位置，则 f′(t) 是<strong>速度</strong>。速度为正（向右运动）→ 位移随 t 增加；速度为负（向左运动）→ 位移随 t 减少。单调性判定 = "速度方向决定位移方向"。</div>
+<h3>极值及其两个充分条件</h3>
+<p><strong>极值</strong>：若在 x₀ 的某邻域内，恒有 <code>f(x) ≤ f(x₀)</code>（或 ≥），则 f(x₀) 为<strong>极大值</strong>（或<strong>极小值</strong>）。极值是<strong>局部</strong>概念，不是整体最大最小。</p>
+<p><strong>必要条件</strong>：若 f 在 x₀ 处可导且取得极值，则 <code>f′(x₀) = 0</code>（x₀ 称为<strong>驻点</strong>）。注意：极值还可能出现在<strong>不可导点</strong>（如尖点、角点），所以候选点 = 驻点 ∪ 不可导点。</p>
+<p><strong>第一充分条件</strong>（看 f′ 在 x₀ 两侧是否变号）：</p>
+<ul>
+<li>f′ 由正变负 → 左升右降 → <strong>极大值</strong>；</li>
+<li>f′ 由负变正 → 左降右升 → <strong>极小值</strong>；</li>
+<li>f′ 不变号 → 不是极值。</li>
+</ul>
+<p><strong>第二充分条件</strong>（用二阶导）：设 <code>f′(x₀)=0</code> 且 <code>f″(x₀) ≠ 0</code>，则</p>
+<ul>
+<li><code>f″(x₀) &lt; 0</code> → <strong>极大值</strong>（曲线在该点向下弯，是"峰"）；</li>
+<li><code>f″(x₀) &gt; 0</code> → <strong>极小值</strong>（曲线向上弯，是"谷"）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>极值点是曲线的"峰顶"与"谷底"，该处切线水平（f′=0）。第一充分条件看的是"山峰还是山谷"（先升后降 / 先降后升）；第二充分条件看的是峰顶处的"朝向"（向下凹的峰、向上凹的谷）。</div>
+<div class="insight"><strong>物理含义：</strong>竖直上抛运动中，位移 f(t) 在最高点达到极大值，此时瞬时速度 f′=0；而速度函数 v(t) 的极值点出现在加速度 a(t)=v′(t)=0 的时刻（速度的增减发生转折）。求极值 = 找"运动状态的转折瞬间"。</div>
+
+<h2 id="s7">3.7 凹凸性与拐点</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="20" y1="160" x2="500" y2="160" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="260" y1="20" x2="260" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M 40 280 C 187 -440, 333 760, 480 40" fill="none" stroke="#475569" stroke-width="2.5"/>
+<circle cx="260" cy="160" r="4.5" fill="#16a34a"/>
+<text x="274" y="150" font-size="13" fill="#16a34a">拐点 f″=0</text>
+<text x="56" y="34" font-size="14" fill="#334155">凸（∩，f″&lt;0）</text>
+<text x="470" y="300" font-size="14" fill="#334155" text-anchor="end">凹（∪，f″&gt;0）</text>
+<g>
+<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" path="M 40 280 C 187 -440, 333 760, 480 40"/>
+<line x1="-100" y1="0" x2="100" y2="0" stroke="#2563eb" stroke-width="3"/>
+<circle r="5.5" fill="#2563eb" stroke="#ffffff" stroke-width="1.5"/>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图2 凹凸性与拐点：切线沿 S 形曲线滑动，拐点处 f″=0、切线穿过曲线，弯曲方向由"∩"翻转为"∪"</figcaption>
+</figure>
+<p>一阶导看"升降"，二阶导看"弯曲"。凹凸性描述曲线是"向上弯（碗）"还是"向下弯（帽）"。</p>
+<h3>凹凸性判定定理</h3>
+<p>设 f(x) 在 [a,b] 上连续，在 (a,b) 内具有二阶导数：</p>
+<ul>
+<li>若在 (a,b) 内 <code>f″(x) &gt; 0</code>，则曲线是<strong>凹（向上凹）</strong>的，曲线位于其任一点切线的<strong>上方</strong>；</li>
+<li>若在 (a,b) 内 <code>f″(x) &lt; 0</code>，则曲线是<strong>凸（向下凹）</strong>的，曲线位于其任一点切线的<strong>下方</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>f″ &gt; 0 意味着切线斜率 f′ 在增大，切线随着 x 逆时针转动，曲线"兜住"切线往上凹，像一只<strong>碗</strong>；f″ &lt; 0 则切线顺时针转动，曲线压在切线下方，像一顶<strong>帽子</strong>。判断凹凸最快的图像记忆：<strong>f″&gt;0 是"∪"（盛水），f″&lt;0 是"∩"（倒扣）</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>若 f(t) 是位置，f″(t) 就是<strong>加速度</strong>。速度函数 v(t) 的凹凸性由加速度决定：a(t)&gt;0 时 v(t) 是向上凹的（速度增长越来越快）；a(t)&lt;0 时 v(t) 是向下凹的（速度减少越来越快）。f″ 符号 = 加速度方向，决定"速度曲线的弯曲方向"。</div>
+<h3>拐点</h3>
+<p><strong>拐点</strong>：连续曲线上<strong>凹凸性发生改变</strong>的点（曲线由"碗"翻成"帽"，或反之）。</p>
+<p><strong>必要条件</strong>：若 (x₀, f(x₀)) 是拐点且 f″(x₀) 存在，则 <code>f″(x₀) = 0</code>。但 f″(x₀)=0 的点不一定是拐点（还要看是否变号）；拐点也可能出现在 <code>f″</code> <strong>不存在</strong>处。</p>
+<p><strong>充分条件</strong>：<code>f″(x)</code> 在 x₀ 两侧<strong>变号</strong>（由正变负或由负变正），则 (x₀, f(x₀)) 是拐点。</p>
+<div class="insight"><strong>几何含义：</strong>拐点是曲线"弯曲方向"翻转的位置：从"向上弯"翻到"向下弯"。想象一条 S 形曲线，正中间那一点就是拐点——曲线在这里由"兜住切线"变成"压在切线下"。</div>
+<div class="insight"><strong>物理含义：</strong>拐点对应 <strong>f″（加速度）变号</strong> 的时刻：运动从"加速"转向"减速"（或反之）的瞬间，物体的运动状态发生质的改变。例如汽车先踩油门（a&gt;0）再踩刹车（a&lt;0），速度曲线的凹凸性改变处就是"开始刹车"的那一刻。</div>
+<p><strong>一句话辨析</strong>：驻点看一阶导（切线水平），拐点看二阶导（弯曲翻转）；二者是<strong>不同</strong>的概念，可同时出现也可只出现其一。</p>
+
+<h2 id="s8">3.8 曲率</h2>
+<p>曲率定量回答"曲线弯曲得有多厉害"。它不是笼统的形容词，而是一个可以用公式算出来的数。</p>
+<h3>弧微分与曲率的定义</h3>
+<p>设曲线弧为 y=f(x)，则<strong>弧微分</strong>（一小段弧长的近似）：</p>
+<pre><code>ds = √(1 + y′²) · dx</code></pre>
+<p><strong>曲率</strong>定义为：切线方向角 α 对弧长 s 的变化率的绝对值，即</p>
+<pre><code>K = |dα / ds|</code></pre>
+<p>对 y=f(x) 的曲线，曲率计算公式为</p>
+<pre><code>K = |y″| / (1 + y′²)^(3/2)</code></pre>
+<p>曲率半径（密切圆半径）为 <code>ρ = 1/K</code>。</p>
+<div class="insight"><strong>几何含义：</strong>曲率 = 沿曲线走单位弧长时<strong>切线方向转过的角度</strong>。直线：切线方向永远不变，dα=0，所以 K=0（曲率半径为 ∞，可以看成"半径无限大的圆"）；半径为 R 的圆：走弧长 ds 时方向转过 dα=ds/R，所以 K=1/R（常数）。<strong>曲率半径 ρ=1/K 就是"与该点曲线最贴合的那个圆（密切圆）"的半径</strong>——弯曲越厉害，ρ 越小，越接近一个急转弯。</div>
+<div class="insight"><strong>物理含义：</strong>车辆沿曲线行驶，向心加速度 <code>a = v²/ρ</code>（v 为速率，ρ 为曲率半径）。曲率越大（ρ 越小），同样速度下需要更大的向心力，转弯越"急"。这就是<strong>高速公路弯道要"外高内低"并限制车速</strong>、铁路要铺设<strong>缓和曲线</strong>（让曲率从 0 平滑过渡，避免列车横向加速度突变）的原因。</div>
+<p><strong>特例速记</strong>：直线上 K=0；圆（半径 R）上 K=1/R；抛物线 y=x² 在顶点 x=0 处 y′=0、y″=2，故 K=2（曲率半径 1/2）。</p>
+
+<h2 id="s9">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>罗尔定理</td><td>两端等高的光滑曲线必有水平切线</td><td>位移为 0 的运动过程必有瞬时速度为 0 的时刻</td></tr>
+<tr><td>拉格朗日中值定理</td><td>曲线上存在切线平行于两端点连线（弦）</td><td>必有一瞬时速度等于整段的平均速度</td></tr>
+<tr><td>柯西中值定理</td><td>参数曲线上存在切线与参数弧的弦平行</td><td>两质点的瞬时速度之比等于平均速度之比</td></tr>
+<tr><td>洛必达法则</td><td>用切线斜率之比比较两条曲线趋近的快慢</td><td>比较两个同时趋于 0/∞ 量的相对变化率</td></tr>
+<tr><td>泰勒公式</td><td>用多项式在一点处"切触"逼近曲线</td><td>局部线性/多项式近似（小角度、低速近似）</td></tr>
+<tr><td>单调性</td><td>切线斜率的正负 → 曲线升降</td><td>速度方向 → 位移增减</td></tr>
+<tr><td>极值</td><td>局部的峰与谷（切线水平处）</td><td>瞬时速度为零的位移转折点</td></tr>
+<tr><td>凹凸性</td><td>曲线在切线上方（碗）或下方（帽）</td><td>加速度符号决定速度曲线的弯曲方向</td></tr>
+<tr><td>拐点</td><td>凹凸性（弯曲方向）发生翻转的点</td><td>加速度变号、运动状态转折的瞬间</td></tr>
+<tr><td>曲率</td><td>切线方向角对弧长的变化率（弯曲程度）</td><td>转弯半径与向心加速度（弯道设计）</td></tr>
+</table>
+
+<h2 id="s10">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题与提示</h4>
+<ol>
+<li><strong>验证罗尔定理</strong>：f(x)=x³−3x 在 [0, √3] 上是否满足罗尔定理条件？求出 ξ。 <em>（提示：f(0)=f(√3)=0；f′(x)=3x²−3=0 得 x=±1，ξ=1∈(0,√3)。）</em></li>
+<li><strong>用拉格朗日定理证不等式</strong>：证明当 x&gt;0 时，<code>x/(1+x) &lt; ln(1+x) &lt; x</code>。 <em>（提示：对 ln(1+x) 在 [0,x] 上用拉格朗日中值定理。）</em></li>
+<li><strong>洛必达</strong>：求 <code>lim(x→0) (sin x − x)/x³</code>。 <em>（答案：−1/6，需连续三次洛必达或配泰勒。）</em></li>
+<li><strong>洛必达</strong>：求 <code>lim(x→0) (eˣ − 1 − x)/x²</code>。 <em>（答案：1/2。）</em></li>
+<li><strong>泰勒</strong>：写出 f(x)=eˣ 在 x=0 处的带拉格朗日余项的 n 阶麦克劳林公式，并据此近似计算 e（取 x=1）。</li>
+<li><strong>单调性与极值</strong>：求 f(x)=x³−3x²−9x+5 的单调区间与极值。 <em>（f′=3(x−3)(x+1)；x=−1 处极大值 10，x=3 处极小值 −22。）</em></li>
+<li><strong>凹凸与拐点</strong>：求曲线 y=x³−3x 的凹凸区间与拐点。 <em>（y″=6x；x&lt;0 凸、x&gt;0 凹，拐点 (0,0)。）</em></li>
+<li><strong>曲率</strong>：求抛物线 y=x² 在 x=1 处的曲率与曲率半径。 <em>（y′=2、y″=2；K=2/5^(3/2)，ρ=5√5/2。）</em></li>
+</ol>
+</div>
+
+<h2 id="s11">常见误区</h2>
+<div class="warn">
+<h4>⚠ 务必避开的坑</h4>
+<ul>
+<li>❌ "罗尔定理只要求 f(a)=f(b)" → ❌ 还必须<strong>闭区间连续、开区间可导</strong>，三个条件缺一不可，否则结论可能不成立。</li>
+<li>❌ "只要两个函数都趋于 0 就能洛必达" → ❌ 必须先验证是 0/0 或 ∞/∞ 未定式，且<strong>求导后极限存在</strong>（或为 ∞）；其他未定式要变形。</li>
+<li>❌ "lim f′/g′ 不存在 ⇒ lim f/g 不存在" → ❌ 洛必达法则<strong>失效</strong>不等于原极限不存在，此时要换夹逼、等价无穷小、泰勒等方法。</li>
+<li>❌ "f′(x₀)=0 就一定是极值点" → ❌ 还可能是拐点（如 y=x³ 在 x=0 处 f′=0 但不是极值）；还要看 f′ 是否变号。</li>
+<li>❌ "f″(x₀)=0 就一定是拐点" → ❌ 还要求 f″ 在 x₀ 两侧<strong>变号</strong>（如 y=x⁴ 在 x=0 处 f″=0 但两侧都凹，不是拐点）。</li>
+<li>❌ "凹、凸是绝对的" → ❌ 不同教材对"凹/凸"命名可能相反，以<strong>f″&gt;0 曲线在切线上方（碗 ∪）</strong>为准，做题先确认所用定义。</li>
+<li>❌ "曲率公式记成 K=|y″|/(1+y′²)" → ❌ 分母是 <code>(1+y′²)^(3/2)</code>，漏掉 3/2 次方是常见错误。</li>
+<li>❌ "极值点 = 最值点" → ❌ 极值是<strong>局部</strong>概念，最值在闭区间上还需比较<strong>端点值</strong>与驻点、不可导点的值。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li><strong>罗尔定理的几何含义</strong>：设 f(x)=x²−2x 在区间 [0,2] 上。验证它是否满足罗尔定理的三个条件；若满足，求出使 f′(ξ)=0 的 ξ，并用"切线水平"解释其几何含义。</li>
+<li><strong>拉格朗日中值定理的物理含义</strong>：一辆汽车沿直线行驶，位置函数为 f(t)=t²+2t（t 单位：小时，f 单位：公里）。求它在 t=0 到 t=2 这段时间内的平均速度，并找出至少一个瞬时速度恰好等于该平均速度的时刻。</li>
+<li><strong>洛必达法则</strong>：求极限 <code>lim(x→0) (1−cos x)/x²</code>，并说明为什么可以用洛必达法则。</li>
+<li><strong>单调性与极值</strong>：求 f(x)=x³−3x 的单调区间与极值，并说明极大/极小值的几何含义。</li>
+<li><strong>凹凸性与拐点</strong>：求曲线 y=x³−3x 的凹凸区间与拐点，并用"碗 ∪ / 帽 ∩"的图像解释。</li>
+<li><strong>泰勒公式</strong>：写出 f(x)=eˣ 在 x=0 处的带皮亚诺余项的麦克劳林公式（展开到 x³ 项），并据此估算 e^0.1 的近似值（保留 4 位小数）。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>f(x)=x²−2x 是多项式，在闭区间 [0,2] 上连续，在开区间 (0,2) 内可导；又 f(0)=0，f(2)=4−4=0，两端函数值相等，满足罗尔定理全部三个条件。f′(x)=2x−2，令 f′(ξ)=0 得 ξ=1∈(0,2)。几何含义：曲线两端点 (0,0) 与 (2,0) 等高，因此在顶点 (1,−1) 处存在一条水平的切线（切线平行于 x 轴，即平行于两端点连线所在的水平线）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>平均速度 = [f(2)−f(0)]/(2−0) = (8−0)/2 = 4 km/h。由拉格朗日中值定理，存在 ξ∈(0,2) 使 f′(ξ)=4。而 f′(t)=2t+2，令 2t+2=4 得 t=1。即 t=1 小时那一刻的瞬时速度恰等于整段平均速度 4 km/h。物理含义：物体在一段时间内必有一个瞬间，其瞬时速度等于这段的平均速度。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>x→0 时 1−cos x→0、x²→0，是 0/0 型未定式，且分子分母都可导、分母导数 x→0 时不为 0，故可用洛必达法则。第一次洛必达：lim (1−cos x)/x² = lim sin x/(2x)。再由重要极限 sin x/x→1，得原极限 = 1/2。也可对 sin x/(2x) 再用一次洛必达得 lim cos x/2 = 1/2。答案：1/2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>f′(x)=3x²−3=3(x−1)(x+1)。由 f′&gt;0 得 x&lt;−1 或 x&gt;1，故在 (−∞,−1) 与 (1,+∞) 上单调递增；由 f′&lt;0 得 −1&lt;x&lt;1，故在 (−1,1) 上单调递减。在 x=−1 处 f′ 由正变负，取得极大值 f(−1)=2；在 x=1 处 f′ 由负变正，取得极小值 f(1)=−2。几何含义：x=−1 是曲线的"峰顶"（左升右降），x=1 是"谷底"（左降右升），这两处切线都是水平的（f′=0）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>y′=3x²−3，y″=6x。当 x&lt;0 时 y″&lt;0，曲线是凸（向下凹，像倒扣的帽子 ∩）；当 x&gt;0 时 y″&gt;0，曲线是凹（向上凹，像盛水的碗 ∪）。y″ 在 x=0 两侧由负变正，凹凸性发生翻转，故 (0,0) 是拐点。直观上曲线从"向下弯"翻成"向上弯"，S 形翻转的中心正是原点。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>eˣ 的各阶导数都是 eˣ，在 x=0 处全为 1，故 eˣ = 1 + x + x²/2! + x³/3! + o(x³)。取 x=0.1 得 e^0.1 ≈ 1 + 0.1 + 0.1²/2 + 0.1³/6 = 1 + 0.1 + 0.005 + 0.0001667 ≈ 1.1052。泰勒公式的意义：在 x=0 附近用多项式"切触"逼近曲线，项数越多贴合越紧，越小的 |x| 近似越准。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第2章-导数与微分/第2章-导数与微分.html">← 上一章：第2章 导数与微分</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第4章-不定积分/第4章-不定积分.html">下一章：第4章 不定积分 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+</body>
+</html>

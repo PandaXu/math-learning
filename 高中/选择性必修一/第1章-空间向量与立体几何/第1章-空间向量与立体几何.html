@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第1章 空间向量与立体几何 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第一册 › 第1章 空间向量与立体几何</div></header>
+<main class="container">
+<h1>第1章 空间向量与立体几何</h1>
+<p class="lead">高中 / 选择性必修第一册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>空间向量 = 「带方向的箭头」。学完本章，你要能把立体几何中的<strong>方向、平行、垂直、距离、夹角</strong>全部翻译成向量的<strong>加法、数乘、数量积与坐标运算</strong>——让"看不见摸不着"的空间关系变成可以算的代数式，这正是向量法的威力所在。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">1.1 空间向量及其运算</a><a href="#s2">1.2 空间向量基本定理</a><a href="#s3">1.3 空间向量及其运算的坐标表示</a><a href="#s4">1.4 用向量研究平行、垂直、距离与夹角</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<hr/>
+
+<div class="insight"><strong>记号约定：</strong>向量用带箭头的字母表示，如 <code>a⃗</code>、<code>b⃗</code>、<code>v⃗</code>（方向向量）、<code>n⃗</code>（法向量）；<code>AB⃗</code> 表示从点 A 到点 B 的向量；<code>|a⃗|</code> 表示向量 a⃗ 的模（长度）；<code>0⃗</code> 表示零向量。</div>
+
+<h2 id="s1">1.1 空间向量及其运算</h2>
+<h3>空间向量的概念</h3>
+<p>在空间中，<strong>既有大小又有方向</strong>的量叫空间向量。它用有向线段表示：从点 A 指向点 B 的有向线段记作 <code>AB⃗</code>，也可用单个字母 <code>a⃗</code>、<code>b⃗</code>、<code>c⃗</code> 表示。向量 <code>AB⃗</code> 的<strong>模</strong>（长度）记作 <code>|AB⃗|</code>，即线段 AB 的长度。</p>
+<ul>
+<li><strong>零向量</strong>：长度为 0 的向量，记作 <code>0⃗</code>，方向任意。</li>
+<li><strong>单位向量</strong>：模为 1 的向量。</li>
+<li><strong>相等向量</strong>：大小相等且方向相同的向量（经平移后能完全重合）。</li>
+<li><strong>相反向量</strong>：与 <code>a⃗</code> 大小相等、方向相反的向量，记作 <code>−a⃗</code>。</li>
+<li><strong>自由向量</strong>：向量只由<strong>大小</strong>和<strong>方向</strong>决定，与起点位置无关，可沿任意方向在空间中平移。这是向量法的根本前提——我们关心的永远是"朝哪、多长"，而不是"从哪出发"。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>向量是一个"带方向、有长度的箭头"，它把空间中的一次<strong>平移（位移）</strong>代数化：<code>AB⃗</code> 就是"从 A 走到 B"这件事。<strong>物理含义：</strong>力 <code>F⃗</code>、速度 <code>v⃗</code>、位移 <code>s⃗</code>、加速度 <code>a⃗</code>、电场强度 <code>E⃗</code> 都是向量——它们共同点在于"既要说明方向，又要说明大小"。</div>
+
+<h3>向量的加法与减法</h3>
+<p><strong>加法法则（在空间中同样成立）</strong>：</p>
+<ul>
+<li><strong>三角形法则</strong>：首尾相接。<code>AB⃗ + BC⃗ = AC⃗</code>（先走 AB 再走 BC，等于直接走 AC）。</li>
+<li><strong>平行四边形法则</strong>：同一起点的两向量为邻边作平行四边形，对角线就是和向量。</li>
+<li>运算律：<code>a⃗ + b⃗ = b⃗ + a⃗</code>（交换律）；<code>(a⃗ + b⃗) + c⃗ = a⃗ + (b⃗ + c⃗)</code>（结合律）。</li>
+</ul>
+<p><strong>减法</strong>：<code>a⃗ − b⃗ = a⃗ + (−b⃗)</code>，即"减去一个向量 = 加上它的相反向量"。特别地，<code>AB⃗ = OB⃗ − OA⃗</code>（终点坐标向量减起点坐标向量）。</p>
+<div class="insight"><strong>几何含义：</strong>加法就是<strong>平移的连续合成</strong>——先发生位移 a⃗ 再发生位移 b⃗，总效果是 a⃗ + b⃗；减法则是"反向平移"。<strong>物理含义：</strong>力的合成（平行四边形法则）、合位移、合速度都是向量加法；"相对速度 = 物体速度 − 参考系速度"就是向量减法。</div>
+
+<h3>向量的数乘（伸缩与反向）</h3>
+<p>实数 λ 与向量 <code>a⃗</code> 的乘积 <code>λa⃗</code> 仍是一个向量：</p>
+<ul>
+<li>|λa⃗| = |λ| · |a⃗|（长度伸缩 |λ| 倍）。</li>
+<li>当 λ &gt; 0 时，λa⃗ 与 a⃗ 方向<strong>相同</strong>；当 λ &lt; 0 时，λa⃗ 与 a⃗ 方向<strong>相反</strong>；当 λ = 0 时，λa⃗ = 0⃗。</li>
+</ul>
+<p><strong>共线（平行）向量</strong>：方向相同或相反的非零向量叫共线向量。判定：向量 <code>a⃗</code> 与 <code>b⃗</code>（b⃗ ≠ 0⃗）共线 ⟺ 存在唯一的实数 λ，使 <code>a⃗ = λb⃗</code>。</p>
+<p><strong>三点共线</strong>：A、B、C 三点共线 ⟺ <code>AB⃗</code> 与 <code>AC⃗</code> 共线（存在 λ 使 <code>AB⃗ = λAC⃗</code>）。</p>
+<div class="insight"><strong>几何含义：</strong>数乘是"沿同一条直线把箭头拉长、缩短或掉头"，λ 就是<strong>缩放倍数 + 方向开关</strong>；共线向量就是"落在同一条直线上的箭头"（或平行直线）。<strong>物理含义：</strong>2F⃗ 表示两倍的力且方向不变，−F⃗ 表示大小相同、方向相反的力；共线向量对应"沿同一条作用线的量"。</div>
+
+<h3>共面向量</h3>
+<p><strong>定义</strong>：平行于同一个平面的向量叫<strong>共面向量</strong>——把它们的起点平移到同一点时，它们都位于同一个平面内。</p>
+<p><strong>判定定理</strong>：若 <code>a⃗</code>、<code>b⃗</code> 不共线，则向量 <code>p⃗</code> 与 <code>a⃗</code>、<code>b⃗</code> 共面 ⟺ 存在唯一的有序实数对 (x, y)，使 <code>p⃗ = xa⃗ + yb⃗</code>。</p>
+<p><strong>四点共面</strong>：空间四点 P、A、B、C 共面 ⟺ 存在实数 x、y，使 <code>PA⃗ = xPB⃗ + yPC⃗</code>（或等价地 <code>OP⃗ = xOA⃗ + yOB⃗ + zOC⃗</code> 且 x + y + z = 1）。</p>
+<div class="insight"><strong>几何含义：</strong>两个不共线向量只能"张成"一个平面，它们的所有线性组合 <code>xa⃗ + yb⃗</code> 都躺在这个平面内——共面性 = "是否只由两个方向就能表示"。<strong>物理含义：</strong>同一平面内所有力的合力，总能用其中两个不共线的力表示出来（平面汇交力系）。</div>
+
+<h3>向量的数量积（点积 / 内积）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <line x1="40" y1="150" x2="490" y2="150" stroke="#cbd5e1" stroke-width="1"/>
+  <line x1="80" y1="150" x2="200" y2="150" stroke="#16a34a" stroke-width="7" opacity="0.35">
+    <animate attributeName="x2" values="200;195.9;183.9;164.9;140;111.1;80;111.1;140;164.9;183.9;195.9;200" dur="8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="80" y1="150" x2="360" y2="150" stroke="#2563eb" stroke-width="2.5"/>
+  <polygon points="360,150 348,143 348,157" fill="#2563eb"/>
+  <text x="370" y="142" fill="#2563eb" font-size="14">a⃗</text>
+  <g>
+    <line x1="80" y1="150" x2="200" y2="150" stroke="#16a34a" stroke-width="2.5"/>
+    <polygon points="200,150 190,144 190,156" fill="#16a34a"/>
+    <text x="172" y="140" fill="#16a34a" font-size="14">b⃗</text>
+    <animateTransform attributeName="transform" type="rotate" values="0 80 150;15 80 150;30 80 150;45 80 150;60 80 150;75 80 150;90 80 150;75 80 150;60 80 150;45 80 150;30 80 150;15 80 150;0 80 150" dur="8s" repeatCount="indefinite"/>
+  </g>
+  <line x1="200" y1="150" x2="200" y2="150" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4">
+    <animate attributeName="x1" values="200;195.9;183.9;164.9;140;111.1;80;111.1;140;164.9;183.9;195.9;200" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="200;195.9;183.9;164.9;140;111.1;80;111.1;140;164.9;183.9;195.9;200" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="y1" values="150;118.9;90;65.1;46.1;34.1;30;34.1;46.1;65.1;90;118.9;150" dur="8s" repeatCount="indefinite"/>
+  </line>
+  <circle cx="200" cy="150" r="4" fill="#16a34a">
+    <animate attributeName="cx" values="200;195.9;183.9;164.9;140;111.1;80;111.1;140;164.9;183.9;195.9;200" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="80" cy="150" r="3" fill="#334155"/>
+  <text x="72" y="172" fill="#64748b" font-size="12" text-anchor="middle">O</text>
+  <text x="185" y="185" fill="#16a34a" font-size="13" text-anchor="middle">投影 = |b⃗|·cosθ（随 θ 增大而变短）</text>
+  <text x="472" y="120" fill="#64748b" font-size="12" text-anchor="end">θ → 90° 时投影为 0</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图① 数量积：b⃗ 在 a⃗ 方向上的投影 × |a⃗|；b⃗ 转到与 a⃗ 垂直（θ = 90°）时投影为 0、数量积为 0——这正是功 W = F⃗·s⃗ = |F⃗||s⃗|cosθ 的几何来源</figcaption>
+</figure>
+<p><strong>定义</strong>：设 〈a⃗, b⃗〉 为两向量 a⃗、b⃗ 的夹角（0 ≤ θ ≤ π），则</p>
+<pre><code>a⃗ · b⃗ = |a⃗| · |b⃗| · cos〈a⃗, b⃗〉</code></pre>
+<p><strong>投影</strong>：向量 <code>b⃗</code> 在向量 <code>a⃗</code> 方向上的投影（有向投影）为 <code>|b⃗|cos〈a⃗, b⃗〉</code>，它可正可负可为零。于是数量积的几何意义就是：</p>
+<pre><code>a⃗ · b⃗ = |a⃗| × (b⃗ 在 a⃗ 方向上的投影长度)</code></pre>
+<p><strong>运算律</strong>：</p>
+<ul>
+<li>交换律：<code>a⃗ · b⃗ = b⃗ · a⃗</code>；</li>
+<li>分配律：<code>a⃗ · (b⃗ + c⃗) = a⃗ · b⃗ + a⃗ · c⃗</code>；</li>
+<li>数乘结合：(λa⃗) · b⃗ = λ(a⃗ · b⃗)；</li>
+<li><strong>注意</strong>：a⃗ · b⃗ 是一个<strong>实数</strong>，(a⃗ · b⃗) · c⃗ 无意义，所以<strong>数量积不满足结合律</strong>——不能写成 a⃗ · b⃗ · c⃗。</li>
+</ul>
+<p><strong>重要性质</strong>：</p>
+<ul>
+<li><code>a⃗ ⊥ b⃗ ⟺ a⃗ · b⃗ = 0</code>（垂直的根本判据，整章都用它）；</li>
+<li><code>a⃗ · a⃗ = |a⃗|²</code>，故 <code>|a⃗| = √(a⃗ · a⃗)</code>；</li>
+<li>夹角公式：<code>cos〈a⃗, b⃗〉 = (a⃗ · b⃗) / (|a⃗| · |b⃗|)</code>；</li>
+<li>柯西不等式形式：<code>|a⃗ · b⃗| ≤ |a⃗| · |b⃗|</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>数量积是"一个向量在另一个向量方向上的<strong>投影</strong>与后者长度的乘积"；它用一个数度量了"两个方向有多一致"——点积为正说明夹角是锐角、为零说明垂直、为负说明是钝角。<strong>物理含义：</strong>恒力做功 <code>W = F⃗ · s⃗ = |F⃗||s⃗|cosθ</code>：力与位移同向做正功、垂直不做功、反向做负功——"力在位移方向上的投影 × 位移"正是功。</div>
+
+<h2 id="s2">1.2 空间向量基本定理</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <polygon points="170,200 260,200 290,230 200,230" fill="#2563eb" opacity="0.06"/>
+  <polygon points="170,200 170,132.5 200,162.5 200,230" fill="#16a34a" opacity="0.05"/>
+  <line x1="170" y1="200" x2="320" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+  <polygon points="320,200 308,194 308,206" fill="#cbd5e1"/>
+  <line x1="170" y1="200" x2="245" y2="275" stroke="#cbd5e1" stroke-width="1"/>
+  <polygon points="245,275 236,272 242,266" fill="#cbd5e1"/>
+  <line x1="170" y1="200" x2="170" y2="50" stroke="#cbd5e1" stroke-width="1"/>
+  <polygon points="170,50 176,62 164,62" fill="#cbd5e1"/>
+  <text x="326" y="206" fill="#64748b" font-size="13">x</text>
+  <text x="252" y="282" fill="#64748b" font-size="13">y</text>
+  <text x="163" y="42" fill="#64748b" font-size="13">z</text>
+  <g stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4">
+    <line x1="260" y1="200" x2="290" y2="230"/>
+    <line x1="260" y1="200" x2="260" y2="132.5"/>
+    <line x1="200" y1="230" x2="290" y2="230"/>
+    <line x1="200" y1="230" x2="200" y2="162.5"/>
+    <line x1="170" y1="132.5" x2="260" y2="132.5"/>
+    <line x1="170" y1="132.5" x2="200" y2="162.5"/>
+    <line x1="290" y1="230" x2="290" y2="162.5"/>
+    <line x1="260" y1="132.5" x2="290" y2="162.5"/>
+    <line x1="200" y1="162.5" x2="290" y2="162.5"/>
+  </g>
+  <g>
+    <line x1="170" y1="200" x2="260" y2="200" stroke="#16a34a" stroke-width="2.5"/>
+    <polygon points="260,200 250,194 250,206" fill="#16a34a"/>
+    <text x="210" y="220" fill="#16a34a" font-size="13">x·i⃗</text>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.9;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+  <g>
+    <line x1="170" y1="200" x2="200" y2="230" stroke="#16a34a" stroke-width="2.5"/>
+    <polygon points="200,230 191,227 197,221" fill="#16a34a"/>
+    <text x="186" y="244" fill="#16a34a" font-size="13">y·j⃗</text>
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2;0.28;0.9;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+  <g>
+    <line x1="170" y1="200" x2="170" y2="132.5" stroke="#16a34a" stroke-width="2.5"/>
+    <polygon points="170,132.5 176,144.5 164,144.5" fill="#16a34a"/>
+    <text x="150" y="124" fill="#16a34a" font-size="13">z·k⃗</text>
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.48;0.9;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+  <g>
+    <line x1="170" y1="200" x2="290" y2="162.5" stroke="#2563eb" stroke-width="3"/>
+    <polygon points="290,162.5 280.4,171.8 276.8,160.4" fill="#2563eb"/>
+    <circle cx="290" cy="162.5" r="4" fill="#2563eb">
+      <animate attributeName="r" values="3;5;3" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="300" y="152" fill="#2563eb" font-size="13">a⃗ = xi⃗ + yj⃗ + zk⃗</text>
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.56;0.64;0.9;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+  <circle cx="170" cy="200" r="3" fill="#334155"/>
+  <text x="160" y="215" fill="#64748b" font-size="12" text-anchor="middle">O</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图② 空间向量基本定理：任一向量沿三个不共面方向（x、y、z 轴）被唯一分解为 a⃗ = xi⃗ + yj⃗ + zk⃗，三个分量恰好就是它的坐标 (x, y, z)</figcaption>
+</figure>
+<h3>从共线、共面到空间</h3>
+<p>先回顾两条"降维"定理：</p>
+<ul>
+<li><strong>共线向量定理</strong>：a⃗、b⃗ 共线（b⃗ ≠ 0⃗）⟺ 存在唯一实数 λ，使 <code>a⃗ = λb⃗</code>。<em>（一条直线上的向量由 1 个"基方向"唯一决定。）</em></li>
+<li><strong>共面向量定理</strong>：a⃗、b⃗ 不共线时，p⃗ 与它们共面 ⟺ 存在唯一实数对 (x, y)，使 <code>p⃗ = xa⃗ + yb⃗</code>。<em>（一个平面内的向量由 2 个"基方向"唯一决定。）</em></li>
+</ul>
+<p>把这条链再走一步，就得到刻画整个三维空间的定理：</p>
+<pre><code>空间向量基本定理：若 a⃗、b⃗、c⃗ 是三个不共面的向量，
+则空间中任一向量 p⃗ 都存在唯一的有序实数组 (x, y, z)，使得
+
+        p⃗ = x·a⃗ + y·b⃗ + z·c⃗</code></pre>
+<ul>
+<li>{a⃗, b⃗, c⃗} 叫空间的一个<strong>基底</strong>，a⃗、b⃗、c⃗ 叫<strong>基向量</strong>。</li>
+<li>三基向量两两垂直 → <strong>正交基底</strong>；若再都是单位向量 → <strong>单位正交基底</strong>（最常用的是三个坐标轴方向的单位向量 i⃗、j⃗、k⃗）。</li>
+<li>"唯一"保证了一旦选定基底，向量就与三元有序数组 (x, y, z) 一一对应——这就是后面坐标化的理论根基。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>两个不共线方向只能铺满一个平面，必须<strong>第三个不共面的方向</strong>才能"撑起"整个空间。任一向量能沿这三个方向被<strong>唯一分解</strong>——这句话的实质就是"<strong>空间的维数是 3</strong>"。<strong>物理含义：</strong>任意一个力、速度或位移都可以沿三个独立（不共面）的方向正交分解，如沿 x、y、z 轴分解；三维空间的物体有 3 个<strong>平动自由度</strong>，恰好对应三个基方向。</div>
+
+<h2 id="s3">1.3 空间向量及其运算的坐标表示</h2>
+<h3>空间直角坐标系与向量的坐标</h3>
+<p>在空间取三条<strong>两两垂直</strong>且交于一点 O 的数轴，分别叫 x 轴、y 轴、z 轴，并约定<strong>右手法则</strong>（右手的拇指、食指、中指依次指向 x、y、z 正方向），就得到<strong>空间直角坐标系 O-xyz</strong>。</p>
+<ul>
+<li>空间中点 P 的坐标 <code>P(x, y, z)</code>：x、y、z 分别是 P 到 yOz、zOx、xOy 三个坐标平面的"有向距离"。</li>
+<li>设沿 x、y、z 轴正方向的单位向量为 <code>i⃗、j⃗、k⃗</code>，则向量 <code>a⃗ = x·i⃗ + y·j⃗ + z·k⃗</code> 记作 <code>a⃗ = (x, y, z)</code>，x、y、z 叫它的<strong>坐标（分量）</strong>。</li>
+<li>若 A(x₁, y₁, z₁)、B(x₂, y₂, z₂)，则 <code>AB⃗ = (x₂ − x₁, y₂ − y₁, z₂ − z₁)</code>（终点减起点）。</li>
+</ul>
+<h3>坐标运算公式</h3>
+<p>设 <code>a⃗ = (x₁, y₁, z₁)</code>，<code>b⃗ = (x₂, y₂, z₂)</code>：</p>
+<table>
+<tr><th>运算</th><th>公式</th></tr>
+<tr><td>加法</td><td>a⃗ + b⃗ = (x₁+x₂, y₁+y₂, z₁+z₂)</td></tr>
+<tr><td>减法</td><td>a⃗ − b⃗ = (x₁−x₂, y₁−y₂, z₁−z₂)</td></tr>
+<tr><td>数乘</td><td>λa⃗ = (λx₁, λy₁, λz₁)</td></tr>
+<tr><td>数量积</td><td>a⃗ · b⃗ = x₁x₂ + y₁y₂ + z₁z₂</td></tr>
+<tr><td>模（长度）</td><td>|a⃗| = √(x₁² + y₁² + z₁²)</td></tr>
+<tr><td>夹角余弦</td><td>cos〈a⃗, b⃗〉 = (x₁x₂ + y₁y₂ + z₁z₂) / (√(x₁²+y₁²+z₁²) · √(x₂²+y₂²+z₂²))</td></tr>
+<tr><td>平行</td><td>a⃗ ∥ b⃗（b⃗≠0⃗）⟺ x₁/x₂ = y₁/y₂ = z₁/z₂（对应坐标成比例）</td></tr>
+<tr><td>垂直</td><td>a⃗ ⊥ b⃗ ⟺ x₁x₂ + y₁y₂ + z₁z₂ = 0</td></tr>
+</table>
+<h3>两点间的距离、中点与定比分点</h3>
+<ul>
+<li><strong>两点距离</strong>：<code>|AB| = √((x₂−x₁)² + (y₂−y₁)² + (z₂−z₁)²)</code>——平面两点距离公式在空间中的直接推广。</li>
+<li><strong>中点</strong>：线段 AB 中点 M 坐标 <code>((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2)</code>。</li>
+<li><strong>定比分点</strong>：若 <code>AP⃗ = λ·PB⃗</code>，则 P 的坐标为 <code>((x₁+λx₂)/(1+λ), (y₁+λy₂)/(1+λ), (z₁+λz₂)/(1+λ))</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>坐标就是把向量沿三个相互垂直的坐标轴方向分解后的<strong>投影长度</strong>；(x, y, z) 这三个数完整记录了向量的长短与朝向，于是"向量的运算"变成"三个数的运算"。<strong>物理含义：</strong>一个三维运动（位移、速度、加速度、力）可分解成沿 x、y、z 的三个<strong>独立的一维运动</strong>，坐标就是各方向上的分量；两点距离公式即三维空间中"两点间直线距离"。</div>
+
+<h2 id="s4">1.4 用空间向量研究平行、垂直、距离与夹角</h2>
+<p>这是本章的"应用篇"。核心思想：给每一条直线配一个<strong>方向向量</strong>、给每一个平面配一个<strong>法向量</strong>，然后把所有位置关系都翻译成向量的<strong>共线、垂直、投影</strong>。</p>
+<h3>方向向量与法向量</h3>
+<ul>
+<li><strong>直线的方向向量</strong>：与直线平行（或就在直线上）的非零向量，记作 <code>v⃗</code>。一条直线的方向向量不唯一（彼此共线），但直线由"一点 + 一个方向向量"完全确定。</li>
+<li><strong>平面的法向量</strong>：与平面<strong>垂直</strong>的非零向量，记作 <code>n⃗</code>。n⃗ ⊥ 平面 ⟺ n⃗ 垂直于平面内<strong>任意</strong>向量（等价于垂直于平面内两条相交直线）。</li>
+</ul>
+<p><strong>求法向量的通用方法</strong>：设 <code>n⃗ = (x, y, z)</code>，在平面内任取两个不共线向量 a⃗、b⃗，由 <code>n⃗ · a⃗ = 0</code>、<code>n⃗ · b⃗ = 0</code> 列出方程组，解出 x、y、z 的一组非零解（常令其中一个为 1，或取最简整数解）。</p>
+<pre><code>例：平面 α 内取 a⃗ = (1, 0, −1)，b⃗ = (0, 1, 1)，求 α 的法向量 n⃗ = (x, y, z)。
+
+    n⃗ · a⃗ = 0   →   x − z = 0        →   x = z
+    n⃗ · b⃗ = 0   →   y + z = 0        →   y = −z
+    取 z = 1，得 n⃗ = (1, −1, 1)   （任取一组非零解即可）</code></pre>
+<div class="insight"><strong>几何含义：</strong>方向向量是直线的"朝向箭头"，法向量是平面的"垂直朝向箭头"——平面由它的法向量<strong>唯一确定方向</strong>（法向量旋转，平面就跟着转）。<strong>物理含义：</strong>法向量就是"面的朝向"，如镜面反射、平面的法线方向；重力在斜面上的正压力方向正是沿斜面的法向量。</div>
+
+<h3>用向量判定平行与垂直</h3>
+<table>
+<tr><th>位置关系</th><th>向量条件</th><th>本质</th></tr>
+<tr><td>线线平行 l₁ ∥ l₂</td><td>两方向向量共线：v⃗₁ ∥ v⃗₂（v⃗₁ = λv⃗₂）</td><td>朝向相同（或相反）</td></tr>
+<tr><td>线线垂直 l₁ ⊥ l₂</td><td>v⃗₁ · v⃗₂ = 0</td><td>朝向垂直</td></tr>
+<tr><td>线面平行 l ∥ α</td><td>v⃗ · n⃗ = 0 且直线不在平面内</td><td>直线方向与平面法向垂直</td></tr>
+<tr><td>线面垂直 l ⊥ α</td><td>v⃗ ∥ n⃗（v⃗ = λn⃗）</td><td>直线方向就是平面法向</td></tr>
+<tr><td>面面平行 α ∥ β</td><td>两法向量共线：n⃗₁ ∥ n⃗₂</td><td>两平面朝向相同</td></tr>
+<tr><td>面面垂直 α ⊥ β</td><td>n⃗₁ · n⃗₂ = 0</td><td>两平面朝向垂直</td></tr>
+</table>
+<div class="insight"><strong>为什么好使？</strong>传统立体几何证明平行垂直要靠"作辅助线、找交线、用公理"，而向量法只需要算<strong>一个点积是否为 0</strong>、<strong>两个向量是否成比例</strong>——把几何证明变成代数判断，程序化、不易漏步骤。<strong>物理含义：</strong>判断"力是否沿平面"（切向力 vs 法向力）、"速度是否垂直撞击平面"、两运动方向是否正交，都是同一条代数判据。</div>
+
+<h3>用向量求距离</h3>
+<p><strong>① 点到平面的距离</strong>：设平面 α 的法向量为 n⃗，平面内任取一点 A，则空间点 P 到 α 的距离为</p>
+<pre><code>        d = |AP⃗ · n⃗| / |n⃗|</code></pre>
+<p>直观理解：<code>AP⃗</code> 在法向量 n⃗ 方向上投影的绝对值，就是 P 到平面的"垂线段"长度。</p>
+<p><strong>② 点到直线的距离</strong>：直线 l 的方向向量为 v⃗，l 上取一点 A，则点 P 到 l 的距离为</p>
+<pre><code>        d = |AP⃗| · sin〈AP⃗, v⃗〉  =  √( |AP⃗|² − (投影长度)² )</code></pre>
+<p>（即用勾股定理：斜边 |AP⃗|，减去它在直线上投影，余下的垂直分量即距离。若引入向量积，也可写作 d = |AP⃗ × v⃗| / |v⃗|。）</p>
+<p><strong>③ 异面直线的距离</strong>：对两异面直线 l₁、l₂，取 A ∈ l₁、B ∈ l₂，方向向量为 v⃗₁、v⃗₂，再取一个同时垂直于 v⃗₁、v⃗₂ 的非零向量 n⃗（即公垂线的方向），则</p>
+<pre><code>        d = |AB⃗ · n⃗| / |n⃗|</code></pre>
+<p><strong>④ 平行线面、平行平面之间的距离</strong>：都归结为<strong>点到平面的距离</strong>（在其中一条线/一个面上任取一点算即可）。</p>
+<div class="insight"><strong>几何含义：</strong>所有距离都是"沿某个<strong>垂直方向</strong>（法向量）的投影长度"——点到平面距离是沿法向量投影，异面直线距离是沿公垂线方向投影；"最短距离必然垂直于目标对象"是这些公式共同的几何直觉。<strong>物理含义：</strong>距离即"最短作用路径"，如电场中沿法线方向的最短距离、质点与平面/直线的最近距离；重力势能差 mg·h 中的 h 正是"沿竖直（法）方向的投影高度"。</div>
+
+<h3>用向量求夹角</h3>
+<ul>
+<li><strong>两直线夹角 θ ∈ [0°, 90°]</strong>：方向向量 v⃗₁、v⃗₂，<code>cosθ = |v⃗₁ · v⃗₂| / (|v⃗₁| · |v⃗₂|)</code>（取绝对值，因为线线角只取锐角或直角）。</li>
+<li><strong>直线与平面的夹角 θ ∈ [0°, 90°]</strong>：方向向量 v⃗、法向量 n⃗，<code>sinθ = |v⃗ · n⃗| / (|v⃗| · |n⃗|)</code>（直线与平面夹角是"直线与它在该平面内投影"的夹角，等于方向向量与法向量夹角的余角）。</li>
+<li><strong>二面角</strong>：两平面法向量 n⃗₁、n⃗₂ 的夹角等于二面角或其补角，<code>cos〈n⃗₁, n⃗₂〉 = (n⃗₁ · n⃗₂) / (|n⃗₁| · |n⃗₂|)</code>；需结合图形判断二面角是锐角还是钝角再定符号。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>夹角 = 两个"朝向箭头"之间的分离程度；数量积公式把"两条线/两个面张开多大角度"转化为两个向量的点积再反余弦。<strong>物理含义：</strong>力的方向与位移方向夹角决定功的正负（cosθ），入射光线与法线的夹角（入射角/反射角）、速度与磁场方向的夹角决定洛伦兹力大小，都是同一套"夹角—点积"语言。</div>
+
+<div class="insight"><strong>拓展（向量积 / 叉积，求法向量的快办法）：</strong>对向量 a⃗、b⃗，定义 <code>a⃗ × b⃗</code> 为一个新向量：其方向垂直于 a⃗、b⃗ 所在平面（右手法则），模为 <code>|a⃗||b⃗|sin〈a⃗,b⃗〉</code>（等于以 a⃗、b⃗ 为边的平行四边形面积）。于是两不共线向量 a⃗、b⃗ 所在平面的一个法向量可一步取为 <code>n⃗ = a⃗ × b⃗</code>，点面距离、异面直线距离也可写作叉积形式。这是老师常用、竞赛与大学常用的利器，选择性必修教材虽不强制，但值得掌握。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>空间向量</td><td>带方向、有长度的箭头（可平移的有向线段）</td><td>力、速度、位移、加速度、电场等"有大小有方向"的量</td></tr>
+<tr><td>向量加法</td><td>首尾相接的平移合成</td><td>力的合成（平行四边形法则）、合位移、合速度</td></tr>
+<tr><td>向量减法</td><td>加相反向量（反向平移）</td><td>相对位移、相对速度（终点减起点）</td></tr>
+<tr><td>数乘</td><td>沿直线的伸缩与反向（缩放倍数 + 方向开关）</td><td>同向/反向按比例放大或缩小的力、速度</td></tr>
+<tr><td>共线向量</td><td>落在同一条直线上的箭头</td><td>沿同一条作用线的量</td></tr>
+<tr><td>共面向量</td><td>平移到同一起点后位于同一平面</td><td>同一平面内的一组力（平面汇交力系）</td></tr>
+<tr><td>数量积</td><td>投影相乘：一个向量在另一个方向上的投影 × 长度</td><td>功 W = F⃗·s⃗；判垂直（投影为 0）</td></tr>
+<tr><td>空间向量基本定理</td><td>沿三个不共面方向的唯一分解（维数 = 3）</td><td>力/速度沿三个独立方向分解，3 个平动自由度</td></tr>
+<tr><td>坐标表示</td><td>沿三个坐标轴的投影分量 (x, y, z)</td><td>三维运动分解为三个独立的一维运动</td></tr>
+<tr><td>方向向量 / 法向量</td><td>直线/平面的"朝向箭头"</td><td>运动方向、面的朝向（法线、镜面反射方向）</td></tr>
+<tr><td>距离公式</td><td>沿垂直方向（法向量）的投影长度</td><td>最短路径、最小作用距离（如竖直投影高度 h）</td></tr>
+<tr><td>夹角公式</td><td>两个朝向箭头之间的分离程度</td><td>力与位移夹角（功）、入射角、速度与磁场夹角</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li><strong>向量表示</strong>：在平行六面体 ABCD–A₁B₁C₁D₁ 中，设 <code>AB⃗ = a⃗</code>、<code>AD⃗ = b⃗</code>、<code>AA₁⃗ = c⃗</code>，请用 a⃗、b⃗、c⃗ 表示 <code>AC₁⃗</code>、<code>A₁C⃗</code>、<code>BD₁⃗</code>。</li>
+<li><strong>共线共面</strong>：已知 <code>a⃗ = (1, 2, 3)</code>、<code>b⃗ = (2, 4, 6)</code>，判断 a⃗ 与 b⃗ 是否共线；再判断点 O(0,0,0)、A(1,2,3)、B(2,4,6)、C(1,1,1) 是否共面。</li>
+<li><strong>数量积与夹角</strong>：<code>a⃗ = (1, 2, 3)</code>、<code>b⃗ = (−1, 1, 2)</code>，求 a⃗ · b⃗、|a⃗| 及 cos〈a⃗, b⃗〉，并判断是否垂直。</li>
+<li><strong>法向量</strong>：求过三点 A(1,0,0)、B(0,1,0)、C(0,0,1) 的平面的一个法向量。</li>
+<li><strong>点到平面距离</strong>：求点 P(2, 3, 4) 到平面 x + y + z = 1 的距离。</li>
+<li><strong>证明位置关系</strong>：在正方体 ABCD–A₁B₁C₁D₁ 中，用向量证明 BD₁ ⊥ AC，并证明 B₁D₁ ∥ 平面 A₁BC（提示：设出坐标，写方向向量/法向量，算点积）。</li>
+<li><strong>夹角</strong>：在长方体 ABCD–A₁B₁C₁D₁ 中，AB = 2，AD = 1，AA₁ = 3，求异面直线 AB₁ 与 BC 所成角、直线 AC₁ 与平面 ABCD 所成角的正弦值。</li>
+</ol>
+<p><strong>参考答案（部分）</strong>：① <code>AC₁⃗ = a⃗ + b⃗ + c⃗</code>，<code>A₁C⃗ = a⃗ + b⃗ − c⃗</code>，<code>BD₁⃗ = −a⃗ + b⃗ + c⃗</code>；② 共线（b⃗ = 2a⃗）；O、A、B、C 共面；③ a⃗ · b⃗ = 7，|a⃗| = √14，不垂直；④ 可取 n⃗ = (1, 1, 1)；⑤ d = |2+3+4−1|/√3 = 8√3/3；⑥ BD₁ · AC = 0 故垂直，B₁D₁ 的方向向量与平面 A₁BC 的法向量点积为 0 故平行；⑦ 异面直线 AB₁ 与 BC 成 90°（AB₁ ⊥ BC），sinθ = 3/√14。</p>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "数量积满足结合律，a⃗ · b⃗ · c⃗ 有意义" → ❌ a⃗ · b⃗ 是<strong>数</strong>，不能再与向量 c⃗ 做点积；点积只满足交换律和分配律。</li>
+<li>❌ "两向量夹角就是两条直线夹角" → ❌ 线线角只取 [0°, 90°]，要加<strong>绝对值</strong> cosθ = |v⃗₁·v⃗₂|/(|v⃗₁||v⃗₂|)；向量夹角本身是 [0°, 180°]。</li>
+<li>❌ "平面的法向量是唯一的" → ❌ 法向量有无穷多个（彼此共线），常取<strong>单位法向量</strong>或最简整数解。</li>
+<li>❌ "基底必须两两垂直、长度为 1" → ❌ 基底只需<strong>三个不共面的向量</strong>；单位正交基底只是最方便的特殊基底。</li>
+<li>❌ "共线向量一定同向" → ❌ 共线（平行）含<strong>同向与反向</strong>两种情况，且零向量与任意向量共线。</li>
+<li>❌ "点到平面距离公式分子不带绝对值" → ❌ 投影可能为负，距离必须取 <strong>|AP⃗ · n⃗| / |n⃗|</strong> 的绝对值。</li>
+<li>❌ "二面角大小 = 两法向量夹角" → ❌ 法向量夹角可能与二面角<strong>互补</strong>，须结合图形判断钝锐角后确定符号。</li>
+<li>❌ "线面平行只需方向向量与法向量垂直" → ❌ 还须保证直线<strong>不在平面内</strong>，否则可能线在面内。</li>
+<li>❌ "坐标成比例即可判平行，忽略了 0 的分量" → ❌ 判断 a⃗ ∥ b⃗ 应理解为"存在 λ 使 a⃗ = λb⃗"；坐标为 0 时不能直接写比例式，要逐分量处理。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li><strong>概念辨析</strong>：下列说法正确的是（　）① 空间向量由大小和方向唯一确定，与起点位置无关（自由向量）；② 单位向量的模为 1，零向量的模为 0 且方向任意；③ 两个向量相等是指它们的大小相等；④ 力、速度、位移、电场强度都是向量，因为它们"既有大小又有方向"。<br/>A. ①②③　B. ①②④　C. ②③④　D. 全部正确</li>
+<li><strong>向量加法与减法的几何含义</strong>：在平行六面体 ABCD–A₁B₁C₁D₁ 中，设 <code>AB⃗ = a⃗</code>、<code>AD⃗ = b⃗</code>、<code>AA₁⃗ = c⃗</code>。请用 <code>a⃗</code>、<code>b⃗</code>、<code>c⃗</code> 表示 <code>AC₁⃗</code> 与 <code>BD₁⃗</code>，并用一句话说明"向量加法 = 平移的连续合成"的含义。</li>
+<li><strong>共线与共面</strong>：已知 <code>a⃗ = (1, 2, 3)</code>、<code>b⃗ = (2, 4, 6)</code>。(1) 判断 <code>a⃗</code> 与 <code>b⃗</code> 是否共线并说明理由；(2) 判断 O(0,0,0)、A(1,2,3)、B(2,4,6)、C(1,1,1) 四点是否共面。</li>
+<li><strong>数量积与夹角（含物理含义）</strong>：已知 <code>a⃗ = (1, 2, 3)</code>、<code>b⃗ = (−1, 1, 2)</code>。求 (1) <code>a⃗ · b⃗</code>；(2) <code>|a⃗|</code>；(3) <code>cos〈a⃗, b⃗〉</code> 并判断 <code>a⃗</code> 与 <code>b⃗</code> 是否垂直；(4) 结合恒力做功 <code>W = F⃗ · s⃗ = |F⃗||s⃗|cosθ</code>，说明什么情况下力对物体做功为零。</li>
+<li><strong>求法向量</strong>：求过三点 A(1,0,0)、B(0,1,0)、C(0,0,1) 的平面 α 的一个法向量。</li>
+<li><strong>综合应用（平行、垂直与夹角）</strong>：(1) 在棱长为 1 的正方体 ABCD–A₁B₁C₁D₁ 中，以 D 为原点、DA、DC、DD₁ 分别为 x、y、z 轴正方向建立空间直角坐标系，用向量证明 <code>BD₁ ⊥ AC</code>。(2) 在长方体 ABCD–A₁B₁C₁D₁ 中，AB = 2、AD = 1、AA₁ = 3，求异面直线 AB₁ 与 BC 所成角，以及直线 AC₁ 与平面 ABCD 所成角的正弦值。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><strong>选 B</strong>。③ 错：向量相等必须"大小相等且方向相同"（平移后可重合），只比大小不够；①②④ 正确。要点：自由向量是向量法可以平移分解的根本前提；力、速度、位移、电场强度等都是"既有大小又有方向"的典型向量。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>AC₁⃗ = AB⃗ + BC⃗ + CC₁⃗ = a⃗ + b⃗ + c⃗</code>；<code>BD₁⃗ = BA⃗ + AA₁⃗ + A₁D₁⃗ = −a⃗ + c⃗ + b⃗ = −a⃗ + b⃗ + c⃗</code>。几何含义：从 A 出发先后沿 <code>a⃗</code>、<code>b⃗</code>、<code>c⃗</code> 三次平移，总效果等于直接沿和向量 <code>AC₁⃗</code> 平移——"首尾相接，总位移为和"。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>(1) 共线：<code>b⃗ = 2a⃗</code>（对应坐标成比例 2/1 = 4/2 = 6/3），存在 λ = 2 使 <code>b⃗ = λa⃗</code>。(2) 共面：<code>OA⃗ = (1,2,3)</code>、<code>OC⃗ = (1,1,1)</code> 不共线，而 <code>OB⃗ = (2,4,6) = 2·OA⃗ + 0·OC⃗</code>，即 <code>OB⃗</code> 可由 <code>OA⃗</code>、<code>OC⃗</code> 线性表示，故四点共面（实际 O、A、B 三点共线）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>(1) <code>a⃗ · b⃗ = 1×(−1) + 2×1 + 3×2 = −1 + 2 + 6 = 7</code>。(2) <code>|a⃗| = √(1² + 2² + 3²) = √14</code>。(3) <code>cos〈a⃗, b⃗〉 = 7 / (√14 × √6) = 7 / (2√21)</code>；因 <code>a⃗ · b⃗ = 7 ≠ 0</code>，故不垂直。(4) 当力与位移垂直（θ = 90°，cosθ = 0）时 W = 0，例如手提重物沿水平方向匀速移动时，重力与位移垂直，重力不做功。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>平面内取 <code>AB⃗ = B − A = (−1, 1, 0)</code>、<code>AC⃗ = C − A = (−1, 0, 1)</code>。设法向量 <code>n⃗ = (x, y, z)</code>，由 <code>n⃗ · AB⃗ = 0</code> 得 −x + y = 0 → y = x；由 <code>n⃗ · AC⃗ = 0</code> 得 −x + z = 0 → z = x。取 x = 1，得 <code>n⃗ = (1, 1, 1)</code>（法向量不唯一，任取一组非零解即可）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(1) 建系得 B(1,1,0)、D₁(0,0,1)、A(1,0,0)、C(0,1,0)，<code>BD₁⃗ = (−1, −1, 1)</code>、<code>AC⃗ = (−1, 1, 0)</code>，<code>BD₁⃗ · AC⃗ = 1 − 1 + 0 = 0</code>，故 <code>BD₁ ⊥ AC</code>。(2) 建系：D(0,0,0)、A(2,0,0)、B(2,1,0)、C(0,1,0)、B₁(2,1,3)、C₁(0,1,3)。<code>AB₁⃗ = (0,1,3)</code>、<code>BC⃗ = (−2,0,0)</code>，<code>cosθ = |AB₁⃗ · BC⃗| / (|AB₁⃗|·|BC⃗|) = 0 / (√10 × 2) = 0</code>，故异面直线所成角为 90°；平面 ABCD 的法向量取 <code>n⃗ = (0,0,1)</code>，<code>AC₁⃗ = (−2,1,3)</code>，<code>|AC₁⃗| = √14</code>，<code>sinθ = |AC₁⃗ · n⃗| / (|AC₁⃗|·|n⃗|) = 3 / √14</code>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../../必修二/第10章-概率/第10章-概率.html">← 上一章：第10章 概率</a><a href="../../../index.html">回目录</a><a href="../第2章-直线和圆的方程/第2章-直线和圆的方程.html">下一章：第2章 直线和圆的方程 →</a></nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 选择性必修第一册</footer>
+</body>
+</html>

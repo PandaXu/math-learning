@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第13章 轴对称 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第13章 轴对称</div></header>
+<main class="container">
+<h1>第13章 轴对称</h1>
+<p class="lead">初中 / 初二 / 八年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>轴对称 = 「沿一条直线折叠后，图形左右完全重合」。折叠轴就是对称轴，折叠重合的点互称对称点；本章要你熟练掌握三种"折叠工具"——线段的垂直平分线、等腰三角形的三线合一、以及用"翻折把折线拉直"来解决最短路径问题。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">13.1 轴对称与轴对称图形</a><a href="#s2">13.2 线段的垂直平分线</a><a href="#s3">13.3 等腰三角形（三线合一）</a><a href="#s4">13.4 最短路径问题</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">13.1 轴对称与轴对称图形</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="260" y1="20" x2="260" y2="188" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="270" y="32" font-size="13" fill="#16a34a">l（对称轴）</text>
+<polygon points="330,50 280,90 330,150" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="190" y1="50" x2="330" y2="50" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<g transform="translate(260 0)">
+<polygon points="-70,50 -20,90 -70,150" fill="#2563eb" fill-opacity="0.85">
+<animateTransform attributeName="transform" type="scale" values="1 1;-1 1;1 1" dur="4s" repeatCount="indefinite"/>
+</polygon>
+</g>
+<circle cx="260" cy="50" r="4" fill="#16a34a"/>
+<path d="M260 50 L268 50 L268 58" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+<text x="182" y="46" font-size="14" fill="#334155">A</text>
+<text x="338" y="46" font-size="14" fill="#334155">A′</text>
+<text x="252" y="66" font-size="12" fill="#16a34a" text-anchor="end">M</text>
+<text x="260" y="192" font-size="12" fill="#6b7280" text-anchor="middle">左侧图形绕对称轴 l 折叠，与右侧虚像完全重合</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：轴对称 = 沿对称轴折叠后完全重合，对称点 A 与 A′ 的连线被对称轴垂直平分</figcaption>
+</figure>
+<h3>核心概念：一个"折叠重合"的动作</h3>
+<p>把一个图形沿着某一条直线<strong>折叠</strong>，如果它能与<strong>另一个图形</strong>完全重合，那么就说这两个图形关于这条直线<strong>（成轴）对称</strong>，这条直线叫做<strong>对称轴</strong>，折叠后重合的点叫做<strong>对称点</strong>。</p>
+<ul>
+<li><strong>对称轴</strong>：一条直线（不是线段，也不是射线），是折叠的"折痕"所在直线。</li>
+<li><strong>对称点</strong>：折叠后互相重合的一对点，例如点 A 与点 A′（A 撇）关于直线 l 对称。</li>
+<li><strong>轴对称图形</strong>：如果一个图形沿某条直线折叠后，直线两旁的<strong>部分能够互相重合</strong>，那么这个图形就叫做<strong>轴对称图形</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>轴对称的本质是<strong>关于一条直线的反射（镜像）</strong>——把直线当作"镜子"，图形在镜子里的像与它本身沿镜面折叠后完全重合。对称轴就是"镜子所在直线"，对称点就是"物体点与它的像点"。</div>
+<div class="insight"><strong>物理含义：</strong>现实中的<strong>平面镜成像</strong>就是轴对称的活例子：你站在镜前，镜中的像与你关于镜面成轴对称，像与你的距离、大小都相等，只是<strong>左右颠倒</strong>。自然界里蝴蝶的翅膀、人的脸、雪花晶体、桥梁和建筑，大多设计成轴对称，因为它<strong>左右受力均衡、结构稳定、视觉对称美观</strong>。</div>
+<h3>轴对称与轴对称图形的区别与联系</h3>
+<table>
+<tr><th>比较</th><th>轴对称（两个图形）</th><th>轴对称图形（一个图形）</th></tr>
+<tr><td>对象</td><td>两个图形之间的位置关系</td><td>一个图形自身的形状特征</td></tr>
+<tr><td>对称轴</td><td>只有 1 条（两个图形只有这一条折叠线）</td><td>可以有 1 条，也可以有多条</td></tr>
+<tr><td>举例</td><td>两个三角形关于直线 l 对称</td><td>等腰三角形、圆、正方形、正五角星</td></tr>
+</table>
+<div class="insight"><strong>联系：</strong>把<strong>成轴对称的两个图形看成一个整体</strong>，它就是一个轴对称图形；把一个轴对称图形<strong>沿对称轴分成两部分</strong>，这两部分关于这条直线成轴对称。</div>
+<h3>轴对称的性质（折叠带来的"不变"与"相等"）</h3>
+<ol>
+<li><strong>全等</strong>：关于某直线对称的两个图形<strong>全等</strong>（形状、大小完全相同，只是位置翻转）。</li>
+<li><strong>对称轴是垂直平分线</strong>：对称轴是<strong>任何一对对称点所连线段的垂直平分线</strong>。也就是说，连接对称点 A 与 A′ 的线段 <code>AA′</code> 被对称轴<strong>垂直平分</strong>。</li>
+<li><strong>对应线段、对应角相等</strong>：两个图形中的对应线段（如对应边）相等，对应角相等。</li>
+<li><strong>交点落在对称轴上</strong>：如果两个图形关于某直线对称，且它们的某组对应线段（或延长线）相交，那么<strong>交点一定在对称轴上</strong>。</li>
+</ol>
+<div class="insight"><strong>几何含义：</strong>性质 2 是本章的"总钥匙"——对称轴等价于"对称点连线的垂直平分线"。由此可以把"关于直线对称"翻译成"任意两对称点连成的线段都被这条直线垂直平分"，从而引出下一节的垂直平分线定理。</div>
+<h3>常见图形的对称轴条数</h3>
+<table>
+<tr><th>图形</th><th>对称轴条数</th><th>对称轴位置</th></tr>
+<tr><td>线段</td><td>2 条</td><td>本身所在直线 + 它的垂直平分线</td></tr>
+<tr><td>角</td><td>1 条</td><td>角平分线所在直线</td></tr>
+<tr><td>等腰三角形</td><td>1 条</td><td>底边上的高（三线合一）所在直线</td></tr>
+<tr><td>等边三角形</td><td>3 条</td><td>三条高（也是中线、角平分线）所在直线</td></tr>
+<tr><td>矩形</td><td>2 条</td><td>两组对边中点的连线所在直线</td></tr>
+<tr><td>正方形</td><td>4 条</td><td>2 条对角线 + 2 组对边中点连线</td></tr>
+<tr><td>圆</td><td>无数条</td><td>任何一条直径所在直线</td></tr>
+</table>
+<div class="insight"><strong>物理含义：</strong>对称轴越多，图形越"均衡"。圆有无数条对称轴，所以<strong>车轮、齿轮、转盘</strong>做成圆形——绕中心任意旋转都保持形状不变，转动最平稳；等腰梯形、风筝做成轴对称，是为了<strong>左右受力对称、飞行稳定</strong>。</div>
+
+<h2 id="s2">13.2 线段的垂直平分线</h2>
+<h3>定义</h3>
+<p>经过线段<strong>中点</strong>并且<strong>垂直于</strong>这条线段的直线，叫做这条线段的<strong>垂直平分线</strong>（也叫<strong>中垂线</strong>）。它同时满足两个条件：</p>
+<pre><code>直线 l 是线段 AB 的垂直平分线  ⟺  l ⊥ AB 且 l 过 AB 的中点</code></pre>
+<h3>性质定理（从"线上"推出"距离相等"）</h3>
+<p><strong>定理：</strong>线段垂直平分线上的点，到这条线段两个端点的<strong>距离相等</strong>。</p>
+<pre><code>若点 P 在 AB 的垂直平分线上，则 PA = PB</code></pre>
+<div class="insight"><strong>几何含义：</strong>垂直平分线可以看作"到线段两端距离相等的点组成的轨迹（集合）"。线上每一个点到 A、B 的距离都一样远——就像站在线段正中央的"公平位置"。</div>
+<div class="insight"><strong>物理含义：</strong>PA = PB 说明点 P 到两个端点是"等距"的。在工程上，把货物吊点选在横梁的垂直平分线上，两端受力相等、最平稳；声音或信号从 P 发出，到 A、B 两处的时间相同（速度相同时"等距 ⇒ 同时到达"）。</div>
+<h3>判定定理（从"距离相等"推回"在线上"）</h3>
+<p><strong>定理：</strong>到一条线段两个端点<strong>距离相等的点</strong>，在这条线段的<strong>垂直平分线上</strong>。</p>
+<pre><code>若 PA = PB，则点 P 在 AB 的垂直平分线上</code></pre>
+<p>性质定理与判定定理<strong>互为逆定理</strong>，合起来就是一句等价命题：</p>
+<pre><code>点 P 在 AB 的垂直平分线上  ⟺  PA = PB</code></pre>
+<div class="insight"><strong>几何含义：</strong>这条等价关系是"位置"与"距离"的互相翻译：想要证明某点在垂直平分线上，只需证明它到两端点距离相等；反之，点在线上就能直接得出两条线段相等。它是<strong>证明线段相等的利器</strong>。</div>
+<h3>尺规作图：作线段的垂直平分线</h3>
+<p>分别以 A、B 为圆心，以<strong>大于 AB 一半</strong>的同一长度为半径画弧，两弧交于两点，过这两个交点作直线，即为 AB 的垂直平分线。</p>
+<div class="insight"><strong>为什么"大于 AB 一半"？</strong>半径太小时两弧不相交（交点不存在）；只有半径 &gt; AB/2 时两弧才在两侧各交于一点。两个交点到 A、B 距离分别相等，故都在这条垂直平分线上，<strong>两点确定一条直线</strong>。</div>
+<p><strong>拓展：</strong>三角形三条边的垂直平分线交于一点，这一点到三个顶点的距离相等——它是三角形<strong>外接圆的圆心（外心）</strong>。</p>
+
+<h2 id="s3">13.3 等腰三角形（三线合一）</h2>
+<h3>定义与基本元素</h3>
+<p>有<strong>两条边相等</strong>的三角形叫做<strong>等腰三角形</strong>。相等的两条边叫<strong>腰</strong>，第三条边叫<strong>底边</strong>，两腰的夹角叫<strong>顶角</strong>，腰与底边的夹角叫<strong>底角</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>等腰三角形是<strong>轴对称图形</strong>，它有且只有 1 条对称轴——就是顶角的平分线（同时也是底边上的中线和高）所在直线。沿这条轴折叠，左右两个"半三角形"完全重合。</div>
+<h3>性质 1：等边对等角</h3>
+<p><strong>定理：</strong>等腰三角形的<strong>两个底角相等</strong>（简写成"<strong>等边对等角</strong>"）。</p>
+<pre><code>在 △ABC 中，若 AB = AC，则 ∠B = ∠C</code></pre>
+<h3>性质 2：三线合一（等腰三角形的核心！）</h3>
+<p><strong>定理：</strong>等腰三角形的<strong>顶角平分线、底边上的中线、底边上的高</strong>，这三条线<strong>互相重合</strong>（简称为"<strong>三线合一</strong>"）。</p>
+<pre><code>AB = AC 时，顶角平分线 = 底边中线 = 底边上的高（同一条线段）</code></pre>
+<div class="insight"><strong>几何含义：</strong>这三条线重合的那条线段，正是等腰三角形的<strong>对称轴</strong>。它既是"把顶角平分"的角平分线，又是"把底边平分"的中线，还是"垂直底边"的高——一条线同时扮演三个角色，全因左右两半关于它对称。</div>
+<div class="insight"><strong>物理含义：</strong>三线合一意味着这条线是三角形<strong>左右质量的对称轴</strong>，重心落在这条中线上，所以等腰三角形物体沿中线支撑最稳定；屋脊、桥拱、衣架、塔吊的三角支撑都做成等腰三角形，让受力沿中线均匀传递，不歪斜。</div>
+<p><strong>"三线合一"的灵活使用</strong>（知道其一，就能推出另外两个）：在等腰三角形中，只要知道<strong>顶角平分线 / 底边中线 / 底边高</strong>中的<strong>任意一条</strong>，它同时就是另外两条，并且垂直平分底边。这是证明线段相等、角相等、垂直关系的高频工具。</p>
+<h3>判定：等角对等边</h3>
+<p><strong>定理：</strong>如果一个三角形有<strong>两个角相等</strong>，那么这两个角所对的边也相等（简写成"<strong>等角对等边</strong>"），即这个三角形是等腰三角形。</p>
+<pre><code>在 △ABC 中，若 ∠B = ∠C，则 AB = AC</code></pre>
+<h3>等边三角形（特殊的等腰三角形）</h3>
+<ul>
+<li><strong>定义</strong>：三条边都相等的三角形。</li>
+<li><strong>性质</strong>：三个内角都相等，且每个角都等于 <code>60°</code>；它<strong>有三条对称轴</strong>（三条高/中线/角平分线所在直线）；每条边上的"三线"都合一。</li>
+<li><strong>判定</strong>：① 三边相等；② 三个角相等；③ 有一个角是 <code>60°</code> 的等腰三角形。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>等边三角形把"对称"发挥到极致——绕中心旋转 120° 图形不变（旋转对称），同时还有 3 条对称轴，是"正多边形"里最简单的成员，处处均匀。</div>
+<div class="insight"><strong>物理含义：</strong>三边等长 ⇒ 三条中线都重合于重心且互相平分，受力最均匀，因此<strong>三角支架、桥梁桁架</strong>常用等边三角形单元，把外力平均分解到三边，结构最稳固。</div>
+
+<h2 id="s4">13.4 最短路径问题（轴对称的实战应用）</h2>
+<h3>核心思想：把"折线"通过翻折"拉直"</h3>
+<p>最短路径问题的通用思路是：当要求的路径是"<strong>折线</strong>"时，利用轴对称把其中一段<strong>翻折到另一侧</strong>，使折线变成一条<strong>直线段</strong>——因为<strong>两点之间线段最短</strong>，所以这条直线段就是最短路径。</p>
+<div class="insight"><strong>几何含义：</strong>翻折不改变长度（轴对称是"刚体运动"，保距）。把一条边关于直线反射后，两条"折线路径"的总长等于一条直线段的长度，于是"最短的折线"问题就变成"最短的直线段"问题。</div>
+<div class="insight"><strong>物理含义：</strong>这正是<strong>光的反射定律</strong>：光从一点经平面镜反射到另一点，走的是<strong>最短路径</strong>（费马原理），入射角等于反射角。把"人—河边—营地"的最短路线画出来，恰好就是一条满足"入射角 = 反射角"的光线路径。</div>
+<h3>经典模型一：将军饮马（两点在直线同侧）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="40" y1="180" x2="500" y2="180" stroke="#16a34a" stroke-width="2"/>
+<text x="48" y="170" font-size="13" fill="#16a34a">河岸 l</text>
+<line x1="140" y1="80" x2="140" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="140" cy="180" r="4" fill="#16a34a"/>
+<text x="132" y="186" font-size="12" fill="#16a34a" text-anchor="end">M</text>
+<line x1="140" y1="280" x2="420" y2="60" stroke="#16a34a" stroke-width="2" stroke-dasharray="7 5"/>
+<circle cx="140" cy="80" r="6" fill="#2563eb"/>
+<text x="132" y="74" font-size="14" fill="#334155" text-anchor="end">A</text>
+<circle cx="420" cy="60" r="6" fill="#2563eb"/>
+<text x="428" y="56" font-size="14" fill="#334155">B</text>
+<circle cx="140" cy="280" r="6" fill="#16a34a"/>
+<text x="132" y="300" font-size="14" fill="#16a34a" text-anchor="end">A′（A 的对称点）</text>
+<line x1="180" y1="180" x2="140" y2="80" stroke="#2563eb" stroke-width="2.5">
+<animate attributeName="x1" values="180;267;267;360;267;267;180" keyTimes="0;0.2;0.3;0.5;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+</line>
+<line x1="180" y1="180" x2="420" y2="60" stroke="#2563eb" stroke-width="2.5">
+<animate attributeName="x1" values="180;267;267;360;267;267;180" keyTimes="0;0.2;0.3;0.5;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+</line>
+<line x1="180" y1="180" x2="140" y2="280" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4">
+<animate attributeName="x1" values="180;267;267;360;267;267;180" keyTimes="0;0.2;0.3;0.5;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+</line>
+<circle cx="267" cy="180" r="9" fill="none" stroke="#16a34a" stroke-width="2">
+<animate attributeName="r" values="6;11;6" dur="1.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/>
+</circle>
+<text x="267" y="164" font-size="12" fill="#16a34a" text-anchor="middle">P*（最短点）</text>
+<circle cy="180" r="6" fill="#2563eb">
+<animate attributeName="cx" values="180;267;267;360;267;267;180" keyTimes="0;0.2;0.3;0.5;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+</circle>
+<text y="172" font-size="12" fill="#2563eb" text-anchor="middle"><animate attributeName="x" values="180;267;267;360;267;267;180" keyTimes="0;0.2;0.3;0.5;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>P</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：将军饮马——作 A 关于 l 的对称点 A′，则 PA = PA′，故 PA + PB = PA′ + PB；当 A′、P、B 共线（P 落在 A′B 与 l 的交点）时最短，这正是光的反射走最短路径</figcaption>
+</figure>
+<p><strong>问题：</strong>如图，点 A、B 在直线 l 的<strong>同侧</strong>，要在 l 上找一点 P，使 <code>PA + PB</code> 最小。</p>
+<p><strong>作法：</strong></p>
+<ol>
+<li>作点 A（或 B）关于直线 l 的对称点 A′；</li>
+<li>连接 A′B，交直线 l 于点 P；</li>
+<li>点 P 即为所求，最短距离 = <code>A′B</code> 的长度。</li>
+</ol>
+<pre><code>对称 → 连接 → 找交点：P = A′B ∩ l，且 PA + PB = A′B 最小</code></pre>
+<div class="insight"><strong>为什么最短？</strong>因为 A 与 A′ 关于 l 对称，所以 l 上任意一点到 A、A′ 距离相等（l 是 AA′ 的垂直平分线），即 <code>PA = PA′</code>。于是 <code>PA + PB = PA′ + PB</code>。要使 PA′ + PB 最小，就是要在 l 上找一点，使 "A′ 到该点再回到 B" 最短——显然当 A′、P、B 三点共线时最短，即 P 取 A′B 与 l 的交点。</div>
+<h3>经典模型二：造桥选址（平移 + 最短）</h3>
+<p><strong>问题：</strong>河的两岸平行，A、B 在河两岸，要在河上垂直河岸架一座桥 MN（M 在上岸、N 在下岸），使 <code>AM + MN + BN</code> 最小。</p>
+<p><strong>思路：</strong>桥长 MN 固定，先把 A 沿垂直河岸方向平移桥长到 A′，问题转化为"在河岸上找点 N 使 <code>A′N + NB</code> 最小"——连接 A′B 与下岸交于 N，再过 N 作垂线交上岸于 M。</p>
+<div class="insight"><strong>本质：</strong>当两定点在河<strong>两侧</strong>时，直接用"两点之间线段最短"连线即可；当在同侧时，用轴对称（或平移）把一侧"搬"到另一侧，把折线拉直。两种模型的统一心法是：<strong>对称（或平移）把问题化到"异侧"→ 直线段最短</strong>。</div>
+
+<hr>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>轴对称 / 轴对称图形</td><td>关于某直线的反射（镜像），折叠重合</td><td>平面镜成像、左右受力对称的桥梁与建筑</td></tr>
+<tr><td>对称轴</td><td>折叠的"折痕"所在直线（镜子所在直线）</td><td>镜面、结构的对称中线</td></tr>
+<tr><td>对称点</td><td>折叠后互相重合的一对点</td><td>物体点与它在镜中的像</td></tr>
+<tr><td>线段垂直平分线（性质）</td><td>线上的点到两端点距离相等（等距轨迹）</td><td>两端受力相等、信号等时到达</td></tr>
+<tr><td>线段垂直平分线（判定）</td><td>到两端等距的点必在这条线上</td><td>由"等距"反推"居中"的位置</td></tr>
+<tr><td>等腰三角形：等边对等角</td><td>两腰相等 ⇒ 两底角相等（轴对称性）</td><td>对称结构的左右角受力相同</td></tr>
+<tr><td>等腰三角形：三线合一</td><td>顶角平分线=底边中线=底边高（对称轴）</td><td>重心在中线上，支撑最稳（屋脊、衣架、塔吊）</td></tr>
+<tr><td>等边三角形</td><td>三边、三角全等，三条对称轴</td><td>受力最均匀的三角支架、桥梁桁架</td></tr>
+<tr><td>最短路径（将军饮马）</td><td>轴对称把折线拉直，两点间线段最短</td><td>光的反射走最短路径（费马原理）</td></tr>
+<tr><td>最短路径（造桥选址）</td><td>平移把折线化到异侧再连线</td><td>架桥选位让总路程最短</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题 1：轴对称性质</h4>
+<p>如图，△ABC 与 △A′B′C′ 关于直线 l 对称，已知 <code>AB = 5</code>，<code>∠C = 40°</code>。求 A′B′ 的长和 ∠C′ 的度数。</p>
+<p><strong>解：</strong>成轴对称的两个图形全等 ⇒ 对应边、对应角相等。所以 <code>A′B′ = AB = 5</code>，<code>∠C′ = ∠C = 40°</code>。</p>
+</div>
+<div class="ex">
+<h4>例题 2：垂直平分线性质</h4>
+<p>已知 DE 是 △ABC 中 BC 边的垂直平分线，交 BC 于 D，交 AC 于 E，<code>AB = 3</code>，<code>AC = 7</code>。求 △ABE 的周长。</p>
+<p><strong>解：</strong>因为 E 在 BC 的垂直平分线上，所以 <code>BE = CE</code>。于是 △ABE 的周长 = <code>AB + AE + BE = AB + AE + CE = AB + AC = 3 + 7 = 10</code>。这里把 BE "搬到" CE，恰好凑成整条 AC。</p>
+</div>
+<div class="ex">
+<h4>例题 3：三线合一</h4>
+<p>在等腰 △ABC 中，<code>AB = AC</code>，顶角 <code>∠A = 100°</code>，AD 是底边 BC 上的高。求 ∠BAD 与 ∠B 的度数。</p>
+<p><strong>解：</strong>由三线合一，AD 同时是顶角平分线 ⇒ <code>∠BAD = ∠A / 2 = 50°</code>；又 ∠B + ∠C = 180° − 100° = 80°，且等边对等角 ⇒ <code>∠B = ∠C = 40°</code>。</p>
+</div>
+<div class="ex">
+<h4>例题 4：最短路径（将军饮马）</h4>
+<p>A、B 两点在直线 l 同侧，A 到 l 的距离为 3，B 到 l 的距离为 5，A、B 沿 l 方向的距离为 6。求 PA + PB 的最小值（P 在 l 上）。</p>
+<p><strong>解：</strong>作 A 关于 l 的对称点 A′，则 A′ 到 l 的距离也是 3（在另一侧）。连接 A′B 交 l 于 P。以 l 为基准，A′ 与 B 到 l 的距离之和为 3 + 5 = 8，沿 l 方向仍相距 6。由勾股定理：<code>PA + PB = A′B = √(8² + 6²) = √100 = 10</code>。</p>
+</div>
+<div class="ex">
+<h4>例题 5：等边三角形判定</h4>
+<p>在 △ABC 中，<code>AB = AC</code>，且 <code>∠B = 60°</code>。判断 △ABC 的形状。</p>
+<p><strong>解：</strong>AB = AC ⇒ 等腰三角形 ⇒ ∠C = ∠B = 60° ⇒ ∠A = 180° − 60° − 60° = 60° ⇒ 三个角都相等 ⇒ △ABC 是等边三角形（"有一个角是 60° 的等腰三角形是等边三角形"）。</p>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "对称轴是一条线段" → ❌ 对称轴是一条<strong>直线</strong>，不是线段或射线（例如线段的对称轴是"本身所在直线 + 垂直平分线所在直线"两条直线）。</li>
+<li>❌ "轴对称图形就是关于某直线对称的两个图形" → ❌ 轴对称图形指<strong>一个</strong>图形自身的特征；"成轴对称"指<strong>两个</strong>图形的位置关系，两者对象不同（但有联系）。</li>
+<li>❌ "等腰三角形有三条对称轴" → ❌ 一般等腰三角形只有 <strong>1 条</strong>对称轴；<strong>等边</strong>三角形才有 3 条。</li>
+<li>❌ "三线合一是三条不同的线" → ❌ 三线合一是"顶角平分线、底边中线、底边高"<strong>互相重合</strong>成同一条线段，不是三条并列的线。</li>
+<li>❌ "垂直平分线上任意点到线段两端点距离相等，反过来也成立，所以两句话等价" 用得对不对都行 → ❌ 性质与判定要分清方向：<strong>性质</strong>是"在线上 ⇒ 距离相等"，<strong>判定</strong>是"距离相等 ⇒ 在线上"，证明时别把因果写反。</li>
+<li>❌ "作垂直平分线时半径取任意长都行" → ❌ 半径必须<strong>大于 AB 的一半</strong>，否则两弧不相交，作不出交点。</li>
+<li>❌ "最短路径只要随便取 P 使 PA = PB 就行" → ❌ 将军饮马中 P 是 <code>A′B</code> 与 l 的<strong>交点</strong>（三点共线），不是 l 上任意点；对称点找错边（没翻到异侧）会得到错误答案。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>下列图形中，对称轴条数最多的是哪一个？请说明理由。<br>A. 等腰三角形　B. 矩形　C. 正方形　D. 圆</li>
+<li>如图，△ABC 与 △A′B′C′ 关于直线 l 对称，已知 <code>AC = 6</code>，<code>∠B = 35°</code>。求 <code>A′C′</code> 的长与 <code>∠B′</code> 的度数，并说明依据。</li>
+<li>已知点 P 在线段 AB 的垂直平分线上，且 <code>AB = 10</code>，<code>PA = 13</code>。求 PB 的长；若再在 AB 的垂直平分线上任取一点 Q，判断 QA 与 QB 的大小关系。</li>
+<li>在等腰 △ABC 中，<code>AB = AC</code>，<code>AD</code> 是底边 BC 上的高，且 <code>∠B = 50°</code>。求 ∠BAD 和 ∠CAD 的度数，并指出"三线合一"里 AD 还同时是哪两条线。</li>
+<li>在 △ABC 中，<code>∠B = ∠C</code>，<code>AB = 8</code>。求 AC 的长；若又知 <code>∠B = 60°</code>，判断 △ABC 的形状。</li>
+<li>将军饮马问题：A、B 两点在直线 l 的同侧，A、B 到 l 的距离分别为 4 和 9，且 A、B 沿 l 方向的距离为 12。要在 l 上找一点 P，使 <code>PA + PB</code> 最小。请写出作法，并求出 <code>PA + PB</code> 的最小值。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>选 D（圆）。圆有无数条对称轴——任何一条直径所在直线都是它的对称轴；而等腰三角形只有 1 条，矩形 2 条，正方形 4 条。所以圆最多。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>A′C′ = AC = 6</code>，<code>∠B′ = ∠B = 35°</code>。依据：成轴对称的两个图形全等，对应边、对应角分别相等。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由垂直平分线性质定理（线上的点到两端点距离相等）得 <code>PB = PA = 13</code>。因为 Q 也在 AB 的垂直平分线上，同样有 <code>QA = QB</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>等腰三角形中等边对等角 ⇒ <code>∠C = ∠B = 50°</code>，故顶角 <code>∠A = 180° − 50° − 50° = 80°</code>。由三线合一，AD 同时是顶角平分线 ⇒ <code>∠BAD = ∠CAD = 80° ÷ 2 = 40°</code>。AD 还同时是底边 BC 上的中线和顶角 ∠A 的平分线（即"高 = 中线 = 顶角平分线"）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由等角对等边 ⇒ <code>AC = AB = 8</code>。又 ∠B = ∠C = 60°，则 ∠A = 180° − 60° − 60° = 60°，三个角都相等 ⇒ △ABC 是等边三角形（也可用"有一个角是 60° 的等腰三角形是等边三角形"判定）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>作法：作点 A 关于直线 l 的对称点 A′（A′ 在 l 另一侧，到 l 的距离也是 4）；连接 A′B 交 l 于点 P，P 即为所求。求值：A′ 与 B 到 l 的距离之和为 4 + 9 = 13，沿 l 方向相距 12，由勾股定理得 <code>PA + PB = PA′ + PB = A′B = √(13² + 12²) = √(169 + 144) = √313</code>。当 A′、P、B 三点共线时路径最短（两点之间线段最短）。</p></details>
+</div>
+
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第12章-全等三角形/第12章-全等三角形.html">← 上一章：第12章 全等三角形</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第14章-整式的乘法与因式分解/第14章-整式的乘法与因式分解.html">下一章：第14章 整式的乘法与因式分解 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

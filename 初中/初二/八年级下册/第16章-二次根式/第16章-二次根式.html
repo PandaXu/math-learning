@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第16章 二次根式 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第16章 二次根式</div></header>
+<main class="container">
+<h1>第16章 二次根式</h1>
+<p class="lead">初中 / 初二 / 八年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>二次根式 √a 就是「面积为 a 的正方形的边长」——它天生非负，把「开方」变成看得见的几何长度，把「化简、乘除、加减」变成「把边长换算成最简尺子、把面积与边长互化、把相同单位的长度拼接」。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">16.1 二次根式的概念</a><a href="#s2">16.2 二次根式的性质</a><a href="#s3">16.3 最简二次根式</a><a href="#s4">16.4 二次根式的乘除</a><a href="#s5">16.5 二次根式的加减</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">16.1 二次根式的概念</h2>
+<h3>什么是二次根式</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<text x="260" y="18" text-anchor="middle" font-size="14" fill="#334155">面积为 a 的正方形，边长 = √a</text>
+<rect x="235" y="75" width="50" height="50" rx="2" fill="#2563eb" fill-opacity="0.14" stroke="#2563eb" stroke-width="2.5">
+<animate attributeName="x" values="235;210;185;210;235" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="y" values="75;50;25;50;75" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="width" values="50;100;150;100;50" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="height" values="50;100;150;100;50" dur="9s" repeatCount="indefinite"/>
+</rect>
+<line x1="235" y1="125" x2="285" y2="125" stroke="#16a34a" stroke-width="3.5">
+<animate attributeName="x1" values="235;210;185;210;235" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="y1" values="125;150;175;150;125" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="x2" values="285;310;335;310;285" dur="9s" repeatCount="indefinite"/>
+<animate attributeName="y2" values="125;150;175;150;125" dur="9s" repeatCount="indefinite"/>
+</line>
+<g text-anchor="middle" font-size="16" font-weight="700">
+<text x="260" y="98" fill="#1d4ed8">面积 a = 1<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.125;0.875;1" dur="9s" repeatCount="indefinite"/></text>
+<text x="260" y="98" fill="#1d4ed8" opacity="0">面积 a = 4<animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.125;0.375;0.625;0.875;1" dur="9s" repeatCount="indefinite"/></text>
+<text x="260" y="98" fill="#1d4ed8" opacity="0">面积 a = 9<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.375;0.625;1" dur="9s" repeatCount="indefinite"/></text>
+</g>
+<g text-anchor="middle" font-size="15" fill="#15803d" font-weight="700">
+<text x="260" y="204">边长 = √a = 1<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.125;0.875;1" dur="9s" repeatCount="indefinite"/></text>
+<text x="260" y="204" opacity="0">边长 = √a = 2<animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.125;0.375;0.625;0.875;1" dur="9s" repeatCount="indefinite"/></text>
+<text x="260" y="204" opacity="0">边长 = √a = 3<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.375;0.625;1" dur="9s" repeatCount="indefinite"/></text>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：√a 是「面积为 a 的正方形的边长」——面积从 1→4→9，边长 √a 从 1→2→3，绿色边就是 √a 这把「尺子」</figcaption>
+</figure>
+<p><strong>定义</strong>：一般地，形如 <code>√a</code>（a ≥ 0）的式子叫做<strong>二次根式</strong>。其中「√」叫做<strong>二次根号</strong>，a 叫做<strong>被开方数</strong>。</p>
+<ul>
+<li><strong>有意义的条件</strong>：被开方数 a ≥ 0。因为在实数范围内，负数没有平方根，所以 a &lt; 0 时 √a 没有意义。</li>
+<li><strong>√a 的值</strong>：√a 表示 a 的<strong>算术平方根</strong>，即「平方等于 a 的那个非负数」。因此 √a 本身恒满足 <code>√a ≥ 0</code>。</li>
+<li><strong>双重非负性</strong>：√a 成立时，必须同时满足「被开方数 a ≥ 0」和「根式值 √a ≥ 0」。这是二次根式一切运算的地基。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>√a 就是「<strong>面积为 a 的正方形的边长</strong>」。面积是 a，边长就是 √a；反过来，边长是 √a 的正方形，面积就是 a。例：√4 = 2（面积 4 的正方形边长是 2），√9 = 3（面积 9 的正方形边长是 3）。而 √2 就是「边长为 1 的正方形」的对角线长——由勾股定理，对角线² = 1² + 1² = 2，所以对角线 = √2。这就是 √2 第一次以真实几何长度的身份出现。</div>
+<div class="insight"><strong>物理含义：</strong>√a 永远是一个<strong>非负的「大小」量</strong>，它代表长度、距离、速率这类「只讲大小、不讲方向」的量。比如面积 a 的量纲是「长度²」，对它开方 √a 就回到「长度」量纲——开方在物理上常常是「把平方量还原成基本量」。</div>
+<p><strong>一句话记牢：√ 是「面积 → 边长」的换算器，结果永远 ≥ 0。</strong></p>
+
+<h2 id="s2">16.2 二次根式的性质</h2>
+<h3>性质一：(√a)² = a（a ≥ 0）</h3>
+<p><strong>含义</strong>：「先开方、再平方」互相抵消，回到 a 本身。</p>
+<pre><code>(√a)² = a   （a ≥ 0）
+(√3)² = 3， (√0.5)² = 0.5</code></pre>
+<div class="insight"><strong>几何含义：</strong>把「面积为 a 的正方形」的边长 √a 取出来，再以它为边长重新拼一个正方形，面积又变回 a——<strong>边长 → 面积</strong>的逆过程。</div>
+<h3>性质二：√(a²) = |a|（这是本章最易错的一条！）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="180" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<text x="20" y="24" font-size="15" font-weight="700" fill="#2563eb">√(a²) = |a|　=　点 a 到原点 0 的距离</text>
+<line x1="20" y1="90" x2="500" y2="90" stroke="#94a3b8" stroke-width="2"/>
+<g stroke="#94a3b8" stroke-width="2">
+<line x1="80" y1="86" x2="80" y2="94"/><line x1="140" y1="86" x2="140" y2="94"/><line x1="200" y1="86" x2="200" y2="94"/><line x1="260" y1="86" x2="260" y2="94"/><line x1="320" y1="86" x2="320" y2="94"/><line x1="380" y1="86" x2="380" y2="94"/><line x1="440" y1="86" x2="440" y2="94"/>
+</g>
+<g fill="#334155" font-size="13" text-anchor="middle">
+<text x="80" y="112">−3</text><text x="140" y="112">−2</text><text x="200" y="112">−1</text><text x="260" y="112">0</text><text x="320" y="112">1</text><text x="380" y="112">2</text><text x="440" y="112">3</text>
+</g>
+<line x1="260" y1="90" x2="440" y2="90" stroke="#16a34a" stroke-width="3.5">
+<animate attributeName="x2" values="440;260;80;260;440" dur="8s" repeatCount="indefinite"/>
+</line>
+<text x="350" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">|a|<animate attributeName="x" values="350;260;170;260;350" dur="8s" repeatCount="indefinite"/></text>
+<circle cx="440" cy="90" r="6.5" fill="#2563eb">
+<animate attributeName="cx" values="440;260;80;260;440" dur="8s" repeatCount="indefinite"/>
+</circle>
+<g text-anchor="middle" font-size="14">
+<text x="260" y="46" fill="#0f172a">a = +3　→　√(a²) = |a| = 3<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.125;0.875;1" dur="8s" repeatCount="indefinite"/></text>
+<text x="260" y="46" fill="#0f172a" opacity="0">a = 0　→　√(a²) = |a| = 0<animate attributeName="opacity" values="0;1;0;0;1;0" keyTimes="0;0.125;0.375;0.625;0.875;1" dur="8s" repeatCount="indefinite"/></text>
+<text x="260" y="46" fill="#0f172a" opacity="0">a = −3　→　√(a²) = |a| = 3<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.375;0.625;1" dur="8s" repeatCount="indefinite"/></text>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：√(a²) = |a| 是「点 a 到原点 0 的距离」——a 从 +3 滑到 −3，绿色距离始终非负，取的是 |a|</figcaption>
+</figure>
+<pre><code>            ┌  a    (a &gt; 0)
+ √(a²) = |a| ├  0    (a = 0)
+            └ −a    (a &lt; 0)</code></pre>
+<ul>
+<li>√(3²) = |3| = 3；√((−3)²) = |−3| = 3；√(0²) = 0。</li>
+<li><strong>关键</strong>：a 本身可能是负数，但 √(a²) 先算平方 a²（≥ 0），再开方得到的是<strong>非负</strong>的结果，所以必须取 |a|，不能直接写成 a。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>√(a²) = |a| 就是「<strong>数轴上点 a 到原点 0 的距离</strong>」。无论 a 在原点右边（正）还是左边（负），距离都是正的 |a|。例：√((−3)²) = 3，正是「−3 这个点到原点的距离为 3」。</div>
+<div class="insight"><strong>物理含义：</strong>|a| 就是「<strong>去掉方向、只留大小</strong>」。速度是 −3 m/s（向西），速率是 |−3| = 3 m/s；位移是 −5 m，路程（长度）是 5 m。√(a²) = |a| 是「把带方向的量变成大小」的标准动作。</div>
+<h3>性质三：积与商的算术平方根（为乘除打基础）</h3>
+<pre><code>√(ab) = √a · √b   （a ≥ 0，b ≥ 0）
+√(a/b) = √a / √b  （a ≥ 0，b &gt; 0）</code></pre>
+<p>这两条说明「根号可以拆进乘积和分数里」，下一节乘除运算就是反复使用它们。</p>
+
+<h2 id="s3">16.3 最简二次根式</h2>
+<h3>什么叫「最简」</h3>
+<p>一个二次根式，若同时满足下面两条，就叫<strong>最简二次根式</strong>：</p>
+<ol>
+<li><strong>被开方数不含分母</strong>（根号里没有分数）；</li>
+<li><strong>被开方数中不含能开得尽方的因数或因式</strong>（根号里没有「平方因子」）。</li>
+</ol>
+<table>
+<tr><th>根式</th><th>是否最简</th><th>原因</th></tr>
+<tr><td>√7</td><td>✅ 最简</td><td>7 是质数，无平方因子，无分母</td></tr>
+<tr><td>√12</td><td>❌ 不是</td><td>12 = 4×3，含能开尽方的因数 4</td></tr>
+<tr><td>√(1/2)</td><td>❌ 不是</td><td>被开方数是分数，含分母</td></tr>
+<tr><td>√(a²b)</td><td>❌ 不是</td><td>含能开尽方的因式 a²</td></tr>
+<tr><td>2√3</td><td>✅ 最简</td><td>√3 内无平方因子，且无分母</td></tr>
+</table>
+<h3>化简方法：把「平方因子」请出根号</h3>
+<pre><code>√(a²b) = a√b   （a ≥ 0，b ≥ 0）
+
+√12 = √(4×3) = √4 × √3 = 2√3
+√18 = √(9×2) = 3√2
+√50 = √(25×2) = 5√2
+√(1/2) = √2/√4 = √2/2   （分母有理化）</code></pre>
+<div class="insight"><strong>几何含义：</strong>化简 = 把边长换算成「<strong>以某个不可再拆的 √n 为最小尺子</strong>」来量。√12 = 2√3 意思是：面积为 12 的正方形，其边长等于「2 个 √3 单位」的长度，而不是一个孤零零的 √12。√3 是这里的「基本尺子」，2 是「尺子用了多少次」。</div>
+<div class="insight"><strong>物理含义：</strong>化简 = 统一「<strong>单位</strong>」。就像 2500 m 要写成 2.5 km、50 cm 要写成 0.5 m 一样，√50 要写成 5√2，把「根号里的平方因子」提出来当作倍数，剩下 √2 作为不可再约的「基本单位」。统一单位之后才能比较大小、做加减。</div>
+
+<h2 id="s4">16.4 二次根式的乘除</h2>
+<h3>乘法：√a · √b = √(ab)（a ≥ 0，b ≥ 0）</h3>
+<pre><code>√a · √b = √(ab)   （反过来：√(ab) = √a · √b）
+
+√2 × √3 = √6
+√2 × √8 = √16 = 4
+2√3 × 3√2 = (2×3) × (√3 × √2) = 6√6</code></pre>
+<div class="insight"><strong>几何含义：</strong>乘法是「<strong>两个正方形边长相乘，得到更大正方形的边长</strong>」。√2 × √3 = √6，就是「面积 2 的正方形边长」×「面积 3 的正方形边长」=「面积 6 的正方形边长」。因为 (√2 × √3)² = (√2)²(√3)² = 2×3 = 6，所以这个积正是面积为 6 的正方形的边长。</div>
+<div class="insight"><strong>物理含义：</strong>乘法对应「<strong>比例缩放</strong>」。把正方形的面积放大 k 倍，边长放大 √k 倍。例：面积从 2 变成 8（放大 4 倍），边长从 √2 变成 √8 = 2√2（放大 √4 = 2 倍）。这就是「面积按 k 倍缩放 → 线度按 √k 倍缩放」的物理规律。</div>
+<h3>除法：√a / √b = √(a/b)（a ≥ 0，b &gt; 0）</h3>
+<pre><code>√a / √b = √(a/b)   （反过来：√(a/b) = √a / √b）
+
+√18 ÷ √2 = √(18/2) = √9 = 3
+√6 ÷ √2 = √3
+2√6 ÷ √2 = 2√3</code></pre>
+<div class="insight"><strong>几何含义：</strong>除法是「<strong>两条边长之比</strong>」。√6 ÷ √2 = √3，就是「面积 6 的正方形边长」除以「面积 2 的正方形边长」= √(6/2) = √3，等价于问「边长放大几倍，面积从 2 变成 6」。</div>
+<h3>分母有理化：把根号从分母赶走</h3>
+<p>分母含根式时，分子分母同乘一个<strong>有理化因式</strong>，使分母变成有理数：</p>
+<pre><code>1/√2   = 1×√2 / (√2 × √2) = √2/2
+3/√5   = 3√5/5
+1/(√3 + 1) = 1×(√3 − 1) / ((√3+1)(√3−1)) = (√3 − 1)/2</code></pre>
+<div class="insight"><strong>几何/物理含义：</strong>分母有理化 = 把「<strong>分数单位</strong>」换成整数。1/√2 和 √2/2 是同一个数（都约 0.707），但 √2/2 表示「把 √2 这个长度二等分」，更容易和别的长度相加、比较。它的本质是「长度之比」的标准化写法。</div>
+
+<h2 id="s5">16.5 二次根式的加减</h2>
+<h3>同类二次根式</h3>
+<p><strong>化简后，被开方数相同的二次根式</strong>，叫做<strong>同类二次根式</strong>。例：√8 与 √2 表面不同，但 √8 = 2√2，与 √2 是同类。</p>
+<h3>加减法则：先化简，再合并同类二次根式</h3>
+<pre><code>√8 + √18 = 2√2 + 3√2 = (2+3)√2 = 5√2
+√27 − √12 = 3√3 − 2√3 = √3
+2√3 + 5√3 − √3 = 6√3</code></pre>
+<p><strong>核心要点</strong>：</p>
+<ul>
+<li>只有<strong>同类二次根式</strong>才能合并（像合并同类项一样，只把系数相加减，根式部分不变）。</li>
+<li>√2 + √3 <strong>不能合并</strong>（被开方数不同，就像「2 厘米 + 3 米」不能直接相加一样）。</li>
+<li>遇到不是最简的根式，<strong>一定要先化简</strong>再判断能否合并。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>加减 = 用「<strong>同一把 √n 尺子</strong>」拼接长度。2√2 + 3√2 = 5√2，就是「2 段 √2 长的线」接上「3 段 √2 长的线」，总共 5 段 √2。而 √2 + √3 之所以不能合并，是因为它们是两把<strong>不同的尺子</strong>，拼起来只能写作 √2 + √3，无法合成一个整数倍的 √n。</div>
+<div class="insight"><strong>物理含义：</strong>加减 = 「<strong>同类量（同单位）才能相加减</strong>」。2√2 和 3√2 具有相同的「单位」√2，可以直接相加；√2 和 √3 单位不同，必须保持分开写。这就像 2 米 + 3 米 = 5 米，但 2 米 + 3 秒无法相加。</div>
+<hr/>
+<p><strong>全章运算顺序小结</strong>：先乘除（含分母有理化）→ 再加减 → 结果必须化为<strong>最简二次根式</strong>。乘法把根号内相乘、除法把根号内相除并有理化分母、加减只合并「同类（同被开方数）」。</p>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>二次根式 √a</td><td>面积为 a 的正方形的边长</td><td>非负的「大小」量（长度、距离、速率）</td></tr>
+<tr><td>(√a)² = a</td><td>边长 √a 的正方形，面积回到 a</td><td>开方后平方，还原原量</td></tr>
+<tr><td>√(a²) = |a|</td><td>数轴上点 a 到原点的距离</td><td>去掉方向后的速率 / 大小（速度 −3 m/s → 速率 3 m/s）</td></tr>
+<tr><td>最简二次根式</td><td>把边长写成「整数个 √n」的最简尺子</td><td>统一单位，便于比较与运算</td></tr>
+<tr><td>乘法 √a·√b=√(ab)</td><td>两边长相乘 → 更大正方形的边长</td><td>面积放大 k 倍 → 边长放大 √k 倍</td></tr>
+<tr><td>除法 √a/√b=√(a/b)</td><td>两条边长之比</td><td>比例、比值</td></tr>
+<tr><td>分母有理化</td><td>把长度之比写成整数分母的标准形</td><td>把「分数单位」换算成整数倍</td></tr>
+<tr><td>加减（合并同类）</td><td>同一把 √n 尺子的长度拼接</td><td>同类量（同单位）才能相加减</td></tr>
+<tr><td>√2</td><td>边长为 1 的正方形的对角线长</td><td>等腰直角三角形的斜边（勾股定理）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<h4>请先独立完成，再对照本章规则检验</h4>
+<ol>
+<li>当 x 取何值时，下列根式有意义：√(x−3)、√(2x+4)、1/√(x−1)？</li>
+<li>化简为最简二次根式：√50、√18、√(1/3)、√(a²b)（a ≥ 0，b ≥ 0）、√27。</li>
+<li>计算：(√3)²、√((−5)²)、√12 × √3、√18 ÷ √2、2√3 × 3√2。</li>
+<li>计算：√8 + √18、√27 − √12、2√3 + 5√3 − √3、√2 + √3（能否合并？）。</li>
+<li>分母有理化：1/√2、3/√5、1/(√3 + 1)、2/(√5 − 1)。</li>
+<li>比较大小：√5 与 2、√7 与 √5、√12 与 3。</li>
+<li>一块正方形菜地面积为 18 m²，求它的边长（用最简二次根式表示）；若把面积扩大 2 倍，新边长是多少？</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<h4>这些错误是本章失分重灾区</h4>
+<ul>
+<li>❌ 「√(a²) = a」 → ❌ 应为 <code>√(a²) = |a|</code>。例：√((−3)²) = 3，而不是 −3。</li>
+<li>❌ 「√a + √b = √(a+b)」 → ❌ 根号不能这样合并。例：√4 + √9 = 2 + 3 = 5，而 √(4+9) = √13 ≈ 3.6，两者不等。</li>
+<li>❌ 「√a × √b = √(a+b)」 → ❌ 乘法应把根号内<strong>相乘</strong>：√2 × √3 = √6，不是 √5。</li>
+<li>❌ 被开方数写成负数 → ❌ √(−4) 在实数范围内没有意义，二次根式要求 a ≥ 0。</li>
+<li>❌ 加减前不先化简 → ❌ √8 + √2 先化成 2√2 + √2 = 3√2，不能直接写成 √10。</li>
+<li>❌ 把非同类根式合并 → ❌ √2 与 √3 被开方数不同，不能合并，√2 + √3 已是最简结果。</li>
+<li>❌ 分母有理化后仍留根号在分母 → ❌ 1/√2 应写 √2/2，而不是 1×√2/2×√2 这种半成品。</li>
+<li>❌ 把「最简」理解为「根号里越小越好」 → ❌ 最简 = 无分母 + 无平方因子，√12 必须写成 2√3，不能停在 √12。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>当 x 取何值时，<code>√(x−3)</code> 有意义？请结合「面积为 a 的正方形的边长」这一几何含义，说明为什么被开方数必须是非负数。</li>
+<li>计算 <code>√((−9)²)</code> 的值，解释为什么它不是 −9；再计算 <code>(√9)²</code>，说说这两条性质（√(a²) 与 (√a)²）的区别。</li>
+<li>一块正方形菜地的面积是 18 m²，用最简二次根式表示它的边长；并说明 <code>√18 = 3√2</code> 的几何含义。</li>
+<li>把一块面积 2 m² 的正方形放大成面积 8 m²，边长变为原来的几倍？请用二次根式说明「面积放大 k 倍、边长放大 √k 倍」这条规律。</li>
+<li>计算 <code>√8 + √18</code>，并解释为什么必须先化简成 <code>2√2 + 3√2</code> 才能相加（用「同一把尺子」来说明）。</li>
+<li>用勾股定理说明 <code>√2</code> 是边长为 1 的正方形的对角线长；再说明 <code>√2 + √2 = 2√2</code> 表示什么样的几何量。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>由被开方数 x−3 ≥ 0，得 x ≥ 3。几何上，√a 是「面积为 a 的正方形的边长」，边长只能是正的长度（或 0），而面积也不可能为负——不存在「面积为负」的正方形，所以被开方数必须 ≥ 0，√a 才有意义。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>√((−9)²) = |−9| = 9</code>。因为 a = −9 是负数，√(a²) = |a|：先平方得 81，再取算术平方根只能取非负的 9，不能取 −9。而 <code>(√9)² = 9</code> 是「先开方、后平方」互相抵消，直接回到 a = 9（此时 a 本身 ≥ 0）。区别：√(a²) 的结果是 |a|（去掉符号后的距离/大小），(√a)² 的结果是 a（前提 a ≥ 0）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>边长 = <code>√18 = √(9×2) = 3√2</code>（米）。几何含义：√18 是面积为 18 的正方形的边长，把它换算成「以 √2 为最小尺子」来量，正好是 3 段 √2 的长度——√2 是不可再拆的基本尺子，3 是尺子用了多少次。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>原边长 = √2，新边长 = √8 = 2√2，所以边长变为原来的 2 倍。因为面积从 2 变成 8，放大了 8÷2 = 4 倍，边长就放大 √4 = 2 倍，即 <code>√8 ÷ √2 = √(8/2) = √4 = 2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>√8 + √18 = 2√2 + 3√2 = (2+3)√2 = 5√2</code>。√8 和 √18 表面被开方数不同，但化简后都是 √2 的整数倍——它们共用「同一把 √2 尺子」。于是 2 段 √2 接上 3 段 √2，总共 5 段 √2。不化简就看不出它们是同类（同一把尺子），也就无法合并。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>边长为 1 的正方形，其对角线 c 满足 <code>c² = 1² + 1² = 2</code>，取正的算术平方根得 <code>c = √2</code>。而 <code>√2 + √2 = 2√2</code> 表示「两条 √2 长的线段首尾拼接」——也就是把这条对角线长度接成原来的 2 倍（2 段 √2 尺子的拼接）。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../../八年级上册/第15章-分式/第15章-分式.html">← 上一章：第15章 分式</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第17章-勾股定理/第17章-勾股定理.html">下一章：第17章 勾股定理 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

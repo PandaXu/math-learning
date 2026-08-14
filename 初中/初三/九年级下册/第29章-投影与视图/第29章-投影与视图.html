@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第29章 投影与视图 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第29章 投影与视图</div></header>
+<main class="container">
+<h1>第29章 投影与视图</h1>
+<p class="lead">初中 / 初三 / 九年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>投影与三视图 = 「把三维物体"拍"到二维平面上」。用光线照射物体得到影子，是<strong>投影</strong>；从正面、上面、左面三个互相垂直的方向各"拍"一次，就得到<strong>三视图</strong>。学完本章，你要能在脑子里完成"实物 ↔ 平面图"的双向转换：看见立体图形能画出它的三视图，看见三视图能还原出立体图形。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">29.1 投影：投影线、投影面、投影</a><a href="#s2">29.2 平行投影与中心投影</a><a href="#s3">29.3 正投影</a><a href="#s4">29.4 三视图及其位置关系</a><a href="#s5">29.5 长对正、高平齐、宽相等</a><a href="#s6">29.6 由三视图还原几何体</a><a href="#s7">29.7 由三视图求表面积与体积</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+</div>
+
+<h2 id="s1">29.1 投影：投影线、投影面、投影</h2>
+<p><strong>投影的定义</strong>：一般地，用光线照射物体，在某个平面（地面、墙壁等）上得到的影子，叫做物体的<strong>投影</strong>。</p>
+<ul>
+<li><strong>投影线</strong>：照射物体的光线。</li>
+<li><strong>投影面</strong>：投影所在的平面（影子落在的那个平面）。</li>
+</ul>
+<p>例如：阳光下大树的影子落在<strong>地面上</strong>，树是物体，太阳光线是<strong>投影线</strong>，地面是<strong>投影面</strong>；路灯下人的影子落在<strong>马路上</strong>，灯光是投影线，马路是投影面；皮影戏里，灯光把纸人投到<strong>幕布</strong>上。</p>
+<div class="insight"><strong>几何含义：</strong>投影是把空间物体沿投影线方向"压扁"到投影面上的过程——三维的物体，变成二维平面上的一片影子。投影线决定"看的方向"，投影面决定"落在哪里"，影子的形状就是物体沿这个方向被压缩后的轮廓。</div>
+<div class="insight"><strong>物理含义：</strong>光是沿直线传播的。物体挡住了光，被挡住的地方就照不到光，于是形成影子。所以"投影"本质上是<strong>光的直线传播 + 物体遮挡</strong>：影子是"光到不了的地方"。</div>
+<p>根据投影线的不同，投影分为两大类：</p>
+<pre><code>          ┌─ 平行投影（投影线互相平行，如太阳光）
+  投影 ──┤
+          └─ 中心投影（投影线从同一点发出，如灯光）</code></pre>
+
+<h2 id="s2">29.2 平行投影与中心投影</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="500" y1="30" x2="500" y2="250" stroke="#94a3b8" stroke-width="3"/><text x="500" y="22" font-size="13" fill="#334155" text-anchor="middle">屏幕</text><polygon points="40,140 500,68 500,212" fill="#fbbf24" opacity="0.15"><animate attributeName="points" values="40,140 500,68 500,212;40,140 500,96 500,184;40,140 500,108 500,172;40,140 500,96 500,184;40,140 500,68 500,212" dur="8s" repeatCount="indefinite"/></polygon><circle cx="40" cy="140" r="16" fill="#f59e0b" opacity="0.25"><animate attributeName="r" values="16;22;16" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.25;0.1;0.25" dur="2s" repeatCount="indefinite"/></circle><circle cx="40" cy="140" r="7" fill="#f59e0b"><animate attributeName="r" values="7;10;7" dur="2s" repeatCount="indefinite"/></circle><text x="40" y="116" font-size="13" fill="#b45309" text-anchor="middle">点光源</text><line x1="40" y1="140" x2="500" y2="68" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/></line><line x1="40" y1="140" x2="500" y2="212" stroke="#f59e0b" stroke-width="1.5"><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line><rect x="193" y="115" width="14" height="50" rx="3" fill="#2563eb"><animate attributeName="x" values="193;293;393;293;193" dur="8s" repeatCount="indefinite"/></rect><text x="200" y="102" font-size="12" fill="#2563eb" text-anchor="middle">物体<animate attributeName="x" values="200;300;400;300;200" dur="8s" repeatCount="indefinite"/></text><line x1="500" y1="68" x2="500" y2="212" stroke="#16a34a" stroke-width="5" stroke-linecap="round"><animate attributeName="y1" values="68;96;108;96;68" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="212;184;172;184;212" dur="8s" repeatCount="indefinite"/></line></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图 1：中心投影（灯光）——物体离点光源越近，屏幕上的影子越大（近大远小），本质是光的直线传播</figcaption></figure>
+<h3>平行投影</h3>
+<p>由<strong>平行光线</strong>形成的投影叫做<strong>平行投影</strong>。太阳光离我们极远，可以近似看成平行光，所以<strong>太阳光下的投影是平行投影</strong>。</p>
+<ul>
+<li>同一时刻，两个物体的高度与它们的影长成<strong>正比</strong>（影长 ∝ 高度）。这是"利用影子测高度"的根据。</li>
+<li>平行光线下的投影保持"平行性"：物体上互相平行的线段，它们的投影仍然互相平行（或重合）。</li>
+</ul>
+<h3>中心投影</h3>
+<p>由<strong>同一点（点光源）</strong>发出的光线形成的投影叫做<strong>中心投影</strong>。灯光（灯泡、蜡烛、手电筒）下的投影是中心投影。</p>
+<ul>
+<li>物体离光源越近，影子越大；离光源越远，影子越小。</li>
+<li>物体与投影面平行时，中心投影把图形<strong>放大</strong>（物体与其投影是<strong>位似</strong>关系，即相似）。</li>
+</ul>
+<h3>平行投影与中心投影的对比</h3>
+<table>
+<tr><th>对比项</th><th>平行投影</th><th>中心投影</th></tr>
+<tr><td>投影线</td><td>互相平行</td><td>从同一点（光源）发出，呈放射状</td></tr>
+<tr><td>典型光源</td><td>太阳光（近似平行光）</td><td>电灯、蜡烛、手电筒</td></tr>
+<tr><td>影子变化</td><td>与物体大小无关（同一时刻影长∝物高）</td><td>离光源越近影子越大</td></tr>
+<tr><td>图形关系</td><td>保持平行性</td><td>物体与平行投影面的影子是位似（相似）图形</td></tr>
+</table>
+<p><strong>区分口诀</strong>：看光线——"太阳"平行、"灯光"放射；看影子——"太阳"影长按比例、"灯光"近大远小。</p>
+<div class="insight"><strong>几何含义：</strong>平行投影是沿"同一个固定方向"把物体拍平，是一种保持平行的线性变换；中心投影是从"一个点"出发的透视变换，属于<strong>位似（相似）变换</strong>，会把远处的东西"缩"、近处的东西"放"。</div>
+<div class="insight"><strong>物理含义：</strong>太阳离地球约 1.5×10⁸ km，光线到达地球时几乎平行，所以影子长短只与太阳高度角（时刻）有关；而灯泡是个"点"，光线向四面八方发散，所以离灯越近影子越大——这就是晚上人走到路灯下影子变短、走远影子变长的原因。</div>
+<h3>正投影与斜投影</h3>
+<p>在<strong>平行投影</strong>中，按投影线与投影面的夹角再细分：</p>
+<ul>
+<li><strong>正投影</strong>：投影线<strong>垂直于</strong>投影面。</li>
+<li><strong>斜投影</strong>：投影线<strong>倾斜于</strong>投影面（不垂直）。</li>
+</ul>
+<p>正投影能"忠实"地反映图形某方向的真实大小，所以工程制图（三视图）用的都是正投影。下一节专门研究它。</p>
+
+<h2 id="s3">29.3 正投影</h2>
+<p><strong>正投影</strong>：投影线垂直于投影面所产生的投影。</p>
+<h3>线段的正投影</h3>
+<table>
+<tr><th>线段与投影面的位置</th><th>正投影</th></tr>
+<tr><td>平行于投影面</td><td>投影等于线段本身（<strong>长度不变</strong>）</td></tr>
+<tr><td>倾斜于投影面</td><td>投影比线段<strong>短</strong></td></tr>
+<tr><td>垂直于投影面</td><td>投影为<strong>一个点</strong></td></tr>
+</table>
+<h3>平面图形的正投影</h3>
+<table>
+<tr><th>图形与投影面的位置</th><th>正投影</th></tr>
+<tr><td>图形所在平面平行于投影面</td><td>投影与原图形<strong>全等</strong>（形状、大小都不变）</td></tr>
+<tr><td>图形所在平面倾斜于投影面</td><td>投影<strong>形状改变</strong>（如圆倾斜投影成椭圆，正方形倾斜投影成长方形）</td></tr>
+<tr><td>图形所在平面垂直于投影面</td><td>投影成<strong>一条线段</strong></td></tr>
+</table>
+<h3>几何体的正投影</h3>
+<p>把几何体放在投影面正前方，用垂直于投影面的光线照射，得到的正投影就是"正对着看"所看到的形状：</p>
+<ul>
+<li>正方体正对投影面 → 投影是<strong>正方形</strong>；</li>
+<li>圆柱竖放、从正面看 → 投影是<strong>矩形</strong>（宽 = 底面直径，高 = 圆柱高）；</li>
+<li>圆锥竖放、从正面看 → 投影是<strong>等腰三角形</strong>（底 = 底面直径，高 = 圆锥高）；</li>
+<li>球从任何方向看 → 投影都是<strong>圆</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>正投影是"最诚实"的投影——凡<strong>平行于投影面</strong>的线段和图形，投影后长度、形状、大小都不变（保真）。因此用正投影画出的图能直接量出真实尺寸，这是它能成为"图纸语言"的根本原因。</div>
+<div class="insight"><strong>物理含义：</strong>正投影相当于"正对着物体、视线垂直于屏幕地看"。日常拍照时镜头正对物体，得到的照片就是近似的正投影；工程上为了保证图纸上尺寸真实、不变形，统一采用正投影。</div>
+
+<h2 id="s4">29.4 三视图及其位置关系</h2>
+<p>只看一个方向的正投影，无法确定一个立体图形（例如一个圆柱和一个长方体，从某个方向看可能都是矩形）。所以工程上规定：从<strong>正面、上面、左面</strong>三个互相垂直的方向同时观察，用三张正投影图共同确定一个物体，这就是<strong>三视图</strong>。</p>
+<ul>
+<li><strong>主视图</strong>：从正面看到的图形（在<strong>正面</strong>的正投影），反映物体的<strong>长和高</strong>。</li>
+<li><strong>俯视图</strong>：从上面（正上方）看到的图形（在<strong>水平面</strong>的正投影），反映物体的<strong>长和宽</strong>。</li>
+<li><strong>左视图</strong>：从左面看到的图形（在<strong>侧面</strong>的正投影），反映物体的<strong>高和宽</strong>。</li>
+</ul>
+<p>画三视图时，三个视图有<strong>固定位置</strong>（国标规定）：</p>
+<pre><code>        主视图          左视图
+       (长 × 高)       (宽 × 高)
+       ┌────────┐      ┌──────┐
+       │        │      │      │
+       └────────┘      └──────┘
+
+        俯视图
+       (长 × 宽)
+       ┌────────┐
+       │        │
+       └────────┘</code></pre>
+<ul>
+<li>主视图在<strong>左上角</strong>；</li>
+<li>俯视图在主视图的<strong>正下方</strong>；</li>
+<li>左视图在主视图的<strong>正右方</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>三个投影面两两垂直（正面、水平面、侧面），三视图就是物体分别在这三个垂直平面上的正投影展开图。用"三个方向各拍一张平面照片"来代替三维实物，这就是<strong>用二维表示三维</strong>的核心方法。</div>
+<div class="insight"><strong>物理含义：</strong>三视图是<strong>工程图纸的标准语言</strong>——工厂里工人不看实物，只看图纸（主视图、俯视图、左视图）就能知道零件长什么样、多大尺寸，从而把零件加工出来。建筑、机械、产品设计都靠三视图交流。</div>
+
+<h2 id="s5">29.5 长对正、高平齐、宽相等</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="110" y="40" width="140" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="110" y="190" width="140" height="60" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><rect x="290" y="40" width="60" height="110" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2"/><text x="180" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">主视图</text><text x="180" y="116" text-anchor="middle" font-size="11" fill="#334155">长 L × 高 H</text><text x="180" y="226" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">俯视图</text><text x="180" y="243" text-anchor="middle" font-size="11" fill="#334155">长 L × 宽 D</text><text x="320" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">左视图</text><text x="320" y="116" text-anchor="middle" font-size="11" fill="#334155">宽 D × 高 H</text><g stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4"><line x1="110" y1="152" x2="110" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="250" y1="152" x2="250" y2="188"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="40" x2="288" y2="40"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><line x1="252" y1="150" x2="288" y2="150"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line></g><line x1="350" y1="190" x2="290" y2="250" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-18" dur="1.2s" repeatCount="indefinite"/></line><circle r="4" fill="#2563eb"><animate attributeName="cx" values="250;250;250" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="152;188;152" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#2563eb"><animate attributeName="cx" values="252;288;252" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="350;290;350" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="190;250;190" dur="4s" repeatCount="indefinite"/></circle><text x="258" y="176" font-size="11" fill="#2563eb">长对正</text><text x="270" y="30" font-size="11" fill="#2563eb">高平齐</text><text x="314" y="238" font-size="11" fill="#16a34a">宽相等</text><text x="260" y="296" font-size="12" fill="#334155" text-anchor="middle">蓝色虚线＝长对正（主↔俯）、高平齐（主↔左）；绿色虚线＝宽相等（俯↔左）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图 2：三视图「长对正、高平齐、宽相等」——主、俯、左三个正投影共享同一组长 L、高 H、宽 D，三张图拼起来唯一确定立体</figcaption></figure>
+<p>三个视图不是三张孤立的图，它们之间有三个相等关系，合称「<strong>长对正、高平齐、宽相等</strong>」：</p>
+<table>
+<tr><th>关系</th><th>哪两个视图</th><th>含义</th></tr>
+<tr><td>长对正</td><td>主视图 ↔ 俯视图</td><td>长度（左右方向尺寸）相等，且<strong>上下对齐</strong>（同一竖直线）</td></tr>
+<tr><td>高平齐</td><td>主视图 ↔ 左视图</td><td>高度（上下方向尺寸）相等，且<strong>左右对齐</strong>（同一水平线）</td></tr>
+<tr><td>宽相等</td><td>俯视图 ↔ 左视图</td><td>宽度（前后方向尺寸）相等</td></tr>
+</table>
+<p><strong>画三视图的步骤</strong>：</p>
+<ol>
+<li>先定主视图的位置，画出主视图；</li>
+<li>在主视图正下方画俯视图，长度与主视图对正；</li>
+<li>在主视图正右方画左视图，高度与主视图平齐，宽度与俯视图相等。</li>
+</ol>
+<p><strong>用线规则</strong>：看得见的轮廓线画<strong>实线</strong>，看不见（被挡住）的轮廓线画<strong>虚线</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>三视图共用同一组坐标轴——主视图和俯视图共享"长"，主视图和左视图共享"高"，俯视图和左视图共享"宽"。这保证三张图拼起来后能<strong>唯一确定</strong>空间立体，不多不少。</div>
+<div class="insight"><strong>物理含义：</strong>图纸上三个方向的尺寸必须一致，工人按图下料时才不会出错：如果长对不正、高不齐、宽不等，造出来的零件就会变形、装不上。这是制造行业"尺寸一致"的硬约束。</div>
+
+<h2 id="s6">29.6 由三视图还原几何体</h2>
+<p>由三视图还原几何体，是画三视图的<strong>逆过程</strong>：把三张平面图"拼"回一个立体图形。</p>
+<h3>还原的基本步骤</h3>
+<ol>
+<li><strong>看俯视图定"地基"</strong>：俯视图给出物体的底面形状（从上往下看占地什么样）。</li>
+<li><strong>看主视图定"高度和正面轮廓"</strong>：主视图给出物体正面长什么样、有多高。</li>
+<li><strong>看左视图定"宽度和侧面轮廓"</strong>：左视图给出物体侧面长什么样、有多宽。</li>
+<li><strong>三图综合</strong>：把底面、正面、侧面信息合在一起，想象出立体图形。</li>
+</ol>
+<h3>由三视图"一眼判断"几何体</h3>
+<table>
+<tr><th>三视图特征</th><th>几何体</th></tr>
+<tr><td>三个视图都是圆</td><td>球</td></tr>
+<tr><td>三个视图都是矩形（或正方形）</td><td>长方体（或正方体）</td></tr>
+<tr><td>主视图、左视图是矩形，俯视图是圆</td><td>圆柱</td></tr>
+<tr><td>主视图、左视图是等腰三角形，俯视图是圆（圆心一点为锥顶）</td><td>圆锥</td></tr>
+<tr><td>主视图、左视图是矩形，俯视图是三角形</td><td>三棱柱（底面水平放置）</td></tr>
+<tr><td>主视图、俯视图、左视图中都出现三角形</td><td>三棱锥等锥体</td></tr>
+</table>
+<h3>常见几何体的三视图</h3>
+<table>
+<tr><th>几何体</th><th>主视图</th><th>俯视图</th><th>左视图</th></tr>
+<tr><td>正方体</td><td>正方形</td><td>正方形</td><td>正方形</td></tr>
+<tr><td>长方体</td><td>矩形</td><td>矩形</td><td>矩形</td></tr>
+<tr><td>圆柱（竖放）</td><td>矩形</td><td>圆</td><td>矩形</td></tr>
+<tr><td>圆锥（竖放）</td><td>等腰三角形</td><td>圆（圆心一点）</td><td>等腰三角形</td></tr>
+<tr><td>球</td><td>圆</td><td>圆</td><td>圆</td></tr>
+<tr><td>三棱柱（底面水平）</td><td>矩形</td><td>三角形</td><td>矩形</td></tr>
+</table>
+<h3>用小正方体搭几何体：俯视图标数法</h3>
+<p>这是由三视图还原的高频题型：用若干个棱长为 1 的小正方体搭几何体，由三视图确定小正方体的个数。</p>
+<p><strong>方法</strong>：在<strong>俯视图</strong>的每个小方格中标出该位置小正方体的<strong>层数（个数）</strong>。</p>
+<ul>
+<li><strong>主视图</strong>告诉我们：每一"左右列"里最高的堆有几层（确定每列最大高度）。</li>
+<li><strong>左视图</strong>告诉我们：每一"前后行"里最高的堆有几层（确定每行最大高度）。</li>
+<li>结合俯视图，把每个格子的数字标出来，所有数字之和就是小正方体的总数；若只求"最少/最多"，就让某些位置取允许的最小/最大值。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>由三视图还原几何体是投影的<strong>逆问题</strong>——三张正投影图是从不同方向把立体"压扁"得到的，现在要把它们"撑"回三维。俯视图决定平面布局，主视图和左视图决定各处的"高度"，三者配合就还原出唯一的（或有限几种）空间形状。</div>
+<div class="insight"><strong>物理含义：</strong>这是"读图"能力：拿到一张工程图纸，在没有实物的条件下，在脑中把平面的三视图还原成立体的零件。制造、装配、装修识图都靠这个能力。</div>
+
+<h2 id="s7">29.7 由三视图求表面积与体积</h2>
+<p>先由三视图<strong>还原出几何体</strong>，再套用对应的表面积、体积公式。常见公式：</p>
+<pre><code>长方体：  V = a·b·c        （a、b、c 为长、宽、高）
+正方体：  V = a³          S表 = 6a²
+圆柱：    V = πr²h        S表 = 2πr² + 2πrh
+圆锥：    V = (1/3)πr²h   S侧 = πrl   （l 为母线长）
+球：      V = (4/3)πr³    S表 = 4πr²
+棱柱：    V = S底 × h
+棱锥：    V = (1/3)·S底 × h</code></pre>
+<p><strong>读数要点</strong>：三视图中的尺寸是"真实尺寸"。例如圆柱的俯视图（圆）直径就是底面直径 2r，主视图矩形的高就是圆柱的高 h，宽也等于 2r。</p>
+<div class="insight"><strong>几何含义：</strong>求表面积、体积是"可测量"的几何：三视图给出了立体在各方向上的真实尺寸，还原出几何体后，就可以像前面章节一样用公式计算它的面的大小（面积）和所占空间的大小（体积）。</div>
+<div class="insight"><strong>物理含义：</strong>这是几何与现实的桥梁——做水箱要知道容积（体积）装多少水，做铁皮桶要知道表面积买多少铁皮，这些实际问题都可以先由三视图还原几何体、再计算解决。</div>
+
+<h2 id="s8">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>投影</td><td>沿投影线把三维物体压缩到二维平面</td><td>光沿直线传播 + 物体遮挡形成影子</td></tr>
+<tr><td>投影线</td><td>决定"看的方向"的射线</td><td>光线的传播路径</td></tr>
+<tr><td>投影面</td><td>影子落到的平面</td><td>地面、墙壁、幕布、图纸</td></tr>
+<tr><td>平行投影</td><td>沿同一方向的线性压缩，保持平行性</td><td>太阳光（近似平行光），影长∝物高</td></tr>
+<tr><td>中心投影</td><td>从一点出发的透视（位似/相似）变换</td><td>点光源，近大远小</td></tr>
+<tr><td>正投影</td><td>垂直投影，平行于投影面的图形保真</td><td>正对着看，图纸上尺寸真实</td></tr>
+<tr><td>三视图</td><td>三个两两垂直方向的正投影，用二维定三维</td><td>工程制图的标准语言（正面、上面、左面看）</td></tr>
+<tr><td>长对正高平齐宽相等</td><td>三视图共享长、高、宽三组坐标</td><td>图纸尺寸一致，保证制造不出错</td></tr>
+<tr><td>由三视图还原几何体</td><td>投影的逆问题：平面图"撑"回立体</td><td>读图识图：看图纸在脑中还原实物</td></tr>
+<tr><td>求表面积与体积</td><td>还原后按公式测量面与体</td><td>算容积、算材料用量的桥梁</td></tr>
+</table>
+
+<h2 id="s9">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断下列投影的类型：①阳光下旗杆的影子；②路灯下人的影子；③皮影戏里纸人的影子。</li>
+<li>一个等腰三角形纸板，先使其平面平行于投影面，再使其平面垂直于投影面，分别求它的正投影。</li>
+<li>画出圆柱（竖放）和圆锥（竖放）的三视图。</li>
+<li>某几何体的三视图为：主视图是矩形（宽 6、高 4），俯视图是圆（直径 6），左视图是矩形（宽 6、高 4）。判断几何体，并求它的体积。</li>
+<li>用小正方体搭几何体，俯视图是 2×2 方格，标数如下（上方为后、下方为前）：<pre><code> 1  1   （后）
+ 2  1   （前）</code></pre>求：(1) 小正方体总数；(2) 主视图各列的高度。</li>
+</ol>
+<p><strong>参考答案提示</strong>：①平行投影、中心投影、中心投影；②全等的等腰三角形、一条线段；④圆柱，V = π·3²·4 = 36π；⑤总数 5，主视图从左到右两列高度为 2、1。</p>
+</div>
+
+<h2 id="s10">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "影子就是投影" → ❌ 影子只是投影的一种直观表现；<strong>投影</strong>是由投影线、投影面共同确定的图形，强调"光线照射 + 落点平面"。</li>
+<li>❌ "太阳光下的影子会近大远小" → ❌ 太阳光是平行投影，同一时刻影长与物高<strong>成正比</strong>；"近大远小"是<strong>中心投影</strong>（灯光）的特征。</li>
+<li>❌ "圆锥的俯视图是一个圆，没有别的" → ❌ 圆锥俯视图是圆，且<strong>圆心处有一点</strong>（锥顶的投影）；若不画这个点，就分不清是圆锥还是圆柱。</li>
+<li>❌ "圆柱和长方体从正面看都是矩形，所以三视图能判断出圆柱" → ❌ 单看一个方向分不清；必须<strong>三视图综合</strong>：俯视图是圆才是圆柱，是矩形才是长方体。</li>
+<li>❌ "画三视图时看不见的轮廓线可以不画" → ❌ 不可见轮廓线要画<strong>虚线</strong>，可见的才画实线；漏画虚线会让人误解图形。</li>
+<li>❌ "求体积直接拿三视图里的数相乘" → ❌ 先<strong>还原几何体</strong>，再按几何体选公式；三个视图中的数对应的是长、宽、高、直径等不同量，不能乱乘。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p style="margin:6px 0"><strong>一、练习题</strong></p>
+<ol>
+<li>判断下列投影分别属于平行投影还是中心投影，并指出各自的投影线和投影面：① 阳光下旗杆投在地面上的影子；② 路灯下行人投在马路上的影子；③ 皮影戏里灯光把纸人投在幕布上的影子。</li>
+<li>同一时刻，某同学身高 1.5 m，影长 1.2 m；旁边一棵大树影长 4.8 m。求树高，并说明这是利用了哪种投影的性质、为什么灯光下不能用同样的方法。</li>
+<li>一个圆形纸片，分别使其所在平面 ① 平行于投影面、② 倾斜于投影面、③ 垂直于投影面，各得到什么正投影？另外，一条垂直于投影面的线段，其正投影是什么？</li>
+<li>某几何体的三视图为：主视图是宽 6、高 4 的矩形，俯视图是直径 6 的圆，左视图是宽 6、高 4 的矩形。写出几何体名称，并说明俯视图圆的直径对应了主视图的哪个尺寸（体现「长对正、高平齐、宽相等」）。</li>
+<li>某几何体的主视图、左视图都是底为 6、高为 4 的等腰三角形，俯视图是直径 6 的圆（圆心处有一点）。判断几何体并求它的体积（用 π 表示）。</li>
+<li>用小正方体（棱长 1）搭几何体，俯视图是 2×2 方格（上方为后、下方为前），标数为：后行 1、1，前行 2、1。求：(1) 小正方体的总数；(2) 主视图从左到右两列的高度分别是多少？</li>
+</ol>
+<p style="margin:14px 0 6px"><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 平行投影（太阳光近似平行光），投影线是太阳光线，投影面是地面；② 中心投影（灯光从一点发出），投影线是灯光，投影面是马路；③ 中心投影（灯光从一点发出），投影线是灯光，投影面是幕布。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>设树高为 x。太阳光下是平行投影，同一时刻影长与物高成正比：1.5/1.2 = x/4.8，解得 x = 6 m。灯光是中心投影，物体离光源远近不同影子大小就不同（近大远小），影长不与物高成正比，不能按比例直接算。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① 正投影为与原圆全等的圆（形状、大小都不变）；② 正投影为椭圆（形状改变）；③ 正投影为一条线段（长度等于直径）。垂直于投影面的线段，其正投影为一个点。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>几何体是圆柱（竖放）。俯视图圆的直径 6 与主视图矩形的宽 6 相等，即「长对正」；主视图与左视图的高都是 4，即「高平齐」；俯视图与左视图的宽都反映底面直径 6，即「宽相等」。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>几何体是圆锥（俯视图圆心处有一点，是锥顶的投影，这是区分圆锥与圆柱的关键）。底面半径 r = 3，高 h = 4，V = (1/3)πr²h = (1/3)π×3²×4 = 12π。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(1) 总数 = 1+1+2+1 = 5 个；(2) 主视图从左到右每列取该列的最大高度：左列 max(1,2) = 2，右列 max(1,1) = 1，所以主视图两列高度为 2、1。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第28章-锐角三角函数/第28章-锐角三角函数.html">← 上一章：第28章 锐角三角函数</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../../../../高中/必修一/第1章-集合与常用逻辑用语/第1章-集合与常用逻辑用语.html">下一章：第1章 集合与常用逻辑用语 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

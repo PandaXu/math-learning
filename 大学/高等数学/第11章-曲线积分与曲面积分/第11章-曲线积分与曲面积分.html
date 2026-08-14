@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第11章 曲线积分与曲面积分 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第11章 曲线积分与曲面积分</div></header>
+<main class="container">
+<h1>第11章 曲线积分与曲面积分</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>把"分割—近似—求和—取极限"的积分思想从数轴、平面区域推广到<strong>弯曲的曲线</strong>和<strong>曲面</strong>上，于是得到曲线积分（沿曲线累加）与曲面积分（沿曲面累加），用来量化质量、功、环量、通量等物理量；而格林公式、高斯公式、斯托克斯公式则是三条"桥梁定理"，把<strong>边界上的积分</strong>与<strong>区域内部的积分</strong>联结起来，揭示"旋转（旋度）"与"源（散度）"这两个向量场的内在本质。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">11.1 对弧长的曲线积分（第一类）</a><a href="#s2">11.2 对坐标的曲线积分（第二类）</a><a href="#s3">11.3 格林公式</a><a href="#s4">11.4 曲面积分（第一类与第二类）</a><a href="#s5">11.5 高斯公式</a><a href="#s6">11.6 斯托克斯公式</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">11.1 对弧长的曲线积分（第一类曲线积分）</h2>
+<h3>从"曲线构件的质量"说起</h3>
+<p>一根弯曲的金属丝（空间曲线或平面曲线），如果线密度均匀，质量 = 密度 × 总弧长；但现实中线密度往往<strong>逐点变化</strong>——设线密度为 <code>ρ(x,y,z)</code>，怎么求总质量？这就是第一类曲线积分的动机。</p>
+<p><strong>基本思想（四步法）</strong>：把曲线 <code>L</code> 分割成 n 个小弧段 → 在第 i 段上任取一点，用 <code>ρ(该点) × 弧段长</code> 近似该段质量 → 求和 → 令最长弧段趋于 0 取极限。</p>
+<pre><code>∫_L f(x,y,z) ds = lim(λ→0) Σ f(ξᵢ,ηᵢ,ζᵢ) · Δsᵢ</code></pre>
+<p>其中 <code>ds</code> 是<strong>弧长元素</strong>（弧微分），<code>λ</code> 是最长弧段的长度。</p>
+<div class="insight"><strong>几何含义：</strong>① 当 <code>f = 1</code> 时，<code>∫_L ds</code> 就是曲线 <code>L</code> 的<strong>弧长</strong>；② 当 <code>f ≥ 0</code> 时，<code>∫_L f ds</code> 是以曲线 <code>L</code> 为准线、以 <code>f</code> 为"高"的<strong>柱面面积</strong>（想象一道沿曲线竖起的"栅栏"）；③ 更本质地说，它是"把曲线拉直、按弧长逐点加权累加"的过程。<strong>物理含义：</strong>线密度为 <code>ρ</code> 的曲线构件的<strong>质量</strong> <code>m = ∫_L ρ ds</code>；由此还能求质心 <code>x̄ = ∫_L xρ ds / m</code>、对轴与对原点的转动惯量等。</div>
+<h3>重要性质</h3>
+<ul>
+<li><strong>与方向无关</strong>：因为 <code>ds</code> 是弧长（恒正），所以 <code>∫_L f ds = ∫_{−L} f ds</code>（从 A 到 B 与从 B 到 A 结果相同）。这是第一类与第二类曲线积分<strong>最本质的区别</strong>。</li>
+<li><strong>线性性</strong>：<code>∫_L (af + bg) ds = a∫_L f ds + b∫_L g ds</code>。</li>
+<li><strong>对弧段可加</strong>：<code>L = L₁ + L₂</code> 时，<code>∫_L f ds = ∫_{L₁} f ds + ∫_{L₂} f ds</code>。</li>
+<li><strong>保序性</strong>：若 <code>f ≤ g</code>，则 <code>∫_L f ds ≤ ∫_L g ds</code>。</li>
+</ul>
+<h3>计算方法：化为定积分</h3>
+<p>核心是写出 <strong>弧微分 <code>ds</code></strong>，把曲线积分化为关于一个参数的定积分。</p>
+<p><strong>① 平面曲线参数式</strong> <code>L: x=x(t), y=y(t), α ≤ t ≤ β</code>：</p>
+<pre><code>ds = √( [x'(t)]² + [y'(t)]² ) dt
+∫_L f(x,y) ds = ∫_α^β f(x(t),y(t)) · √( [x'(t)]² + [y'(t)]² ) dt</code></pre>
+<p><strong>② 直角坐标</strong> <code>y = y(x), a ≤ x ≤ b</code>（视 x 为参数）：</p>
+<pre><code>ds = √( 1 + [y'(x)]² ) dx</code></pre>
+<p><strong>③ 极坐标</strong> <code>r = r(θ), θ₁ ≤ θ ≤ θ₂</code>：</p>
+<pre><code>ds = √( r² + [r'(θ)]² ) dθ</code></pre>
+<p><strong>④ 空间曲线</strong> <code>x=x(t), y=y(t), z=z(t), α ≤ t ≤ β</code>：</p>
+<pre><code>ds = √( [x'(t)]² + [y'(t)]² + [z'(t)]² ) dt</code></pre>
+<div class="insight"><strong>为什么 <code>ds = √(dx² + dy²)</code>？</strong>微元上，<code>ds</code> 是"斜边的长"，<code>dx、dy</code> 是两条直角边，由勾股定理 <code>ds² = dx² + dy²</code>。这是本章所有"弧微分"的几何根源，务必在脑中画出一个"微小的直角三角形"。</div>
+
+<h2 id="s2">11.2 对坐标的曲线积分（第二类曲线积分）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <defs>
+    <marker id="c11force" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"></path></marker>
+    <marker id="c11tan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"></path></marker>
+  </defs>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="3s" repeatCount="indefinite"></animateTransform>
+    <line x1="130" y1="142" x2="147" y2="125" stroke="#93c5fd" stroke-width="2" marker-end="url(#c11force)"></line>
+    <line x1="180" y1="103" x2="197" y2="86" stroke="#93c5fd" stroke-width="2" marker-end="url(#c11force)"></line>
+    <line x1="245" y1="85" x2="262" y2="68" stroke="#93c5fd" stroke-width="2" marker-end="url(#c11force)"></line>
+  </g>
+  <path id="c11curve" d="M 50 190 C 140 120, 200 60, 330 110" fill="none" stroke="#94a3b8" stroke-width="2.5"></path>
+  <g>
+    <animateMotion dur="6s" repeatCount="indefinite"><mpath href="#c11curve"></mpath></animateMotion>
+    <circle cx="0" cy="0" r="7" fill="#16a34a"></circle>
+    <line x1="0" y1="0" x2="12" y2="-12" stroke="#2563eb" stroke-width="2" marker-end="url(#c11force)"></line>
+  </g>
+  <line x1="400" y1="130" x2="490" y2="130" stroke="#94a3b8" stroke-width="1.5"></line>
+  <line x1="405" y1="130" x2="405" y2="80" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,3"></line>
+  <line x1="405" y1="80" x2="455" y2="80" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"></line>
+  <line x1="455" y1="80" x2="455" y2="130" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3"></line>
+  <line x1="405" y1="130" x2="455" y2="80" stroke="#2563eb" stroke-width="2.5" marker-end="url(#c11force)"></line>
+  <line x1="405" y1="130" x2="455" y2="130" stroke="#16a34a" stroke-width="3" marker-end="url(#c11tan)"></line>
+  <circle cx="405" cy="130" r="3" fill="#334155"></circle>
+  <text x="460" y="82" fill="#2563eb" font-size="13">F</text>
+  <text x="462" y="126" fill="#16a34a" font-size="12">F_t</text>
+  <text x="390" y="76" fill="#94a3b8" font-size="12">F_n</text>
+  <text x="399" y="147" fill="#6b7280" font-size="12">P</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：第二类曲线积分 W = ∫_L P dx + Q dy = ∫_L F·dr——变力 F 沿曲线推动质点，只有切向分量 F_t = F·T 沿位移方向做功，法向分量 F_n 不做功</figcaption>
+</figure>
+<h3>从"变力沿曲线做功"说起</h3>
+<p>一个质点受变力 <code>F(x,y) = (P(x,y), Q(x,y))</code> 作用，沿有向曲线 <code>L</code> 从 A 移动到 B，求力做的功。把曲线分成小段，在第 i 段上力近似不变、位移为 <code>drᵢ = (dxᵢ, dyᵢ)</code>，做功近似 <code>F·drᵢ = P dxᵢ + Q dyᵢ</code>，求和取极限得：</p>
+<pre><code>W = ∫_L P(x,y) dx + Q(x,y) dy = ∫_L (P dx + Q dy)</code></pre>
+<p>这是<strong>第二类曲线积分</strong>，也叫<strong>对坐标的曲线积分</strong>。向量形式写作 <code>∫_L F·dr</code>，其中 <code>dr = (dx, dy)</code> 是有向弧微元。</p>
+<div class="insight"><strong>几何含义：</strong>它是"被积函数与<strong>有向坐标增量</strong> <code>dx、dy</code> 的乘积"沿曲线的累加，本质是<strong>向量场沿曲线的"有向投影"积分</strong>。<strong>物理含义：</strong>变力 <code>F</code> 沿曲线 <code>L</code> 所做的<strong>功</strong>。推广到三维，<code>∫_L P dx + Q dy + R dz = ∫_L F·dr</code> 仍是"力 × 位移"的连续累加。</div>
+<h3>关键性质：与方向有关</h3>
+<pre><code>∫_{−L} P dx + Q dy = − ∫_L P dx + Q dy</code></pre>
+<p>反向积分<strong>变号</strong>——这是它区别于第一类的标志：<code>dx、dy</code> 是有向增量，反向走时它们同时变号。此外线性性、对弧段可加性同样成立。</p>
+<h3>计算方法：化为定积分（参数必须与方向对应）</h3>
+<p>设 <code>L: x=x(t), y=y(t)</code>，起点对应 <code>t=α</code>、终点对应 <code>t=β</code>（<strong>下限对应起点、上限对应终点</strong>）：</p>
+<pre><code>∫_L P dx + Q dy = ∫_α^β [ P(x(t),y(t))·x'(t) + Q(x(t),y(t))·y'(t) ] dt</code></pre>
+<p>三维情形同理，把 <code>dx、dy、dz</code> 分别换成 <code>x'(t)dt、y'(t)dt、z'(t)dt</code> 代入。</p>
+<h3>两类曲线积分的联系</h3>
+<p>记曲线在点处的<strong>单位切向量</strong>为 <code>T = (cosα, cosβ)</code>，则有 <code>dx = cosα·ds</code>、<code>dy = cosβ·ds</code>，于是：</p>
+<pre><code>∫_L P dx + Q dy = ∫_L (P cosα + Q cosβ) ds = ∫_L (F·T) ds</code></pre>
+<div class="insight"><strong>一句话统一：</strong>第二类曲线积分 = 把"向量场在<strong>切线方向</strong>上的投影分量"沿弧长累加。第一类是对<strong>标量</strong>沿弧长加权；第二类是对<strong>向量</strong>沿<strong>切向</strong>做点积后再沿弧长加权。二者通过 <code>cosα、cosβ</code>（切向方向余弦）互相转化。</div>
+
+<h2 id="s3">11.3 格林公式（Green）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <defs>
+    <marker id="c11blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#60a5fa"></path></marker>
+    <marker id="c11green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"></path></marker>
+  </defs>
+  <circle cx="260" cy="125" r="78" fill="#dbeafe" stroke="#2563eb" stroke-width="3"></circle>
+  <text x="196" y="132" fill="#1e3a8a" font-size="16" font-style="italic">D</text>
+  <line x1="300" y1="135" x2="300" y2="105" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#c11blue)"></line>
+  <line x1="280" y1="85" x2="250" y2="85" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#c11blue)"></line>
+  <line x1="220" y1="105" x2="220" y2="135" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#c11blue)"></line>
+  <line x1="250" y1="165" x2="270" y2="165" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#c11blue)"></line>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 260 125" to="-360 260 125" dur="4s" repeatCount="indefinite"></animateTransform>
+    <line x1="260" y1="125" x2="260" y2="97" stroke="#2563eb" stroke-width="2"></line>
+    <line x1="260" y1="125" x2="260" y2="153" stroke="#2563eb" stroke-width="2"></line>
+    <line x1="260" y1="125" x2="232" y2="125" stroke="#2563eb" stroke-width="2"></line>
+    <line x1="260" y1="125" x2="288" y2="125" stroke="#2563eb" stroke-width="2"></line>
+    <circle cx="260" cy="125" r="3" fill="#16a34a"></circle>
+  </g>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 260 125" to="-360 260 125" dur="9s" repeatCount="indefinite"></animateTransform>
+    <circle cx="338" cy="125" r="5" fill="#16a34a"></circle>
+    <line x1="338" y1="125" x2="338" y2="106" stroke="#16a34a" stroke-width="2.5" marker-end="url(#c11green)"></line>
+  </g>
+  <text x="344" y="52" fill="#334155" font-size="13">L（正向·逆时针）</text>
+  <text x="150" y="218" fill="#6b7280" font-size="13">沿边界环量 = 内部旋度之和</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：格林公式——沿闭曲线 L（逆时针正向）的一圈环量，等于区域 D 内部旋度（∂Q/∂x − ∂P/∂y）的面积总和；中心旋转的“桨轮”象征每一点的旋度</figcaption>
+</figure>
+<h3>定理内容</h3>
+<p>设平面闭区域 <code>D</code> 由分段光滑曲线 <code>L</code> 围成，<code>P、Q</code> 在 <code>D</code> 上有一阶连续偏导数，<code>L</code> 取<strong>正向</strong>，则：</p>
+<pre><code>∮_L P dx + Q dy = ∬_D ( ∂Q/∂x − ∂P/∂y ) dx dy</code></pre>
+<p><strong>正向</strong>：沿边界 <code>L</code> 行走时，区域 <code>D</code> 始终在<strong>左手边</strong>（对单连通区域即"逆时针"）。</p>
+<div class="insight"><strong>几何含义：</strong>它把<strong>沿闭曲线的一圈积分（线积分）</strong>转化为<strong>所围平面区域上的二重积分（面积分）</strong>——"绕边界一圈"的信息完全由"区域内部的分布"决定。<strong>物理含义：</strong><code>∂Q/∂x − ∂P/∂y</code> 正是二维向量场 <code>(P,Q)</code> 的<strong>旋度（rot，标量形式）</strong>；格林公式即"<strong>沿边界的环量 = 内部旋度的面积总和</strong>"，它是平面版的斯托克斯公式。</div>
+<h3>两大用途</h3>
+<p><strong>用途一：用曲线积分求平面图形面积。</strong>取适当的 P、Q 使 <code>∂Q/∂x − ∂P/∂y = 1</code>，例如：</p>
+<pre><code>A = ∮_L x dy = − ∮_L y dx = (1/2) ∮_L ( x dy − y dx )</code></pre>
+<p>于是椭圆的面积等可用"沿边界的线积分"求出。</p>
+<p><strong>用途二：把复杂的曲线积分化为较易的二重积分</strong>（或反向运用）。当闭曲线上的积分难算、而内部偏导差简单时，用格林公式降维或换域。</p>
+<h3>平面上曲线积分与路径无关的等价条件</h3>
+<p>设 <code>D</code> 是<strong>单连通</strong>区域，<code>P、Q</code> 在 <code>D</code> 上有连续偏导数，以下四条<strong>等价</strong>：</p>
+<ol>
+<li>沿 <code>D</code> 内任意闭曲线的积分 <code>∮_L P dx + Q dy = 0</code>。</li>
+<li>积分 <code>∫_L P dx + Q dy</code> <strong>与路径无关</strong>，只与起点、终点有关。</li>
+<li><code>∂P/∂y = ∂Q/∂x</code> 在 <code>D</code> 内恒成立。</li>
+<li>存在可微函数 <code>u(x,y)</code>，使 <code>du = P dx + Q dy</code>（即 <code>P dx + Q dy</code> 是某个函数的<strong>全微分</strong>，<code>∂u/∂x = P</code>、<code>∂u/∂y = Q</code>）。</li>
+</ol>
+<div class="insight"><strong>几何/物理含义：</strong><code>∂P/∂y = ∂Q/∂x</code> 意味着该向量场<strong>无旋（旋度为零）</strong>，是无旋场（保守场）——它一定来自某个<strong>势函数</strong>（<code>u</code>，即势能），"做功与路径无关，只取决于起终点的势能差"，这正是重力、静电力等保守力的特征。</div>
+<p><strong>求原函数 u(x,y)</strong>：先由 <code>∂u/∂x = P</code> 对 x 积分得 <code>u = ∫P dx + φ(y)</code>，再由 <code>∂u/∂y = Q</code> 定出 <code>φ(y)</code>；或沿折线 <code>(x₀,y₀)→(x,y₀)→(x,y)</code> 逐段积分。于是 <code>∫_{(A)}^{(B)} P dx + Q dy = u(B) − u(A)</code>（"积分 = 势函数增量"）。</p>
+
+<h2 id="s4">11.4 曲面积分（第一类与第二类）</h2>
+<h3>第一类曲面积分（对面积）</h3>
+<p>仿照第一类曲线积分，把"曲线 + 弧长"换成"曲面 + 面积"：</p>
+<pre><code>∫∫_Σ f(x,y,z) dS = lim(λ→0) Σ f(ξᵢ,ηᵢ,ζᵢ) · ΔSᵢ</code></pre>
+<div class="insight"><strong>几何含义：</strong>① 当 <code>f = 1</code> 时，<code>∫∫_Σ dS</code> 就是曲面 <code>Σ</code> 的<strong>面积</strong>；② 它是"按面积逐点加权累加"。<strong>物理含义：</strong>面密度为 <code>ρ(x,y,z)</code> 的曲面薄壳的<strong>质量</strong> <code>m = ∫∫_Σ ρ dS</code>；此外可求质心、转动惯量。</div>
+<p><strong>计算方法</strong>：把曲面投影到一个坐标面，写出<strong>面积元素 <code>dS</code></strong>。设 <code>Σ: z = z(x,y)</code>，在 <code>xOy</code> 面上的投影区域为 <code>D</code>：</p>
+<pre><code>dS = √( 1 + z_x² + z_y² ) dx dy
+∫∫_Σ f dS = ∫∫_D f(x,y,z(x,y)) · √( 1 + z_x² + z_y² ) dx dy</code></pre>
+<p>同理，向 <code>yOz</code> 或 <code>zOx</code> 面投影时，<code>dS</code> 分别带 <code>√(1 + x_y² + x_z²)</code>、<code>√(1 + y_x² + y_z²)</code>。第一类曲面积分<strong>与曲面的侧（方向）无关</strong>。</p>
+<div class="insight"><strong>为什么 <code>dS = √(1 + z_x² + z_y²) dxdy</code>？</strong>切平面上，<code>dS</code> 是"斜面积"，它在 <code>xOy</code> 面的投影是 <code>dxdy</code>，二者夹角余弦 <code>cosγ = 1/√(1+z_x²+z_y²)</code>（法向与 z 轴夹角的余弦），故 <code>dS = dxdy / cosγ</code>。斜面越陡，<code>cosγ</code> 越小，同样投影对应的真实面积越大。</div>
+<h3>第二类曲面积分（对坐标）</h3>
+<p>背景是求<strong>向量场的通量（流量）</strong>：流体以速度 <code>v = (P,Q,R)</code> 穿过<strong>有向曲面</strong> <code>Σ</code>，单位时间流量 = 把速度在<strong>法向</strong>上的分量沿面积累加：</p>
+<pre><code>∫∫_Σ P dy dz + Q dz dx + R dx dy = ∫∫_Σ (P cosα + Q cosβ + R cosγ) dS = ∫∫_Σ F · dS</code></pre>
+<p>其中 <code>dS = n dS</code> 是<strong>有向面积元素</strong>，<code>n = (cosα, cosβ, cosγ)</code> 是指定侧的单位法向量。</p>
+<div class="insight"><strong>几何含义：</strong>第二类曲面积分是"向量场在<strong>法向</strong>上的分量"沿曲面的累加——是<strong>有方向的</strong>：选定曲面的一侧为正，<code>n</code> 指向哪一侧，结果的正负就反映"穿越方向"。<strong>物理含义：</strong>它就是向量场（流速、电场、磁场）穿过曲面 <code>Σ</code> 的<strong>通量（流量）</strong>，单位时间穿过曲面的"物质或场线"总量。</div>
+<p><strong>计算方法（投影法）</strong>：以 <code>R dxdy</code> 项为例，把 <code>Σ</code> 投影到 <code>xOy</code> 面得 <code>D</code>，若取<strong>上侧</strong>（法向与 z 轴正向夹角为锐角）取正号，<strong>下侧</strong>取负号：</p>
+<pre><code>∫∫_Σ R dx dy = ± ∫∫_D R(x,y,z(x,y)) dx dy</code></pre>
+<p>同理 <code>P dydz</code> 项投影到 <code>yOz</code> 面（前侧正 / 后侧负）、<code>Q dzdx</code> 项投影到 <code>zOx</code> 面（右侧正 / 左侧负）。</p>
+<h3>两类曲面积分的联系</h3>
+<pre><code>∫∫_Σ P dy dz + Q dz dx + R dx dy = ∫∫_Σ (P cosα + Q cosβ + R cosγ) dS</code></pre>
+<p>其中 <code>(cosα, cosβ, cosγ)</code> 是曲面指定侧的单位法向量，满足 <code>cosα² + cosβ² + cosγ² = 1</code>。第二类曲面积分<strong>与侧有关</strong>：反向 <code>−Σ</code> 积分变号，而第一类 <code>dS</code> 恒正、与侧无关。</p>
+
+<h2 id="s5">11.5 高斯公式（Gauss / 散度定理）</h2>
+<h3>定理内容</h3>
+<p>设空间闭区域 <code>Ω</code> 由分片光滑的闭曲面 <code>Σ</code> 围成，<code>P、Q、R</code> 在 <code>Ω</code> 上有一阶连续偏导数，<code>Σ</code> 取<strong>外侧</strong>，则：</p>
+<pre><code>∯_Σ P dy dz + Q dz dx + R dx dy = ∭_Ω ( ∂P/∂x + ∂Q/∂y + ∂R/∂z ) dV</code></pre>
+<p>记<strong>散度</strong> <code>div F = ∂P/∂x + ∂Q/∂y + ∂R/∂z</code>，则高斯公式写作：</p>
+<pre><code>∯_Σ F · n dS = ∭_Ω div F dV</code></pre>
+<div class="insight"><strong>几何含义：</strong>它把<strong>闭曲面上的面积分</strong>转化为<strong>所围空间区域上的三重积分</strong>——"穿过封闭表面的总量"由"内部每一点的发散程度"累加决定。<strong>物理含义：</strong>散度 <code>div F</code> 是向量场在一点的"<strong>源强度 / 产生率</strong>"：<code>div F &gt; 0</code> 该点有<strong>源</strong>（向外流出），<code>div F &lt; 0</code> 有<strong>汇</strong>（向内流入），<code>div F = 0</code> 无源无汇。高斯公式即"<strong>闭合曲面总通量 = 内部所有源的总和</strong>"，是流体、电磁学（麦克斯韦方程之一）的基石。</div>
+<p><strong>使用要点</strong>：曲面必须<strong>封闭</strong>且取<strong>外侧</strong>；若曲面不封闭，可<strong>补面</strong>使之为闭曲面，再用高斯公式减去补面上的积分（补面通常取坐标平面，其上某些项为零）。</p>
+
+<h2 id="s6">11.6 斯托克斯公式（Stokes）</h2>
+<h3>定理内容</h3>
+<p>设 <code>Γ</code> 为分段光滑的空间有向闭曲线，<code>Σ</code> 是以 <code>Γ</code> 为边界的分片光滑曲面，<code>Γ</code> 的正向与 <code>Σ</code> 的侧满足<strong>右手法则</strong>（右手四指沿 <code>Γ</code> 正向，拇指指向 <code>Σ</code> 的法向），则：</p>
+<pre><code>∮_Γ P dx + Q dy + R dz
+  = ∬_Σ ( ∂R/∂y − ∂Q/∂z ) dy dz
+  + ∬_Σ ( ∂P/∂z − ∂R/∂x ) dz dx
+  + ∬_Σ ( ∂Q/∂x − ∂P/∂y ) dx dy</code></pre>
+<p>记<strong>旋度</strong> <code>rot F = (∂R/∂y − ∂Q/∂z, ∂P/∂z − ∂R/∂x, ∂Q/∂x − ∂P/∂y)</code>，则向量形式为：</p>
+<pre><code>∮_Γ F · dr = ∬_Σ (rot F) · n dS</code></pre>
+<div class="insight"><strong>几何含义：</strong>它把<strong>沿闭曲线的环量（线积分）</strong>与<strong>张在其上的曲面的面积分</strong>联系起来——格林公式正是它在平面（曲面退化为平面区域）上的特例。<strong>物理含义：</strong>旋度 <code>rot F</code> 度量向量场在一点的<strong>旋转程度与旋转轴方向</strong>；斯托克斯公式即"<strong>沿闭合回路的环量 = 穿过该回路的旋度通量</strong>"。流体中某点旋度不为零，表示该处有"涡旋"；静电场无旋（<code>rot E = 0</code>）故为保守场，而磁场一般有旋。</div>
+<p><strong>空间曲线积分与路径无关的条件</strong>：在<strong>单连通</strong>空间区域内，<code>∮_Γ P dx + Q dy + R dz = 0</code>（任意闭曲线） ⟺ <code>rot F = 0</code> ⟺ 存在 <code>u</code> 使 <code>du = P dx + Q dy + R dz</code>，即 <code>F</code> 是<strong>无旋场 / 有势场</strong>。</p>
+<p><strong>使用要点</strong>：<code>Γ</code> 必须是<strong>闭曲线</strong>；<code>Σ</code> 的选取可<strong>任意</strong>（只要以 <code>Γ</code> 为边界且定向符合右手法则），所以常选<strong>平面</strong>作 <code>Σ</code> 简化计算（如取坐标平面或其平行面，使某些项为零）。</p>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>对弧长的曲线积分 ∫_L f ds</td><td>沿曲线按弧长加权累加；f=1 时是弧长，f≥0 时是柱面面积</td><td>变线密度构件的质量、质心、转动惯量</td></tr>
+<tr><td>对坐标的曲线积分 ∫_L Pdx+Qdy</td><td>向量场沿有向曲线的切向投影累加，方向反向则变号</td><td>变力沿曲线所做的功</td></tr>
+<tr><td>格林公式</td><td>边界线积分 = 内部二重积分（面积分）</td><td>平面场的环量 = 内部旋度总和</td></tr>
+<tr><td>第一类曲面积分 ∫∫_Σ f dS</td><td>沿曲面按面积加权累加；f=1 时是曲面面积</td><td>变面密度薄壳的质量、质心、转动惯量</td></tr>
+<tr><td>第二类曲面积分 ∫∫_Σ Pdydz+Qdzdx+Rdxdy</td><td>向量场沿有向曲面法向的累加，随侧变号</td><td>向量场穿过曲面的通量（流量）</td></tr>
+<tr><td>高斯公式</td><td>闭曲面面积分 = 内部三重积分（体积分）</td><td>闭合曲面总通量 = 内部散度（源）的总和</td></tr>
+<tr><td>斯托克斯公式</td><td>闭曲线线积分 = 张于其上的曲面积分</td><td>闭合回路环量 = 穿过回路的旋度通量</td></tr>
+<tr><td>散度 div F</td><td>——（标量场"产生率"）</td><td>一点处的源/汇强度（流出为正、流入为负）</td></tr>
+<tr><td>旋度 rot F</td><td>旋转的方向（轴）与强弱</td><td>一点处的旋转（涡旋）程度，无旋则保守</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<h4>对弧长的曲线积分</h4>
+<ol>
+<li>计算 <code>∫_L (x² + y²) ds</code>，其中 <code>L</code> 为圆心在原点、半径为 a 的上半圆周 <code>x = a cos t, y = a sin t (0 ≤ t ≤ π)</code>。（提示：<code>ds = a dt</code>，答案 <code>π a³</code>）</li>
+<li>求螺旋线 <code>x = cos t, y = sin t, z = t (0 ≤ t ≤ 2π)</code> 的弧长。</li>
+</ol>
+<h4>对坐标的曲线积分与格林公式</h4>
+<ol>
+<li>计算 <code>∫_L (x² + y) dx + (x + y²) dy</code>，<code>L</code> 为从 <code>(0,0)</code> 沿抛物线 <code>y = x²</code> 到 <code>(1,1)</code>。</li>
+<li>用格林公式求 <code>∮_L (2xy − x²) dx + (x + y²) dy</code>，<code>L</code> 为顶点 <code>(0,0),(1,0),(0,1)</code> 的三角形正向边界。</li>
+<li>验证 <code>(2xy) dx + (x²) dy</code> 是否为某函数的全微分，若是，求出 <code>u(x,y)</code> 并计算沿任意路径从 <code>(0,0)</code> 到 <code>(1,2)</code> 的积分。</li>
+</ol>
+<h4>曲面积分、高斯与斯托克斯公式</h4>
+<ol>
+<li>求上半球面 <code>z = √(a² − x² − y²)</code> 的面积。</li>
+<li>用高斯公式计算 <code>∯_Σ x dy dz + y dz dx + z dx dy</code>，<code>Σ</code> 为球面 <code>x² + y² + z² = a²</code> 的外侧。（答案 <code>4π a³</code>）</li>
+<li>用斯托克斯公式计算 <code>∮_Γ y dx + z dy + x dz</code>，<code>Γ</code> 为平面 <code>x + y + z = 1</code> 与三坐标面的交线（从 z 轴正向看为逆时针）。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<h4>易错点清单</h4>
+<ul>
+<li>❌ 把对弧长的曲线积分 <code>∫_L f ds</code> 反向计算时变号 → ✅ 第一类曲线积分<strong>与方向无关</strong>，<code>ds</code> 恒正，反向不变号；只有第二类（对坐标）才反向变号。</li>
+<li>❌ 用格林公式前不检查<strong>闭曲线</strong>、<strong>正向</strong>、<strong>P、Q 有连续偏导</strong>三个条件 → ✅ 三个条件缺一不可；有奇点时（如原点处的 <code>1/(x²+y²)</code>）必须先挖去奇点或另作处理。</li>
+<li>❌ 判断路径无关只验 <code>∂P/∂y = ∂Q/∂x</code> 却忘了要求区域<strong>单连通</strong> → ✅ 对含"洞"的区域，该条件只是<strong>必要</strong>而非充分。</li>
+<li>❌ 用高斯公式时曲面不封闭或取成内侧、方向搞反 → ✅ 高斯公式要求<strong>封闭曲面取外侧</strong>；不封闭要先补面，取内侧要变号。</li>
+<li>❌ 把 <code>dS</code> 直接写成 <code>dxdy</code> → ✅ 曲面元素 <code>dS = √(1 + z_x² + z_y²) dxdy</code>，只有平面（或法向平行 z 轴）时 <code>dS = dxdy</code>。</li>
+<li>❌ 第二类曲面积分投影后符号随意取 → ✅ 符号由<strong>曲面的侧</strong>决定（上侧正、下侧负，前侧正、后侧负，右侧正、左侧负），侧错了整个结果反号。</li>
+<li>❌ 用斯托克斯公式时 Σ 的定向与 Γ 正向不配套 → ✅ 必须满足<strong>右手法则</strong>：四指沿 Γ 正向，拇指指向 Σ 的法向。</li>
+<li>❌ 混淆"散度"与"旋度"的物理意义 → ✅ 散度描述"源/汇"（流出量），旋度描述"旋转"（环量密度）；无散 ≠ 无旋，二者互相独立。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:0 0 10px;color:#b45309">一、练习题</h3>
+<ol>
+<li>设平面曲线 <code>L</code> 为上半圆 <code>x = cos t, y = sin t</code>（<code>0 ≤ t ≤ π</code>），计算第一类曲线积分 <code>∫_L (x² + y²) ds</code>；并说明当被积函数 <code>f ≡ 1</code> 时 <code>∫_L ds</code> 的几何意义。</li>
+<li>判断正误并说明理由：对弧长的曲线积分（第一类曲线积分）与曲线的方向有关，反向积分需要变号。</li>
+<li>质点在力场 <code>F = (x² + y, x + y²)</code> 作用下沿抛物线 <code>y = x²</code> 从点 <code>(0,0)</code> 移动到点 <code>(1,1)</code>，求力所做的功 <code>W = ∫_L (x² + y) dx + (x + y²) dy</code>。</li>
+<li>利用格林公式计算 <code>∮_L (2xy − x²) dx + (x + y²) dy</code>，其中 <code>L</code> 是以 <code>(0,0)</code>、<code>(1,0)</code>、<code>(0,1)</code> 为顶点的三角形区域的正向边界。</li>
+<li>验证 <code>(2xy) dx + (x²) dy</code> 是某个二元函数 <code>u(x,y)</code> 的全微分，求出 <code>u(x,y)</code>，并计算沿任意路径从 <code>(0,0)</code> 到 <code>(1,2)</code> 的曲线积分。</li>
+<li>用高斯公式计算 <code>∯_Σ x dy dz + y dz dx + z dx dy</code>，其中 <code>Σ</code> 为球面 <code>x² + y² + z² = a²</code> 的外侧；并结合散度说明其物理意义。</li>
+</ol>
+<h3 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>参数化 <code>x = cos t, y = sin t</code>，则 <code>ds = √[(x′)² + (y′)²] dt = dt</code>，且 <code>x² + y² = 1</code>。故 <code>∫_L (x²+y²) ds = ∫_0^π 1·dt = π</code>。当 <code>f ≡ 1</code> 时，<code>∫_L ds</code> 表示曲线 <code>L</code> 的弧长（此处上半圆周长 <code>= π</code>）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>错误。对弧长的曲线积分与方向无关：弧长元素 <code>ds</code> 恒为正，反向只是把同一弧段按相反顺序累加，结果不变，即 <code>∫_{−L} f ds = ∫_L f ds</code>。只有对坐标的曲线积分（第二类）反向才变号。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>取参数 <code>x = t, y = t²</code>（<code>t</code> 从 0 到 1），<code>dx = dt, dy = 2t dt</code>；<code>P = x² + y = 2t²</code>，<code>Q = x + y² = t + t⁴</code>。<code>W = ∫_0^1 [2t² + (t + t⁴)·2t] dt = ∫_0^1 (4t² + 2t⁵) dt = [4t³/3 + t⁶/3]_0^1 = 4/3 + 1/3 = 5/3</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>P = 2xy − x², Q = x + y²</code>，则 <code>∂Q/∂x = 1</code>，<code>∂P/∂y = 2x</code>。由格林公式，<code>∮_L = ∬_D (∂Q/∂x − ∂P/∂y) dA = ∬_D (1 − 2x) dA</code>。区域 <code>D: x ≥ 0, y ≥ 0, x + y ≤ 1</code>。<code>∬_D (1−2x) dA = ∫_0^1 ∫_0^{1−x} (1−2x) dy dx = ∫_0^1 (1−2x)(1−x) dx = ∫_0^1 (1 − 3x + 2x²) dx = 1 − 3/2 + 2/3 = 1/6</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>令 <code>P = 2xy, Q = x²</code>，<code>∂P/∂y = 2x = ∂Q/∂x</code>，且在全平面（单连通）成立，故该式是某函数的全微分。由 <code>∂u/∂x = 2xy</code> 得 <code>u = ∫ 2xy dx = x²y + φ(y)</code>；再由 <code>∂u/∂y = x² + φ′(y) = x²</code> 得 <code>φ′(y) = 0</code>，故 <code>u = x²y + C</code>。于是 <code>∫_{(0,0)}^{(1,2)} = u(1,2) − u(0,0) = 2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>记 <code>F = (x, y, z)</code>，<code>P = x, Q = y, R = z</code>，散度 <code>div F = ∂P/∂x + ∂Q/∂y + ∂R/∂z = 3</code>。由高斯公式，<code>∯_Σ = ∭_Ω 3 dV = 3 × (4/3 π a³) = 4π a³</code>。物理意义：这是径向向量场 <code>F = (x,y,z)</code> 从球内流向外侧的总通量；散度恒为 3，表示空间处处有强度为 3 的均匀“源”，故总通量 = 源强度 × 球体体积 = <code>3 × 4πa³/3 = 4πa³</code>。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第10章-重积分/第10章-重积分.html">← 上一章：第10章 重积分</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第12章-无穷级数/第12章-无穷级数.html">下一章：第12章 无穷级数 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中数学到大学高等数学</footer>
+</body>
+</html>

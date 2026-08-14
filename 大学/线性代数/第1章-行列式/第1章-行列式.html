@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第1章 行列式 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第1章 行列式</div></header>
+<main class="container">
+<h1>第1章 行列式</h1>
+<p class="lead">大学 / 线性代数</p>
+<div class="summary"><span class="tag">一句话总纲：</span>行列式 = 「由矩阵的列向量张成的 <strong>有向体积</strong>」。它是把"几个向量"压缩成"一个数"的机器，这个数的绝对值是体积、正负号是定向，而这个数是否为零，直接决定了线性方程组有没有唯一解。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">1.1 二阶与三阶行列式（从面积、体积出发）</a><a href="#s2">1.2 n 阶行列式的定义</a><a href="#s3">1.3 行列式的性质</a><a href="#s4">1.4 行列式按行（列）展开</a><a href="#s5">1.5 克拉默法则</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">1.1 二阶与三阶行列式（从面积、体积出发）</h2>
+<h3>为什么引入行列式？（从解方程组到几何量）</h3>
+<p>解二元一次方程组</p>
+<pre><code>   a₁₁ x₁ + a₁₂ x₂ = b₁
+   a₂₁ x₁ + a₂₂ x₂ = b₂</code></pre>
+<p>用加减消元法（假设 a₁₁a₂₂ − a₁₂a₂₁ ≠ 0）可得唯一解：</p>
+<pre><code>   x₁ = (b₁a₂₂ − a₁₂b₂) / (a₁₁a₂₂ − a₁₂a₂₁)
+   x₂ = (a₁₁b₂ − b₁a₂₁) / (a₁₁a₂₂ − a₁₂a₂₁)</code></pre>
+<p>分子分母出现了<strong>同一种"交叉相乘再相减"</strong>的式子。把它单独拎出来、记成一个符号，就是<strong>二阶行列式</strong>。</p>
+<h3>二阶行列式 = 有向面积</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr1b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2563eb"/></marker><marker id="arr1g" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#16a34a"/></marker></defs><line x1="20" y1="150" x2="500" y2="150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/><line x1="150" y1="18" x2="150" y2="250" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/><polygon fill="#2563eb" fill-opacity="0.12" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 3"><animate attributeName="points" values="150,150 270,150 360,150 240,150;150,150 270,150 270,60 150,60;150,150 270,150 180,150 60,150;150,150 270,150 270,240 150,240;150,150 270,150 360,150 240,150" dur="12s" repeatCount="indefinite"/></polygon><line x1="150" y1="150" x2="270" y2="150" stroke="#2563eb" stroke-width="3" marker-end="url(#arr1b)"/><line x1="150" y1="150" x2="240" y2="150" stroke="#16a34a" stroke-width="3" marker-end="url(#arr1g)"><animate attributeName="x2" values="240;150;60;150;240" dur="12s" repeatCount="indefinite"/><animate attributeName="y2" values="150;60;150;240;150" dur="12s" repeatCount="indefinite"/></line><g font-size="14" text-anchor="middle" fill="#334155"><text x="260" y="34"><animate attributeName="opacity" values="1;0;1;0;0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="12s" repeatCount="indefinite"/>有向面积 = 0（两向量共线，行列式为 0）</text><text x="260" y="34"><animate attributeName="opacity" values="0;1;0;0;0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="12s" repeatCount="indefinite"/>有向面积 &gt; 0（u→v 逆时针为正）</text><text x="260" y="34"><animate attributeName="opacity" values="0;0;0;1;0" keyTimes="0;0.25;0.5;0.75;1" calcMode="discrete" dur="12s" repeatCount="indefinite"/>有向面积 &lt; 0（u→v 顺时针为负）</text></g><g font-size="13" fill="#334155" text-anchor="start"><text x="20" y="34">蓝：u = (a,c)ᵀ</text><text x="20" y="52">绿：v = (b,d)ᵀ</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：二阶行列式 = 两列向量张成的平行四边形有向面积——v 绕 u 旋转一周，面积先正（逆时针）后负（顺时针），共线时面积塌缩为 0</figcaption></figure>
+<pre><code>        | a  b |
+   det = |      | = a·d − b·c
+        | c  d |</code></pre>
+<ul>
+<li>主对角线（左上→右下）乘积取正：<code>a·d</code>；副对角线（右上→左下）乘积取负：<code>−b·c</code>。</li>
+<li>例：<code>|2 1; 3 4| = 2×4 − 1×3 = 5</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>把两列看成平面向量 <strong>u</strong> = (a, c)ᵀ、<strong>v</strong> = (b, d)ᵀ，则行列式的<strong>绝对值 = 这两个向量张成的平行四边形的面积</strong>；正负号 = 从 u 旋转到 v 的方向（逆时针为正、顺时针为负），称为<strong>有向面积</strong>。行列式为 0 意味着两向量共线，平行四边形"塌缩"成一条线段，面积为 0。</div>
+<div class="insight"><strong>物理含义：</strong>二阶行列式就是两个向量的"叉积模长"（在二维平面上的有向面积）。它是力矩、角动量的雏形：力臂与力张成的有向面积正是"旋转效果"的度量。</div>
+<h3>三阶行列式 = 有向体积（对角线法则）</h3>
+<pre><code>        | a₁  a₂  a₃ |
+   det = | b₁  b₂  b₃ |  （把每一行或每一列写成一个三元组）
+        | c₁  c₂  c₃ |</code></pre>
+<p><strong>对角线法则（只适用于三阶）</strong>：把前两列抄到右侧，三条<strong>主对角线</strong>（↘）乘积相加、三条<strong>副对角线</strong>（↙）乘积相减：</p>
+<pre><code>   a₁b₂c₃ + a₂b₃c₁ + a₃b₁c₂ − a₃b₂c₁ − a₁b₃c₂ − a₂b₁c₃</code></pre>
+<div class="insight"><strong>几何含义：</strong>三列是三个三维向量，行列式的<strong>绝对值 = 它们张成的平行六面体的体积</strong>；符号表示这组向量构成右手系（正）还是左手系（负）。行列式为 0 ⇔ 三个向量共面 ⇔ 体积塌缩为 0 ⇔ 线性相关。</div>
+<div class="insight"><strong>物理含义：</strong>三阶行列式就是三个向量的<strong>混合积（三重积）</strong> [a, b, c] = a · (b × c)。它是平行六面体体积，也是流体微元、晶体原胞体积的度量。</div>
+
+<h2 id="s2">1.2 n 阶行列式的定义</h2>
+<h3>从低阶到高阶的"破题"</h3>
+<p>对角线法则<strong>不能推广</strong>到四阶及以上（四阶行列式有 4! = 24 项，而"对角线"只有 8 条，根本对不上）。要给出统一定义，需要两个准备：<strong>排列</strong>与<strong>逆序数</strong>。</p>
+<h3>排列与逆序数</h3>
+<ul>
+<li><strong>排列</strong>：n 个不同元素排成一列。n 个元素共有 <strong>n!</strong> 种排列。</li>
+<li><strong>逆序</strong>：在一个排列中，<strong>大数排在小数前面</strong>，就构成一个逆序。如排列 3 1 2 中，3 在 1、2 前面，共 2 个逆序。</li>
+<li><strong>逆序数 τ</strong>：一个排列中逆序的总数。例：τ(3 1 2) = 2。</li>
+<li><strong>奇排列 / 偶排列</strong>：逆序数为奇数叫奇排列，为偶数叫偶排列。例：3 1 2 是偶排列，1 3 2（τ=1）是奇排列。</li>
+<li>性质：交换排列中任意两个元素（一次对换），排列的奇偶性<strong>改变</strong>。</li>
+</ul>
+<h3>n 阶行列式的展开式定义</h3>
+<p>设 n 阶方阵 A = (aᵢⱼ)，它的行列式记作 <code>|A|</code> 或 <code>det(A)</code>，定义为：</p>
+<pre><code>   |A| = Σ (−1)^τ(j₁ j₂ … jₙ) · a_{1j₁} a_{2j₂} … a_{njn}
+         (对 1,2,…,n 的所有排列 j₁j₂…jₙ 求和)</code></pre>
+<ul>
+<li>共有 <strong>n!</strong> 项，每项是<strong>取自不同行、不同列的 n 个元素之积</strong>。</li>
+<li>每一项的正负由列下标排列 j₁j₂…jₙ 的逆序数决定：τ 为偶取正，τ 为奇取负（即 (−1)^τ）。</li>
+<li>n = 2 时它还原为 <code>a₁₁a₂₂ − a₁₂a₂₁</code>；n = 3 时还原为对角线法则的 6 项。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>n 阶行列式 = n 个 n 维向量张成的 <strong>n 维有向超体积</strong>。定义式里"每一项取自不同行不同列"正对应"每个向量各取一个分量相乘"，而 ±1 的符号编码了这些向量的"定向"（是右手系还是经过奇数次交换的镜像系）。</div>
+<div class="insight"><strong>物理含义：</strong>它是<strong>线性变换的体积缩放因子</strong>：一个区域在变换 x ↦ Ax 作用后，体积变为原来的 |det A| 倍，det A &lt; 0 表示变换"翻转"了空间方向（镜像）。这正是变量替换中雅可比行列式的本质。</div>
+<h3>几个特殊行列式（务必记住）</h3>
+<pre><code>   上三角 / 下三角 / 对角行列式 = 主对角线元素之积
+   （其余位置全为 0 的三角阵，行列式 = a₁₁a₂₂…aₙₙ）</code></pre>
+
+<h2 id="s3">1.3 行列式的性质</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="220" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr2b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2563eb"/></marker></defs><line x1="40" y1="160" x2="500" y2="160" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4 4"/><polygon fill="#2563eb" fill-opacity="0.12" stroke="#2563eb" stroke-width="1.5"><animate attributeName="points" values="60,160 260,160 200,80 0,80;60,160 260,160 260,80 60,80;60,160 260,160 320,80 120,80;60,160 260,160 260,80 60,80;60,160 260,160 200,80 0,80" dur="8s" repeatCount="indefinite"/></polygon><line x1="60" y1="160" x2="260" y2="160" stroke="#2563eb" stroke-width="3" marker-end="url(#arr2b)"/><line x1="180" y1="160" x2="180" y2="80" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6 4"/><g font-size="14" text-anchor="middle" fill="#334155"><text x="260" y="36">面积 = 底 × 高 = 200 × 80 = 16000（斜推不变）</text></g><g font-size="13" fill="#334155" text-anchor="start"><text x="160" y="182">底 b</text><text x="190" y="122">高 h（不变）</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：性质⑦ 倍加不变——沿底边方向"斜推"（剪切）这个平行四边形，高 h 不变，故面积 = 底 × 高 恒为 16000，对应"把一行 k 倍加到另一行，行列式不变"</figcaption></figure>
+<p>下列性质是<strong>简化计算的全部工具</strong>，都可以由展开式定义严格证明。</p>
+<table>
+<tr><th>性质</th><th>内容</th><th>一句记忆</th></tr>
+<tr><td>① 转置不变</td><td><code>|Aᵀ| = |A|</code></td><td>行列式对"行"和"列"一视同仁，凡对行成立的性质对列也成立。</td></tr>
+<tr><td>② 交换变号</td><td>互换两行（或两列），行列式<strong>变号</strong>。</td><td>换一次行 = 体积定向翻转一次。</td></tr>
+<tr><td>③ 提公因子</td><td>某行（列）有公因子 k，可提到行列式外：<code>|… k·(某行) …| = k |… (某行) …|</code>。</td><td>整行同乘 k，体积缩放 k 倍。</td></tr>
+<tr><td>④ 可加性</td><td>某行是两组数之和，则行列式拆成两个行列式之和（其余行不变）。</td><td>"和的贡献 = 各贡献之和"。</td></tr>
+<tr><td>⑤ 零行</td><td>某行（列）元素全为 0，行列式为 0。</td><td>有一个方向"没有长度"，体积为 0。</td></tr>
+<tr><td>⑥ 两行成比例</td><td>两行（列）相同或成比例，行列式为 0。</td><td>两个方向重合，退化，体积为 0。</td></tr>
+<tr><td>⑦ 倍加不变</td><td>把某行（列）的 k 倍加到另一行（列），行列式<strong>不变</strong>。</td><td>这是化三角形、消元的最强工具。</td></tr>
+<tr><td>⑧ 拆分不变</td><td>把"一行 + 另一行的 k 倍"替换某行，行列式不变（即⑦）。</td><td>高斯消元就是不断做这件事。</td></tr>
+</table>
+<div class="insight"><strong>几何含义（统一视角）：</strong>③ = 一个向量被拉伸 k 倍，体积放大 k 倍；⑥ = 两个向量共线（或成比例），张成的区域退化为低维，体积为 0；⑦ = 把向量 v 换成 v + k·u，相当于沿 u 方向"斜推"这个平行四边形/平行六面体——<strong>斜推不改变体积</strong>（就像把一摞扑克牌斜着推一下，底面积×高不变）。</div>
+<div class="insight"><strong>物理含义：</strong>② 交换变号 = 右手系与左手系（镜像）的区分，是<strong>手性</strong>在数学里的体现；⑦ 倍加不变 = 力的分解中，把力沿某一方向平移或叠加平行分量，不改变系统的"体积效应"。</div>
+<h3>核心技巧：化三角形法</h3>
+<p>用性质 ⑦、② 把矩阵化为<strong>上三角</strong>，行列式 = 主对角线乘积。这是手算高阶行列式的标准流程。</p>
+
+<h2 id="s4">1.4 行列式按行（列）展开</h2>
+<h3>余子式与代数余子式</h3>
+<p>在 n 阶行列式中，划去元素 <code>aᵢⱼ</code> 所在的<strong>第 i 行和第 j 列</strong>，剩下的 (n−1) 阶行列式叫 <code>aᵢⱼ</code> 的<strong>余子式</strong> <code>Mᵢⱼ</code>；再乘以符号 (−1)^(i+j) 得到<strong>代数余子式</strong>：</p>
+<pre><code>   Aᵢⱼ = (−1)^(i+j) · Mᵢⱼ</code></pre>
+<p>符号棋盘：位置 (i, j) 的符号为 + 当 i+j 为偶，− 当 i+j 为奇。</p>
+<pre><code>   [+  −  +  −  …]
+   [−  +  −  +  …]
+   [+  −  +  −  …]</code></pre>
+<h3>展开定理（拉普拉斯展开）</h3>
+<p><strong>按第 i 行展开</strong>：</p>
+<pre><code>   |A| = aᵢ₁Aᵢ₁ + aᵢ₂Aᵢ₂ + … + aᵢₙAᵢₙ   （任意取定一行）</code></pre>
+<p><strong>按第 j 列展开</strong>：</p>
+<pre><code>   |A| = a₁ⱼA₁ⱼ + a₂ⱼA₂ⱼ + … + aₙⱼAₙⱼ   （任意取定一列）</code></pre>
+<p><strong>异乘变零（重要推论）</strong>：某行元素与<strong>另一行</strong>对应元素的代数余子式乘积之和等于 0：</p>
+<pre><code>   aᵢ₁Aⱼ₁ + aᵢ₂Aⱼ₂ + … + aᵢₙAⱼₙ = 0   (i ≠ j)</code></pre>
+<div class="insight"><strong>几何含义：</strong>按行展开 = <strong>把高维体积拆成"底 × 高"逐层累加</strong>。aᵢⱼ 是第 i 维上的"高"，Aᵢⱼ 是划去该方向后剩余 (n−1) 维子空间的"底体积"，(−1)^(i+j) 校正定向——这正是"体积 = Σ (高 × 底面积)"的高维推广。</div>
+<div class="insight"><strong>物理含义：</strong>展开过程 = 把 n 维效应<strong>降维分解</strong>：先固定一个方向，计算它在所有 (n−1) 维"截面"上的贡献，再求和。这与把体积积分写成"先对一维积分、再对余下维积分"（累次积分/切片法）完全同构。</div>
+
+<h2 id="s5">1.5 克拉默法则</h2>
+<h3>定理（克拉默法则，Cramer's Rule）</h3>
+<p>n 元线性方程组 <code>Ax = b</code>（A 为 n 阶方阵，x、b 为 n 维列向量）。若系数行列式 <code>D = |A| ≠ 0</code>，则方程组有<strong>唯一解</strong>：</p>
+<pre><code>   x₁ = D₁/D，  x₂ = D₂/D，  …，  xₙ = Dₙ/D</code></pre>
+<p>其中 <code>Dⱼ</code> 是把 D 中<strong>第 j 列换成常数项列 b</strong> 得到的行列式（其余列不变）。</p>
+<h3>两个推论（判定解的唯一性）</h3>
+<ul>
+<li><strong>D ≠ 0</strong> ⇔ 非齐次方程组 Ax = b 有唯一解。</li>
+<li><strong>齐次方程组 Ax = 0</strong>：D ≠ 0 时只有零解；<strong>D = 0 时有非零解</strong>（有非零解 ⇔ D = 0）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>D ≠ 0 表示系数矩阵的列向量张成"满维"的平行多面体（体积不为 0），即这些列向量<strong>线性无关、张满整个空间</strong>，于是任意目标向量 b 都能被唯一地线性表出——解 xⱼ 正是表出系数。D = 0 表示列向量"塌缩"到低维，b 若不在这个低维子空间内就无解，在子空间内则有无穷多解。</div>
+<div class="insight"><strong>物理含义：</strong>解线性方程组 = <strong>用一组"基向量"去拼出目标向量 b</strong>，系数 xⱼ 是各基向量的"用量"。克拉默法则告诉我们：只要基向量组"体积"不为 0（能张满空间），任何目标都能唯一拼出；这对应物理中"给定足够且独立的参照方向，任何向量可唯一分解"（如斜面上的力沿法向、切向分解）。</div>
+<h3>克拉默法则的适用边界</h3>
+<ul>
+<li>只适用于<strong>方程个数 = 未知数个数</strong>（方阵）且 <strong>D ≠ 0</strong> 的情形。</li>
+<li>计算量约为 n! 级别，n 较大时不实用，一般只用于 n ≤ 3 或理论推导；工程上多用消元法。</li>
+<li>它的真正价值是<strong>理论意义</strong>：把"解存在且唯一"与"行列式非零"等价起来，为第 3 章矩阵可逆、第 4 章向量组线性相关性奠基。</li>
+</ul>
+
+<hr/>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>二阶行列式</td><td>两向量张成的有向面积（平行四边形）</td><td>力矩、角动量的旋转效果度量</td></tr>
+<tr><td>三阶行列式</td><td>三向量张成的有向体积（平行六面体）</td><td>混合积、晶体原胞 / 流体微元体积</td></tr>
+<tr><td>n 阶行列式</td><td>n 个 n 维向量的有向超体积</td><td>线性变换的体积缩放因子（雅可比行列式）</td></tr>
+<tr><td>行列式的符号</td><td>定向：右手系（正）/ 左手系（负）</td><td>手性、镜像翻转的区分</td></tr>
+<tr><td>行列式 = 0</td><td>向量线性相关，体积塌缩为 0</td><td>系统退化：方向不独立，无法唯一确定</td></tr>
+<tr><td>性质③ 提公因子</td><td>某向量拉伸 k 倍 → 体积缩放 k 倍</td><td>均匀缩放对体积的线性效应</td></tr>
+<tr><td>性质⑦ 倍加不变</td><td>沿某方向"斜推"不改变体积</td><td>平行分量叠加不改变体积效应</td></tr>
+<tr><td>按行展开</td><td>体积 = Σ(高 × 底面积) 的高维推广</td><td>累次积分 / 切片法降维分解</td></tr>
+<tr><td>克拉默法则</td><td>满秩基向量组唯一拼出目标向量</td><td>向量沿独立参照方向的唯一分解</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li>计算二阶行列式 <code>|3 −2; 1 4|</code>，并说明它对应的平行四边形面积。</li>
+<li>用对角线法则计算三阶行列式 <code>|1 2 3; 4 5 6; 7 8 9|</code>，它为什么等于 0？几何上说明理由。</li>
+<li>用化三角形法（性质⑦）计算四阶行列式：把第一行的 −2 倍、−3 倍、−4 倍分别加到第 2、3、4 行，再观察结果。</li>
+<li>求三阶行列式中元素 a₂₃ 的余子式与代数余子式，并按第 2 行展开计算该行列式。</li>
+<li>用克拉默法则解方程组：x₁ + 2x₂ = 5；3x₁ + 4x₂ = 11。先算 D，再算 D₁、D₂。</li>
+<li>判断齐次方程组 <code>2x + 3y = 0；4x + 6y = 0</code> 是否有非零解，并说明几何含义。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<h4>⚠️ 常见误区</h4>
+<ul>
+<li>❌ "对角线法则可以算四阶行列式" → ❌ 对角线法则<strong>只适用于二阶、三阶</strong>；n 阶行列式有 n! 项，必须用定义式、性质或按行展开。</li>
+<li>❌ "行列式 = 矩阵" → ❌ 行列式是方阵对应的<strong>一个数</strong>；矩阵是一张数表。只有方阵才有行列式。</li>
+<li>❌ "交换两行行列式不变" → ❌ 交换两行（列）行列式<strong>变号</strong>，符号 = 定向翻转。</li>
+<li>❌ "某行提公因子时，把整个行列式乘 k" → ❌ 只有<strong>一行（或一列）</strong>的公因子提到外面；n 行各提 k，才是整体乘 kⁿ。</li>
+<li>❌ "两行成比例但比例常数是 0 也行" → ❌ 严格说，是"两行对应元素成比例"或"两行相等"⇒ 行列式为 0；不要和"全 0 行"混淆。</li>
+<li>❌ "代数余子式忘了符号 (−1)^(i+j)" → ❌ 余子式 Mᵢⱼ 不带符号，<strong>代数余子式 Aᵢⱼ = (−1)^(i+j)Mᵢⱼ</strong>，展开时漏符号必错。</li>
+<li>❌ "克拉默法则万能，什么方程组都能解" → ❌ 仅当<strong>方程数 = 未知数数</strong>且 <strong>D ≠ 0</strong> 时才有唯一解；D = 0 时法则失效，且高阶时计算量巨大，不实用。</li>
+<li>❌ "D = 0 时齐次方程组只有零解" → ❌ 恰好相反：齐次方程组 <strong>D = 0 才有非零解</strong>，D ≠ 0 只有零解。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:18px 0 10px;color:#b45309">一、练习题</h3>
+<ol>
+<li>计算二阶行列式 <code>|2 5; 3 4|</code>，并说明它对应的有向面积是多少、正负号代表什么。</li>
+<li>用对角线法则计算三阶行列式 <code>|1 2 3; 4 5 6; 7 8 9|</code>，结果为何是 0？请从"列向量共面、体积塌缩"的角度解释。</li>
+<li>用性质把行列式 <code>|1 2 3; 2 5 7; 3 8 13|</code> 化为上三角形，再求值。</li>
+<li>写出三阶行列式 <code>|2 1 0; 1 3 1; 0 1 2|</code> 中元素 a₂₃ 的余子式与代数余子式，并按第 2 行展开计算该行列式的值。</li>
+<li>用克拉默法则解方程组 x₁ + 2x₂ = 5，3x₁ + 4x₂ = 11：先算 D，再算 D₁、D₂，最后写出解。</li>
+<li>判断齐次方程组 2x + 3y = 0，4x + 6y = 0 是否有非零解，并用"两行成比例 ⇒ 行列式为 0 ⇒ 列向量共线"说明几何含义。</li>
+</ol>
+<h3 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>|2 5; 3 4| = 2×4 − 5×3 = 8 − 15 = −7</code>。<br/>有向面积 = −7：绝对值 7 是两列向量 (2,3) 与 (5,4) 张成的平行四边形面积；负号表示从 (2,3) 转到 (5,4) 是顺时针方向（逆时针为正、顺时针为负）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>对角线法则：1·5·9 + 2·6·7 + 3·4·8 − 3·5·7 − 1·6·8 − 2·4·9 = 45 + 84 + 96 − 105 − 48 − 72 = 0。<br/>几何：第三行 = 2×第二行 − 第一行（三行线性相关），等价地三个列向量共面，张成的平行六面体"塌缩"为平面图形，有向体积为 0。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>r₂ − 2r₁ → (0,1,1)；r₃ − 3r₁ → (0,2,4)；r₃ − 2r₂ → (0,0,2)。<br/>得上三角形 <code>[1 2 3; 0 1 1; 0 0 2]</code>，det = 1×1×2 = 2。倍加不改变行列式，故原式也为 2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>a₂₃ = 1，M₂₃ = <code>|2 1; 0 1|</code> = 2，A₂₃ = (−1)^(2+3)·M₂₃ = −2。<br/>按第 2 行展开：|A| = a₂₁A₂₁ + a₂₂A₂₂ + a₂₃A₂₃，其中 A₂₁ = −<code>|1 0; 1 2|</code> = −2，A₂₂ = <code>|2 0; 0 2|</code> = 4，A₂₃ = −2。<br/>故 |A| = 1×(−2) + 3×4 + 1×(−2) = 8。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>D = <code>|1 2; 3 4|</code> = 1×4 − 2×3 = −2。<br/>D₁ = <code>|5 2; 11 4|</code> = 5×4 − 2×11 = −2；D₂ = <code>|1 5; 3 11|</code> = 1×11 − 5×3 = −4。<br/>x₁ = D₁/D = (−2)/(−2) = 1，x₂ = D₂/D = (−4)/(−2) = 2，即解为 (1, 2)。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>D = <code>|2 3; 4 6|</code> = 12 − 12 = 0，且第二行 = 2×第一行（两行成比例）⇒ 齐次方程组有非零解。<br/>几何：两个列向量 (2,4) 与 (3,6) 共线，张成的平行四边形面积为 0，方向不独立，故存在非零组合为零向量。例如 (x, y) = (−3, 2) 满足两式。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../../高等数学/第12章-无穷级数/第12章-无穷级数.html">← 上一章：第12章 无穷级数</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第2章-矩阵及其运算/第2章-矩阵及其运算.html">下一章：第2章 矩阵及其运算 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从线性代数开始</footer>
+</body>
+</html>

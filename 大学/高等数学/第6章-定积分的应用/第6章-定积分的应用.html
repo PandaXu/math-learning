@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第6章 定积分的应用 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第6章 定积分的应用</div></header>
+<main class="container">
+<h1>第6章 定积分的应用</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>定积分的应用 = 用<strong>元素法（微元法）</strong>把几何量（面积、体积、弧长）与物理量（功、水压力、引力）都还原成"无穷小元素的累加"，统一写成 <code>Q = ∫<sub>a</sub><sup>b</sup> f(x) dx</code>——抓住"切薄片 → 找微元 → 无限累加"这一条主线，就能把所有应用公式自行推导出来。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">6.1 元素法（微元分析法）</a><a href="#s2">6.2 几何应用一：平面图形的面积</a><a href="#s3">6.3 几何应用二：体积</a><a href="#s4">6.4 几何应用三：平面曲线的弧长</a><a href="#s5">6.5 物理应用：功、水压力、引力</a><a href="#s6">几何与物理含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">6.1 元素法（微元分析法）</h2>
+<h3>从"和式的极限"到"微元的累加"</h3>
+<p>第5章把定积分定义为"分割—近似—求和—取极限"，即</p>
+<pre><code>  ∫<sub>a</sub><sup>b</sup> f(x) dx = lim (λ→0) Σ f(ξᵢ) Δxᵢ</code></pre>
+<p>但在<strong>应用</strong>中，我们通常反着用：要算的量 Q 是"分布在区间 [a,b] 上的量"，并且<strong>对区间具有可加性</strong>（整体 = 各部分之和）。这时不必每次都从极限定义出发，而是抓住一个"典型微元"直接写出积分。<strong>这就是元素法。</strong></p>
+<h3>元素法的四步（务必背熟、每一步都懂为什么）</h3>
+<ol>
+<li><strong>选积分变量，定区间</strong>：选取合适的坐标变量 x（或 θ、t 等），确定其变化范围 [a,b]。</li>
+<li><strong>取微元，作局部近似</strong>：在 [a,b] 内任取一个小区间 [x, x+dx]，在这个小区间上把"变的东西近似看成不变的、曲的近似看成直的"，求出局部量 ΔQ 的近似值 <code>dQ = f(x) dx</code>，这个 dQ 就叫做<strong>元素（微元）</strong>。</li>
+<li><strong>求和</strong>：把全部元素加起来，Q ≈ Σ f(x) dx。</li>
+<li><strong>取极限</strong>：令 dx → 0，得 <code>Q = ∫<sub>a</sub><sup>b</sup> f(x) dx</code>。</li>
+</ol>
+<h3>元素法的<strong>成立条件</strong>（最容易被忽略、也最致命）</h3>
+<p>第 2 步的近似 <code>dQ = f(x)dx</code> 必须是"精度足够"的近似：要求 ΔQ 与 dQ 之差是 dx 的<strong>高阶无穷小</strong>，即</p>
+<pre><code>  ΔQ − dQ = o(dx)   （即 ΔQ = f(x)dx + o(dx)）</code></pre>
+<p>换句话说，<strong>f(x)dx 必须等于局部量 ΔQ 的"线性主部"</strong>。这样在求和、取极限时，所有被丢掉的 o(dx) 加起来才趋于 0，近似才"变成"精确。若用太粗糙的近似当微元，积分结果就会错。</p>
+<div class="insight"><strong>几何含义：</strong>元素法 = "化整为零、以直代曲、积零为整"。把整体切成无穷薄的一片片，每一片都用最简单的图形（矩形、圆盘、圆环、圆柱壳、直线段……）近似，再把无穷多片累加。这是微积分"无限细分 + 极限还原"思想的直接运用。</div>
+<div class="insight"><strong>物理含义：</strong>所有物理量本质上都是"分布量"——质量分布在长度/面积/体积上、力分布在位移上、压强分布在面积上。元素法的物理版本就是"密度 × 微元 = 局部量"：只要写出 <code>dQ = (某密度) × (某微元)</code>，积分自然给出总量。功、压力、引力、质心、转动惯量……全部如此。</div>
+
+<h2 id="s2">6.2 几何应用一：平面图形的面积</h2>
+<h3>(1) 直角坐标：X 型区域（"上下型"，对 x 积分）</h3>
+<p>由曲线 <code>y = f(x)</code>、<code>y = g(x)</code>（在 [a,b] 上 f(x) ≥ g(x)）与直线 x = a、x = b 围成的图形，面积为</p>
+<pre><code>  A = ∫<sub>a</sub><sup>b</sup> [ f(x) − g(x) ] dx</code></pre>
+<p><strong>微元</strong>：<code>dA = [ f(x) − g(x) ] dx</code>——宽 dx、高为"上减下"的<strong>窄竖条矩形</strong>。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrUp1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,8 Z" fill="#16a34a"/></marker></defs><line x1="50" y1="292" x2="492" y2="292" stroke="#94a3b8" stroke-width="1.5"/><line x1="50" y1="30" x2="50" y2="292" stroke="#94a3b8" stroke-width="1.5"/><text x="34" y="36" fill="#334155" font-size="13" text-anchor="end">y</text><path d="M70,120 L460,60" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="466" y="52" fill="#2563eb" font-size="14" font-style="italic">y=f(x)</text><path d="M70,240 L460,200" fill="none" stroke="#16a34a" stroke-width="2.5"/><text x="466" y="196" fill="#16a34a" font-size="14" font-style="italic">y=g(x)</text><rect x="70" y="120" width="9" height="120" fill="#2563eb" fill-opacity="0.20" stroke="#2563eb" stroke-width="1.2"><animate attributeName="x" values="70;451;70" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="height" values="120;140;120" dur="6s" repeatCount="indefinite"/></rect><line x1="74" y1="120" x2="74" y2="240" stroke="#16a34a" stroke-width="2" marker-start="url(#arrUp1)" marker-end="url(#arrUp1)"><animate attributeName="x1" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="74;455;74" dur="6s" repeatCount="indefinite"/><animate attributeName="y1" values="120;60;120" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="240;200;240" dur="6s" repeatCount="indefinite"/></line><text x="86" y="185" font-size="13" fill="#16a34a">f(x)−g(x)<animate attributeName="x" values="86;467;86" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="185;132;185" dur="6s" repeatCount="indefinite"/></text><g fill="#334155" font-size="13"><text x="70" y="312" text-anchor="middle">a</text><text x="460" y="312" text-anchor="middle">b</text><text x="260" y="312" text-anchor="middle">x</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：面积微元 dA=[f(x)−g(x)]dx——一条宽 dx、高为"上减下"的窄竖条，从 a 扫到 b 累加成平面图形面积</figcaption></figure>
+<p>特例：若只有曲线 y = f(x)（f ≥ 0）、x 轴、x = a、x = b 围成，则 g(x) = 0，得</p>
+<pre><code>  A = ∫<sub>a</sub><sup>b</sup> f(x) dx</code></pre>
+<h3>(2) 直角坐标：Y 型区域（"左右型"，对 y 积分）</h3>
+<p>由曲线 <code>x = φ(y)</code>、<code>x = ψ(y)</code>（在 [c,d] 上 φ(y) ≥ ψ(y)）与直线 y = c、y = d 围成的图形，面积为</p>
+<pre><code>  A = ∫<sub>c</sub><sup>d</sup> [ φ(y) − ψ(y) ] dy</code></pre>
+<p><strong>微元</strong>：<code>dA = [ φ(y) − ψ(y) ] dy</code>——高 dy、宽为"右减左"的<strong>窄横条矩形</strong>。</p>
+<p><strong>选型原则</strong>：怎么好算怎么来。有时"竖着切"（对 x 积分）要分好几段，"横着切"（对 y 积分）一段就够；反之亦然。动手前先画出草图、标出交点。</p>
+<h3>(3) 极坐标下的面积</h3>
+<p>由极坐标曲线 <code>r = r(θ)</code>（r(θ) ≥ 0 且连续）与两条射线 θ = α、θ = β（α &lt; β）围成的"扇形区域"，面积为</p>
+<pre><code>  A = (1/2) ∫<sub>α</sub><sup>β</sup> [ r(θ) ]² dθ</code></pre>
+<p><strong>微元</strong>：<code>dA = (1/2) r² dθ</code>——半径 r、圆心角 dθ 的<strong>小扇形</strong>（用扇形面积公式 ½r²θ 近似）。</p>
+<div class="insight"><strong>几何含义：</strong>直角坐标下的面积微元是"窄矩形"，其核心动作是<strong>以直代曲</strong>——在宽 dx 的一小段内，把曲线看成水平直线，高近似取"上减下"；极坐标下的面积微元是"小扇形"，用 ½r²dθ 以"扇形代曲边"。总面积的几何意义，就是把这些细条/细扇形的面积<strong>无限累加</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>曲线下的面积在物理上就是"速率 × 时间"型的累积量：v–t 图下面积 = 位移，a–t 图下面积 = 速度变化量，P–t（功率–时间）图下面积 = 功，F–x（力–位移）图下面积 = 功。<strong>凡"横轴量的微元 × 纵轴量"能构成某物理量的微分，该物理量就是某曲线下的面积。</strong></div>
+
+<h2 id="s3">6.3 几何应用二：体积（截面法与旋转体）</h2>
+<h3>(1) 平行截面面积已知的立体（切片法，最一般）</h3>
+<p>设立体夹在垂直于 x 轴的两个平面 x = a、x = b 之间，且过点 x 处垂直于 x 轴的<strong>截面面积 A(x)</strong> 是已知的连续函数，则体积为</p>
+<pre><code>  V = ∫<sub>a</sub><sup>b</sup> A(x) dx</code></pre>
+<p><strong>微元</strong>：<code>dV = A(x) dx</code>——底面积 A(x)、厚度 dx 的<strong>薄片</strong>（薄柱体，体积 ≈ 底面积 × 厚度）。</p>
+<h3>(2) 旋转体：圆盘法（Disk Method）</h3>
+<p>曲线 y = f(x)（a ≤ x ≤ b，f ≥ 0）绕 x 轴旋转一周所得旋转体体积：</p>
+<pre><code>  V = π ∫<sub>a</sub><sup>b</sup> [ f(x) ]² dx</code></pre>
+<p><strong>微元</strong>：<code>dV = π [f(x)]² dx</code>——半径 f(x)、厚度 dx 的<strong>薄圆盘（圆柱）</strong>。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="500" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="500" y2="260" stroke="#94a3b8" stroke-width="1.5"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240 L450,280 L380,400 L320,460 L260,480 L190,453 L130,386 L70,280 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M70,240 L130,134 L190,67 L260,40 L320,60 L380,120 L450,240" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M70,280 L130,386 L190,453 L260,480 L320,460 L380,400 L450,280" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,4"/><ellipse cx="70" cy="260" rx="6.4" ry="20" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="1.5"><animate attributeName="cx" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="rx" values="6.4;40;62;70;64;45;6.4;45;64;70;62;40;6.4" dur="8s" repeatCount="indefinite"/><animate attributeName="ry" values="20;126;193;220;200;140;20;140;200;220;193;126;20" dur="8s" repeatCount="indefinite"/></ellipse><line x1="70" y1="260" x2="70" y2="240" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x1" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="70;130;190;260;320;380;450;380;320;260;190;130;70" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="240;134;67;40;60;120;240;120;60;40;67;134;240" dur="8s" repeatCount="indefinite"/></line><text x="260" y="28" fill="#2563eb" font-size="14" font-style="italic" text-anchor="middle">y=f(x)</text><text x="500" y="246" fill="#334155" font-size="13" text-anchor="end">旋转轴 (x 轴)</text><text x="78" y="250" font-size="13" fill="#16a34a">半径 f(x)<animate attributeName="x" values="78;138;198;268;328;388;458;388;328;268;198;138;78" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="250;197;164;150;160;190;250;190;160;150;164;197;250" dur="8s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：圆盘法——曲线 y=f(x) 绕 x 轴旋转，每个薄圆盘半径 f(x)、厚 dx，体积 V=π∫[f(x)]²dx</figcaption></figure>
+<h3>(3) 旋转体：垫圈法（Washer Method）</h3>
+<p>由 y = R(x) 与 y = r(x)（a ≤ x ≤ b，且 R(x) ≥ r(x) ≥ 0）围成的区域绕 x 轴旋转一周所得"空心"旋转体体积：</p>
+<pre><code>  V = π ∫<sub>a</sub><sup>b</sup> ( [R(x)]² − [r(x)]² ) dx</code></pre>
+<p><strong>微元</strong>：<code>dV = π([R(x)]² − [r(x)]²) dx</code>——外半径 R、内半径 r、厚度 dx 的<strong>薄垫圈（圆环片）</strong>。</p>
+<h3>(4) 旋转体：柱壳法（Shell Method）</h3>
+<p>由 y = f(x)（f ≥ 0）、x 轴、x = a、x = b 围成的区域绕 <strong>y 轴</strong>旋转一周所得体积：</p>
+<pre><code>  V = 2π ∫<sub>a</sub><sup>b</sup> x · f(x) dx</code></pre>
+<p><strong>微元</strong>：<code>dV = 2π x · f(x) · dx</code>——半径 x、高 f(x)、厚度 dx 的<strong>薄圆柱壳</strong>；把它沿一条母线剪开展平，近似为长 2πx、宽 f(x)、厚 dx 的长方体。</p>
+<p><strong>选法提示</strong>：绕水平轴（x 轴）通常用<strong>圆盘/垫圈法</strong>（以 x 为积分变量）；绕竖直轴（y 轴）通常用<strong>柱壳法</strong>（仍以 x 为积分变量，避免反解函数）。两种方法结果一致，难易可差很多，选对方法往往比硬算更重要。</p>
+<div class="insight"><strong>几何含义：</strong>体积的三种微元对应三种"几何母体"：圆盘（半径 f、厚 dx）、垫圈（外半径 R、内半径 r）、圆柱壳（周长 2πx × 高 f × 厚 dx，剪开近似长方体）。共同点是"把立体切成无穷多片规则小体，再累加"。截面法是母方法，圆盘/垫圈/柱壳都是"旋转对称"这一特殊情形下的截面法。</div>
+<div class="insight"><strong>物理含义：</strong>体积 × 密度 = 质量，所以"求体积"与"求质量"同构：若立体线密度为 ρ(x)，质量 M = ∫ ρ(x) A(x) dx。圆盘法把旋转体切成薄圆盘，是后面求转动惯量（I = ∫ r² dm）等力学量的几何基础；柱壳法则对应"把物体看成一层层同心薄壳"。</div>
+
+<h2 id="s4">6.4 几何应用三：平面曲线的弧长</h2>
+<h3>弧微分：一切弧长公式的共同源头</h3>
+<p>弧长元素来自<strong>勾股定理 + 以切线代弧线</strong>：在微小区间上，弧段 Δs 可用切线段近似，于是</p>
+<pre><code>  ds² = dx² + dy²   ⟹   ds = √( dx² + dy² )</code></pre>
+<p>不同坐标系只是把 ds 换成相应变量的形式。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><path d="M60,215 Q 290,120 470,185" fill="none" stroke="#cbd5e1" stroke-width="2"/><circle cx="60" cy="215" r="6" fill="#2563eb"><animateMotion dur="6s" repeatCount="indefinite" path="M60,215 Q 290,120 470,185"/></circle><path d="M230,170 Q 290,150 350,210" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"><animate attributeName="opacity" values="1;0.15;1" dur="4s" repeatCount="indefinite"/></path><line x1="230" y1="170" x2="350" y2="210" stroke="#0f172a" stroke-width="2.5"/><line x1="230" y1="170" x2="350" y2="170" stroke="#2563eb" stroke-width="2" stroke-dasharray="5,4"/><line x1="350" y1="170" x2="350" y2="210" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,4"/><path d="M338,170 L338,182 L350,182" fill="none" stroke="#94a3b8" stroke-width="1.5"/><text x="286" y="160" fill="#2563eb" font-size="14" text-anchor="middle">dx</text><text x="360" y="194" fill="#16a34a" font-size="14">dy</text><text x="282" y="226" fill="#0f172a" font-size="14" text-anchor="middle">ds</text><text x="150" y="140" fill="#334155" font-size="13">ds² = dx² + dy²</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：弧微分——以切线微元 ds 代替弧线微元，由勾股定理得 ds=√(dx²+dy²)</figcaption></figure>
+<h3>(1) 直角坐标</h3>
+<p>曲线 y = f(x)，a ≤ x ≤ b，f′(x) 连续，则</p>
+<pre><code>  L = ∫<sub>a</sub><sup>b</sup> √( 1 + [f′(x)]² ) dx</code></pre>
+<h3>(2) 参数方程</h3>
+<p>曲线 x = x(t)、y = y(t)，α ≤ t ≤ β，x′(t)、y′(t) 连续，则</p>
+<pre><code>  L = ∫<sub>α</sub><sup>β</sup> √( [x′(t)]² + [y′(t)]² ) dt</code></pre>
+<h3>(3) 极坐标</h3>
+<p>曲线 r = r(θ)，α ≤ θ ≤ β，r′(θ) 连续，则</p>
+<pre><code>  L = ∫<sub>α</sub><sup>β</sup> √( [r(θ)]² + [r′(θ)]² ) dθ</code></pre>
+<div class="insight"><strong>几何含义：</strong>弧微分的本质是"<strong>以切线代弧线</strong>"：把一段无限短的曲线看成直线段，用勾股定理 ds = √(dx² + dy²) 求出它的长，再无限累加。三种坐标形式的弧长公式是同一句"勾股定理"分别用 x、t、θ 三种参数写出来。</div>
+<div class="insight"><strong>物理含义：</strong>若参数 t 是时间，(x(t), y(t)) 是质点的运动轨迹，那么 <code>√([x′(t)]² + [y′(t)]²) = |v(t)|</code> 恰好是瞬时<strong>速率</strong>，于是 <code>L = ∫ v(t) dt</code> 就是质点从 t=α 到 t=β 走过的<strong>路程</strong>。这给出重要结论：<strong>路程 = 速率对时间的积分</strong>；而位移只关心起终点，与弧长不同。</div>
+
+<h2 id="s5">6.5 物理应用：功、水压力、引力</h2>
+<h3>(1) 变力沿直线所做的功</h3>
+<p>质点在变力 F(x) 作用下沿 x 轴从 x = a 移到 x = b（F 方向与运动方向一致），所做的功为</p>
+<pre><code>  W = ∫<sub>a</sub><sup>b</sup> F(x) dx</code></pre>
+<p><strong>微元</strong>：<code>dW = F(x) dx</code>——在小区间 [x, x+dx] 上把力近似看成常力，功 = 力 × 位移。</p>
+<p><strong>弹簧（胡克定律 F = kx）</strong>：把弹簧从自然长度拉长 X，克服弹力做功</p>
+<pre><code>  W = ∫<sub>0</sub><sup>X</sup> kx dx = (1/2) k X²</code></pre>
+<p><strong>抽水（提水）做功</strong>：要把容器中的水抽出，需把"深度 h 处、厚度 dh 的一层水"提升到指定高度，设该层截面积为 A(h)、密度 ρ、重力加速度 g、提升距离 D(h)，则</p>
+<pre><code>  dW = ρ g · A(h) dh · D(h)
+  W  = ∫ ρ g · A(h) · D(h) dh</code></pre>
+<h3>(2) 液体的静压力（水压力）</h3>
+<p>液体压强随深度线性增大：<code>P = ρ g h</code>。面积微元 dA 上所受压力</p>
+<pre><code>  dF = P · dA = ρ g h · dA</code></pre>
+<p>对竖直浸入水中的平板，取"深 h、厚 dh"的水平窄条（该窄条宽度 W(h)），则整块板所受总压力</p>
+<pre><code>  F = ∫ ρ g · h · W(h) dh</code></pre>
+<p><strong>关键</strong>：压强不是常数，深度 h 是积分变量；窄条上各点深度近似相同，故整条可用 P = ρgh 近似，这正是元素法。</p>
+<h3>(3) 万有引力（连续体对质点的引力）</h3>
+<p>万有引力 <code>F = G m₁ m₂ / r²</code>，方向沿两物体连线。对<strong>连续分布</strong>的物体（如细棒、圆环、薄片）对质点的引力，须把物体切成质量微元 dm，先写出微元引力</p>
+<pre><code>  dF = G · m · dm / r²   （方向沿质点与 dm 的连线）</code></pre>
+<p>注意 <strong>dF 是向量，方向随 dm 位置而变</strong>，必须<strong>按坐标分量分解后再分别积分</strong>，不能把大小直接标量相加。</p>
+<p><strong>经典例</strong>：长为 L、线密度为 ρ（均匀，总质量 M = ρL）的细棒，对位于其延长线上、距近端 a 处质量为 m 的质点的引力（取棒上 x ∈ [0, L]，dm = ρ dx，距离 = a + x）：</p>
+<pre><code>  F = ∫<sub>0</sub><sup>L</sup> G m ρ dx / (a+x)² = G m ρ [ 1/a − 1/(a+L) ] = G m M / [ a (a+L) ]</code></pre>
+<h3>(4) 补充：平均值与质心（重心）</h3>
+<p><strong>函数平均值</strong>：f(x) 在 [a,b] 上的平均值</p>
+<pre><code>  f̄ = ( 1/(b−a) ) ∫<sub>a</sub><sup>b</sup> f(x) dx</code></pre>
+<p><strong>质心（重心）坐标</strong>：对质量连续分布的物体，用元素法对质量微元加权平均</p>
+<pre><code>  x̄ = ∫ x dm / ∫ dm ，  ȳ = ∫ y dm / ∫ dm</code></pre>
+<div class="insight"><strong>几何含义：</strong>变力做功的 W = ∫ F(x)dx 在几何上就是"力–位移曲线下的面积"；函数平均值 f̄ 是"与曲线下面积等面积的矩形的高"（面积相等原则）；质心是"使各质量微元关于该点的力矩之和为零"的平衡点，几何上对应图形的几何中心（均匀体 = 形心）。</div>
+<div class="insight"><strong>物理含义：</strong>功 = 力 × 位移的累积（力是位置的函数，必须积分）；水压力 = 压强 × 面积的累积（压强随深度线性变化，深度是积分变量）；引力 = 连续体各微元引力的矢量叠加（要分解分量）。三者都是"分布量"——分别分布在位移、面积、质量上，元素法把它们统一为 ∫ (密度) d(微元)。</div>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>元素法（微元法）</td><td>化整为零、以直代曲、积零为整</td><td>分布量 = 密度 × 微元的无限累加</td></tr>
+<tr><td>面积 A = ∫[f−g]dx</td><td>窄竖条矩形的累加（以直代曲）</td><td>v–t 图下面积 = 位移；F–x 图下面积 = 功</td></tr>
+<tr><td>极坐标面积 A = ½∫r²dθ</td><td>小扇形 ½r²dθ 的累加</td><td>按角度"扫过"的区域的度量</td></tr>
+<tr><td>体积（截面法）V = ∫A(x)dx</td><td>截面面积的累加（切片）</td><td>质量 = ∫ 密度 × 截面面积 dx</td></tr>
+<tr><td>旋转体（圆盘/垫圈）</td><td>圆盘/圆环薄片的叠加</td><td>旋转对称体的切片求和；转动惯量基础</td></tr>
+<tr><td>旋转体（柱壳法）</td><td>圆柱壳剪开近似长方体</td><td>同心薄壳逐层累加</td></tr>
+<tr><td>弧长 L = ∫√(dx²+dy²)</td><td>以切线代弧线，勾股定理得 ds</td><td>路程 = ∫ 速率 dt</td></tr>
+<tr><td>变力做功 W = ∫F(x)dx</td><td>力–位移曲线下的面积</td><td>功的累积；弹簧功 = ½kX²</td></tr>
+<tr><td>水压力 F = ∫ρgh dA</td><td>面积微元上的压强累加</td><td>压强随深度线性变化，深度是变量</td></tr>
+<tr><td>引力 F = ∫ Gm dm/r²</td><td>连续体的质量微元累加</td><td>万有引力，须分解坐标分量</td></tr>
+<tr><td>平均值 f̄ = 1/(b−a)∫f dx</td><td>与曲边梯形等面积的矩形的高</td><td>平均速度、平均功率</td></tr>
+<tr><td>质心 x̄ = ∫x dm/∫dm</td><td>均匀体 = 形心（几何中心）</td><td>重心、力矩平衡点</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li><strong>面积</strong>：求抛物线 <code>y = x²</code> 与 <code>y = √x</code> 所围成图形的面积。（交点 (0,0)、(1,1)，A = ∫<sub>0</sub><sup>1</sup> (√x − x²) dx = <strong>1/3</strong>）</li>
+<li><strong>体积（圆盘法）</strong>：求曲线 <code>y = x²</code> 在 [0,1] 上绕 x 轴旋转所得旋转体体积。（V = π ∫<sub>0</sub><sup>1</sup> x⁴ dx = <strong>π/5</strong>）</li>
+<li><strong>体积（柱壳法）</strong>：求 <code>y = x²</code> 与 x 轴、x = 1 围成的区域绕 y 轴旋转所得体积。（V = 2π ∫<sub>0</sub><sup>1</sup> x·x² dx = 2π ∫<sub>0</sub><sup>1</sup> x³ dx = <strong>π/2</strong>）</li>
+<li><strong>弧长</strong>：求曲线 <code>y = (2/3) x<sup>3/2</sup></code> 从 x = 0 到 x = 1 的弧长。（y′ = √x，L = ∫<sub>0</sub><sup>1</sup> √(1+x) dx = <strong>(2/3)(2√2 − 1)</strong>）</li>
+<li><strong>变力做功</strong>：力 <code>F(x) = x²</code>（单位沿 x 轴正向）把物体从 x = 0 拉到 x = 2，求做功。（W = ∫<sub>0</sub><sup>2</sup> x² dx = <strong>8/3</strong>）</li>
+<li><strong>水压力</strong>：一宽 2 m、高 3 m 的矩形闸门竖直浸入水中，其上边在水面下 1 m 处，求水对闸门的总压力。（取深度 h ∈ [1,4]，F = ∫<sub>1</sub><sup>4</sup> ρg h · 2 dh = 15ρg；取 ρ = 1000、g = 9.8，得 <strong>147000 N</strong>）</li>
+<li><strong>引力</strong>：长 L、总质量 M 的均匀细棒，对延长线上距近端 a 处质量为 m 的质点的引力。（F = GmM/[a(a+L)]）</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<h4>⚠️ 常见误区与纠正</h4>
+<ul>
+<li>❌ 面积公式"上减下"弄反，算出负面积 → ❌ 面积恒正，务必保证 f ≥ g，否则取绝对值或分区间；"上减下、右减左"要先画草图。</li>
+<li>❌ 旋转体绕 x 轴与绕 y 轴混用公式 → ❌ 绕水平轴用圆盘/垫圈法，绕竖直轴常用柱壳法；先明确旋转轴再选公式。</li>
+<li>❌ 柱壳法把"半径"写成 f(x)、把"高"写成 x → ❌ 柱壳半径是 x（到 y 轴的距离），高是 f(x)，微元 dV = 2π·x·f(x)·dx。</li>
+<li>❌ 弧长公式写成 ∫[1+f′(x)]dx 或 ∫√(1+f(x))dx → ❌ 正确是 ∫√(1+[f′(x)]²)dx，平方在导数上、整体再开方。</li>
+<li>❌ 变力做功仍用 W = F·s，把 F 当常数 → ❌ 力随位置变化时必须积分 W = ∫F(x)dx。</li>
+<li>❌ 水压力把压强 ρgh 当常数（用表面深度）→ ❌ 压强随深度线性增大，深度是积分变量，必须 ∫ρg·h·W(h)dh。</li>
+<li>❌ 引力把方向各异的微元引力直接标量相加 → ❌ dF 是向量，须按坐标分量分解后分别积分，利用对称性可抵消某些分量。</li>
+<li>❌ 元素法不做"ΔQ − dQ = o(dx)"验证，用粗糙近似当微元 → ❌ 微元必须是局部量的线性主部，否则积分结果错误。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p style="margin:0 0 10px;font-weight:700;color:#b45309">一、练习题</p>
+<ol style="margin:6px 0 16px">
+<li>求抛物线 <code>y = x²</code> 与直线 <code>y = 2x</code> 所围图形的面积。</li>
+<li>求极坐标曲线 <code>r = 2sinθ</code>（圆）所围成区域的面积。</li>
+<li>求由 <code>y = x − x²</code> 与 <code>x</code> 轴围成的区域绕 <code>y</code> 轴旋转一周所得旋转体的体积。</li>
+<li>求曲线 <code>y = (1/2) x²</code> 从 <code>x = 0</code> 到 <code>x = 1</code> 的弧长。</li>
+<li>用 10 N 的力恰好把某弹簧从自然长度拉长 0.1 m，求把该弹簧从自然长度拉长 0.2 m 时克服弹力所做的功。</li>
+<li>一竖直放置的等腰三角形闸门，底边在上且宽 2 m、恰在水面处，高 3 m、顶点朝下。求水对闸门的总压力（取 ρ = 1000 kg/m³，g = 9.8 m/s²）。</li>
+</ol>
+<p style="margin:0 0 6px;font-weight:700;color:#b45309">二、参考答案（点击展开）</p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 1 题答案</summary><p>交点：<code>x² = 2x ⟹ x = 0, 2</code>；在 [0,2] 上 <code>2x ≥ x²</code>，故 A = ∫<sub>0</sub><sup>2</sup> (2x − x²) dx = [ x² − x³/3 ]<sub>0</sub><sup>2</sup> = 4 − 8/3 = <strong>4/3</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 2 题答案</summary><p><code>r = 2sinθ</code> 是半径 1 的圆（θ ∈ [0,π]）。A = ½∫<sub>0</sub><sup>π</sup> (2sinθ)² dθ = 2∫<sub>0</sub><sup>π</sup> sin²θ dθ = 2 · (π/2) = <strong>π</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 3 题答案</summary><p>与 x 轴交点：<code>x − x² = x(1 − x) = 0 ⟹ x = 0, 1</code>。绕竖直 y 轴用<strong>柱壳法</strong>：V = 2π∫<sub>0</sub><sup>1</sup> x·(x − x²) dx = 2π∫<sub>0</sub><sup>1</sup> (x² − x³) dx = 2π( 1/3 − 1/4 ) = <strong>π/6</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 4 题答案</summary><p>y′ = x，弧长 L = ∫<sub>0</sub><sup>1</sup> √(1 + x²) dx = ½[ x√(1+x²) + ln(x + √(1+x²)) ]<sub>0</sub><sup>1</sup> = <strong>½[ √2 + ln(1 + √2) ]</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 5 题答案</summary><p>胡克定律 <code>F = kx</code>，由 10 = k·0.1 得 <code>k = 100 N/m</code>。克服弹力做功 W = ∫<sub>0</sub><sup>0.2</sup> 100x dx = 50x² |<sub>0</sub><sup>0.2</sup> = 50 × 0.04 = <strong>2 J</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第 6 题答案</summary><p>取水面为深度 h = 0，竖直向下为 h 轴。深度 h 处闸门宽度 W(h) = 2 − (2/3)h（h ∈ [0,3]）。压强 p = ρgh，故 F = ∫<sub>0</sub><sup>3</sup> ρg h·W(h) dh = ρg∫<sub>0</sub><sup>3</sup> h(2 − (2/3)h) dh = ρg[ h² − (2/9)h³ ]<sub>0</sub><sup>3</sup> = ρg(9 − 6) = 3ρg = 3 × 1000 × 9.8 = <strong>29400 N</strong>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第5章-定积分/第5章-定积分.html">← 上一章：第5章 定积分</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第7章-微分方程/第7章-微分方程.html">下一章：第7章 微分方程 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学高等数学</footer>
+</body>
+</html>

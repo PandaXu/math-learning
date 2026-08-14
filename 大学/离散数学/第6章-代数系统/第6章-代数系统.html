@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第6章 代数系统 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第6章 代数系统</div></header>
+<main class="container">
+<h1>第6章 代数系统</h1>
+<p class="lead">大学 / 离散数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>代数系统 = 「集合 + 运算」。群刻画<strong>对称</strong>，环刻画<strong>加减乘</strong>，域刻画<strong>四则运算</strong>，格刻画<strong>上下确界</strong>，布尔代数刻画<strong>逻辑与集合</strong>。学完本章，你要能把"运算"本身当成一个对象来研究——看见一个集合，先问：上面定义了哪些运算？满足哪些律？这些运算背后藏着怎样的对称与结构？</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">6.1 代数系统与二元运算</a><a href="#s2">6.2 群：对称性的数学</a><a href="#s3">6.3 环：可加减乘的数系</a><a href="#s4">6.4 域：可四则运算的数系</a><a href="#s5">6.5 格：上下确界的结构</a><a href="#s6">6.6 布尔代数：逻辑与电路的代数</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">6.1 代数系统与二元运算</h2>
+<h3>什么是二元运算？</h3>
+<p><strong>二元运算</strong>：设 <code>S</code> 是非空集合，从 <code>S×S</code> 到 <code>S</code> 的映射 <code>f</code> 称为 <code>S</code> 上的二元运算。也就是说，任取 <code>a, b ∈ S</code>，运算结果 <code>f(a, b)</code> 仍然落在 <code>S</code> 里——这叫做<strong>封闭性</strong>（closure）。</p>
+<p>记法：把 <code>f(a, b)</code> 写作 <code>a * b</code>、<code>a + b</code>、<code>a × b</code>、<code>a ∘ b</code> 等。"<code>*</code>"只是一个占位符号，代表"某种规则"，不一定是乘法。</p>
+<p><strong>反例辨析</strong>：普通减法在自然数 <code>N</code> 上<strong>不封闭</strong>（<code>2 − 3 = −1 ∉ N</code>），但在整数 <code>Z</code> 上封闭；普通除法在整数上不封闭（<code>1 ÷ 2 ∉ Z</code>），但在非零有理数上封闭。封闭性是"这套运算能不能一直算下去"的第一道门槛。</p>
+
+<h3>代数系统（代数结构）</h3>
+<p><strong>代数系统</strong>：非空集合 <code>S</code> 连同其上若干运算组成的整体，记作 <code>(S, *₁, *₂, …)</code>。例如 <code>(Z, +, ×)</code> 是整数加法乘法系统，<code>(P(S), ∪, ∩)</code> 是集合的并交系统。</p>
+<p>研究代数系统，本质是回答三个问题：</p>
+<ol>
+<li><strong>有哪些运算？</strong>（几元运算、封闭不封闭）</li>
+<li><strong>满足哪些运算律？</strong>（结合、交换、分配、幂等、吸收……）</li>
+<li><strong>存在哪些特殊元素？</strong>（幺元、零元、逆元）</li>
+</ol>
+<div class="insight"><strong>几何/物理含义：</strong>代数系统是把"运算"当成一个<strong>整体对象</strong>来研究的框架。就像几何把"点、线、变换"抽象出来一样，代数系统把"数、集合、函数、矩阵、对称操作"上共同的运算规律抽象成同一种语言。一旦证明一个定理对"所有群"成立，它就同时适用于整数加法、矩阵乘法、魔方旋转——这是<strong>数学的一次"化归与统一"</strong>。</div>
+
+<h3>运算律</h3>
+<table>
+<tr><th>运算律</th><th>表达式</th><th>直观含义</th></tr>
+<tr><td>结合律</td><td><code>(a*b)*c = a*(b*c)</code></td><td>先算哪一步结果都一样，括号可省略</td></tr>
+<tr><td>交换律</td><td><code>a*b = b*a</code></td><td>两个操作数的顺序可交换</td></tr>
+<tr><td>分配律</td><td><code>a*(b∘c) = (a*b)∘(a*c)</code></td><td>"乘"能"拆开"到"加"的每一项</td></tr>
+<tr><td>幂等律</td><td><code>a*a = a</code></td><td>重复运算一次不改变结果（∪、∩、∨、∧）</td></tr>
+<tr><td>吸收律</td><td><code>a*(a∘b) = a</code></td><td>一个运算能"吞掉"另一个运算</td></tr>
+</table>
+<p><strong>关键辨析</strong>：结合律 ≠ 交换律。矩阵乘法<strong>满足结合律但不满足交换律</strong>：<code>(AB)C = A(BC)</code> 恒成立，但一般 <code>AB ≠ BA</code>。这说明"运算顺序"与"操作数顺序"是两件独立的事。</p>
+
+<h3>特殊元素：幺元、零元、逆元</h3>
+<ul>
+<li><strong>幺元（单位元）</strong><code>e</code>：对任意 <code>a</code>，有 <code>e*a = a*e = a</code>。如加法中的 <code>0</code>（<code>a+0 = a</code>）、乘法中的 <code>1</code>、矩阵乘法中的单位阵 <code>I</code>、集合并运算中的 <code>∅</code>（<code>A∪∅ = A</code>）。</li>
+<li><strong>零元</strong><code>θ</code>：对任意 <code>a</code>，有 <code>θ*a = a*θ = θ</code>。如乘法中的 <code>0</code>（<code>0×a = 0</code>）、集合交运算中的 <code>∅</code>（<code>A∩∅ = ∅</code>）。注意：加法的幺元 <code>0</code> 恰是乘法的零元，同一个元素在不同运算里身份不同。</li>
+<li><strong>逆元</strong>：若 <code>a*b = b*a = e</code>，则 <code>b</code> 是 <code>a</code> 的逆元，记 <code>a⁻¹</code>。如加法中 <code>a</code> 的逆元是 <code>−a</code>，乘法中 <code>a</code>（≠0）的逆元是 <code>1/a</code>。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>幺元 = "什么都不做的操作"（恒等变换、加 0、乘 1、空操作）；逆元 = "撤销操作"（前进的反向是后退，旋转 90° 的逆是旋转 −90°）。一组操作若能"做"也能"撤销"，就逼近了群的雏形。</div>
+
+<h3>同态与同构（简要）</h3>
+<p>设 <code>(A, *)</code> 与 <code>(B, ∘)</code> 是两个代数系统，映射 <code>φ : A → B</code> 若满足 <code>φ(a*b) = φ(a)∘φ(b)</code>，则称 <code>φ</code> 为<strong>同态</strong>；若 <code>φ</code> 还是双射，则称<strong>同构</strong>。同构的两个系统"结构完全相同"，只是换了符号。例如 <code>(R⁺, ×)</code> 与 <code>(R, +)</code> 通过对数/指数 <code>φ(x) = ln x</code> 建立同构：<code>ln(x·y) = ln x + ln y</code>——乘法被"翻译"成了加法。</p>
+
+<h2 id="s2">6.2 群：对称性的数学</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr1" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><polygon points="260,36 308.5,120 211.5,120" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 92;120 260 92;120 260 92;240 260 92;240 260 92;360 260 92;360 260 92" keyTimes="0;0.22;0.34;0.56;0.68;0.9;1" dur="7s" repeatCount="indefinite"/><polygon points="260,36 308.5,120 211.5,120" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="3"/><circle cx="260" cy="36" r="7" fill="#16a34a"/></g><circle cx="260" cy="92" r="4" fill="#334155"/><path d="M 302 58 C 324 44, 326 66, 306 80" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr1)"/><text x="338" y="64" font-size="13" fill="#16a34a">旋转 120°</text><text x="260" y="158" font-size="13" fill="#334155" text-anchor="middle">绿色顶点随旋转依次落到另外两个顶点，三角形轮廓与虚线原位置完全重合</text><text x="260" y="180" font-size="12" fill="#6b7280" text-anchor="middle">e（恒等）· r（转 120°）· r²（转 240°）在复合下构成循环群 C₃ ⊆ D₃</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：正三角形旋转 120° 后与原位置重合——群是「对称变换」的抽象，这些变换在复合下封闭、可逆且满足结合律</figcaption></figure>
+<h3>从半群到群：四个条件的层层递进</h3>
+<table>
+<tr><th>结构</th><th>满足条件</th><th>例</th></tr>
+<tr><td>半群</td><td>封闭 + 结合律</td><td>(N, +)，(Z, ×)</td></tr>
+<tr><td>幺半群（独异点）</td><td>半群 + 存在幺元</td><td>(N, +) 幺元 0；(Z, ×) 幺元 1</td></tr>
+<tr><td>群</td><td>幺半群 + 每个元素有逆元</td><td>(Z, +)，(Q∖{0}, ×)</td></tr>
+<tr><td>阿贝尔群（交换群）</td><td>群 + 交换律</td><td>(Z, +)，(R, +)，模 n 加法群</td></tr>
+</table>
+
+<h3>群的定义</h3>
+<p>代数系统 <code>(G, *)</code> 称为<strong>群</strong>，如果满足四条：</p>
+<pre><code>① 封闭性：∀a, b ∈ G，有 a * b ∈ G
+② 结合律：∀a, b, c ∈ G，(a*b)*c = a*(b*c)
+③ 幺元：  ∃e ∈ G，∀a，e*a = a*e = a
+④ 逆元：  ∀a ∈ G，∃a⁻¹ ∈ G，使 a*a⁻¹ = a⁻¹*a = e</code></pre>
+<p>若再满足 <code>a*b = b*a</code>，称为<strong>交换群（阿贝尔群，Abel 群）</strong>。</p>
+
+<h3>群的经典例子</h3>
+<ul>
+<li><strong>(Z, +)</strong> 整数加法群：幺元 <code>0</code>，<code>a</code> 的逆元是 <code>−a</code>。这是最"朴素"的无限阿贝尔群。</li>
+<li><strong>(Q∖{0}, ×)</strong> 非零有理数乘法群：幺元 <code>1</code>，<code>a</code> 的逆元是 <code>1/a</code>。</li>
+<li><strong>(Z<sub>n</sub>, ⊕)</strong> 模 <code>n</code> 加法群：元素为 <code>{0, 1, …, n−1}</code>，运算 <code>a ⊕ b = (a+b) mod n</code>。例如 <code>Z₄</code> 中 <code>3 ⊕ 2 = 5 mod 4 = 1</code>。</li>
+<li><strong>(S<sub>n</sub>, ∘)</strong> <code>n</code> 个元素的<strong>置换群</strong>：元素是 <code>n</code> 个对象的排列置换，运算为置换的复合。它是有限群的"母版"——凯莱定理指出：<strong>任何有限群都同构于某个置换群的子群</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义（本章的灵魂）：群就是"对称"的抽象定义。</strong>一个图形的<strong>对称变换</strong>，指"搬动图形后与原位置重合"的操作（旋转、翻转、镜像）。所有这些对称变换在"复合"运算下构成一个群——因为恒等变换是幺元、每个变换都有逆变换（能转过去就能转回来）、复合满足结合律。<br/><br/>例：<strong>正三角形的对称群</strong>含 6 个元素——恒等 <code>e</code>、旋转 120° 记 <code>r</code>、旋转 240° 记 <code>r²</code>、绕三条对称轴翻转记 <code>f, fr, fr²</code>。它记作二面体群 <code>D₃</code>，阶为 6。正方形有 8 个对称，<code>D₄</code> 阶为 8。研究"一个图形有多对称"，等价于研究"它的对称群的阶有多大"。</div>
+<div class="insight"><strong>物理含义：</strong>群在物理中是<strong>对称性与守恒律</strong>的语言。诺特定理（Noether's theorem）说：<strong>每个连续对称都对应一条守恒定律</strong>——时间平移对称 → 能量守恒；空间平移对称 → 动量守恒；旋转对称 → 角动量守恒。现代粒子物理用<strong>规范群</strong>描述基本力：电磁力对应 <code>U(1)</code>，弱力 <code>SU(2)</code>，强力 <code>SU(3)</code>。晶体的空间群决定晶格结构，魔方、鲁比克群、密码学（如 RSA 依赖群/环结构）都是群的应用。</div>
+
+<h3>子群、循环群、阶与拉格朗日定理</h3>
+<ul>
+<li><strong>子群</strong>：群 <code>G</code> 的非空子集 <code>H</code> 若在 <code>G</code> 的运算下也构成群，则 <code>H</code> 是 <code>G</code> 的子群。判定：<code>H</code> 对运算封闭、对取逆封闭，且含幺元。例：偶数集 <code>2Z</code> 是 <code>(Z, +)</code> 的子群。</li>
+<li><strong>循环群</strong>：由一个元素 <code>g</code> 反复运算生成，记 <code>⟨g⟩ = {…, g⁻², g⁻¹, e, g, g², …}</code>。例：<code>(Z, +) = ⟨1⟩</code> 由 1 生成；<code>Z₄ = ⟨1⟩</code>（1, 1⊕1=2, 2⊕1=3, 3⊕1=0）。</li>
+<li><strong>元素的阶</strong>：使 <code>aⁿ = e</code> 成立的最小正整数 <code>n</code>；若不存在则称无限阶。例：<code>Z₄</code> 中元素 <code>2</code> 的阶为 2（<code>2⊕2 = 0</code>），元素 <code>1</code> 的阶为 4。</li>
+<li><strong>群的阶</strong>：群的元素个数，记 <code>|G|</code>。</li>
+<li><strong>拉格朗日定理</strong>：有限群 <code>G</code> 的任意子群 <code>H</code> 的阶 <code>|H|</code> <strong>整除</strong> <code>|G|</code>；进一步，任意元素的阶也整除 <code>|G|</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>子群对应"对称的一部分"——正三角形的旋转群 <code>C₃ = {e, r, r²}</code> 是 <code>D₃</code> 的子群（只保留旋转、丢掉翻转）。循环群对应"一个生成旋转反复作用"——像钟表指针：旋转 <code>360°/n</code> 的变换反复做 <code>n</code> 次回到原位，<code>Zₙ</code> 正是 <code>n</code> 等分的旋转群。拉格朗日定理的几何解释：<strong>对称的总数必是任何"对称子集"数量的整数倍</strong>，因为整个图形被均匀分成若干等价的部分。</div>
+
+<h2 id="s3">6.3 环：可加减乘的数系</h2>
+<h3>环的定义</h3>
+<p>代数系统 <code>(R, +, ×)</code> 称为<strong>环</strong>，如果满足：</p>
+<pre><code>① (R, +) 是阿贝尔群（加法：封闭、结合、交换、有幺元 0、有逆元）
+② (R, ×) 是半群（乘法：封闭、结合）
+③ 乘法对加法满足分配律：
+   a×(b+c) = a×b + a×c      (左分配)
+   (b+c)×a = b×a + c×a      (右分配)</code></pre>
+<p><strong>直观理解</strong>：环是"<strong>能自由做加减、能结合地做乘</strong>，但不保证能除、不保证乘法交换"的结构。加法的幺元记 <code>0</code>（零元），乘法若交换则称<strong>交换环</strong>，乘法若有幺元 <code>1</code> 则称<strong>含幺环</strong>。</p>
+<div class="insight"><strong>几何/物理含义：</strong>环的加法是"平移"（阿贝尔群），乘法是"缩放/旋转"（半群），分配律把两者绑在一起——先缩放再平移 = 先平移再缩放。这正是<strong>线性变换</strong>的核心：<code>k(x + y) = kx + ky</code>。矩阵环 <code>Mₙ(R)</code> 之所以是环，就因为"矩阵的线性变换"天然满足这三条。</div>
+
+<h3>零因子与整环</h3>
+<p><strong>零因子</strong>：在环中，若 <code>a ≠ 0</code> 且 <code>b ≠ 0</code>，但 <code>a×b = 0</code>，则称 <code>a</code>、<code>b</code> 为零因子。有零因子的环里，"两个非零元素相乘得零"——这违反了熟悉的"数"的直觉。</p>
+<ul>
+<li><strong>整环</strong>：交换含幺环 + <strong>无零因子</strong>。即 <code>a×b = 0</code> 必推出 <code>a = 0</code> 或 <code>b = 0</code>。</li>
+<li><strong>除环（体）</strong>：含幺环 + <strong>每个非零元都有乘法逆元</strong>。除环不要求乘法交换（如四元数 <code>H</code> 是除环但非交换）。</li>
+</ul>
+<h3>环的经典例子</h3>
+<table>
+<tr><th>环</th><th>交换？含幺？</th><th>特点</th></tr>
+<tr><td>(Z, +, ×) 整数环</td><td>交换、含幺</td><td>整环；<code>2, −3</code> 等不可"除"</td></tr>
+<tr><td>多项式环 Z[x]</td><td>交换、含幺</td><td>整环；元素是整系数多项式</td></tr>
+<tr><td>模 n 环 Z<sub>n</sub></td><td>交换、含幺</td><td>n 为素数时是域；n 合数时有零因子</td></tr>
+<tr><td>矩阵环 M<sub>n</sub>(R)</td><td>非交换、含幺</td><td>有零因子；幺元是单位阵 I</td></tr>
+</table>
+<p><strong>零因子实例</strong>：在 <code>Z₆</code> 中，<code>2 × 3 = 6 ≡ 0 (mod 6)</code>，但 <code>2 ≠ 0</code>、<code>3 ≠ 0</code>，所以 2 和 3 是 <code>Z₆</code> 的零因子。在矩阵环中，<code>A = [[0,1],[0,0]]</code> 满足 <code>A² = 0</code> 但 <code>A ≠ 0</code>——矩阵是"零因子"的典型来源。</p>
+<div class="insight"><strong>物理含义：</strong>多项式环是"函数/曲线的代数化"——两个多项式相加、相乘仍得多项式，对应信号与系统里的<strong>卷积与滤波</strong>（多项式系数相乘正是卷积系数）。矩阵环对应<strong>线性映射</strong>；矩阵乘法非交换对应"先旋转再拉伸 ≠ 先拉伸再旋转"的物理事实。零因子在物理中对应"非零操作的复合结果为零"——例如两个非零的投影算符相乘可能得零（投影到互相垂直的子空间）。</div>
+
+<h2 id="s4">6.4 域：可四则运算的数系</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="220" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="vec2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker><marker id="arr2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#16a34a"/></marker></defs><line x1="90" y1="100" x2="430" y2="100" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="24" x2="260" y2="176" stroke="#94a3b8" stroke-width="1.5"/><circle cx="260" cy="100" r="56" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 100;-90 260 100;-90 260 100;-180 260 100;-180 260 100;-270 260 100;-270 260 100;-360 260 100;-360 260 100" keyTimes="0;0.15;0.25;0.4;0.5;0.65;0.75;0.9;1" dur="8s" repeatCount="indefinite"/><line x1="260" y1="100" x2="312" y2="100" stroke="#2563eb" stroke-width="3" marker-end="url(#vec2)"/><circle cx="318" cy="100" r="6" fill="#16a34a"/></g><text x="324" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">1</text><text x="260" y="26" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">i</text><text x="196" y="122" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−1</text><text x="260" y="178" font-size="14" fill="#334155" text-anchor="middle" font-weight="700">−i</text><path d="M 298 64 C 310 56, 306 44, 290 46" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arr2)"/><text x="330" y="46" font-size="13" fill="#16a34a">× i 逆时针 90°</text><text x="260" y="206" font-size="13" fill="#334155" text-anchor="middle">向量沿单位圆走一圈：1 → i → −1 → −i → 1，即「乘以 i 就是逆时针旋转 90°」</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：复数域中乘以 i 即逆时针旋转 90°——复数乘法 = 旋转 + 缩放，这是域的结构赋予平面的几何操作</figcaption></figure>
+<h3>域的定义</h3>
+<p>代数系统 <code>(F, +, ×)</code> 称为<strong>域</strong>，如果：</p>
+<pre><code>① (F, +) 是阿贝尔群，加法幺元记 0
+② (F∖{0}, ×) 是阿贝尔群，乘法幺元记 1
+③ 乘法对加法满足分配律</code></pre>
+<p>也就是说，域是"<strong>加、减、乘、除（除数非零）四种运算都封闭</strong>"的数系。域必然是交换含幺环，且每个非零元都有乘法逆元——所以<strong>域 = 交换除环</strong>。域里没有零因子：若 <code>a×b = 0</code> 且 <code>a ≠ 0</code>，两边乘 <code>a⁻¹</code> 得 <code>b = 0</code>。</p>
+<div class="insight"><strong>几何含义：</strong>域是"<strong>坐标系能够自由缩放的代数基础</strong>"。在域上，可以定义向量空间、线性代数、解析几何——因为坐标可以任意做除法（伸缩），直线、平面、内积、行列式都有意义。实数域 <code>R</code> 张成<strong>数轴（一维空间）</strong>；复数域 <code>C</code> 张成<strong>复平面（二维空间）</strong>——复数乘法 <code>(a+bi)(c+di)</code> 对应"<strong>旋转 + 缩放</strong>"：乘以 <code>i</code> 就是逆时针旋转 90°，乘以 <code>e^{iθ}</code> 就是旋转 θ 角。这正是"域的结构决定了空间能做哪些几何操作"。</div>
+
+<h3>域的例子与有限域</h3>
+<ul>
+<li><strong>Q、R、C</strong>：有理数域、实数域、复数域，是无限域。它们的关系 <code>Q ⊂ R ⊂ C</code> 是域的扩张链。</li>
+<li><strong>有限域 GF(p)</strong>：<code>p</code> 为素数时，模 <code>p</code> 环 <code>Z<sub>p</sub> = {0, 1, …, p−1}</code> 是域。例如 <code>GF(5)</code> 中 <code>3 × 2 = 6 ≡ 1 (mod 5)</code>，所以 3 的乘法逆元是 2。而 <code>Z₆</code> 不是域（2、3 是零因子）。</li>
+<li><strong>GF(pⁿ)</strong>：元素个数为素数幂 <code>pⁿ</code> 的有限域（伽罗瓦域），是构造纠错码与密码的基础。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>域是<strong>现代信息技术的隐形地基</strong>。① <strong>纠错码</strong>：二维码（QR 码）、CD/DVD、深空通信都依赖 GF(2⁸) 上的里德-所罗门（Reed–Solomon）码，在数据被划伤、沾污时仍能还原。② <strong>密码学</strong>：AES 加密算法把字节看成 GF(2⁸) 的元素做运算；椭圆曲线密码（ECC）在有限域 GF(p) 上定义"曲线上的点"，实现超短密钥的高强度加密。③ 有限域的"循环"结构对应<strong>离散傅里叶变换</strong>（FFT 在有限域上的推广），是快速算法与信号处理的根基。</div>
+
+<h2 id="s5">6.5 格：上下确界的结构</h2>
+<h3>偏序集与哈斯图</h3>
+<p><strong>偏序关系</strong> <code>≼</code>：满足自反（<code>a ≼ a</code>）、反对称（<code>a ≼ b</code> 且 <code>b ≼ a ⇒ a = b</code>）、传递（<code>a ≼ b</code> 且 <code>b ≼ c ⇒ a ≼ c</code>）的关系。偏序与全序的区别：偏序允许"两个元素不可比较"。</p>
+<p><strong>哈斯图（Hasse diagram）</strong>：偏序关系的几何表示——元素画成点，若 <code>a ≺ b</code> 且中间没有其他元素，则把 <code>b</code> 画在 <code>a</code> 上方并连线，省略传递边。</p>
+<pre><code>集合 {a,b,c} 的幂集按 ⊆ 排序的哈斯图：
+
+                 {a,b,c}
+                /   |   \
+           {a,b}  {a,c}  {b,c}
+            / \   / \   / \
+          {a}    {b}    {c}
+            \    |    /
+                 ∅</code></pre>
+<div class="insight"><strong>几何含义：</strong>哈斯图把抽象的"谁包含谁 / 谁整除谁 / 谁比谁大"画成一张<strong>上下分层的图</strong>。偏序 = 有方向的层级；哈斯图 = 这个层级的"骨架"。看见哈斯图，就能一眼看出最大元、最小元、极大元、极小元、上界与下界。</div>
+
+<h3>格的定义（两个等价视角）</h3>
+<p><strong>视角一（偏序）</strong>：偏序集 <code>(L, ≼)</code> 中，若任意两元素 <code>a, b</code> 都有<strong>最小上界</strong>（上确界，记 <code>a ∨ b</code>，读作 "a join b"）与<strong>最大下界</strong>（下确界，记 <code>a ∧ b</code>，读作 "a meet b"），则 <code>L</code> 是<strong>格</strong>。</p>
+<p><strong>视角二（代数）</strong>：<code>(L, ∨, ∧)</code> 是带两个二元运算的代数系统，满足交换律、结合律、<strong>吸收律</strong>（幂等律可由吸收律推出）：</p>
+<pre><code>交换律：a∨b = b∨a，        a∧b = b∧a
+结合律：(a∨b)∨c = a∨(b∨c)，(a∧b)∧c = a∧(b∧c)
+吸收律：a∨(a∧b) = a，      a∧(a∨b) = a</code></pre>
+<p>两个视角等价：<code>a ≼ b</code> 当且仅当 <code>a∧b = a</code>（等价于 <code>a∨b = b</code>）。</p>
+<h3>格的例子</h3>
+<ul>
+<li><strong>整除格</strong> <code>(N⁺, |)</code>：正整数按整除关系构成格，<code>a∧b = gcd(a, b)</code>（最大公约数），<code>a∨b = lcm(a, b)</code>（最小公倍数）。</li>
+<li><strong>幂集格</strong> <code>(P(S), ⊆)</code>：<code>A∧B = A∩B</code>，<code>A∨B = A∪B</code>。</li>
+<li><strong>子群格</strong>：群的所有子群按包含关系构成格。</li>
+</ul>
+<h3>分配格、有界格与有补格</h3>
+<ul>
+<li><strong>分配格</strong>：<code>∨</code> 与 <code>∧</code> 互相满足分配律：<code>a∨(b∧c) = (a∨b)∧(a∨c)</code> 及对偶式。</li>
+<li><strong>有界格</strong>：存在最大元 <code>1</code>（全上界）与最小元 <code>0</code>（全下界）。</li>
+<li><strong>有补格</strong>：有界格中每个元素 <code>a</code> 都有<strong>补元</strong> <code>a'</code>，满足 <code>a∨a' = 1</code> 且 <code>a∧a' = 0</code>。</li>
+</ul>
+<div class="insight"><strong>几何/物理含义：</strong>格是"<strong>层级结构 + 上下确界</strong>"的数学。知识图谱、文件目录树、权限继承、信息分类都是格；两个概念的"共同祖先"是 <code>∧</code>（最大下界），"最细的公共后代"是 <code>∨</code>（最小上界）。整除格 <code>gcd/lcm</code> 是"约分与通分"的代数化：两个分数通分要找分母的 lcm（<code>∨</code>），约分要找 gcd（<code>∧</code>）。<strong>数据挖掘</strong>中的"概念格"（形式概念分析）正是用格的上下确界来挖掘数据中的概念层级。</div>
+
+<h2 id="s6">6.6 布尔代数：逻辑与电路的代数</h2>
+<h3>布尔代数的定义</h3>
+<p><strong>布尔代数</strong> = <strong>有补分配格</strong>。即代数系统 <code>(B, ∨, ∧, ′, 0, 1)</code>，其中 <code>(B, ∨, ∧)</code> 是有界分配格，<code>0</code> 是最小元、<code>1</code> 是最大元，且每个元素 <code>a</code> 有补元 <code>a′</code>。它满足：</p>
+<pre><code>幂等律：a∨a = a，          a∧a = a
+交换律：a∨b = b∨a，        a∧b = b∧a
+结合律：(a∨b)∨c = a∨(b∨c)，(a∧b)∧c = a∧(b∧c)
+吸收律：a∨(a∧b) = a，      a∧(a∨b) = a
+分配律：a∨(b∧c) = (a∨b)∧(a∨c)，a∧(b∨c) = (a∧b)∨(a∧c)
+补元律：a∨a′ = 1，         a∧a′ = 0
+对合律：(a′)′ = a
+德摩根律：(a∨b)′ = a′∧b′， (a∧b)′ = a′∨b′
+同一律：a∨0 = a，a∧1 = a；a∨1 = 1，a∧0 = 0</code></pre>
+<h3>布尔代数的三个"化身"（同构）</h3>
+<table>
+<tr><th>化身</th><th>∨</th><th>∧</th><th>补 ′</th><th>0 / 1</th></tr>
+<tr><td>集合代数 (P(S), ∪, ∩, ¯, ∅, S)</td><td>并集 ∪</td><td>交集 ∩</td><td>补集</td><td>∅ / S</td></tr>
+<tr><td>命题逻辑 ({T,F}, ∨, ∧, ¬)</td><td>或 OR</td><td>且 AND</td><td>非 NOT</td><td>假 F / 真 T</td></tr>
+<tr><td>开关代数 ({0,1}, +, ·, ¯)</td><td>逻辑或 +</td><td>逻辑与 ·</td><td>逻辑非</td><td>0 / 1</td></tr>
+</table>
+<p>这三个系统"结构完全相同"：把 <code>∪ ↔ ∨ ↔ OR</code>、<code>∩ ↔ ∧ ↔ AND</code>、补集 ↔ 非 ↔ NOT 一一对应，所有定律逐条吻合。例如德摩根律在集合中是 <code>overline{A∪B} = overline{A} ∩ overline{B}</code>，在逻辑中是 <code>¬(p∨q) = ¬p ∧ ¬q</code>，在电路中是"或非门 = 两个非门的与"。</p>
+<div class="insight"><strong>几何含义：</strong>布尔代数是<strong>集合子集的格</strong>，可用<strong>文氏图（Venn diagram）</strong>完全可视化。<code>∪</code> 是"区域合并"（并集），<code>∩</code> 是"区域重叠"（交集），补集是"取反"（圈外区域）。三个集合的文氏图把整个区域分成 <code>2³ = 8</code> 块，恰好对应 <code>n</code> 个集合的幂集有 <code>2ⁿ</code> 个元素——布尔代数的元素个数必为 <code>2ⁿ</code>。德摩根律的几何解释："非(A 或 B)" = "非 A 且非 B"——即"不在 A∪B 里" = "既不在 A 里也不在 B 里"。</div>
+<div class="insight"><strong>物理含义：</strong>布尔代数是<strong>数字电路与计算机芯片</strong>的数学根基。逻辑门电路正是布尔运算的物理实现：<strong>与门 AND</strong>（<code>∧</code>，串联开关）、<strong>或门 OR</strong>（<code>∨</code>，并联开关）、<strong>非门 NOT</strong>（<code>′</code>，反相器）。所有数字逻辑——加法器、存储器、CPU 指令——都能用这些门搭成。布尔代数还能<strong>化简逻辑表达式</strong>：<code>ab + ab′ = a(b+b′) = a·1 = a</code>，从而用更少的门、更省的芯片面积实现同一功能。它是"软件逻辑"与"硬件电路"之间那道桥梁。</div>
+
+<hr/>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>代数系统</td><td>把"集合 + 运算"当作整体对象</td><td>抽象出数、矩阵、变换的公共结构</td></tr>
+<tr><td>封闭性</td><td>运算结果仍在集合内部</td><td>"这套运算能一直算下去"</td></tr>
+<tr><td>幺元 / 逆元</td><td>恒等变换 / 反向变换</td><td>"什么都不做" / "撤销操作"</td></tr>
+<tr><td>群</td><td>图形的对称变换之集合</td><td>对称性与守恒律（诺特定理）、晶体结构</td></tr>
+<tr><td>循环群 Z<sub>n</sub></td><td>n 等分的旋转（钟表）</td><td>周期现象、相位、模运算</td></tr>
+<tr><td>置换群 S<sub>n</sub></td><td>n 个对象的重新排列</td><td>排序、编码、魔方状态</td></tr>
+<tr><td>子群 / 拉格朗日定理</td><td>对称的子集 / 对称数必为整数倍</td><td>结构按等价部分均匀划分</td></tr>
+<tr><td>环</td><td>平移（加法）+ 缩放旋转（乘法）</td><td>线性变换、矩阵、多项式/卷积</td></tr>
+<tr><td>零因子</td><td>非零变换复合得零</td><td>互相垂直的投影相乘得零</td></tr>
+<tr><td>整环 / 除环</td><td>无零因子 / 每非零元可除</td><td>逼近"数"的直觉 / 四元数描述三维旋转</td></tr>
+<tr><td>域</td><td>可自由缩放的坐标系（数轴、复平面）</td><td>四则运算封闭的数系</td></tr>
+<tr><td>有限域 GF(pⁿ)</td><td>有限个"点"上的离散几何</td><td>纠错码（QR/CD）、AES、椭圆曲线密码</td></tr>
+<tr><td>偏序 / 哈斯图</td><td>上下分层的层级图</td><td>包含、整除、权限、分类的层级</td></tr>
+<tr><td>格</td><td>任意两点的上确界与下确界</td><td>gcd/lcm、知识图谱、概念格</td></tr>
+<tr><td>布尔代数</td><td>幂集格、文氏图（2ⁿ 个区域）</td><td>逻辑电路（与/或/非门）、计算机芯片</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题与解答</h4>
+<ol>
+<li><strong>判断群</strong>：<code>(Z, −)</code>（整数减法的系统）是不是群？——<em>不是</em>：减法不满足结合律，如 <code>(5−3)−1 = 1</code> 而 <code>5−(3−1) = 3</code>；也没有幺元（不存在 <code>e</code> 使 <code>a−e = e−a = a</code> 恒成立）。</li>
+<li><strong>构造乘法表</strong>：写出 <code>Z₄ = {0,1,2,3}</code> 的模 4 加法表，并求每个元素的阶。——<code>0</code> 的阶为 1；<code>1</code> 与 <code>3</code> 的阶为 4（<code>1⊕1⊕1⊕1 = 0</code>）；<code>2</code> 的阶为 2。全部整除群的阶 4。</li>
+<li><strong>零因子</strong>：在 <code>Z₆</code> 中求 2、3、4、5 哪些是零因子，哪些有逆元。——<code>2×3 = 6 ≡ 0</code>、<code>4×3 = 12 ≡ 0</code>，故 2、3、4 为零因子；<code>5×5 = 25 ≡ 1</code>，5 有逆元（就是 5 自身）。所以 <code>Z₆</code> 不是域。</li>
+<li><strong>有限域</strong>：验证 <code>GF(7)</code> 中 3 的乘法逆元、2⁻¹、以及 <code>4 × 5 mod 7</code>。——<code>3×5 = 15 ≡ 1 (mod 7)</code>，故 <code>3⁻¹ = 5</code>；<code>2×4 = 8 ≡ 1</code>，故 <code>2⁻¹ = 4</code>；<code>4×5 = 20 ≡ 6 (mod 7)</code>。</li>
+<li><strong>格</strong>：对 <code>a = 12, b = 18</code>，在整除格中求 <code>a∧b</code> 与 <code>a∨b</code>。——<code>a∧b = gcd(12,18) = 6</code>，<code>a∨b = lcm(12,18) = 36</code>。</li>
+<li><strong>布尔化简</strong>：用布尔代数定律化简 <code>F = ab + ab′ + a′b</code>。——<code>ab + ab′ = a(b+b′) = a·1 = a</code>；故 <code>F = a + a′b = (a + a′)(a + b) = 1·(a+b) = a + b</code>（分配律）。</li>
+<li><strong>德摩根</strong>：写出 <code>¬(p ∧ q)</code> 与 <code>overline{A ∩ B}</code> 的对偶式并解释。——<code>¬(p∧q) = ¬p ∨ ¬q</code>，<code>overline{A∩B} = overline{A} ∪ overline{B}</code>："不(A 且 B)" = "非 A 或非 B"。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<h4>⚠️ 小心这些坑</h4>
+<ul>
+<li>❌ "运算符号 * 一定是乘法" → ❌ <code>*</code> 只是任意二元运算的占位符，可代表加法、复合、取 gcd 等任何规则。</li>
+<li>❌ "封闭性自动满足" → ❌ 减在自然数上、除在整数上都不封闭，封闭性必须逐条验证。</li>
+<li>❌ "结合律就是交换律" → ❌ 矩阵乘法结合但不交换；减法既不结合也不交换。</li>
+<li>❌ "群一定满足交换律" → ❌ 群不要求交换；交换的群才叫阿贝尔群。置换群 S₃、矩阵群一般非交换。</li>
+<li>❌ "幺元就是零元" → ❌ 幺元是 <code>e*a = a</code>（不改变别人），零元是 <code>θ*a = θ</code>（吞掉别人）。乘法的幺元 1 与零元 0 完全不同。</li>
+<li>❌ "环一定能做除法" → ❌ 环只保证加减乘，除法需要"非零元有逆"，那是除环/域。整数环 Z 里 <code>1÷2</code> 无意义。</li>
+<li>❌ "域和整环是一回事" → ❌ 域 = 交换除环，比整环强：整环只是无零因子，未必每个非零元可逆（Z 是整环但不是域）。</li>
+<li>❌ "Z<sub>n</sub> 当 n 为任意数时都是域" → ❌ 只有 <code>n</code> 为素数时 <code>Z<sub>n</sub></code> 才是域；<code>Z₆</code> 有零因子，连整环都不是。</li>
+<li>❌ "格就是全序（任意两元素可比）" → ❌ 偏序允许不可比，格只要求任意两元素有上下确界；幂集格中 <code>{a}</code> 与 <code>{b}</code> 互不包含。</li>
+<li>❌ "布尔代数的补元可以不止一个" → ❌ 在布尔代数（有补分配格）中补元<strong>唯一</strong>；仅在一般有补格中补元才可能不唯一。</li>
+<li>❌ "布尔代数的 ∨/∧ 就是数的加减乘除" → ❌ ∨ 是并/或、∧ 是交/且，且满足幂等律 <code>a∨a = a</code>——这与数的加法 <code>a+a = 2a</code> 完全不同。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:8px 0 10px;color:#b45309">一、练习题</h3>
+<ol>
+<li><strong>封闭性（易）</strong>：在自然数集 <code>N</code> 上，减法是不是二元运算？在整数集 <code>Z</code> 上呢？由此说明"封闭性"在什么意义上决定了"这套运算能不能一直算下去"。</li>
+<li><strong>群的定义（易）</strong>：判断 <code>(Z, −)</code>（整数连同普通减法）是否构成群。若否，逐条指出它违反了群的哪一条公理。</li>
+<li><strong>对称群（中）</strong>：正三角形的所有对称变换（恒等、旋转 120°、旋转 240°、沿三条对称轴翻转）在"复合"运算下构成二面体群 <code>D₃</code>。请指出：这里的幺元是什么？"旋转 120°"的逆元是什么？为什么说"群就是对称的抽象定义"？</li>
+<li><strong>零因子（中）</strong>：在模 6 环 <code>Z₆ = {0,1,2,3,4,5}</code> 中，找出全部零因子；据此说明为什么 <code>Z₆</code> 不是域。并用自己的话解释：零因子对应"两个非零操作复合得零"，例如哪类矩阵相乘会得零？</li>
+<li><strong>有限域（中偏难）</strong>：验证 <code>GF(7)</code> 中 3 的乘法逆元是 5（即 <code>3 × 5 ≡ 1 (mod 7)</code>），并计算 <code>4 × 5 mod 7</code>。结合"乘以 i 就是旋转 90°"，说明为什么"域的结构决定了空间能做哪些几何操作"。</li>
+<li><strong>布尔代数（难）</strong>：用布尔代数定律化简 <code>F = ab + ab′ + a′b</code>（提示：先提公因子，再吸收），并写出 <code>(a∨b)′</code> 的德摩根对偶式。结合"与/或/非门"，说明化简对数字电路有什么现实意义。</li>
+</ol>
+<h3 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>在 <code>N</code> 上减法<strong>不是</strong>二元运算，因为 <code>2 − 3 = −1 ∉ N</code>，不满足封闭性；在 <code>Z</code> 上是，因为任意两个整数之差仍是整数。封闭性保证"运算结果永远留在集合内"，一旦不封闭，算着算着就会"越出"这个数系，也就无法在它上面建立群、环等结构。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><strong>不是群</strong>。① 不满足<strong>结合律</strong>：<code>(5−3)−1 = 1</code>，而 <code>5−(3−1) = 3</code>；② <strong>没有幺元</strong>：不存在 <code>e</code> 使 <code>a − e = e − a = a</code> 对一切 <code>a</code> 成立；③ 因而更谈不上每个元素有逆元。减法只封闭，但"运算顺序"与"操作数顺序"都乱，故连半群都不是。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>幺元是<strong>恒等变换 e</strong>（什么都不做）；"旋转 120°"记 <code>r</code>，其逆元是"旋转 240°"<code>r²</code>，因为 <code>r ∘ r² = r³ = e</code> 回到原位（转过去还能转回来）。<code>D₃</code> 满足封闭、结合、有幺元、每元素有逆元，所以是群；而"对称"的本质正是"一组能搬动图形、搬完又与原位重合、且能撤销的操作"，群的公理恰好把它形式化。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>2×3 = 6 ≡ 0</code>、<code>4×3 = 12 ≡ 0</code>（且 2、3、4 均非零），故零因子为 <strong>2、3、4</strong>。因为 <code>Z₆</code> 中存在零因子，无法保证每个非零元有乘法逆元，所以不是域。零因子的"操作"含义：两个非零的<strong>投影算符</strong>若投影到互相垂直的子空间，相乘（复合）得零矩阵——例如 <code>A = [[0,1],[0,0]]</code> 满足 <code>A² = 0</code> 但 <code>A ≠ 0</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>3 × 5 = 15 ≡ 1 (mod 7)</code>，所以 <code>3⁻¹ = 5</code>；<code>4 × 5 = 20 ≡ 6 (mod 7)</code>。域保证加、减、乘、除（除数非零）都封闭，于是在其上可以自由"缩放坐标"：实数域张成数轴，复数域张成复平面，乘以 <code>i</code> 即逆时针旋转 90°、乘以 <code>e^{iθ}</code> 即旋转 θ 角——域能做的运算决定了这个空间里哪些几何操作有意义。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>化简：<code>ab + ab′ = a(b+b′) = a·1 = a</code>，故 <code>F = a + a′b = (a+a′)(a+b) = 1·(a+b) = a+b</code>。德摩根对偶式：<code>(a∨b)′ = a′ ∧ b′</code>（即"非(a 或 b) = 非 a 且非 b"）。现实意义：逻辑表达式越短，需要的<strong>逻辑门越少、芯片面积越小、功耗越低</strong>，同一功能可用更省的电路实现——布尔化简是数字电路设计的日常工序。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第5章-函数/第5章-函数.html">← 上一章：第5章 函数</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第7章-图论/第7章-图论.html">下一章：第7章 图论 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+</body>
+</html>

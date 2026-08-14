@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第15章 分式 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第15章 分式</div></header>
+<main class="container">
+<h1>第15章 分式</h1>
+<p class="lead">初中 / 初二 / 八年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>分式 = 「分母里含字母的比值」，它的本质是"两个量相除得到的比例"。学完本章，你要能在心里"看见"一条双曲线——分母趋近 0 时比值冲向无穷（渐近线），分母无穷大时比值归零；约分、通分、四则运算、解方程，全都能还原成"同一个比值换了不同的表达方式"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">15.1 分式的概念</a><a href="#s2">15.2 分式的基本性质与约分、通分</a><a href="#s3">15.3 分式的乘除与乘方</a><a href="#s4">15.4 分式的加减</a><a href="#s5">15.5 分式方程</a><a href="#s6">15.6 分式方程的应用</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">15.1 分式的概念</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="260" y1="12" x2="260" y2="328" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="16" y1="170" x2="504" y2="170" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="274" y="20" font-size="12" fill="#16a34a">x = 0（渐近线）</text>
+<text x="428" y="160" font-size="12" fill="#16a34a">y = 0（渐近线）</text>
+<g fill="#94a3b8" font-size="12" text-anchor="middle">
+<text x="140" y="188">−2</text>
+<text x="200" y="188">−1</text>
+<text x="320" y="188">1</text>
+<text x="380" y="188">2</text>
+</g>
+<g fill="#94a3b8" font-size="12" text-anchor="end">
+<text x="248" y="54">2</text>
+<text x="248" y="114">1</text>
+<text x="248" y="226">−1</text>
+<text x="248" y="286">−2</text>
+</g>
+<circle cx="260" cy="170" r="3" fill="#334155"/>
+<text x="244" y="188" font-size="12" fill="#334155">O</text>
+<path d="M284 20 L290 50 L296 70 L308 95 L320 110 L350 130 L380 140 L410 146 L440 150 L470 153 L500 155" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<path d="M236 320 L230 290 L224 270 L212 245 L200 230 L170 210 L140 200 L110 194 L80 190 L50 187 L20 185" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<text x="392" y="94" font-size="15" fill="#2563eb" font-style="italic">y = 1/x</text>
+<circle cx="284" cy="20" r="6" fill="#16a34a" stroke="#fff" stroke-width="2">
+<animateMotion dur="6s" repeatCount="indefinite" path="M284 20 L290 50 L296 70 L308 95 L320 110 L350 130 L380 140 L410 146 L440 150 L470 153 L500 155"/>
+</circle>
+<circle cx="236" cy="320" r="6" fill="#16a34a" stroke="#fff" stroke-width="2">
+<animateMotion dur="6s" repeatCount="indefinite" path="M236 320 L230 290 L224 270 L212 245 L200 230 L170 210 L140 200 L110 194 L80 190 L50 187 L20 185"/>
+</circle>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图①：分式 y = 1/x 的图像是双曲线——分母 x 趋近 0 时比值冲向 ±∞，x 无穷大时比值归零，两条渐近线正是「分母为 0」的几何化身。</figcaption>
+</figure>
+<h3>从分数到分式</h3>
+<p>我们熟悉的<strong>分数</strong>，分子、分母都是确定的<strong>数</strong>，如 3/4、−5/7、2/5。而<strong>分式</strong>把"数"推广到"式"——分子、分母是<strong>整式</strong>，并且<strong>分母里含有字母</strong>。</p>
+<p><strong>定义</strong>：一般地，如果 A、B 表示两个整式，并且 B 中含有字母，那么式子 <code>A/B</code> 叫做<strong>分式</strong>，其中 A 叫分子，B 叫分母。</p>
+<pre><code> A
+───   （A、B 是整式，B 中含有字母，B ≠ 0）
+ B</code></pre>
+<ul>
+<li><code>5/x</code>、<code>x/(x+1)</code>、<code>(2a)/(a²−1)</code>、<code>(x+y)/(x−y)</code> 都是分式。</li>
+<li><code>3/4</code> 是分数；<code>x/2</code>、<code>x/π</code> 不是分式——它们的分母是数（π 是圆周率，是一个确定的数，不是字母），所以是整式。</li>
+</ul>
+<div class="insight"><strong>分式与分数的关系：</strong>分数是分式的特殊情况（分母不含字母）；分式是分数的推广（分母含字母，代表"会变化的量"）。因此分式继承了分数的全部法则，但又因为分母会变，多了一条最重要的限制——<strong>分母不能为 0</strong>。</div>
+
+<h3>分式有意义的条件：分母 ≠ 0</h3>
+<p>因为"除以 0"没有意义，所以分式 <code>A/B</code> 有意义的条件是 <strong>B ≠ 0</strong>。</p>
+<pre><code> A
+───  有意义  ⟺  B ≠ 0
+ B</code></pre>
+<p>例：分式 <code>1/(x−2)</code>，当 x = 2 时分母为 0，分式<strong>无意义</strong>；当 x ≠ 2 时才有意义。求分式有意义的条件，就是"解不等式：分母 ≠ 0"。</p>
+<div class="insight"><strong>几何含义（双曲线与渐近线）：</strong>把 <code>y = 1/(x−2)</code> 看成一条曲线，它的图像是一条<strong>双曲线</strong>（反比例函数的图像，我们以后会正式学到）。当 x 从右边逼近 2 时，分母 x−2 逼近 0，y 冲向 +∞；当 x 从左边逼近 2 时，y 冲向 −∞。图像会无限逼近竖直线 x = 2，却<strong>永远碰不到</strong>它。这条竖直线叫<strong>渐近线</strong>，它就是"分母为 0"在几何上的化身——在 x = 2 处函数根本没有定义，图像上是一个"断开的缺口"。</div>
+<div class="insight"><strong>物理含义（分母不能为 0 的现实意义）：</strong>速度 v = s/t，时间 t 不能为 0（"0 小时走完全程"在物理上无意义）；密度 ρ = m/V，体积 V 不能为 0；浓度 = 溶质/溶液，溶液不能为 0。凡是"每单位××的量"，那个"单位量"（分母）都不能为 0。</div>
+
+<h3>分式值为 0 的条件：分子 = 0 且 分母 ≠ 0</h3>
+<p>要让一个分式等于 0，必须分子为 0；但同时分母不能为 0（否则分式无意义，根本谈不上"等于 0"）。两个条件缺一不可：</p>
+<pre><code> A
+─── = 0  ⟺  A = 0  且  B ≠ 0
+ B</code></pre>
+<p>例：分式 <code>(x−1)/(x+2)</code>，令分子 x−1 = 0 得 x = 1，此时分母 1+2 = 3 ≠ 0，所以当 x = 1 时分式值为 0。而 x = −2 时，分子 −3 ≠ 0、分母为 0，分式<strong>无意义</strong>（不是"值为 0"）。</p>
+<div class="insight"><strong>几何含义：</strong>分式值为 0 的点，就是图像与 x 轴的<strong>交点</strong>（y = 0 处），但要排除该点同时让分母为 0 的"断点"。例如 <code>y = (x−1)/(x−2)</code>：x = 1 时 y = 0，图像在点 (1, 0) 处穿过 x 轴；而 x = 2 处是渐近线，根本取不到 y 值。</div>
+
+<h3>分式的符号法则</h3>
+<p>分式的符号由分子、分母和分式整体三处共同决定，与分数完全一致（同号得正、异号得负）：</p>
+<pre><code>  −A     A       A
+ ──── = ──── = −───   （只改变分子或分母一个的符号，分式整体前面加负号）
+   B    −B       B
+
+   A    −A
+  ─── = ────           （分子、分母同时变号，分式的值不变）
+   B    −B</code></pre>
+<p>例：<code>−x/(x−1) = x/(1−x)</code>（把分母 x−1 变号成 1−x，同时分式前面补一个负号，二者等价）。</p>
+
+<h2 id="s2">15.2 分式的基本性质与约分、通分</h2>
+<h3>基本性质</h3>
+<p>分式的分子与分母都乘（或除以）同一个<strong>不等于 0</strong>的整式，分式的值不变：</p>
+<pre><code> A     A·M         A     A÷M
+─── = ─────        ─── = ─────     （M ≠ 0）
+ B     B·M         B     B÷M</code></pre>
+<p>这与"分数的基本性质"完全一样：分子、分母同乘（除）同一个非零数，分数值不变。区别只在于 M 现在可以是<strong>含字母的整式</strong>，所以必须特别强调 M ≠ 0。</p>
+<div class="insight"><strong>几何含义（换单位不换比值）：</strong>把分子、分母同时放大或缩小 M 倍，相当于"换了一把更粗或更细的尺子"，量出的两个数都变了，但它们的<strong>比值</strong>不变。好比地图比例尺 1:100000 与 2:200000，画出来的是<strong>同一张地图、同一个形状</strong>，只是刻度粗细不同。</div>
+<div class="insight"><strong>物理含义（单位换算的本质）：</strong>60 km/h = 60 km / 1 h = 60000 m / 3600 s = 50/3 m/s。分子、分母同乘（除）同一系数，速度这个比值不变——这正是"约分 / 通分"在做的事：约分 = 把公因子约掉（把单位约小），通分 = 统一分母（把单位统一）。</div>
+
+<h3>约分与最简分式</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<text x="260" y="30" font-size="14" fill="#334155" text-anchor="middle">分式的基本性质：分子、分母同除以 M（约分），分式的值不变</text>
+<rect x="70" y="100" width="380" height="60" fill="#fff" stroke="#334155" stroke-width="2"/>
+<rect x="70" y="100" width="190" height="60" fill="#2563eb" opacity="0.4"/>
+<line x1="260" y1="100" x2="260" y2="160" stroke="#1e3a8a" stroke-width="2.5"/>
+<path d="M70 176 L70 188 L260 188 L260 176" fill="none" stroke="#16a34a" stroke-width="2"/>
+<text x="165" y="206" font-size="12" fill="#16a34a" text-anchor="middle">阴影长度始终 = 1/2（值不变）</text>
+<g>
+<line x1="117.5" y1="100" x2="117.5" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="165" y1="100" x2="165" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="212.5" y1="100" x2="212.5" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="307.5" y1="100" x2="307.5" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="355" y1="100" x2="355" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="402.5" y1="100" x2="402.5" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<text x="260" y="82" font-size="24" font-weight="700" fill="#2563eb" text-anchor="middle">4/8</text>
+<animate attributeName="opacity" values="1;1;0;0;0;0;1" keyTimes="0;0.32;0.35;0.65;0.68;0.98;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<g>
+<line x1="165" y1="100" x2="165" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<line x1="355" y1="100" x2="355" y2="160" stroke="#64748b" stroke-width="1.5"/>
+<text x="260" y="82" font-size="24" font-weight="700" fill="#2563eb" text-anchor="middle">2/4</text>
+<animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.32;0.35;0.65;0.68;0.98;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<g>
+<text x="260" y="82" font-size="24" font-weight="700" fill="#2563eb" text-anchor="middle">1/2</text>
+<animate attributeName="opacity" values="0;0;0;0;1;1;0" keyTimes="0;0.32;0.35;0.65;0.68;0.98;1" dur="9s" repeatCount="indefinite"/>
+</g>
+<text x="260" y="244" font-size="12" fill="#9ca3af" text-anchor="middle">每次约去公因式 2：4/8 → 2/4 → 1/2，分子、分母同时变小，但阴影长度（比值）始终不变</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图②：约分 = 换更粗的尺子——分子、分母同除以 M，格子数变了，但涂色长度（比值）不变，如同地图比例尺 1:100000 与 2:200000 是同一张地图。</figcaption>
+</figure>
+<p><strong>约分</strong>：根据基本性质，把分式的分子、分母的<strong>公因式</strong>约去。</p>
+<p><strong>最简分式</strong>：分子与分母没有公因式（除 ±1 之外）的分式。约分的结果必须化成最简分式。</p>
+<p>约分的关键是<strong>先因式分解，再约去公因式</strong>：</p>
+<pre><code>a²b       a·(ab)      a
+────  =  ────────  =  ──      （约去公因式 ab，要求 ab ≠ 0）
+ab²       b·(ab)      b
+
+x²−1      (x+1)(x−1)     x+1
+─────  =  ───────────  =  ─────   （约去 x−1，要求 x ≠ 0 且 x ≠ 1）
+x²−x       x(x−1)         x</code></pre>
+<div class="insight"><strong>注意：</strong>约分约的是"相乘的因式"，不是"相加的项"。例如 <code>(a+b)/b</code> 不能把 b 约成 a——b 在分子里是"加项"不是"因式"。正确结果是 <code>(a+b)/b = a/b + 1</code>，而不是 a。</div>
+
+<h3>通分与最简公分母</h3>
+<p><strong>通分</strong>：把几个异分母的分式化成与原来相等的<strong>同分母</strong>分式。</p>
+<p><strong>最简公分母</strong>：取各分母所有因式的<strong>最高次幂</strong>的积（系数取各系数的最小公倍数）。</p>
+<pre><code>例：1/(2x²y) 与 1/(3xy³)
+系数 2、3 的最小公倍数是 6；
+字母 x 取最高次 x²，y 取最高次 y³；
+∴ 最简公分母 = 6x²y³
+
+1/(2x²y) = 3y²/(6x²y³)      1/(3xy³) = 2x/(6x²y³)</code></pre>
+<pre><code>例：1/(x²−x) 与 1/(x²−1)
+x²−x = x(x−1)，x²−1 = (x+1)(x−1)
+最简公分母 = x(x−1)(x+1)
+
+1/(x²−x) = (x+1) / [x(x−1)(x+1)]
+1/(x²−1) = x / [x(x−1)(x+1)]</code></pre>
+<div class="insight"><strong>几何含义（统一刻度再拼接）：</strong>通分就是"把两条刻度不同的尺子，统一成同一把刻度更细的尺子"。1/2 和 1/3 要相加，先把整条线段等分成 6 份（6 就是最简公分母），3/6 和 2/6 就能直接"数格子"相加了。</div>
+
+<h2 id="s3">15.3 分式的乘除与乘方</h2>
+<h3>分式的乘法</h3>
+<pre><code> A     C     A·C
+─── · ─── = ─────
+ B     D     B·D</code></pre>
+<p>分子乘分子作新分子，分母乘分母作新分母。运算时<strong>先约分、后相乘</strong>，结果化成最简分式。</p>
+<p>例：<code>(x/y)·(y²/x²) = (x·y²)/(y·x²) = y/x</code>（约去公因式 xy）。</p>
+<div class="insight"><strong>几何含义（矩形面积）：</strong><code>(a/b)·(c/d) = ac/bd</code>，相当于一个长 a/b、宽 c/d 的矩形，其面积是 ac/bd——分式乘法就是"两个比例相乘，得到一个新的比例"。</div>
+
+<h3>分式的除法</h3>
+<p>除以一个分式，等于乘这个分式的<strong>倒数</strong>（分子、分母颠倒位置）：</p>
+<pre><code> A     C     A     D     A·D
+─── ÷ ─── = ─── · ─── = ─────
+ B     D     B     C     B·C</code></pre>
+<p>例：<code>(a/b) ÷ (a/b²) = (a/b)·(b²/a) = b</code>。</p>
+<div class="insight"><strong>物理含义（比值复合与"单位约消"）：</strong>分式的乘除对应物理量的复合与换算，分子、分母的单位像数一样"约分"：
+<ul>
+<li>速度 × 时间 = 路程：<code>(s/t) · t = s</code> —— 时间单位约掉了。</li>
+<li>路程 ÷ 速度 = 时间：<code>s ÷ (s/t) = s · (t/s) = t</code> —— 路程单位约掉了。</li>
+<li>密度 × 体积 = 质量：<code>ρ · V = m</code> —— 体积单位约掉了。</li>
+</ul>
+这就是物理中的<strong>量纲分析</strong>：把单位本身当成分式来乘除。</div>
+
+<h3>分式的乘方</h3>
+<p>分式的乘方，等于把分子、分母分别乘方：</p>
+<pre><code>( A )ⁿ     Aⁿ
+(───)   =  ────     （n 是正整数）
+( B )      Bⁿ</code></pre>
+<p>例：</p>
+<pre><code>( x² )³      x⁶
+(────)    =  ────
+( y  )       y³
+
+( −2a² )³      (−2)³·(a²)³      −8a⁶
+(──────)    =  ────────────  =  ─────
+(  b   )           b³             b³</code></pre>
+<div class="insight"><strong>符号要点：</strong>负号也要参与乘方——负数的<strong>奇次幂为负、偶次幂为正</strong>。(−2)³ = −8，而 (−2)² = +4。所以 <code>(−a/b)² = a²/b²</code>（负号平方后变正），但 <code>(−2a²/b)³ = −8a⁶/b³</code>（负号三次方仍是负）。</div>
+
+<h2 id="s4">15.4 分式的加减</h2>
+<h3>同分母分式相加减</h3>
+<pre><code> A     C     A ± C
+─── ± ─── = ─────
+ B     B      B</code></pre>
+<p>分母不变，分子相加减。</p>
+<p>例：<code>3/(x+1) + 2/(x+1) = (3+2)/(x+1) = 5/(x+1)</code>。</p>
+<div class="insight"><strong>几何含义：</strong>同分母就是"同一把刻度尺"下的量，直接拼接（相加）或截断（相减）。3/5 米 + 1/5 米 = 4/5 米——都是"五分之一"这种刻度，直接数格子即可。</div>
+
+<h3>异分母分式相加减</h3>
+<p>先<strong>通分</strong>（化成同分母），再按同分母分式相加减。</p>
+<pre><code>1     1      y + x      x + y
+── + ───  =  ───────  =  ─────      （最简公分母 xy）
+x     y        xy          xy
+
+  1         1        (x−1) + (x+1)        2x
+────── + ──────  =  ───────────────  =  ──────
+x + 1     x − 1       (x+1)(x−1)        x² − 1</code></pre>
+<div class="insight"><strong>物理含义（单位必须统一才能相加）：</strong>异分母分式相加，就像"1/2 小时 + 20 分钟"不能直接加——必须先把 1/2 小时换成 30 分钟（或把 20 分钟换成 1/3 小时），统一单位后再相加。通分就是"统一单位"。</div>
+
+<h3>分式的混合运算</h3>
+<p>运算顺序：先<strong>乘方</strong>，再<strong>乘除</strong>，最后<strong>加减</strong>；有括号先算括号。结果要化成最简分式。</p>
+<pre><code>例：计算 (1/x + 1/y) ÷ (1/x − 1/y)
+
+1/x + 1/y = (x+y)/(xy)
+1/x − 1/y = (y−x)/(xy)
+原式 = (x+y)/(xy) · (xy)/(y−x) = (x+y)/(y−x)</code></pre>
+
+<h2 id="s5">15.5 分式方程</h2>
+<h3>什么是分式方程</h3>
+<p><strong>分母中含有未知数</strong>的方程叫分式方程。例如：<code>1/x = 3/(x+2)</code>、<code>x/(x−1) = 2</code>。</p>
+<p>注意区分：分母不含未知数的（如 <code>x/2 + 1 = 3</code>）是<strong>整式方程</strong>，不是分式方程。</p>
+
+<h3>解分式方程的基本思路</h3>
+<p>核心是"<strong>化分式为整式</strong>"：方程两边同乘<strong>最简公分母</strong>，把分式方程转化为整式方程来解。但这一步可能引入<strong>增根</strong>，所以解完必须检验。</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li><strong>去分母</strong>：两边同乘最简公分母，化为整式方程；</li>
+<li><strong>解整式方程</strong>；</li>
+<li><strong>检验</strong>：把解代入最简公分母（或原方程的各分母），若为 0 则是增根、舍去；若不为 0 则是原方程的解。</li>
+</ol>
+
+<h3>增根：为什么必须检验？</h3>
+<p><strong>增根</strong>：去分母后整式方程的解中，使原分式方程的分母为 0 的根。它是"去分母"这个变形多出来的解，不是原方程的解，必须舍去。</p>
+<p><strong>产生原因</strong>：两边同乘的"最简公分母"可能为 0。用一个可能为 0 的式子去乘方程两边，会"偷偷"多出解——就像方程两边同乘 0 会让任何等式都成立、凭空冒出无数"解"一样。</p>
+<p>完整例题（含增根）：</p>
+<pre><code>解方程：x/(x−1) + 1/(x+1) = 2/(x²−1)
+
+去分母（两边同乘 (x−1)(x+1)）：
+x(x+1) + (x−1) = 2
+x² + x + x − 1 = 2
+x² + 2x − 3 = 0
+(x+3)(x−1) = 0   →   x = −3 或 x = 1
+
+检验：x = 1 使 (x−1)(x+1) = 0，是增根，舍去；
+      x = −3 使 (x−1)(x+1) = 8 ≠ 0，是原方程的解。
+∴ 原方程的解是 x = −3。</code></pre>
+<div class="insight"><strong>几何含义（交点与渐近线）：</strong>分式方程的解，可以看成"双曲线"与"直线"（或另一条曲线）的<strong>交点横坐标</strong>。去分母相当于把双曲线方程"拉扯"成整式方程，拉扯过程中双曲线的<strong>渐近线</strong>可能会被"拉"成一个假交点——这个假交点就是增根。上例中 x = 1 处原分式根本不存在（图像断开、冲向无穷），整式方程算出的"交点"在图上并不存在，必须剔除。</div>
+<div class="insight"><strong>物理含义（物理上无意义的解）：</strong>分式方程常表示"比值相等"的条件（速度相等、密度相等、浓度相等、效率相等）。解出的根若让分母为 0（时间为 0、体积为 0），或为负数（时间为负、长度为负），在物理上无意义，必须检验舍去。数学的"增根"，在现实中对应的就是"无意义的解"。</div>
+
+<h2 id="s6">15.6 分式方程的应用</h2>
+<h3>列分式方程解应用题的步骤</h3>
+<ol>
+<li>审题，找<strong>等量关系</strong>（通常是"××相等"或"××相差多少"）；</li>
+<li>设未知数（通常设"单位量"或"总量"）；</li>
+<li>用含未知数的分式表示各量，列方程；</li>
+<li>解分式方程；</li>
+<li><strong>双检验</strong>：① 是否为增根；② 是否符合实际意义（如时间、速度不能为负或 0）。</li>
+</ol>
+
+<h3>题型一：工程问题</h3>
+<p><strong>等量关系</strong>：工作总量 = 工作效率 × 工作时间。合作时，<strong>总效率 = 各效率之和</strong>。</p>
+<pre><code>例：一项工程，甲单独做 10 天完成，乙单独做 15 天完成。
+问：两人合作，几天完成？
+
+设合作需 x 天完成。
+甲每天做 1/10，乙每天做 1/15，合作每天做 1/x。
+列方程：1/10 + 1/15 = 1/x
+解：3/30 + 2/30 = 1/x   →   5/30 = 1/x   →   x = 6
+检验：x = 6 ≠ 0，且符合实际。
+答：两人合作 6 天完成。</code></pre>
+<div class="insight"><strong>物理含义：</strong>"工作效率 = 工作量 ÷ 时间"本身就是一个分式。把"每天完成几分之几"这种<strong>比值</strong>加起来，就是"每天一共完成几分之几"——分式加法在这里有了最自然的现实意义。</div>
+
+<h3>题型二：行程问题</h3>
+<p><strong>等量关系</strong>：路程 = 速度 × 时间。</p>
+<pre><code>例：甲乙两地相距 60 km，一辆汽车从甲到乙后原路返回。
+去时速度为 x km/h，返回时提速 15 km/h，
+返回比去时少用 20 分钟（1/3 小时）。求去时速度。
+
+设去时速度 x km/h，则返回速度 (x+15) km/h。
+去时时间 = 60/x，返回时间 = 60/(x+15)。
+列方程：60/x − 60/(x+15) = 1/3
+去分母（两边乘 3x(x+15)）：
+180(x+15) − 180x = x(x+15)
+180x + 2700 − 180x = x² + 15x
+x² + 15x − 2700 = 0
+(x+60)(x−45) = 0   →   x = 45 或 x = −60
+检验：x = −60 为负数（速度不能为负），舍去；x = 45 使分母 ≠ 0。
+答：去时速度为 45 km/h。</code></pre>
+
+<h3>题型三：浓度问题（分式 = 比值）</h3>
+<p><strong>等量关系</strong>：浓度 = 溶质质量 ÷ 溶液质量（"浓度"本身就是一个分式/比值）。</p>
+<pre><code>例：有含盐 15% 的盐水 200 g，加水稀释成含盐 10% 的盐水，需加水多少克？
+
+稀释前后"盐的质量"不变：盐 = 200 × 15% = 30 g。
+设加水 x g，则新盐水 (200+x) g，浓度 = 30/(200+x) = 10%。
+列方程：30/(200+x) = 0.1
+解：30 = 0.1(200+x)   →   30 = 20 + 0.1x   →   x = 100
+检验：x = 100 使分母 200+100 = 300 ≠ 0，且符合实际。
+答：需加水 100 g。</code></pre>
+<div class="insight"><strong>物理含义：</strong>浓度、速度、密度、效率……这些量本质上都是<strong>分式（比值）</strong>。分式方程就是把这些比值之间的相等关系翻译成等式，去分母后变成熟悉的整式方程，再回头用"分母 ≠ 0、量非负"这些物理约束来检验。</div>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>分式的概念</td><td>分母含字母的比值；y = k/x 对应双曲线</td><td>速度、密度、浓度、效率等"比值"</td></tr>
+<tr><td>分母 ≠ 0（有意义）</td><td>双曲线的渐近线——图像永远碰不到的那条线</td><td>时间、体积等"单位量"不能为 0</td></tr>
+<tr><td>分式值为 0</td><td>图像与 x 轴的交点（分子 = 0 且分母 ≠ 0）</td><td>比值为 0（分子为 0，分母仍有效）</td></tr>
+<tr><td>基本性质（约分/通分）</td><td>换单位不换比值（比例尺缩放）</td><td>单位换算：60 km/h = 60000 m / 3600 s</td></tr>
+<tr><td>分式乘法</td><td>矩形面积（两个边长比相乘）</td><td>比值复合、单位约消（速度×时间=路程）</td></tr>
+<tr><td>分式除法</td><td>乘倒数（分子、分母颠倒）</td><td>路程÷速度=时间（单位约消）</td></tr>
+<tr><td>分式加减</td><td>同刻度直接拼接；异刻度先统一刻度</td><td>统一单位后再相加（1/2 时 + 20 分）</td></tr>
+<tr><td>分式方程</td><td>双曲线与直线（曲线）的交点横坐标</td><td>比值相等（速度、浓度、效率相等）</td></tr>
+<tr><td>增根</td><td>落在渐近线上的"假交点"</td><td>物理上无意义的解（时间为 0/负等）</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>当 x 取何值时，分式 <code>(x−2)/(x+3)</code> 有意义？当 x 取何值时它的值为 0？</li>
+<li>约分：<code>(x²−4)/(x²+4x+4)</code>；<code>(a²b−ab²)/(a²b²)</code>。</li>
+<li>计算：<code>(x/y)·(y²/x²)</code>；<code>(a/b) ÷ (a/b²)</code>；<code>(1/x + 1/y) ÷ (1/x − 1/y)</code>。</li>
+<li>计算：<code>(x²/y)³</code> 与 <code>(−2a²/b)³</code>。</li>
+<li>通分并计算：<code>1/(x+2) + x/(x−2)</code>。</li>
+<li>解分式方程 <code>x/(x−1) + 1/(x+1) = 2/(x²−1)</code>，并指出增根是谁。</li>
+<li>应用题：一项工程甲单独 10 天、乙单独 15 天完成，两人合作几天完成？</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "分母里含字母的式子都是分式" → ❌ 像 <code>x/π</code>、<code>x/2</code> 的分母是数（π 是常数，不是字母），它们是整式不是分式。</li>
+<li>❌ "分式有意义 ⇔ 分子 ≠ 0" → ❌ 关键是<strong>分母 ≠ 0</strong>；分子可以为 0。</li>
+<li>❌ "分式值为 0 ⇔ 分子 = 0" → ❌ 还要同时满足<strong>分母 ≠ 0</strong>，否则分式无意义。</li>
+<li>❌ "约分就是约掉分母" → ❌ 约分约的是分子、分母的<strong>公因式</strong>，约后分母仍保留；而且只能约"相乘的因式"，不能约"相加的项"（<code>(a+b)/b ≠ a</code>）。</li>
+<li>❌ "通分就是把分母相乘" → ❌ 要用<strong>最简公分母</strong>（各因式的最高次幂的积），否则会算得又大又复杂甚至出错。</li>
+<li>❌ "去分母时漏乘不含分母的项" → ❌ 去分母是<strong>每一项</strong>都乘最简公分母，常数项、整式项也要乘。</li>
+<li>❌ "解完分式方程不用检验" → ❌ 这是最易丢分点。去分母可能产生<strong>增根</strong>，必须代入最简公分母检验并舍去。</li>
+<li>❌ "分式乘方时不管负号" → ❌ 负号也要乘方：<code>(−a/b)² = a²/b²</code>（负号平方后为正），但 <code>(−2a²/b)³ = −8a⁶/b³</code>（奇次幂仍为负）。</li>
+<li>❌ "应用题解出负数也照写" → ❌ 时间、速度、长度等不能为负或 0，要"双检验"（增根 + 实际意义）。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:6px 0 10px;color:#b45309">一、练习题</h3>
+<ol>
+<li>下列代数式中，哪些是<strong>分式</strong>，哪些是<strong>整式</strong>？<code>5/x</code>、<code>x/2</code>、<code>(x+y)/(x−y)</code>、<code>3/π</code>、<code>(a+b)/3</code>，并说明判断依据。</li>
+<li>当 x 取何值时，分式 <code>(x−2)/(x²−1)</code> 有意义？当 x 取何值时它的值为 0？并说说"分母为 0"在双曲线图像上对应什么现象。</li>
+<li>约分：<code>(x²−4)/(x²+4x+4)</code>；再通分：<code>1/(x−1)</code> 与 <code>1/(x²−1)</code>，写出最简公分母。</li>
+<li>计算：<code>(x/y²)·(y/x²)</code>、<code>(a/b) ÷ (a²/b²)</code>、<code>(−2x²/y)³</code>；并用"单位约消"解释 <code>(s/t)·t = s</code> 的物理含义。</li>
+<li>计算：<code>1/(x+2) + x/(x−2)</code>；并说明"通分"在几何上相当于什么操作。</li>
+<li>解分式方程 <code>x/(x−1) − 2/(x²−1) = 1</code>，并指出增根是谁；再解应用题：一项工程甲单独做 10 天、乙单独做 15 天完成，两人合作几天完成？为什么分式方程应用题要"双检验"？</li>
+</ol>
+<h3 style="margin:16px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>分式：<code>5/x</code>（分母含字母 x）、<code>(x+y)/(x−y)</code>（分母含字母 x、y）。整式：<code>x/2</code>（分母是数 2）、<code>3/π</code>（π 是圆周率，是确定的数不是字母）、<code>(a+b)/3</code>（分母是数 3）。判断依据：<strong>分母里是否含字母</strong>——含字母是分式，不含字母（只是数）是整式。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>有意义 ⟺ 分母 <code>x²−1 ≠ 0</code>，即 <code>x ≠ ±1</code>。值为 0 ⟺ 分子 <code>x−2 = 0</code> 且分母 ≠ 0，得 <code>x = 2</code>（此时分母 = 3 ≠ 0）。"分母为 0"对应双曲线 <code>y = (x−2)/(x²−1)</code> 在 <code>x = ±1</code> 处的<strong>竖直渐近线</strong>：图像无限逼近这条竖线却永远碰不到，函数在该处没有定义（出现"缺口"）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>约分：<code>x²−4 = (x+2)(x−2)</code>，<code>x²+4x+4 = (x+2)²</code>，约去公因式 <code>(x+2)</code> 得 <code>(x−2)/(x+2)</code>（注意 x ≠ −2）。通分：<code>x²−1 = (x+1)(x−1)</code>，最简公分母 = <code>(x+1)(x−1)</code>，所以 <code>1/(x−1) = (x+1)/(x²−1)</code>，<code>1/(x²−1)</code> 保持不变。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>(x/y²)·(y/x²) = xy/(x²y²) = 1/(xy)</code>。<code>(a/b) ÷ (a²/b²) = (a/b)·(b²/a²) = b/a</code>。<code>(−2x²/y)³ = (−2)³·x⁶/y³ = −8x⁶/y³</code>。<code>(s/t)·t = (s·t)/t = s</code>：时间单位 t 在分子、分母各出现一次被约掉，只剩路程 s——这正是物理量纲分析里"速度 × 时间 = 路程"的单位约消。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>最简公分母 = <code>(x+2)(x−2) = x²−4</code>。原式 = <code>(x−2)/(x²−4) + x(x+2)/(x²−4) = [x−2 + x²+2x]/(x²−4) = (x²+3x−2)/(x²−4)</code>。"通分"在几何上相当于<strong>把两条刻度不同的尺子统一成同一把更细的尺子</strong>（统一单位刻度），统一之后才能直接"数格子"相加。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>去分母：两边同乘最简公分母 <code>(x+1)(x−1)</code>，得 <code>x(x+1) − 2 = x²−1</code>，即 <code>x²+x−2 = x²−1</code>，解得 <code>x = 1</code>。但 <code>x = 1</code> 使最简公分母 <code>x²−1 = 0</code>，是<strong>增根</strong>，舍去，原方程<strong>无解</strong>。应用题：设合作需 x 天，则 <code>1/10 + 1/15 = 1/x</code>，即 <code>3/30 + 2/30 = 1/x</code>，<code>5/30 = 1/x</code>，解得 <code>x = 6</code> 天。要"双检验"：一是去分母可能产生增根，须代入最简公分母检验；二是"天数"这类实际量不能为负或 0，须检验解是否符合实际意义。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第14章-整式的乘法与因式分解/第14章-整式的乘法与因式分解.html">← 上一章：第14章 整式的乘法与因式分解</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../../八年级下册/第16章-二次根式/第16章-二次根式.html">下一章：第16章 二次根式 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

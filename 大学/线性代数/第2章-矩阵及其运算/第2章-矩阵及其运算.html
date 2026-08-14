@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第2章 矩阵及其运算 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第2章 矩阵及其运算</div></header>
+<main class="container">
+<h1>第2章 矩阵及其运算</h1>
+<p class="lead">大学 / 线性代数</p>
+
+<div class="summary"><span class="tag">一句话总纲：</span>矩阵是「线性变换」的记法，也是「批量数据」的容器——它把一组数打包成一张表，加、乘、求逆这些运算的本质，分别对应「合成变换」「复合变换」「把变换倒回去」，而分块矩阵则是「把大系统拆成子系统」的思想。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">2.1 矩阵的概念</a><a href="#s2">2.2 矩阵的运算</a><a href="#s3">2.3 逆矩阵</a><a href="#s4">2.4 分块矩阵</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">2.1 矩阵的概念</h2>
+<h3>定义</h3>
+<p>由 <code>m × n</code> 个数 <code>a<sub>ij</sub></code>（i = 1,2,…,m；j = 1,2,…,n）排成的 <strong>m 行 n 列</strong>的数表，称为一个 <strong>m×n 矩阵</strong>，记作：</p>
+<pre><code>        ⎡ a₁₁  a₁₂  ⋯  a₁ₙ ⎤
+        ⎢ a₂₁  a₂₂  ⋯  a₂ₙ ⎥
+  A  =  ⎢  ⋮    ⋮    ⋱    ⋮  ⎥  =  (aᵢⱼ)_{m×n}
+        ⎣ aₘ₁  aₘ₂  ⋯  aₘₙ ⎦</code></pre>
+<ul>
+<li><strong>元素</strong> <code>a<sub>ij</sub></code>：位于第 i 行、第 j 列的数（<strong>行标在前，列标在后</strong>）。</li>
+<li><strong>行数 m、列数 n</strong> 决定矩阵的「型」（形状），两个矩阵同型才能谈相等。</li>
+<li><strong>矩阵相等</strong>：A = B ⟺ 同型且对应元素全部相等。</li>
+<li>矩阵常用大写字母 A、B、C 表示，元素用小写字母表示。</li>
+</ul>
+
+<h3>矩阵 vs 行列式（务必分清）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<polygon points="60,160 110,160 110,110 60,110" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="85" y="102" fill="#94a3b8" font-size="12" text-anchor="middle">单位正方形</text>
+<polygon points="60,160 110,160 110,110 60,110" fill="#bfdbfe" stroke="#2563eb" stroke-width="2">
+<animate attributeName="points" dur="6s" repeatCount="indefinite" values="60,160 110,160 110,110 60,110;60,160 160,110 210,10 110,60;60,160 110,160 110,110 60,110" keyTimes="0;0.5;1"/>
+</polygon>
+<g>
+<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;0.5;0.6;1"/>
+<line x1="60" y1="160" x2="160" y2="110" stroke="#16a34a" stroke-width="2.5"/>
+<polygon points="160,110 154.6,117.2 151.1,110" fill="#16a34a"/>
+<line x1="60" y1="160" x2="110" y2="60" stroke="#16a34a" stroke-width="2.5"/>
+<polygon points="110,60 110,69 102.8,65.4" fill="#16a34a"/>
+<text x="125" y="132" fill="#16a34a" font-size="12" text-anchor="middle">a₁</text>
+<text x="70" y="96" fill="#16a34a" font-size="12" text-anchor="middle">a₂</text>
+</g>
+<text x="85" y="142" fill="#334155" font-size="13" font-weight="bold" text-anchor="middle">面积 = 1<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="1;1;0;0" keyTimes="0;0.45;0.55;1"/></text>
+<text x="135" y="85" fill="#334155" font-size="13" font-weight="bold" text-anchor="middle">面积 = |A| = 3<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;0.55;0.65;1"/></text>
+<text x="260" y="26" fill="#334155" font-size="13" text-anchor="middle">矩阵 A = [2 1; 1 2]，det A = 2×2 − 1×1 = 3</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：行列式 |A| 是单位面积经矩阵 A 变换后放大的倍数（面积 1 → 3）</figcaption>
+</figure>
+<table>
+<tr><th>对象</th><th>本质</th><th>记号</th><th>是否算出一个数</th></tr>
+<tr><td>矩阵</td><td>一张<strong>数表</strong>（m 行 n 列）</td><td>圆括号或方括号 ( ) / [ ]</td><td>否，它本身就是一个整体对象</td></tr>
+<tr><td>行列式</td><td>一个<strong>数值</strong>（只对方阵定义）</td><td>两条竖线 | |</td><td>是，按规则算出一个数</td></tr>
+</table>
+<div class="insight"><strong>核心直觉：</strong>矩阵是「表格 / 变换」，行列式是「这个方阵的一个特征数」。例如 <code>|A| = 0</code> 说的是「这个变换把体积压成了 0（不可逆）」，而不是矩阵本身等于 0。</div>
+
+<h3>特殊矩阵</h3>
+<ul>
+<li><strong>方阵</strong>：行数 = 列数（m = n），称为 <strong>n 阶方阵</strong>，有主对角线、行列式、逆等专属概念。</li>
+<li><strong>行矩阵 / 列矩阵</strong>：只有一行 / 只有一列。列矩阵常被看作「向量」，是几何里最基本的对象。</li>
+<li><strong>零矩阵</strong>：所有元素都是 0，记作 <strong>O</strong> 或 <code>0</code>。它是加法的「零元」。</li>
+<li><strong>单位矩阵</strong>：主对角线全为 1、其余为 0 的方阵，记作 <strong>E</strong> 或 <strong>I</strong>。它是乘法的「单位元」。</li>
+<li><strong>对角矩阵</strong>：非主对角线元素全为 0；对角元全相等的对角矩阵叫 <strong>数量矩阵</strong>。</li>
+<li><strong>上三角 / 下三角矩阵</strong>：主对角线下方 / 上方全为 0。</li>
+<li><strong>对称矩阵</strong>：<code>Aᵀ = A</code>（关于主对角线对称，即 a<sub>ij</sub> = a<sub>ji</sub>）。</li>
+<li><strong>反对称矩阵</strong>：<code>Aᵀ = −A</code>（a<sub>ij</sub> = −a<sub>ji</sub>，主对角线必为 0）。</li>
+</ul>
+<pre><code>单位矩阵 E₃       对角矩阵 D        对称矩阵 S
+⎡1 0 0⎤         ⎡2 0 0⎤           ⎡1 2 3⎤
+⎢0 1 0⎥         ⎢0 3 0⎥           ⎢2 4 5⎥
+⎣0 0 1⎦         ⎣0 0 5⎦           ⎣3 5 6⎦</code></pre>
+
+<div class="insight"><strong>几何含义：</strong>一个 m×n 矩阵 = 一个从 n 维空间到 m 维空间的<strong>线性变换</strong>：输入一个 n 维列向量 x，输出一个 m 维列向量 y = Ax。矩阵的每一列，就是「标准基向量被送到哪里去了」——<strong>看懂了各列，就看懂了这个变换</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>矩阵 = 一个「多分量系统」的状态表。例如 2×2 矩阵可记录一个平面上的两组数据：两列分别是两个基向量（或两种状态）的分量；3×3 矩阵可描述一个刚体在三维空间的惯性张量。矩阵把「一堆相关的数」组织成「一个可以整体操作的对象」。</div>
+
+<h2 id="s2">2.2 矩阵的运算</h2>
+
+<h3>2.2.1 加法与减法</h3>
+<p><strong>同型</strong>矩阵才能相加：对应元素相加。</p>
+<pre><code>(A + B)ᵢⱼ = aᵢⱼ + bᵢⱼ</code></pre>
+<ul>
+<li>交换律：A + B = B + A</li>
+<li>结合律：(A + B) + C = A + (B + C)</li>
+<li>A + O = A；A + (−A) = O（−A 是 A 的负矩阵）</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>矩阵加法 = <strong>两个线性变换「逐分量叠加」</strong>。作用在向量上：(A+B)x = Ax + Bx，即「先各自变换、再把结果相加」。它对应着物理上「两个场/两种效应的合成（叠加原理）」。<br/><strong>物理含义：</strong>两套数据表按位置相加，例如把两个时刻的位移表叠加，或把两组力分别写成分量表后逐项合成。</div>
+
+<h3>2.2.2 数与矩阵相乘（数乘）</h3>
+<pre><code>(kA)ᵢⱼ = k · aᵢⱼ        （k 为任意数，逐元素乘）</code></pre>
+<ul>
+<li>k(A + B) = kA + kB；(k + l)A = kA + lA；k(lA) = (kl)A</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>数乘 = <strong>把变换整体按比例缩放</strong>。作用在向量上：(kA)x = k(Ax)，即「先变换、再拉伸到 k 倍」。<br/><strong>物理含义：</strong>把一张数据表整体放大/缩小，如把某个量纲（单位）整体换算、把整个系统的响应统一放大 k 倍。</div>
+
+<h3>2.2.3 矩阵乘法（本章核心）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="200" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="40" y1="110" x2="500" y2="110" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="150" y1="18" x2="150" y2="185" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="495" y="128" fill="#94a3b8" font-size="12">x</text>
+<text x="164" y="24" fill="#94a3b8" font-size="12">y</text>
+<text x="136" y="128" fill="#94a3b8" font-size="12">O</text>
+<g transform="translate(150,110)">
+<g>
+<animateTransform attributeName="transform" type="scale" values="1 1;1 1;2 1" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite"/>
+<g>
+<animateTransform attributeName="transform" type="rotate" values="0;-90;-90" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite"/>
+<line x1="0" y1="0" x2="0" y2="-52" stroke="#2563eb" stroke-width="4"/>
+<polygon points="0,-60 6,-46 -6,-46" fill="#2563eb"/>
+</g>
+</g>
+</g>
+<text x="260" y="178" fill="#334155" font-size="13" text-anchor="middle">① 先绕原点旋转 90°（左乘 R）<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="1;1;0;0" keyTimes="0;0.45;0.55;1"/></text>
+<text x="260" y="178" fill="#16a34a" font-size="13" text-anchor="middle">② 再沿 x 轴拉伸 2 倍（左乘 S，合成 SR）<animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;0.55;0.65;1"/></text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：矩阵乘法即线性变换的复合——先旋转 90°、再沿 x 轴拉伸 2 倍，箭头为 SR·v 的作用轨迹</figcaption>
+</figure>
+<p><strong>定义</strong>：设 A 是 <code>m × s</code> 矩阵，B 是 <code>s × n</code> 矩阵，则乘积 <code>C = AB</code> 是 <code>m × n</code> 矩阵，且</p>
+<pre><code>cᵢⱼ = aᵢ₁b₁ⱼ + aᵢ₂b₂ⱼ + ⋯ + aᵢₛbₛⱼ = Σₖ aᵢₖ bₖⱼ</code></pre>
+<p><strong>口诀</strong>：<strong>左行 × 右列，对应相乘再相加</strong>。C 的第 (i, j) 元素 = A 的第 i 行与 B 的第 j 列做「内积」。</p>
+<p><strong>可乘条件</strong>：<strong>左矩阵的列数 = 右矩阵的行数</strong>（内维 s 必须相等），结果的行列取「外维」m × n。</p>
+<pre><code>     A(m×s)  ·  B(s×n)  =  C(m×n)
+        └──── 相等 s ────┘</code></pre>
+<p><strong>例</strong>：</p>
+<pre><code>⎡1 2⎤   ⎡5 6⎤   ⎡1·5+2·7  1·6+2·8⎤   ⎡19 22⎤
+⎣3 4⎦ × ⎣7 8⎦ = ⎣3·5+4·7  3·6+4·8⎦ = ⎣43 50⎦</code></pre>
+<p><strong>运算律</strong>：</p>
+<ul>
+<li>结合律：<code>(AB)C = A(BC)</code>（可随意分组，但顺序不能换）</li>
+<li>分配律：<code>A(B + C) = AB + AC</code>，<code>(B + C)A = BA + CA</code></li>
+<li>与数乘：<code>k(AB) = (kA)B = A(kB)</code></li>
+<li><strong>一般不满足交换律</strong>：<code>AB ≠ BA</code>（甚至 AB 有意义而 BA 无意义；即便都有意义，通常也不相等）。</li>
+<li>有「零因子」：<code>A ≠ O, B ≠ O</code> 却可能 <code>AB = O</code>；也可能 <code>AB = AC</code> 而 <code>A ≠ O</code> 时推不出 B = C（<strong>消去律不成立</strong>）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>矩阵乘法 = <strong>线性变换的复合（先后作用）</strong>。<code>(AB)x = A(Bx)</code>：先把 x 用 B 变换，再用 A 变换。所以「先作用 B、后作用 A」要写成 <strong>AB</strong>——<strong>从右往左读</strong>。这也直接解释了为什么交换律不成立：先旋转再拉伸 ≠ 先拉伸再旋转（一般不等）。</div>
+<div class="insight"><strong>物理含义：</strong>矩阵乘法 = <strong>级联系统</strong>的传递。若 A 描述「输入 → 中间量」、B 描述「中间量 → 输出」，则 AB 描述「输入 → 输出」的整体传递函数；连续两次作用（两次变换、两级滤波、两次坐标系变换）就写成乘积。</div>
+
+<h3>2.2.4 转置</h3>
+<p>把矩阵的行与列互换，得到 <strong>转置矩阵</strong> <code>Aᵀ</code>（或 A′）：</p>
+<pre><code>(Aᵀ)ᵢⱼ = aⱼᵢ      （A 的第 i 行变成 Aᵀ 的第 i 列）</code></pre>
+<ul>
+<li>(Aᵀ)ᵀ = A</li>
+<li>(A + B)ᵀ = Aᵀ + Bᵀ</li>
+<li>(kA)ᵀ = kAᵀ</li>
+<li><strong>(AB)ᵀ = BᵀAᵀ</strong>（注意顺序颠倒！）</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>转置 = <strong>把「行视角」换成「列视角」</strong>（或反过来）。在实内积空间里，转置对应<strong>伴随（对偶）</strong>：<code>(Ax)·y = x·(Aᵀy)</code>，即「A 作用在左边」等价于「Aᵀ 作用在右边」——它把向量空间的对偶关系「翻了个面」。<br/><strong>物理含义：</strong>把「以行为单位组织的记录」变成「以列为单位组织的记录」，例如状态量按行写还是按列写、输入与输出的角色互换。</div>
+
+<h3>2.2.5 方阵的行列式与矩阵的关系</h3>
+<p>只有方阵才有行列式 <code>|A|</code>（或 det A）：</p>
+<ul>
+<li><code>|Aᵀ| = |A|</code></li>
+<li><code>|kA| = kⁿ|A|</code>（A 为 n 阶方阵，<strong>k 要提 n 次方</strong>）</li>
+<li><code>|AB| = |A|·|B|</code>（乘积的行列式 = 行列式的乘积）</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>|A| = 线性变换 A 对<strong>有向体积（面积）的缩放倍率</strong>。2×2 的 |A| = 平行四边形有向面积放大倍数；3×3 的 |A| = 平行六面体有向体积放大倍数。<code>|AB| = |A||B|</code> 就是说「先按 B 缩、再按 A 缩」的总倍率 = 两者倍率相乘。</div>
+
+<h3>2.2.6 共轭矩阵（复矩阵）</h3>
+<p>当元素为复数时，把每个元素取共轭得到 <strong>共轭矩阵</strong> <code>Ā</code>；取共轭再转置得到 <strong>共轭转置</strong> <code>Aᴴ = (Ā)ᵀ</code>。性质：</p>
+<pre><code>(AB)ᴴ = BᴴAᴴ，  (Aᴴ)ᴴ = A</code></pre>
+<div class="insight"><strong>物理含义：</strong>量子力学里，可观测量（如能量、动量）对应的算符是<strong>自伴（厄米）</strong>矩阵，满足 <code>Aᴴ = A</code>；态向量的「内积」也由共轭转置定义。共轭转置是复空间里「伴随/对偶」的推广。</div>
+
+<h2 id="s3">2.3 逆矩阵</h2>
+<h3>定义</h3>
+<p>设 A 为 n 阶方阵，若存在 n 阶方阵 B，使</p>
+<pre><code>AB = BA = E</code></pre>
+<p>则称 A <strong>可逆</strong>（非奇异），B 称为 A 的 <strong>逆矩阵</strong>，记作 <code>A⁻¹</code>。</p>
+<ul>
+<li>逆矩阵若存在必<strong>唯一</strong>。</li>
+<li><strong>可逆 ⟺ |A| ≠ 0</strong>（这是判定可逆最常用的充要条件）。</li>
+<li>单位矩阵的逆是自身：<code>E⁻¹ = E</code>；零矩阵不可逆。</li>
+</ul>
+
+<h3>求法一：伴随矩阵法（公式法）</h3>
+<pre><code>A⁻¹ = (1/|A|) · A*        （其中 |A| ≠ 0）</code></pre>
+<p>这里 <code>A*</code> 是 A 的<strong>伴随矩阵</strong>（由各元素的代数余子式按「转置」排列而成）。二阶方阵有简洁公式：</p>
+<pre><code>A = ⎡a b⎤  ⟹  A⁻¹ = (1/(ad−bc)) · ⎡ d  −b⎤
+    ⎣c d⎦                            ⎣−c   a⎦     （要求 ad − bc ≠ 0）</code></pre>
+
+<h3>求法二：初等行变换法（最实用）</h3>
+<p>把 A 与单位阵 E 并排，对整行做初等行变换，把左边变成 E，右边就得到 A⁻¹：</p>
+<pre><code>( A | E )  ──初等行变换──▶  ( E | A⁻¹ )</code></pre>
+<p>若左边无法化成 E（出现整行 0），则 |A| = 0，A 不可逆。</p>
+
+<h3>性质</h3>
+<ul>
+<li>(A⁻¹)⁻¹ = A</li>
+<li><strong>(AB)⁻¹ = B⁻¹A⁻¹</strong>（顺序颠倒）</li>
+<li>(Aᵀ)⁻¹ = (A⁻¹)ᵀ</li>
+<li>(kA)⁻¹ = (1/k) · A⁻¹（k ≠ 0）</li>
+<li>|A⁻¹| = 1/|A|</li>
+</ul>
+
+<h3>可逆与线性方程组（克莱姆法则）</h3>
+<p>方程组 <code>Ax = b</code>，当 A 可逆时，解唯一且可写为：</p>
+<pre><code>x = A⁻¹ b</code></pre>
+<p>克莱姆法则：x<sub>i</sub> = |A<sub>i</sub>| / |A|，其中 A<sub>i</sub> 是把 A 的第 i 列换成 b 得到的矩阵（要求 |A| ≠ 0）。</p>
+
+<div class="insight"><strong>几何含义：</strong>逆矩阵 = <strong>逆变换</strong>，把线性变换「倒着做回去」。A 把 x 送到 y，A⁻¹ 就把 y 送回 x：<code>A⁻¹(Ax) = x</code>。可逆 ⟺ 变换<strong>不降维、不折叠</strong>（把体积缩到 0 的变换，即 |A| = 0，丢失了信息，就无法还原）。</div>
+<div class="insight"><strong>物理含义：</strong>「已知结果反推原因」。若 A 是「原因 x → 结果 b」的系统矩阵，则 A⁻¹ 是「由测得的结果 b 反解出原始输入 x」的反问题求解器；在电路、力学、统计回归里，A⁻¹ 就是「去卷积/反演」的算子。</div>
+
+<h2 id="s4">2.4 分块矩阵</h2>
+<h3>基本思想</h3>
+<p>用若干横线、竖线把矩阵<strong>切成若干子块</strong>，每个子块本身又是一个（较小的）矩阵，从而把大矩阵的运算化归为小块间的运算。</p>
+<pre><code>        ⎡ A₁₁  A₁₂ ⎤
+  A  =  ⎣ A₂₁  A₂₂ ⎦      （每个 Aᵢⱼ 都是一个小矩阵）</code></pre>
+<p><strong>分块的目的</strong>：</p>
+<ul>
+<li>结构清晰：把「0 块」集中暴露出来，简化计算；</li>
+<li>降维：大矩阵运算变成若干小矩阵运算；</li>
+<li>揭示系统结构：一个块对应一个子系统。</li>
+</ul>
+
+<h3>分块运算规则</h3>
+<ul>
+<li><strong>加法</strong>：同型且<strong>同一种分法</strong>时，对应子块相加。</li>
+<li><strong>数乘</strong>：每个子块都乘 k。</li>
+<li><strong>乘法</strong>：把子块当「元素」按矩阵乘法规则做，但要求<strong>子块的乘法都合法</strong>（左块列分法 = 右块行分法）。</li>
+<li><strong>转置</strong>：整体转置且每个子块内部也转置：<code>(A)ᵀ 的第 (i,j) 块 = (Aⱼᵢ)ᵀ</code>。</li>
+</ul>
+
+<h3>重要特例：分块对角矩阵</h3>
+<pre><code>        ⎡ A₁  0   0 ⎤
+  A  =  ⎢ 0   A₂  0 ⎥   （主对角上是方阵 A₁, A₂, A₃，其余为 0 块）
+        ⎣ 0   0   A₃⎦</code></pre>
+<ul>
+<li><strong>行列式</strong>：<code>|A| = |A₁| · |A₂| · |A₃|</code>（各块行列式相乘）。</li>
+<li><strong>逆</strong>：<code>A⁻¹ = diag(A₁⁻¹, A₂⁻¹, A₃⁻¹)</code>（各块分别求逆再对角放回）。</li>
+<li><strong>幂</strong>：<code>Aᵏ = diag(A₁ᵏ, A₂ᵏ, A₃ᵏ)</code>。</li>
+</ul>
+<p>对<strong>分块三角矩阵</strong>：</p>
+<pre><code>⎡ A  C ⎤ 的行列式 = |A|·|B|；  可逆 ⟺ A、B 都可逆
+⎣ 0  B ⎦</code></pre>
+
+<div class="insight"><strong>几何含义：</strong>分块对角矩阵 = <strong>空间被分解成若干「互不干扰」的子空间的直和</strong>，变换在每个子空间里<strong>各自独立</strong>地作用（互不混合）。因此整体效果 = 各子空间效果的「独立乘积」。</div>
+<div class="insight"><strong>物理含义：</strong>把大系统<strong>解耦成子系统</strong>。例如把耦合的振动系统通过坐标变换变成分块对角形，各块对应独立的简正模（各自振动的自由度）；把「电路网络、多体问题」按块组织，一块就是一个子系统，可以分别处理再拼接。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>矩阵</td><td>线性变换（各列是基向量的像）</td><td>多分量系统 / 批量数据的容器</td></tr>
+<tr><td>矩阵加法</td><td>两个变换逐分量叠加</td><td>两种效应（力/场）的叠加原理</td></tr>
+<tr><td>数乘</td><td>变换整体按比例缩放</td><td>数据表整体缩放 / 量纲换算</td></tr>
+<tr><td>矩阵乘法</td><td>线性变换的复合（从右往左先后作用）</td><td>级联系统的传递 / 连续作用</td></tr>
+<tr><td>转置</td><td>行、列视角互换（对偶/伴随）</td><td>输入输出角色互换、行记录↔列记录</td></tr>
+<tr><td>方阵行列式</td><td>有向面积/体积的缩放倍率</td><td>变换是否「保体积」、信息是否丢失</td></tr>
+<tr><td>逆矩阵</td><td>逆变换（把变换倒回去）</td><td>由结果反推原因（反演/去卷积）</td></tr>
+<tr><td>分块矩阵</td><td>空间直和分解、各子空间独立作用</td><td>大系统解耦成独立子系统</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>基础运算</h4>
+<ol>
+<li>设 A = ⎡1 2⎤、B = ⎡5 6⎤、C = ⎡2 0⎤，求 AB、BA、并验证 AB ≠ BA（一般）。<br/>　　⎣3 4⎦　　　⎣7 8⎦　　　⎣0 3⎦</li>
+<li>设 A = ⎡1 2 3⎤，求 Aᵀ 及 (Aᵀ)ᵀ；对 B = ⎡1 2⎤ 验证 (AB)ᵀ = BᵀAᵀ。<br/>　　　　⎣4 5 6⎦　　　　　　⎣3 4⎦</li>
+<li>设 A、B 为 3 阶方阵，|A| = 2，|B| = −3，求 |AB|、|Aᵀ|、|2A|。</li>
+<li>设 A 与 B 均非零但 AB = O，举一个 2×2 的具体例子，说明消去律不成立。</li>
+</ol>
+<h4>逆矩阵</h4>
+<ol start="5">
+<li>求 A = ⎡1 2⎤ 的逆矩阵（用二阶公式，并验证 AA⁻¹ = E）。<br/>　　　　⎣3 4⎦</li>
+<li>用初等行变换求 A = ⎡1 2 3⎤ 的逆（先判断 |A| 是否非零）。<br/>　　　　　　　　　　⎢0 1 4⎥<br/>　　　　　　　　　　⎣0 0 1⎦</li>
+<li>已知 AB = E 且 A 可逆，证明 B = A⁻¹，并由此写出 (AB)⁻¹ = B⁻¹A⁻¹ 的推导。</li>
+</ol>
+<h4>分块矩阵</h4>
+<ol start="8">
+<li>设 A = ⎡2 1 0 0⎤ 用分块法（分成两个 2×2 对角块）求 |A| 与 A⁻¹。<br/>　　　　⎢0 2 0 0⎥<br/>　　　　⎢0 0 3 1⎥<br/>　　　　⎣0 0 1 2⎦</li>
+<li>设分块上三角矩阵 M = ⎡A C⎤，其中 A、B 均可逆，试写出 M⁻¹ 的分块形式。<br/>　　　　　　　　　　　　⎣0 B⎦</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ 「矩阵就是行列式」→ ❌ 矩阵是数表（本身不是数），行列式是方阵按规则算出的一个数，两者本质不同。</li>
+<li>❌ 「任何两个矩阵都能相乘」→ ❌ 必须满足<strong>左列数 = 右行数</strong>，否则无定义。</li>
+<li>❌ 「矩阵乘法满足交换律」→ ❌ 一般 <code>AB ≠ BA</code>；能用交换律的只是特殊情形（如对角阵之间）。</li>
+<li>❌ 「AB = O 说明 A = O 或 B = O」→ ❌ 矩阵有零因子，非零矩阵相乘可为零阵。</li>
+<li>❌ 「AB = AC 且 A ≠ O ⟹ B = C」→ ❌ 矩阵乘法没有消去律，除非 A 可逆才能左乘 A⁻¹ 消去。</li>
+<li>❌ 「(AB)ᵀ = AᵀBᵀ」→ ❌ 转置要<strong>颠倒顺序</strong>：<code>(AB)ᵀ = BᵀAᵀ</code>。</li>
+<li>❌ 「(AB)⁻¹ = A⁻¹B⁻¹」→ ❌ 求逆也要<strong>颠倒顺序</strong>：<code>(AB)⁻¹ = B⁻¹A⁻¹</code>。</li>
+<li>❌ 「|kA| = k|A|」→ ❌ 对 n 阶方阵，数 k 要提 n 次方：<code>|kA| = kⁿ|A|</code>。</li>
+<li>❌ 「只要 A 是方阵就一定可逆」→ ❌ 可逆 ⟺ |A| ≠ 0；|A| = 0（降维/折叠）则不可逆。</li>
+<li>❌ 「分块乘法随便切就行」→ ❌ 分块必须让<strong>子块之间的乘法合法</strong>（左块列分法 = 右块行分法），不能乱切。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin-top:0">一、练习题</h3>
+<ol>
+<li><strong>（概念辨析）</strong>判断题：设 A 是 2×3 矩阵。"A 是数表，|A| 也是数"这句话对吗？请说明矩阵与行列式的本质区别。</li>
+<li><strong>（几何含义）</strong>用矩阵乘法表示"先绕原点旋转 90°，再沿 x 轴拉伸 2 倍"这一连续作用。设旋转矩阵 R = ⎡0 −1⎤、拉伸矩阵 S = ⎡2 0⎤，复合变换矩阵应写作 SR 还是 RS？为什么？<br/>　　　　　　　　　　　　　　　　　　　　　⎣1 0⎦　　　　　　　⎣0 1⎦</li>
+<li><strong>（转置）</strong>设 A = ⎡1 2⎤、B = ⎡5 6⎤，验证 (AB)ᵀ = BᵀAᵀ，并说明"转置"在现实数据表里对应什么操作。<br/>　　　　　　⎣3 4⎦　　　⎣7 8⎦</li>
+<li><strong>（行列式与数乘）</strong>设 A、B 为 3 阶方阵，|A| = 2，|B| = −3。求 |AB|、|Aᵀ|、|2A|，并从"有向体积缩放倍率"的角度解释 |2A| 为何不是 2|A|。</li>
+<li><strong>（逆矩阵·反演）</strong>求 A = ⎡1 2⎤ 的逆矩阵（用二阶公式），并验证 AA⁻¹ = E；若 y = Ax 且已知 y = ⎡5⎤，用 A⁻¹ 反解出 x，说明逆矩阵"由结果反推原因"的物理含义。<br/>　　　　　　　　　　⎣3 4⎦　　　　　　　　　　　　　　　　　　　⎣11⎦</li>
+<li><strong>（分块矩阵）</strong>设 A = ⎡2 1 0 0⎤，用分块法（分成两个 2×2 对角块）求 |A| 与 A⁻¹，并从"空间直和分解"的角度说明分块对角矩阵的优势。<br/>　　　　　　　　⎢0 2 0 0⎥<br/>　　　　　　　　⎢0 0 3 1⎥<br/>　　　　　　　　⎣0 0 1 2⎦</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>错。矩阵是一张<strong>数表</strong>（本身不是数），行列式只是对<strong>方阵</strong>按规则算出的<strong>一个数</strong>。2×3 矩阵 A 不是方阵，根本不存在 |A|；两者本质不同，不可混用。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>复合矩阵写作 <strong>SR</strong>。矩阵乘法表示线性变换的复合，<strong>从右往左先后作用</strong>：SR 表示"先作用 R（旋转），再作用 S（拉伸）"。计算 SR = ⎡0 −2⎤；若写成 RS 则顺序颠倒，表示"先拉伸后旋转"，一般结果不同。<br/>　　　　　　　⎣1 0⎦</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>AB = ⎡19 22⎤，(AB)ᵀ = ⎡19 43⎤；BᵀAᵀ = ⎡19 43⎤，两者相等 ✓。转置是<strong>行、列视角互换</strong>，在数据表中对应"行记录 ↔ 列记录"的角色互换。<br/>　　　⎣43 50⎦　　　　　⎣22 50⎦　　　⎣22 50⎦</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>|AB| = |A|·|B| = 2×(−3) = <strong>−6</strong>；|Aᵀ| = |A| = <strong>2</strong>；|2A| = 2³|A| = 8×2 = <strong>16</strong>。几何上，|A| 表示 A 对有向体积的缩放倍率；2A 把<strong>每个列向量都放大 2 倍</strong>，三维空间三个方向各自翻倍，体积变为 2³ = 8 倍（再乘原倍率 2），所以是 16 而不是 2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>|A| = 1×4 − 2×3 = −2。A⁻¹ = (1/|A|)⎡ d −b⎤ = (−1/2)⎡4 −2⎤ = ⎡−2 1⎤。验证 AA⁻¹ = E ✓。<br/>　　　　　　　　　　　　　　⎣−c a⎦　　　　　⎣−3 1⎦　　⎣3/2 −1/2⎦<br/>x = A⁻¹y = ⎡1⎤。含义：已知输出 y 反推输入 x，即"反演"——逆矩阵把线性变换倒回去，由结果恢复原因。<br/>　　　　　　⎣2⎦</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>分块 A = diag(B₁, B₂)，其中 B₁ = ⎡2 1⎤、B₂ = ⎡3 1⎤。|A| = |B₁|·|B₂| = 4×5 = <strong>20</strong>。<br/>　　　　　　　　　　　　　　　　　　　　　⎣0 2⎦　　　⎣1 2⎦<br/>B₁⁻¹ = ⎡1/2 −1/4⎤，B₂⁻¹ = ⎡2/5 −1/5⎤，故 A⁻¹ = 分块对角 ⎡B₁⁻¹ 0⎤。优势：把 4 维问题拆成两个独立的 2 维子问题，各子空间互不影响，实现"解耦"。<br/>　　　　⎣ 0 1/2⎦　　　　⎣−1/5 3/5⎦　　　　　　　　⎣ 0 B₂⁻¹⎦</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第1章-行列式/第1章-行列式.html">← 上一章：第1章 行列式</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第3章-矩阵的初等变换与线性方程组/第3章-矩阵的初等变换与线性方程组.html">下一章：第3章 矩阵的初等变换与线性方程组 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 线性代数</footer>
+</body>
+</html>

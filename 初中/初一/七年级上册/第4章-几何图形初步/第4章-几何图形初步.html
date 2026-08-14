@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第4章 几何图形初步 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级上册 › 第4章 几何图形初步</div></header>
+<main class="container">
+<h1>第4章 几何图形初步</h1>
+<p class="lead">初中 / 初一 / 七年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>世界由「点、线、面、体」构成，它们靠<strong>运动</strong>互相生成：<strong>点动成线、线动成面、面动成体</strong>。这是几何的起点。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">4.1 几何图形</a><a href="#s2">4.2 直线、射线、线段</a><a href="#s3">4.3 角</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+</div>
+
+<h2 id="s1">4.1 几何图形</h2>
+<h3>立体图形（占据空间的图形）</h3>
+<ul>
+<li><strong>柱体</strong>：长方体、正方体、圆柱、棱柱（上下底面全等）</li>
+<li><strong>锥体</strong>：圆锥、棱锥（一个底面，收拢到一个顶点）</li>
+<li><strong>球体</strong>：球</li>
+<li><strong>台体</strong>：圆台、棱台（锥体截去顶）</li>
+</ul>
+<div class="insight"><strong>几何直觉：</strong>柱体 = "底面沿一条直线平移扫出来"；锥体 = "底面收缩到一个点"；球 = "一个圆绕直径旋转"。</div>
+<h3>平面图形（画在平面内的图形）</h3>
+<p>三角形、四边形（长方形、正方形、平行四边形、梯形）、圆、线段、角、直线、射线等。</p>
+<h3>点、线、面、体</h3>
+<ul>
+<li><strong>体</strong>：由面围成，如长方体有 6 个面。</li>
+<li><strong>面</strong>：有平面、曲面（如圆柱侧面是曲面）。</li>
+<li><strong>线</strong>：面与面相交得到线（如长方体的棱）。</li>
+<li><strong>点</strong>：线与线相交得到点（如长方体的顶点）。</li>
+</ul>
+<h3>运动生成（核心思想！）</h3>
+<table>
+<tr><th>运动</th><th>结果</th></tr>
+<tr><td><strong>点动成线</strong></td><td>笔尖划过纸 → 线；流星划过夜空 → 光线</td></tr>
+<tr><td><strong>线动成面</strong></td><td>雨刷扫过 → 扇形面；门的一条边转动 → 面</td></tr>
+<tr><td><strong>面动成体</strong></td><td>长方形绕一边旋转 → 圆柱；直角三角形绕直角边旋转 → 圆锥</td></tr>
+</table>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="720" height="240" viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="115" y="32" text-anchor="middle" font-size="14" fill="#334155" font-weight="700">① 点动成线</text>
+  <text x="350" y="32" text-anchor="middle" font-size="14" fill="#334155" font-weight="700">② 线动成面</text>
+  <text x="608" y="32" text-anchor="middle" font-size="14" fill="#334155" font-weight="700">③ 面动成体</text>
+  <line x1="30" y1="170" x2="200" y2="170" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="30" y1="170" x2="200" y2="170" stroke="#16a34a" stroke-width="3" stroke-dasharray="170" stroke-dashoffset="170">
+    <animate attributeName="stroke-dashoffset" values="170;0;0;170" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <circle cx="30" cy="170" r="8" fill="#2563eb">
+    <animate attributeName="cx" values="30;200;200;30" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <text x="30" y="150" font-size="12" fill="#2563eb" text-anchor="middle">点</text>
+  <text x="200" y="150" font-size="12" fill="#16a34a" text-anchor="middle">线</text>
+  <rect x="270" y="110" width="160" height="70" fill="none" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <rect x="270" y="110" width="0" height="70" fill="#16a34a" opacity="0.35">
+    <animate attributeName="width" values="0;160;160;0" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <line x1="270" y1="110" x2="270" y2="180" stroke="#2563eb" stroke-width="3">
+    <animate attributeName="x1" values="270;430;430;270" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="270;430;430;270" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <text x="265" y="105" font-size="12" fill="#2563eb" text-anchor="middle">线</text>
+  <text x="350" y="205" font-size="12" fill="#16a34a" text-anchor="middle">面</text>
+  <rect x="540" y="110" width="64" height="64" fill="#2563eb" opacity="0.25" stroke="#2563eb" stroke-width="2"/>
+  <g>
+    <rect x="540" y="110" width="64" height="64" fill="#16a34a" opacity="0.3" stroke="#16a34a" stroke-width="2"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;72 0;72 0;0 0" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </g>
+  <line x1="540" y1="110" x2="540" y2="110" stroke="#64748b" stroke-width="2">
+    <animate attributeName="x2" values="540;612;612;540" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <line x1="604" y1="110" x2="604" y2="110" stroke="#64748b" stroke-width="2">
+    <animate attributeName="x2" values="604;676;676;604" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <line x1="540" y1="174" x2="540" y2="174" stroke="#64748b" stroke-width="2">
+    <animate attributeName="x2" values="540;612;612;540" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <line x1="604" y1="174" x2="604" y2="174" stroke="#64748b" stroke-width="2">
+    <animate attributeName="x2" values="604;676;676;604" keyTimes="0;0.5;0.5;1" dur="4s" repeatCount="indefinite"/>
+  </line>
+  <text x="540" y="205" font-size="12" fill="#2563eb" text-anchor="middle">面</text>
+  <text x="640" y="205" font-size="12" fill="#16a34a" text-anchor="middle">体</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：点动成线、线动成面、面动成体——运动让维度逐级升高（0维→1维→2维→3维）</figcaption>
+</figure>
+<div class="insight"><strong>物理含义：</strong>这是"维度递增"的直觉——0维(点) → 1维(线) → 2维(面) → 3维(体)。旋转体（圆柱、圆锥、球）本质都是"一个平面图形绕一条轴旋转"。</div>
+<h3>展开图</h3>
+<p>把立体图形表面剪开铺平得到<strong>展开图</strong>。正方体的展开图有 11 种（分为"141、231、222、33"四类）。训练空间想象力：看到一个立体，能在脑子里"拆开铺平"和"折起来还原"。</p>
+
+<h2 id="s2">4.2 直线、射线、线段</h2>
+<h3>三种线的区别</h3>
+<table>
+<tr><th>图形</th><th>端点</th><th>延伸</th><th>表示</th></tr>
+<tr><td>直线</td><td>0 个</td><td>向两方无限延伸</td><td>直线 AB 或直线 l</td></tr>
+<tr><td>射线</td><td>1 个</td><td>向一方无限延伸</td><td>射线 AB（A 是端点）</td></tr>
+<tr><td>线段</td><td>2 个</td><td>不能延伸</td><td>线段 AB 或线段 a</td></tr>
+</table>
+<h3>两条基本事实（公理）</h3>
+<ol>
+<li><strong>两点确定一条直线</strong>（过两点有且只有一条直线）。物理应用：木匠用两个点弹墨线；两个钉子固定一块木板。</li>
+<li><strong>两点之间，线段最短</strong>。物理应用：<strong>光沿直线传播</strong>；"两点之间直线最近"；蚂蚁走直线最短。</li>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <path id="curveAB" d="M50,150 C 160,20 340,190 450,70" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 6" opacity="0.85"/>
+  <path id="segAB" d="M50,150 L450,70" fill="none" stroke="#16a34a" stroke-width="3"/>
+  <circle cx="50" cy="150" r="6" fill="#0f172a"/>
+  <circle cx="450" cy="70" r="6" fill="#0f172a"/>
+  <text x="42" y="172" font-size="14" fill="#0f172a" font-weight="700">A</text>
+  <text x="458" y="62" font-size="14" fill="#0f172a" font-weight="700">B</text>
+  <circle cx="50" cy="150" r="8" fill="#16a34a">
+    <animateMotion dur="2.2s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+      <mpath href="#segAB"/>
+    </animateMotion>
+  </circle>
+  <circle cx="50" cy="150" r="8" fill="#2563eb">
+    <animateMotion dur="3.2s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear">
+      <mpath href="#curveAB"/>
+    </animateMotion>
+  </circle>
+  <text x="260" y="32" font-size="13" fill="#2563eb" text-anchor="middle">弯路（蓝）更长</text>
+  <text x="260" y="200" font-size="13" fill="#16a34a" text-anchor="middle">线段 AB（绿）最短</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两点之间线段最短——绿点沿直线先到，蓝点绕弯更久，这正是光沿直线传播的原因</figcaption>
+</figure>
+</ol>
+<h3>线段的比较与中点</h3>
+<ul>
+<li><strong>比较</strong>：度量法（用刻度尺量）或叠合法（把一条线段移到另一条上比）。</li>
+<li><strong>中点</strong>：把线段分成<strong>两条相等线段</strong>的点。若 C 是线段 AB 的中点，则 AC = BC = ½AB。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>中点 = 线段上到两端距离相等的点（也是线段的"对称中心"）。</div>
+
+<h2 id="s3">4.3 角</h2>
+<h3>角的概念</h3>
+<p><strong>静态定义</strong>：有公共端点的<strong>两条射线</strong>组成的图形，公共端点叫<strong>顶点</strong>，两条射线叫<strong>边</strong>。<br/>
+<strong>动态定义</strong>：一条射线<strong>绕端点旋转</strong>到另一个位置形成的图形。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="350" viewBox="0 0 520 350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <circle cx="250" cy="170" r="90" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="250" y1="170" x2="360" y2="170" stroke="#94a3b8" stroke-width="2"/>
+  <text x="372" y="174" font-size="13" fill="#64748b">始边 OA</text>
+  <text x="250" y="64" font-size="12" fill="#94a3b8" text-anchor="middle">90°</text>
+  <text x="138" y="174" font-size="12" fill="#94a3b8" text-anchor="middle">180°</text>
+  <text x="250" y="300" font-size="12" fill="#94a3b8" text-anchor="middle">270°</text>
+  <text x="352" y="174" font-size="12" fill="#94a3b8" text-anchor="middle">0°</text>
+  <text x="250" y="285" font-size="13" fill="#64748b" text-anchor="middle">顶点 O</text>
+  <g>
+    <path d="M250,170 L340,170 A90 90 0 0 0 295 92.06 Z" fill="#16a34a" opacity="0.3"/>
+    <line x1="250" y1="170" x2="340" y2="170" stroke="#2563eb" stroke-width="3"/>
+    <polygon points="340,170 328,163 328,177" fill="#2563eb"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 250 170" to="360 250 170" dur="8s" repeatCount="indefinite"/>
+  </g>
+  <text x="250" y="330" font-size="13" fill="#2563eb" text-anchor="middle">终边 OB 绕顶点旋转 → 旋转量就是角</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：角 = 一条射线绕端点旋转的「旋转量」——从始边扫到终边，转一圈就是周角 360°</figcaption>
+</figure>
+<div class="insight"><strong>物理含义：</strong>角 = <strong>旋转量</strong>。钟表指针转过的角度、门转过的角度，都是"转动"。</div>
+<h3>角的度量（度、分、秒）</h3>
+<ul>
+<li>单位：度（°）、分（′）、秒（″）</li>
+<li>换算（<strong>六十进制</strong>）：1° = 60′，1′ = 60″</li>
+<li>例：0.5° = 30′；1.25° = 1°15′</li>
+</ul>
+<p><strong>角的分类</strong>：</p>
+<table>
+<tr><th>角</th><th>大小</th></tr>
+<tr><td>锐角</td><td>0° &lt; α &lt; 90°</td></tr>
+<tr><td>直角</td><td>α = 90°</td></tr>
+<tr><td>钝角</td><td>90° &lt; α &lt; 180°</td></tr>
+<tr><td>平角</td><td>α = 180°（两条边成一直线）</td></tr>
+<tr><td>周角</td><td>α = 360°（转一整圈）</td></tr>
+</table>
+<h3>角的比较与运算</h3>
+<ul>
+<li>比较：度量法、叠合法。</li>
+<li>角的和差：两个角可以相加、相减。</li>
+<li><strong>角平分线</strong>：从顶点出发，把角分成两个<strong>相等角</strong>的射线。若 OC 是 ∠AOB 的平分线，则 ∠AOC = ∠COB = ½∠AOB。</li>
+</ul>
+<h3>余角和补角</h3>
+<ul>
+<li><strong>余角</strong>：两个角的和等于 <strong>90°</strong>（直角），则互余。如 30° 与 60°。</li>
+<li><strong>补角</strong>：两个角的和等于 <strong>180°</strong>（平角），则互补。如 120° 与 60°。</li>
+<li><strong>性质</strong>：同角（或等角）的余角相等；同角（或等角）的补角相等。</li>
+</ul>
+<div class="insight"><strong>几何直觉：</strong>互余 = 两个角拼成一个直角；互补 = 两个角拼成一条直线（平角）。</div>
+
+<h2 id="s4">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>点线面体</td><td>维度递进的基本元素</td><td>空间的层次结构</td></tr>
+<tr><td>点动成线…</td><td>运动生成图形</td><td>轨迹（流星、雨刷、旋转）</td></tr>
+<tr><td>两点确定一直线</td><td>唯一的连接</td><td>弹墨线、钉木板</td></tr>
+<tr><td>两点之间线段最短</td><td>最短路径</td><td>光沿直线传播</td></tr>
+<tr><td>线段中点</td><td>到两端等距</td><td>对称中心、重心平衡点</td></tr>
+<tr><td>角</td><td>两条射线的张开程度</td><td>旋转量、方向差</td></tr>
+<tr><td>角平分线</td><td>把角平分</td><td>均匀分割方向</td></tr>
+<tr><td>余角/补角</td><td>拼成直角/平角</td><td>两角合成特定姿态</td></tr>
+</table>
+
+<h2 id="s5">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>长方体有几个面、几条棱、几个顶点？</li>
+<li>下列能确定一条直线的是：过一点、过两点、过三点？</li>
+<li>线段 AB = 10 cm，C 是 AB 的中点，D 是 AC 的中点，求 AD 的长。</li>
+<li>把 25.2° 化成度分秒；把 15°30′ 化成度。</li>
+<li>一个角的补角是它的 3 倍，求这个角的度数。（提示：设角为 x，补角 180° − x = 3x）</li>
+</ol>
+</div>
+
+<h2 id="s6">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "射线 AB 和射线 BA 是同一条射线" → ❌ 端点不同（A 与 B），方向相反。</li>
+<li>❌ "两点之间直线最短" → ❌ 准确说法是"两点之间<strong>线段</strong>最短"（直线无限长）。</li>
+<li>❌ "1° = 100′" → ❌ 度分秒是<strong>六十进制</strong>：1° = 60′，1′ = 60″。</li>
+<li>❌ "锐角 + 钝角 = 平角" → ❌ 不一定，如 30° + 100° = 130° ≠ 180°。</li>
+<li>❌ "互为余角的两角一定有一个锐角" → ❌ 两角都为 45° 时也互余（90°）。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li><strong>（概念·点线面体）</strong>填空：点动成____、线动成____、面动成____；正方体有____个面、____条棱、____个顶点。</li>
+<li><strong>（判断·射线）</strong>「射线 AB 和射线 BA 是同一条射线」这句话对吗？为什么？</li>
+<li><strong>（判断·公理）</strong>「两点之间直线最短」这句话对吗？正确的说法应该是什么？</li>
+<li><strong>（计算·线段中点）</strong>线段 AB = 12 cm，C 是 AB 的中点，D 是 AC 的中点，求 AD 的长。</li>
+<li><strong>（计算·度分秒）</strong>把 25.2° 化成度分秒；把 15°30′ 化成度。</li>
+<li><strong>（综合·余补角）</strong>一个角的补角是它的 3 倍，求这个角的度数。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>线、面、体；正方体有 <strong>6</strong> 个面、<strong>12</strong> 条棱、<strong>8</strong> 个顶点。依据：点动成线（笔尖画线）、线动成面（雨刷扫过）、面动成体（长方形绕一边旋转成圆柱）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>不对。射线 AB 以 A 为端点、向 B 方向延伸；射线 BA 以 B 为端点、向 A 方向延伸，二者<strong>端点不同、方向相反</strong>，是两条不同的射线。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>不对。正确说法是「两点之间<strong>线段</strong>最短」——直线向两方无限延伸，谈不上「最短」。同时注意另一条基本事实：<strong>两点确定一条直线</strong>（过两点有且只有一条直线）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>C 是 AB 中点 → AC = BC = ½×12 = 6 cm；D 是 AC 中点 → AD = ½×6 = 3 cm。答：<strong>AD = 3 cm</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>25.2° = 25° + 0.2×60′ = <strong>25°12′</strong>；15°30′ = 15 + 30÷60 = <strong>15.5°</strong>。（度分秒为六十进制：1° = 60′，1′ = 60″）</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设这个角为 x，则补角 = 180° − x。由题意 180° − x = 3x，得 180° = 4x，x = <strong>45°</strong>。答：这个角是 45°。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第3章-一元一次方程/第3章-一元一次方程.html">← 上一章：第3章 一元一次方程</a><a href="../../../../index.html">回目录</a><a href="../../七年级下册/第5章-相交线与平行线/第5章-相交线与平行线.html">下一章：第5章 相交线与平行线 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

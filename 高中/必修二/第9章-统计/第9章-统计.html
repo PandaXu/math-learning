@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第9章 统计 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第9章 统计</div></header>
+<main class="container">
+<h1>第9章 统计</h1>
+<p class="lead">高中 / 必修第二册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>统计 = 「用一小撮样本，去还原一大群总体的分布模样」。学完本章，你要能在心里"看见"两条线——一条是把数据从小到大排开的<strong>数轴</strong>（百分位数就是它上面的"切点"），一张是把数据按区间"装箱"的<strong>面积图</strong>（频率分布直方图里，面积才是频率）。抽样、画图、算数、估计，每一步都是"从局部推整体"的几何度量。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">9.1 随机抽样：简单随机抽样与分层随机抽样</a><a href="#s2">9.2 频率分布直方图</a><a href="#s3">9.3 百分位数</a><a href="#s4">9.4 样本估计总体</a><a href="#s5">本章·几何与物理含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">9.1 随机抽样：简单随机抽样与分层随机抽样</h2>
+<h3>为什么要抽样？（从"全体"到"样本"）</h3>
+<p>统计研究的是<strong>总体</strong>（要考察对象的全体，含 N 个个体）。但总体往往太大、太贵、或不可全测（比如检验灯泡寿命会把灯泡烧坏），于是我们从总体中抽取一部分个体作为<strong>样本</strong>，用样本的规律去推断总体。</p>
+<p>抽样的核心原则只有一条：<strong>样本要有代表性、每个个体被抽到的机会要可控制</strong>。抽样方法决定了样本"长得像不像总体"。</p>
+<div class="insight"><strong>物理含义：</strong>总体 = 一大桶混合溶液；抽样 = 舀一小勺去化验。简单随机抽样相当于<strong>先把桶搅匀再随机舀一勺</strong>（每一点被舀到的机会相同）；分层抽样相当于<strong>按不同密度/成分分成几层，再逐层按比例舀</strong>，保证每一层都被代表到。</div>
+
+<h3>简单随机抽样</h3>
+<p><strong>定义</strong>：设总体含 N 个个体，从中<strong>逐个、不放回</strong>地抽取 n（1 ≤ n &lt; N）个个体作为样本，且每次抽取时总体内<strong>每个个体被抽到的机会都相等</strong>，这样的抽样叫<strong>简单随机抽样</strong>。</p>
+<ul>
+<li>最常用的两种实现：<strong>抽签法</strong>（编号→制签→搅匀→逐个不放回抽取）、<strong>随机数法</strong>（用随机数表或计算机生成的随机数挑编号）。</li>
+<li><strong>等可能性</strong>：每个个体被抽中的概率都等于 <code>n/N</code>。这是"公平"的数学保证。</li>
+<li>特点：不放回 + 逐个 + 等机会。放回抽样（每次抽完放回）也叫简单随机抽样的一种，但课本默认不放回。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>把总体 N 个个体看成数轴或平面上 N 个等权重的点。简单随机抽样 = <strong>在这一点集上"均匀随机取 n 个点"</strong>，任何一点都不被偏爱、任何一块区域被取到的概率只与它包含的点数成正比——这是"等概率测度"的直接体现。</div>
+<div class="insight"><strong>物理含义：</strong>把总体搅"均匀"后随机取样。搅匀 = 抹掉所有个体间的差异权重，让每一份被取中的机会一致；这正对应"随机"的物理本义——无偏、无记忆。</div>
+
+<h3>分层随机抽样</h3>
+<p>当总体内部差异明显时（如不同年级、不同车间），先按一个或多个变量把总体划分为若干<strong>互不相交</strong>的子总体（每个个体属于且仅属于一个子总体），每个子总体叫一个<strong>层</strong>；然后在每一层内<strong>独立进行简单随机抽样</strong>，最后把各层样本合起来作为总样本。这就是<strong>分层随机抽样</strong>。</p>
+<p><strong>按比例分配</strong>：各层抽取的样本量 <code>n_i</code> 与该层个体数 <code>N_i</code> 成正比——</p>
+<pre><code>n_i = (N_i / N) × n    （N = N₁ + N₂ + … + N_k 为总体容量，n 为总样本量）</code></pre>
+<p>例：全校共 1000 人，其中高一 400、高二 300、高三 300，抽 100 人的样本，则各层抽 <code>400/1000×100=40</code>、<code>30</code>、<code>30</code> 人。</p>
+<div class="insight"><strong>几何含义：</strong>把总体的"点集"沿某个特征轴切成若干互不重叠的<strong>区间段（层）</strong>，再在每段内按"该段长度占总长度的比例"均匀取点。比例分配 = <strong>每一层内部的抽样密度与全局一致</strong>，于是样本点在各区间的分布自动复刻总体结构，不会"漏掉"或"挤爆"某一段。</div>
+<div class="insight"><strong>物理含义：</strong>像从一瓶<strong>分层的液体</strong>（油浮在上、水沉在下）里取样——若只搅表面会错过底层，必须先<strong>按层分别取样、再按体积比合并</strong>，才能还原整瓶的成分比例。分层抽样的"层"就是物理上的"不同相/不同浓度区"。</div>
+<p><strong>分层样本的总体均值</strong>：设第 i 层样本量为 n_i、样本平均数为 x̄_i，则总样本平均数等于<strong>各层平均数按样本量的加权平均</strong>：</p>
+<pre><code>x̄ = (n₁x̄₁ + n₂x̄₂ + … + n_kx̄_k) / (n₁ + n₂ + … + n_k)</code></pre>
+<div class="insight">这其实是<strong>物理中的"重心公式"</strong>：x̄ 是把各层"质心" x̄_i 按质量 n_i 加权后求出的总质心位置。</div>
+
+<h2 id="s2">9.2 频率分布直方图</h2>
+<p>拿到一大堆原始数据，要先"整理出形状"。频率分布直方图就是<strong>把数据分布的"形"画出来</strong>的标准工具。</p>
+<h3>画图五步</h3>
+<ol>
+<li><strong>求极差</strong>：R = 最大值 − 最小值，它刻画数据的"总跨度"。</li>
+<li><strong>定组距与组数</strong>：组数一般取 5～12 组；组距 ≈ R ÷ 组数，通常取"方便的数"（如 1、2、5、10）。</li>
+<li><strong>分组</strong>：常用<strong>左闭右开</strong>区间 [a, b) 分组，保证每点恰属一组。</li>
+<li><strong>列频率分布表</strong>：统计每组<strong>频数</strong>（个数），再算<strong>频率</strong> = 频数 ÷ 样本容量 n。</li>
+<li><strong>画图</strong>：横轴 = 数据，纵轴 = <strong>频率/组距</strong>；以组距为宽、频率/组距为高画小矩形。</li>
+</ol>
+<div class="insight"><strong>几何含义（本章最重要的几何直觉！）：</strong>频率分布直方图中，<strong>小矩形的面积 = 组距 × (频率/组距) = 频率</strong>。所以直方图是用<strong>面积</strong>而不是高度来表示频率——所有小矩形面积之和恰好等于 1（即"总概率 = 1"）。每个小矩形可以理解为数轴上一个区间上方"铺出的一块面积"，面积大小就是落在这个区间里的概率。</div>
+<div class="insight"><strong>物理含义：</strong>把 n 个数据点看成撒在数轴上的一堆"沙粒"。分组 = 用若干箱子接住不同区间的沙粒；<strong>纵轴（频率/组距）= 沙粒的"线密度"</strong>（单位长度内的相对沙量），矩形<strong>面积 = 该箱里的沙量（频率）</strong>。箱子越宽、密度越高，装进的沙越多——"密度 × 宽度 = 质量"，这正是密度概念的统计翻版。</div>
+<h3>几个必须记牢的换算</h3>
+<pre><code>频率 = 频数 / 样本容量 n
+小矩形面积 = 组距 × 纵轴值 = 频率
+所有小矩形面积之和 = 1
+组中值 = (左端点 + 右端点) / 2   （代表该组数据的"中心"）</code></pre>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="540" height="270" viewBox="0 0 540 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="220" x2="520" y2="220" stroke="#94a3b8" stroke-width="2"/><polygon points="520,220 510,215 510,225" fill="#94a3b8"/><line x1="40" y1="220" x2="40" y2="60" stroke="#94a3b8" stroke-width="2"/><polygon points="40,60 35,70 45,70" fill="#94a3b8"/><text x="505" y="245" font-size="12" fill="#64748b" text-anchor="end">数据</text><text x="32" y="55" font-size="12" fill="#64748b" text-anchor="end">频率/组距</text><rect x="60" y="180" width="30" height="40" fill="#dbeafe"/><rect x="100" y="130" width="30" height="90" fill="#dbeafe"/><rect x="150" y="165" width="30" height="55" fill="#dbeafe"/><rect x="190" y="150" width="30" height="70" fill="#dbeafe"/><rect x="250" y="140" width="120" height="80" fill="none" stroke="#2563eb" stroke-width="2"/><rect x="250" y="220" width="120" height="0" fill="#16a34a" opacity="0.5"><animate attributeName="height" values="0;80;80;0;0" keyTimes="0;0.35;0.65;0.9;1" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="220;140;140;220;220" keyTimes="0;0.35;0.65;0.9;1" dur="6s" repeatCount="indefinite"/></rect><line x1="250" y1="240" x2="370" y2="240" stroke="#2563eb" stroke-width="2"/><line x1="250" y1="235" x2="250" y2="245" stroke="#2563eb" stroke-width="2"/><line x1="370" y1="235" x2="370" y2="245" stroke="#2563eb" stroke-width="2"/><text x="310" y="257" font-size="13" fill="#2563eb" text-anchor="middle">组距</text><line x1="388" y1="140" x2="388" y2="220" stroke="#16a34a" stroke-width="2"/><line x1="383" y1="140" x2="393" y2="140" stroke="#16a34a" stroke-width="2"/><line x1="383" y1="220" x2="393" y2="220" stroke="#16a34a" stroke-width="2"/><text x="388" y="132" font-size="12" fill="#16a34a" text-anchor="middle">频率/组距</text><text x="310" y="118" font-size="14" fill="#0f172a" text-anchor="middle" font-weight="700">面积 = 组距 × 频率/组距 = 频率</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：频率分布直方图里，小矩形的<strong>面积</strong>（宽=组距，高=频率/组距）才是频率——绿色面积自下而上充满矩形，正是"面积 = 频率"的直观体现。</figcaption></figure>
+<p>用直方图还可以<strong>估算</strong>总体特征：</p>
+<ul>
+<li><strong>平均数估计</strong>：<code>x̄ ≈ Σ(每组组中值 × 该组频率)</code></li>
+<li><strong>方差估计</strong>：<code>s² ≈ Σ[(组中值 − x̄)² × 该组频率]</code></li>
+<li><strong>中位数/百分位数估计</strong>：找"面积累计到 50%（或 p%）"的那条竖线（见 9.3）。</li>
+</ul>
+<h3>频率分布折线图与总体密度曲线</h3>
+<p>把每个小矩形<strong>上边的中点</strong>顺次连接，得到<strong>频率分布折线图</strong>。当样本量越来越大、组距越来越小时，这条折线会越来越接近一条光滑曲线，称为<strong>总体密度曲线</strong>——它刻画了总体数据分布的"理想形状"（如"钟形"的正态曲线）。</p>
+<div class="insight"><strong>几何含义：</strong>折线 → 光滑曲线的过程，是<strong>用越来越多、越来越细的矩形去逼近一条曲线下方区域的面积</strong>——本质上就是"积分/黎曼和"思想的雏形：面积（频率）和曲线（密度）互为表里。</div>
+
+<h2 id="s3">9.3 百分位数</h2>
+<p>百分位数回答的问题是："<strong>从小到大排，落在前 p% 位置的那个值是多少？</strong>"它是刻画数据位置（尤其是"排名/分数线"）的最直接工具。</p>
+<h3>定义</h3>
+<p>一般地，一组数据的<strong>第 p 百分位数</strong>是这样的一个值，它使得这组数据中<strong>至少有 p% 的数据小于或等于它</strong>，且<strong>至少有 (100 − p)% 的数据大于或等于它</strong>。</p>
+<h3>计算步骤（务必先排序！）</h3>
+<ol>
+<li>把 n 个数据<strong>从小到大排列</strong>：x₁ ≤ x₂ ≤ … ≤ x_n。</li>
+<li>计算 <code>i = n × p%</code>。</li>
+<li>若 <code>i</code> <strong>不是整数</strong>：取大于 i 的最小整数 j，第 p 百分位数 = 第 j 项数据 x_j。</li>
+<li>若 <code>i</code> <strong>是整数</strong>：第 p 百分位数 = 第 i 项与第 i+1 项数据的<strong>平均数</strong> (x_i + x_{i+1}) / 2。</li>
+</ol>
+<p><strong>四分位数</strong>：第 25、50、75 百分位数分别叫<strong>第一、第二、第三四分位数</strong>（记 Q₁、Q₂、Q₃）。其中<strong>第二四分位数就是中位数</strong>。它们把有序数据分成四等份。</p>
+<div class="insight"><strong>几何含义：</strong>把 n 个数据点按顺序排在数轴上，第 p 百分位数就是<strong>把这条有序点链切成"左 p%、右 (100−p)%"的那一刀的位置</strong>。中位数 = 第 50 百分位数，是正中间那一刀；四分位数 = 三刀，把点集等分成四段。计算中的"向上取整 / 两项取平均"正是为了<strong>让切点落在"至少 p% 在左、至少 (100−p)% 在右"的平衡点上</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>百分位数就是<strong>排名线/分数线</strong>。某同学成绩处于第 90 百分位数，意味着他<strong>高于（或等于）90% 的考生</strong>——就像一根横在成绩数轴上的"刻度杆"，把这批人按高低切成 90% 与 10% 两段。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="540" height="215" viewBox="0 0 540 215" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="120" x2="520" y2="120" stroke="#94a3b8" stroke-width="2"/><polygon points="520,120 510,115 510,125" fill="#94a3b8"/><rect x="40" y="130" width="0" height="20" fill="#16a34a" opacity="0.18"><animate attributeName="width" values="0;362;362;0;0" keyTimes="0;0.4;0.6;0.9;1" dur="7s" repeatCount="indefinite"/></rect><circle cx="96" cy="120" r="6" fill="#16a34a"/><text x="96" y="104" font-size="11" fill="#334155" text-anchor="middle">3</text><circle cx="164" cy="120" r="6" fill="#16a34a"/><text x="164" y="104" font-size="11" fill="#334155" text-anchor="middle">7</text><circle cx="181" cy="120" r="6" fill="#16a34a"/><text x="181" y="104" font-size="11" fill="#334155" text-anchor="middle">8</text><circle cx="215" cy="120" r="6" fill="#16a34a"/><text x="215" y="104" font-size="11" fill="#334155" text-anchor="middle">10</text><circle cx="249" cy="120" r="6" fill="#16a34a"/><text x="249" y="104" font-size="11" fill="#334155" text-anchor="middle">12</text><circle cx="300" cy="120" r="6" fill="#16a34a"/><text x="300" y="104" font-size="11" fill="#334155" text-anchor="middle">15</text><circle cx="351" cy="120" r="6" fill="#16a34a"/><text x="351" y="104" font-size="11" fill="#334155" text-anchor="middle">18</text><circle cx="385" cy="120" r="6" fill="#16a34a"/><text x="385" y="104" font-size="11" fill="#334155" text-anchor="middle">20</text><circle cx="419" cy="120" r="6" fill="#2563eb"/><text x="419" y="104" font-size="11" fill="#334155" text-anchor="middle">22</text><circle cx="470" cy="120" r="6" fill="#2563eb"/><text x="470" y="104" font-size="11" fill="#334155" text-anchor="middle">25</text><g><animateTransform attributeName="transform" type="translate" values="0 0;362 0;362 0;0 0" keyTimes="0;0.4;0.6;1" dur="7s" repeatCount="indefinite"/><line x1="40" y1="58" x2="40" y2="156" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 4"/></g><text x="402" y="40" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="700" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.55;0.85;1" dur="7s" repeatCount="indefinite"/>第 80 百分位数 = 21</text><text x="220" y="176" font-size="13" fill="#16a34a" text-anchor="middle">前 80%（8 个点）</text><text x="455" y="176" font-size="13" fill="#2563eb" text-anchor="middle">后 20%</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：百分位数是"有序点链上的一刀"——竖线滑到第 80 百分位数处（第 8、9 项的平均数 21），把 10 个点切成左侧 80% 与右侧 20%。</figcaption></figure>
+<h3>箱线图（百分位数的几何画像）</h3>
+<p>用最小值、Q₁、中位数 Q₂、Q₃、最大值五个数画出的"箱子 + 须"图形叫<strong>箱线图</strong>：箱子从 Q₁ 到 Q₃（箱长 = 四分位距 IQR = Q₃ − Q₁），箱内一条线标中位数，两端"须"延伸到最小值与最大值。它一眼给出数据的<strong>中心、跨度、偏斜</strong>。</p>
+
+<h2 id="s4">9.4 样本估计总体</h2>
+<p>抽样的最终目的，是用<strong>样本统计量</strong>去估计<strong>总体参数</strong>。最核心的两个估计：用<strong>样本平均数 x̄</strong> 估计<strong>总体平均数 μ</strong>，用<strong>样本方差 s²</strong> 估计<strong>总体方差 σ²</strong>。</p>
+<h3>样本平均数（估计"中心"）</h3>
+<pre><code>x̄ = (x₁ + x₂ + … + x_n) / n</code></pre>
+<div class="insight"><strong>几何含义：</strong>x̄ 是这 n 个数据点在数轴上的<strong>重心 / 平衡点</strong>。关键性质：各数据到 x̄ 的<strong>偏差之和为 0</strong>，即 Σ(x_i − x̄) = 0——正偏差与负偏差互相抵消，x̄ 正是让点集"左右力矩平衡"的那个支点。</div>
+<div class="insight"><strong>物理含义：</strong>把每个数据点看成数轴上质量为 1 的小球，x̄ 就是<strong>这排小球的质心</strong>。平均数两侧"距离之和"相等，像跷跷板两端坐人的平衡位置；若一侧数据普遍更大，质心就朝那一侧偏移。</div>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="120" x2="500" y2="120" stroke="#334155" stroke-width="6" stroke-linecap="round"/><g><animateTransform attributeName="transform" type="translate" values="-240 0;0 0;0 0;-240 0" keyTimes="0;0.42;0.58;1" dur="7s" repeatCount="indefinite"/><polygon points="280,120 270,152 290,152" fill="#16a34a"/><text x="280" y="170" font-size="13" fill="#16a34a" text-anchor="middle">支点</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.55;0.85;1" dur="7s" repeatCount="indefinite"/><line x1="280" y1="50" x2="280" y2="120" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4"/><text x="280" y="42" font-size="13" fill="#16a34a" text-anchor="middle" font-weight="700">x̄ = 5.5</text></g><circle cx="140" cy="120" r="12" fill="#2563eb"/><circle cx="220" cy="120" r="12" fill="#2563eb"/><circle cx="340" cy="120" r="12" fill="#2563eb"/><circle cx="420" cy="120" r="12" fill="#2563eb"/><text x="140" y="150" font-size="13" fill="#334155" text-anchor="middle">2</text><text x="220" y="150" font-size="13" fill="#334155" text-anchor="middle">4</text><text x="340" y="150" font-size="13" fill="#334155" text-anchor="middle">7</text><text x="420" y="150" font-size="13" fill="#334155" text-anchor="middle">9</text><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.55;0.85;1" dur="7s" repeatCount="indefinite"/><line x1="280" y1="86" x2="140" y2="86" stroke="#16a34a" stroke-width="3"/><polygon points="140,86 150,81 150,91" fill="#16a34a"/><line x1="280" y1="74" x2="220" y2="74" stroke="#16a34a" stroke-width="3"/><polygon points="220,74 230,69 230,79" fill="#16a34a"/><line x1="280" y1="86" x2="340" y2="86" stroke="#2563eb" stroke-width="3"/><polygon points="340,86 330,81 330,91" fill="#2563eb"/><line x1="280" y1="74" x2="420" y2="74" stroke="#2563eb" stroke-width="3"/><polygon points="420,74 410,69 410,79" fill="#2563eb"/></g><text x="260" y="200" font-size="14" fill="#0f172a" text-anchor="middle" font-weight="700">Σ(x_i − x̄) = 0：正偏差 = 负偏差，支点两侧力矩平衡</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：样本平均数 x̄ 是数轴上这排"小球"的质心/平衡点——支点滑到 x̄ 处时，左右偏差箭头总长相等（Σ(x_i − x̄) = 0），像跷跷板在支点两侧力矩平衡。</figcaption></figure>
+<h3>样本方差与标准差（估计"离散程度"）</h3>
+<pre><code>s² = (1/n) Σ (x_i − x̄)²   （i = 1, 2, …, n）
+s  = √(s²)                （标准差 = 方差的算术平方根）</code></pre>
+<div class="insight"><strong>几何含义：</strong>方差 = 各数据点到重心 x̄ 的<strong>"平均平方距离"</strong>（先算每个点到重心的距离，再平方求平均）。它度量的是点集围绕重心<strong>散开的半径有多大</strong>：方差小 → 点紧贴重心（分布集中）；方差大 → 点远离重心（分布分散）。标准差 s 则把这个"距离"还原到与数据同单位。</div>
+<div class="insight"><strong>物理含义：</strong>方差/标准差对应物理中的<strong>"转动惯量/离散度"</strong>：质量越远离转轴，转动惯量越大；数据越偏离均值，方差越大。标准差小 = 数据"质量集中、稳定"（如零件尺寸一致）；标准差大 = 数据"质量分散、波动大"（如成绩两极分化）。</div>
+<p><strong>补充</strong>：统计中常把样本方差写成 <code>1/(n−1)</code> 的形式（称为<strong>无偏估计</strong>），是为了让"样本方差的平均值"恰好等于总体方差 σ²。课本正文通常用 <code>1/n</code> 定义样本方差，二者在 n 较大时差别很小；做题时以题目要求为准。</p>
+<h3>分层抽样的样本估计</h3>
+<p>若按 9.1 分层抽样，总体平均数的估计 = 各层平均数按层权加权（即前述重心公式）；总体方差的估计可拆为"<strong>层内方差</strong>"与"<strong>层间方差</strong>"两部分，这就是<strong>方差分解</strong>：</p>
+<pre><code>总方差 = 层内方差的加权平均 + 层间方差
+（层间方差 = 各层均值相对总均值的离散程度）</code></pre>
+<div class="insight"><strong>物理含义：</strong>方差分解就像"<strong>总能量 = 内部能量 + 质心运动能量</strong>"——把总波动拆成"各层内部各自的晃动"与"各层质心之间的彼此拉开"两股来源。分层抽样的优势正在于：它把"层间差异"主动纳入控制，使估计更稳定、更有代表性。</div>
+
+<hr/>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>总体与样本</td><td>全体点集 vs 从中取出的子点集</td><td>整桶溶液 vs 舀出的一勺</td></tr>
+<tr><td>简单随机抽样</td><td>点集上等概率均匀取点</td><td>搅拌均匀后随机取样化验</td></tr>
+<tr><td>分层随机抽样</td><td>数轴分段，每段按长度比例取点</td><td>按浓度/密度分层后分别取样</td></tr>
+<tr><td>分层样本均值</td><td>各层质心按"质量"加权的总质心</td><td>重心公式 / 总质心位置</td></tr>
+<tr><td>频率分布直方图</td><td>小矩形<strong>面积</strong>=频率，总面积=1</td><td>装箱：柱高=线密度，面积=沙量</td></tr>
+<tr><td>频率分布折线/密度曲线</td><td>细矩形逼近曲线下面积（积分雏形）</td><td>理想分布形状（钟形曲线）</td></tr>
+<tr><td>百分位数</td><td>有序点链上的"切分点"位置</td><td>排名线/分数线（中位数、四分位数）</td></tr>
+<tr><td>样本平均数 x̄</td><td>数据点集的重心 / 平衡点</td><td>质心、跷跷板支点（力矩平衡）</td></tr>
+<tr><td>样本方差 s² / 标准差 s</td><td>各点到重心的平均平方距离</td><td>绕重心的转动惯量 / 离散度</td></tr>
+<tr><td>样本估计总体</td><td>用子点集的中心与散度逼近全体</td><td>抽样质检、民意调查、推断</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li><strong>抽样</strong>：某校高一 900 人、高二 700 人、高三 400 人，用分层抽样抽 200 人，问各年级各抽多少人？</li>
+<li><strong>百分位数</strong>：数据 3, 7, 8, 10, 12, 15, 18, 20, 22, 25（n=10），求中位数、第 25 百分位数、第 80 百分位数。</li>
+<li><strong>频率分布直方图</strong>：某组数据直方图中，某小组组距为 4、纵轴（频率/组距）为 0.075，求该组频率与频数（样本容量 n=80）；并说明如何由面积估算中位数。</li>
+<li><strong>平均数与方差</strong>：样本 2, 4, 4, 6，求平均数 x̄、方差 s²、标准差 s。</li>
+<li><strong>分层均值</strong>：甲层样本量 30、平均数 80；乙层样本量 20、平均数 60，求总样本平均数。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<h4>警惕这些坑</h4>
+<ul>
+<li>❌ "频率分布直方图的纵轴是频率" → ❌ 纵轴是<strong>频率/组距</strong>；频率要用<strong>面积</strong>（组距 × 纵轴）来算。</li>
+<li>❌ "直方图里柱越高频率越大" → ❌ 只在组距相等时成立；组距不同时，<strong>面积</strong>才是频率。</li>
+<li>❌ "求百分位数不用排序" → ❌ 必须先<strong>从小到大排序</strong>再算 i = n×p%，否则位置错乱。</li>
+<li>❌ "第 50 百分位数一定是某个数据本身" → ❌ 当 n×50% 是整数时，中位数是中间两项的<strong>平均数</strong>，可能不是原数据。</li>
+<li>❌ "方差可以小于 0" → ❌ 方差是平方的平均，恒 ≥ 0；标准差是它的算术平方根，也 ≥ 0。</li>
+<li>❌ "分层抽样各层抽样方法可以随便" → ❌ 每一层内应独立进行<strong>简单随机抽样</strong>，各层样本量按比例（n_i = N_i/N × n）。</li>
+<li>❌ "样本平均数一定等于总体平均数" → ❌ x̄ 只是 μ 的<strong>估计</strong>，受抽样随机性影响会有偏差；样本量越大通常越接近。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li><strong>抽样理解</strong>：某校高一年级有 1200 人、高二 800 人、高三 400 人。现用分层随机抽样抽取 120 人的样本，问三个年级各应抽取多少人？并说明这样分配能保证样本"长得像总体"的几何道理。</li>
+<li><strong>百分位数</strong>：某班 10 名同学的数学成绩从小到大排列为 55, 62, 68, 70, 74, 78, 82, 85, 90, 96。求中位数、第 25 百分位数、第 80 百分位数。</li>
+<li><strong>频率分布直方图</strong>：某组样本数据的频率分布直方图中，某一小组的组距为 5，纵轴（频率/组距）为 0.06。若样本容量 n = 100，求该小组的频率与频数；并解释"直方图里为什么用面积而不用高度表示频率"。</li>
+<li><strong>平均数与方差</strong>：样本数据为 4, 6, 6, 8, 8, 8。求平均数 x̄、方差 s² 与标准差 s（用 1/n 定义），并说明方差刻画的几何含义是什么。</li>
+<li><strong>分层均值（重心公式）</strong>：甲层样本量 40、样本平均数 75；乙层样本量 60、样本平均数 90。求总样本平均数，并说明它为什么是"按质量加权的质心"。</li>
+<li><strong>综合（用样本估计总体）</strong>：为估计一批灯泡的平均寿命，随机抽取 5 只测得寿命为 980, 1000, 1020, 1010, 990（小时）。求样本平均数作为总体平均寿命的估计值，并计算这组样本的方差，说明方差小意味着什么。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>各年级抽取人数按 n_i = (N_i/N)×n 分配，N = 1200+800+400 = 2400，n = 120。高一：1200/2400×120 = 60 人；高二：800/2400×120 = 40 人；高三：400/2400×120 = 20 人。几何道理：把总体看成一条按年级分成的三段数轴（长度比为 1200:800:400 = 3:2:1），每段按"该段长度占总长度的比例"均匀取点，使每段内的抽样密度与全局一致，样本点分布自动复刻总体结构，不会漏掉或挤爆某一段。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>n = 10。中位数（第 50 百分位数）：i = 10×50% = 5 为整数，取第 5、6 项平均数 = (74+78)/2 = 76。第 25 百分位数：i = 10×25% = 2.5 非整数，取大于 2.5 的最小整数 3，即第 3 项 = 68。第 80 百分位数：i = 10×80% = 8 为整数，取第 8、9 项平均数 = (85+90)/2 = 87.5。注意必须先从小到大排序（本题已排好），再按"整数取两项平均、非整数向上取整"的规则定位。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>频率 = 组距 × 纵轴值 = 5 × 0.06 = 0.30；频数 = 频率 × 样本容量 = 0.30 × 100 = 30。直方图用面积表示频率：小矩形面积 = 组距 ×（频率/组距）= 频率，所有小矩形面积之和恰为 1（总概率 = 1）。若只看高度，当各组组距不同时会产生误导——组距宽的小矩形即使频率大也可能"矮"；面积才真正等于落入该区间的数据占比，相当于数轴上区间上方"铺出的一块面积"。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>x̄ = (4+6+6+8+8+8)/6 = 40/6 ≈ 6.67。方差 s² = (1/n)Σ(x_i − x̄)²：各偏差平方为 (4−6.67)²≈7.11、(6−6.67)²≈0.44、(6−6.67)²≈0.44、(8−6.67)²≈1.78、(8−6.67)²≈1.78、(8−6.67)²≈1.78，合计约 13.33，s² ≈ 13.33/6 ≈ 2.22。标准差 s = √2.22 ≈ 1.49。几何含义：方差是各数据点到重心（平均数）x̄ 的"平均平方距离"，度量点集围绕重心散开的半径——方差小则数据紧贴重心、分布集中，方差大则数据远离重心、分布分散。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>总样本平均数 x̄ = (n₁x̄₁ + n₂x̄₂)/(n₁+n₂) = (40×75 + 60×90)/(40+60) = (3000 + 5400)/100 = 8400/100 = 84。它相当于把各层的样本平均数 x̄_i 看作该层的"质心"，把样本量 n_i 看作"质量"，做加权平均后得到的总质心位置——这正是物理中的重心公式。因为乙层样本量更大（质量更大），总平均数 84 更靠近乙层均值 90 而不是两者的简单平均 (75+90)/2 = 82.5。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>样本平均数 x̄ = (980+1000+1020+1010+990)/5 = 5000/5 = 1000 小时，故总体平均寿命的估计值为 1000 小时。方差 s² = (1/n)Σ(x_i − x̄)² = [(980−1000)²+(1000−1000)²+(1020−1000)²+(1010−1000)²+(990−1000)²]/5 = (400 + 0 + 400 + 100 + 100)/5 = 1000/5 = 200（小时²），标准差 s = √200 ≈ 14.14 小时。方差小意味着各灯泡寿命都紧紧贴着平均数 1000 小时、彼此差异不大，说明这批灯泡质量稳定、波动小；若方差很大，则寿命两极分化、质量不稳定。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第8章-立体几何初步/第8章-立体几何初步.html">← 上一章：第8章 立体几何初步</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第10章-概率/第10章-概率.html">下一章：第10章 概率 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学 · 必修第二册</footer>
+</body>
+</html>

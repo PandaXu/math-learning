@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第22章 二次函数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第22章 二次函数</div></header>
+<main class="container">
+<h1>第22章 二次函数</h1>
+<p class="lead">初中 / 初三 / 九年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>二次函数 y = ax² + bx + c（a≠0）的图象是一条<strong>抛物线</strong>：顶点是它的最高点或最低点，对称轴把它分成左右镜像对称的两半，而与 x 轴的交点正是对应一元二次方程 ax² + bx + c = 0 的根。学完本章，你要能把一个代数式在脑中"画"成一条抛物线——开口方向、顶点、对称轴、与坐标轴的交点一眼看穿，并把它还原成抛体运动、最优化利润、最省材料等真实问题。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">22.1 二次函数的概念</a><a href="#s2">22.2 图象：抛物线 y = ax²</a><a href="#s3">22.3 顶点与对称轴（配方法）</a><a href="#s4">22.4 最值</a><a href="#s5">22.5 与一元二次方程的关系</a><a href="#s6">22.6 二次函数的应用</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">22.1 二次函数的概念</h2>
+<h3>定义</h3>
+<p>形如</p>
+<pre><code>y = ax² + bx + c    (a、b、c 是常数，a ≠ 0)</code></pre>
+<p>的函数叫做<strong>二次函数</strong>。其中 <code>ax²</code> 叫<strong>二次项</strong>，a 叫二次项系数；<code>bx</code> 叫一次项，b 叫一次项系数；c 叫<strong>常数项</strong>。</p>
+<ul>
+<li><strong>为什么 a ≠ 0？</strong>若 a = 0，则 y = bx + c 就退化成一次函数（直线），不再是"二次"。</li>
+<li>b、c 可以等于 0。例如：y = x²（b=c=0）、y = −3x² + 1（b=0）、y = x² + 2x（c=0）都是二次函数。</li>
+<li><strong>判断依据</strong>：看化简后的解析式中，自变量 x 的最高次数是否为 2，且二次项系数不为 0。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>二次函数 y = ax² + bx + c 的图象是一条<strong>抛物线</strong>——光滑的"U"形或倒"U"形曲线。二次项 x² 让图象"弯曲"（产生曲率），一次项 bx 和常数项 c 只负责移动它的位置、不改变"弯曲的形状"（形状只由 a 决定）。</div>
+<div class="insight"><strong>物理含义：</strong>抛体运动的高度随时间变化就是二次函数。例如竖直上抛：<code>h(t) = −½gt² + v₀t + h₀</code>（g 是重力加速度，v₀ 是初速度，h₀ 是初始高度）。这里的 −½g 相当于 a（负的，开口向下），v₀ 相当于 b，h₀ 相当于 c。<strong>x² 项对应"匀加速运动"</strong>——位移与时间的平方成正比，这正是"越落越快、越走越远"的数学本质。</div>
+
+<h2 id="s2">22.2 图象：抛物线 y = ax²</h2>
+<h3>从描点法开始</h3>
+<p>先画最简单的 <code>y = x²</code>：取若干 x 值，算出对应 y，列表、描点、用光滑曲线连线。</p>
+<table>
+<tr><th>x</th><td>−2</td><td>−1</td><td>−½</td><td>0</td><td>½</td><td>1</td><td>2</td></tr>
+<tr><th>y = x²</th><td>4</td><td>1</td><td>¼</td><td>0</td><td>¼</td><td>1</td><td>4</td></tr>
+</table>
+<pre><code>  y
+  4 │         ●                     ●
+  3 │        / \                  / \
+  2 │       /   \                /   \
+  1 │  ●   /     \              /     \   ●
+  0 │──●──●───────●──────────────●───────●──→ x
+     −2   −1       0              1      2
+       （这条光滑的 U 形曲线就是抛物线）</code></pre>
+<h3>a 决定开口方向与开口大小</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="22" text-anchor="middle" fill="#111827" font-size="14" font-weight="bold">y = ax²：a 决定开口方向与大小</text><line x1="100" y1="200" x2="420" y2="200" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="56" x2="260" y2="344" stroke="#94a3b8" stroke-width="2"/><text x="414" y="192" fill="#334155" font-size="13">x</text><text x="273" y="68" fill="#334155" font-size="13">y</text><circle cx="260" cy="200" r="5" fill="#16a34a"/><text x="260" y="224" text-anchor="middle" fill="#16a34a" font-size="12">顶点(0,0)</text><g transform="translate(260 200)"><g><animateTransform attributeName="transform" type="scale" values="1 1;1 2;1 0.5;1 -1;1 -2;1 -0.5;1 1" dur="10s" repeatCount="indefinite"/><polyline points="-120,-72 -100,-50 -80,-32 -60,-18 -40,-8 -20,-2 0,0 20,-2 40,-8 60,-18 80,-32 100,-50 120,-72" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g></g><text x="260" y="354" text-anchor="middle" fill="#6b7280" font-size="12">a&gt;0 开口向上 · a&lt;0 开口向下 · |a| 越大开口越窄</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：a 决定抛物线的开口方向与开口大小——|a| 越大越窄，a 变号则整体上下翻转</figcaption></figure>
+<ul>
+<li><strong>a &gt; 0</strong>：开口<strong>向上</strong>，图象像"碗"/"U"，顶点是<strong>最低点</strong>。</li>
+<li><strong>a &lt; 0</strong>：开口<strong>向下</strong>，图象像"∩"，顶点是<strong>最高点</strong>。</li>
+<li><strong>|a| 越大，开口越窄（越"瘦高"）</strong>；|a| 越小，开口越宽（越"扁平"）。|a| 相同则形状完全相同，只是方向或位置不同。</li>
+</ul>
+<pre><code>y = 2x²   开口向上、较窄（陡）
+y = x²    开口向上、标准
+y = ½x²   开口向上、较宽（缓）
+y = −x²   开口向下（与 y = x² 关于 x 轴镜像对称）</code></pre>
+<h3>c 决定与 y 轴的交点</h3>
+<p><code>y = ax² + c</code> 的图象与 y 轴交于点 <code>(0, c)</code>：c &gt; 0 时整体上移，c &lt; 0 时整体下移。当 b = 0 时，对称轴就是 y 轴（直线 x = 0）。</p>
+<div class="insight"><strong>几何含义（抛物线为什么叫"抛物线"）：</strong>从更高角度看，抛物线是<strong>"到定点（焦点）与到定直线（准线）距离相等的点的轨迹"</strong>，因此它天生具有完美的<strong>轴对称性</strong>。初中只需记住直观结论：抛物线是"U"形或倒"U"形的光滑曲线，关于过顶点的竖直直线左右对称。</div>
+<div class="insight"><strong>物理含义（为什么抛出的物体走抛物线）：</strong>斜抛或平抛物体（不计空气阻力）在水平方向做<strong>匀速直线运动</strong>（x = v₀t），竖直方向受重力做<strong>匀加速运动</strong>（y = −½gt²）。把时间 t 消去后，竖直位移 y 恰好是水平位移 x 的<strong>二次函数</strong>——所以投篮、跳水、喷泉、炮弹的轨迹都是抛物线。a = −½g &lt; 0 说明重力总把轨迹"往下拉"，所以开口向下。</div>
+
+<h2 id="s3">22.3 顶点与对称轴（配方法）</h2>
+<h3>顶点式：一眼读出顶点与对称轴</h3>
+<p>把一般式配方，可以写成<strong>顶点式</strong>：</p>
+<pre><code>y = a(x − h)² + k     （顶点为 (h, k)，对称轴为直线 x = h）</code></pre>
+<ul>
+<li><strong>顶点</strong>：抛物线与对称轴的交点，是图象的"拐弯点"（最高点或最低点）。</li>
+<li><strong>对称轴</strong>：过顶点、垂直于 x 轴的直线 <code>x = h</code>，把抛物线分成左右<strong>镜像对称</strong>的两半——在对称轴两侧等距离处的两个点，纵坐标相同。</li>
+<li><strong>注意符号</strong>：<code>y = a(x + 2)² + 1</code> 的顶点是 (−2, 1)，因为 <code>x + 2 = x − (−2)</code>，即 h = −2。</li>
+</ul>
+<h3>配方法（把一般式化为顶点式）</h3>
+<p>步骤：① 提出二次项系数 a；② 配上"一次项系数一半的平方"；③ 整理常数。</p>
+<pre><code>例：y = 2x² − 8x + 5
+   = 2(x² − 4x) + 5              ← 提出 2
+   = 2(x² − 4x + 4 − 4) + 5      ← 加上并减去 (4÷2)² = 4
+   = 2(x − 2)² − 8 + 5           ← 前三项凑成完全平方
+   = 2(x − 2)² − 3
+∴ 顶点 (2, −3)，对称轴 x = 2，开口向上（a=2 &gt; 0）。</code></pre>
+<h3>一般式下的顶点公式（直接套用）</h3>
+<pre><code>对称轴：x = −b / (2a)
+顶  点：( −b/(2a) , (4ac − b²)/(4a) )</code></pre>
+<p>其中顶点纵坐标也常记作 <code>(4ac − b²)/(4a)</code>。用公式验证上例：a=2, b=−8, c=5，得 x = −(−8)/(2×2) = 2，y = (4×2×5 − 64)/(4×2) = (40−64)/8 = −3，与配方结果一致。</p>
+<h3>a、b、c 各自的作用小结</h3>
+<table>
+<tr><th>系数</th><th>作用</th><th>几何/物理直观</th></tr>
+<tr><td>a</td><td>决定开口方向与开口大小（形状）</td><td>a&gt;0 开口向上（碗）；a&lt;0 开口向下（重力拉弯）；|a| 定胖瘦</td></tr>
+<tr><td>b（与 a 配合）</td><td>决定对称轴位置 x = −b/2a</td><td>把顶点左右平移；b=0 时顶点恰好在 y 轴上</td></tr>
+<tr><td>c</td><td>决定与 y 轴交点 (0, c)</td><td>图象的"纵向起点"；对抛体就是初始高度 h₀</td></tr>
+</table>
+<div class="insight"><strong>几何含义（平移）：</strong><code>y = a(x − h)² + k</code> 的图象，就是由最基本的 <code>y = ax²</code> <strong>向右平移 h 个单位、再向上平移 k 个单位</strong>得到的（h &gt; 0 向右、h &lt; 0 向左；k &gt; 0 向上、k &lt; 0 向下）。注意是 <code>(x − h)</code>，所以"减 h 反而向右"——这是初学者最容易记反的一点。</div>
+<div class="insight"><strong>物理含义：</strong>对抛体运动，<strong>顶点就是轨迹的最高点</strong>（a &lt; 0 时），此刻竖直速度为零、物体由"上升"转为"下降"；对称轴 x = h 对应"到达最高点的时刻"左右的<strong>时间对称</strong>——上升和下降花费同样的时间，同一高度总对应上升、下降两个对称时刻。</div>
+
+<h2 id="s4">22.4 最值</h2>
+<h3>顶点处取最值</h3>
+<p>因为顶点是抛物线的最高点或最低点，所以二次函数的<strong>最值一定在顶点取得</strong>：</p>
+<ul>
+<li><strong>a &gt; 0（开口向上）</strong>：顶点是最低点。当 <code>x = −b/2a</code> 时，y 取<strong>最小值</strong> <code>(4ac − b²)/(4a)</code>；因为图象向上无限延伸，<strong>没有最大值</strong>。</li>
+<li><strong>a &lt; 0（开口向下）</strong>：顶点是最高点。当 <code>x = −b/2a</code> 时，y 取<strong>最大值</strong> <code>(4ac − b²)/(4a)</code>；因为图象向下无限延伸，<strong>没有最小值</strong>。</li>
+</ul>
+<pre><code>例：y = −2x² + 8x − 6 （a = −2 &lt; 0，开口向下）
+   x = −8 / (2×(−2)) = 2
+   y_max = (4×(−2)×(−6) − 64) / (4×(−2)) = (48 − 64)/(−8) = 2
+∴ 当 x = 2 时，y 有最大值 2。</code></pre>
+<h3>自变量有取值范围时要"分段讨论"</h3>
+<p>若题目限定 <code>x</code> 在某个区间内（如 <code>0 ≤ x ≤ 10</code>），则最值未必恰在顶点：</p>
+<ol>
+<li>先看顶点横坐标是否<strong>落在给定区间内</strong>——在，则顶点处取到区间内的极值；</li>
+<li>再比较<strong>两个端点</strong>的函数值；</li>
+<li>在"顶点值 + 两端点值"中，最大者为最大值、最小者为最小值。</li>
+</ol>
+<div class="insight"><strong>几何含义：</strong>最值就是图象上<strong>最高点/最低点的纵坐标</strong>，也就是顶点的 y 坐标。找最值 = 找抛物线的"顶"。有范围限制时，相当于把抛物线"切下一段"，要看这段上的最高/最低点在哪里。</div>
+<div class="insight"><strong>物理含义：</strong>最大高度（投篮最高点、烟花最高点）、最大利润（卖多少件最赚钱）、最小成本（怎样造最省料）、最大面积（怎样围地最大）——<strong>所有"最优化"问题的本质都是求顶点纵坐标</strong>。</div>
+
+<h2 id="s5">22.5 与一元二次方程的关系</h2>
+<h3>交点就是"根"</h3>
+<p>求抛物线 <code>y = ax² + bx + c</code> 与 x 轴的交点，就是令 <code>y = 0</code>，即解一元二次方程 <code>ax² + bx + c = 0</code>。<strong>抛物线与 x 轴交点的横坐标，就是对应方程的根。</strong></p>
+<h3>判别式 Δ 决定交点个数</h3>
+<pre><code>Δ = b² − 4ac
+
+Δ &gt; 0  →  与 x 轴有 2 个交点，方程有两个不相等的实根
+Δ = 0  →  与 x 轴有 1 个交点（顶点恰好落在 x 轴上，相切），方程有两个相等的实根（一个根）
+Δ &lt; 0  →  与 x 轴没有交点，方程没有实数根（图象整体在 x 轴上方或下方）</code></pre>
+<h3>交点式</h3>
+<p>若抛物线与 x 轴的两个交点横坐标为 x₁、x₂，则解析式可写成：</p>
+<pre><code>y = a(x − x₁)(x − x₂)    （交点式，a ≠ 0）</code></pre>
+<p>已知与 x 轴交点求解析式时，用交点式再代入另一点求 a，往往比一般式更快。</p>
+<h3>延伸到不等式</h3>
+<p><code>ax² + bx + c &gt; 0</code> 的解集，对应图象在 x 轴<strong>上方</strong>的部分对应的 x 范围；<code>&lt; 0</code> 对应图象在 x 轴<strong>下方</strong>的部分。结合开口方向和两个交点（或判别式）即可写出解集。</p>
+<div class="insight"><strong>几何含义：</strong>方程的根 = 抛物线与 x 轴（水平线 y=0）交点的横坐标；判别式 Δ 刻画的是"抛物线是否够到 x 轴、是穿过还是相切"。Δ &lt; 0 时抛物线"悬在空中"或"整体浸在水下"，碰不到 x 轴。</div>
+<div class="insight"><strong>物理含义：</strong>对抛体运动 <code>h(t) = 0</code> 就是问"什么时候落地"，解一元二次方程得到两个时刻 t₁（通常是起点）和 t₂（落地时刻）。Δ &lt; 0 意味着物体永远到不了该高度（例如求它何时到 10 米，但它最高只有 8 米）；交点式则直接告诉你"起点和落点"两个水平位置。</div>
+
+<h2 id="s6">22.6 二次函数的应用</h2>
+<h3>应用一：面积最值（几何）</h3>
+<p>用一段定长的篱笆围矩形，何时面积最大？设一边长为 x，另一边由总长确定，面积 S 是关于 x 的二次函数，配方求顶点即得最大面积。结论：<strong>周长一定时，正方形面积最大</strong>。</p>
+<h3>应用二：利润最值（经济/物理量）</h3>
+<p>总利润 = (售价 − 成本) × 销量。销量常随售价上升而下降（线性关系），代入后利润就是售价的二次函数，开口向下，顶点即<strong>最大利润</strong>与对应的<strong>最优售价</strong>。</p>
+<h3>应用三：抛体与桥梁（物理）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="22" text-anchor="middle" fill="#111827" font-size="14" font-weight="bold">抛体轨迹：顶点是最高点</text><line x1="90" y1="300" x2="430" y2="300" stroke="#94a3b8" stroke-width="2"/><text x="92" y="320" fill="#6b7280" font-size="12">地面 y=0</text><line x1="260" y1="60" x2="260" y2="300" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 6"/><text x="272" y="78" fill="#16a34a" font-size="12">对称轴</text><path d="M 140 300 Q 260 -60 380 300" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 5"/><circle cx="260" cy="120" r="6" fill="#2563eb"/><text x="260" y="108" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="bold">顶点 = 最高点</text><circle cx="140" cy="300" r="5" fill="#16a34a"/><circle cx="380" cy="300" r="5" fill="#16a34a"/><text x="140" y="322" text-anchor="middle" fill="#16a34a" font-size="12">起点</text><text x="380" y="322" text-anchor="middle" fill="#16a34a" font-size="12">落点</text><circle cx="0" cy="0" r="11" fill="#2563eb" stroke="#1d4ed8" stroke-width="2"><animateMotion dur="4s" repeatCount="indefinite" path="M 140 300 Q 260 -60 380 300"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：抛体轨迹是开口向下的抛物线——小球升到顶点（最高点、最大高度）后落下，左右关于对称轴对称</figcaption></figure>
+<p>投篮、喷泉、炮弹轨迹、拱桥、隧道截面都可抽象为抛物线，用顶点求最大高度，用与 x 轴交点求落地位置或跨度。</p>
+<h3>通用解题步骤</h3>
+<ol>
+<li><strong>设变量</strong>：明确自变量 x（如边长、售价、时间）与因变量 y（面积、利润、高度）；</li>
+<li><strong>列函数</strong>：根据等量关系写出 <code>y = ax² + bx + c</code>；</li>
+<li><strong>求顶点 / 交点</strong>：用配方法或顶点公式求最值，令 y = 0 求与 x 轴交点；</li>
+<li><strong>检验实际意义</strong>：答案是否在自变量的合理范围内、是否为正、是否符合题意。</li>
+</ol>
+<div class="insight"><strong>几何 + 物理的合一：</strong>所有二次函数应用题，本质上都是"画一条抛物线，然后找它的顶点（最值）或与 x 轴的交点（临界条件）"。顶点回答"最好/最坏能到多少"，交点回答"什么时候发生、在哪里发生"。</div>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>二次函数 y = ax²+bx+c</td><td>一条抛物线（U 形或倒 U 形的光滑曲线）</td><td>抛体运动轨迹：高度随时间的二次变化</td></tr>
+<tr><td>开口方向与大小（a）</td><td>a&gt;0 开口向上，a&lt;0 开口向下；|a| 定胖瘦</td><td>a&lt;0 对应重力把轨迹"往下拉"；|a| 对应加速度/曲率大小</td></tr>
+<tr><td>对称轴 x = −b/2a</td><td>抛物线左右镜像对称的竖直轴</td><td>抛体上升与下降关于最高点时刻对称</td></tr>
+<tr><td>顶点 (h, k)</td><td>抛物线与对称轴的交点、最高/最低点</td><td>最高点（最大高度）或最低点（最小成本）</td></tr>
+<tr><td>最值</td><td>顶点纵坐标（最大值 / 最小值）</td><td>最大利润、最大面积、最小用料</td></tr>
+<tr><td>c（与 y 轴交点）</td><td>图象在纵轴上的截距 (0, c)</td><td>初始高度 h₀（t = 0 时的高度）</td></tr>
+<tr><td>与 x 轴交点</td><td>抛物线与水平线 y=0 的交点</td><td>落地时刻、盈亏平衡点、临界条件</td></tr>
+<tr><td>与一元二次方程的关系</td><td>交点横坐标 = 方程的根；Δ 定交点个数</td><td>求落地时间、求"何时到达某高度"</td></tr>
+<tr><td>平移 (h, k)</td><td>y=a(x−h)²+k 由 y=ax² 平移得到</td><td>抛体起点位置与发射高度的改变</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>已知 <code>y = −2x² + 8x − 6</code>，求：开口方向、对称轴、顶点坐标、与 x 轴和 y 轴的交点、最大值，并画出草图。</li>
+<li>用配方法把 <code>y = x² − 6x + 5</code> 化为顶点式，写出顶点与对称轴。</li>
+<li>抛物线与 x 轴交于 (−1, 0)、(3, 0)，且经过点 (0, −3)，求它的解析式（提示：用交点式）。</li>
+<li>用 20 米长的篱笆围成一个矩形，求长、宽各为多少时面积最大，最大面积是多少？</li>
+<li>判断 <code>y = x² + 2x + 3</code> 与 x 轴的交点个数；若方程 <code>x² + 2x + 3 = 0</code> 无实根，说明抛物线在 x 轴的上方还是下方。</li>
+<li>一枚烟花以 <code>h(t) = −5t² + 20t + 1</code>（米）上升，求它到达的最大高度和所需时间，以及它何时落地（取正根）。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "二次函数中 a 可以等于 0" → ❌ a = 0 时退化为一次函数（直线），不再是二次函数。</li>
+<li>❌ "顶点横坐标是 b/2a" → ❌ 漏了负号，应为 <code>x = −b/2a</code>。</li>
+<li>❌ "开口向上一定有最大值" → ❌ 开口向上是最小值，图象向上无限延伸，没有最大值；开口向下才有最大值。</li>
+<li>❌ "对称轴永远是 y 轴" → ❌ 只有 b = 0 时对称轴才是 y 轴（x = 0），一般情况是 <code>x = −b/2a</code>。</li>
+<li>❌ "抛物线与 x 轴一定相交" → ❌ Δ &lt; 0 时没有交点，图象整体在 x 轴上方或下方。</li>
+<li>❌ "求最值直接代入区间端点" → ❌ 要先判断顶点是否落在自变量取值范围内，再与端点值比较。</li>
+<li>❌ "y = (x+2)² + 1 的顶点是 (2, 1)" → ❌ 顶点是 (−2, 1)，因为 x+2 = x−(−2)，h = −2。</li>
+<li>❌ "方程有两个实根 = 抛物线与 x 轴有两个交点，方程一个根 = 一个交点" → 严格说 Δ=0 是"两个相等实根"，对应抛物线与 x 轴"相切于一点"。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="color:#b45309;margin:0 0 10px">一、练习题</h3>
+<ol>
+<li>下列函数哪些是二次函数？并写出二次项系数 a：① <code>y = 3x² − 2x + 1</code>；② <code>y = x + 5</code>；③ <code>y = −x²</code>；④ <code>y = (x + 1)(x − 1)</code>。</li>
+<li>比较 <code>y = 2x²</code>、<code>y = ½x²</code>、<code>y = −2x²</code> 三条抛物线的开口方向与开口大小，并说明系数 a 各起什么作用。</li>
+<li>用配方法把 <code>y = x² − 4x + 1</code> 化为顶点式，写出顶点坐标与对称轴。</li>
+<li>已知 <code>y = −x² + 6x − 5</code>，求它的对称轴、顶点坐标、最大值，以及与 x 轴交点的横坐标。</li>
+<li>抛物线与 x 轴交于 <code>(1, 0)</code>、<code>(5, 0)</code> 两点，且经过点 <code>(0, −5)</code>，用交点式求它的解析式，并判断开口方向。</li>
+<li>用 40 米长的篱笆靠墙围一个矩形（一边靠墙，只围其余三边）。问长、宽各为多少时面积最大？最大面积是多少？并结合"顶点是抛物线的最高点"解释为什么这样取。</li>
+</ol>
+<h3 style="color:#b45309;margin:16px 0 10px">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 是二次函数，a = 3；② 不是（x 的最高次数是 1，为一次函数）；③ 是二次函数，a = −1（此时 b = c = 0）；④ 展开得 <code>y = x² − 1</code>，是二次函数，a = 1。判断依据：化简后自变量 x 的最高次数为 2，且二次项系数不等于 0。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>y = 2x²</code> 开口向上、最窄（|a|=2 大，越"瘦高"）；<code>y = ½x²</code> 开口向上、最宽（|a|=½ 小，越"扁平"）；<code>y = −2x²</code> 开口向下，与 <code>y = 2x²</code> 关于 x 轴镜像对称。a 的正负决定开口方向（a&gt;0 向上、a&lt;0 向下），|a| 决定开口大小（越大越窄、越小越宽）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>y = x² − 4x + 1 = (x² − 4x + 4) − 4 + 1 = (x − 2)² − 3</code>。所以顶点坐标为 <code>(2, −3)</code>，对称轴为直线 <code>x = 2</code>。步骤要点：先配"一次项系数一半的平方"即 (4÷2)² = 4，加上再减去，再整理常数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>a = −1 &lt; 0，开口向下。对称轴 <code>x = −b/(2a) = −6/(2×(−1)) = 3</code>；顶点纵坐标 <code>y = −9 + 18 − 5 = 4</code>，顶点为 <code>(3, 4)</code>，最大值为 4。令 <code>y = 0</code>：<code>−x² + 6x − 5 = 0</code>，即 <code>x² − 6x + 5 = 0</code>，因式分解 <code>(x − 1)(x − 5) = 0</code>，得与 x 轴交点横坐标为 <code>x = 1</code> 和 <code>x = 5</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>用交点式 <code>y = a(x − 1)(x − 5)</code>。代入 <code>(0, −5)</code>：<code>−5 = a(0 − 1)(0 − 5) = 5a</code>，得 <code>a = −1</code>。所以解析式为 <code>y = −(x − 1)(x − 5) = −x² + 6x − 5</code>。因为 a = −1 &lt; 0，开口向下。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设垂直墙的两条边各为 <code>x</code> 米，则靠墙那条边长为 <code>40 − 2x</code> 米。面积 <code>S = x(40 − 2x) = −2x² + 40x</code>。这是开口向下的二次函数，顶点即最大值：<code>x = −40/(2×(−2)) = 10</code>，此时靠墙边 <code>40 − 2×10 = 20</code>。最大面积 <code>S = 10 × 20 = 200</code>（平方米）。所以宽 10 米、长 20 米时面积最大，为 200 平方米。解释：a = −2 &lt; 0，抛物线开口向下，顶点是它的最高点，最高点的纵坐标就是面积的最大值。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第21章-一元二次方程/第21章-一元二次方程.html">← 上一章：第21章 一元二次方程</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第23章-旋转/第23章-旋转.html">下一章：第23章 旋转 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初三数学开始</footer>
+</body>
+</html>

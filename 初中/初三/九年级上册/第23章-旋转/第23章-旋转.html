@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第23章 旋转 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第23章 旋转</div></header>
+<main class="container">
+<h1>第23章 旋转</h1>
+<p class="lead">初中 / 初三 / 九年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>旋转 = 「绕一个固定点转动一个角度」，是继平移、轴对称之后的第三种<strong>全等变换</strong>；而<strong>中心对称</strong>就是「恰好转 180°」的旋转，<strong>中心对称图形</strong>就是「绕某点转 180° 还能与自身重合」的图形。学完本章，你要能在心里"看见"图形绕点转动，并把每次转动还原成"转轴、方向、角度"三个要素。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">23.1 旋转</a><a href="#s2">23.2 中心对称</a><a href="#s3">23.3 中心对称图形</a><a href="#s4">23.4 中心对称与轴对称的区别与联系</a><a href="#s5">几何与物理含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">23.1 旋转</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="135" r="4" fill="#0f172a"/><text x="260" y="120" font-size="13" fill="#334155" text-anchor="middle">O</text><circle cx="260" cy="135" r="80" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="340" cy="135" r="4" fill="#2563eb"/><text x="340" y="158" font-size="13" fill="#2563eb" text-anchor="middle">P</text><circle cx="220" cy="65.72" r="4" fill="#16a34a"/><text x="220" y="52" font-size="13" fill="#16a34a" text-anchor="middle">P′</text><line x1="260" y1="135" x2="220" y2="65.72" stroke="#16a34a" stroke-width="2"/><path d="M 340 135 A 80 80 0 0 1 220 65.72" fill="none" stroke="#16a34a" stroke-width="2"/><text x="308" y="60" font-size="15" fill="#16a34a" text-anchor="middle">α</text><g><animateTransform attributeName="transform" type="rotate" values="0 260 135;120 260 135;0 260 135" dur="6s" repeatCount="indefinite"/><line x1="260" y1="135" x2="340" y2="135" stroke="#2563eb" stroke-width="3"/><circle cx="340" cy="135" r="6" fill="#2563eb"/></g><text x="303" y="128" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="234" y="104" font-size="12" fill="#16a34a" text-anchor="middle">r</text><text x="260" y="238" font-size="14" fill="#334155" text-anchor="middle">OP = OP′ = r，∠POP′ = α</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：绕中心 O 旋转 α，对应点到中心的距离相等（OP = OP′ = r），∠POP′ 就是旋转角</figcaption></figure>
+<h3>旋转的定义</h3>
+<p>在平面内，把一个平面图形绕着平面内某一点 <code>O</code> 转动一个角度，叫做图形的<strong>旋转</strong>（rotation）。点 <code>O</code> 叫做<strong>旋转中心</strong>，转动的角叫做<strong>旋转角</strong>。如果图形上的点 <code>P</code> 经过旋转变为点 <code>P′</code>，那么 <code>P</code> 与 <code>P′</code> 叫做这个旋转的<strong>对应点</strong>。</p>
+<p>旋转与<strong>平移</strong>、<strong>轴对称</strong>并列，是初中阶段必须掌握的<strong>三大全等变换（刚体变换）</strong>之一。</p>
+<h3>旋转的三要素</h3>
+<p>要完整描述一次旋转，必须同时说清三件事，缺一不可：</p>
+<table>
+<tr><th>要素</th><th>含义</th><th>通俗说法</th></tr>
+<tr><td>旋转中心 <code>O</code></td><td>旋转时固定不动的那个点</td><td>「绕谁转」</td></tr>
+<tr><td>旋转方向</td><td>顺时针 或 逆时针</td><td>「朝哪转」</td></tr>
+<tr><td>旋转角 <code>α</code></td><td>转过的角度大小（通常 0° &lt; α ≤ 360°）</td><td>「转多少」</td></tr>
+</table>
+<p>同一个图形，绕不同的中心、朝不同的方向、转不同的角度，得到的结果完全不同——这就是"三要素"的意义。</p>
+<div class="insight"><strong>几何含义：</strong>旋转是<strong>平面到自身的一一映射（保距变换 / 等距变换）</strong>。它保持任意两点间的距离不变、任意两条线段所成的夹角不变，因此图形的<strong>形状与大小都不变，只有位置和方向发生改变</strong>。<br/><strong>物理含义：</strong>旋转对应<strong>刚体绕定点（定轴）的转动</strong>——风车叶片绕轴心转、钟表指针绕表盘中心转、方向盘绕中心转、齿轮与螺旋桨的转动。转过的角度就是"角位移"，转动的快慢就是"角速度" ω。因为旋转保距保形，刚体在转动中不会变形。</div>
+<h3>旋转的性质</h3>
+<ol>
+<li><strong>对应点到旋转中心的距离相等</strong>：<code>OP = OP′</code>，<code>OQ = OQ′</code>……（所有对应点都在"以 O 为圆心"的同一个圆周上）。</li>
+<li><strong>对应点与旋转中心所连线段的夹角等于旋转角</strong>：<code>∠POP′ = ∠QOQ′ = α</code>。</li>
+<li><strong>旋转前、后的图形全等</strong>（形状、大小都不变）。</li>
+</ol>
+<pre><code>旋转是等距变换：对任意两点 A、B，
+旋转后得到 A′、B′，必有  A′B′ = AB（距离不变）。</code></pre>
+<p><strong>一句话记牢：</strong>旋转后，图形"换了个姿势，但形状大小一模一样"，每个点都绕中心走了同样大小的角、保持了与中心同样的距离。</p>
+<h3>旋转作图</h3>
+<p>抓住性质 1、2 两点：<strong>距离相等 + 夹角等于旋转角</strong>。</p>
+<ol>
+<li>定中心、定方向、定角度 α；</li>
+<li>把图形上的<strong>关键点</strong>（顶点等）与旋转中心连线；</li>
+<li>将每条连线绕中心、按指定方向转过角度 α，在终点取对应点（保持到中心的距离不变）；</li>
+<li>顺次连接对应点，得到旋转后的图形。</li>
+</ol>
+
+<h2 id="s2">23.2 中心对称</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="105" r="4" fill="#0f172a"/><text x="260" y="92" font-size="13" fill="#334155" text-anchor="middle">O</text><path d="M 330 105 A 70 70 0 0 1 190 105" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="120" y1="105" x2="400" y2="105" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="2.5"/><line x1="260" y1="105" x2="190" y2="105" stroke="#16a34a" stroke-width="2.5"/><circle cx="330" cy="105" r="4" fill="#2563eb"/><text x="330" y="128" font-size="13" fill="#2563eb" text-anchor="middle">A</text><circle cx="190" cy="105" r="4" fill="#16a34a"/><text x="190" y="128" font-size="13" fill="#16a34a" text-anchor="middle">A′</text><text x="295" y="98" font-size="12" fill="#2563eb" text-anchor="middle">r</text><text x="225" y="98" font-size="12" fill="#16a34a" text-anchor="middle">r</text><line x1="260" y1="96" x2="260" y2="114" stroke="#0f172a" stroke-width="1.5"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 105;180 260 105;0 260 105" dur="6s" repeatCount="indefinite"/><line x1="260" y1="105" x2="330" y2="105" stroke="#2563eb" stroke-width="3" opacity="0.55"/><circle cx="330" cy="105" r="6" fill="#2563eb"/></g><text x="260" y="196" font-size="14" fill="#334155" text-anchor="middle">A、O、A′ 三点共线，且 OA = OA′（O 是中点）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：中心对称就是绕 O 转 180°，对称点 A、O、A′ 三点共线且 O 是 AA′ 的中点</figcaption></figure>
+<h3>定义</h3>
+<p>把一个图形绕着某一点旋转 <strong>180°</strong>，如果它能够与<strong>另一个图形</strong>重合，那么就说这两个图形关于这个点对称，或<strong>中心对称</strong>（central symmetry），这个点叫做<strong>对称中心</strong>（简称中心）。这两个图形在旋转后能重合的对应点叫做<strong>关于中心的对称点</strong>。</p>
+<p><strong>本质：</strong>中心对称就是"旋转角恰好等于 180°"的特殊旋转。它完全继承旋转的三要素与全部性质，只是方向固定为"转半圈"。</p>
+<div class="insight"><strong>几何含义：</strong>若 <code>A</code> 与 <code>A′</code> 关于点 <code>O</code> 中心对称，则 <code>O</code> 必是线段 <code>AA′</code> 的<strong>中点</strong>——点 O 把每一对对称点"对折"到彼此的位置上（绕 O 转半圈，两点互换位置）。<br/><strong>物理含义：</strong>旋转 180° 就是"掉头 / 反向"——电动机轴转半圈、钟表指针从 12 点转到 6 点（方向完全相反）。对称中心 O 就像<strong>杠杆的支点</strong>：两侧等距的两点关于支点处于对称（平衡）的位置。</div>
+<h3>性质</h3>
+<ol>
+<li><strong>对称点所连线段都经过对称中心，而且被对称中心平分</strong>：若 <code>A</code> 与 <code>A′</code> 关于 <code>O</code> 对称，则 <code>A、O、A′</code> 三点共线，且 <code>OA = OA′</code>。</li>
+<li><strong>关于中心对称的两个图形是全等图形</strong>。</li>
+</ol>
+<pre><code>中心对称（旋转 180°）的两条核心性质：
+ ① 对称点连线都过对称中心 O，且被 O 平分（O 是中点）；
+ ② 两个图形全等。</code></pre>
+<h3>中心对称的作图</h3>
+<pre><code>已知：点 A 与对称中心 O。
+求作：点 A 关于 O 的对称点 A′。
+作法：
+  1. 连接 AO；
+  2. 延长 AO 至 A′，使 OA′ = OA；
+  3. 点 A′ 即为所求。</code></pre>
+<p><strong>一句话：</strong>找对称点 = <strong>连点 → 延长 → 取等长</strong>。把一个图形各关键点的对称点都作出来，再连起来，就得到它关于 O 中心对称的图形。</p>
+<h3>中心对称与旋转的关系</h3>
+<p>中心对称是<strong>旋转角为 180°</strong> 的旋转，因此它继承旋转的全部性质；反过来，一次旋转角恰为 180° 的旋转，就是中心对称。可以说：<strong>中心对称 ⊂ 旋转</strong>（中心对称是旋转的特殊情形）。</p>
+
+<h2 id="s3">23.3 中心对称图形</h2>
+<h3>定义</h3>
+<p>把一个图形绕着某一点旋转 <strong>180°</strong>，如果旋转后的图形能够与<strong>原来的图形</strong>重合，那么这个图形叫做<strong>中心对称图形</strong>（centrally symmetric figure），这个点就是它的<strong>对称中心</strong>。</p>
+<p><strong>一句话：</strong>中心对称图形 = "自己绕中心转 180° 后，还能和自己完全重合"的图形。</p>
+<div class="insight"><strong>几何含义：</strong>图形上<strong>任意一点</strong>绕中心转 180° 后仍在图形上——图形关于中心"半周自洽"。即对图形内任一点 A，它的中心对称点 A′ 也一定在图形内，且二者被对称中心平分。<br/><strong>物理含义：</strong>物体绕中心转半圈后外观不变，体现"反向对称 / 均匀平衡"——如两叶螺旋桨关于轴心、车轮关于圆心、齿轮关于中心。这种对称性让转动更平稳、受力更均衡，是很多机械零件设计成中心对称图形的原因。</div>
+<h3>常见中心对称图形</h3>
+<table>
+<tr><th>图形</th><th>对称中心</th></tr>
+<tr><td>线段</td><td>线段的中点</td></tr>
+<tr><td>平行四边形</td><td>两条对角线的交点</td></tr>
+<tr><td>矩形</td><td>两条对角线的交点</td></tr>
+<tr><td>菱形</td><td>两条对角线的交点</td></tr>
+<tr><td>正方形</td><td>两条对角线的交点</td></tr>
+<tr><td>圆</td><td>圆心</td></tr>
+<tr><td>正偶数边形（正六边形、正八边形……）</td><td>图形的中心</td></tr>
+</table>
+<p><strong>注意反例：</strong>正三角形（等边三角形）绕中心转 180° 后不能与自身重合，所以<strong>正三角形不是中心对称图形</strong>（它是轴对称图形）。一般地，正奇数边形都不是中心对称图形。</p>
+<h3>中心对称图形 vs 中心对称（两个图形的对称）</h3>
+<table>
+<tr><th></th><th>中心对称</th><th>中心对称图形</th></tr>
+<tr><td>对象</td><td><strong>两个图形</strong>之间的关系</td><td><strong>一个图形</strong>自身的性质</td></tr>
+<tr><td>描述</td><td>甲绕 O 转 180° 与乙重合</td><td>它绕 O 转 180° 与自身重合</td></tr>
+<tr><td>例子</td><td>△ABC 与 △A′B′C′ 关于点 O 对称</td><td>平行四边形、圆、线段</td></tr>
+</table>
+<p><strong>联系：</strong>把中心对称的<strong>两个图形看成一个整体</strong>，这个整体就是一个中心对称图形；反之，把中心对称图形沿对称中心"一分为二"，这两部分就关于对称中心对称。</p>
+
+<h2 id="s4">23.4 中心对称与轴对称的区别与联系</h2>
+<h3>对比表</h3>
+<table>
+<tr><th>对比项</th><th>轴对称</th><th>中心对称</th></tr>
+<tr><td>运动方式</td><td>沿一条直线（对称轴）<strong>翻折</strong> 180°</td><td>绕一个点（对称中心）<strong>旋转</strong> 180°</td></tr>
+<tr><td>对称元素</td><td>一条直线（轴）</td><td>一个点（中心）</td></tr>
+<tr><td>对应点连线</td><td>被对称轴<strong>垂直平分</strong></td><td>经过对称中心且<strong>被对称中心平分</strong></td></tr>
+<tr><td>图形是否全等</td><td>是</td><td>是</td></tr>
+</table>
+<h3>联系</h3>
+<ul>
+<li>两者都是<strong>全等变换</strong>，变换前后形状、大小都不变。</li>
+<li>有些图形<strong>既有轴对称又有中心对称</strong>：线段、圆、正方形、正偶数边形。</li>
+<li>有些图形<strong>只有中心对称、没有轴对称</strong>：一般的平行四边形。</li>
+<li>有些图形<strong>只有轴对称、没有中心对称</strong>：等腰三角形、正三角形。</li>
+</ul>
+<h3>三大全等变换一览</h3>
+<table>
+<tr><th>变换</th><th>几何方式</th><th>物理对应</th></tr>
+<tr><td>平移</td><td>沿某方向整体移动</td><td>平动（直线运动）</td></tr>
+<tr><td>轴对称</td><td>沿直线翻折</td><td>镜像 / 反射</td></tr>
+<tr><td>旋转（含中心对称）</td><td>绕点转动（中心对称 = 转 180°）</td><td>转动（旋转运动）</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>平移、轴对称、旋转都是<strong>刚体变换（等距变换）</strong>——保距、保角、保形状大小；中心对称是旋转角为 180° 的特例。<br/><strong>物理含义：</strong>平移对应平动，轴对称对应反射（镜像），旋转对应转动；中心对称就是"转半圈的掉头 / 反向"。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>旋转</td><td>绕点转动一个角度；保距保角，形状大小不变</td><td>刚体绕定轴转动（风车、齿轮、指针）</td></tr>
+<tr><td>旋转中心</td><td>转动的固定点</td><td>转轴 / 轴心 / 支点</td></tr>
+<tr><td>旋转角</td><td>转过的角度</td><td>角位移（转过的度数）</td></tr>
+<tr><td>中心对称</td><td>绕点转 180° 两图形重合；对称点连线被中心平分</td><td>掉头 / 反向；以 O 为平衡中心</td></tr>
+<tr><td>对称中心</td><td>对应点连线的中点</td><td>平衡支点 / 转动轴心</td></tr>
+<tr><td>中心对称图形</td><td>绕中心转 180° 与自身重合</td><td>半周自洽、均匀平衡（螺旋桨、车轮、圆）</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>△ABC 绕点 O 顺时针旋转 90° 得到 △A′B′C′。（1）指出旋转中心、旋转方向、旋转角；（2）若 OA = 5，求 OA′；（3）判断 △ABC 与 △A′B′C′ 是否全等，为什么？</li>
+<li>已知点 A 与点 A′ 关于点 O 中心对称，且 AO = 3。求 AA′ 的长，并说明 A、O、A′ 三点的位置关系。</li>
+<li>判断下列图形哪些是中心对称图形：平行四边形、等腰三角形、圆、正三角形、线段、正六边形。</li>
+<li>△ABC 与 △A′B′C′ 关于点 O 中心对称，写出三对对应点；若 AB = 6，求 A′B′。</li>
+<li>把等边三角形绕它的中心 O 旋转多少度能与自身重合？它是中心对称图形吗？为什么？</li>
+<li>举出三个"既是轴对称图形又是中心对称图形"的例子，并分别写出它们的对称轴和对称中心。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "旋转 180° 与轴对称（翻折 180°）是一回事" → ❌ 轴对称沿<strong>直线</strong>翻折，中心对称绕<strong>点</strong>旋转，对称元素不同（直线 vs 点）。</li>
+<li>❌ "中心对称图形就是轴对称图形" → ❌ 二者互不包含：一般的平行四边形是中心对称但不是轴对称；等腰三角形是轴对称但不是中心对称。</li>
+<li>❌ "正三角形是中心对称图形" → ❌ 正三角形绕中心转 180° 不能与自身重合，它只是轴对称图形。</li>
+<li>❌ "对应点到旋转中心的距离相等" 理解成 "对应点之间的距离相等" → ❌ 是"到中心的距离"相等（OP = OP′），不是任意两点间的距离都相等。</li>
+<li>❌ "旋转角一定小于 180°" → ❌ 旋转角可以是任意角度，如 270°、360°。</li>
+<li>❌ "两个全等图形一定关于某点中心对称" → ❌ 全等 ≠ 中心对称，还要求每一对对应点的连线都经过同一个点、且被该点平分。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>（旋转三要素）把 △ABC 绕点 O 沿逆时针方向旋转 60° 得到 △A′B′C′。请指出这次旋转的旋转中心、旋转方向和旋转角。</li>
+<li>（旋转性质）点 P 绕点 O 旋转后得到对应点 P′，已知 OP = 4。求 OP′ 的长；△OQQ′（Q、Q′ 为一对对应点）中 ∠QOQ′ 与旋转角有何关系？旋转前后的图形是否全等？为什么？</li>
+<li>（中心对称性质）已知点 A 与点 A′ 关于点 O 中心对称，且 AO = 5。求 AA′ 的长，并说明 A、O、A′ 三点的位置关系。</li>
+<li>（中心对称作图）用直尺和圆规作出点 A 关于对称中心 O 的对称点 A′，并写出简要作法。</li>
+<li>（中心对称图形）判断下列图形哪些是中心对称图形，并写出它们的对称中心：线段、平行四边形、等腰三角形、圆、正三角形、正六边形。</li>
+<li>（综合应用）分别举出一个"既是轴对称图形又是中心对称图形"和一个"是中心对称图形但不是轴对称图形"的例子；并说明：正三角形绕它的中心旋转多少度能与自身重合？它是中心对称图形吗？为什么？</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>旋转中心是点 O，旋转方向是逆时针，旋转角是 60°。描述一次旋转必须同时说清"中心、方向、角度"三个要素，缺一不可。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>OP′ = OP = 4（对应点到旋转中心的距离相等）；∠QOQ′ 等于旋转角（对应点与旋转中心连线所成的夹角等于旋转角）；旋转前后的图形全等，因为旋转是保距保形的等距变换，形状、大小都不变。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>AA′ = 2AO = 10。A、O、A′ 三点共线，且点 O 是线段 AA′ 的中点（对称点连线经过对称中心且被对称中心平分）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>作法：① 连接 AO；② 延长 AO 到 A′，使 OA′ = OA；③ 点 A′ 即为所求。一句话概括：连点 → 延长 → 取等长。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>是中心对称图形的有：线段（对称中心为线段中点）、平行四边形（对角线交点）、圆（圆心）、正六边形（图形中心）。等腰三角形、正三角形不是中心对称图形（它们只是轴对称图形）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>"既是轴对称又是中心对称"的例子：线段（轴为垂直平分线、中心为中点）或圆、正方形；"是中心对称但不是轴对称"的例子：一般的平行四边形。正三角形绕中心旋转 120°（或 240°、360°）能与自身重合；它不是中心对称图形，因为绕中心转 180° 后不能与自身重合。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第22章-二次函数/第22章-二次函数.html">← 上一章：第22章 二次函数</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第24章-圆/第24章-圆.html">下一章：第24章 圆 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 九年级上册</footer>
+</body>
+</html>

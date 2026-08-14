@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第4章 向量组的线性相关性 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第4章 向量组的线性相关性</div></header>
+<main class="container">
+<h1>第4章 向量组的线性相关性</h1>
+<p class="lead">大学 / 线性代数</p>
+<div class="summary"><span class="tag">一句话总纲：</span>本章回答一个根本问题——「一组向量里，有几个是"多余的"，有几个是"真正独立的"？」线性无关的向量彼此"方向不冗余"，极大无关组把它们能撑开的空间压缩到最少，向量空间则是这个"可张成"世界的完整舞台。掌握本章，你就能在任何维度里数清"独立自由度"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">4.1 向量与向量组</a><a href="#s2">4.2 线性组合与线性表示</a><a href="#s3">4.3 线性相关与线性无关</a><a href="#s4">4.4 极大无关组与向量组的秩</a><a href="#s5">4.5 向量空间</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">4.1 向量与向量组</h2>
+<h3>n 维向量的定义</h3>
+<p>由 <code>n</code> 个有顺序的数 <code>a₁, a₂, ⋯, aₙ</code> 组成的有序数组，称为一个 <strong>n 维向量</strong>，这 n 个数称为它的 <strong>分量</strong>，第 i 个数 aᵢ 叫第 i 个分量。通常记作（列向量）：</p>
+<pre><code>         ┌ a₁ ┐
+         │ a₂ │
+   α  =  │ ⋮  │    （或写成行向量  α = (a₁, a₂, …, aₙ)）
+         └ aₙ ┘</code></pre>
+<p>分量全为零的向量叫 <strong>零向量</strong>，记作 <code>0</code>；分量全为实数的向量叫实向量（本章默认实向量）。两个 n 维向量 <strong>相等</strong>，当且仅当它们对应分量都相等。向量的 <strong>线性运算</strong>：加法（对应分量相加）与数乘（每个分量同乘一个数）。</p>
+<div class="insight"><strong>几何含义：</strong>在平面（n=2）与空间（n=3）中，向量就是<strong>一个有长度、有方向的箭头（有向线段）</strong>：分量给出它沿各坐标轴投影的长度。n 维向量把"箭头"从看得见的 2、3 维抽象到任意维——你虽然画不出 4 维，但"方向 + 长度 + 可加减可伸缩"的直觉原封不动。零向量就是长度为零、没有方向的"点"。</div>
+<div class="insight"><strong>物理含义：</strong>向量就是一切"既有大小又有方向"的物理量的数学化身：<strong>力、速度、加速度、位移、动量、电场强度</strong>。分量的加减数乘对应"把几个力按分量合成、把力放大 k 倍"。</div>
+<h3>向量组</h3>
+<p>若干个<strong>同维数</strong>的向量放在一起，就构成一个 <strong>向量组</strong>。例如由 m 个 n 维向量组成的向量组记作：</p>
+<pre><code>  A : α₁, α₂, …, αₘ</code></pre>
+<p>向量组可以<strong>有限</strong>（本章主要研究），也可以<strong>无限</strong>。一个 m×n 矩阵既可以看成 m 个行向量（每个行向量是 n 维），也可以看成 n 个列向量（每个列向量是 m 维）——<strong>矩阵与向量组是一体两面</strong>，这是本章一切判别的桥梁。</p>
+<div class="insight"><strong>几何含义：</strong>一个向量组就是空间中的<strong>一组箭头</strong>（都从原点出发）。向量组的问题本质是：<strong>这组箭头里有没有"多余"的方向？它们合起来能铺满多大的空间？</strong></div>
+<div class="insight"><strong>物理含义：</strong>向量组对应<strong>作用在同一点上的一组力</strong>、一组速度、一组观测数据。接下来要研究的"相关性"，就是问：<strong>其中某个力是不是其余力的合力（可以被拆掉）？</strong></div>
+
+<h2 id="s2">4.2 线性组合与线性表示</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="380" height="300" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<defs>
+<marker id="f1a1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,3 L0,6 Z" fill="#2563eb"/></marker>
+<marker id="f1a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,3 L0,6 Z" fill="#16a34a"/></marker>
+<marker id="f1a3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,3 L0,6 Z" fill="#ea580c"/></marker>
+</defs>
+<line x1="40" y1="210" x2="360" y2="210" stroke="#e5e7eb" stroke-width="1.5"/>
+<line x1="120" y1="130" x2="120" y2="290" stroke="#e5e7eb" stroke-width="1.5"/>
+<polygon fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-opacity="0.35" stroke-width="1.5"><animate attributeName="points" values="120,210 175.4,210 175.4,189 120,189;120,210 143,210 143,159.2 120,159.2;120,210 97,210 97,159.2 120,159.2;120,210 64.6,210 64.6,189 120,189;120,210 64.6,210 64.6,231.1 120,231.1;120,210 97,210 97,260.8 120,260.8;120,210 143,210 143,260.8 120,260.8;120,210 175.4,210 175.4,231.1 120,231.1;120,210 175.4,210 175.4,189 120,189" dur="8s" repeatCount="indefinite"/></polygon>
+<line x1="120" y1="210" y2="210" stroke="#2563eb" stroke-width="3.5" marker-end="url(#f1a1)"><animate attributeName="x2" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/></line>
+<line x1="120" y1="210" x2="120" stroke="#16a34a" stroke-width="3.5" marker-end="url(#f1a2)"><animate attributeName="y2" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/></line>
+<line x1="120" y1="210" stroke="#ea580c" stroke-width="3.5" marker-end="url(#f1a3)"><animate attributeName="x2" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/></line>
+<line y1="210" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.7"><animate attributeName="x1" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/></line>
+<line x1="120" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.7"><animate attributeName="x2" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/><animate attributeName="y1" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/></line>
+<circle r="5" fill="#ea580c"><animate attributeName="cx" values="175.4;143;97;64.6;64.6;97;143;175.4;175.4" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="189;159.2;159.2;189;231.1;260.8;260.8;231.1;189" dur="8s" repeatCount="indefinite"/></circle>
+<g font-size="13">
+<text x="188" y="226" fill="#2563eb" font-weight="bold">α₁</text>
+<text x="98" y="150" fill="#16a34a" font-weight="bold">α₂</text>
+</g>
+<g font-size="12">
+<rect x="24" y="12" width="16" height="4" fill="#2563eb"/><text x="46" y="22" fill="#334155">α₁（分力）</text>
+<rect x="118" y="12" width="16" height="4" fill="#16a34a"/><text x="140" y="22" fill="#334155">α₂（分力）</text>
+<rect x="212" y="12" width="16" height="4" fill="#ea580c"/><text x="234" y="22" fill="#334155">β（合力＝对角线）</text>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：线性组合 β=k₁α₁+k₂α₂ 就是两个分力按平行四边形法则合成；当系数 k₁、k₂ 不断变化时，对角线终点扫过整个平面——两个不共线向量铺满整个平面。</figcaption>
+</figure>
+<h3>线性组合</h3>
+<p>给定向量组 <code>A : α₁, α₂, …, αₘ</code> 和一组实数 <code>k₁, k₂, …, kₘ</code>，称向量</p>
+<pre><code>  β = k₁α₁ + k₂α₂ + ⋯ + kₘαₘ</code></pre>
+<p>为向量组 A 的一个 <strong>线性组合</strong>，k₁, …, kₘ 称为 <strong>组合系数</strong>。若向量 <code>β</code> 能写成上面这种形式，就说 <code>β</code> 可由向量组 A <strong>线性表示</strong>（或说 β 是 A 的线性组合）。</p>
+<div class="insight"><strong>几何含义：</strong>k₁α₁ + k₂α₂ 就是把 α₁ 拉长/压缩/反向 k₁ 倍、α₂ 拉长 k₂ 倍，再按<strong>平行四边形法则</strong>相加：它是"以 k₁α₁、k₂α₂ 为邻边的平行四边形的对角线"。因此 <strong>两个不共线的向量 α₁、α₂ 的一切线性组合能铺满整个平面</strong>（取遍所有系数 k₁、k₂，终点扫过整个平面）。一个向量 β 能被 α₁、α₂ 表示 ⇔ β 落在这个平面内。</div>
+<div class="insight"><strong>物理含义：</strong>线性组合就是<strong>力的合成（平行四边形法则）</strong>："β 可由 α₁、α₂ 表示"意为——合力 β 可以分解成沿 α₁、α₂ 两个方向的分力，k₁、k₂ 就是各分力的大小。</div>
+<h3>两个基本问题</h3>
+<ol>
+<li><strong>表示问题</strong>：给定 β 与向量组 A，问 β 能否由 A 线性表示？若能，系数是否唯一？——这对应线性方程组 <code>k₁α₁ + ⋯ + kₘαₘ = β</code> <strong>是否有解、解是否唯一</strong>。</li>
+<li><strong>等价问题</strong>：若两组向量能<strong>互相</strong>线性表示，称它们<strong>等价</strong>（记作 A ≅ B）。等价的向量组"撑开同样的空间"。</li>
+</ol>
+<div class="insight"><strong>几何含义：</strong>"β 能否由 A 表示"就是问 β 是否落在 A 张成的子空间内；"两组向量等价"就是问它们张成的是<strong>同一个子空间</strong>。</div>
+
+<h2 id="s3">4.3 线性相关与线性无关</h2>
+<h3>定义（本章核心）</h3>
+<p>给定向量组 <code>A : α₁, α₂, …, αₘ</code>，若存在<strong>不全为零</strong>的数 k₁, k₂, …, kₘ，使得</p>
+<pre><code>  k₁α₁ + k₂α₂ + ⋯ + kₘαₘ = 0</code></pre>
+<p>则称向量组 A <strong>线性相关</strong>；否则（即<strong>只有当</strong> k₁ = k₂ = ⋯ = kₘ = 0 时才成立），称向量组 A <strong>线性无关</strong>。</p>
+<p><strong>等价表述</strong>：线性相关 ⇔ 其中<strong>至少有一个</strong>向量可由其余向量线性表示；线性无关 ⇔ <strong>任何一个</strong>向量都不能由其余向量线性表示。</p>
+<div class="insight"><strong>几何含义：</strong>两个向量线性相关 ⇔ 它们<strong>共线</strong>（一个在另一个所在的直线上）；两个向量线性无关 ⇔ 它们<strong>不共线</strong>，能撑开一个平面。三个向量线性相关 ⇔ 它们<strong>共面</strong>（三个箭头都落在同一平面内，其中一个能被另外两个"拼"出来）；三个向量线性无关 ⇔ 它们<strong>不共面</strong>，能撑起整个三维空间。于是「线性无关」=「方向互不冗余，能撑开更高一维」，每加一个真正无关的向量，维度就多一层。</div>
+<div class="insight"><strong>物理含义：</strong>线性相关 = <strong>有冗余的力</strong>：其中一个力恰好是其余力的合力，拆掉它信息不丢。线性无关 = <strong>一组彼此独立的分量/自由度</strong>：谁也代替不了谁，缺一个就少覆盖一个维度。工程师口中的"独立方程"、"独立自由度"，正是线性无关。</div>
+<h3>几个重要结论（记牢）</h3>
+<ul>
+<li><strong>含零向量必相关</strong>：只要向量组里有一个零向量 0，它必线性相关（取该零向量系数为 1、其余为 0 即可）。</li>
+<li><strong>个数超过维数必相关</strong>：m 个 n 维向量，若 m &gt; n，必线性相关（"m 个箭头挤在 n 维空间里，必有冗余"）。</li>
+<li><strong>部分相关 ⇒ 整体相关</strong>；逆否命题 <strong>整体无关 ⇒ 部分无关</strong>。</li>
+<li><strong>两个向量线性相关 ⇔ 对应分量成比例</strong>（共线）。</li>
+<li>向量组线性相关 ⇔ 以它们为列构成的矩阵的 <strong>秩 &lt; 向量个数</strong>；线性无关 ⇔ 秩 = 向量个数。</li>
+</ul>
+<h3>用行列式 / 秩判别</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="360" height="350" viewBox="0 0 360 350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<defs>
+<marker id="f2a1" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,3 L0,6 Z" fill="#2563eb"/></marker>
+<marker id="f2a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,3 L0,6 Z" fill="#16a34a"/></marker>
+</defs>
+<line x1="10" y1="210" x2="330" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,6"/>
+<polygon fill="#2563eb" fill-opacity="0.12" stroke="#2563eb" stroke-opacity="0.35" stroke-width="1.5"><animate attributeName="points" values="110,210 190,210 280,210 200,210;110,210 190,210 253.6,146.4 173.6,146.4;110,210 190,210 190,120 110,120;110,210 190,210 126.4,146.4 46.4,146.4;110,210 190,210 100,210 20,210;110,210 190,210 126.4,273.6 46.4,273.6;110,210 190,210 190,300 110,300;110,210 190,210 253.6,273.6 173.6,273.6;110,210 190,210 280,210 200,210" dur="8s" repeatCount="indefinite"/></polygon>
+<line x1="110" y1="210" x2="190" y2="210" stroke="#2563eb" stroke-width="3.5" marker-end="url(#f2a1)"/>
+<line x1="110" y1="210" stroke="#16a34a" stroke-width="3.5" marker-end="url(#f2a2)"><animate attributeName="x2" values="200;173.6;110;46.4;20;46.4;110;173.6;200" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="210;146.4;120;146.4;210;273.6;300;273.6;210" dur="8s" repeatCount="indefinite"/></line>
+<text x="196" y="206" font-size="13" fill="#2563eb" font-weight="bold">α₁</text>
+<text x="180" y="330" font-size="13" fill="#dc2626" font-weight="bold" text-anchor="middle"><animate attributeName="opacity" values="1;0;0;0;1;0;0;0;1" dur="8s" repeatCount="indefinite"/>共线 ⇒ 面积=0 ⇒ 线性相关</text>
+<text x="180" y="330" font-size="13" fill="#16a34a" font-weight="bold" text-anchor="middle"><animate attributeName="opacity" values="0;1;1;1;0;1;1;1;0" dur="8s" repeatCount="indefinite"/>不共线 ⇒ 面积≠0 ⇒ 线性无关</text>
+<g font-size="12">
+<rect x="24" y="12" width="16" height="4" fill="#2563eb"/><text x="46" y="22" fill="#334155">α₁（固定）</text>
+<rect x="118" y="12" width="16" height="4" fill="#16a34a"/><text x="140" y="22" fill="#334155">α₂（绕原点旋转）</text>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两向量张成的平行四边形面积 = 行列式的绝对值；α₂ 转到与 α₁ 共线时面积坍缩为 0（线性相关），其余位置面积非零（线性无关）。</figcaption>
+</figure>
+<p>把 m 个 n 维向量排成一个 n×m 矩阵 <code>A = (α₁, α₂, …, αₘ)</code>，解齐次方程组 <code>Ax = 0</code>：</p>
+<ul>
+<li>若 <code>Ax = 0</code> 只有零解 ⇔ 向量组<strong>线性无关</strong>；</li>
+<li>若 <code>Ax = 0</code> 有非零解 ⇔ 向量组<strong>线性相关</strong>。</li>
+</ul>
+<p>特别地，<strong>n 个 n 维向量</strong>构成方阵 A，则：</p>
+<pre><code>  A 的向量组线性无关  ⇔  det(A) ≠ 0  ⇔  A 可逆
+  A 的向量组线性相关  ⇔  det(A) = 0</code></pre>
+<div class="insight"><strong>几何含义：</strong>det(A) 是这 n 个向量张成的"平行多面体"的<strong>带符号体积</strong>（二维就是平行四边形面积，三维就是平行六面体体积）。<strong>体积 ≠ 0 ⇔ 向量不共面/不共线，真正撑满 n 维</strong>；体积 = 0 ⇔ 它们被"压扁"进低一维，于是线性相关。</div>
+<div class="insight"><strong>物理含义：</strong>行列式非零表示 n 个力（或 n 组测量）<strong>线性独立、信息不冗余</strong>，是判断"方程组是否有唯一解""坐标系是否可逆"的试金石。</div>
+
+<h2 id="s4">4.4 极大无关组与向量组的秩</h2>
+<h3>极大无关组</h3>
+<p>设 <code>A₀</code> 是向量组 A 的一个部分组，若满足两条：</p>
+<ol>
+<li><strong>无关</strong>：A₀ 本身线性无关；</li>
+<li><strong>极大</strong>：向 A₀ 中<strong>再添入 A 的任何一个其余向量</strong>，所得的新向量组都线性相关；</li>
+</ol>
+<p>则称 A₀ 为向量组 A 的一个 <strong>极大（线性）无关组</strong>（最大无关组）。</p>
+<p><strong>性质</strong>：</p>
+<ul>
+<li>A 的任一向量都可由极大无关组线性表示（因此极大无关组与 A 等价）；</li>
+<li>极大无关组是"能从 A 里挑出的、仍能表示出整个 A 的<strong>最少</strong>向量"；</li>
+<li>极大无关组<strong>一般不唯一</strong>，但所含向量个数<strong>唯一</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>向量组 A 张成一个子空间（过原点的直线/平面/空间），极大无关组就是这个子空间的<strong>一组"基"</strong>——用最少的箭头撑起同一片空间。不唯一，好比同一平面可以选"东+北"当坐标轴，也可以选"东北+西北"，但<strong>基里箭头个数（维数）不变</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>从一组力/信号里<strong>剔除所有冗余、保留真正独立的分量</strong>，极大无关组就是"最小独立集"——既不多余（无关），又不遗漏（极大，能表示其余全部）。</div>
+<h3>向量组的秩</h3>
+<p>向量组 A 的<strong>极大无关组所含向量的个数</strong>，称为向量组 A 的<strong>秩</strong>，记作 <code>R(A)</code> 或 <code>rank(A)</code>。规定只含零向量的向量组秩为 0。</p>
+<p><strong>关键事实</strong>：把 A 排成矩阵，则<strong>向量组的秩 = 该矩阵的秩 = 该矩阵行/列阶梯形中非零行的个数</strong>。因此求秩就用初等行变换化阶梯形。</p>
+<p><strong>结论</strong>：m 个向量线性无关 ⇔ R(A) = m；线性相关 ⇔ R(A) &lt; m。</p>
+<div class="insight"><strong>几何含义：</strong>秩 = 向量组张成的子空间的<strong>维数</strong>。三个共面但不全共线的向量：秩 = 2（只撑开一个平面）；三个不共面向量：秩 = 3（撑满空间）。秩告诉你这组箭头"实际占据了几维"。</div>
+<div class="insight"><strong>物理含义：</strong>秩 = 一组物理量/方程组中<strong>独立信息的个数</strong>（独立方程数、独立自由度、独立约束数）。秩小于向量个数，就说明存在线性冗余（某些方程/测量可由其余推出）。</div>
+
+<h2 id="s5">4.5 向量空间</h2>
+<h3>向量空间（线性空间）的定义</h3>
+<p>设 V 是一个非空集合，其中定义了<strong>加法</strong>（V 中任意 α、β 的和仍在 V 中）与<strong>数乘</strong>（实数 k 乘 V 中向量仍在 V 中），且满足八条运算规律，则称 V 为数域（实数域 ℝ）上的 <strong>向量空间</strong>（线性空间）。八条规律为：</p>
+<pre><code>  加法：α+β = β+α             (交换律)
+        (α+β)+γ = α+(β+γ)     (结合律)
+        存在零元 0，α+0 = α
+        存在负元 −α，α+(−α) = 0
+  数乘：1·α = α
+        k(lα) = (kl)α
+        (k+l)α = kα + lα
+        k(α+β) = kα + kβ</code></pre>
+<p>全体 n 维实向量的集合 <strong>ℝⁿ</strong>（按通常的向量加法与数乘）是最重要的向量空间。本章"向量组张成的空间"就是 ℝⁿ 的子集。</p>
+<div class="insight"><strong>几何含义：</strong>向量空间就是<strong>过原点的"整片"直线、平面或整个空间</strong>（及高维推广）——之所以必须过原点，是因为加法与数乘要求 0 一定在 V 里。ℝ¹ 是一条直线，ℝ² 是整个平面，ℝ³ 是我们生活的三维空间；ℝⁿ 是"看不见但可算"的 n 维空间。</div>
+<div class="insight"><strong>物理含义：</strong>向量空间 = <strong>某一类物理量所有可能取值的全集</strong>：所有可能的力构成一个向量空间（两个力的合力还是力，力放大 k 倍还是力）。"线性叠加原理"成立的一切系统（力、电场、量子态、信号），其状态都住在某个向量空间里。</div>
+<h3>子空间、基、维数与坐标</h3>
+<ul>
+<li><strong>子空间</strong>：V 的非空子集 W 若对加法与数乘封闭（α、β∈W ⇒ α+β∈W，kα∈W），则 W 是 V 的<strong>子空间</strong>。例：过原点的直线、平面是 ℝ³ 的子空间；不过原点的直线、平面<strong>不是</strong>子空间。</li>
+<li><strong>基</strong>：向量空间 V 中一组<strong>线性无关</strong>、且能<strong>表示出 V 中一切向量</strong>的向量组，称为 V 的一组<strong>基</strong>。基就是"整片空间"的极大无关组。</li>
+<li><strong>维数</strong>：V 的基所含向量个数，记 <code>dim V</code>。ℝⁿ 的维数是 n。</li>
+<li><strong>坐标</strong>：给定基后，V 中任一向量 α 可<strong>唯一</strong>写成 α = x₁ε₁ + ⋯ + xₙεₙ，称 (x₁, …, xₙ) 为 α 在该基下的<strong>坐标</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>基 = <strong>坐标轴</strong>（方向尺子），坐标 = <strong>沿各坐标轴的投影长度</strong>。选不同的基相当于换一套坐标轴（旋转/斜放），同一个点坐标不同，但"轴的根数 = 维数"永远不变。ℝ³ 的标准基 e₁、e₂、e₃ 就是 x、y、z 三根坐标轴。</div>
+<div class="insight"><strong>物理含义：</strong>基 = 一套<strong>正交/独立的测量方向</strong>，坐标 = 物理量在该方向上的<strong>分量读数</strong>（力的 Fx、Fy、Fz）。维数 = 描述该系统最少需要几个独立参数。</div>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>n 维向量</td><td>有长度、有方向的箭头（2、3 维可画，n 维抽象推广）</td><td>力、速度、位移等"有大小有方向"的量</td></tr>
+<tr><td>向量组</td><td>空间中的一组箭头</td><td>作用在同一点的一组力 / 一组观测数据</td></tr>
+<tr><td>线性组合</td><td>拉伸压缩后按平行四边形法则合成（对角线）</td><td>力的合成与分解（分力→合力）</td></tr>
+<tr><td>线性表示</td><td>目标向量落在向量组张成的子空间内</td><td>合力能被分解成若干分力</td></tr>
+<tr><td>线性相关</td><td>共线（两向量）、共面（三向量），方向有冗余</td><td>存在冗余的力/方程，可被其余代替</td></tr>
+<tr><td>线性无关</td><td>不共线 / 不共面，能撑开更高一维</td><td>独立分量、独立自由度、独立信息</td></tr>
+<tr><td>极大无关组</td><td>撑起同一子空间的"最少箭头"，即一组基</td><td>剔除冗余后的最小独立集</td></tr>
+<tr><td>向量组的秩</td><td>张成子空间的维数</td><td>独立信息/独立方程的个数</td></tr>
+<tr><td>行列式判据</td><td>平行多面体的带符号体积（=0 即被压扁）</td><td>是否线性独立、方程组是否唯一可解</td></tr>
+<tr><td>向量空间</td><td>过原点的直线/平面/整个空间（ℝⁿ）</td><td>某类物理量全部可能状态的集合</td></tr>
+<tr><td>基与维数</td><td>坐标轴与空间维数</td><td>独立测量方向与所需最少参数个数</td></tr>
+<tr><td>坐标</td><td>沿各坐标轴的投影长度</td><td>分量读数（如力的 Fx、Fy、Fz）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断向量组 α₁=(1,2,3)ᵀ，α₂=(2,4,6)ᵀ，α₃=(1,0,1)ᵀ 是否线性相关；若相关，找出其中的线性表示关系。</li>
+<li>求向量组 α₁=(1,1,1)ᵀ，α₂=(0,1,1)ᵀ，α₃=(0,0,1)ᵀ，α₄=(1,2,3)ᵀ 的秩，并求一个极大无关组，把其余向量用它线性表示。</li>
+<li>问 β=(1,3,−2)ᵀ 能否由 α₁=(1,0,0)ᵀ，α₂=(0,1,0)ᵀ，α₃=(1,1,1)ᵀ 线性表示？若能，表示是否唯一？</li>
+<li>设 α₁、α₂、α₃ 线性无关，证明：β₁=α₁+α₂，β₂=α₂+α₃，β₃=α₃+α₁ 也线性无关。</li>
+<li>判断集合 W = { (x, y, z)ᵀ | x + y + z = 0 } 是否为 ℝ³ 的子空间；若是，求它的一组基和维数。</li>
+<li>用行列式判断向量组 (1,1,1)ᵀ、(1,2,3)ᵀ、(1,3,6)ᵀ 是否线性无关。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "线性相关就是每个向量都能被其余向量表示" → ❌ 正确是「<strong>至少存在一个</strong>」向量可被其余表示；全体都能被表示是更强的条件。</li>
+<li>❌ "向量两两不共线，整组就线性无关" → ❌ 线性无关是<strong>整体</strong>概念：三个向量可以两两不共线却仍共面而相关。须看整体能否组合出零向量。</li>
+<li>❌ "向量个数 = 维数时必线性无关" → ❌ 还需行列式 ≠ 0（或秩 = 个数）。例如 (1,1)ᵀ 与 (2,2)ᵀ 共线，虽个数=维数=2 却相关。</li>
+<li>❌ "极大无关组是唯一的" → ❌ 一般不唯一，但<strong>所含向量个数（秩）唯一</strong>。例如平面内可任选两条不共线向量作极大无关组。</li>
+<li>❌ "向量组的秩就是向量个数" → ❌ 秩 = 极大无关组的个数，只有向量组线性无关时才等于向量个数。</li>
+<li>❌ "零向量组也有极大无关组" → ❌ 只含零向量的向量组没有极大无关组，规定其秩为 0。</li>
+<li>❌ "子空间不必过原点" → ❌ 子空间必须对加法、数乘封闭，故一定含零向量、一定过原点。不过原点的直线/平面不是子空间。</li>
+<li>❌ "线性相关 ⇒ 行列式为 0（任何情况）" → ❌ 行列式判据只对<strong> n 个 n 维向量（方阵）</strong>成立；一般情形统一用<strong>秩</strong>判断。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<strong style="color:#b45309">一、练习题</strong>
+<ol>
+<li>判断向量组 α₁=(2,−4)ᵀ，α₂=(−1,2)ᵀ 是否线性相关；若相关，写出线性表示关系，并用"共线"的几何含义解释。</li>
+<li>判断向量组 α₁=(1,2,3)ᵀ，α₂=(0,0,0)ᵀ，α₃=(2,1,0)ᵀ 是否线性相关？依据的是哪条结论？物理上如何理解零向量？</li>
+<li>问 β=(5,7)ᵀ 能否由 α₁=(1,1)ᵀ，α₂=(1,−1)ᵀ 线性表示？若能，表示是否唯一？并说明"两个不共线向量能铺满平面"的含义。</li>
+<li>求向量组 α₁=(1,0,1)ᵀ，α₂=(0,1,1)ᵀ，α₃=(1,1,2)ᵀ 的秩，并给出一个极大无关组；从"力的合成"角度说明 α₃ 的冗余性。</li>
+<li>用行列式判断向量组 (1,1,1)ᵀ、(2,0,1)ᵀ、(1,−1,0)ᵀ 是否线性无关，并解释其几何含义（平行六面体体积）。</li>
+<li>判断集合 W = { (x,y,z)ᵀ | 2x − y + z = 0 } 是否为 ℝ³ 的子空间；若是，求它的一组基和维数，并说明 W 在几何上是什么图形。</li>
+</ol>
+<strong style="color:#b45309">二、参考答案（点击展开）</strong>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>线性相关。α₁ = −2·α₂（因为 −2·(−1,2)ᵀ = (2,−4)ᵀ）。几何上二者<strong>共线且方向相反</strong>：α₁ 落在 α₂ 所在的直线上，是 α₂ 的 −2 倍，属于"方向冗余"。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>线性相关。依据"<strong>含零向量必相关</strong>"：取系数 k₁=0、k₂=1、k₃=0（不全为零），则 0·α₁ + 1·α₂ + 0·α₃ = 0。物理上零向量是"大小为 0 的力"，对张成空间毫无贡献，属于冗余分量。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>能，且表示唯一。设 β = k₁α₁ + k₂α₂，得方程组 k₁ + k₂ = 5，k₁ − k₂ = 7，解得 k₁ = 6，k₂ = −1，即 β = 6α₁ − α₂。几何上 α₁、α₂ 不共线，它们的全部线性组合能铺满整个平面，β 落在该平面内，故系数唯一。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>秩 R(A) = 2，一个极大无关组可取 {α₁, α₂}。因为 α₃ = α₁ + α₂，故三个向量线性相关；而 α₁、α₂ 不共线（不成比例），线性无关。物理上 α₃ 恰是 α₁、α₂ 的合力（"冗余的力"），剔除后仍保留 2 个独立分量。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>线性相关。排成矩阵求行列式：det = 1·(0·0 − (−1)·1) − 2·(1·0 − (−1)·1) + 1·(1·1 − 0·1) = 1 − 2 + 1 = 0。几何上这三个向量张成的平行六面体体积为 0，即三向量共面、被"压扁"进低一维，故不撑满三维空间。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>是 ℝ³ 的子空间。W 对加法、数乘封闭：若 α=(x,y,z)ᵀ、β=(x′,y′,z′)ᵀ ∈ W，则 2(x+x′) − (y+y′) + (z+z′) = (2x−y+z) + (2x′−y′+z′) = 0 + 0 = 0；kα 同理。取基 {(1,2,0)ᵀ, (0,1,1)ᵀ}（验证 2·1−2+0=0、2·0−1+1=0，且二者不共线），故 dim W = 2。几何上 W 是 ℝ³ 中过原点的一张平面。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第3章-矩阵的初等变换与线性方程组/第3章-矩阵的初等变换与线性方程组.html">← 上一章：第3章 矩阵的初等变换与线性方程组</a><a href="../../../index.html">回目录</a><a href="../第5章-相似矩阵及二次型/第5章-相似矩阵及二次型.html">下一章：第5章 相似矩阵及二次型 →</a></nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
+</body>
+</html>

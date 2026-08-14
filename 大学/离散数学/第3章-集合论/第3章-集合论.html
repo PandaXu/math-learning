@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第3章 集合论 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第3章 集合论</div></header>
+<main class="container">
+<h1>第3章 集合论</h1>
+<p class="lead">大学 / 离散数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>集合论 = 「把对象圈成一团、再研究这些“团”之间的包含、合并、交集与计数」。学完本章，你要能在心里"看见"一个文氏图——每个集合是一块平面区域，<strong>属于 ∈ 是“点落在区域里”、包含 ⊆ 是“一个区域整个套在另一个区域里”、并 ∩ 交 ∪ 是“区域的叠加与重叠”</strong>，而幂集与容斥原理则告诉你“这块区域到底能拆出多少种组合、数出多少元素”。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">3.1 集合的概念</a><a href="#s2">3.2 集合的运算</a><a href="#s3">3.3 幂集</a><a href="#s4">3.4 集合恒等式</a><a href="#s5">3.5 有穷集合的计数</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">3.1 集合的概念</h2>
+<h3>什么是集合？</h3>
+<p><strong>集合（set）</strong>是一组<strong>确定的、互不相同的对象</strong>的总称，这些对象叫做集合的<strong>元素（element）</strong>。集合是离散数学的起点：它不关心元素"排列顺序"与"重复次数"，只关心<strong>“谁在里面、谁不在里面”</strong>。</p>
+<p>记号：<code>a ∈ A</code> 表示 a 是 A 的元素（读作“a 属于 A”）；<code>a ∉ A</code> 表示 a 不是 A 的元素。用 <code>|A|</code> 表示集合 A 中<strong>元素的个数</strong>（即基数，cardinality）。</p>
+<div class="insight"><strong>几何含义：</strong>把集合想象成平面上的一块<strong>封闭区域</strong>，元素就是区域内的一个个<strong>点</strong>。<code>a ∈ A</code> = “点 a 落在区域 A 之内”，<code>a ∉ A</code> = “点 a 落在区域 A 之外”。这就是<strong>文氏图（Venn diagram）</strong>——用“图形”刻画“属于关系”，是本章所有直觉的根基。</div>
+<div class="insight"><strong>物理含义：</strong>集合 = “按某种特征把对象<strong>分类/归堆</strong>”。例如：把全班同学按“是否选修数学”分成两个集合；把一次抛硬币的所有可能结果放进样本空间 S = {正面, 反面}。分类是科学实验与数据处理的第一步——集合论为“分类”提供了严格的数学语言。</div>
+<h3>集合的三大特征</h3>
+<ul>
+<li><strong>确定性</strong>：对任意对象 x，<code>x ∈ A</code> 与 <code>x ∉ A</code> 二者必居其一且仅居其一，不能含糊。例如“高个子同学”不是集合（多高算高？不确定），而“身高 ≥ 180cm 的同学”是集合。</li>
+<li><strong>互异性</strong>：同一集合中元素不重复。{1, 2, 2, 3} 应写作 {1, 2, 3}，重复只记一次。</li>
+<li><strong>无序性</strong>：{1, 2, 3} 与 {3, 1, 2} 是<strong>同一个</strong>集合，元素顺序无关紧要。</li>
+</ul>
+<h3>集合的表示法</h3>
+<ul>
+<li><strong>列举法</strong>：把元素一一写出来，用花括号括住。例：A = {1, 2, 3, 4}；B = {a, b, c}。</li>
+<li><strong>描述法（谓词法）</strong>：写出元素满足的性质。例：A = {x | x 是小于 10 的正偶数} = {2, 4, 6, 8}。一般写作 <code>{x | P(x)}</code>，读作“所有满足性质 P 的 x”。</li>
+<li><strong>文氏图法</strong>：用矩形表示<strong>全集（universal set，记作 U）</strong>，用其中的圆或闭曲线表示各个集合——直观但无法精确表达无穷集合。</li>
+</ul>
+<h3>常用集合符号</h3>
+<table>
+<tr><th>符号</th><th>含义</th></tr>
+<tr><td>∅（或 {}）</td><td>空集：不含任何元素的集合</td></tr>
+<tr><td>N</td><td>自然数集 {0, 1, 2, 3, …}（部分教材从 1 开始）</td></tr>
+<tr><td>Z</td><td>整数集 {…, −2, −1, 0, 1, 2, …}</td></tr>
+<tr><td>Q</td><td>有理数集</td></tr>
+<tr><td>R</td><td>实数集</td></tr>
+<tr><td>U</td><td>全集：讨论所涉及的所有对象构成的“最大”集合</td></tr>
+</table>
+<p>集合之间的关系用 <code>⊆</code>（包含于）、<code>⊂</code>（真包含于）、<code>=</code>（相等）表示：</p>
+<pre><code>A ⊆ B  ⇔  ∀x (x ∈ A → x ∈ B)      A 是 B 的子集
+A ⊂ B  ⇔  A ⊆ B 且 A ≠ B            A 是 B 的真子集
+A = B  ⇔  A ⊆ B 且 B ⊆ A            外延公理：两个集合相等当且仅当元素完全相同</code></pre>
+<div class="insight"><strong>几何含义：</strong><code>A ⊆ B</code> = “区域 A 整个落在区域 B 内部”；<code>A = B</code> = “两个区域的<strong>边界完全重合</strong>，框住的是同一批点”。判断集合相等不必比较“顺序”，只看“边界所围的点是否一模一样”。</div>
+<h3>空集、幂集前奏：子集的个数</h3>
+<p><strong>空集 ∅</strong> 是<strong>任何集合的子集</strong>（∅ ⊆ A 对一切 A 成立），且空集是<strong>唯一</strong>的。<strong>全集 U</strong> 是“讨论的舞台”，任何集合都是 U 的子集。</p>
+<p>一个 n 元集合共有 <strong>2ⁿ 个子集</strong>。为什么？每个元素都有“进 / 不进”两种选择，n 个元素独立选择，共 2ⁿ 种组合。这个“每个元素二选一”的思想，正是下一节<strong>幂集</strong>的核心，也是后面<strong>位串表示法</strong>的来源。</p>
+
+<h2 id="s2">3.2 集合的运算</h2>
+<p>集合的运算由定义出发，<strong>等价于对“点是否落在区域内”做逻辑判断</strong>：</p>
+<table>
+<tr><th>运算</th><th>记号</th><th>定义</th><th>读法</th></tr>
+<tr><td>并集</td><td>A ∪ B</td><td>{x | x ∈ A 或 x ∈ B}</td><td>A 并 B：属于 A <strong>或</strong>属于 B</td></tr>
+<tr><td>交集</td><td>A ∩ B</td><td>{x | x ∈ A 且 x ∈ B}</td><td>A 交 B：既属于 A <strong>又</strong>属于 B</td></tr>
+<tr><td>差集</td><td>A − B（或 A\B）</td><td>{x | x ∈ A 且 x ∉ B}</td><td>A 减 B：属于 A 但<strong>不属于</strong> B</td></tr>
+<tr><td>补集</td><td>∁A（或 Ā、A′）</td><td>{x | x ∈ U 且 x ∉ A}</td><td>A 的补：全集里<strong>除 A 之外</strong>的全部</td></tr>
+<tr><td>对称差</td><td>A ⊕ B</td><td>(A − B) ∪ (B − A)</td><td>恰好只属于其中一个集合的元素</td></tr>
+</table>
+<p>例：设 U = {1, 2, 3, 4, 5, 6}，A = {1, 2, 3}，B = {3, 4, 5}，则：</p>
+<pre><code>A ∪ B = {1,2,3,4,5}      A ∩ B = {3}
+A − B = {1,2}            B − A = {4,5}
+∁A = {4,5,6}             A ⊕ B = {1,2,4,5}</code></pre>
+<div class="insight"><strong>几何含义（文氏图着色）：</strong>
+<ul>
+<li><code>A ∪ B</code> = 两块区域<strong>全部涂满</strong>（取并）。</li>
+<li><code>A ∩ B</code> = 两块区域<strong>重叠的部分</strong>（取交）。</li>
+<li><code>A − B</code> = 只涂 A、<strong>抠掉</strong>与 B 重叠的那块月牙。</li>
+<li><code>∁A</code> = 矩形（全集）里<strong>圆 A 之外的背景</strong>。</li>
+<li><code>A ⊕ B</code> = 两圆交叠形成的<strong>“蝴蝶结”左右两片月牙</strong>（不含重叠芯）。</li>
+</ul>
+把它们画出来，会发现“并、交、差、补”恰好对应“区域并、区域交、区域差、区域补”——集合代数本质上是<strong>平面区域的布尔代数</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>把集合看成<strong>事件</strong>（概率论）或<strong>查询结果</strong>（数据库）：∪ 是“或”的检索（并集合并两个条件的结果集），∩ 是“与”的筛选（交集要求两个条件同时成立），补集是“非”的筛选（排除法）。电路里，并/交/补对应逻辑门的<strong>或 OR / 与 AND / 非 NOT</strong>——集合运算就是布尔逻辑的几何版。</div>
+<h3>运算的重要性质（先直观感受）</h3>
+<ul>
+<li><code>A ∩ B ⊆ A ⊆ A ∪ B</code>：交集是“公共芯”，被双方包含；并集是“全体”，包含双方。</li>
+<li><strong>不相交（disjoint）</strong>：A ∩ B = ∅，两块区域无重叠。</li>
+<li><strong>划分（partition）</strong>：把 A 切成若干<strong>互不相交、合并还原</strong>的子集，如 {奇数}、{偶数} 是整数集的划分。</li>
+<li>补集满足 <code>∁(∁A) = A</code>（双重否定）、<code>A ∪ ∁A = U</code>、<code>A ∩ ∁A = ∅</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>“划分”就是把一块区域用刀切成互不重叠的几片，再拼回来还是原来那块——这是后面<strong>计数（加法原理）</strong>与<strong>等价关系（商集）</strong>的直观来源。</div>
+
+<h2 id="s3">3.3 幂集</h2>
+<h3>定义</h3>
+<p>集合 A 的<strong>幂集（power set）</strong>，记作 <code>P(A)</code> 或 <code>2ᴬ</code>，是 A 的<strong>所有子集</strong>组成的集合：</p>
+<pre><code>P(A) = { X | X ⊆ A }</code></pre>
+<p>例：A = {a, b}，则</p>
+<pre><code>P(A) = { ∅, {a}, {b}, {a,b} }        |P(A)| = 4</code></pre>
+<div class="insight"><strong>几何含义：</strong>把 A 看成一块区域，幂集 P(A) 就是<strong>这块区域所有可能的“圈选方案”</strong>：一个都不圈（∅）、只圈 a、只圈 b、全圈上（{a,b}）——每一种圈法都是一个子集。n 个元素对应 2ⁿ 个圈法。</div>
+<div class="insight"><strong>物理含义：</strong>幂集 = <strong>“所有可能的状态/配置”</strong>。n 个开关，每个有“开/关”两态，全体开关状态正好 2ⁿ 种，与 P(A) 一一对应；n 位二进制数 000…0 到 111…1 也恰好 2ⁿ 个。因此幂集就是<strong>“二值状态的枚举空间”</strong>，是组合计数、数字电路、布尔函数论的基础对象。</div>
+<h3>幂集的基数（为什么是 2ⁿ？）</h3>
+<p>定理：若 <code>|A| = n</code>，则 <code>|P(A)| = 2ⁿ</code>。证明思路——用<strong>位串（bit string）</strong>与子集建立一一对应：给 A 的元素排定一个顺序，对每个子集 X，用长度为 n 的 0/1 串表示“该元素是否属于 X”。</p>
+<pre><code>A = {a, b, c}  按顺序 (a, b, c)：
+∅       → 000
+{a}     → 100
+{b}     → 010
+{c}     → 001
+{a,b}   → 110
+{a,c}   → 101
+{b,c}   → 011
+{a,b,c} → 111        ← 共 2³ = 8 个子集</code></pre>
+<p>每个位置 2 种选择、n 个位置相互独立，由<strong>乘法原理</strong>得 2ⁿ 种；所以 <code>|P(A)| = 2ⁿ</code>。这也解释了为什么幂集又记作 <code>2ᴬ</code>。</p>
+<div class="insight"><strong>关键认识：</strong>“子集 ↔ 位串 ↔ 二进制数”三者一一对应。数一数子集，等于数一数 n 位二进制数（共 2ⁿ 个）。这是<strong>离散数学“用符号串编码对象”</strong>思想的第一次集中体现。</div>
+
+<h2 id="s4">3.4 集合恒等式</h2>
+<h3>基本定律表</h3>
+<p>对任意集合 A、B、C（都在全集 U 中讨论），下列恒等式成立：</p>
+<table>
+<tr><th>定律</th><th>并 ∪ 形式</th><th>交 ∩ 形式</th></tr>
+<tr><td>幂等律</td><td>A ∪ A = A</td><td>A ∩ A = A</td></tr>
+<tr><td>交换律</td><td>A ∪ B = B ∪ A</td><td>A ∩ B = B ∩ A</td></tr>
+<tr><td>结合律</td><td>(A ∪ B) ∪ C = A ∪ (B ∪ C)</td><td>(A ∩ B) ∩ C = A ∩ (B ∩ C)</td></tr>
+<tr><td>分配律</td><td>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</td><td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td></tr>
+<tr><td>德摩根律</td><td>∁(A ∪ B) = ∁A ∩ ∁B</td><td>∁(A ∩ B) = ∁A ∪ ∁B</td></tr>
+<tr><td>吸收律</td><td>A ∪ (A ∩ B) = A</td><td>A ∩ (A ∪ B) = A</td></tr>
+<tr><td>补律</td><td>A ∪ ∁A = U</td><td>A ∩ ∁A = ∅</td></tr>
+<tr><td>双重否定律</td><td colspan="2">∁(∁A) = A</td></tr>
+<tr><td>恒等律</td><td>A ∪ ∅ = A</td><td>A ∩ U = A</td></tr>
+<tr><td>支配律</td><td>A ∪ U = U</td><td>A ∩ ∅ = ∅</td></tr>
+</table>
+<div class="insight"><strong>几何含义（德摩根律最能体现）：</strong>“∁(A ∪ B) = ∁A ∩ ∁B” 说：<strong>“既不在 A 也不在 B 的区域” = “A 之外”与“B 之外”的交</strong>——即矩形里两圆<strong>都不覆盖</strong>的角落。“∁(A ∩ B) = ∁A ∪ ∁B” 说：“不在重叠区” = “不在 A” ∪ “不在 B”，即抠掉两圆重叠芯后剩下的全部。在文氏图上把左右两边着色，颜色范围<strong>完全一致</strong>。</div>
+<div class="insight"><strong>物理含义（德摩根律 = 逻辑否定穿过括号）：</strong>“<strong>不是</strong>（晴天 且 周末）” 等价于 “不是晴天 <strong>或</strong> 不是周末”；“<strong>不是</strong>（会唱歌 或 会跳舞）” 等价于 “不会唱歌 <strong>且</strong> 不会跳舞”。否定词“非”穿过括号时，<strong>“且”变“或”、“或”变“且”</strong>。这正是数字电路里“非门 + 与门 ↔ 与非门、非门 + 或门 ↔ 或非门”相互转化的依据。</div>
+<h3>如何证明集合恒等式？（三种武器）</h3>
+<ol>
+<li><strong>成员表法（membership table）</strong>：列出元素对 A、B 的“属于(1)/不属于(0)”各 4 种情况，检验两边取值完全一致。</li>
+<li><strong>按定义证两边互相包含</strong>：证 <code>X ⊆ Y</code> 且 <code>Y ⊆ X</code>，即“任取 x ∈ X 推出 x ∈ Y”且反向成立。</li>
+<li><strong>恒等变形</strong>：从已知定律出发逐步化简，例如证明 <code>A ∪ (A ∩ B) = A</code>。</li>
+</ol>
+<p>示例：用成员表验证 <code>∁(A ∪ B) = ∁A ∩ ∁B</code>：</p>
+<pre><code> A   B   A∪B   ∁(A∪B)   ∁A   ∁B   ∁A∩∁B
+ 0   0    0      1       1    1      1
+ 0   1    1      0       1    0      0
+ 1   0    1      0       0    1      0
+ 1   1    1      0       0    0      0
+                ↑ 两列完全相同 → 恒等式成立</code></pre>
+<div class="insight"><strong>几何含义：</strong>成员表里的每一行，就是文氏图中<strong>一个最小区域</strong>（比如“只在 B、不在 A”的那片月牙）。只要每一个最小区域的“着色与否”两边都一致，整个图形就一致——证明就是<strong>逐块核对</strong>。</div>
+
+<h2 id="s5">3.5 有穷集合的计数</h2>
+<h3>加法原理与乘法原理（计数的地基）</h3>
+<ul>
+<li><strong>加法原理</strong>：做一件事有若干<strong>互斥</strong>的方案，则总数 = 各方案数之和。若 <code>A ∩ B = ∅</code>，则 <code>|A ∪ B| = |A| + |B|</code>。几何：两块<strong>不相交</strong>区域，点数直接相加。</li>
+<li><strong>乘法原理</strong>：一件事分<strong>依次</strong>的若干步，则总数 = 各步选择数之积。例：A 有 3 元素、B 有 4 元素，则有序对 (a, b) 共 3 × 4 = 12 种。</li>
+</ul>
+<h3>容斥原理（Inclusion–Exclusion，计数核心）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="clipB1"><circle cx="310" cy="110" r="80"/></clipPath></defs><rect x="40" y="20" width="440" height="180" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8"/><text x="52" y="42" font-size="13" fill="#94a3b8">全集 U</text><circle cx="210" cy="110" r="80" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2.5"/><circle cx="310" cy="110" r="80" fill="#16a34a" fill-opacity="0.22" stroke="#16a34a" stroke-width="2.5"/><g clip-path="url(#clipB1)"><circle cx="210" cy="110" r="80" fill="#f59e0b"><animate attributeName="fill-opacity" values="0.1;0.55;0.1" dur="2.5s" repeatCount="indefinite"/></circle></g><text x="168" y="78" font-size="17" font-weight="700" fill="#2563eb">A</text><text x="342" y="78" font-size="17" font-weight="700" fill="#16a34a">B</text><text x="260" y="106" font-size="14" font-weight="700" fill="#b45309" text-anchor="middle">A∩B</text><text x="260" y="224" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle">|A ∪ B| = |A| + |B| − |A ∩ B|</text><text x="260" y="244" font-size="12" fill="#92400e" text-anchor="middle">重叠区（A∩B）被数了 2 次，须扣掉 1 次</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：容斥原理——两圆重叠的“透镜区”被数了两次，必须扣掉一次才不重复。</figcaption></figure>
+<p>两个集合相加时，<strong>交集被数了两次</strong>，要扣掉一次：</p>
+<pre><code>|A ∪ B| = |A| + |B| − |A ∩ B|</code></pre>
+<p>三个集合：先加单集，再减两两交集，最后加回三交集：</p>
+<pre><code>|A ∪ B ∪ C| = |A| + |B| + |C|
+             − |A ∩ B| − |A ∩ C| − |B ∩ C|
+             + |A ∩ B ∩ C|</code></pre>
+<div class="insight"><strong>几何含义：</strong>容斥原理就是“<strong>文氏图里不重复地数点数</strong>”。三圆情形：先数三个圆（重叠区被多数），减掉三片“两圆重叠”的透镜区（三重重叠芯被减过头了），再加回最中心的三重芯。口诀：<strong>“加单、减双、加三”——奇数次加、偶数次减</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>统计“至少满足一个条件”的人数/事件数时，直接相加会<strong>重复计算</strong>同时满足多项的对象。例：某班 40 人，20 人学英语、15 人学日语、8 人两者都学，则学英语<strong>或</strong>日语的人数为 20 + 15 − 8 = 27，其余 40 − 27 = 13 人两门都不学。容斥原理就是<strong>“去重计数”</strong>的标准工具。</div>
+<h3>笛卡尔积与有序对</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="266" viewBox="0 0 520 266" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="70" y1="220" x2="470" y2="220" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="220" x2="70" y2="30" stroke="#94a3b8" stroke-width="2"/><text x="470" y="238" font-size="13" fill="#334155" text-anchor="end">A（横坐标）</text><text x="60" y="36" font-size="13" fill="#334155" text-anchor="end">B（纵坐标）</text><line x1="200" y1="60" x2="200" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="360" y1="60" x2="360" y2="220" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="70" x2="370" y2="70" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="140" x2="370" y2="140" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><line x1="190" y1="210" x2="370" y2="210" stroke="#cbd5e1" stroke-dasharray="4 4" stroke-width="1"/><text x="200" y="240" font-size="13" fill="#334155" text-anchor="middle">1</text><text x="360" y="240" font-size="13" fill="#334155" text-anchor="middle">2</text><text x="180" y="74" font-size="13" fill="#334155" text-anchor="end">x</text><text x="180" y="144" font-size="13" fill="#334155" text-anchor="end">y</text><text x="180" y="214" font-size="13" fill="#334155" text-anchor="end">z</text><circle cx="200" cy="70" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.0667;0.1167;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="70" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.1833;0.2333;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="140" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.3;0.35;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="140" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.4167;0.4667;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="200" cy="210" r="7" fill="#2563eb"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.5333;0.5833;0.92;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="360" cy="210" r="7" fill="#16a34a"><animate attributeName="r" values="0;0;7;7;0" keyTimes="0;0.65;0.7;0.92;1" dur="6s" repeatCount="indefinite"/></circle><text x="260" y="256" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">|A × B| = |A| · |B| = 2 × 3 = 6 个有序对</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：笛卡尔积 A×B 是横坐标取 A、纵坐标取 B 的矩形格点阵，共 |A|×|B| 个有序对（本例 2×3=6）。</figcaption></figure>
+<p>A、B 的<strong>笛卡尔积（Cartesian product）</strong>是所有有序对的集合：</p>
+<pre><code>A × B = { (a, b) | a ∈ A, b ∈ B }        |A × B| = |A| · |B|</code></pre>
+<p>例：A = {1, 2}，B = {x, y, z}，则 <code>A × B = {(1,x),(1,y),(1,z),(2,x),(2,y),(2,z)}</code>，共 2 × 3 = 6 个有序对。</p>
+<div class="insight"><strong>几何含义：</strong>笛卡尔积就是<strong>平面直角坐标系的“点阵”</strong>——A 提供横坐标、B 提供纵坐标，A × B 是 |A| 列 × |B| 行的矩形格点，格点总数 = 长 × 宽。R × R 就是整个坐标平面。</div>
+<div class="insight"><strong>物理含义：</strong>笛卡尔积 = <strong>“两两配对的所有组合”</strong>。掷两枚骰子的样本空间就是 {1,…,6} × {1,…,6}，共 6 × 6 = 36 个等可能结果；两个变量取值范围的组合也由笛卡尔积刻画。乘法原理的“分步”思想，本质就是笛卡尔积的基数公式。</div>
+<h3>由容斥推出的补集计数</h3>
+<pre><code>|A − B| = |A| − |A ∩ B|          |∁A| = |U| − |A|</code></pre>
+<p>“至少属于一个”与“一个都不属于”互补：<code>|∁(A ∪ B)| = |U| − |A ∪ B|</code>。用补集思想做“<strong>至少一个</strong>”类问题时，常先算“<strong>一个都没有</strong>”再相减，更省事。</p>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>集合与元素</td><td>封闭区域与区域内的点</td><td>按特征把对象分类、归堆</td></tr>
+<tr><td>属于 ∈</td><td>点落在区域内部</td><td>对象满足某分类条件</td></tr>
+<tr><td>子集 ⊆</td><td>一个区域整个套在另一个区域内</td><td>范围更窄的类别被更宽类别涵盖</td></tr>
+<tr><td>相等 =</td><td>两区域边界完全重合</td><td>两类对象完全相同</td></tr>
+<tr><td>并集 ∪</td><td>区域合并（全部涂满）</td><td>逻辑“或”、事件至少发生一个、检索合并</td></tr>
+<tr><td>交集 ∩</td><td>区域重叠部分</td><td>逻辑“与”、条件同时成立、检索筛选</td></tr>
+<tr><td>差集 − / 补集 ∁</td><td>抠掉重叠区 / 圆外背景</td><td>逻辑“非”、排除法、例外</td></tr>
+<tr><td>对称差 ⊕</td><td>两圆交叠的左右两片月牙</td><td>“恰好一个成立”的异或 XOR</td></tr>
+<tr><td>划分</td><td>把区域切成互不重叠的几片</td><td>互斥分类（奇数/偶数等）</td></tr>
+<tr><td>幂集 P(A)</td><td>区域所有可能的圈选方案</td><td>所有可能状态/配置（2ⁿ 种开关状态）</td></tr>
+<tr><td>位串表示</td><td>每个元素对应一个位置，1=圈、0=不圈</td><td>二进制编码、布尔向量</td></tr>
+<tr><td>集合恒等式</td><td>文氏图左右着色范围一致</td><td>逻辑等价式、电路等价变换</td></tr>
+<tr><td>德摩根律</td><td>“两圆都不覆盖”与“各自外面取交”相同</td><td>否定穿过括号时“且”“或”互换</td></tr>
+<tr><td>容斥原理</td><td>文氏图不重复地数点数（加单减双加三）</td><td>去重计数、至少一个条件的统计</td></tr>
+<tr><td>笛卡尔积 A × B</td><td>直角坐标平面的矩形格点阵</td><td>两两配对的所有组合、样本空间</td></tr>
+<tr><td>基数 |A|</td><td>区域内的点数</td><td>元素个数、状态个数、结果个数</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li>设 A = {1, 2, 3, 4}，B = {3, 4, 5, 6}，求 A ∪ B、A ∩ B、A − B、B − A、A ⊕ B，并验证 |A ∪ B| = |A| + |B| − |A ∩ B|。</li>
+<li>设 U = {1, 2, 3, 4, 5}，A = {1, 2}，求 P(A)、∁A，并指出 |P(A)| 与 2² 的关系。</li>
+<li>写出 A = {a, b, c} 的所有子集，并用 3 位位串分别表示它们，验证共 2³ = 8 个。</li>
+<li>用成员表法证明分配律 A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)。</li>
+<li>某班 50 人中，30 人喜欢数学、25 人喜欢物理、15 人两门都喜欢。求：(a) 至少喜欢一门的人数；(b) 两门都不喜欢的人数。</li>
+<li>某班 100 人中，会 Java 的 60 人、会 Python 的 50 人、会 C 的 40 人；同时会 Java 和 Python 的 20 人、Java 和 C 的 15 人、Python 和 C 的 10 人；三门都会的 5 人。求至少会一门语言的人数。</li>
+<li>设 |A| = 3，|B| = 4，求 |A × B|、|P(A)|、|P(A × B)|。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<h4>避坑提示</h4>
+<ul>
+<li>❌ “元素与子集不分” → ❌ <code>a ∈ A</code> 与 <code>{a} ⊆ A</code> 是两回事：a 是元素，{a} 是“只含 a 的集合”。<code>∅ ∈ P(A)</code> 对，但 <code>∅ ⊆ A</code> 也对——空集既是任何集合的子集，又是任何幂集的元素，二者不矛盾。</li>
+<li>❌ “{1,2} 与 {2,1} 是两个集合” → ❌ 无序性：它们是同一个集合；但有序对 (1,2) ≠ (2,1)。</li>
+<li>❌ “{1,1,2} 有三个元素” → ❌ 互异性：重复元素只算一次，|{1,1,2}| = 2。</li>
+<li>❌ “∅ 是 {∅} 的空集关系” → ❌ ∅ 是<strong>空</strong>集合（0 个元素）；{∅} 是<strong>含一个元素 ∅</strong> 的集合，|{∅}| = 1，二者不相等。</li>
+<li>❌ “A − B = B − A” → ❌ 差集不对称，例 {1,2} − {2} = {1}，而 {2} − {1,2} = ∅。A − B 的元素必须<strong>属于 A</strong>。</li>
+<li>❌ “|A ∪ B| = |A| + |B| 永远成立” → ❌ 只有当 A ∩ B = ∅（不相交）时才成立；有重叠必须用容斥扣掉 |A ∩ B|。</li>
+<li>❌ “∁(A ∪ B) = ∁A ∪ ∁B” → ❌ 德摩根律是“取补后且/或互换”：∁(A ∪ B) = ∁A ∩ ∁B。把 ∪ 抄成 ∩ 是最高频错误。</li>
+<li>❌ “幂集 P(A) 的元素是 A 的元素” → ❌ P(A) 的元素是 A 的<strong>子集</strong>（是“集合”不是“元素”），例如 A = {1,2} 时 1 ∉ P(A)，而 {1} ∈ P(A)。</li>
+<li>❌ “A ⊆ B 与 A ∈ B 分不清” → ❌ ⊆ 比较“范围大小”，∈ 表示“是成员”。例：A = {1} 时 A ⊆ {1,2} 对；{1} ∈ {{1}, 2} 对，但 {1} ⊆ {{1}, 2} 错。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>设 A = {1, {2}, 3}。判断下列命题的真假：<code>1 ∈ A</code>、<code>{2} ∈ A</code>、<code>2 ∈ A</code>、<code>∅ ⊆ A</code>、<code>{1, 3} ⊆ A</code>、<code>|A| = 3</code>。结合“元素 vs 子集”的几何含义说明理由。</li>
+<li>设全集 U = {1, 2, 3, 4, 5, 6, 7, 8}，A = {1, 2, 3, 4}，B = {3, 4, 5, 6}。求 A ∪ B、A ∩ B、A − B、∁A、A ⊕ B，并在文氏图上指出每个结果对应哪块区域。</li>
+<li>写出 A = {a, b} 的幂集 P(A)，验证 |P(A)| = 2²；再用 3 位位串表示集合 {a, c} 的子集（按顺序 a, b, c），说明“子集 ↔ 位串 ↔ 二进制数”三者如何一一对应。</li>
+<li>用成员表法证明德摩根律：<code>∁(A ∩ B) = ∁A ∪ ∁B</code>，并用一句“现实语言”（如“不是会唱歌且会跳舞”）复述它的含义。</li>
+<li>某班 40 人，20 人学英语、15 人学日语、8 人两门都学。求：(a) 至少学一门的人数；(b) 两门都不学的人数。说明这里为什么要用容斥原理而不是直接相加。</li>
+<li>某班 100 人中，会 Java 的 60 人、会 Python 的 50 人、会 C 的 40 人；同时会 Java 和 Python 的 20 人、Java 和 C 的 15 人、Python 和 C 的 10 人；三门都会的 5 人。求至少会一门语言的人数（用三集合容斥）。再设 |A| = 3，|B| = 4，求 |A × B|、|P(A)|、|P(A × B)|。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>1 ∈ A</code> 真（1 是 A 的元素）；<code>{2} ∈ A</code> 真（{2} 是 A 的元素，注意它是“集合”整体作为元素）；<code>2 ∈ A</code> 假（2 不是元素，{2} 才是）；<code>∅ ⊆ A</code> 真（空集是任何集合的子集）；<code>{1, 3} ⊆ A</code> 真（两个元素都在 A 内）；<code>|A| = 3</code> 真（元素是 1、{2}、3 三个）。几何上：∈ 是“点落在区域里”，⊆ 是“一块区域整个套在另一块里”——{2} 作为“一个对象”落在 A 内，但 2 本身不是 A 的点。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>A ∪ B = {1,2,3,4,5,6}（两圆全部涂满）；A ∩ B = {3,4}（重叠芯）；A − B = {1,2}（只属于 A 的月牙）；∁A = {5,6,7,8}（全集矩形里 A 之外的背景）；A ⊕ B = {1,2,5,6}（两圆交叠形成的左右两片月牙，不含重叠芯）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>P(A) = { ∅, {a}, {b}, {a,b} }，共 4 = 2² 个子集，正好是 A 的所有“圈选方案”（一个都不圈、只圈 a、只圈 b、全圈）。对 A = {a, b, c} 按顺序 (a, b, c)，{a, c} 对应位串 101（a 圈、b 不圈、c 圈）。每个位置 0/1 二选一，n 个位置共 2ⁿ 种，与 n 位二进制数 000…0 到 111…1 一一对应。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>成员表（1=属于，0=不属于）：A、B 取 00/01/10/11 四种情况。A∩B 列依次为 0,0,0,1，故 ∁(A∩B) 为 1,1,1,0；∁A 为 1,1,0,0，∁B 为 1,0,1,0，∁A ∪ ∁B 为 1,1,1,0。两列完全相同，恒等式成立。现实含义：“不是（会唱歌 且 会跳舞）”等价于“不会唱歌 或 不会跳舞”——否定穿过括号时“且”变“或”。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>(a) |E ∪ J| = 20 + 15 − 8 = 27（两门都学的 8 人被数了两次，必须扣掉一次）；(b) 40 − 27 = 13 人两门都不学。不能直接 20 + 15 相加，因为交集 E ∩ J 被重复计数，这正是容斥原理“去重”的作用。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>至少会一门：|J ∪ P ∪ C| = 60 + 50 + 40 − 20 − 15 − 10 + 5 = 110？不对——先加单集 150，减两两交集 45，再加三交集 5，得 150 − 45 + 5 = 110，但人数不能超过 100，说明题目数据自相矛盾（交集数据偏小导致“至少一门”超过总人数），应重新核对原始数据。计数的正确公式是 |A ∪ B ∪ C| = |A|+|B|+|C| − |A∩B|−|A∩C|−|B∩C| + |A∩B∩C|。笛卡尔积部分：|A × B| = 3 × 4 = 12；|P(A)| = 2³ = 8；|P(A × B)| = 2¹² = 4096。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第2章-谓词逻辑/第2章-谓词逻辑.html">← 上一章：第2章 谓词逻辑</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第4章-二元关系/第4章-二元关系.html">下一章：第4章 二元关系 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从集合论开始</footer>
+</body>
+</html>

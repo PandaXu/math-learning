@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第10章 重积分 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第10章 重积分</div></header>
+<main class="container">
+<h1>第10章 重积分</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>重积分 = 一元定积分的「高维推广」——二重积分算「曲顶柱体的体积 / 平面薄片的质量」，三重积分算「空间物体的质量」，本质都是「分割—近似—求和—取极限」，最终把平面或空间区域上的连续量累加，化成一串可算的累次积分（二次、三次积分）。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">10.1 二重积分的概念</a><a href="#s2">10.2 二重积分的性质</a><a href="#s3">10.3 二重积分的计算（直角坐标）</a><a href="#s4">10.4 二重积分的计算（极坐标）</a><a href="#s5">10.5 三重积分的概念与计算</a><a href="#s6">10.6 柱坐标与球坐标下的三重积分</a><a href="#s7">10.7 重积分的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+</div>
+
+<h2 id="s1">10.1 二重积分的概念</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><polygon points="170,250 420,250 350,295 100,295" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/><polyline points="170,250 182.5,250 195,250 207.5,250 220,250 232.5,250 245,250 257.5,250 270,250 282.5,250 295,250 307.5,250 320,250 332.5,250 345,250 357.5,250 370,250 382.5,250 395,250 407.5,250 420,250" fill="none" stroke="#cbd5e1" stroke-width="1"/><polyline points="135,272.5 147.5,244 160,218.5 172.5,196 185,176.5 197.5,160 210,146.5 222.5,136 235,128.5 247.5,124 260,122.5 272.5,124 285,128.5 297.5,136 310,146.5 322.5,160 335,176.5 347.5,196 360,218.5 372.5,244 385,272.5" fill="none" stroke="#cbd5e1" stroke-width="1"/><polyline points="100,295 112.5,295 125,295 137.5,295 150,295 162.5,295 175,295 187.5,295 200,295 212.5,295 225,295 237.5,295 250,295 262.5,295 275,295 287.5,295 300,295 312.5,295 325,295 337.5,295 350,295" fill="none" stroke="#cbd5e1" stroke-width="1"/><polyline points="170,250 166.5,252.3 163,254.5 159.5,256.8 156,259 152.5,261.3 149,263.5 145.5,265.8 142,268 138.5,270.3 135,272.5 131.5,274.8 128,277 124.5,279.3 121,281.5 117.5,283.8 114,286 110.5,288.3 107,290.5 103.5,292.8 100,295" fill="none" stroke="#cbd5e1" stroke-width="1"/><polyline points="295,250 291.5,223.8 288,200.5 284.5,180.3 281,163 277.5,148.8 274,137.5 270.5,129.3 267,124 263.5,121.8 260,122.5 256.5,126.3 253,133 249.5,142.8 246,155.5 242.5,171.3 239,190 235.5,211.8 232,236.5 228.5,264.3 225,295" fill="none" stroke="#cbd5e1" stroke-width="1"/><polyline points="420,250 416.5,252.3 413,254.5 409.5,256.8 406,259 402.5,261.3 399,263.5 395.5,265.8 392,268 388.5,270.3 385,272.5 381.5,274.8 378,277 374.5,279.3 371,281.5 367.5,283.8 364,286 360.5,288.3 357,290.5 353.5,292.8 350,295" fill="none" stroke="#cbd5e1" stroke-width="1"/><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0333;0.0778;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="170,214.8 201.3,214.8 131.3,259.8 100,259.8" fill="#2563eb" fill-opacity="0.82"/><polygon points="170,250 201.3,250 201.3,214.8 170,214.8" fill="#1e40af"/><polygon points="201.3,250 131.3,295 131.3,259.8 201.3,214.8" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0889;0.1333;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="201.3,158.6 232.5,158.6 162.5,203.6 131.3,203.6" fill="#2563eb" fill-opacity="0.82"/><polygon points="201.3,250 232.5,250 232.5,158.6 201.3,158.6" fill="#1e40af"/><polygon points="232.5,250 162.5,295 162.5,203.6 232.5,158.6" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1444;0.1889;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="232.5,121.1 263.8,121.1 193.8,166.1 162.5,166.1" fill="#2563eb" fill-opacity="0.82"/><polygon points="232.5,250 263.8,250 263.8,121.1 232.5,121.1" fill="#1e40af"/><polygon points="263.8,250 193.8,295 193.8,166.1 263.8,121.1" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2;0.2444;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="263.8,102.3 295,102.3 225,147.3 193.8,147.3" fill="#2563eb" fill-opacity="0.82"/><polygon points="263.8,250 295,250 295,102.3 263.8,102.3" fill="#1e40af"/><polygon points="295,250 225,295 225,147.3 295,102.3" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2556;0.3;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="295,102.3 326.3,102.3 256.3,147.3 225,147.3" fill="#2563eb" fill-opacity="0.82"/><polygon points="295,250 326.3,250 326.3,102.3 295,102.3" fill="#1e40af"/><polygon points="326.3,250 256.3,295 256.3,147.3 326.3,102.3" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3111;0.3556;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="326.3,121.1 357.5,121.1 287.5,166.1 256.3,166.1" fill="#2563eb" fill-opacity="0.82"/><polygon points="326.3,250 357.5,250 357.5,121.1 326.3,121.1" fill="#1e40af"/><polygon points="357.5,250 287.5,295 287.5,166.1 357.5,121.1" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3667;0.4111;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="357.5,158.6 388.8,158.6 318.8,203.6 287.5,203.6" fill="#2563eb" fill-opacity="0.82"/><polygon points="357.5,250 388.8,250 388.8,158.6 357.5,158.6" fill="#1e40af"/><polygon points="388.8,250 318.8,295 318.8,203.6 388.8,158.6" fill="#3b82f6"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4222;0.4667;0.9556;1" dur="9s" repeatCount="indefinite"/><polygon points="388.8,214.8 420,214.8 350,259.8 318.8,259.8" fill="#2563eb" fill-opacity="0.82"/><polygon points="388.8,250 420,250 420,214.8 388.8,214.8" fill="#1e40af"/><polygon points="420,250 350,295 350,259.8 420,214.8" fill="#3b82f6"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;250 0;250 0;0 0" keyTimes="0;0.0333;0.4667;0.9556;1" dur="9s" repeatCount="indefinite"/><line x1="170" y1="250" x2="170" y2="100" stroke="#16a34a" stroke-width="3"/><text x="176" y="92" font-size="11" fill="#16a34a">截面 A(x)</text></g><text x="260" y="82" font-size="13" fill="#1e40af" text-anchor="middle">z = f(x,y)</text><text x="256" y="232" font-size="15" fill="#1e40af" text-anchor="middle" font-weight="bold">D</text><text x="260" y="292" font-size="13" fill="#334155" text-anchor="middle">V = ∬_D f(x,y) dσ</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图1：二重积分的几何意义——把区域 D 上的曲顶柱体切成一片片薄片、逐片累加，极限就是体积 ∬_D f(x,y) dσ。</figcaption></figure>
+<h3>从哪里来？一元定积分的推广</h3>
+<p>一元定积分 <code>∫ₐᵇ f(x) dx</code> 解决的是「曲边梯形的面积」：把区间 [a,b] 无限细分，每段高 f(x) 乘微小宽度 dx，再累加取极限。二重积分把问题从「一条线上的函数」推广到「一块平面区域上的函数」：被积函数 f(x,y) 定义在平面闭区域 D 上，我们想知道它在 D 上「累加」起来是多少。</p>
+<h3>几何背景：曲顶柱体的体积</h3>
+<p>设曲面 <code>z = f(x,y) ≥ 0</code> 在闭区域 D 上连续，以 D 为底、曲面为顶、以 D 的边界为准线、母线平行于 z 轴的柱面为侧面，围成的立体叫<strong>曲顶柱体</strong>。它的体积 V 无法用「底面积 × 高」直接算（因为「高」f(x,y) 处处不同），于是用「切细、求积、累加、取极限」四步。</p>
+<h3>定义（四步法）</h3>
+<ol>
+<li><strong>分割</strong>：把 D 任意分成 n 个小闭区域 Δσ₁, Δσ₂, …, Δσₙ（Δσᵢ 同时表示该小区域的面积）。</li>
+<li><strong>近似</strong>：在每个 Δσᵢ 内任取一点 (ξᵢ, ηᵢ)，小柱体体积近似为 f(ξᵢ, ηᵢ)·Δσᵢ。</li>
+<li><strong>求和</strong>：V ≈ Σᵢ₌₁ⁿ f(ξᵢ, ηᵢ)·Δσᵢ。</li>
+<li><strong>取极限</strong>：记 λ 为各 Δσᵢ 的<strong>直径</strong>（区域上任意两点距离的最大值）的最大者，令 λ → 0，若极限存在，且与分割方式、取点方式都无关，则称 f 在 D 上<strong>可积</strong>。</li>
+</ol>
+<pre><code>        n
+∬_D f(x,y) dσ = lim  Σ  f(ξᵢ, ηᵢ)·Δσᵢ
+        λ→0  i=1</code></pre>
+<p>其中 f 叫<strong>被积函数</strong>，D 叫<strong>积分区域</strong>，dσ 叫<strong>面积元素</strong>。在直角坐标下面积元素也写成 <code>dσ = dx dy</code>，所以常记作 <code>∬_D f(x,y) dx dy</code>。</p>
+<div class="insight"><strong>几何含义：</strong>当 f(x,y) ≥ 0 时，二重积分 <code>∬_D f dσ</code> 就是<strong>曲顶柱体的体积</strong>；特别地，当 <code>f(x,y) ≡ 1</code> 时，<code>∬_D 1 dσ</code> = 以 D 为底、高为 1 的平顶柱体体积 = <strong>D 的面积</strong>。这就是「积分算面积」在高维的体现。</div>
+<div class="insight"><strong>物理含义：</strong>设平面薄片占据区域 D，其<strong>面密度</strong>为 ρ(x,y)（单位面积的质量，可以逐点变化），则薄片的总质量 <code>M = ∬_D ρ(x,y) dσ</code>。这就是「密度 × 面积」从「均匀」到「非均匀」的推广：把 D 切成无数小片，每小片质量 ≈ ρ·dσ，再累加。</div>
+<p><strong>可积的充分条件</strong>：闭区域 D 上的连续函数一定可积（本课程绝大多数函数都满足）。</p>
+
+<h2 id="s2">10.2 二重积分的性质</h2>
+<p>设 f、g 都在 D 上可积，k 为常数，σ 表示区域 D 的面积。</p>
+<ul>
+<li><strong>线性性</strong>：<code>∬_D [f(x,y) ± g(x,y)] dσ = ∬_D f dσ ± ∬_D g dσ</code>；<code>∬_D k·f(x,y) dσ = k·∬_D f dσ</code>。</li>
+<li><strong>区域可加性</strong>：若 D = D₁ ∪ D₂，且 D₁、D₂ 除边界外互不重叠，则 <code>∬_D f dσ = ∬_{D₁} f dσ + ∬_{D₂} f dσ</code>。</li>
+<li><strong>保号性</strong>：若在 D 上 f(x,y) ≥ 0，则 <code>∬_D f dσ ≥ 0</code>。</li>
+<li><strong>单调性</strong>：若在 D 上 f(x,y) ≤ g(x,y)，则 <code>∬_D f dσ ≤ ∬_D g dσ</code>。</li>
+<li><strong>绝对值不等式</strong>：<code>| ∬_D f dσ | ≤ ∬_D |f| dσ</code>。</li>
+<li><strong>估值不等式</strong>：若在 D 上 m ≤ f(x,y) ≤ M，则 <code>m·σ ≤ ∬_D f dσ ≤ M·σ</code>。</li>
+<li><strong>二重积分中值定理</strong>：若 f 在闭区域 D 上连续，σ 为 D 的面积，则存在点 (ξ,η) ∈ D，使 <code>∬_D f dσ = f(ξ,η)·σ</code>。</li>
+</ul>
+<div class="insight"><strong>几何直觉：</strong>估值不等式说「曲顶柱体的体积夹在『最小高度 × 底面积』与『最大高度 × 底面积』之间」；中值定理说「曲顶柱体必在某一点的高度 f(ξ,η) 正好等于它的<strong>平均高度</strong>（总体积 ÷ 底面积）」。两者都把「积分」翻译成「高度」的语言，非常好记。</div>
+
+<h2 id="s3">10.3 二重积分的计算（直角坐标）</h2>
+<h3>核心思想：化二重积分为累次积分（二次积分）</h3>
+<p>二重积分的定义极限没法直接算，实际计算靠<strong>「先对一个变量积分、再对另一个变量积分」</strong>，把它变成连续的两个一元定积分。关键是：把积分区域 D 用不等式组描述清楚，从而确定上下限。</p>
+<h3>X 型区域（先积 y，再积 x）</h3>
+<p>若区域可写成：<code>D = {(x,y) | a ≤ x ≤ b, φ₁(x) ≤ y ≤ φ₂(x)}</code>（用两条竖线 x=a、x=b 和两条曲线 y=φ₁(x)、y=φ₂(x) 围成），则</p>
+<pre><code>                 φ₂(x)
+∬_D f(x,y) dσ = ∫ₐᵇ [ ∫_{φ₁(x)}  f(x,y) dy ] dx</code></pre>
+<p>口诀：<strong>「先积 y、后积 x」</strong>——内层对 y 积分时把 x 当常数，积出只含 x 的函数（它是「垂直于 x 轴的截面面积」S(x)），外层再对 x 积分。</p>
+<div class="insight"><strong>几何含义（切片法）：</strong>固定一个 x，用垂直于 x 轴的平面去切曲顶柱体，截面是一块「曲边梯形」，其面积 <code>S(x) = ∫_{φ₁(x)}^{φ₂(x)} f(x,y) dy</code>；再让 x 从 a 扫到 b，把这些薄片的面积 S(x)dx 累加起来，正好是体积 <code>V = ∫ₐᵇ S(x) dx</code>。</div>
+<h3>Y 型区域（先积 x，再积 y）</h3>
+<p>若区域可写成：<code>D = {(x,y) | c ≤ y ≤ d, ψ₁(y) ≤ x ≤ ψ₂(y)}</code>，则</p>
+<pre><code>                 ψ₂(y)
+∬_D f(x,y) dσ = ∫꜀ᵈ [ ∫_{ψ₁(y)}  f(x,y) dx ] dy</code></pre>
+<div class="insight"><strong>物理含义：</strong>累次积分就是「先沿一条线竖着扫（积 x），再横着扫过整片区域（积 y）」。对质量而言：先算出「一条竖直细条」的质量，再把所有细条并排累加成整块薄片的质量。</div>
+<h3>交换积分次序</h3>
+<p>有时按一种次序积分会碰到积不出来的内层积分（如 <code>∫ e^{x²} dx</code> 没有初等原函数），此时需要<strong>交换积分次序</strong>。步骤：① 由原积分限写出区域 D 的不等式组；② 画出 D 的草图；③ 改用另一种变量作外层，重新写出上下限；④ 再积分。</p>
+<p><strong>选择次序的原则</strong>：看区域是「上下型」(X型) 还是「左右型」(Y型)，再看被积函数先对哪个变量好积，通常「先积的那个变量」应是好积的。</p>
+
+<h2 id="s4">10.4 二重积分的计算（极坐标）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="95" y1="160" x2="365" y2="160" stroke="#94a3b8" stroke-width="1"/><line x1="230" y1="25" x2="230" y2="295" stroke="#94a3b8" stroke-width="1"/><circle cx="230" cy="160" r="45" fill="none" stroke="#94a3b8" stroke-width="1"/><circle cx="230" cy="160" r="90" fill="none" stroke="#94a3b8" stroke-width="1"/><circle cx="230" cy="160" r="135" fill="none" stroke="#94a3b8" stroke-width="1"/><line x1="230" y1="160" x2="365" y2="160" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="325.5" y2="64.5" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="230" y2="25" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="134.5" y2="64.5" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="95" y2="160" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="134.5" y2="255.5" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="230" y2="295" stroke="#e2e8f0" stroke-width="1"/><line x1="230" y1="160" x2="325.5" y2="255.5" stroke="#e2e8f0" stroke-width="1"/><path d="M 853.5,-200 A 16 16 0 0 1 573.4,-472.8" fill="none" stroke="#1e40af" stroke-width="1.5"/><text x="250" y="148" font-size="11" fill="#1e40af">dθ</text><line x1="230" y1="160" x2="346.9" y2="92.5" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4 4"/><text x="294.5" y="127.4" font-size="12" fill="#2563eb">r</text><polygon points="245.6,151 244.9,150 244.2,148.9 243.4,148 242.6,147.1 241.6,146.3 240.7,145.5 239.7,144.8 238.6,144.2 247.2,128.4 249.3,129.6 251.3,131 253.3,132.5 255.1,134.2 256.8,136 258.4,137.9 259.9,139.9 261.2,142" fill="#16a34a" fill-opacity="0.35" stroke="#16a34a" stroke-width="2"><animate attributeName="points" values="245.6,151 244.9,150 244.2,148.9 243.4,148 242.6,147.1 241.6,146.3 240.7,145.5 239.7,144.8 238.6,144.2 247.2,128.4 249.3,129.6 251.3,131 253.3,132.5 255.1,134.2 256.8,136 258.4,137.9 259.9,139.9 261.2,142;327.4,103.7 323.3,97.2 318.8,90.9 313.8,85 308.5,79.4 302.8,74.2 296.7,69.4 290.3,65 283.7,61.1 292.2,45.3 300,49.8 307.4,54.9 314.4,60.5 321.1,66.5 327.3,73 333,79.9 338.3,87.1 343,94.7;245.6,151 244.9,150 244.2,148.9 243.4,148 242.6,147.1 241.6,146.3 240.7,145.5 239.7,144.8 238.6,144.2 247.2,128.4 249.3,129.6 251.3,131 253.3,132.5 255.1,134.2 256.8,136 258.4,137.9 259.9,139.9 261.2,142" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite"/></polygon><circle cx="261.2" cy="142" r="4" fill="#2563eb"><animate attributeName="cx" values="261.2;343;261.2" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="142;94.7;142" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite"/></circle><text x="304.5" y="83.4" font-size="12" fill="#2563eb" text-anchor="end">dr</text><text x="321.1" y="58.5" font-size="12" fill="#16a34a" text-anchor="middle">r·dθ</text><g><rect x="356" y="236.2" width="18" height="19.8" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"><animate attributeName="height" values="19.8;71.8;19.8" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="236.2;184.2;236.2" keyTimes="0;0.5;1" dur="8s" repeatCount="indefinite"/></rect><text x="365" y="270" font-size="11" fill="#334155" text-anchor="middle">dA ≈ (r·dθ)·dr</text></g><text x="60" y="44" font-size="16" fill="#1e40af" font-weight="bold">极坐标：dσ = r dr dθ</text><text x="230" y="174" font-size="12" fill="#64748b" text-anchor="middle">O</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图2：极坐标面积元 dσ = r dr dθ——离原点越远，同一角宽 dθ 张成的弧长 r·dθ 越大，面积元按 r 放大。</figcaption></figure>
+<h3>什么时候用极坐标</h3>
+<ul>
+<li>积分区域 D 是<strong>圆、圆环、扇形</strong>（边界含 x² + y²）。</li>
+<li>被积函数含 <code>x² + y²</code> 或 <code>y/x</code> 等旋转对称结构。</li>
+</ul>
+<h3>坐标变换与面积元素</h3>
+<pre><code>x = r·cos θ,   y = r·sin θ
+dσ = r · dr · dθ</code></pre>
+<p>于是</p>
+<pre><code>∬_D f(x,y) dσ = ∬_D f(r cos θ, r sin θ) · r · dr dθ</code></pre>
+<div class="insight"><strong>几何含义：面积元素为什么多个 r？</strong>极坐标网格由「同心圆 + 从原点出发的射线」组成，一个小格是「小扇形」，其面积 ≈ (1/2)(r+dr)²·dθ − (1/2)r²·dθ ≈ r·dr·dθ。那个多出来的 r 反映：<strong>离原点越远，同样的角度张开的弧越长</strong>，所以小格面积随 r 放大。漏掉这个 r 是初学者最常见的错误。</div>
+<h3>典型极坐标区域</h3>
+<table>
+<tr><th>区域 D</th><th>极坐标表示</th></tr>
+<tr><td>圆域 x²+y² ≤ R²</td><td>0 ≤ r ≤ R, 0 ≤ θ ≤ 2π</td></tr>
+<tr><td>圆环 R₁ ≤ √(x²+y²) ≤ R₂</td><td>R₁ ≤ r ≤ R₂, 0 ≤ θ ≤ 2π</td></tr>
+<tr><td>扇形（圆心角 β−α）</td><td>0 ≤ r ≤ R, α ≤ θ ≤ β</td></tr>
+<tr><td>圆心在原点、位于第一象限的圆</td><td>0 ≤ r ≤ R, 0 ≤ θ ≤ π/2</td></tr>
+</table>
+<p><strong>重要结论（联系概率与误差函数）</strong>：由 <code>∬ e^{−(x²+y²)} dσ</code> 在全平面第一象限的积分，可得著名的<strong>泊松积分</strong> <code>∫₀^∞ e^{−x²} dx = √π / 2</code>——这是「直角坐标算不出、极坐标一换就出」的经典范例。</p>
+
+<h2 id="s5">10.5 三重积分的概念与计算</h2>
+<h3>概念：三元函数在空间区域上的累加</h3>
+<p>与二重积分完全类比：把空间闭区域 Ω 分成 n 个小区域 ΔVᵢ，在每个小区域内取点 (ξᵢ, ηᵢ, ζᵢ)，求和取极限：</p>
+<pre><code>                n
+∭_Ω f(x,y,z) dV = lim  Σ  f(ξᵢ, ηᵢ, ζᵢ)·ΔVᵢ
+        λ→0  i=1</code></pre>
+<p>d V 叫<strong>体积元素</strong>；直角坐标下 dV = dx dy dz。</p>
+<div class="insight"><strong>几何含义：</strong>当 <code>f ≡ 1</code> 时，<code>∭_Ω 1 dV</code> = 区域 Ω 的<strong>体积</strong>。一般 f 没有直接的三维几何体（它表示一个「四维超体积」，想象不出但可类比），我们主要依赖物理意义和「切片」来理解。</div>
+<div class="insight"><strong>物理含义：</strong>设空间物体 Ω 的<strong>体密度</strong>为 ρ(x,y,z)（单位体积质量），则物体的总质量 <code>M = ∭_Ω ρ(x,y,z) dV</code>。这是「密度 × 体积」从均匀到非均匀的推广。</div>
+<h3>直角坐标计算：投影法（先一后二）</h3>
+<p>把 Ω 投影到 xOy 平面得区域 D，设 Ω 可写成</p>
+<pre><code>Ω = { (x,y,z) | (x,y) ∈ D,  z₁(x,y) ≤ z ≤ z₂(x,y) }</code></pre>
+<p>则</p>
+<pre><code>                           z₂(x,y)
+∭_Ω f dV = ∬_D [ ∫_{z₁(x,y)}  f(x,y,z) dz ] dxdy</code></pre>
+<p>先对 z 积分（把 x、y 当常数），再对投影区域 D 做二重积分（可再按 10.3 化成二次积分）。</p>
+<div class="insight"><strong>几何含义：</strong>「先一」= 沿 z 方向竖着穿一根「线」，积出该点上方到曲面之间的「高」的贡献；「后二」= 在投影区域上把整片立体的贡献累加。这正是一元定积分「竖条累加」向「竖线累加成一片」的推广。</div>
+<h3>直角坐标计算：截面法（先二后一）</h3>
+<p>若用垂直于 z 轴的平面去截 Ω，得到截面 D_z（随 z 变化，z ∈ [c,d]），则</p>
+<pre><code>              d
+∭_Ω f dV = ∫꜀ᵈ [ ∬_{D_z}  f(x,y,z) dxdy ] dz</code></pre>
+<div class="insight"><strong>几何含义：</strong>「先二」= 先算某一高度 z 处截面的「面积」（当 f ≡ 1 时就是截面 D_z 的面积 A(z)）；「后一」= 沿 z 轴把各截面面积累加。这就是熟悉的<strong>「体积 = ∫ 截面积 dz」</strong>（祖暅原理 / 卡瓦列里原理）。被积函数只含 z（f = f(z)）且截面面积易求时，此法特别省事。</div>
+
+<h2 id="s6">10.6 柱坐标与球坐标下的三重积分</h2>
+<h3>柱坐标（三维的「极坐标 + z」）</h3>
+<pre><code>x = r·cos θ,   y = r·sin θ,   z = z
+dV = r · dr · dθ · dz</code></pre>
+<p><strong>适用</strong>：积分区域 Ω 是<strong>圆柱体、圆台、旋转抛物面、圆锥面</strong>等绕 z 轴旋转的结构，或被积函数含 <code>x² + y²</code>。</p>
+<div class="insight"><strong>几何含义：</strong>柱坐标就是「xOy 平面用极坐标，竖直方向 z 不动」。体积元素 dV = (r dr dθ)·dz = 「小扇形面积 r dr dθ」×「小高 dz」。那个 r 与二重积分极坐标里的 r 是同一个道理。</div>
+<h3>球坐标</h3>
+<pre><code>x = r·sin φ·cos θ
+y = r·sin φ·sin θ
+z = r·cos φ
+
+dV = r² · sin φ · dr · dφ · dθ</code></pre>
+<p>三个变量的意义与范围：</p>
+<ul>
+<li><strong>r</strong>：点到原点的距离，r ≥ 0。</li>
+<li><strong>φ</strong>：向径与 z 轴正向的夹角（<strong>纬度方向</strong>），0 ≤ φ ≤ π（不是 0~2π！）。</li>
+<li><strong>θ</strong>：向径在 xOy 平面的投影与 x 轴正向的夹角（<strong>经度方向</strong>），0 ≤ θ ≤ 2π。</li>
+</ul>
+<p><strong>适用</strong>：积分区域是<strong>球体、球壳、球的一部分、圆锥</strong>，或被积函数含 <code>x² + y² + z²</code>。</p>
+<div class="insight"><strong>几何含义：</strong>球坐标网格是一个「弯曲的小长方体」，三条棱分别是：径向 <code>dr</code>、经线弧长 <code>r·dφ</code>、纬线弧长 <code>r·sin φ·dθ</code>，三边相乘得 <code>dV = r²·sin φ·dr·dφ·dθ</code>。注意纬线半径是 <code>r·sin φ</code>（不是 r），所以纬线弧长要乘 sin φ——漏掉 <code>r² sin φ</code> 是最常见错误。</div>
+<p><strong>例</strong>：半径为 R 的球体 Ω，用球坐标算体积</p>
+<pre><code>         2π      π       R
+V = ∫₀  ∫₀  ∫₀  r²·sin φ  dr dφ dθ
+  = (∫₀^2π dθ)·(∫₀^π sin φ dφ)·(∫₀^R r² dr)
+  = 2π · 2 · (R³/3) = (4/3)πR³</code></pre>
+<p>一步得到熟悉的球体积公式，球坐标的威力可见一斑。</p>
+
+<h2 id="s7">10.7 重积分的应用</h2>
+<h3>1. 曲面的面积</h3>
+<p>曲面 <code>z = z(x,y)</code>（在区域 D 上）的面积：</p>
+<pre><code>S = ∬_D √( 1 + z_x² + z_y² ) dxdy</code></pre>
+<div class="insight"><strong>几何含义：</strong>把曲面「贴」到平面区域 D 上，曲面上的小面积元素被<strong>放大 √(1 + z_x² + z_y²) 倍</strong>（曲面越「陡」，放大越多；水平时 z_x = z_y = 0，倍数为 1）。这是「曲面面积 = 平面面积 × 局部放大系数」的累加。</div>
+<h3>2. 平面薄片的质量、质心、转动惯量</h3>
+<p>设薄片 D 的面密度 ρ(x,y)：</p>
+<ul>
+<li>质量 <code>M = ∬_D ρ dσ</code></li>
+<li>质心（质量中心）<code>x̄ = (1/M)∬_D x·ρ dσ</code>，<code>ȳ = (1/M)∬_D y·ρ dσ</code></li>
+<li>转动惯量：关于 x 轴 <code>I_x = ∬_D y²·ρ dσ</code>；关于 y 轴 <code>I_y = ∬_D x²·ρ dσ</code>；关于原点 <code>I_O = ∬_D (x²+y²)·ρ dσ</code></li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>质心 = 把整块质量「加权平均」到的那个点（重心）；转动惯量 = 每个质量元 × 它到转轴距离的平方 的累加，度量「让它转起来/停下来有多费劲」，距离越远的质量贡献越大（平方放大）。</div>
+<h3>3. 空间物体的质量、质心、转动惯量</h3>
+<p>设物体 Ω 的体密度 ρ(x,y,z)：</p>
+<ul>
+<li>质量 <code>M = ∭_Ω ρ dV</code></li>
+<li>质心 <code>x̄ = (1/M)∭_Ω x·ρ dV</code>，<code>ȳ = (1/M)∭_Ω y·ρ dV</code>，<code>z̄ = (1/M)∭_Ω z·ρ dV</code></li>
+<li>转动惯量：关于 z 轴 <code>I_z = ∭_Ω (x²+y²)·ρ dV</code>；关于 x 轴 <code>I_x = ∭_Ω (y²+z²)·ρ dV</code>；关于 y 轴 <code>I_y = ∭_Ω (x²+z²)·ρ dV</code></li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>关于 z 轴的转动惯量中，质量元到 z 轴的距离平方就是 <code>x² + y²</code>（水平投影距离的平方），所以 <code>I_z = ∭ (x²+y²)ρ dV</code>。均匀物体（ρ 为常数）的质心退化为<strong>几何形心</strong>，此时质量可以「约掉」，只用几何区域算形心。</div>
+
+<h2 id="s8">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>二重积分 ∬_D f dσ</td><td>曲顶柱体的体积（f ≥ 0）；f ≡ 1 时为区域面积</td><td>面密度 ρ(x,y) 平面薄片的质量</td></tr>
+<tr><td>面积元素 dσ = r dr dθ（极坐标）</td><td>极坐标网格的小扇形面积</td><td>面积随半径放大的度量元</td></tr>
+<tr><td>三重积分 ∭_Ω f dV</td><td>f ≡ 1 时为体积；一般 f 为「四维超体积」</td><td>体密度 ρ(x,y,z) 物体的质量</td></tr>
+<tr><td>体积元素 dV = r² sinφ dr dφ dθ（球坐标）</td><td>球坐标弯曲小长方体的体积</td><td>体积随 r 与纬度变化的度量元</td></tr>
+<tr><td>投影法（先一后二）</td><td>竖线穿立体、再在投影上累加</td><td>把质量按竖条累加成整块</td></tr>
+<tr><td>截面法（先二后一）</td><td>体积 = ∫ 截面积 dz（祖暅原理）</td><td>按水平层累加质量</td></tr>
+<tr><td>曲面面积公式</td><td>曲面贴平，面积放大 √(1+z_x²+z_y²) 倍</td><td>薄壳的表面积</td></tr>
+<tr><td>质心</td><td>均匀时即几何形心</td><td>质量加权平均位置（重心）</td></tr>
+<tr><td>转动惯量</td><td>——</td><td>绕轴转动的「惯性」：质量 × 距离² 累加</td></tr>
+</table>
+
+<h2 id="s9">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li><strong>极坐标算圆域积分</strong>：计算 <code>∬_D (x²+y²) dσ</code>，其中 D 为圆盘 x²+y² ≤ 1。（提示：极坐标后为 ∫₀^2π dθ ∫₀^1 r³ dr，答案 π/2。）</li>
+<li><strong>直角坐标算区域积分</strong>：计算 <code>∬_D x·y dσ</code>，D 由 y = x² 与 y = x 围成。（先画图定限，交点 x = 0, 1；答案 1/24。）</li>
+<li><strong>交换积分次序</strong>：交换 <code>∫₀¹ dy ∫_y¹ f(x,y) dx</code> 的积分次序，并写出新表达式。（区域为 0 ≤ y ≤ 1, y ≤ x ≤ 1 的三角形；答案 ∫₀¹ dx ∫₀ˣ f(x,y) dy。）</li>
+<li><strong>三重积分（球坐标）</strong>：计算 <code>∭_Ω z dV</code>，Ω 是上半球体 x²+y²+z² ≤ R²（z ≥ 0）。（球坐标 z = r cosφ，0 ≤ φ ≤ π/2；答案 πR⁴/4。）</li>
+<li><strong>曲面面积</strong>：求旋转抛物面 z = x²+y² 在 x²+y² ≤ 1 部分的面积。（答案 (π/6)(5√5 − 1)。）</li>
+</ol>
+</div>
+
+<h2 id="s10">常见误区</h2>
+<div class="warn">
+<h4>本章易错点</h4>
+<ul>
+<li>❌ 极坐标把 <code>dσ</code> 直接写成 <code>dr dθ</code> → 正确是 <code>dσ = r dr dθ</code>，<strong>漏掉 r</strong> 必错。</li>
+<li>❌ 球坐标体积元素写成 <code>r² dr dφ dθ</code> 或 <code>sinφ dr dφ dθ</code> → 正确是 <code>r² sinφ dr dφ dθ</code>。</li>
+<li>❌ 球坐标里 φ 取 0 到 2π → φ 是「与 z 轴夹角」，范围是 <strong>0 到 π</strong>；θ 才取 0 到 2π。</li>
+<li>❌ 交换积分次序后直接把上下限对调 → 必须先<strong>画区域草图、重新定限</strong>，次序一变限就变。</li>
+<li>❌ 二重积分值一定等于体积 → 只有 <strong>f ≥ 0</strong> 时才是体积；f 可为负，体积要积 <code>|f|</code> 或按正负分段。</li>
+<li>❌ 三重积分投影法忘写 z 的上下限函数 → 内层上下限是 <code>z₁(x,y)</code>、<code>z₂(x,y)</code>（曲面方程），不是常数。</li>
+<li>❌ 用估值不等式 / 中值定理时忘记 σ 是<strong>区域的面积</strong>（要算 D 的面积，不是随便代入）。</li>
+<li>❌ 极坐标下 θ 的范围一律写 0 到 2π → 半圆、扇形、第一象限等区域 θ 范围要按<strong>角度</strong>实际确定。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p style="margin:0 0 6px"><strong style="color:#b45309">一、练习题</strong></p>
+<ol>
+<li>（面积）设 <code>D</code> 为矩形区域 <code>0 ≤ x ≤ 2, 0 ≤ y ≤ 3</code>，计算 <code>∬_D 1 dσ</code>。</li>
+<li>（物理·质量）平面薄片 <code>D</code> 为单位圆盘 <code>x² + y² ≤ 1</code>，面密度 <code>ρ(x,y) = x² + y²</code>，求薄片的总质量 <code>M</code>。</li>
+<li>（直角坐标）计算 <code>∬_D x dσ</code>，其中 <code>D</code> 由曲线 <code>y = x</code> 与 <code>y = x²</code> 围成。</li>
+<li>（交换次序）交换积分 <code>∫₀¹ dy ∫_y¹ f(x,y) dx</code> 的积分次序，写出新表达式。</li>
+<li>（三重积分·体积）用球坐标计算半径为 <code>R</code> 的球体 <code>x²+y²+z² ≤ R²</code> 的体积。</li>
+<li>（球坐标·物理）计算 <code>∭_Ω z dV</code>，其中 <code>Ω</code> 为上半球体 <code>x²+y²+z² ≤ R²（z ≥ 0）</code>。</li>
+</ol>
+<p style="margin:18px 0 6px"><strong style="color:#b45309">二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>∬_D 1 dσ = D 的面积 = 2 × 3 = 6</code>。几何意义：被积函数恒为 1 时，二重积分就是以 D 为底、高为 1 的平顶柱体体积，数值上等于区域面积。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>M = ∬_D (x²+y²) dσ</code>，换极坐标 <code>x²+y²=r²</code>、<code>dσ=r dr dθ</code>：<code>M = ∫₀^2π dθ ∫₀^1 r³ dr = 2π · (1/4) = π/2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>交点 <code>x=0,1</code>，区域为 <code>0 ≤ x ≤ 1, x² ≤ y ≤ x</code>。<code>∬_D x dσ = ∫₀¹ dx ∫_{x²}^{x} x dy = ∫₀¹ x(x−x²) dx = [x³/3 − x⁴/4]₀¹ = 1/3 − 1/4 = 1/12</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>区域为三角形 <code>0 ≤ y ≤ 1, y ≤ x ≤ 1</code>（即 <code>0 ≤ x ≤ 1, 0 ≤ y ≤ x</code>），交换后为 <code>∫₀¹ dx ∫₀ˣ f(x,y) dy</code>。口诀：先画区域草图，再重新定限。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>球坐标 <code>dV = r² sin φ dr dφ dθ</code>，<code>0 ≤ r ≤ R, 0 ≤ φ ≤ π, 0 ≤ θ ≤ 2π</code>：<code>V = ∫₀^2π dθ · ∫₀^π sin φ dφ · ∫₀^R r² dr = 2π · 2 · (R³/3) = (4/3)πR³</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>球坐标 <code>z = r cos φ</code>，上半球 <code>0 ≤ φ ≤ π/2</code>：<code>∭_Ω z dV = ∫₀^2π dθ · ∫₀^{π/2} cos φ sin φ dφ · ∫₀^R r³ dr = 2π · (1/2) · (R⁴/4) = πR⁴/4</code>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第9章-多元函数微分法及其应用/第9章-多元函数微分法及其应用.html">← 上一章：第9章 多元函数微分法及其应用</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第11章-曲线积分与曲面积分/第11章-曲线积分与曲面积分.html">下一章：第11章 曲线积分与曲面积分 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第3章 圆锥曲线的方程 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第一册 › 第3章 圆锥曲线的方程</div></header>
+<main class="container">
+<h1>第3章 圆锥曲线的方程</h1>
+<p class="lead">高中 / 选择性必修第一册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>圆锥曲线 = 「到定点（焦点）与到定直线（准线）的距离之比为常数 e 的点的轨迹」——<code>0 &lt; e &lt; 1</code> 得椭圆、<code>e = 1</code> 得抛物线、<code>e &gt; 1</code> 得双曲线。学完本章，你要能在心里"看见"三条曲线：行星绕太阳的椭圆轨道、抛出去的物体走出的抛物线、以及由距离差定位出的双曲线，并能用 <code>a、b、c、e、p</code> 这几个参数把它们完全刻画出来。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">3.1 圆锥曲线与曲线方程</a><a href="#s2">3.2 椭圆</a><a href="#s3">3.3 双曲线</a><a href="#s4">3.4 抛物线</a><a href="#s5">3.5 圆锥曲线的统一视角（第二定义）</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">3.1 圆锥曲线与曲线方程</h2>
+<h3>圆锥曲线的由来（几何含义的源头）</h3>
+<p>「圆锥曲线」这个名字来自一个空间几何实验：<strong>用一个平面去截一个（两叶对顶的）圆锥面</strong>，改变平面与圆锥轴线的夹角，得到的截线（交线）正好就是圆、椭圆、抛物线、双曲线：</p>
+<table>
+<tr><th>平面与圆锥的相对位置</th><th>截得的曲线</th></tr>
+<tr><td>平面垂直于圆锥的轴</td><td>圆（椭圆的特殊情形）</td></tr>
+<tr><td>平面与轴的夹角大于半顶角，且不平行于母线</td><td>椭圆</td></tr>
+<tr><td>平面平行于一条母线</td><td>抛物线</td></tr>
+<tr><td>平面与上下两叶都相交</td><td>双曲线</td></tr>
+</table>
+<div class="insight"><strong>核心直觉：</strong>圆、椭圆、抛物线、双曲线是「同一个圆锥面的不同截面」，所以它们共享统一的定义与统一的参数（离心率 e）。本章先各自给出定义与方程，最后再用 <code>e</code> 把它们统一起来。</div>
+<h3>曲线与方程（解析几何的基本思想）</h3>
+<p>解析几何的核心是<strong>用坐标（代数）去研究图形（几何）</strong>：把「点」写成有序数对 <code>(x, y)</code>，把「曲线」写成方程 <code>F(x, y) = 0</code>。两者要严格对应，必须同时满足两个条件：</p>
+<ol>
+<li><strong>完备性（曲线上 → 方程）</strong>：曲线上每一点的坐标 <code>(x, y)</code> 都是方程 <code>F(x, y) = 0</code> 的解；</li>
+<li><strong>纯粹性（方程 → 曲线上）</strong>：以方程 <code>F(x, y) = 0</code> 的解为坐标的点，都在曲线上。</li>
+</ol>
+<p>此时称 <code>F(x, y) = 0</code> 是这条曲线的<strong>方程</strong>，这条曲线是方程的<strong>曲线</strong>。两个条件缺一不可——只有「完备性」会混进多余的点，只有「纯粹性」会漏掉曲线上的点。</p>
+<h3>求曲线方程的一般步骤（五步法）</h3>
+<ol>
+<li><strong>建系</strong>：建立适当的平面直角坐标系，设动点为 <code>M(x, y)</code>；</li>
+<li><strong>列式</strong>：把题目给出的<strong>几何条件</strong>（如"距离之和为常数"）用坐标翻译成等式；</li>
+<li><strong>化简</strong>：两边平方、移项、合并，把等式化成最简形式；</li>
+<li><strong>验证</strong>：检查化简过程是否「增根」（平方会引入多余的点）或「失根」，必要时补上范围；</li>
+<li><strong>说明</strong>：指出所得方程表示的曲线（或轨迹）。</li>
+</ol>
+<div class="insight"><strong>几何含义：</strong>方程是「点的集合」的代数名字——满足同一关系的所有点拼成一条曲线。<strong>物理含义：</strong>方程刻画的是动点<strong>运动所受的约束</strong>，例如"到两枚图钉的距离之和恒定"，正是用一根定长的绳子、两端钉住、笔尖绷紧画出的轨迹。</div>
+
+<h2 id="s2">3.2 椭圆</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">|MF₁| + |MF₂| = 2a（恒定）</text><ellipse cx="260" cy="130" rx="180" ry="100" fill="none" stroke="#cbd5e1" stroke-width="2"/><line x1="110" y1="130" x2="440" y2="130" stroke="#2563eb" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><line x1="410" y1="130" x2="440" y2="130" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x2" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="y2" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></line><circle cx="110" cy="130" r="5" fill="#2563eb"/><circle cx="410" cy="130" r="5" fill="#16a34a"/><text x="110" y="154" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">F₁</text><text x="410" y="154" text-anchor="middle" fill="#16a34a" font-size="13" font-weight="700">F₂</text><circle cx="440" cy="130" r="6" fill="#2563eb"><animate attributeName="cx" values="440;436.54;426.3;409.66;387.28;360;328.88;295.12;260;224.88;191.12;160;132.72;110.34;93.7;83.46;80;83.46;93.7;110.34;132.72;160;191.12;224.88;260;295.12;328.88;360;387.28;409.66;426.3;436.54" dur="10s" repeatCount="indefinite"/><animate attributeName="cy" values="130;149.51;168.27;185.56;200.71;213.15;222.39;228.08;230;228.08;222.39;213.15;200.71;185.56;168.27;149.51;130;110.49;91.73;74.44;59.29;46.85;37.61;31.92;30;31.92;37.61;46.85;59.29;74.44;91.73;110.49" dur="10s" repeatCount="indefinite"/></circle><text x="440" y="220" text-anchor="middle" fill="#6b7280" font-size="12">蓝 + 绿 = 2a</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：椭圆上任意点 M 到两焦点 F₁、F₂ 的距离之和恒为常数 2a（绳子画椭圆、行星轨道）</figcaption></figure>
+<h3>椭圆的定义（几何）</h3>
+<p><strong>定义：</strong>平面内与两个定点 <code>F₁、F₂</code> 的距离的<strong>和</strong>等于常数（大于 <code>|F₁F₂|</code>）的点的轨迹叫做<strong>椭圆</strong>。这两个定点叫做椭圆的<strong>焦点</strong>，两焦点间的距离 <code>|F₁F₂|</code> 叫做<strong>焦距</strong>，记作 <code>2c</code>。</p>
+<pre><code>|MF₁| + |MF₂| = 2a    （常数 2a &gt; 焦距 2c，即 a &gt; c）</code></pre>
+<ul>
+<li><strong>为什么必须 2a &gt; 2c？</strong>若 2a = 2c，轨迹退化为线段 F₁F₂；若 2a &lt; 2c，满足条件的点不存在（三角形两边之和大于第三边）。</li>
+<li><strong>画椭圆的方法</strong>：把一根绳子（长 2a + 2c）的两端固定在两个焦点（图钉）处，用笔尖绷紧绳子画一圈，笔尖画出的就是椭圆。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>椭圆是「到两焦点距离之和恒定」的点的集合，焦点是椭圆的"心脏"，焦距 2c 决定两心的远近。<strong>物理含义：</strong>这是<strong>开普勒第一定律</strong>——行星绕太阳运行的轨道是椭圆，太阳位于椭圆的一个焦点上；人造卫星的轨道也是椭圆。</div>
+<h3>椭圆的标准方程（如何从定义推出方程）</h3>
+<p>以两焦点所在直线为 x 轴、线段 <code>F₁F₂</code> 的垂直平分线为 y 轴建系，则 <code>F₁(−c, 0)、F₂(c, 0)</code>。设椭圆上任意一点 <code>M(x, y)</code>：</p>
+<pre><code>√[(x+c)² + y²] + √[(x−c)² + y²] = 2a
+
+移项后两边平方、再平方一次，化简得：
+x²/a² + y²/(a²−c²) = 1
+
+令 b² = a² − c²（b &gt; 0），得到焦点在 x 轴上的椭圆标准方程：
+x²/a² + y²/b² = 1   （a &gt; b &gt; 0，c² = a² − b²，焦点 F(±c, 0)）</code></pre>
+<p><strong>焦点在 y 轴</strong>（两焦点在 y 轴上）时，标准方程把 x、y 互换位置：</p>
+<pre><code>y²/a² + x²/b² = 1   （a &gt; b &gt; 0，焦点 F(0, ±c)）</code></pre>
+<p><strong>判断焦点在哪条轴上的方法</strong>：看哪个<strong>分母大</strong>——大分母对应的是 <code>a²</code>，焦点就在那一条坐标轴上（<code>a &gt; b</code> 恒成立，长轴一定落在 a 所在的那条轴）。</p>
+<h3>椭圆的简单几何性质（以 x²/a² + y²/b² = 1 为例）</h3>
+<table>
+<tr><th>性质</th><th>结论</th></tr>
+<tr><td>范围</td><td>|x| ≤ a 且 |y| ≤ b，椭圆被框在一个矩形 [−a, a]×[−b, b] 内</td></tr>
+<tr><td>对称性</td><td>关于 x 轴、y 轴、原点都对称（既是轴对称图形又是中心对称图形）；对称中心（原点）叫椭圆中心</td></tr>
+<tr><td>顶点</td><td>A₁(−a,0)、A₂(a,0)、B₁(0,−b)、B₂(0,b)；线段 A₁A₂ 叫<strong>长轴</strong>（长 2a），B₁B₂ 叫<strong>短轴</strong>（长 2b）；a 叫长半轴长，b 叫短半轴长</td></tr>
+<tr><td>离心率</td><td>e = c/a，且 0 &lt; e &lt; 1</td></tr>
+<tr><td>a、b、c 关系</td><td>c² = a² − b²（a 是最大者）</td></tr>
+</table>
+<h3>离心率 e 的几何意义（椭圆形状的"旋钮"）</h3>
+<p><strong>离心率</strong> <code>e = c/a = 焦距/长轴长</code>，它只由椭圆的<strong>形状</strong>决定（两个椭圆只要 e 相同，就"长得一样"——相似）。因为 <code>b = a·√(1−e²)</code>，所以：</p>
+<ul>
+<li><strong>e 越接近 0</strong>：c 越小，b 越接近 a，椭圆越"圆"；极限情形 e = 0 时 c = 0，两焦点重合，椭圆变成圆。</li>
+<li><strong>e 越接近 1</strong>：c 越接近 a，b 越接近 0，椭圆越"扁"。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>e 衡量椭圆"偏离圆"的程度，e 越大椭圆越扁长。<strong>物理含义：</strong>在天体运动中，e 描述轨道的"偏心"程度——近圆轨道 e ≈ 0，彗星那种又细又长的轨道 e 接近 1；<strong>行星轨道的 e 直接决定近日点与远日点的差距</strong>。</div>
+<h3>椭圆的反射性质与应用（物理含义）</h3>
+<p>椭圆有一条著名的<strong>光学（反射）性质</strong>：从一个焦点发出的光线（或声波、冲击波），经椭圆周反射后，必定通过另一个焦点。原因是椭圆上任意一点处的<strong>切线</strong>，恰好是两条"焦半径"（该点与两焦点的连线）所成夹角的<strong>角平分线的垂线</strong>。</p>
+<ul>
+<li><strong>回音壁 / 耳语廊</strong>：站在一个焦点小声说话，声音经墙面反射后汇聚到另一个焦点，那里听得清清楚楚。</li>
+<li><strong>体外冲击波碎石机</strong>：把冲击波源放在椭球面的一个焦点、结石放在另一个焦点，冲击波反射后集中轰击结石，把肾结石击碎而不伤及周围组织。</li>
+<li><strong>行星轨道</strong>：太阳在焦点处，行星在轨道上受到的引力指向焦点。</li>
+</ul>
+
+<h2 id="s3">3.3 双曲线</h2>
+<h3>双曲线的定义（几何）</h3>
+<p><strong>定义：</strong>平面内与两个定点 <code>F₁、F₂</code> 的距离的<strong>差的绝对值</strong>等于常数（小于 <code>|F₁F₂|</code> 且不等于 0）的点的轨迹叫做<strong>双曲线</strong>。这两个定点叫做双曲线的<strong>焦点</strong>，两焦点间距离 <code>|F₁F₂| = 2c</code> 叫做<strong>焦距</strong>。</p>
+<pre><code>| |MF₁| − |MF₂| | = 2a    （0 &lt; 2a &lt; 2c，即 a &lt; c）</code></pre>
+<ul>
+<li><strong>绝对值不能丢</strong>：去掉绝对值 <code>|MF₁| − |MF₂| = 2a</code> 只得到<strong>一支</strong>（离 F₂ 较近的那一支）；带上绝对值才得到左右两支。</li>
+<li><strong>三个边界情形</strong>：常数 = 0 → 线段 F₁F₂ 的垂直平分线；常数 = 2c → 以 F₁、F₂ 为端点的两条射线；常数 &gt; 2c → 无轨迹。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>双曲线是「到两焦点距离之差恒定」的点的集合，所以它有<strong>两支</strong>，两支分别对应"离这个焦点更近"与"离那个焦点更近"两种情形。<strong>物理含义：</strong>这是<strong>距离差定位（双曲线导航）</strong>的原理——测量自己到两个已知发射台的距离差（由信号到达的时间差算出），就确定自己落在一条双曲线上；再用第三个台画另一条双曲线，两条双曲线的交点就是你的位置（如罗兰 LORAN 导航系统）。</div>
+<h3>双曲线的标准方程</h3>
+<p>以两焦点所在直线为 x 轴、线段 <code>F₁F₂</code> 的垂直平分线为 y 轴建系，由定义可化简得：</p>
+<pre><code>x²/a² − y²/b² = 1   （a &gt; 0，b &gt; 0，c² = a² + b²，焦点 F(±c, 0)）</code></pre>
+<p><strong>焦点在 y 轴</strong>时：</p>
+<pre><code>y²/a² − x²/b² = 1   （焦点 F(0, ±c)）</code></pre>
+<div class="warn"><h4>与椭圆的关键区别（务必记牢）</h4>椭圆中 <code>c² = a² − b²</code>（a 最大），双曲线中 <code>c² = a² + b²</code>（<strong>c 最大</strong>）。所以双曲线里"a 是否大于 b"没有要求，判断焦点在哪条轴要<strong>看哪个平方项是正的</strong>——正的平方项所在的那条轴就是焦点所在的轴。</div>
+<h3>双曲线的简单几何性质（以 x²/a² − y²/b² = 1 为例）</h3>
+<table>
+<tr><th>性质</th><th>结论</th></tr>
+<tr><td>范围</td><td>x ≤ −a 或 x ≥ a（曲线在两条竖直线 x = ±a 的外侧，中间无图形）</td></tr>
+<tr><td>对称性</td><td>关于 x 轴、y 轴、原点对称；对称中心（原点）叫双曲线中心</td></tr>
+<tr><td>顶点</td><td>A₁(−a,0)、A₂(a,0)；线段 A₁A₂ 叫<strong>实轴</strong>（长 2a），a 叫实半轴长；B₁(0,−b)、B₂(0,b) 叫虚轴端点，线段 B₁B₂ 叫<strong>虚轴</strong>（长 2b），b 叫虚半轴长</td></tr>
+<tr><td>渐近线</td><td>y = ±(b/a)x</td></tr>
+<tr><td>离心率</td><td>e = c/a &gt; 1</td></tr>
+<tr><td>a、b、c 关系</td><td>c² = a² + b²（c 是最大者）</td></tr>
+</table>
+<h3>渐近线的几何意义（双曲线的"骨架"）</h3>
+<p>双曲线的两支向外无限延伸时，会<strong>无限接近</strong>直线 <code>y = ±(b/a)x</code>，但<strong>永远不相交</strong>。画双曲线时通常先画出由直线 <code>x = ±a、y = ±b</code> 围成的"辅助矩形"，矩形的两条对角线就是渐近线，双曲线沿着对角线方向伸展开去。</p>
+<div class="insight"><strong>几何含义：</strong>渐近线决定了双曲线"张开的方向和快慢"，是双曲线的骨架。<strong>物理含义：</strong>超音速飞行产生的冲击波波前是圆锥面，它与地面的交线正是一对双曲线，渐近线刻画了冲击波向两侧扩展的渐近方向。</div>
+<h3>离心率 e 与等轴双曲线</h3>
+<ul>
+<li><strong>e = c/a &gt; 1</strong>，且 e 越大，双曲线"开口越开阔"（越张得开）；e 越接近 1，开口越窄。</li>
+<li><strong>等轴双曲线</strong>：a = b 时，方程为 <code>x² − y² = a²</code>，两条渐近线 <code>y = ±x</code> 互相垂直，离心率恒为 <code>e = √2</code>。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>双曲线的反射（光学）性质与椭圆相反——从一个焦点发出的光线，经双曲线一支反射后，反射光线的<strong>反向延长线</strong>经过另一个焦点（看起来像是从另一个焦点"发出来"的）。这在反射式望远镜的某些光路设计中有应用。</div>
+
+<h2 id="s4">3.4 抛物线</h2>
+<h3>抛物线的定义（几何：焦点 + 准线）</h3>
+<p><strong>定义：</strong>平面内与一个定点 <code>F</code> 和一条定直线 <code>l</code>（<code>l</code> 不经过点 <code>F</code>）的距离<strong>相等</strong>的点的轨迹叫做<strong>抛物线</strong>。定点 <code>F</code> 叫做抛物线的<strong>焦点</strong>，定直线 <code>l</code> 叫做抛物线的<strong>准线</strong>。</p>
+<pre><code>|MF| = d(M, l)   （动点到焦点的距离 = 到准线的距离）</code></pre>
+<ul>
+<li>焦点到准线的距离记作 <code>p</code>（<code>p &gt; 0</code>），p 叫<strong>焦准距</strong>，它决定抛物线"开口的大小"。</li>
+<li>抛物线的<strong>离心率恒为 1</strong>——这正是它"到焦点与到准线距离之比"的定义本身。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>抛物线是「到一个定点与一条定直线等距」的点的集合，焦点与准线是它的两个"锚"。<strong>物理含义：</strong>这是<strong>抛体运动</strong>的轨迹——只受重力、初速度与重力方向不共线时，物体（忽略空气阻力）走过的路线就是抛物线。</div>
+<h3>抛物线的标准方程（四种形式）</h3>
+<p>取焦点到准线的垂线段中点为原点，对称轴为坐标轴建系。设焦点 <code>F(p/2, 0)</code>、准线 <code>x = −p/2</code>，由定义化简得：</p>
+<pre><code>y² = 2px   （p &gt; 0，焦点 (p/2, 0)，准线 x = −p/2，开口向右）</code></pre>
+<p>其余三种标准方程及其焦点、准线、开口方向如下：</p>
+<table>
+<tr><th>标准方程</th><th>焦点</th><th>准线</th><th>开口方向</th></tr>
+<tr><td>y² = 2px　(p&gt;0)</td><td>(p/2, 0)</td><td>x = −p/2</td><td>向右</td></tr>
+<tr><td>y² = −2px　(p&gt;0)</td><td>(−p/2, 0)</td><td>x = p/2</td><td>向左</td></tr>
+<tr><td>x² = 2py　(p&gt;0)</td><td>(0, p/2)</td><td>y = −p/2</td><td>向上</td></tr>
+<tr><td>x² = −2py　(p&gt;0)</td><td>(0, −p/2)</td><td>y = p/2</td><td>向下</td></tr>
+</table>
+<p><strong>记忆规律</strong>：<strong>一次项</strong>决定对称轴（一次项是 x，则对称轴是 x 轴；一次项是 y，则对称轴是 y 轴）；<strong>一次项系数的正负</strong>决定开口朝向（正号朝正半轴方向开，负号朝负半轴方向开）；<strong>焦点的坐标是 (系数/4, 0) 或 (0, 系数/4)</strong>，准线在另一侧且与焦点关于顶点对称。</p>
+<h3>抛物线的简单几何性质（以 y² = 2px 为例）</h3>
+<table>
+<tr><th>性质</th><th>结论</th></tr>
+<tr><td>范围</td><td>x ≥ 0，y 取一切实数（曲线在 y 轴右侧）</td></tr>
+<tr><td>对称性</td><td>关于 x 轴（对称轴）对称，无对称中心</td></tr>
+<tr><td>顶点</td><td>原点 O(0,0)，是抛物线与对称轴的交点，也是"离准线最近"的点</td></tr>
+<tr><td>离心率</td><td>e = 1</td></tr>
+<tr><td>通径</td><td>过焦点且垂直于对称轴的弦，长为 2p（可用来快速比较开口大小）</td></tr>
+</table>
+<h3>抛物线的反射性质与应用（物理含义）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="50" y1="130" x2="430" y2="130" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/><line x1="60" y1="28" x2="60" y2="232" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4"/><text x="60" y="252" text-anchor="middle" fill="#16a34a" font-size="13">准线</text><path d="M 100,130 L 100.22,124 L 100.9,118 L 102.03,112 L 103.6,106 L 105.63,100 L 108.1,94 L 111.03,88 L 114.4,82 L 118.22,76 L 122.5,70 L 127.22,64 L 132.4,58 L 138.03,52 L 144.1,46 L 150.63,40 L 157.6,34 L 165.03,28 L 172.9,22" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M 100,130 L 100.22,136 L 100.9,142 L 102.03,148 L 103.6,154 L 105.63,160 L 108.1,166 L 111.03,172 L 114.4,178 L 118.22,184 L 122.5,190 L 127.22,196 L 132.4,202 L 138.03,208 L 144.1,214 L 150.63,220 L 157.6,226 L 165.03,232 L 172.9,238" fill="none" stroke="#2563eb" stroke-width="2.5"/><circle cx="140" cy="130" r="5" fill="#2563eb"/><text x="140" y="118" text-anchor="middle" fill="#2563eb" font-size="13" font-weight="700">焦点 F</text><line x1="140" y1="130" x2="122.5" y2="70" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="122.5" y1="70" x2="242.5" y2="70" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;122.5;242.5" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="130;70;70" keyTimes="0;0.4;1" dur="4.5s" begin="0s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="162.5" y2="30" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="162.5" y1="30" x2="282.5" y2="30" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;162.5;282.5" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="cy" values="130;30;30" keyTimes="0;0.4;1" dur="5s" begin="0.6s" repeatCount="indefinite"/></circle><line x1="140" y1="130" x2="135.16" y2="205" stroke="#2563eb" stroke-width="1.6" stroke-opacity="0.3"/><line x1="135.16" y1="205" x2="255.16" y2="205" stroke="#16a34a" stroke-width="1.6" stroke-opacity="0.3"/><circle cx="140" cy="130" r="3.5" fill="#f59e0b"><animate attributeName="cx" values="140;135.16;255.16" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="cy" values="130;205;205" keyTimes="0;0.4;1" dur="5.5s" begin="1.2s" repeatCount="indefinite"/></circle><text x="260" y="20" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">焦点光 → 平行光</text><text x="452" y="240" text-anchor="middle" fill="#6b7280" font-size="12">反射后平行于轴</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：从焦点射出的光经抛物线反射后都平行于对称轴（探照灯 / 抛物面天线原理）</figcaption></figure>
+<p>抛物线有极其重要的<strong>反射（光学）性质</strong>：</p>
+<ul>
+<li><strong>焦点 → 平行</strong>：从焦点发出的光线，经抛物线反射后，变成<strong>平行于对称轴</strong>的一束平行光。<strong>应用</strong>：探照灯、手电筒、汽车大灯——把光源（灯泡）放在焦点处，就能射出平行光束。</li>
+<li><strong>平行 → 焦点</strong>：平行于对称轴射来的光线，经抛物线反射后，<strong>全部汇聚到焦点</strong>。<strong>应用</strong>：抛物面天线、卫星电视接收器、太阳灶——把信号（或阳光）集中到焦点处增强。</li>
+</ul>
+<div class="insight"><strong>为什么抛物线能"聚焦"？</strong>因为抛物线由"到焦点与到准线距离相等"定义，这天然保证了：任意平行光线到达准线的路程相等，于是反射后到焦点的路程也相等——各条光线<strong>同时到达焦点（等光程）</strong>，形成聚焦。这是抛物线反射性质背后的物理本质。</div>
+
+<h2 id="s5">3.5 圆锥曲线的统一视角（第二定义）</h2>
+<h3>统一定义（第二定义）：离心率 e 决定曲线形状</h3>
+<p>椭圆、抛物线、双曲线可以由<strong>同一条定义</strong>统一描述：</p>
+<pre><code>平面内动点 M 到定点 F（焦点）的距离，与到定直线 l（准线）的距离之比为常数 e：
+          |MF| / d(M, l) = e
+</code></pre>
+<table>
+<tr><th>常数 e 的范围</th><th>曲线类型</th><th>补充</th></tr>
+<tr><td>0 &lt; e &lt; 1</td><td>椭圆</td><td>到焦点近于到准线，轨迹"闭合"成椭圆</td></tr>
+<tr><td>e = 1</td><td>抛物线</td><td>到焦点与到准线等距，轨迹"敞开"成抛物线</td></tr>
+<tr><td>e &gt; 1</td><td>双曲线</td><td>到焦点远于到准线，轨迹"张开"成双曲线</td></tr>
+</table>
+<p><strong>椭圆与双曲线准线的统一形式</strong>：对焦点在 x 轴上的椭圆、双曲线，对应准线为 <code>x = ±a²/c</code>，离心率 <code>e = c/a</code>；抛物线的准线为 <code>x = −p/2</code>，<code>e = 1</code>。</p>
+<div class="insight"><strong>几何含义：</strong>第二定义把"两个焦点的和/差"这种<strong>双点定义</strong>，统一成"焦点 + 准线"这种<strong>点线定义</strong>，并指出唯一的开关就是 <code>e</code>。<strong>物理含义：</strong>在天体力学中，e 就是轨道能量的"刻度"——<code>e &lt; 1</code> 是闭合的椭圆轨道（行星、卫星，被引力束缚），<code>e = 1</code> 是恰好能逃逸的抛物线轨道，<code>e &gt; 1</code> 是掠过即走的双曲线轨道（脱离束缚）。<strong>一个 e，同时是几何形状参数和天体运动的能量参数</strong>，这是本章最深刻的统一。</div>
+<h3>三种曲线对比一览</h3>
+<table>
+<tr><th>曲线</th><th>第一定义</th><th>标准方程（x 轴为对称轴）</th><th>a、b、c 关系</th><th>离心率 e</th><th>开口/范围</th></tr>
+<tr><td>椭圆</td><td>|MF₁|+|MF₂|=2a</td><td>x²/a² + y²/b² = 1</td><td>c² = a² − b²</td><td>0&lt;e&lt;1</td><td>闭合，|x|≤a</td></tr>
+<tr><td>抛物线</td><td>|MF|=d(M,l)</td><td>y² = 2px</td><td>—（只有 p）</td><td>e = 1</td><td>单支，x≥0</td></tr>
+<tr><td>双曲线</td><td>||MF₁|−|MF₂||=2a</td><td>x²/a² − y²/b² = 1</td><td>c² = a² + b²</td><td>e&gt;1</td><td>两支，|x|≥a</td></tr>
+</table>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>圆锥曲线</td><td>平面截圆锥面所得的截线（圆、椭圆、抛物线、双曲线）</td><td>由离心率 e 划分的天体轨道形状</td></tr>
+<tr><td>椭圆</td><td>到两焦点距离之和为常数的点的轨迹（闭合曲线）</td><td>行星/卫星轨道（开普勒第一定律）、回声聚焦、冲击波碎石机</td></tr>
+<tr><td>双曲线</td><td>到两焦点距离之差的绝对值为常数的点的轨迹（两支张开）</td><td>距离差定位（双曲线导航）、超音速冲击波、冷却塔双曲面</td></tr>
+<tr><td>抛物线</td><td>到定点与到定直线距离相等的点的轨迹（单支敞开）</td><td>抛体运动轨迹、抛物面天线/车灯/太阳灶的反射聚焦</td></tr>
+<tr><td>焦点</td><td>定义中的定点（椭圆的"心"、双曲线的"心"、抛物线的"定点"）</td><td>力心/光源/发射点/接收点（太阳、灯泡、信号汇聚点）</td></tr>
+<tr><td>准线</td><td>定义中的定直线（与焦点配对，二者之比定义 e）</td><td>反射聚焦中的"参照线"（等光程原理的几何基础）</td></tr>
+<tr><td>焦距 2c</td><td>两焦点间的距离</td><td>决定椭圆扁圆、双曲线开口的"两心距离"</td></tr>
+<tr><td>长轴 2a / 短轴 2b</td><td>椭圆最长直径 / 最短直径</td><td>轨道的尺寸参数（长轴决定轨道大小）</td></tr>
+<tr><td>实轴 2a / 虚轴 2b</td><td>双曲线两顶点间线段 / 辅助虚线段</td><td>决定双曲线两支的距离与渐近线斜率</td></tr>
+<tr><td>渐近线</td><td>双曲线无限接近却永不相交的直线</td><td>冲击波扩展的渐近方向、双曲线的"骨架"</td></tr>
+<tr><td>离心率 e</td><td>焦距/长轴(或实轴)长；刻画"偏离圆/张开"的程度</td><td>轨道形状参数：e&lt;1 椭圆、e=1 抛物线、e&gt;1 双曲线（能量参数）</td></tr>
+<tr><td>焦准距 p</td><td>抛物线焦点到准线的距离</td><td>决定抛物线开口大小（通径 = 2p）</td></tr>
+<tr><td>a、b、c 关系</td><td>椭圆 c²=a²−b²；双曲线 c²=a²+b²</td><td>几何量之间的代数约束（a 最大 / c 最大）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<h4>先独立思考，再对照解析</h4>
+<ol>
+<li>已知椭圆 <code>16x² + 25y² = 400</code>，求它的长轴长、短轴长、焦点坐标、离心率。</li>
+<li>已知双曲线 <code>4x² − 9y² = 36</code>，求它的实轴长、虚轴长、焦点坐标、渐近线方程、离心率。</li>
+<li>求抛物线 <code>y² = −12x</code> 的焦点坐标与准线方程。</li>
+<li>动点 M 到定点 <code>F(4, 0)</code> 的距离与到定直线 <code>x = 25/4</code> 的距离之比为 <code>4/5</code>，求动点 M 的轨迹方程，并说明它是哪类曲线。</li>
+<li>椭圆 <code>x²/9 + y²/4 = 1</code> 上一点 P 与两焦点 F₁、F₂ 构成三角形，若 <code>∠F₁PF₂ = 90°</code>，求 △PF₁F₂ 的面积。</li>
+<li>动圆 M 与圆 C₁: <code>(x+3)² + y² = 1</code> 外切，又与圆 C₂: <code>(x−3)² + y² = 81</code> 内切，求动圆圆心 M 的轨迹方程。</li>
+</ol>
+</div>
+<div class="ex">
+<h4>参考解析</h4>
+<ol>
+<li>化为标准式 <code>x²/25 + y²/16 = 1</code>：a = 5，b = 4，c = √(25−16) = 3。长轴长 2a = <strong>10</strong>，短轴长 2b = <strong>8</strong>，焦点 <strong>(±3, 0)</strong>，离心率 e = c/a = <strong>3/5</strong>。</li>
+<li>化为 <code>x²/9 − y²/4 = 1</code>：a = 3，b = 2，c = √(9+4) = √13。实轴长 <strong>6</strong>，虚轴长 <strong>4</strong>，焦点 <strong>(±√13, 0)</strong>，渐近线 <strong>y = ±(2/3)x</strong>，离心率 e = √13/3。</li>
+<li>2p = 12 → p = 6，一次项系数为负 → 开口向左。焦点 <strong>(−3, 0)</strong>，准线 <strong>x = 3</strong>。</li>
+<li>距离之比 4/5 &lt; 1 → <strong>椭圆</strong>。焦点 (4, 0) → c = 4；准线 x = a²/c = 25/4 → a² = 25，a = 5；b² = a² − c² = 9。轨迹为 <strong>x²/25 + y²/9 = 1</strong>。</li>
+<li>焦点三角形面积公式 S = b²·tan(∠F₁PF₂/2)。这里 a = 3，b = 2，∠F₁PF₂ = 90°，故 S = b² = <strong>4</strong>。</li>
+<li>设动圆 M 半径为 r：外切 → |MC₁| = r + 1；内切 → |MC₂| = 9 − r。两式相加：|MC₁| + |MC₂| = 10（常数）。C₁(−3,0)、C₂(3,0)，2a = 10 → a = 5，2c = 6 → c = 3，b² = a² − c² = 16。轨迹为 <strong>椭圆 x²/25 + y²/16 = 1</strong>。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "椭圆中 a、b、c 满足 c² = a² + b²" → ❌ 那是双曲线；<strong>椭圆是 c² = a² − b²</strong>（a 最大），双曲线才是 c² = a² + b²（c 最大）。</li>
+<li>❌ "双曲线的离心率 e &lt; 1" → ❌ 双曲线 e &gt; 1；椭圆才 0 &lt; e &lt; 1；抛物线 e = 1。</li>
+<li>❌ "双曲线是到两焦点距离之和为常数" → ❌ 双曲线是<strong>差的绝对值</strong>；之和为常数是椭圆。</li>
+<li>❌ 双曲线定义丢了"绝对值" → ❌ 只得一支；必须写 <code>||MF₁| − |MF₂|| = 2a</code> 才是两支。</li>
+<li>❌ "椭圆的范围是 |x| ≥ a" → ❌ 椭圆 |x| ≤ a（闭合）；|x| ≥ a 是双曲线的范围。</li>
+<li>❌ 判断焦点位置只看"x² 在前还是 y² 在前" → ❌ 要看<strong>哪个分母大</strong>（椭圆）或<strong>哪个平方项为正</strong>（双曲线），与前后顺序无关。</li>
+<li>❌ "抛物线 y² = 2px 的焦点是 (p, 0)" → ❌ 焦点是 <strong>(p/2, 0)</strong>，准线是 x = −p/2，不要漏掉"除以 2"。</li>
+<li>❌ "抛物线的离心率是 0 或 &gt; 1" → ❌ 抛物线 e 恒等于 1。</li>
+<li>❌ 长轴/实轴与"半轴长"混淆 → ❌ 长轴<strong>长</strong>是 2a，长<strong>半轴</strong>长是 a；写顶点坐标时用的是 ±a、±b。</li>
+<li>❌ 用第二定义时忘记"准线 x = a²/c"中的平方 → ❌ 椭圆、双曲线的准线是 x = ±a²/c（不是 a/c），抛物线的准线才是 x = −p/2。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong>（由易到难，紧扣本章的几何/物理含义）</p>
+<ol>
+<li>已知椭圆的标准方程为 <code>x²/25 + y²/16 = 1</code>，求它的长轴长、短轴长、焦距、焦点坐标与离心率，并说明焦点落在哪条坐标轴上。</li>
+<li>已知双曲线的标准方程为 <code>x²/9 − y²/16 = 1</code>，求它的实轴长、虚轴长、焦距、焦点坐标、渐近线方程与离心率。</li>
+<li>求抛物线 <code>y² = 8x</code> 的焦点坐标、准线方程与开口方向，并写出它的通径长。</li>
+<li>（物理含义）手电筒、汽车大灯为什么要把灯泡放在抛物面镜的焦点处？椭圆形的"耳语廊"中，为什么站在一个焦点小声说话，另一个焦点处反而能听得更清楚？请分别用抛物线和椭圆的反射性质解释。</li>
+<li>（第二定义）动点 M 到定点 <code>F(3, 0)</code> 的距离与到定直线 <code>x = 25/3</code> 的距离之比为 <code>3/5</code>，求动点 M 的轨迹方程，并说明它是哪类曲线、离心率是多少。</li>
+<li>动圆 M 与圆 <code>C₁: (x+4)² + y² = 4</code> 外切，又与圆 <code>C₂: (x−4)² + y² = 100</code> 内切，求动圆圆心 M 的轨迹方程，并判断它是哪类曲线。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>分母 25 &gt; 16，故焦点在 <strong>x 轴</strong>：a = 5，b = 4，c = √(25−16) = 3。长轴长 2a = <strong>10</strong>，短轴长 2b = <strong>8</strong>，焦距 2c = <strong>6</strong>，焦点 <strong>(±3, 0)</strong>，离心率 e = c/a = <strong>3/5</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>a = 3，b = 4，c = √(9+16) = 5。实轴长 2a = <strong>6</strong>，虚轴长 2b = <strong>8</strong>，焦距 2c = <strong>10</strong>，焦点 <strong>(±5, 0)</strong>，渐近线 <strong>y = ±(4/3)x</strong>，离心率 e = c/a = <strong>5/3</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>y² = 8x 中 2p = 8，得 p = 4。开口<strong>向右</strong>，焦点 <strong>(2, 0)</strong>，准线 <strong>x = −2</strong>，通径长 2p = <strong>8</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><strong>抛物线：</strong>从焦点发出的光线，经抛物线反射后变成<strong>平行于对称轴</strong>的平行光束，所以把灯泡放在焦点处能射出照得更远、更集中的平行光。<strong>椭圆：</strong>从一个焦点发出的声波，经椭圆周反射后<strong>必定通过另一个焦点</strong>，因此一个焦点处的低声细语会汇聚到另一个焦点，那里的人听得清清楚楚。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>距离之比 e = 3/5 &lt; 1，是<strong>椭圆</strong>。焦点 (3, 0) → c = 3；准线 x = a²/c = 25/3 → a² = 25，a = 5；b² = a² − c² = 25 − 9 = 16。轨迹为 <strong>x²/25 + y²/16 = 1</strong>，离心率 e = <strong>3/5</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设动圆 M 半径为 r。外切：|MC₁| = r + 2；内切：|MC₂| = 10 − r。两式相加得 |MC₁| + |MC₂| = <strong>12</strong>（常数）。C₁(−4, 0)、C₂(4, 0)，2c = 8 → c = 4；2a = 12 → a = 6；b² = a² − c² = 36 − 16 = 20。轨迹为<strong>椭圆 x²/36 + y²/20 = 1</strong>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第2章-直线和圆的方程/第2章-直线和圆的方程.html">← 上一章：第2章 直线和圆的方程</a>
+<a href="../../../index.html">回目录</a>
+<a href="../../选择性必修二/第4章-数列/第4章-数列.html">下一章：第4章 数列 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第一册 · 圆锥曲线的方程</footer>
+</body>
+</html>

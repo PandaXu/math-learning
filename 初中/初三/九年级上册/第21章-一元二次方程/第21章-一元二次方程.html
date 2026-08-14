@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第21章 一元二次方程 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第21章 一元二次方程</div></header>
+<main class="container">
+<h1>第21章 一元二次方程</h1>
+<p class="lead">初中 / 初三 / 九年级上册</p>
+
+<div class="summary"><span class="tag">一句话总纲：</span>一元二次方程 <code>ax² + bx + c = 0（a≠0）</code> 是「抛物线 y = ax² + bx + c 与 x 轴（高度为 0 的水平线）相交」这一几何事件的代数表达：它的每一个<strong>实根</strong>，都是抛物线与 x 轴交点的<strong>横坐标</strong>；判别式 Δ 则回答「有几个交点」。学完本章，你要能在心里同时"看见"两条路——代数上的<strong>配方 / 求根 / 因式分解</strong>，与几何上的<strong>抛物线开口、对称轴、交点</strong>，以及物理上的<strong>抛体落地、匀加速相遇</strong>等模型。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">21.1 一元二次方程的概念</a><a href="#s2">21.2 直接开平方法</a><a href="#s3">21.3 配方法</a><a href="#s4">21.4 公式法与判别式</a><a href="#s5">21.5 因式分解法</a><a href="#s6">21.6 根与系数的关系（韦达定理）</a><a href="#s7">21.7 一元二次方程的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+</div>
+
+<h2 id="s1">21.1 一元二次方程的概念</h2>
+<h3>什么是"一元二次方程"</h3>
+<p>只含有<strong>一个未知数</strong>，并且未知数的<strong>最高次数是 2</strong> 的<strong>整式方程</strong>，叫做一元二次方程。把它整理后的一般形式是：</p>
+<pre><code>ax² + bx + c = 0     (a ≠ 0)
+
+├ a —— 二次项系数
+├ b —— 一次项系数
+└ c —— 常数项</code></pre>
+<ul>
+<li><strong>一元</strong>：只有一个未知数 x（不像二元方程有 x、y 两个）。</li>
+<li><strong>二次</strong>：未知数的最高次数是 2（来自 x² 这一项）。</li>
+<li><strong>a ≠ 0</strong> 是硬性条件：若 a = 0，方程退化为一次方程 <code>bx + c = 0</code>，就不叫"二次"了。</li>
+<li>b、c 可以等于 0，例如 <code>2x² = 0</code>、<code>3x² - 12 = 0</code>、<code>x² + 4x = 0</code> 都是一元二次方程。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>一元二次方程 <code>ax² + bx + c = 0</code> 的每一个实数解，都对应抛物线 <code>y = ax² + bx + c</code> 与 <strong>x 轴（即直线 y = 0）</strong> 的一个交点的<strong>横坐标</strong>。换句话说：<strong>解方程 = 求曲线与水平线"海拔 0"相交的位置</strong>。这是继数轴之后，数与形的又一次统一——方程从"一串待解的符号"变成了"一条看得见的曲线与一条直线的位置关系"。</div>
+<div class="insight"><strong>物理含义：</strong>竖直上抛 / 自由落体的高度公式 <code>h(t) = -½gt² + v₀t + h₀</code> 就是一个关于时间 t 的一元二次式。问"物体何时落地"（h = 0）、"何时经过某个高度 h₀"（h = h₀），本质上都是解一个一元二次方程。系数 a、b、c 对应着"重力加速度的一半、初速度、初始高度"这类实实在在的物理量。</div>
+
+<h2 id="s2">21.2 直接开平方法</h2>
+<h3>适用情形：已经"平方好了"的方程</h3>
+<p>形如 <code>x² = p</code> 或 <code>(x + m)² = n</code> 的方程，可以直接"两边开平方"来解。它是一元二次方程里最朴素、最直观的一类。</p>
+<pre><code>x² = p   （或  (x + m)² = n）
+
+p &gt; 0   →  x = ±√p        （两个互为相反数的实根）
+p = 0   →  x = 0          （两个相等的实根）
+p &lt; 0   →  无实数根        （实数的平方不可能为负）</code></pre>
+<ul>
+<li><strong>p &gt; 0</strong>：例如 x² = 9，开平方得 x = ±3，注意<strong>一正一负两个根</strong>都不能丢。</li>
+<li><strong>p = 0</strong>：例如 x² = 0，只有 x = 0，习惯上叫"两个相等的实根"（二重根）。</li>
+<li><strong>p &lt; 0</strong>：例如 x² = -4，在实数范围内<strong>无解</strong>（任何实数的平方都 ≥ 0）。要等到高中引入复数才有解。</li>
+</ul>
+<p><strong>带括号的情形</strong>：<code>(x + m)² = n</code> 先整体开平方，再移项。</p>
+<pre><code>(x - 3)² = 16
+x - 3 = ±4
+x = 3 ± 4   →  x = 7 或 x = -1</code></pre>
+<div class="insight"><strong>几何含义：</strong><code>x² = p</code> 就是"边长为 x 的正方形，面积等于 p"。解 x = ±√p 表示：面积为 p 的正方形，其<strong>边长</strong>是 √p；而 ± 号表示在数轴上，距离原点 √p 的两个点（+√p 与 -√p）<strong>关于原点对称</strong>。当 p &lt; 0 时"面积为负"，这样的正方形不存在，所以无实数根——几何上一目了然。</div>
+<div class="insight"><strong>物理含义：</strong>初速度为 0 的匀加速直线运动，位移公式 <code>s = ½at²</code>。已知位移 s 和加速度 a 求时间 t：<code>t² = 2s/a</code>，开平方得 <code>t = ±√(2s/a)</code>——负号对应"往回追溯的过去时刻"，通常只取正根 t &gt; 0 作为物理上合理的时间。</div>
+
+<h2 id="s3">21.3 配方法</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<defs>
+<marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<g transform="translate(120,55)">
+  <rect x="0" y="0" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <rect x="60" y="0" width="45" height="60" fill="#bfdbfe" stroke="#2563eb" stroke-width="2">
+    <animateTransform attributeName="transform" type="translate" values="45 0;45 0;0 0;0 0" keyTimes="0;0.1;0.3;1" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="0" y="60" width="60" height="45" fill="#bfdbfe" stroke="#2563eb" stroke-width="2">
+    <animateTransform attributeName="transform" type="translate" values="0 45;0 45;0 0;0 0" keyTimes="0;0.2;0.4;1" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="60" y="60" width="45" height="45" fill="#bbf7d0" stroke="#16a34a" stroke-width="2">
+    <animate attributeName="width" values="0;0;45;45" keyTimes="0;0.35;0.55;1" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="height" values="0;0;45;45" keyTimes="0;0.35;0.55;1" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.35;0.55;1" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="0" y="0" width="105" height="105" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4">
+    <animate attributeName="stroke-dashoffset" values="420;420;0;0" keyTimes="0;0.6;0.9;1" dur="5s" repeatCount="indefinite"/>
+  </rect>
+  <g fill="#334155" font-size="13" text-anchor="middle">
+    <text x="30" y="-9">x</text><text x="82.5" y="-9">3</text>
+    <text x="30" y="120">x</text><text x="82.5" y="120">3</text>
+  </g>
+  <g fill="#1e3a8a" font-size="14" text-anchor="middle" font-weight="700">
+    <text x="30" y="36">x²</text><text x="82.5" y="36">3x</text><text x="30" y="90">3x</text>
+    <text x="82.5" y="90" fill="#166534">
+      <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.35;0.55;1" dur="5s" repeatCount="indefinite"/>
+      9
+    </text>
+  </g>
+</g>
+<line x1="228" y1="108" x2="296" y2="108" stroke="#16a34a" stroke-width="2" marker-end="url(#arr1)"/>
+<text x="330" y="118" fill="#2563eb" font-size="22" text-anchor="middle" font-weight="700">(x + 3)²</text>
+<text x="260" y="255" fill="#1e3a8a" font-size="17" text-anchor="middle">x² + 6x + 9 = (x + 3)²</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：配方法——把缺一角的矩形补成完整正方形，补上的正是 3²</figcaption>
+</figure>
+<h3>思想：把"一般式"变成"能直接开平方的形式"</h3>
+<p>配方法的本质是<strong>把 ax² + bx + c = 0 化为 (x + m)² = n</strong>，再回到直接开平方。这是所有方法里最"原理化"的一种，求根公式正是由它推出来的。</p>
+<h3>四个标准步骤</h3>
+<ol>
+<li><strong>化 1</strong>：二次项系数化为 1（方程两边同除以 a）。</li>
+<li><strong>移项</strong>：把常数项移到等号右边。</li>
+<li><strong>配方</strong>：两边同时加上"一次项系数一半的平方"，把左边凑成完全平方式。</li>
+<li><strong>开平方</strong>：用直接开平方法求解。</li>
+</ol>
+<p>完整示范（解 <code>x² + 6x + 5 = 0</code>）：</p>
+<pre><code>x² + 6x + 5 = 0
+x² + 6x = -5                     ← 移常数项
+x² + 6x + 9 = -5 + 9             ← 加 (6/2)² = 9
+(x + 3)² = 4                     ← 左边配成完全平方
+x + 3 = ±2
+x = -3 ± 2  →  x = -1 或 x = -5</code></pre>
+<p><strong>为什么要加 9？</strong>因为 <code>x² + 2·m·x + m² = (x + m)²</code>。这里一次项系数是 6，即 2m = 6，m = 3，所以必须补上 m² = 3² = 9，左边才能变成完全平方。</p>
+<div class="insight"><strong>几何含义：</strong>配方法的名字就来自几何里的<strong>"补形"</strong>。把 <code>x² + 6x</code> 看成"一个面积为 x² 的正方形 + 一块长为 6、宽为 x 的长条"，这块长条可以分成两个 3×x 的窄条贴在正方形两侧，还缺一个 3×3 的角；补上这个面积为 9 的角，整体就变成一个边长为 (x+3) 的完整正方形，面积 (x+3)²。这就是"配方 = 补成正方形"的字面含义，也是古人解二次方程的原始图景。</div>
+<div class="insight"><strong>物理含义：</strong>把匀变速运动的高度式 <code>h = -½gt² + v₀t + h₀</code> 配成 <code>h = -½g(t - t顶)² + h顶</code> 的形式后，能直接读出"顶点"：<code>t顶 = v₀/g</code> 是到达最高点的时刻，<code>h顶 = h₀ + v₀²/(2g)</code> 是最高点高度。配方法把"一团二次式"整理成"一眼看出极值"的形状。</div>
+
+<h2 id="s4">21.4 公式法与判别式</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="80" y1="180" x2="440" y2="180" stroke="#94a3b8" stroke-width="2"/>
+<text x="446" y="184" fill="#334155" font-size="13">x 轴</text>
+<g fill="#334155" font-size="14" text-anchor="middle">
+  <text x="150" y="36" fill="#2563eb"><animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>Δ &gt; 0：两个交点</text>
+  <text x="260" y="36" fill="#16a34a"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>Δ = 0：相切（一个交点）</text>
+  <text x="400" y="36" fill="#dc2626"><animate attributeName="opacity" values="0;0;0;0;1;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>Δ &lt; 0：无交点</text>
+</g>
+<path d="M140,36 L150,59 L160,80 L170,99 L180,116 L190,131 L200,144 L210,155 L220,164 L230,171 L240,176 L250,179 L260,180 L270,179 L280,176 L290,171 L300,164 L310,155 L320,144 L330,131 L340,116 L350,99 L360,80 L370,59 L380,36" fill="none" stroke="#2563eb" stroke-width="3">
+  <animateTransform attributeName="transform" type="translate" values="0 40;0 40;0 0;0 -40;0 -40;0 40" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+</path>
+<circle cx="197" cy="180" r="6" fill="#2563eb">
+  <animate attributeName="cx" values="197;197;260;260;260;197" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+</circle>
+<circle cx="323" cy="180" r="6" fill="#2563eb">
+  <animate attributeName="cx" values="323;323;260;260;260;323" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+</circle>
+<circle cx="260" cy="180" r="6" fill="#16a34a">
+  <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+</circle>
+<text y="202" font-size="13" fill="#2563eb" text-anchor="middle">
+  <animate attributeName="x" values="197;197;260;260;260;197" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  x₁
+</text>
+<text y="202" font-size="13" fill="#2563eb" text-anchor="middle">
+  <animate attributeName="x" values="323;323;260;260;260;323" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  <animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.25;0.4;0.55;0.75;1" dur="6s" repeatCount="indefinite"/>
+  x₂
+</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：判别式 Δ——抛物线上下平移，与 x 轴交点由 2 个 → 1 个（相切）→ 0 个</figcaption>
+</figure>
+<h3>求根公式：万能解法</h3>
+<p>对一般式 <code>ax² + bx + c = 0（a≠0）</code> 配方，可直接导出适用于<strong>所有</strong>一元二次方程的求根公式：</p>
+<pre><code>        -b ± √(b² - 4ac)
+x = ─────────────────────
+              2a</code></pre>
+<h3>判别式 Δ（读作"得尔塔"）</h3>
+<pre><code>Δ = b² - 4ac</code></pre>
+<p>根的情况完全由 Δ 的符号决定：</p>
+<table>
+<tr><th>判别式</th><th>根的情况</th><th>与 x 轴的交点</th></tr>
+<tr><td>Δ &gt; 0</td><td>两个不相等的实根</td><td>两个交点</td></tr>
+<tr><td>Δ = 0</td><td>两个相等的实根 x = -b/(2a)</td><td>一个交点（顶点恰在 x 轴上，相切）</td></tr>
+<tr><td>Δ &lt; 0</td><td>无实数根</td><td>无交点</td></tr>
+</table>
+<h3>公式是怎么来的（配方推导，理解即可）</h3>
+<pre><code>ax² + bx + c = 0
+→  x² + (b/a)x = -c/a
+→  x² + (b/a)x + (b/2a)² = (b/2a)² - c/a
+→  (x + b/2a)² = (b² - 4ac) / (4a²)
+→  x + b/2a = ± √(b² - 4ac) / (2a)
+→  x = [-b ± √(b² - 4ac)] / (2a)</code></pre>
+<div class="insight"><strong>几何含义：</strong>判别式 Δ 就是抛物线 y = ax² + bx + c 与 x 轴<strong>交点个数</strong>的判官：Δ &gt; 0 时曲线"穿过"x 轴两次；Δ = 0 时曲线<strong>顶点恰好落在 x 轴上</strong>（相切，只有一个切点）；Δ &lt; 0 时整条抛物线悬在 x 轴上方或下方，永远碰不到 x 轴。求根公式里 <code>-b/(2a)</code> 是<strong>对称轴</strong>，<code>±√Δ/(2a)</code> 表示两个根<strong>关于对称轴左右对称分布</strong>——两个交点关于对称轴镜像。</div>
+<div class="insight"><strong>物理含义：</strong>竖直上抛中，问"物体能否到达高度 H"，等价于问方程 <code>-½gt² + v₀t + (h₀ - H) = 0</code> 的判别式：<code>Δ ≥ 0</code> 才能到达该高度（Δ = 0 时刚好在最高点擦过），<code>Δ &lt; 0</code> 则初速度不够，永远达不到。判别式把"能不能、有几个时刻"这样的物理问题一次判断清楚。</div>
+
+<h2 id="s5">21.5 因式分解法</h2>
+<h3>原理：零乘任何数得零</h3>
+<p>若两个因式的乘积为 0，则<strong>至少有一个因式为 0</strong>。把方程左边分解成两个一次因式之积，就能"一拆二"分别求解：</p>
+<pre><code>a(x - p)(x - q) = 0
+⟺  x - p = 0  或  x - q = 0
+⟺  x = p  或  x = q</code></pre>
+<h3>常用分解手段</h3>
+<ul>
+<li><strong>提公因式</strong>：<code>x² - 4x = 0 → x(x - 4) = 0 → x = 0 或 x = 4</code></li>
+<li><strong>平方差公式</strong>：<code>a² - b² = (a + b)(a - b)</code>，如 <code>x² - 9 = 0 → (x + 3)(x - 3) = 0</code></li>
+<li><strong>完全平方公式</strong>：<code>a² ± 2ab + b² = (a ± b)²</code>，如 <code>x² - 6x + 9 = 0 → (x - 3)² = 0 → x = 3（重根）</code></li>
+<li><strong>十字相乘</strong>：对 <code>x² + (p+q)x + pq = (x+p)(x+q)</code> 反用。</li>
+</ul>
+<p>示范（十字相乘解 <code>x² - 5x + 6 = 0</code>）：</p>
+<pre><code>x² - 5x + 6 = 0
+(x - 2)(x - 3) = 0
+x - 2 = 0 或 x - 3 = 0
+x = 2 或 x = 3</code></pre>
+<div class="insight"><strong>几何含义：</strong>抛物线 <code>y = (x - 2)(x - 3)</code> 可以看成两个一次函数 <code>y₁ = x - 2</code>、<code>y₂ = x - 3</code> 的<strong>乘积</strong>。当 y = 0（落在 x 轴上）时，只要其中一个因子为 0 即可——所以两个交点分别位于 x = 2 和 x = 3，恰好是这两个一次函数各自的零点。因式分解把一个"二次曲线与 x 轴相交"的问题，拆成了两个"一次直线过零点"的问题。</div>
+<div class="insight"><strong>物理含义：</strong>当一个物理过程可写成"两个独立条件相乘 = 0"时，因式分解法能一次性找出所有满足条件的时刻。例如"位移为 0"<code>t(v₀ - ½gt) = 0</code>：t = 0 是出发时刻，<code>t = 2v₀/g</code> 是重新落回原高度的时刻——两个根对应两个真实发生的物理瞬间。</div>
+
+<h2 id="s6">21.6 根与系数的关系（韦达定理）</h2>
+<h3>定理内容</h3>
+<p>若 <code>x₁、x₂</code> 是一元二次方程 <code>ax² + bx + c = 0（a≠0）</code> 的两个根，那么它们与系数之间有如下关系：</p>
+<pre><code>x₁ + x₂ = -b / a          （两根之和）
+x₁ · x₂ =  c / a          （两根之积）</code></pre>
+<p>特别地，当 a = 1（即 <code>x² + px + q = 0</code>）时，简化为：<code>x₁ + x₂ = -p</code>，<code>x₁x₂ = q</code>。</p>
+<h3>两个高频推论（务必背熟）</h3>
+<pre><code>x₁² + x₂² = (x₁ + x₂)² - 2x₁x₂
+(x₁ - x₂)² = (x₁ + x₂)² - 4x₁x₂</code></pre>
+<p>这些式子让我们<strong>不解方程</strong>就能求出与根有关的对称式的值。</p>
+<div class="insight"><strong>几何含义：</strong>两根之和 <code>x₁ + x₂</code> 的几何意义是"两个交点横坐标之和"。因为两个根关于<strong>对称轴</strong> <code>x = -b/(2a)</code> 左右对称，所以 <code>x₁ + x₂ = 2 × (-b/(2a)) = -b/a</code>——即<strong>两根之和等于对称轴横坐标的 2 倍</strong>。两根之积 <code>x₁x₂ = c/a</code> 则与抛物线在 y 轴上的截距 c 及开口大小 a 有关。韦达定理在几何上就是"对称轴把两个交点等分"这件事的代数化。</div>
+<div class="insight"><strong>物理含义：</strong>抛体运动中，物体两次经过同一高度 H 的时刻 t₁、t₂ 满足 <code>t₁ + t₂ = 2t顶</code>（其中 t顶 是到达最高点的时刻），即"两时刻之和等于顶点时刻的 2 倍"——这正是韦达定理两根之和的物理版本。用 <code>t₁ + t₂ = 2v₀/g</code> 无需解方程就能求出抛体在空中停留的总时间。</div>
+
+<h2 id="s7">21.7 一元二次方程的应用</h2>
+<p>一元二次方程是刻画<strong>平方关系</strong>的模型，凡是"一个量是另一个量的二次函数"的场景都能用它列方程求解。解应用题的通用流程：<strong>审题设未知数 → 找等量关系列方程 → 解方程 → 检验（舍去不合题意的根，如负时间、负长度）→ 作答</strong>。</p>
+
+<h3>（一）平均增长率 / 降低率问题</h3>
+<p>若基数为 a，平均增长率为 x，经过两期后的量为 b，则：</p>
+<pre><code>a(1 + x)² = b      （增长）
+a(1 - x)² = b      （降低）</code></pre>
+<p>例：某厂产量 2 万吨，两年后达到 2.42 万吨，求平均年增长率。设增长率为 x，则 <code>2(1 + x)² = 2.42</code>，解得 <code>1 + x = 1.1</code>，x = 10%（舍去负根）。</p>
+<div class="insight"><strong>几何含义：</strong>"每期按比例缩放再缩放"相当于在数轴上连续做两次<strong>等比拉伸</strong>，(1+x)² 就是连续两次乘同一个倍率后总面积/总量放大到原来的平方倍——面积类问题（长宽各增 x）天然是平方关系。</div>
+<div class="insight"><strong>物理含义：</strong>连续两次同比例的变化就是"指数/几何增长"的离散版本，与利息复利、细菌翻倍、放射性衰变同源；平方项代表"两期复合"的效果。</div>
+
+<h3>（二）几何面积问题</h3>
+<p>靠墙围篱笆、相框加宽、道路占地等，面积常表示为一边长的二次式，令其等于给定面积即得一元二次方程。</p>
+<pre><code>例：用 40m 长的篱笆靠墙围一个矩形（只围三边），
+面积为 200m²。设垂直于墙的边为 x，则平行于墙的边为 40 - 2x：
+x(40 - 2x) = 200
+2x² - 40x + 200 = 0
+x² - 20x + 100 = 0  →  (x - 10)² = 0  →  x = 10</code></pre>
+<div class="insight"><strong>几何含义：</strong>面积问题的根就是"使矩形面积达到目标值的边长"，解方程 = 求曲线 <code>S = x(40 - 2x)</code>（一条开口向下的抛物线，表示面积随边长的变化）与水平线 <code>S = 200</code> 的交点。</div>
+
+<h3>（三）抛体运动问题（物理）</h3>
+<p>竖直上抛的高度：<code>h = h₀ + v₀t - ½gt²</code>。问"何时落地"即令 h = 0 解关于 t 的一元二次方程；问"何时到达某高度 H"即令 h = H。</p>
+<pre><code>例：以 20 m/s 竖直上抛（g = 10 m/s²，从地面出发）：
+h = 20t - 5t²
+问何时回到地面：20t - 5t² = 0
+→ 5t(4 - t) = 0  →  t = 0（出发）或 t = 4（回到地面）</code></pre>
+<div class="insight"><strong>几何含义：</strong>h(t) 的图像是一条开口向下的抛物线，解方程 h = 0 就是求它与 t 轴（高度为 0）的交点横坐标；顶点是最高点，对称轴时刻 t = v₀/g 恰是两根（出发、落地时刻）的中点。</div>
+
+<h3>（四）销售利润问题</h3>
+<p>利润 = (售价 - 成本) × 销量。设每件涨价 x 元，销量按线性规律下降，利润就是 x 的二次式，令利润等于目标值得到一元二次方程。</p>
+<pre><code>例：进价 30 元、售价 40 元、每天卖 60 件；每涨 1 元少卖 2 件。
+设涨价 x 元，利润 y = (40 + x - 30)(60 - 2x) = (10 + x)(60 - 2x)。
+问利润何时为 800 元：(10 + x)(60 - 2x) = 800，展开解得 x = 10 或 x = -10（舍）。</code></pre>
+<div class="insight"><strong>几何含义：</strong>利润是涨价幅度 x 的二次函数，图像是开口向下的抛物线；"利润 = 800"是它与水平线 y = 800 的两个交点，顶点对应最大利润。</div>
+<div class="insight"><strong>物理含义：</strong>利润抛物线与抛体轨迹同形——开口向下、有最高点、两边对称，本质上都是"二次量 = 常量"的结构：一个量上升、另一个量下降，乘积在中间取极值。</div>
+
+<h2 id="s8">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>一元二次方程</td><td>抛物线 y = ax²+bx+c 与 x 轴的交点方程</td><td>抛体何时到达指定高度、增长率模型</td></tr>
+<tr><td>根（解）</td><td>抛物线与 x 轴交点的横坐标</td><td>特定时刻（落地、相遇、达标时刻）</td></tr>
+<tr><td>直接开平方</td><td>正方形面积求边长（± 关于原点对称）</td><td>已知加速度/位移求时间 t = ±√(2s/a)</td></tr>
+<tr><td>配方法</td><td>把缺角矩形补成完整正方形</td><td>把二次式整理成能直读顶点的标准形</td></tr>
+<tr><td>求根公式</td><td>由系数 a、b、c 定位两交点横坐标</td><td>给定初速/高度求时刻</td></tr>
+<tr><td>判别式 Δ</td><td>抛物线与 x 轴交点个数（2 / 1 / 0）</td><td>能否到达某高度（Δ ≥ 0 才可能）</td></tr>
+<tr><td>因式分解法</td><td>拆成两个一次因子的零点</td><td>两个独立条件各自为 0 的时刻</td></tr>
+<tr><td>韦达定理</td><td>两交点关于对称轴对称，和 = 2×对称轴</td><td>两时刻之和 = 顶点时刻的 2 倍</td></tr>
+<tr><td>对称轴 / 顶点</td><td>抛物线的镜像轴与最高(低)点</td><td>抛体最高点时刻与最大高度</td></tr>
+</table>
+
+<h2 id="s9">典型例题（自测）</h2>
+<div class="ex">
+<h4>先独立做，再看思路</h4>
+<ol>
+<li>判断下列哪些是一元二次方程，并写出 a、b、c：<code>3x² - 2x - 1 = 0</code>、<code>x² = 0</code>、<code>x + 1/x = 2</code>、<code>(x - 1)(x + 2) = 0</code>。</li>
+<li>用直接开平方法解：<code>(x - 1)² = 25</code>、<code>2x² - 8 = 0</code>。</li>
+<li>用配方法解：<code>x² - 4x - 5 = 0</code>、<code>x² + x - 1 = 0</code>。</li>
+<li>用公式法解：<code>2x² + 3x - 2 = 0</code>，并求出 Δ 的值。</li>
+<li>用因式分解法解：<code>x² - 7x + 12 = 0</code>、<code>x(x - 3) = 10</code>。</li>
+<li>已知方程 <code>x² - 5x + k = 0</code> 的一个根是 2，求另一个根及 k 的值。</li>
+<li>已知 <code>x₁、x₂</code> 是 <code>x² - 3x - 1 = 0</code> 的两根，不解方程求 <code>x₁² + x₂²</code> 与 <code>(x₁ - x₂)²</code> 的值。</li>
+<li>某商品连续两次降价，由 100 元降到 81 元，求平均每次降价的百分率。</li>
+</ol>
+</div>
+
+<h2 id="s10">常见误区</h2>
+<div class="warn">
+<h4>⚠ 高频易错点</h4>
+<ul>
+<li>❌ "x² = 9 的解是 x = 3" → ❌ 少了 <strong>x = -3</strong>。开平方要 <strong>±</strong>，丢掉负根是本章第一大错。</li>
+<li>❌ "x² = -9 有解 x = ±3" → ❌ 实数的平方恒非负，x² = -9 在实数范围内<strong>无解</strong>。</li>
+<li>❌ "配方法加的是 (b/2)²" 记成加 b² 或 b/2 → ❌ 要加的是<strong>一次项系数一半的平方</strong>：<code>x² + 6x</code> 加 3² = 9，不是加 36。</li>
+<li>❌ "用公式时把 a、b、c 抄反" → ❌ 必须先把方程整理成 <strong>ax² + bx + c = 0</strong> 的标准形，再对号入座；<code>-b</code> 的负号不能漏。</li>
+<li>❌ "Δ &gt; 0 有两个根，Δ = 0 只有一个根" → ❌ 严格说 Δ = 0 是<strong>两个相等的实根</strong>（二重根），不是"只有一个"。</li>
+<li>❌ "因式分解后 (x-2)(x-3)=0 得 x=2 且 x=3" → ❌ 是 <strong>x=2 或 x=3</strong>，两个根分别成立，不能同时取。</li>
+<li>❌ "韦达定理 x₁+x₂ = b/a" → ❌ 是 <strong>-b/a</strong>，负号最容易被遗忘。</li>
+<li>❌ "应用题解出负根直接写进答案" → ❌ 负数的时间、长度、百分率下降率等<strong>不合题意，要检验舍去</strong>。</li>
+<li>❌ "忘了 a ≠ 0 的条件" → ❌ 若 a = 0 则不是二次方程，讨论根时先确认 a 是否为零。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin-top:0">一、练习题</h3>
+<ol>
+<li>判断下列哪些是一元二次方程，并把属于一元二次方程的整理成一般式 <code>ax² + bx + c = 0</code>，指出 a、b、c：① <code>3x² - 2x - 1 = 0</code>；② <code>x² = 0</code>；③ <code>2x - 1 = 0</code>；④ <code>(x - 1)(x + 2) = 0</code>。</li>
+<li>用直接开平方法解方程 <code>x² = 25</code> 和 <code>(x - 3)² = 16</code>。结合「正方形面积 = 边长²」的几何含义，说明为什么 <code>x² = 25</code> 有两个根，而 <code>x² = -4</code> 在实数范围内无解。</li>
+<li>用配方法解方程 <code>x² + 8x - 9 = 0</code>，并解释配方时「为什么两边要同时加上 16」。</li>
+<li>用公式法解方程 <code>2x² - 5x + 2 = 0</code>；再不解方程，用判别式 Δ 判断 <code>x² - 4x + 5 = 0</code> 对应的抛物线与 x 轴交点的个数，并说明理由。</li>
+<li>用因式分解法解方程 <code>x² - 7x + 12 = 0</code>，并用韦达定理（两根之和、两根之积）验证所得两个根与系数的关系。</li>
+<li>一小球以 20 m/s 竖直上抛（g = 10 m/s²），高度 <code>h = 20t - 5t²</code>。求：小球何时回到地面（h = 0）？何时到达最高点？最高点的高度是多少？</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>①②④ 是一元二次方程，③ 是一次方程。① 已是一般式：a = 3，b = -2，c = -1；② x² = 0：a = 1，b = 0，c = 0；④ 展开得 x² + x - 2 = 0：a = 1，b = 1，c = -2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>x² = 25 → x = ±5。几何上，面积为 25 的正方形边长为 5，但数轴上「距原点 5」的点有 +5 和 -5 两个，二者关于原点对称，所以有两个根。(x - 3)² = 16 → x - 3 = ±4 → x = 7 或 x = -1。而 x² = -4 无实数根：任何实数的平方都 ≥ 0，「面积为负」的正方形不存在。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>x² + 8x - 9 = 0 → x² + 8x = 9 → x² + 8x + 16 = 9 + 16 → (x + 4)² = 25 → x + 4 = ±5 → x = 1 或 x = -9。加 16 是因为一次项系数 8 的一半是 4，4² = 16，补上它左边才能凑成完全平方式 (x + 4)²（相当于把缺角的矩形补成完整正方形）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>2x² - 5x + 2 = 0：a = 2，b = -5，c = 2，Δ = b² - 4ac = 25 - 16 = 9 &gt; 0，x = [-(-5) ± √9]/(2×2) = (5 ± 3)/4，故 x = 2 或 x = 1/2。对于 x² - 4x + 5 = 0：Δ = 16 - 20 = -4 &lt; 0，无实数根；抛物线 y = x² - 4x + 5 开口向上且顶点在 x 轴上方，与 x 轴没有交点（0 个交点）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>x² - 7x + 12 = 0 → (x - 3)(x - 4) = 0 → x = 3 或 x = 4。验证韦达定理：x₁ + x₂ = 3 + 4 = 7 = -(-7)/1，x₁·x₂ = 3 × 4 = 12 = 12/1，与「两根之和 = -b/a、两根之积 = c/a」完全一致。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>回到地面即 h = 0：20t - 5t² = 0 → 5t(4 - t) = 0 → t = 0（出发时刻）或 t = 4 s（回到地面）。到达最高点时刻在对称轴（两根 0 与 4 的中点）处：t = -b/(2a) = 20/(2×5) = 2 s；最高点高度 h(2) = 20×2 - 5×2² = 40 - 20 = 20 m。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../../../初二/八年级下册/第20章-数据的分析/第20章-数据的分析.html">← 上一章：第20章 数据的分析</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第22章-二次函数/第22章-二次函数.html">下一章：第22章 二次函数 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

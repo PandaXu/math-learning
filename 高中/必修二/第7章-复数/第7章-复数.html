@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第7章 复数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第7章 复数</div></header>
+<main class="container">
+<h1>第7章 复数</h1>
+<p class="lead">高中 / 必修第二册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>复数 = 「平面上的数」。实数只够填满一条线（数轴），而复数用一个点 <code>(a, b)</code> 填满整个平面：横轴是实轴、纵轴是虚轴，中间的 “+” 把两条轴「缝」成一个二维的数。学完本章，你要能在脑中的复平面上“看见”每一个复数——加法是向量平移、乘法是旋转+伸缩、共轭是关于实轴的镜像、模是到原点的距离。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">7.1 复数的概念</a><a href="#s2">7.2 复数的代数运算</a><a href="#s3">7.3 复平面与几何意义</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+</div>
+
+<h2 id="s1">7.1 复数的概念</h2>
+<h3>为什么要发明复数？（历史的动机）</h3>
+<p>解一元二次方程 <code>x² = −1</code> 时，任何实数的平方都 ≥ 0，所以在实数范围内它<strong>无解</strong>。为了让「开平方」对一切数都成立——也为了让三次方程求根公式里的中间量能被统一处理——数学家引入了一个新数：</p>
+<pre><code>虚数单位 i：  i² = −1      （即 i = √−1）</code></pre>
+<p>于是 <code>x = ±i</code> 就是方程 <code>x² = −1</code> 的两个解。把实数与 i 的「实倍」拼起来，就得到一般的复数：</p>
+<pre><code>复数：  z = a + bi    （a、b 都是实数，i 是虚数单位）
+
+实部  Re(z) = a       虚部  Im(z) = b</code></pre>
+<p>全体复数组成的集合记作 <strong>C</strong>（complex）。显然 <strong>实数集 R ⊂ 复数集 C</strong>：当 b = 0 时，z = a 就是原来的实数。</p>
+<div class="insight"><strong>几何含义：</strong>一个复数 <code>a + bi</code> 就是平面上的一个点 <code>(a, b)</code>。实数「躺」在横轴上（b = 0），纯虚数「立」在纵轴上（a = 0），而 <code>i</code> 就是「从原点竖直向上走一个单位」的那一步。复数的 “+” 不是大小相加，而是把「横着的实部」与「竖着的虚部」组合成一个二维位置。</div>
+<div class="insight"><strong>物理含义：</strong>一个复数同时携带<strong>两个独立信息</strong>（实部 + 虚部），天然适合描述「有大小、又有方向/相位」的量——交流电的电压、机械振动、电磁波、量子力学波函数，全都用复数表示：实部记「与参考同相的分量」，虚部记「相位超前/滞后 90° 的分量」。</div>
+
+<h3>复数的分类</h3>
+<table>
+<tr><th>类型</th><th>条件</th><th>例</th><th>在复平面上的位置</th></tr>
+<tr><td>实数</td><td>b = 0</td><td>3、−2、0</td><td>横轴（实轴）上</td></tr>
+<tr><td>虚数</td><td>b ≠ 0</td><td>2 + 3i、−i</td><td>不在实轴上</td></tr>
+<tr><td>纯虚数</td><td>a = 0 且 b ≠ 0</td><td>3i、−i</td><td>纵轴（虚轴）上</td></tr>
+</table>
+<p><strong>注意</strong>：0 = 0 + 0i 是实数（也是唯一的「既实又虚的分界点」，位于原点）。</p>
+
+<h3>复数相等的充要条件</h3>
+<pre><code>a + bi = c + di   ⟺   a = c 且 b = d</code></pre>
+<p>两个复数相等，当且仅当它们的<strong>实部相等、虚部也相等</strong>。特别地：</p>
+<pre><code>a + bi = 0   ⟺   a = 0 且 b = 0</code></pre>
+<div class="insight"><strong>为什么不能给复数「比大小」？</strong>实数是「一条线」，天然有前后（大小）；复数是「一张面」，点与点之间只有距离、没有先后。所以「3 + 4i 和 5 谁大」是<strong>无意义</strong>的问题——只有实数才可比较大小。</div>
+
+<h3>共轭复数（实轴的“镜像”）</h3>
+<p>把虚部变号，得到 <code>z = a + bi</code> 的<strong>共轭复数</strong>，记作 <code>z̄</code>（读作「z 共轭」）：</p>
+<pre><code>z = a + bi   ⟶   z̄ = a − bi</code></pre><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="140" x2="490" y2="140" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="30" x2="170" y2="250" stroke="#94a3b8" stroke-width="2"/><text x="478" y="130" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="48" font-size="13" fill="#334155">虚轴</text><text x="150" y="158" font-size="13" fill="#334155">O</text><line x1="305" y1="50" x2="305" y2="230" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"><animate attributeName="stroke-dashoffset" values="0;-20" dur="1.2s" repeatCount="indefinite"/></line><circle cx="305" cy="50" r="6" fill="#2563eb"/><text x="316" y="46" font-size="14" fill="#2563eb" font-weight="700">z = 3 + 2i</text><circle cx="305" cy="230" r="6" fill="#16a34a"/><text x="316" y="246" font-size="14" fill="#16a34a" font-weight="700">z̄ = 3 − 2i</text><circle cx="305" cy="50" r="7" fill="none" stroke="#2563eb" stroke-width="3"><animate attributeName="cy" values="50;230;50" dur="4s" repeatCount="indefinite"/><animate attributeName="stroke" values="#2563eb;#16a34a;#2563eb" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：共轭 z̄ 是 z 关于实轴（横轴）的镜像，只有虚部变号、上下翻转</figcaption></figure>
+<ul>
+<li><code>z + z̄ = 2a</code>（两倍的实部，是实数）；<code>z − z̄ = 2bi</code>（两倍的虚部，是纯虚数）</li>
+<li><code>z · z̄ = a² + b² = |z|²</code>（这个结论贯穿全章，务必记住）</li>
+<li><code>z = z̄ ⟺ z 是实数</code>；<code>z = −z̄ ⟺ z 是纯虚数</code></li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>共轭就是<strong>关于实轴（横轴）的镜像</strong>。点 <code>(a, b)</code> 与点 <code>(a, −b)</code> 上下对称，实轴是它们的对称轴。</div>
+<div class="insight"><strong>物理含义：</strong>共轭对应「相位取反」。一个沿正向旋转的矢量，其共轭沿反向旋转；在电路里，取共轭常用来消掉虚部、得到实的有功功率（<code>P = Re(V·Ī)</code>）。</div>
+
+<h2 id="s2">7.2 复数的代数运算</h2>
+<p>复数的运算规则只有一条总原则：<strong>把 i 当作一个普通的字母，按多项式运算法则去做，最后用 <code>i² = −1</code> 化简</strong>。</p>
+
+<h3>加减法：实部加实部，虚部加虚部</h3>
+<pre><code>(a + bi) ± (c + di) = (a ± c) + (b ± d)i</code></pre>
+<p>例：<code>(3 + 2i) + (1 − 4i) = 4 − 2i</code>；<code>(3 + 2i) − (1 − 4i) = 2 + 6i</code>。</p>
+<div class="insight"><strong>几何含义：</strong>复数加法 = 两个向量的<strong>相加（平行四边形法则）</strong>。把 z₁、z₂ 的对应向量首尾相接，和向量就是 z₁ + z₂。减法 = 向量相减，即 <code>z₁ − z₂</code> 是从 z₂ 指向 z₁ 的向量。</div>
+<div class="insight"><strong>物理含义：</strong>同频率的两个正弦信号叠加（干涉、波的叠加），其「振幅+相位」恰好按复数加法合成——这就是为什么交流电路里可用复数（相量）直接相加算合成电压/电流。</div>
+
+<h3>乘法：多项式展开 + i² = −1</h3>
+<pre><code>(a + bi)(c + di) = ac + adi + bci + bdi²
+                = (ac − bd) + (ad + bc)i</code></pre>
+<p>例：<code>(3 + 2i)(1 − 4i) = 3 − 12i + 2i − 8i² = 3 − 10i + 8 = 11 − 10i</code>。</p>
+<div class="insight"><strong>几何含义（本章核心）：</strong>两个复数相乘 = <strong>模相乘、辐角相加</strong>，也就是「<strong>旋转 + 伸缩</strong>」。设 <code>z₁ = r₁(cos θ₁ + i sin θ₁)</code>、<code>z₂ = r₂(cos θ₂ + i sin θ₂)</code>，则<br/><code>z₁z₂ = r₁r₂ [ cos(θ₁+θ₂) + i sin(θ₁+θ₂) ]</code>。长度变为 <code>r₁r₂</code>，角度变为 <code>θ₁+θ₂</code>。</div><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="300" x2="500" y2="300" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="330" x2="170" y2="40" stroke="#94a3b8" stroke-width="2"/><text x="488" y="290" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="182" y="55" font-size="13" fill="#334155">虚轴</text><text x="148" y="320" font-size="13" fill="#334155">O</text><path d="M 273.9 240 A 120 120 0 0 0 170 180" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M 325.9 210 A 180 180 0 0 0 170 120" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/><text x="300" y="236" font-size="12" fill="#94a3b8">r₁ = 2</text><text x="344" y="176" font-size="12" fill="#94a3b8">r₁r₂ = 3</text><line x1="170" y1="300" x2="273.9" y2="240" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="6 4"/><path d="M 204.6 280 A 40 40 0 0 0 170 260" fill="none" stroke="#16a34a" stroke-width="2"/><text x="216" y="282" font-size="12" fill="#16a34a">θ: 30°→90°</text><g transform="translate(170,300)"><g><animateTransform attributeName="transform" type="rotate" values="-30;-90;-30" dur="6s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="scale" values="1 1;1.5 1.5;1 1" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="120" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="120,0 106,-7 106,7" fill="#2563eb"/></g></g></g><text x="282" y="238" font-size="14" fill="#0f172a" font-weight="700">z₁</text><text x="108" y="114" font-size="14" fill="#2563eb" font-weight="700">z₁·z₂</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：复数相乘 = 模相乘、辐角相加——向量同时「旋转」并「伸缩」</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>「辐角相加」就是<strong>相位相加</strong>。信号通过一个电路或滤波环节，输出相对输入的相位差 θ 用「乘一个单位模复数 <code>e^(iθ)</code>」来表示；而「模相乘」表示增益（放大或衰减）。乘法把「放大/衰减」与「移相」一次完成。</div>
+
+<h3>i 的幂：周期为 4 的循环</h3>
+<pre><code>i¹ = i，  i² = −1，  i³ = −i，  i⁴ = 1，  然后 i⁵ = i … 每 4 次循环一次</code></pre>
+<p>因此求 <code>iⁿ</code>，只需看 n 除以 4 的余数：<code>i²⁰²⁵</code>：2025 ÷ 4 余 1，所以 <code>i²⁰²⁵ = i</code>。</p>
+<div class="insight"><strong>几何含义：</strong>每乘一次 i，就把向量<strong>逆时针旋转 90°</strong>。乘 4 次正好转回原位（旋转 360°），所以 i 的幂以 4 为周期循环。</div><figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="160" r="90" fill="none" stroke="#94a3b8" stroke-width="1.5"/><line x1="120" y1="160" x2="400" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="40" x2="260" y2="280" stroke="#94a3b8" stroke-width="2"/><text x="388" y="150" font-size="13" fill="#334155" text-anchor="end">实轴</text><text x="272" y="55" font-size="13" fill="#334155">虚轴</text><text x="242" y="178" font-size="13" fill="#334155">O</text><text x="366" y="164" font-size="15" fill="#2563eb" font-weight="700">1<animate attributeName="opacity" values="1;0;0;0;1" keyTimes="0;0.1;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="48" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.1;0.25;0.4;1" dur="6s" repeatCount="indefinite"/></text><text x="154" y="164" font-size="15" fill="#2563eb" font-weight="700" text-anchor="end">−1<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.35;0.5;0.65;1" dur="6s" repeatCount="indefinite"/></text><text x="260" y="284" font-size="15" fill="#16a34a" font-weight="700" text-anchor="middle">−i<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.6;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></text><g transform="translate(260,160)"><g><animateTransform attributeName="transform" type="rotate" values="0;-360" dur="6s" repeatCount="indefinite"/><line x1="0" y1="0" x2="90" y2="0" stroke="#2563eb" stroke-width="4"/><polygon points="90,0 78,-6 78,6" fill="#2563eb"/></g></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：每乘一次 i 就逆时针旋转 90°，乘 4 次正好回到原位</figcaption></figure>
+
+<h3>共轭运算的性质（共轭“穿过”四则运算）</h3>
+<pre><code>z₁ ± z₂ 的共轭 = z̄₁ ± z̄₂
+z₁ · z₂ 的共轭 = z̄₁ · z̄₂
+(z₁ / z₂) 的共轭 = z̄₁ / z̄₂     (z₂ ≠ 0)
+z̄̄ = z（取两次共轭回到自身）</code></pre>
+
+<h3>除法：分母实数化（乘分母的共轭）</h3>
+<pre><code> (a + bi)      (a + bi)(c − di)     (ac + bd) + (bc − ad)i
+---------- = ------------------- = ------------------------
+ (c + di)      (c + di)(c − di)          c² + d²</code></pre>
+<p>核心手法：分子分母<strong>同乘分母的共轭</strong> <code>c − di</code>，使分母变成实数 <code>c² + d²</code>。</p>
+<p>例：<code>(3 + 2i)/(1 − 4i) = (3 + 2i)(1 + 4i)/(1² + 4²) = (3 + 12i + 2i + 8i²)/17 = (−5 + 14i)/17</code>。</p>
+<div class="insight"><strong>几何含义：</strong>除法是乘法的逆：<strong>模相除、辐角相减</strong>。<code>z₁/z₂ = (r₁/r₂)[ cos(θ₁−θ₂) + i sin(θ₁−θ₂) ]</code>——长度缩小到 <code>r₁/r₂</code>，角度减去 <code>θ₂</code>（即反向旋转）。</div>
+
+<h3>复数的模（到原点的距离）</h3>
+<pre><code>|z| = √(a² + b²)      （z = a + bi）</code></pre>
+<ul>
+<li><code>|z| ≥ 0</code>，且 <code>|z| = 0 ⟺ z = 0</code></li>
+<li><code>|z| = |z̄|</code>（镜像不改变距离）</li>
+<li><code>|z|² = z · z̄ = a² + b²</code>（<strong>是实数</strong>，不是复数！）</li>
+<li><code>|z₁z₂| = |z₁|·|z₂|</code>；<code>|z₁/z₂| = |z₁|/|z₂|</code>（模乘除 = 长度乘除）</li>
+<li>三角不等式：<code>|z₁ + z₂| ≤ |z₁| + |z₂|</code>（两边之和 ≥ 第三边）</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>模 = 复数对应的向量<strong>长度</strong> = 该点到<strong>原点</strong>的距离。它是「绝对值」从一维数轴到二维平面的推广。</div>
+<div class="insight"><strong>物理含义：</strong>模就是<strong>振幅/幅值</strong>。交流电 <code>u = U cos(ωt + φ)</code> 用相量表示时，模 <code>U</code> 即峰值；信号的能量、功率正比于模的平方 <code>|z|²</code>。</div>
+
+<h2 id="s3">7.3 复平面与几何意义</h2>
+<h3>复平面（高斯平面 / 阿尔冈图）：数与形的第二次统一</h3>
+<p>建立平面直角坐标系，让<strong>横轴表示实部</strong>（实轴）、<strong>纵轴表示虚部</strong>（虚轴），这个平面叫<strong>复平面</strong>。于是：</p>
+<pre><code>复数 z = a + bi  ↔  点 (a, b)  ↔  向量 (a, b)（起点在原点）</code></pre>
+<pre><code>       虚轴
+        ↑
+    2i  |     ● (3, 2) = 3 + 2i
+        |     |
+     i  |     |      r = |z| = √13
+        |     |    /
+        |     |  /  θ = arg z
+   -----+-----|----|---------→ 实轴
+        |   O  3
+        |
+      ● (1, −1) = 1 − i
+        |</code></pre>
+<ul>
+<li>复数的<strong>模</strong> <code>r = |z| = √(a² + b²)</code> 就是向量长度（点到原点距离）。</li>
+<li>复数的<strong>辐角</strong> <code>θ = arg z</code> 就是向量与实轴正方向之间的夹角（逆时针为正）。</li>
+<li>这一一对应关系，让<strong>复数的运算全部可以翻译成平面几何的运动</strong>——这是复数最深刻的威力所在。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>这是继「实数 ↔ 数轴」之后，数与形的<strong>第二次统一</strong>：一次函数、向量、旋转变换、平面几何，全部可以用复数语言改写。旋转、平移、缩放这些几何操作，都变成了复数的乘与加。</div>
+
+<h3>三角形式与欧拉公式（极坐标表示）</h3>
+<pre><code>z = r (cos θ + i sin θ)      r = |z| ≥ 0， θ = arg z</code></pre>
+<p>这正是「长度 + 方向」的极坐标写法。由欧拉公式：</p>
+<pre><code>e^(iθ) = cos θ + i sin θ    ⟹    z = r · e^(iθ)</code></pre>
+<p>三角形式让乘除的几何含义一目了然（见 7.2 节）：<strong>乘 = 模乘、角加；除 = 模除、角减</strong>。</p>
+
+<h3>几个“标志性”复数的几何动作</h3>
+<table>
+<tr><th>复数</th><th>模/辐角</th><th>几何动作</th><th>物理动作</th></tr>
+<tr><td><code>1</code></td><td>r=1, θ=0</td><td>不动</td><td>同相（相位差 0）</td></tr>
+<tr><td><code>i</code></td><td>r=1, θ=90°</td><td>逆时针旋转 90°</td><td>相位超前 π/2</td></tr>
+<tr><td><code>−1</code></td><td>r=1, θ=180°</td><td>旋转 180°（中心对称）</td><td>反相（相位差 π）</td></tr>
+<tr><td><code>−i</code></td><td>r=1, θ=270°</td><td>顺时针旋转 90°</td><td>相位滞后 π/2</td></tr>
+<tr><td><code>1 + i</code></td><td>r=√2, θ=45°</td><td>旋转 45° 并放大 √2 倍</td><td>相位 +45° 且增益 √2</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>「乘以 i」是整章最漂亮的几何动作——它把任意复数<strong>绕原点逆时针转 90°</strong>，长度不变。正因如此，虚数单位 i 的本质就是「旋转 90° 的算子」，而不是什么“神秘”的数。</div>
+<div class="insight"><strong>物理含义（旋转矢量法 / 相量法）：</strong>交流电 <code>u(t) = U·cos(ωt + φ)</code> 可看作一个<strong>以角速度 ω 逆时针旋转的矢量</strong>在实轴上的投影。把它冻结在 t=0 时刻，就得到相量 <code>U∠φ = U(cos φ + i sin φ)</code>。复数乘法「模乘、角加」= 物理上「<strong>振幅相乘、相位相加</strong>」；复数加法 = 同频信号的叠加。</div>
+
+<h3>乘方与棣莫弗定理（旋转的加速）</h3>
+<pre><code>[r(cos θ + i sin θ)]ⁿ = rⁿ [ cos(nθ) + i sin(nθ) ]</code></pre>
+<p>即：<strong>n 次方 = 模取 n 次方、辐角乘 n</strong>。例：<code>(1 + i)² = 2i</code>，把 <code>1 + i</code>（模 √2、辐角 45°）平方后模变 2、辐角变 90°——正好落在正虚轴上的 <code>2i</code>。</p>
+<div class="insight"><strong>几何含义：</strong>乘方把「旋转」不断叠加：<code>zⁿ</code> 相当于把 z 的向量<strong>连续旋转 n 次 θ、每次同时放大 r 倍</strong>。当 <code>r = 1</code> 时，zⁿ 只是绕着单位圆转圈——这正是<code>cos、sin</code>的倍角公式与 n 次方根背后的同一件事。</div>
+
+<h2 id="s4">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>虚数单位 i</td><td>绕原点逆时针旋转 90° 的单位算子</td><td>相位超前 π/2 的符号</td></tr>
+<tr><td>复数 z = a + bi</td><td>平面上的点 / 向量 (a, b)</td><td>同时携带「幅度」与「相位」的量</td></tr>
+<tr><td>实部 a</td><td>点在实轴上的投影（横坐标）</td><td>与参考同相的分量（余弦分量）</td></tr>
+<tr><td>虚部 b</td><td>点在虚轴上的投影（纵坐标）</td><td>正交/超前 90° 的分量（正弦分量）</td></tr>
+<tr><td>共轭 z̄</td><td>关于实轴的镜像</td><td>相位取反（反向旋转、时间反演）</td></tr>
+<tr><td>模 |z|</td><td>到原点的距离（向量长度）</td><td>振幅/幅值（功率 ∝ |z|²）</td></tr>
+<tr><td>辐角 arg z</td><td>与实轴正方向的夹角</td><td>初相位（相位角）</td></tr>
+<tr><td>加法</td><td>向量合成（平行四边形法则）</td><td>同频波的叠加/干涉</td></tr>
+<tr><td>减法</td><td>向量差（两点间的位移）</td><td>两信号的相位差矢量</td></tr>
+<tr><td>乘法</td><td>旋转 + 伸缩（模乘、辐角加）</td><td>振幅相乘、相位相加（增益+移相）</td></tr>
+<tr><td>除法</td><td>反向旋转 + 缩小（模除、辐角减）</td><td>振幅相除、相位相减</td></tr>
+<tr><td>乘 i / 乘 −1</td><td>旋转 90° / 旋转 180°</td><td>移相 π/2 / 反相（差 π）</td></tr>
+<tr><td>三角形式 r(cosθ+isinθ)</td><td>极坐标（长度 + 方向）</td><td>幅值 + 相位的紧凑表示（相量）</td></tr>
+<tr><td>乘方（棣莫弗）</td><td>旋转加速（模 n 次方、角 n 倍）</td><td>倍频/谐波（频率 n 倍）</td></tr>
+</table>
+
+<h2 id="s5">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>设 <code>z₁ = 3 + 2i</code>、<code>z₂ = 1 − 4i</code>，求 <code>z₁ + z₂</code>、<code>z₁ − z₂</code>、<code>z₁·z₂</code>、<code>z₁ / z₂</code>。</li>
+<li>求 <code>i²⁰²⁵</code> 的值；再求 <code>(1 + i)⁴</code>。</li>
+<li>已知 <code>z = 1 + i</code>，求 <code>|z|</code>、<code>z̄</code>、<code>z · z̄</code>、<code>z / z̄</code>，并在复平面上标出 z 与 z̄ 的位置关系。</li>
+<li>解释为什么「乘以 <code>1 + i</code>」等价于「旋转 45° 并放大 √2 倍」，并算出 <code>(1 + i)²</code> 验证。</li>
+<li>若 <code>z = 2(cos 60° + i sin 60°)</code>，用棣莫弗定理求 <code>z³</code> 及其模与辐角。</li>
+<li>两个同频交流信号用相量 <code>3 + 4i</code> 和 <code>5 − 12i</code> 表示，求合成信号的相量、模（幅值）与辐角（相位）。</li>
+</ol>
+</div>
+
+<h2 id="s6">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ 「虚数是“不存在”的数」 → ❌ 虚数只是<strong>不在实轴（数轴）上</strong>，它活在纵轴方向，和实数同样真实，只是维度多了一维。</li>
+<li>❌ 「复数可以比大小」 → ❌ 复数<strong>不能比较大小</strong>，只有实数才有次序；「3+4i 和 5 谁大」是无意义的问题。</li>
+<li>❌ 乘法时忘记 <code>i² = −1</code> → ❌ 例：<code>(3+2i)(1−4i)</code> 中间会出现 <code>2i·(−4i) = −8i² = +8</code>，漏掉这一项就错。</li>
+<li>❌ 除法直接「约分」 → ❌ 必须<strong>分子分母同乘分母的共轭</strong>把分母实数化，不能把 <code>(a+bi)/(c+di)</code> 当作 <code>a/c + (b/d)i</code>。</li>
+<li>❌ 混淆共轭与相反数 → ❌ 共轭 <code>z̄ = a − bi</code>（只虚部变号），相反数 <code>−z = −a − bi</code>（实部虚部都变号），两者几何上分别是「关于实轴镜像」和「关于原点中心对称」。</li>
+<li>❌ 以为 <code>|z|² = z²</code> → ❌ <code>|z|² = z·z̄ = a² + b²</code> 是<strong>非负实数</strong>；而 <code>z²</code> 一般仍是复数。例：<code>z = 1 + i</code> 时 <code>|z|² = 2</code>，但 <code>z² = 2i</code>。</li>
+<li>❌ 求 <code>iⁿ</code> 时硬算 → ❌ 直接看 <code>n</code> 除以 4 的余数即可：余 0→1、余 1→i、余 2→−1、余 3→−i。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:6px 0 10px">一、练习题</h3>
+<ol>
+<li>设 <code>z = 4 − 3i</code>，写出它的实部、虚部、共轭 <code>z̄</code> 与模 <code>|z|</code>；判断它是实数、虚数还是纯虚数，并说明 <code>z</code> 与 <code>z̄</code> 在复平面上的位置关系。</li>
+<li>求 <code>i²⁰²⁶</code> 与 <code>i²⁰²⁷</code> 的值，并说明理由。</li>
+<li>已知 <code>(x + y) + (x − y)i = 5 + i</code>，求实数 <code>x</code>、<code>y</code>。</li>
+<li>设 <code>z₁ = 1 + i</code>、<code>z₂ = 3 − 4i</code>，求 <code>z₁·z₂</code> 与 <code>z₁ / z₂</code>（写成 <code>a + bi</code> 形式）；并结合几何意义解释为什么「乘以 <code>1 + i</code>」相当于「旋转 45° 并放大 √2 倍」。</li>
+<li>在复平面上用旋转解释 <code>i³ = −i</code> 和 <code>(1 + i)² = 2i</code> 的几何过程。</li>
+<li>两个同频信号用相量 <code>u₁ = 3 + 4i</code>、<code>u₂ = 5 − 12i</code> 表示，求合成相量 <code>u = u₁ + u₂</code> 及其模与辐角正切；又设 <code>z = 2(cos 60° + i sin 60°)</code>，用棣莫弗定理求 <code>z³</code> 的模与辐角。</li>
+</ol>
+<h3 style="margin:16px 0 10px">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>实部 <code>Re(z) = 4</code>、虚部 <code>Im(z) = −3</code>；<code>z̄ = 4 + 3i</code>；<code>|z| = √(4² + (−3)²) = 5</code>。因为 <code>b = −3 ≠ 0</code> 且 <code>a = 4 ≠ 0</code>，它是虚数（但不是纯虚数）。几何上，<code>z</code> 与 <code>z̄</code> 关于实轴（横轴）上下对称。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>i</code> 的幂以 4 为周期循环。<code>2026 ÷ 4</code> 余 2，故 <code>i²⁰²⁶ = i² = −1</code>；<code>2027 ÷ 4</code> 余 3，故 <code>i²⁰²⁷ = i³ = −i</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由复数相等的充要条件，实部相等、虚部相等：<code>x + y = 5</code>，<code>x − y = 1</code>。两式相加得 <code>2x = 6</code>，故 <code>x = 3</code>；代回得 <code>y = 2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>z₁·z₂ = (1+i)(3−4i) = 3 − 4i + 3i − 4i² = 3 − i + 4 = 7 − i</code>。<br/><code>z₁/z₂ = (1+i)(3+4i)/(3²+4²) = (3 + 4i + 3i + 4i²)/25 = (−1 + 7i)/25 = −1/25 + (7/25)i</code>。<br/>几何意义：<code>1 + i</code> 的模为 <code>√(1²+1²) = √2</code>、辐角为 <code>45°</code>，故「乘以 <code>1+i</code>」就是把向量模放大 √2 倍、辐角加 45°，即旋转 45° 并放大 √2 倍。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>每乘一次 <code>i</code> 即绕原点逆时针旋转 90°。<code>i³</code> 从 1 出发连续乘三次 <code>i</code>：转 90° 到 <code>i</code>，再转 90° 到 <code>−1</code>，再转 90° 到 <code>−i</code>，故 <code>i³ = −i</code>。<br/><code>(1+i)² = 1 + 2i + i² = 2i</code>；几何上 <code>1+i</code> 模为 √2、辐角 45°，平方后模变 2、辐角变 90°，正好落在正虚轴上，即 <code>2i</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>合成相量 <code>u = (3+5) + (4−12)i = 8 − 8i</code>；模 <code>|u| = √(8² + (−8)²) = 8√2</code>；<code>tan θ = −8/8 = −1</code>，且 <code>u</code> 在第四象限，故 <code>θ = −45°</code>（即 315°）。<br/>由棣莫弗定理：<code>z³</code> 的模为 <code>2³ = 8</code>、辐角为 <code>3 × 60° = 180°</code>，故 <code>z³ = 8(cos 180° + i sin 180°) = −8</code>。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第6章-平面向量及其应用/第6章-平面向量及其应用.html">← 上一章：第6章 平面向量及其应用</a><a href="../../../index.html">回目录</a><a href="../第8章-立体几何初步/第8章-立体几何初步.html">下一章：第8章 立体几何初步 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中的完整脉络</footer>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第9章 组合计数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第9章 组合计数</div></header>
+<main class="container">
+<h1>第9章 组合计数</h1>
+<p class="lead">大学 / 离散数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>组合计数 = 「数一数"有多少种方法"」的精确化工具：加法原理管"或"、乘法原理管"且"、排列管"顺序"、组合管"子集"，而二项式系数、鸽笼原理、生成函数、容斥原理则把"数"这件事分别变成格点路径、存在性、幂级数与韦恩图——学完本章，你要能对任何一个"计数"问题，一眼看出它是"加"还是"乘"、是"有序"还是"无序"、该用哪个武器。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">9.1 计数基本原理（加法原理与乘法原理）</a><a href="#s2">9.2 排列与组合</a><a href="#s3">9.3 二项式系数与二项式定理</a><a href="#s4">9.4 鸽笼原理</a><a href="#s5">9.5 生成函数</a><a href="#s6">9.6 容斥原理</a><a href="#s7">本章 · 几何与物理含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">9.1 计数基本原理（加法原理与乘法原理）</h2>
+<p>一切计数问题的地基只有两块：<strong>加法原理</strong>（分类相加）与<strong>乘法原理</strong>（分步相乘）。几乎每道组合题，本质上都是这两条原理的反复套用。</p>
+
+<h3>加法原理（Rule of Sum，分类用加）</h3>
+<p><strong>陈述</strong>：若完成一件事有 m 种<strong>互斥</strong>的方式，第一种方式有 n₁ 种方法，第二种有 n₂ 种方法，……，第 m 种有 n<sub>m</sub> 种方法，且这些方式<strong>两两互斥</strong>（不可能同时发生），那么总方法数为</p>
+<pre><code>总数 = n₁ + n₂ + ⋯ + n_m</code></pre>
+<p>用集合语言说：若 <code>A ∩ B = ∅</code>，则 <code>|A ∪ B| = |A| + |B|</code>。关键词是<strong>"或"</strong>、<strong>"分类"</strong>、<strong>"互斥（不相交）"</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>加法原理 = 把两块<strong>不相交</strong>区域的"面积/点数"直接加起来。并集的大小等于各部分大小之和，前提是各部分没有重叠；一旦有重叠，就得交给后面的容斥原理去"扣除重叠"。</div>
+<div class="insight"><strong>物理含义：</strong>加法原理处理"选<strong>或</strong>"的现实场景——你今天从家到学校，可以<strong>步行</strong>（有 3 条路）<strong>或</strong>坐公交（有 5 条线），两种方式互斥，共有 3 + 5 = 8 种走法。凡是"两者只能取其一"的并列选择，就把方案数加起来。</div>
+
+<h3>乘法原理（Rule of Product，分步用乘）</h3>
+<p><strong>陈述</strong>：若完成一件事需要依次进行 k 个<strong>步骤</strong>，第一步有 n₁ 种方法，第二步有 n₂ 种方法（且不管第一步怎么选，第二步的选择数都固定为 n₂），……，第 k 步有 n<sub>k</sub> 种方法，那么总方法数为</p>
+<pre><code>总数 = n₁ × n₂ × ⋯ × n_k</code></pre>
+<p>用集合语言说：<code>|A × B| = |A| × |B|</code>（两个集合的<strong>笛卡尔积</strong>的大小）。关键词是<strong>"且"</strong>、<strong>"分步"</strong>、<strong>"每一步的选择数彼此独立"</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>乘法原理 = <strong>矩形网格的点数</strong>或<strong>决策树的分支数</strong>。n₁ 行 × n₂ 列共有 n₁n₂ 个格子；从根出发的每一层分叉数相乘，得到叶子总数。这是"笛卡尔积"最直观的图像。</div>
+<div class="insight"><strong>物理含义：</strong>乘法原理处理"选<strong>且</strong>"的现实场景——一个 4 位密码锁，每位可取 0–9（10 种），四位依次独立，共有 10 × 10 × 10 × 10 = 10⁴ 种密码；食堂"3 种主食 × 4 种菜 × 2 种饮料"共 3×4×2 = 24 种套餐。凡是一件事要"连续做完多步"，就把每步的选择数乘起来。</div>
+
+<p><strong>怎么区分加法与乘法？</strong>一句话：<strong>分类（互斥、平行）用加，分步（依次、串联）用乘</strong>。判断方法是问一句"完成这件事需要走<strong>完所有步骤</strong>吗？"——需要全部走完 → 乘；只需走<strong>其中一类</strong> → 加。</p>
+<p><strong>综合例子</strong>：从北京到上海可乘飞机（3 班）或火车（2 班），到上海后再去杭州可乘大巴（4 班）或高铁（5 班）。北京→上海：3 + 2 = 5 种；上海→杭州：4 + 5 = 9 种；全程（先到上海，再到杭州，两步都要走完）：5 × 9 = 45 种。这里先"加"后"乘"，正是两条原理的叠加。</p>
+
+<h2 id="s2">9.2 排列与组合</h2>
+<p>从 n 个<strong>不同</strong>元素中取 r 个，唯一要问的问题是：<strong>顺序重要吗？</strong>顺序重要 → <strong>排列</strong>；顺序不重要 → <strong>组合</strong>。这是全章的枢纽。</p>
+
+<h3>排列（Permutation：顺序重要）</h3>
+<p><strong>定义</strong>：从 n 个不同元素中取出 r 个（1 ≤ r ≤ n），<strong>按一定顺序排成一列</strong>，称为排列，其个数记为 <code>P(n, r)</code>（也写作 <code>A(n, r)</code> 或 <code>nPr</code>）。</p>
+<pre><code>P(n, r) = n(n−1)(n−2)⋯(n−r+1) = n! / (n−r)!</code></pre>
+<p>推导用的是乘法原理：第一个位置有 n 种选法，第二个位置剩 n−1 种，……，第 r 个位置剩 n−r+1 种，连乘即得。当 r = n 时是<strong>全排列</strong>：</p>
+<pre><code>P(n, n) = n! = n(n−1)(n−2)⋯2·1</code></pre>
+<p>约定 <code>0! = 1</code>，这样 <code>P(n, 0) = 1</code>、<code>C(n, 0) = 1</code> 都能自洽（"取 0 个"只有"一个都不取"这一种做法）。</p>
+<div class="insight"><strong>几何含义：</strong>排列 = 把 r 个物体<strong>依次放进 r 个有序的"坑位"</strong>。想象一排编号为 1,2,…,r 的空位，逐个填入物体；每个排列对应一条"填放路径"。几何上，排列关心的是<strong>点的先后编号顺序</strong>——同样的元素，顺序一变就是另一个排列。</div>
+<div class="insight"><strong>物理含义：</strong>排列对应一切"位置/名次有区分"的安排：n 个人排成一队有 n! 种；从 8 名运动员中选 3 人分别拿金、银、铜牌有 P(8,3) = 8×7×6 = 336 种（金银铜是不同的位置，顺序重要）。</div>
+
+<h3>组合（Combination：顺序不重要）</h3>
+<p><strong>定义</strong>：从 n 个不同元素中取出 r 个（1 ≤ r ≤ n），<strong>不计顺序地组成一组</strong>，称为组合，其个数记为 <code>C(n, r)</code>（也写作 <code>nCr</code> 或 <code>⎛n⎞</code>）。</p>
+<pre><code>C(n, r) = P(n, r) / r! = n! / (r!(n−r)!)</code></pre>
+<p><strong>为什么多除以 r!？</strong>先"按顺序选 r 个"有 P(n,r) 种；但同一个组合（同一批 r 个元素）在排列里被数了 r! 次（这 r 个元素自己内部有 r! 种排列顺序）。要"抹掉顺序"，就把每个组合的 r! 个排列合并成 1 个：<code>C(n, r) = P(n, r) / r!</code>。这正是排列与组合的核心关系：</p>
+<pre><code>P(n, r) = C(n, r) × r!   （先选，再排）</code></pre>
+<p>基本性质：<strong>对称性</strong> <code>C(n, r) = C(n, n−r)</code>（选 r 个与"留下 n−r 个"是一回事）。</p>
+<div class="insight"><strong>几何含义：</strong>组合 = <strong>子集</strong>。C(n, r) 就是 n 元集合的 r 元子集的个数。从"有序"到"无序"的除法，几何上等于把同一批元素的 r! 种排列"压扁"成同一个点——排列是"带顺序的序列"，组合是"不带顺序的点集"。</div>
+<div class="insight"><strong>物理含义：</strong>组合对应一切"只挑人、不排座"的选择：从 50 人中选 5 人组成班委（这 5 人不分主席/委员，顺序无关）有 C(50,5) 种；彩票选 6 个号码（顺序无关）也是组合。凡是结果只看"选了谁"、不看"谁先谁后"，就用 C。</div>
+<p><strong>对比记忆</strong>：5 人中选 3 人<strong>站成一排</strong>有 P(5,3) = 5×4×3 = 60 种；只<strong>选出 3 人</strong>（不管站队）有 C(5,3) = 60/6 = 10 种。同一批 3 个人有 3! = 6 种站法，所以排列数是组合数的 6 倍。</p>
+
+<h2 id="s3">9.3 二项式系数与二项式定理</h2>
+<p>上一节的组合数 C(n, k) 有一个专门的名字——<strong>二项式系数</strong>，因为它正是 (x+y)ⁿ 展开式里的系数。</p>
+<h3>二项式定理</h3>
+<pre><code>(x + y)^n = Σ_{k=0}^{n} C(n,k) · x^k · y^(n−k)
+          = C(n,0)x^n + C(n,1)x^(n−1)y + C(n,2)x^(n−2)y^2 + ⋯ + C(n,n)y^n</code></pre>
+<p><strong>组合证明（理解本质）</strong>：(x+y)ⁿ = (x+y)(x+y)⋯(x+y) 共 n 个因子相乘。展开时，每一项是从每个因子里各挑一个 x 或 y 相乘；若要得到 x<sup>k</sup> y<sup>n−k</sup>，就必须从 n 个因子中<strong>选 k 个挑 x</strong>（其余 n−k 个挑 y），选法正好是 C(n,k) 种，所以系数是 C(n,k)。</p>
+<p><strong>两个最重要的特例</strong>（令 x = y = 1，以及 x = 1、y = −1）：</p>
+<pre><code>Σ_{k=0}^{n} C(n,k) = C(n,0)+C(n,1)+⋯+C(n,n) = 2^n
+Σ_{k=0}^{n} (−1)^k C(n,k) = C(n,0)−C(n,1)+C(n,2)−⋯ = 0   (n ≥ 1)</code></pre>
+<p><strong>帕斯卡恒等式</strong>（生成帕斯卡三角形的递推关系）：</p>
+<pre><code>C(n, k) = C(n−1, k−1) + C(n−1, k)   （1 ≤ k ≤ n−1）</code></pre>
+<h3>帕斯卡三角形与格点路径</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="230" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#cbd5e1" stroke-width="1"><line x1="40" y1="50" x2="40" y2="170"/><line x1="130" y1="50" x2="130" y2="170"/><line x1="220" y1="50" x2="220" y2="170"/><line x1="310" y1="50" x2="310" y2="170"/><line x1="40" y1="170" x2="310" y2="170"/><line x1="40" y1="110" x2="310" y2="110"/><line x1="40" y1="50" x2="310" y2="50"/></g><g fill="#94a3b8"><circle cx="40" cy="170" r="2.5"/><circle cx="130" cy="170" r="2.5"/><circle cx="220" cy="170" r="2.5"/><circle cx="310" cy="170" r="2.5"/><circle cx="40" cy="110" r="2.5"/><circle cx="130" cy="110" r="2.5"/><circle cx="220" cy="110" r="2.5"/><circle cx="310" cy="110" r="2.5"/><circle cx="40" cy="50" r="2.5"/><circle cx="130" cy="50" r="2.5"/><circle cx="220" cy="50" r="2.5"/><circle cx="310" cy="50" r="2.5"/></g><g fill="#334155" font-size="11" text-anchor="middle"><text x="40" y="188">1</text><text x="130" y="188">1</text><text x="220" y="188">1</text><text x="310" y="188">1</text><text x="40" y="102">1</text><text x="130" y="102">2</text><text x="220" y="102">3</text><text x="310" y="102">4</text><text x="40" y="42">1</text><text x="130" y="42">3</text><text x="220" y="42">6</text><text x="310" y="42">10</text></g><path id="lp" d="M40,170 H220 V110 H310 V50" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="390" stroke-dashoffset="390"><animate attributeName="stroke-dashoffset" values="390;0" dur="6s" repeatCount="indefinite"/></path><circle r="7" fill="#16a34a"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#lp"/></animateMotion></circle><text x="40" y="202" font-size="12" fill="#6b7280" text-anchor="middle">起点 (0,0)</text><text x="310" y="30" font-size="12" fill="#6b7280" text-anchor="middle">终点 (3,2)</text><g font-size="13" fill="#334155"><rect x="340" y="56" width="14" height="14" rx="3" fill="#2563eb"/><text x="362" y="68">向右走 3 步</text><rect x="340" y="82" width="14" height="14" rx="3" fill="#16a34a"/><text x="362" y="94">向上走 2 步</text><text x="340" y="124">总步数 = 3 + 2 = 5</text><text x="340" y="146" font-weight="700" fill="#2563eb">最短路数 = C(5,3) = 10</text><text x="340" y="168" font-size="12" fill="#6b7280">格点数字 = 到该点的路径数</text><text x="340" y="184" font-size="12" fill="#6b7280">（每个 = 左邻 + 下邻）</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图1（二项式系数）：C(n,k) 就是格点图上从 (0,0) 走到 (k,n−k) 的最短路条数——每一步只能<strong>向右(蓝)</strong>或<strong>向上(绿)</strong>；每个格点上的数字 = 到达它的路径数（左邻 + 下邻），绿色圆点沿一条最短路（右右上右上）行走。</figcaption></figure>
+<pre><code>              1
+            1   1
+          1   2   1
+        1   3   3   1
+      1   4   6   4   1
+    1   5  10  10   5   1
+   （第 n 行第 k 个数 = C(n, k)，行与列都从 0 起）</code></pre>
+<p>帕斯卡三角形的每一项都等于"左上 + 右上"两数之和，这正是帕斯卡恒等式。</p>
+<div class="insight"><strong>几何含义（核心！）：</strong>二项式系数 C(n, k) = <strong>格点路径数</strong>。在平面格点图上，从 (0, 0) 走到 (k, n−k)，每一步只能<strong>向右</strong>或<strong>向上</strong>走一个单位：总共要走 n 步，其中恰有 k 步向右（n−k 步向上），选择"哪 k 步向右"有 C(n,k) 种，所以路径数是 C(n,k)。帕斯卡恒等式的几何证明：到达 (k, n−k) 的最后一步，要么从左边 (k−1, n−k) 向右过来，要么从下面 (k, n−k−1) 向上过来，两条来源路径数相加，即 C(n,k) = C(n−1,k−1) + C(n−1,k)。整张帕斯卡三角形，就是格点图上"从原点出发向右/向上走"的路径计数表。</div>
+<div class="insight"><strong>物理含义：</strong>(1) <strong>2ⁿ = 子集数</strong>：n 个开关，每个"开/关"二选一，共 2ⁿ 种状态；ΣC(n,k)=2ⁿ 正是"按选了 k 个开"分类相加。(2) <strong>二项分布</strong>：n 次独立试验，每次成功概率为 p，恰有 k 次成功的概率是 C(n,k) p<sup>k</sup>(1−p)<sup>n−k</sup>——(x+y)ⁿ 中把 x、y 换成概率 p 与 1−p 即得。(3) <strong>路线选择</strong>：从家到学校走 n 个街区、其中 k 次右转的最短路数就是 C(n,k)。</div>
+<p><strong>推广</strong>：多项式系数（多项展开）(x+y+z)ⁿ 中 xᵃyᵇzᶜ 的系数为 <code>n! / (a! b! c!)</code>（其中 a+b+c=n），是二项式系数的三元推广。</p>
+
+<h2 id="s4">9.4 鸽笼原理（抽屉原理）</h2>
+<p>鸽笼原理是离散数学里最朴素、却最有力的<strong>存在性</strong>工具：它不告诉你"具体是谁"，只保证"一定存在"。</p>
+<h3>简单形式</h3>
+<pre><code>把 n+1 只鸽子放进 n 个笼子 ⇒ 至少有一个笼子放了 ≥ 2 只鸽子</code></pre>
+<p>证明显然：若每个笼子最多 1 只，则 n 个笼子最多装 n 只，与 n+1 只矛盾。</p>
+<h3>一般形式（定量版）</h3>
+<pre><code>把 n 只鸽子放进 k 个笼子 ⇒ 至少有一个笼子放了 ≥ ⌈n/k⌉ 只
+（⌈ ⌉ 表示向上取整）</code></pre>
+<p>等价说法：若 k 个笼子每个最多放 m 只，则总共最多放 km 只；因此只要 n &gt; km，就必有某笼超过 m 只。</p>
+<div class="insight"><strong>几何含义：</strong>鸽笼原理 = "区域划分 + 平均分配"的离散版。把单位区间 [0,1] 等分成 n 份，任取 n+1 个点，必有两个点落在同一个小区间里，因此它们的距离 ≤ 1/n。几何图像是：<strong>n 个格子装 n+1 个点，必有格子"超载"</strong>。原理的本质是"平均值原理"：平均每个笼子 n/k 只，那么至少有一个笼子达到平均值——向上取整 ⌈n/k⌉。</div>
+<div class="insight"><strong>物理含义：</strong>无数经典"必然重复"现象都由它解释：367 个人中必有 2 人同一天生日（因为一年最多 366 天）；13 个人中必有 2 人同一个月出生（12 个月）；从 1, 2, …, 2n 中任取 n+1 个数，必有两个数相邻、从而互质（把它们两两配对成 n 个"抽屉"：(1,2),(3,4),…,(2n−1,2n)，取 n+1 个数必取到同一对中的两个相邻数）。</div>
+<p><strong>重要提醒</strong>：鸽笼原理给出的是<strong>存在性而非构造性</strong>——它证明"至少有一个笼子装 2 只以上"，但不告诉你具体是哪只笼子、哪只鸽子。在证明"一定存在某性质"时，它是首选的"非构造"武器。</p>
+<p><strong>进阶应用</strong>：任意 6 个人中，必有 3 人两两相识或两两不相识（拉姆齐数 R(3,3) = 6）。这是鸽笼思想与图论结合的著名结论。</p>
+
+<h2 id="s5">9.5 生成函数（母函数）</h2>
+<p>生成函数是"把计数问题翻译成代数问题"的桥梁：用一个幂级数把整个数列的计数信息一次性打包，然后靠代数运算（展开、合并同类项、卷积）来计数。</p>
+<h3>定义</h3>
+<pre><code>数列 a₀, a₁, a₂, … 的（普通）生成函数为
+A(x) = Σ_{n≥0} aₙ xⁿ = a₀ + a₁x + a₂x² + a₃x³ + ⋯</code></pre>
+<p>思想核心：<strong>x 的指数是"规模/重量"标签，系数是"达到该规模的方案数"</strong>。例如 C(n,0), C(n,1), …, C(n,n) 这列二项式系数的生成函数就是 <code>(1+x)ⁿ</code>。</p>
+<h3>两条关键运算</h3>
+<ul>
+<li><strong>加法</strong>：两个数列的生成函数相加，系数逐项相加（对应"两种互斥方案的计数相加"，即加法原理）。</li>
+<li><strong>乘法（卷积）</strong>：<code>(Σ aᵢxⁱ)(Σ bⱼxʲ)</code> 展开后，x<sup>k</sup> 的系数是</li>
+</ul>
+<pre><code>c_k = Σ_{i+j=k} aᵢ bⱼ = a₀b_k + a₁b_{k−1} + ⋯ + a_k b₀</code></pre>
+<p>这个"卷积"恰好对应<strong>乘法原理</strong>：从第一堆里选"重量 i"、从第二堆里选"重量 j"，合起来重量 k 的所有组合之和。</p>
+<h3>最常用的几个展开式</h3>
+<pre><code>1/(1−x)   = 1 + x + x² + x³ + ⋯                     （每项系数 1）
+(1+x)^n   = Σ_{k=0}^{n} C(n,k) x^k                    （二项式系数）
+1/(1−x)^n = Σ_{k≥0} C(n+k−1, k) x^k                   （多重组合/隔板法）</code></pre>
+<p>（作为<strong>形式幂级数</strong>，我们只关心系数、不关心收敛；若按实函数理解，则需 |x| &lt; 1。）</p>
+<div class="insight"><strong>几何含义：</strong>生成函数的乘法卷积 <code>c_k = Σ_{i+j=k} aᵢbⱼ</code>，几何上就是<strong>沿二维格点上"对角线 i+j = k"求和</strong>——把两个一维序列 a、b 排成坐标网格，每一条"反对角线"上的乘积之和就是乘积序列的第 k 项。生成函数把"选 k 个"这种<strong>截断的、离散的</strong>计数，统一成<strong>一个连续的代数对象</strong>，x 的幂次就是"选了多少"的坐标轴。</div>
+<div class="insight"><strong>物理含义：</strong>(1) <strong>找零问题</strong>：用 1 元、2 元、5 元硬币凑 n 元的方法数，正是 <code>1/((1−x)(1−x²)(1−x⁵))</code> 展开后 xⁿ 的系数——每种面值硬币"取 0,1,2,… 个"对应 (1+x+x²+⋯) 的一截。(2) <strong>方程非负整数解</strong>：x₁ + x₂ + ⋯ + xₙ = k 的非负整数解个数 = C(n+k−1, k)，其生成函数是 (1+x+x²+⋯)ⁿ = 1/(1−x)ⁿ；这就是"隔板法"的生成函数版本。</div>
+<p><strong>隔板法</strong>：方程 x₁ + x₂ + ⋯ + xₙ = k（xᵢ ≥ 0 整数）的解，等价于把 k 个相同的球放进 n 个不同的盒，用 n−1 块隔板分隔 k 个球，共有 <code>C(n+k−1, k)</code> 种（在 k+n−1 个位置里选 n−1 个放隔板）。例：x₁+x₂+x₃ = 4 的解有 C(6,4) = 15 个。</p>
+
+<h2 id="s6">9.6 容斥原理（排容原理）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="285" viewBox="0 0 560 285" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g font-size="14" text-anchor="middle" font-weight="700"><text x="280" y="20" fill="#2563eb">+ |A| + |B| + |C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#dc2626">− |A∩B| − |A∩C| − |B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="20" fill="#16a34a">+ |A∩B∩C|<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/></text></g><circle cx="165" cy="115" r="80" fill="rgba(37,99,235,0.16)" stroke="#2563eb" stroke-width="2"/><circle cx="315" cy="115" r="80" fill="rgba(22,163,74,0.16)" stroke="#16a34a" stroke-width="2"/><circle cx="240" cy="180" r="80" fill="rgba(217,119,6,0.16)" stroke="#d97706" stroke-width="2"/><g font-size="15" font-weight="700"><text x="165" y="60" fill="#2563eb" text-anchor="middle">A</text><text x="315" y="60" fill="#16a34a" text-anchor="middle">B</text><text x="240" y="218" fill="#d97706" text-anchor="middle">C</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.04;0.09;0.24;0.29;1" dur="6s" repeatCount="indefinite"/><circle cx="108" cy="90" r="14" fill="#fff" stroke="#2563eb" stroke-width="2"/><text x="108" y="95" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">+</text><circle cx="372" cy="90" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="372" y="95" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text><circle cx="240" cy="245" r="14" fill="#fff" stroke="#d97706" stroke-width="2"/><text x="240" y="250" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">+</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.29;0.34;0.54;0.59;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="92" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="240" y="97" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="190" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="190" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text><circle cx="290" cy="148" r="14" fill="#fff" stroke="#dc2626" stroke-width="2"/><text x="290" y="153" font-size="15" font-weight="700" fill="#dc2626" text-anchor="middle">−</text></g><g><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.59;0.64;0.79;0.84;1" dur="6s" repeatCount="indefinite"/><circle cx="240" cy="128" r="14" fill="#fff" stroke="#16a34a" stroke-width="2"/><text x="240" y="133" font-size="15" font-weight="700" fill="#16a34a" text-anchor="middle">+</text></g><text x="280" y="282" font-size="12" fill="#6b7280" text-anchor="middle">规律：奇数个集合的交取 + ，偶数个取 − ，符号交错</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图2（容斥原理）：韦恩图上"奇加偶减"——先加三个集合(+)，再减去两两交集(−)，最后加回三者交集(+)，使每个点恰好被数 1 次，重叠区不再重复计数。</figcaption></figure>
+<p>当要数的东西有<strong>重叠</strong>时，加法原理失效（不能把重叠部分算两遍），容斥原理就是"扣掉重叠、补回多扣"的精确方法。</p>
+<h3>两个集合</h3>
+<pre><code>|A ∪ B| = |A| + |B| − |A ∩ B|</code></pre>
+<h3>三个集合</h3>
+<pre><code>|A ∪ B ∪ C| = |A| + |B| + |C|
+             − |A ∩ B| − |A ∩ C| − |B ∩ C|
+             + |A ∩ B ∩ C|</code></pre>
+<h3>一般形式</h3>
+<pre><code>|A₁ ∪ A₂ ∪ ⋯ ∪ Aₙ|
+  = Σ|Aᵢ| − Σ|Aᵢ ∩ Aⱼ| + Σ|Aᵢ ∩ Aⱼ ∩ Aₖ| − ⋯
+      + (−1)^(n+1) |A₁ ∩ A₂ ∩ ⋯ ∩ Aₙ|</code></pre>
+<p>规律：<strong>奇数个集合的交取 +，偶数个集合的交取 −</strong>，符号交错，直到所有集合的交为止。</p>
+<div class="insight"><strong>几何含义（核心！）：</strong>容斥原理 = <strong>韦恩图上重叠区域的交错加减</strong>。以三圆为例：先加三个圆的面积（此时重叠区被算了多次）→ 减去每两个圆的交（把双重区纠正、但三重区被减过头了）→ 再加回三个圆的交（补回三重区）。每个点最终恰好被数 1 次。它本质上断言：<strong>并集的"度量（面积/体积/计数）"等于各层交集的交错的代数和</strong>——这正是现代测度论"可加性"的雏形。</div>
+<div class="insight"><strong>物理含义：</strong>(1) <strong>整除计数</strong>：1 到 n 中能被 2 或 3 或 5 整除的数的个数，用 |A₂ ∪ A₃ ∪ A₅| 容斥，避免"既能被 2 又能被 3 整除的数"被重复计数。(2) <strong>满射计数</strong>：n 个不同的球放入 k 个盒子、每盒非空的放法数（满射个数）= kⁿ − C(k,1)(k−1)ⁿ + C(k,2)(k−2)ⁿ − ⋯ + (−1)^(k−1)C(k,k−1)·1ⁿ。(3) <strong>错排</strong>：n 封信全部装错信封的方法数 D(n) = n!(1 − 1/1! + 1/2! − 1/3! + ⋯ + (−1)ⁿ/n!)。</div>
+<p><strong>补集视角（更常用）</strong>：有时直接数"至少满足一个性质"很难，就数"一个都不满足"：<code>|A₁ ∪ ⋯ ∪ Aₙ| 的补集 = 全集 − 并集</code>。错排公式正是这样：总数 n! 减去"至少有一封信装对"的并集（用容斥算并集）得到的。</p>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>加法原理</td><td>不相交区域的面积/点数直接相加</td><td>"或"关系的互斥选择分类相加</td></tr>
+<tr><td>乘法原理</td><td>矩形网格点数 / 笛卡尔积 / 决策树分支</td><td>"且"关系的分步选择相乘（密码锁、套餐）</td></tr>
+<tr><td>排列 P(n,r)</td><td>把元素依次填入 r 个有序"坑位"的路径</td><td>排队、颁奖名次等顺序有区分的安排</td></tr>
+<tr><td>组合 C(n,r)</td><td>无序子集；把 r! 个排列"压成"1 个点</td><td>组队、选号等不计顺序的选择</td></tr>
+<tr><td>二项式系数 C(n,k)</td><td>格点路径数、帕斯卡三角形（左上+右上）</td><td>2ⁿ 个子集、二项分布、街区路线</td></tr>
+<tr><td>鸽笼原理</td><td>n 个格子装 n+1 个点必有格子超载（平均分配）</td><td>生日问题等"必然重复"的存在性</td></tr>
+<tr><td>生成函数</td><td>幂级数系数；卷积 = 沿对角线 i+j=k 求和</td><td>找零、方程非负整数解的计数编码</td></tr>
+<tr><td>容斥原理</td><td>韦恩图重叠区域的交错加减（奇加偶减）</td><td>整除计数、满射计数、错排（避免重复计数）</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>由 5 本不同的书，从中选 3 本<strong>排成一排</strong>有多少种？只<strong>选出 3 本</strong>（不计顺序）有多少种？</li>
+<li>一个 4 位密码锁，每位取 0–9，共有多少种密码？如果每位数字互不相同，又有多少种？</li>
+<li>求 (x + 2)⁵ 展开式中 x³ 的系数。</li>
+<li>用鸽笼原理说明：13 个人中至少两人同月出生；367 人中至少两人同一天生日。</li>
+<li>求方程 x₁ + x₂ + x₃ + x₄ = 10 的非负整数解的个数。</li>
+<li>求 1 到 200 中能被 3 或 5 整除的数有多少个。</li>
+</ol>
+<p><strong>参考答案</strong>：① 排列 P(5,3)=60；组合 C(5,3)=10。② 10⁴=10000；P(10,4)=10×9×8×7=5040。③ 一般项 C(5,k)x<sup>k</sup>2<sup>5−k</sup>，取 k=3 得 C(5,3)·2²=10×4=<strong>40</strong>。④ 13 人 → 12 个月，必有某月 ≥⌈13/12⌉=2 人；367 人 → 366 天，必有某天 ≥2 人。⑤ C(4+10−1,10)=C(13,10)=C(13,3)=<strong>286</strong>。⑥ ⌊200/3⌋=66，⌊200/5⌋=40，⌊200/15⌋=13，故 66+40−13=<strong>93</strong>。</p>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "排列组合就随手乘/除以一个阶乘" → ❌ 先判断<strong>顺序是否重要</strong>：有顺序用排列 P，无顺序用组合 C；且 C = P / r!（多除一个 r!，不是 r）。</li>
+<li>❌ "加法原理和乘法原理看心情用" → ❌ 互斥分类（"或"）用<strong>加</strong>，依次分步（"且"）用<strong>乘</strong>；判断法：完成这件事需要走完全部步骤吗？</li>
+<li>❌ "(x+y)ⁿ 的系数是 n!/(k!(n−k)!) 还是别的" 记混 → ❌ 二项式系数就是 C(n,k) = n!/(k!(n−k)!)；而 (x+y+z)ⁿ 的多项式系数是 n!/(a!b!c!)，别混淆。</li>
+<li>❌ "0! = 0" → ❌ 约定 0! = 1，否则 C(n,0)、P(n,0)、C(n,n) 无法统一为 1。</li>
+<li>❌ "鸽笼原理能告诉我具体是哪只鸽子在哪笼" → ❌ 它只保证<strong>存在性</strong>，不提供构造；"至少有一个"≠"知道是哪个"。</li>
+<li>❌ "容斥原理就是加加减减随便来" → ❌ 符号必须严格交错：<strong>奇数个集合的交取 +，偶数个取 −</strong>；漏掉最高阶交项或符号写反都会数错。</li>
+<li>❌ "生成函数的系数就是随便展开出来的数" → ❌ 系数必须精确对应"该幂次的方案数"，乘法卷积对应<strong>分拆求和</strong>（Σ_{i+j=k} aᵢbⱼ），是计数不是摆设。</li>
+<li>❌ "排列与组合一样，只是换个写法" → ❌ 排列是"有序序列"、组合是"无序子集"，同一批元素对应 r! 个排列、却只有 1 个组合。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>（加法/乘法原理）从甲地到乙地有 3 条公路、2 条铁路；从乙地到丙地有 4 条公路、1 条铁路。问：从甲地经乙地到丙地共有多少种走法？</li>
+<li>（排列与组合）从 8 名运动员中：① 选 3 人分别获得金、银、铜牌，有多少种排法？② 只选 3 人组成一支接力队（不计顺序、不分名次），有多少种选法？</li>
+<li>（二项式系数）求 (2x − 1)⁶ 展开式中 x⁴ 项的系数。</li>
+<li>（鸽笼原理）证明：任意 5 个整数中，必有两个数模 4 同余（即它们的差能被 4 整除）。</li>
+<li>（生成函数/隔板法）求方程 x₁ + x₂ + x₃ + x₄ = 12 的<strong>正整数</strong>解（每个 xᵢ ≥ 1）的个数。</li>
+<li>（容斥原理）求 1 到 100 中能被 2 或 3 整除的数有多少个。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>甲→乙：公路或铁路互斥，用加法，3 + 2 = 5 种；乙→丙：4 + 1 = 5 种；全程两步都要走完，用乘法：5 × 5 = <strong>25</strong> 种。（先"加"后"乘"，正是两条原理叠加。）</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>① 金银铜是三个不同位置，顺序重要，用排列：P(8,3) = 8 × 7 × 6 = <strong>336</strong> 种。② 只挑人不排座，顺序不重要，用组合：C(8,3) = 336 / 3! = 336 / 6 = <strong>56</strong> 种。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>一般项为 C(6,k)·(2x)^k·(−1)^(6−k)。要得到 x⁴，取 k = 4：C(6,4)·(2x)⁴·(−1)² = 15 × 16x⁴ × 1 = 240x⁴。故系数为 <strong>240</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>模 4 的余数只有 0、1、2、3 共 4 种，相当于 4 个"抽屉"；把 5 个整数放进去，由鸽笼原理，必有两个数落在同一个余数类中，即模 4 同余，它们的差能被 4 整除。（注意：原理只保证"存在"，不指明具体是哪两个数。）</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>令 yᵢ = xᵢ − 1（≥ 0），则原方程化为 y₁ + y₂ + y₃ + y₄ = 12 − 4 = 8 的<strong>非负</strong>整数解，用隔板法：C(4+8−1, 8) = C(11, 8) = C(11, 3) = <strong>165</strong> 个。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>设 A 为被 2 整除的数、B 为被 3 整除的数。|A| = ⌊100/2⌋ = 50，|B| = ⌊100/3⌋ = 33，|A ∩ B| = ⌊100/6⌋ = 16（被 6 整除即被两者同时整除）。由容斥原理：|A ∪ B| = 50 + 33 − 16 = <strong>67</strong> 个。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第8章-树/第8章-树.html">← 上一章：第8章 树</a>
+<a href="../../../index.html">回目录</a>
+<span style="color:#9ca3af">已是最后一章</span>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+</body>
+</html>

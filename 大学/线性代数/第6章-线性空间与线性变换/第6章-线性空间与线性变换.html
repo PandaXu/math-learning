@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第6章 线性空间与线性变换 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第6章 线性空间与线性变换</div></header>
+<main class="container">
+<h1>第6章 线性空间与线性变换</h1>
+<p class="lead">大学 / 线性代数</p>
+<div class="summary"><span class="tag">一句话总纲：</span>线性空间 = 「对加法和数乘封闭、满足八条公理的向量世界」；线性变换 = 「保持加法和数乘这两种结构的映射」。学完本章，你要能在心里"看见"两件事：一是任意一组向量如何"张成"一个空间、基如何给这个空间装上"坐标系"；二是线性变换如何被一张矩阵"完全决定"——换基则矩阵随之"相似"，如同同一个物理规律换了坐标描述。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">6.1 线性空间的定义与例子</a><a href="#s2">6.2 子空间、线性相关与无关</a><a href="#s3">6.3 维数、基与坐标</a><a href="#s4">6.4 线性变换的定义与性质</a><a href="#s5">6.5 线性变换的矩阵表示与换基</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">6.1 线性空间的定义与例子</h2>
+<h3>从"箭头"到"抽象的向量"</h3>
+<p>中学里向量是"有大小有方向的箭头"，放在平面或空间里。但大量数学对象——多项式、矩阵、函数、数列——也满足与箭头完全一样的运算规律：<strong>能相加、能乘数，且这些运算遵守同样的代数规则</strong>。把它们统称为"向量"，把满足公理的集合统称为"线性空间"（也叫<strong>向量空间</strong>），就是抽象化的动机。</p>
+<div class="insight"><strong>物理含义：</strong>线性空间是"叠加原理"成立的舞台。物理中的位移、速度、力、电场、量子态都满足"两个状态可以叠加、可以成倍放大"——这正是线性空间的八条公理所刻画的本质，因此物理上凡是线性系统都在一个线性空间里描述。</div>
+<h3>定义：八条公理</h3>
+<p>设 <code>V</code> 是一个非空集合，数域 <code>F</code>（本书取实数域 <code>R</code> 或复数域 <code>C</code>）上定义了两种运算：</p>
+<ul>
+<li><strong>加法</strong>：对任意 <code>α, β ∈ V</code>，有唯一元素 <code>α + β ∈ V</code>（加法<strong>封闭</strong>）；</li>
+<li><strong>数乘</strong>：对任意 <code>k ∈ F, α ∈ V</code>，有唯一元素 <code>kα ∈ V</code>（数乘<strong>封闭</strong>）。</li>
+</ul>
+<p>若它们满足以下八条，则称 <code>V</code> 为数域 <code>F</code> 上的线性空间：</p>
+<pre><code>(1) α + β = β + α                     （加法交换律）
+(2) (α + β) + γ = α + (β + γ)         （加法结合律）
+(3) 存在零元 0，使 α + 0 = α
+(4) 对每个 α，存在负元 −α，使 α + (−α) = 0
+(5) 1·α = α
+(6) k(α + β) = kα + kβ                （数乘对加法的分配律）
+(7) (k + l)α = kα + lα                （数乘对数的分配律）
+(8) k(lα) = (kl)α                     （数乘的结合律）</code></pre>
+<p>前四条说 <code>V</code> 关于加法构成<strong>交换群</strong>，后四条把"数"与"向量"的乘法协调起来。</p>
+<div class="insight"><strong>几何含义：</strong>公理(1)(2)是说两个位移合成与顺序无关、可结合；(3)(4)是"原地不动"和"反向走回来"；(5)(8)是说"乘以1不变""先乘 l 再乘 k 等于一次乘 kl"。这一套正是"平行四边形法则 + 伸缩"的代数化。</div>
+<h3>经典例子（要会验证封闭性）</h3>
+<table>
+<tr><th>空间</th><th>元素</th><th>加法</th><th>数乘</th></tr>
+<tr><td><code>Rⁿ</code></td><td>n 元有序数组 <code>(x₁,…,xₙ)</code></td><td>逐分量相加</td><td>逐分量乘数</td></tr>
+<tr><td><code>Pₙ[x]</code></td><td>次数 &lt; n 的多项式全体</td><td>多项式相加</td><td>系数乘数</td></tr>
+<tr><td><code>R^{m×n}</code></td><td>m×n 实矩阵全体</td><td>矩阵相加</td><td>矩阵数乘</td></tr>
+<tr><td><code>C[a,b]</code></td><td>[a,b] 上的连续函数</td><td>函数相加 (f+g)(x)</td><td>(kf)(x)</td></tr>
+<tr><td>数列空间</td><td>收敛（或任意）实数列</td><td>逐项相加</td><td>逐项乘数</td></tr>
+</table>
+<div class="insight"><strong>关键认识：</strong>"向量"未必是箭头——一个多项式、一个矩阵、一个函数都可能是"向量"。判断是不是线性空间，核心只看两条：<strong>加法封闭、数乘封闭</strong>（八条公理里分配律、结合律等一般都自动继承自实数运算）。例：<code>P₂[x]</code>（次数 ≤ 2 的多项式）关于"多项式加法"是线性空间，但"次数恰为 2 的多项式"全体不是——因为 <code>x²</code> 与 <code>−x²</code> 相加得 0，次数不再是 2，加法<strong>不封闭</strong>。</div>
+
+<h2 id="s2">6.2 子空间、线性相关与无关</h2>
+<h3>子空间（几何：空间里的"平面"和"直线"）</h3>
+<p><code>V</code> 的非空子集 <code>W</code> 若关于 <code>V</code> 的加法与数乘也封闭，则称 <code>W</code> 是 <code>V</code> 的<strong>子空间</strong>。判定只需两条：</p>
+<ul>
+<li>对任意 <code>α, β ∈ W</code>，有 <code>α + β ∈ W</code>；</li>
+<li>对任意 <code>k ∈ F, α ∈ W</code>，有 <code>kα ∈ W</code>。</li>
+</ul>
+<p>平凡例子：<code>{0}</code>（零子空间）与 <code>V</code> 本身。常见非平凡子空间：<code>R³</code> 中过原点的平面、过原点的直线都是子空间；而<strong>不过原点的平面/直线不是子空间</strong>（因为不含零元 0）。</p>
+<div class="insight"><strong>几何含义：</strong>子空间就是"过原点的平坦部分"——原点(零向量)必须在内，且沿其中任意方向走、任意伸缩都不离开它。<strong>物理含义：</strong>所有可能的合力方向（力系能合成的所有结果）构成一个子空间；约束系统的"允许状态集"往往也是子空间。</div>
+<h3>线性组合、张成与生成子空间</h3>
+<p>设 <code>α₁,…,αₘ ∈ V</code>，形如 <code>k₁α₁ + k₂α₂ + … + kₘαₘ</code> 的向量叫这些向量的<strong>线性组合</strong>；所有线性组合构成的集合叫<strong>生成子空间（张成）</strong>，记作：</p>
+<pre><code>span{α₁, …, αₘ} = { k₁α₁ + … + kₘαₘ : kᵢ ∈ F }</code></pre>
+<div class="insight"><strong>几何含义：</strong>一个向量的张成是一条直线，两个不共线向量的张成是一个平面，三个不共面向量的张成是整个三维空间。<strong>物理含义：</strong>span 是"由若干基元状态通过叠加能到达的全部状态"——比如两个方向的单位位移张成整个平面运动。</div>
+<h3>线性相关与线性无关</h3>
+<p>对 <code>α₁,…,αₘ</code>，若存在<strong>不全为零</strong>的数 <code>k₁,…,kₘ</code> 使</p>
+<pre><code>k₁α₁ + k₂α₂ + … + kₘαₘ = 0</code></pre>
+<p>则称这组向量<strong>线性相关</strong>；否则（只有 <code>k₁=k₂=…=kₘ=0</code> 才使上式为 0）称<strong>线性无关</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>线性无关 = 这组向量"没有一个是多余的"，没有一个能被其余线性表出；相关 = 至少有一个向量落在其余向量张成的子空间里（"贡献"被重复了）。<strong>物理含义：</strong>无关的力/位移是"独立的方向自由度"，相关的量之间存在冗余约束。n 维空间里线性无关向量的个数最多为 n。</div>
+<p><strong>关键结论</strong>：</p>
+<ul>
+<li>含零向量的向量组必线性相关（取零向量的系数为 1，其余为 0 即可）。</li>
+<li>两个向量相关 ⟺ 它们共线（成比例）；三个向量相关 ⟺ 它们共面。</li>
+<li>向量组线性相关 ⟺ 其中至少有一个向量可由其余向量线性表出。</li>
+<li>若 <code>α₁,…,αₘ</code> 线性无关，而添加 <code>β</code> 后相关，则 <code>β</code> 可由它们唯一表出。</li>
+</ul>
+
+<h2 id="s3">6.3 维数、基与坐标</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="470" height="320" viewBox="0 0 470 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="f1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="f1g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="f1d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111827"/></marker></defs><polygon points="150,250 220,250 250,180 180,180" fill="rgba(37,99,235,0.06)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"><animate attributeName="points" values="150,250 220,250 250,180 180,180;150,250 346,250 376,180 180,180;150,250 346,250 430,54 234,54;150,250 220,250 304,54 234,54;150,250 220,250 250,180 180,180" dur="8s" repeatCount="indefinite"/></polygon><line x1="150" y1="250" x2="290" y2="250" stroke="#2563eb" stroke-width="3" marker-end="url(#f1b)"/><line x1="150" y1="250" x2="210" y2="110" stroke="#16a34a" stroke-width="3" marker-end="url(#f1g)"/><line x1="150" y1="250" x2="220" y2="250" stroke="#2563eb" stroke-width="4" marker-end="url(#f1b)"><animate attributeName="x2" values="220;346;346;220;220" dur="8s" repeatCount="indefinite"/></line><line x1="220" y1="250" x2="250" y2="180" stroke="#16a34a" stroke-width="4" marker-end="url(#f1g)"><animate attributeName="x1" values="220;346;346;220;220" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="250;376;430;304;250" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="180;180;54;54;180" dur="8s" repeatCount="indefinite"/></line><line x1="150" y1="250" x2="250" y2="180" stroke="#111827" stroke-width="4" marker-end="url(#f1d)"><animate attributeName="x2" values="250;376;430;304;250" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="180;180;54;54;180" dur="8s" repeatCount="indefinite"/></line><circle cx="150" cy="250" r="3.5" fill="#111827"/><text x="136" y="270" font-size="13" fill="#334155" text-anchor="middle">O</text><text x="302" y="244" font-size="15" fill="#2563eb" font-weight="bold">α₁</text><text x="220" y="104" font-size="15" fill="#16a34a" font-weight="bold">α₂</text><text x="262" y="172" font-size="15" fill="#111827" font-weight="bold">v<animate attributeName="x" values="262;388;442;316;262" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="172;172;46;46;172" dur="8s" repeatCount="indefinite"/></text><text x="30" y="310" font-size="13" fill="#334155">v = x₁α₁ + x₂α₂：坐标就是沿两条基向量「走多远」</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：向量 v 沿基 α₁、α₂ 分解，系数 x₁、x₂ 就是在该基下的坐标——沿两条基向量各"走多少步"</figcaption></figure>
+<h3>基（几何：坐标系）与维数</h3>
+<p>若 <code>V</code> 中向量组 <code>α₁,…,αₙ</code> 满足：</p>
+<ul>
+<li><strong>线性无关</strong>；</li>
+<li><strong>张成整个空间</strong>：<code>V = span{α₁,…,αₙ}</code>，即任意 <code>α ∈ V</code> 都能写成它们的线性组合。</li>
+</ul>
+<p>则称其为 <code>V</code> 的一组<strong>基</strong>，基所含向量的个数 <code>n</code> 叫 <code>V</code> 的<strong>维数</strong>，记 <code>dim V = n</code>。若维数无限，称无限维空间（如 <code>C[a,b]</code>）。</p>
+<div class="insight"><strong>几何含义：</strong>基就是"坐标轴"。平面里两个不共线向量构成一组基（不一定是垂直的直角坐标，斜的也可以）；空间里三个不共面向量构成基。<strong>关键定理：维数与基的选择无关</strong>——无论你选哪组基，基向量的个数都一样，这是"维度"概念的坚实根基。</div>
+<h3>坐标（几何：向量在坐标系下的"读数"）</h3>
+<p>给定基 <code>α₁,…,αₙ</code>，任意 <code>α ∈ V</code> 可<strong>唯一</strong>表成</p>
+<pre><code>α = x₁α₁ + x₂α₂ + … + xₙαₙ</code></pre>
+<p>称有序数组 <code>(x₁, x₂, …, xₙ)ᵀ</code> 为 <code>α</code> 在这组基下的<strong>坐标</strong>。唯一性来自基的线性无关性（若有两种表出，相减得零的线性组合，系数必全为零）。</p>
+<div class="insight"><strong>几何含义：</strong>坐标 = 从原点出发，沿各基向量"走多远"才能到达目标向量。在标准基 <code>e₁,e₂,e₃</code> 下坐标就是熟悉的直角坐标。<strong>物理含义：</strong>一个物理量"在某个参考系（基）下的分量"——同一个速度矢量，换了坐标系分量就变，但矢量本身不变。这就是后面"换基"的物理原型。</div>
+<h3>标准基与维数公式</h3>
+<p><code>Rⁿ</code> 的标准基：<code>e₁=(1,0,…,0), e₂=(0,1,…,0), …, eₙ=(0,…,0,1)</code>，故 <code>dim Rⁿ = n</code>。</p>
+<pre><code>Pₙ[x] 的一组基：1, x, x², …, xⁿ⁻¹        ⇒ dim Pₙ[x] = n
+R^{m×n} 的基：Eᵢⱼ（第 i 行第 j 列为 1，其余为 0） ⇒ dim R^{m×n} = mn</code></pre>
+<p><strong>维数公式（子空间的交与和）</strong>：设 <code>W₁, W₂</code> 是 <code>V</code> 的子空间，则</p>
+<pre><code>dim(W₁ + W₂) = dim W₁ + dim W₂ − dim(W₁ ∩ W₂)</code></pre>
+<div class="insight"><strong>几何含义：</strong>两个过原点的平面在三维空间中相交于一条直线（也可能重合）：<code>2 + 2 − 1 = 3</code>。维数公式正是"容斥原理"在空间维度上的体现。</div>
+
+<h2 id="s4">6.4 线性变换的定义与性质</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="470" height="260" viewBox="0 0 470 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="f2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker><marker id="f2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker><marker id="f2t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker></defs><text x="120" y="40" font-size="14" fill="#334155" text-anchor="middle">定义域</text><polygon points="90,150 150,150 150,90 90,90" fill="rgba(37,99,235,0.06)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="90" y1="150" x2="150" y2="150" stroke="#2563eb" stroke-width="4" marker-end="url(#f2b)"/><line x1="90" y1="150" x2="90" y2="90" stroke="#16a34a" stroke-width="4" marker-end="url(#f2g)"/><circle cx="90" cy="150" r="3.5" fill="#111827"/><text x="156" y="146" font-size="15" fill="#2563eb" font-weight="bold">e₁</text><text x="74" y="86" font-size="15" fill="#16a34a" font-weight="bold">e₂</text><text x="76" y="168" font-size="13" fill="#334155">O</text><line x1="252" y1="150" x2="332" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#f2t)"/><text x="292" y="142" font-size="15" fill="#334155" text-anchor="middle" font-weight="bold">T</text><text x="350" y="40" font-size="14" fill="#334155" text-anchor="middle">像（如旋转 90°）</text><polygon points="350,150 410,150 410,90 350,90" fill="rgba(37,99,235,0.06)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"><animate attributeName="points" values="350,150 410,150 410,90 350,90;350,150 350,210 290,210 290,150;350,150 410,150 410,90 350,90" dur="6s" repeatCount="indefinite"/></polygon><line x1="350" y1="150" x2="410" y2="150" stroke="#2563eb" stroke-width="4" marker-end="url(#f2b)"><animate attributeName="x2" values="410;350;410" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="150;210;150" dur="6s" repeatCount="indefinite"/></line><line x1="350" y1="150" x2="350" y2="90" stroke="#16a34a" stroke-width="4" marker-end="url(#f2g)"><animate attributeName="x2" values="350;290;350" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="90;150;90" dur="6s" repeatCount="indefinite"/></line><circle cx="350" cy="150" r="3.5" fill="#111827"/><text x="336" y="168" font-size="13" fill="#334155">O</text><text x="416" y="142" font-size="13" fill="#2563eb" font-weight="bold">T(e₁)<animate attributeName="x" values="416;356;416" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="142;202;142" dur="6s" repeatCount="indefinite"/></text><text x="320" y="106" font-size="13" fill="#16a34a" font-weight="bold">T(e₂)<animate attributeName="x" values="320;260;320" dur="6s" repeatCount="indefinite"/><animate attributeName="y" values="106;166;106" dur="6s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：线性变换把基向量与它们张成的平行四边形一起映过去——直线仍变直线、原点不动，结构被保持</figcaption></figure>
+<h3>定义：保持两种结构的映射</h3>
+<p>设 <code>V, W</code> 都是数域 <code>F</code> 上的线性空间，映射 <code>T : V → W</code> 若满足对任意 <code>α, β ∈ V, k ∈ F</code>：</p>
+<pre><code>T(α + β) = T(α) + T(β)      （保加法）
+T(kα)    = k·T(α)           （保数乘）</code></pre>
+<p>则称 <code>T</code> 是<strong>线性变换</strong>（W = V 时称线性变换/线性算子；一般情形也叫<strong>线性映射</strong>）。两条可合并为一条：</p>
+<pre><code>T(kα + lβ) = k·T(α) + l·T(β)     对任意 k, l ∈ F</code></pre>
+<div class="insight"><strong>几何含义：</strong>线性变换把"平行四边形"映成"平行四边形"——把直线映成直线（或原点），把原点映成原点，且"均匀"地缩放。<strong>物理含义：</strong>线性变换是"保持叠加原理"的物理过程：两列波的叠加后再变换 = 变换后再叠加；放大 k 倍再变换 = 变换后放大 k 倍。旋转、投影、伸缩、镜像、剪切都是线性变换。</div>
+<h3>例子（几何直觉）</h3>
+<table>
+<tr><th>变换</th><th>在 R² 上的作用</th><th>几何效果</th></tr>
+<tr><td>旋转 <code>Rot(θ)</code></td><td>绕原点逆时针转 θ 角</td><td>刚体旋转</td></tr>
+<tr><td>投影 <code>P</code></td><td>投到 x 轴：<code>(x,y) ↦ (x,0)</code></td><td>压扁到一条直线</td></tr>
+<tr><td>伸缩 <code>S</code></td><td><code>(x,y) ↦ (ax,by)</code></td><td>坐标轴方向缩放</td></tr>
+<tr><td>镜像 <code>M</code></td><td><code>(x,y) ↦ (x,−y)</code></td><td>关于 x 轴翻折</td></tr>
+<tr><td>剪切 <code>Sh</code></td><td><code>(x,y) ↦ (x+y, y)</code></td><td>横向错切</td></tr>
+</table>
+<div class="insight"><strong>判定技巧：</strong>检查是否线性，先看"原点是否映成原点"（<code>T(0)=0</code> 必须成立），再验证 <code>T(kα + lβ) = kT(α) + lT(β)</code>。例：平移 <code>T(x,y)=(x+a, y+b)</code> 当 <code>(a,b)≠(0,0)</code> 时不是线性变换——因为它把原点移走了，属于"仿射变换"。</div>
+<h3>核与像、秩—零度定理</h3>
+<p><strong>核（kernel/零空间）</strong>：被映成零向量的全体输入。</p>
+<pre><code>Ker T = { α ∈ V : T(α) = 0 }</code></pre>
+<p><strong>像（image/值域）</strong>：所有输出构成的集合。</p>
+<pre><code>Im T = { T(α) : α ∈ V }</code></pre>
+<p>核是 <code>V</code> 的子空间，像是 <code>W</code> 的子空间。称 <code>dim(Ker T)</code> 为<strong>零度</strong>，<code>dim(Im T)</code> 为<strong>秩</strong>。核心定理——<strong>秩—零度定理（维数定理）</strong>：</p>
+<pre><code>dim V = dim(Ker T) + dim(Im T)</code></pre>
+<div class="insight"><strong>几何含义：</strong>输入空间的维数 = "被压成零点的方向数" + "存活下来的方向数"。例如把 R³ 垂直投影到 xy 平面：z 轴整个被压成原点（<code>dim Ker = 1</code>），像就是 xy 平面（<code>dim Im = 2</code>），而 <code>3 = 1 + 2</code>。<strong>物理含义：</strong>线性系统里"解的自由度" = 方程个数（列空间维数）之外的零空间维数；秩度量了变换"保留了多少独立信息"，零度度量了"丢失了多少独立方向"。</div>
+
+<h2 id="s5">6.5 线性变换的矩阵表示与换基</h2>
+<h3>核心思想：选定基之后，变换 = 一张矩阵</h3>
+<p>设 <code>dim V = n, dim W = m</code>。取 <code>V</code> 的基 <code>α₁,…,αₙ</code> 与 <code>W</code> 的基 <code>β₁,…,βₘ</code>。对每个基向量 <code>αⱼ</code>，它在 <code>W</code> 基下的坐标为：</p>
+<pre><code>T(αⱼ) = a₁ⱼβ₁ + a₂ⱼβ₂ + … + aₘⱼβₘ</code></pre>
+<p>把这些坐标<strong>按列</strong>排成 m×n 矩阵 <code>A = (aᵢⱼ)</code>，称为 <code>T</code> 在这两组基下的<strong>矩阵表示</strong>。于是对任意 <code>α = x₁α₁+…+xₙαₙ</code>，其像的坐标满足：</p>
+<pre><code>y = A x，其中 x = (x₁,…,xₙ)ᵀ，y = (y₁,…,yₘ)ᵀ</code></pre>
+<div class="insight"><strong>几何含义：</strong>矩阵 A 的第 j 列 = 第 j 个基向量被变换后的"影子坐标"。也就是说，<strong>一个线性变换被它在基向量上的取值完全决定</strong>——因为任何向量都是基向量的线性组合，而变换又保持线性组合。所以"选好基后，变换 ↔ 矩阵"是一一对应。</div>
+<div class="insight"><strong>物理含义：</strong>这就是"物理规律在具体坐标系里的数字形式"。同样的转动（一个几何/物理动作），在标准直角坐标下是一张矩阵，换了坐标轴又变成另一张矩阵——它们描述的是<strong>同一个变换</strong>，这就是"相似矩阵"的物理来源。</div>
+<h3>复合与矩阵乘法</h3>
+<p>若 <code>T : V→W</code> 与 <code>S : W→U</code> 的矩阵分别为 <code>A</code>、<code>B</code>，则复合 <code>S∘T</code> 的矩阵为 <code>BA</code>。即：</p>
+<pre><code>矩阵乘法 = 线性变换的复合</code></pre>
+<div class="insight"><strong>几何含义：</strong>先做 T 再做 S，对应"先乘 A 再乘 B"——从右到左依次作用。这正是"先旋转后拉伸"与"先拉伸后旋转"一般不等（<code>BA ≠ AB</code>）的几何根源：<strong>变换一般不交换</strong>。</div>
+<h3>换基公式与相似矩阵（同一变换，不同坐标）</h3>
+<p>设 <code>V = W</code>（同一空间上的线性算子），旧基 <code>α₁,…,αₙ</code> 与新基 <code>α'₁,…,α'ₙ</code>。若 <code>T</code> 在旧基下矩阵为 <code>A</code>，在新基下矩阵为 <code>B</code>，则存在可逆的<strong>过渡矩阵（基变换矩阵）</strong> <code>P</code> 使</p>
+<pre><code>B = P⁻¹ A P</code></pre>
+<p>此时称 <code>A</code> 与 <code>B</code><strong>相似</strong>。过渡矩阵 <code>P</code> 的列 = 新基向量在旧基下的坐标。</p>
+<div class="insight"><strong>几何含义：</strong>换基只是"换一副坐标系看同一个几何动作"。<code>A</code> 和 <code>B</code> 是同一个变换的两张"照片"。<strong>物理含义：</strong>同一个物理规律（转动、惯性张量、量子算符）在不同参考系下有不同矩阵，但它们相似；<strong>相似不变量</strong>（如迹、行列式、特征值、秩）才是这个变换的"本质属性"，与坐标系无关——正如矢量长度不随坐标系改变。</div>
+<h3>可逆变换与同构</h3>
+<p>若线性变换 <code>T</code> 既是单射（<code>Ker T = {0}</code>）又是满射（<code>Im T = W</code>），则称 <code>T</code> 可逆，其矩阵 <code>A</code> 是方阵且可逆，逆变换的矩阵为 <code>A⁻¹</code>。两个线性空间若存在可逆线性映射，称它们<strong>同构</strong>；同维数的线性空间必同构。</p>
+<div class="insight"><strong>几何含义：</strong>可逆变换不"压扁"任何方向（核只有零点），空间经过它之后维数不损失，还能"复原"。<strong>物理含义：</strong>可逆性 = 信息不丢失、过程可逆；行列式 <code>det A ≠ 0</code> 是"体积不被压成零"的代数判据。</div>
+
+<hr>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>线性空间</td><td>加法、数乘封闭的"平坦世界"</td><td>满足叠加原理的物理状态集合</td></tr>
+<tr><td>向量</td><td>带方向的箭头（可推广为函数、矩阵）</td><td>位移、速度、力、量子态等可叠加的量</td></tr>
+<tr><td>子空间</td><td>过原点的直线/平面/更高维平坦部分</td><td>受约束系统允许到达的状态集</td></tr>
+<tr><td>线性相关</td><td>有向量落在其余向量张成的子空间里（冗余）</td><td>存在冗余约束、自由度被重复计数</td></tr>
+<tr><td>线性无关</td><td>无一个能被其余表出（独立方向）</td><td>独立自由度、独立基元状态</td></tr>
+<tr><td>基</td><td>张成整个空间的坐标系（坐标轴）</td><td>参考系/单位基元</td></tr>
+<tr><td>维数</td><td>基向量的个数（与基无关）</td><td>系统的独立自由度数</td></tr>
+<tr><td>坐标</td><td>沿各基向量的"步数"</td><td>物理量在某参考系下的分量</td></tr>
+<tr><td>线性变换</td><td>把直线映成直线、原点映成原点的均匀映射</td><td>保持叠加原理的线性过程（旋转/投影/伸缩）</td></tr>
+<tr><td>核 Ker T</td><td>被压到零点的方向集合</td><td>被过程"湮灭"、信息丢失的方向</td></tr>
+<tr><td>像 Im T</td><td>变换后能到达的范围</td><td>过程能产生的结果范围</td></tr>
+<tr><td>秩—零度定理</td><td>dim V = 丢失方向 + 存活方向</td><td>输入信息 = 冗余 + 有效信息</td></tr>
+<tr><td>矩阵表示</td><td>基向量变换后的坐标按列排</td><td>规律在选定坐标系下的数字形式</td></tr>
+<tr><td>换基/相似矩阵</td><td>同一几何动作换坐标系看</td><td>同一规律换参考系（迹/特征值不变）</td></tr>
+<tr><td>可逆变换</td><td>不压扁任何方向、可复原</td><td>信息不丢失、过程可逆（det ≠ 0）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断下列集合是否构成线性空间（加法、数乘为通常意义）：(a) 全体 n 次多项式；(b) 全体 n 阶上三角矩阵；(c) 满足 <code>f(1)=0</code> 的全体实系数多项式。</li>
+<li>判断向量组是否线性无关：<code>α₁=(1,2,3)</code>，<code>α₂=(2,−1,4)</code>，<code>α₃=(0,5,2)</code>。</li>
+<li>设 <code>R³</code> 中 <code>β₁=(1,1,0), β₂=(0,1,1), β₃=(1,0,1)</code>。证明它是一组基，并求 <code>α=(1,2,3)</code> 在该基下的坐标。</li>
+<li>设 <code>T : R³ → R²</code>，<code>T(x,y,z)=(x+y, y−z)</code>。求 T 在标准基下的矩阵、<code>Ker T</code> 与 <code>Im T</code> 的维数，并验证秩—零度定理。</li>
+<li>设 <code>T</code> 是 <code>R²</code> 上逆时针旋转 90° 的变换。写出它在标准基下的矩阵 A；若新基为 <code>α₁=(1,1), α₂=(−1,1)</code>，求过渡矩阵 P 及新基下的矩阵 B = P⁻¹AP。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "子空间只要对加法封闭就行" → ❌ 还必须对数乘封闭、含零向量；只对加法封闭不足以成为子空间。</li>
+<li>❌ "维数就是向量里数字的个数" → ❌ 维数是"基向量的个数"，是空间的属性，不是单个向量分量的个数；<code>Pₙ[x]</code> 里的向量是多项式，没有"分量个数"，但 dim 仍是 n。</li>
+<li>❌ "基必须是相互垂直的单位向量" → ❌ 基只要求线性无关且张成全空间，可以斜交、可以非单位长；垂直单位的是"标准正交基"这一特例。</li>
+<li>❌ "坐标是唯一的吗？换基不变" → ❌ 同一向量在<strong>给定</strong>一组基下坐标唯一，但换一组基坐标就变；坐标依赖基的选择。</li>
+<li>❌ "把原点映成原点的映射都是线性变换" → ❌ 仅是必要条件不充分；<code>T(x)=x²</code> 在 <code>R</code> 上把 0 映成 0，但不满足 <code>T(x+y)=T(x)+T(y)</code>，不是线性的。</li>
+<li>❌ "相似矩阵相等" → ❌ 相似矩阵一般不相等，只是描述同一变换在不同基下；它们的迹、行列式、特征值、秩相同。</li>
+<li>❌ "矩阵乘法的顺序无所谓" → ❌ 矩阵乘法对应变换的复合，一般 <code>BA ≠ AB</code>；先旋转后拉伸 ≠ 先拉伸后旋转。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>判断下列集合关于通常的加法与数乘是否构成线性空间，并说明理由：(a) 全体次数<strong>恰为 2</strong> 的多项式；(b) <code>R³</code> 中满足 <code>x+y+z=0</code> 的向量 <code>(x,y,z)</code> 全体；(c) <code>R²</code> 中满足 <code>x²+y²=1</code> 的点全体。</li>
+<li>判断向量组 <code>α₁=(1,1,0)</code>、<code>α₂=(0,1,1)</code>、<code>α₃=(1,2,1)</code> 是否线性无关，并从几何角度说明其含义。</li>
+<li>设 <code>β₁=(1,0,1)</code>、<code>β₂=(0,1,1)</code>、<code>β₃=(1,1,0)</code>。证明它是 <code>R³</code> 的一组基，并求 <code>α=(2,3,4)</code> 在该基下的坐标。</li>
+<li>设 <code>T:R³→R²</code>，<code>T(x,y,z)=(x+y, y−z)</code>。求 T 在标准基下的矩阵 A，以及 <code>Ker T</code>、<code>Im T</code> 的维数，并验证秩—零度定理。</li>
+<li>设 T 是 <code>R²</code> 上逆时针旋转 90° 的变换。写出它在标准基下的矩阵 A；若新基为 <code>α₁=(1,1)</code>、<code>α₂=(−1,1)</code>，求过渡矩阵 P 及新基下的矩阵 <code>B = P⁻¹AP</code>，并验证相似不变量。</li>
+<li>设 T 是 <code>R³</code> 向 xy 平面的正交投影：<code>T(x,y,z)=(x,y,0)</code>。(a) 求 <code>Ker T</code> 与 <code>Im T</code> 及其维数，验证秩—零度定理；(b) 用一两句话说明其几何含义，并指出这一变换"丢失"了哪一维信息。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>(a) 不是。取 <code>x²</code> 与 <code>−x²</code> 相加得 0，次数不再是 2，加法不封闭（也不含零元 0）。 (b) 是。它是过原点的平面，含零向量；任取两向量相加、任意数乘后分量之和仍为 0，故对加法与数乘都封闭，八条公理自动继承。 (c) 不是。单位圆不含原点 0，且 <code>(1,0)+(0,1)=(1,1)</code> 不在圆上，加法不封闭。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>线性<strong>相关</strong>。因为 <code>α₃ = α₁ + α₂</code>，即 <code>1·α₁ + 1·α₂ + (−1)·α₃ = 0</code>，存在不全为零的系数。几何上：<code>α₃</code> 落在 <code>α₁、α₂</code> 张成的平面内，是被"重复"的冗余方向，故三者不能构成独立的方向。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>先证无关：设 <code>c₁β₁+c₂β₂+c₃β₃=0</code>，展开得方程组 <code>c₁+c₃=0, c₂+c₃=0, c₁+c₂=0</code>，解得 <code>c₁=c₂=c₃=0</code>，故线性无关；又 <code>dim R³=3</code>，三个无关向量张成整个 <code>R³</code>，所以是基。求坐标：设 <code>α=xβ₁+yβ₂+zβ₃</code>，解 <code>x+z=2, y+z=3, x+y=4</code>，得 <code>x=3/2, y=5/2, z=1/2</code>，即坐标为 <code>(3/2, 5/2, 1/2)ᵀ</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>取标准基：<code>T(e₁)=(1,0)</code>、<code>T(e₂)=(1,1)</code>、<code>T(e₃)=(0,−1)</code>，故 <code>A = [[1,1,0],[0,1,−1]]</code>。求核：解 <code>x+y=0, y−z=0</code> 得 <code>x=−y, z=y</code>，自由变量为 y，故 <code>Ker T = span{(−1,1,1)}</code>，<code>dim Ker T = 1</code>。像由 A 的列张成，两行线性独立，故 <code>dim Im T = 2</code>。验证：<code>3 = 1 + 2</code>，秩—零度定理成立。几何上：沿 <code>(−1,1,1)</code> 这一个方向被"压"到原点，另外两个独立方向存活下来。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>旋转 90° 把 <code>e₁→(0,1)</code>、<code>e₂→(−1,0)</code>，故 <code>A = [[0,−1],[1,0]]</code>。过渡矩阵 P 的列是新基在旧基下的坐标：<code>P = [[1,−1],[1,1]]</code>，<code>det P = 2</code>，<code>P⁻¹ = (1/2)[[1,1],[−1,1]]</code>。计算 <code>B = P⁻¹AP = [[0,−1],[1,0]]</code>，恰与 A 相同（这组新基下 90° 旋转仍取同一形式）。相似不变量保持不变：<code>tr(A)=tr(B)=0</code>、<code>det(A)=det(B)=1</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(a) <code>Ker T = {(0,0,z)}</code> 即 z 轴，<code>dim Ker T = 1</code>；<code>Im T = {(x,y,0)}</code> 即 xy 平面，<code>dim Im T = 2</code>；<code>3 = 1 + 2</code>，定理成立。(b) 几何上这是把整个空间"压扁"到 xy 平面，z 轴方向被整体映成原点；它丢失了"高度"（z 分量）这一维信息——正如把三维物体拍成平面照片，纵深信息丢失。核的维数（1）正是被丢失的独立方向数。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第5章-相似矩阵及二次型/第5章-相似矩阵及二次型.html">← 上一章：第5章 相似矩阵及二次型</a><a href="../../../index.html">回目录</a><a href="../../离散数学/第1章-命题逻辑/第1章-命题逻辑.html">下一章：第1章 命题逻辑 →</a></nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中到大学</footer>
+</body>
+</html>

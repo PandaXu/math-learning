@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第28章 锐角三角函数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第28章 锐角三角函数</div></header>
+<main class="container">
+<h1>第28章 锐角三角函数</h1>
+<p class="lead">初中 / 初三 / 九年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>锐角三角函数 = 「用一个锐角，定死一个直角三角形的<strong>形状</strong>」。正弦、余弦、正切是三角形的三条「边比」，它们只由角决定、与三角形大小无关；学完本章，你要能在心里把「角」翻译成「边之比」，再用它去测量无法直接丈量的高度与距离。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">28.1 正弦、余弦、正切</a><a href="#s2">28.2 特殊角的三角函数值</a><a href="#s3">28.3 解直角三角形</a><a href="#s4">28.4 应用：仰角俯角、坡度、方位角</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">28.1 正弦、余弦、正切</h2>
+<h3>为什么需要三角函数？（几何动机）</h3>
+<p>回忆<b>相似三角形</b>：两个直角三角形，只要有一个锐角相等，它们就相似；相似三角形的<b>对应边成比例</b>。反过来想——<strong>只要锐角 ∠A 确定，直角三角形的形状就被唯一确定了</strong>，于是任意两条边的<strong>比值</strong>也就被唯一确定了，跟这个三角形画得有多大无关。</p>
+<p>这三个「由角唯一决定的边之比」，就是三角函数。用它们，我们可以<strong>从角度出发去求边长</strong>，也可以<strong>从边长反推出角度</strong>——这就是「角」与「边」之间的桥梁。</p>
+<div class="insight"><strong>核心直觉：</strong>三角函数是「角 → 形状 → 边比」的编码表。同一个 30° 角，无论三角形放大缩小多少倍，<code>对边/斜边</code> 永远是 <code>1/2</code>。这就像「形状的指纹」——角度不变，指纹不变。</div>
+
+<h3>三条边的命名：对边、邻边、斜边</h3>
+<p>在直角三角形 <code>Rt△ABC</code> 中，设 <code>∠C = 90°</code>，考察锐角 <code>∠A</code>：</p>
+<table>
+<tr><th>边</th><th>相对 ∠A 的位置</th><th>记号（按边长）</th></tr>
+<tr><td>斜边</td><td>直角所对的边（最长边）</td><td>c（对直角）</td></tr>
+<tr><td>∠A 的对边</td><td>∠A 正对着的那条直角边</td><td>a</td></tr>
+<tr><td>∠A 的邻边</td><td>∠A 旁边的另一条直角边（不是斜边）</td><td>b</td></tr>
+</table>
+<pre><code>        A
+        |\
+        | \
+    b(邻)|  \ c(斜边)
+        |   \
+        |____\
+        C   a(对边)  B
+
+  ∠A 的对边 = a，∠A 的邻边 = b，斜边 = c（∠C = 90°）</code></pre>
+<p><strong>关键提醒</strong>：「对边」「邻边」永远是<strong>相对某个锐角</strong>说的。同一条直角边，对 ∠A 是邻边，对 ∠B 却是对边——换个角度，命名就互换。</p>
+
+<h3>三个三角函数的定义</h3>
+<pre><code>             ∠A 的对边      a
+  正弦 sinA = ────────── = ───
+                斜边         c
+
+             ∠A 的邻边      b
+  余弦 cosA = ────────── = ───
+                斜边         c
+
+             ∠A 的对边      a
+  正切 tanA = ────────── = ───
+             ∠A 的邻边      b</code></pre>
+<ul>
+<li><strong>正弦 sinA</strong>：对边比斜边。</li>
+<li><strong>余弦 cosA</strong>：邻边比斜边。</li>
+<li><strong>正切 tanA</strong>：对边比邻边（<strong>两条直角边之比</strong>，与斜边无关）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>sinA 与 cosA 把「斜边」投影到「竖直」与「水平」两个方向——它们回答「斜边这个总长度，有多少落在竖直方向、多少落在水平方向」；tanA 回答「竖直与水平的配比」，也就是这条边的<strong>倾斜程度（斜率）</strong>。所以 sin、cos 是<strong>投影</strong>，tan 是<strong>坡度</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>任何斜着的量都可以用 sin、cos 拆成「竖直分量 + 水平分量」。例如斜面上物体的重力 G 沿斜面下滑的分力是 <code>G·sinθ</code>、垂直压着斜面的分力是 <code>G·cosθ</code>；一个斜向拉力 F 与水平成 θ 角，则水平分力 <code>F·cosθ</code>、竖直分力 <code>F·sinθ</code>。三角函数是「力的分解」的语言。</div>
+
+<h3>取值范围与基本性质</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">单位圆：sin²A + cos²A = 1</text><line x1="40" y1="150" x2="322" y2="150" stroke="#94a3b8" stroke-width="2"/><line x1="170" y1="18" x2="170" y2="292" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="150" r="120" fill="none" stroke="#cbd5e1" stroke-width="2"/><text x="294" y="144" font-size="12" fill="#64748b">1</text><text x="176" y="30" font-size="12" fill="#64748b">1</text><text x="158" y="168" font-size="12" fill="#64748b">O</text><line x1="170" y1="150" x2="290" y2="150" stroke="#2563eb" stroke-width="3"><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/></line><line x1="290" y1="150" x2="290" y2="150" stroke="#16a34a" stroke-width="3"><animate attributeName="x1" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="290;273.9;230;170;110;66.1;50;66.1;110;170;230;273.9;290" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="150;90;46.1;30;46.1;90;150;210;253.9;270;253.9;210;150" dur="8s" repeatCount="indefinite"/></line><g><animateTransform attributeName="transform" type="rotate" from="0 170 150" to="360 170 150" dur="8s" repeatCount="indefinite"/><line x1="170" y1="150" x2="290" y2="150" stroke="#1d4ed8" stroke-width="3"/><circle cx="290" cy="150" r="6" fill="#2563eb"/><text x="298" y="142" font-size="13" font-weight="700" fill="#0f172a">P</text></g><g font-size="12" fill="#334155"><line x1="356" y1="64" x2="386" y2="64" stroke="#2563eb" stroke-width="3"/><text x="392" y="68">cosA（水平投影）</text><line x1="356" y1="88" x2="386" y2="88" stroke="#16a34a" stroke-width="3"/><text x="392" y="92">sinA（竖直投影）</text><line x1="356" y1="112" x2="386" y2="112" stroke="#1d4ed8" stroke-width="3"/><text x="392" y="116">斜边（半径＝1）</text></g><text x="260" y="284" text-anchor="middle" font-size="13" fill="#1e3a8a">勾股定理的比值版：cos²A + sin²A = 1（两投影平方和 = 半径²）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：单位圆中斜边（半径 1）投影成竖直 sinA、水平 cosA，两投影的平方和恒等于 1——这就是 sin²A + cos²A = 1</figcaption></figure>
+<p>因为直角三角形的直角边总比斜边短，所以对锐角 A（0° &lt; A &lt; 90°）恒有：</p>
+<pre><code>0 &lt; sinA &lt; 1，  0 &lt; cosA &lt; 1，  tanA &gt; 0（可任意大）</code></pre>
+<p><strong>同角关系（三条黄金公式）</strong>：</p>
+<pre><code>① sin²A + cos²A = 1     （由勾股定理 a² + b² = c² 两边同除以 c² 得到）
+② tanA = sinA / cosA    （对边/邻边 = 对边/斜边 ÷ 邻边/斜边）
+③ 互余关系：sinA = cos(90° − A)，cosA = sin(90° − A)，
+   tanA = 1 / tan(90° − A)（因为两个锐角 A、B 互余，A 的对边正是 B 的邻边）</code></pre>
+<div class="insight"><strong>几何含义：</strong><code>sin²A + cos²A = 1</code> 就是勾股定理的「比值版」——一个单位长度斜边，在竖直方向的投影 sinA 与水平方向的投影 cosA，满足「两投影的平方和 = 1」。这正是一个半径为 1 的圆（单位圆）上的点坐标 <code>(cosA, sinA)</code>，到高中会全面展开。</div>
+
+<h2 id="s2">28.2 特殊角的三角函数值（30°、45°、60°）</h2>
+<h3>三个特殊角，两个「标准三角形」</h3>
+<p>特殊角的值不需要死记，它们都来自两块「最标准的三角板」：</p>
+<ul>
+<li><strong>45°</strong>：等腰直角三角形（45°-45°-90°）。设两直角边都为 1，则斜边 = √2。</li>
+<li><strong>30° 与 60°</strong>：30°-60°-90° 三角形（把边长为 2 的等边三角形沿高对半分）。短直角边（对 30°）= 1，斜边 = 2，长直角边（对 60°）= √3。</li>
+</ul>
+<pre><code>45° 等腰直角△：                30°-60°-90°△（等边△的一半）：
+  直角边 1、1、斜边 √2            短边 1、斜边 2、长边 √3
+
+  sin45° = 1/√2 = √2/2           sin30° = 1/2      sin60° = √3/2
+  cos45° = 1/√2 = √2/2           cos30° = √3/2     cos60° = 1/2
+  tan45° = 1/1 = 1               tan30° = 1/√3 = √3/3
+                                  tan60° = √3/1 = √3</code></pre>
+<h3>特殊角三角函数值速查表</h3>
+<table>
+<tr><th>角 α</th><th>sin α</th><th>cos α</th><th>tan α</th></tr>
+<tr><td>30°</td><td>1/2</td><td>√3/2</td><td>√3/3</td></tr>
+<tr><td>45°</td><td>√2/2</td><td>√2/2</td><td>1</td></tr>
+<tr><td>60°</td><td>√3/2</td><td>1/2</td><td>√3</td></tr>
+</table>
+<p><strong>记忆规律</strong>：</p>
+<ul>
+<li>sin 一列：<code>1/2 → √2/2 → √3/2</code>（分母都是 2，分子是 √1、√2、√3 递增）。</li>
+<li>cos 一列：正好是 sin 一列的<strong>倒过来</strong>：<code>√3/2 → √2/2 → 1/2</code>（因为 cosα = sin(90°−α)）。</li>
+<li>tan 一列：<code>√3/3 → 1 → √3</code>（等于 sin/cos，逐级放大）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>记住两句话即可现场推导——「30° 所对的直角边等于斜边的一半」（所以 sin30° = 1/2），「45° 的直角三角形两直角边相等」（所以 tan45° = 1）。其余全部由勾股定理与定义推出。</div>
+<div class="insight"><strong>物理含义：</strong>sin30° = 1/2 在物理里极常用：光滑斜面上物块沿斜面下滑的加速度 <code>a = g·sinθ</code>，当斜面倾角 30° 时 a = g/2；要把一个物体匀速拉上 30° 坡，至少需要 <code>G·sin30° = G/2</code> 的力。特殊角让力、速度、高度的换算直接变成简单分数。</div>
+
+<h2 id="s3">28.3 解直角三角形</h2>
+<h3>什么是「解直角三角形」？</h3>
+<p>直角三角形共有<strong>六个元素</strong>：三条边 a、b、c 与三个角 A、B、C（其中 C = 90°）。已知其中<strong>某些元素</strong>（至少一条边），求出<strong>其余所有未知元素</strong>的过程，叫「解直角三角形」。</p>
+<h3>解题的三组工具</h3>
+<table>
+<tr><th>工具</th><th>内容</th><th>作用</th></tr>
+<tr><td>三边关系</td><td>勾股定理 a² + b² = c²</td><td>已知两边求第三边</td></tr>
+<tr><td>两角关系</td><td>A + B = 90°（两锐角互余）</td><td>已知一角求另一角</td></tr>
+<tr><td>边角关系</td><td>sin、cos、tan 三个定义</td><td>已知一边一角求其它边</td></tr>
+</table>
+<h3>四种基本类型</h3>
+<table>
+<tr><th>已知条件</th><th>求解步骤</th></tr>
+<tr><td>① 两直角边 a、b</td><td>勾股定理求 c；tanA = a/b 求 A；B = 90° − A</td></tr>
+<tr><td>② 斜边 c 与一直角边 a</td><td>勾股定理求 b；sinA = a/c 求 A；B = 90° − A</td></tr>
+<tr><td>③ 一直角边 a 与一锐角 A</td><td>B = 90° − A；tanA = a/b 求 b；sinA = a/c 求 c</td></tr>
+<tr><td>④ 斜边 c 与一锐角 A</td><td>B = 90° − A；sinA = a/c 求 a；cosA = b/c 求 b</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>「解直角三角形」的本质是——<strong>给定形状的一部分信息，把整个三角形的形状和大小复原出来</strong>。因为直角三角形由「一个锐角」决定形状、由「一条边」决定大小，所以「一边 + 一角」或「两边」就足以唯一确定整个三角形。</div>
+<div class="insight"><strong>物理含义：</strong>这对应「矢量合成的逆运算」——已知一个斜向量的大小和方向角，把它分解成水平、竖直两个分量（用 sin、cos）；反过来，已知两个垂直分量，用勾股定理与 tan 合成出合矢量的大小与方向。这是物理中几乎所有「分解与合成」的数学模型。</div>
+<h3>精确值与近似值</h3>
+<p>若角是 30°、45°、60°，结果应保留<strong>精确值</strong>（含 √ 或分数）；若角不是特殊角，则用计算器求 <code>sin/cos/tan</code>，结果按题目要求四舍五入。注意：先列式、后代值、最后一步才取近似，避免中间四舍五入积累误差。</p>
+
+<h2 id="s4">28.4 应用：仰角俯角、坡度、方位角</h2>
+<p>三角函数的最大价值，是让我们<strong>不用爬上去，就能量出高度；不用走过去，就能量出距离</strong>。关键是把实际问题抽象成一个直角三角形，找到「已知边、已知角、所求边」。</p>
+<h3>① 仰角与俯角</h3>
+<ul>
+<li><strong>仰角</strong>：视线在水平线<strong>上方</strong>时，视线与水平线所成的角。</li>
+<li><strong>俯角</strong>：视线在水平线<strong>下方</strong>时，视线与水平线所成的角。</li>
+<li>规律：<strong>从高处看低处的俯角 = 从低处看高处的仰角</strong>（两直线平行，内错角相等）。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>测旗杆高、测楼高、测飞机高度，用的都是「仰角 + 水平距离」这条直角三角形：<code>高度 = 水平距离 × tan(仰角)</code>。雷达、测距仪也是靠仰角 + 斜距，用 <code>高度 = 斜距 × sin(仰角)</code> 换算。</div>
+<h3>② 坡度与坡角</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">正切 tanα = 坡度（对边 h ÷ 邻边 l）</text><line x1="40" y1="210" x2="440" y2="210" stroke="#94a3b8" stroke-width="2"/><text x="448" y="214" font-size="12" fill="#64748b">地面</text><line x1="60" y1="224" x2="320" y2="224" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 4"/><text x="184" y="242" text-anchor="middle" font-size="13" fill="#2563eb">水平宽度 l（固定）</text><line x1="60" y1="210" x2="320" y2="210" stroke="#1d4ed8" stroke-width="3"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><line x1="320" y1="210" x2="320" y2="210" stroke="#16a34a" stroke-width="4"><animate attributeName="y2" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></line><circle cx="320" cy="210" r="6" fill="#16a34a"><animate attributeName="cy" values="210;170;130;90;50;90;130;170;210" dur="8s" repeatCount="indefinite"/></circle><text x="330" y="210" font-size="13" font-weight="700" fill="#16a34a"><animate attributeName="y" values="210;190;170;150;130;150;170;190;210" dur="8s" repeatCount="indefinite"/>h</text><g><animateTransform attributeName="transform" type="rotate" values="0 60 210;8.7 60 210;17.1 60 210;24.8 60 210;31.6 60 210;24.8 60 210;17.1 60 210;8.7 60 210;0 60 210" dur="8s" repeatCount="indefinite"/><line x1="60" y1="210" x2="98" y2="210" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 3"/></g><text x="104" y="204" font-size="13" fill="#b45309">α</text><text x="60" y="44" font-size="13" fill="#334155">坡度 i = tanα = h / l（正切就是坡度，量化「陡」的程度）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同一水平宽度下坡越陡、高度 h 越大，正切 tanα = h/l 越大——正切是「坡度（陡峭程度）」的量化</figcaption></figure>
+<ul>
+<li><strong>坡角 α</strong>：坡面与水平面的夹角。</li>
+<li><strong>坡度（坡比）i</strong>：坡面的<strong>铅直高度 h 与水平宽度 l 的比</strong>，记作 <code>i = h : l = h/l</code>。</li>
+<li><strong>关键联系</strong>：<code>坡度 i = tan(坡角 α)</code>——坡度就是正切！</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>公路、铁路、登山道标注的「坡度 1:2」其实就是在说 <code>tanα = 1/2</code>，即每水平前进 2 米，上升 1 米。坡越陡，α 越大，tanα 越大——正切就是「陡峭程度」的量化。</div>
+<h3>③ 方位角与方向角</h3>
+<ul>
+<li><strong>方位角</strong>：从某点的指北方向线起，<strong>顺时针</strong>转到目标方向线的水平角（0°~360°）。例：方位角 135° 表示从正北顺时针转 135°，指向东南。</li>
+<li><strong>方向角</strong>：以南北为基准、东西为偏转来描述方向，如「北偏东 30°」「南偏西 45°（即西南）」。做题时先在图上标出南北方向，再画出偏转角度。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>航海、航空、GPS 定位都靠方位角确定方向；结合速度与时间算出航程，再用 sin、cos 把航程分解成「东西位移」与「南北位移」，就能确定到达点的精确坐标。</div>
+<h3>应用题的通用四步</h3>
+<ol>
+<li><strong>画图</strong>：把题中的高度、距离、角度标到图上，找出（或补出）直角三角形。</li>
+<li><strong>定角定边</strong>：明确已知的是哪个角、哪条边，要求的是哪条边。</li>
+<li><strong>选函数</strong>：按「已知边—所求边」选 sin/cos/tan（见下表）。</li>
+<li><strong>列式求解</strong>：列方程、解出未知量，保留精确值或按题取近似。</li>
+</ol>
+<table>
+<tr><th>已知 + 所求</th><th>用哪个函数</th></tr>
+<tr><td>已知斜边，求对边</td><td>sin（对边 = 斜边 × sinA）</td></tr>
+<tr><td>已知斜边，求邻边</td><td>cos（邻边 = 斜边 × cosA）</td></tr>
+<tr><td>已知邻边，求对边</td><td>tan（对边 = 邻边 × tanA）</td></tr>
+<tr><td>已知两边，求角</td><td>反用 sin/cos/tan（比值 → 角度）</td></tr>
+</table>
+
+<hr/>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>正弦 sinA</td><td>对边与斜边之比，斜边在「对边方向」的投影比例</td><td>斜向量的竖直分量系数（重力沿斜面的分力、速度的竖直分量）</td></tr>
+<tr><td>余弦 cosA</td><td>邻边与斜边之比，斜边在「邻边方向」的投影比例</td><td>斜向量的水平分量系数（水平位移、水平分力）</td></tr>
+<tr><td>正切 tanA</td><td>对边与邻边之比，直角边的「倾斜度（斜率）」</td><td>坡度、坡比、斜面陡峭程度</td></tr>
+<tr><td>sin²A + cos²A = 1</td><td>勾股定理的比值版；单位圆上点的坐标</td><td>两正交分量平方和为总量平方（能量/分量守恒）</td></tr>
+<tr><td>特殊角的值</td><td>标准三角板（等腰直角△、等边△之半）的边比</td><td>30°/45°/60° 斜面、坡道的力与位移速算</td></tr>
+<tr><td>解直角三角形</td><td>由部分边角复原整个三角形的形状与大小</td><td>矢量的分解与合成（已知斜向量求分量、已知分量求合矢量）</td></tr>
+<tr><td>仰角 / 俯角</td><td>视线与水平线的夹角</td><td>测量高度（楼高、旗杆、飞行器高度）</td></tr>
+<tr><td>坡度 / 坡角</td><td>铅直高度与水平宽度的比（= tanα）</td><td>道路、铁路、坡道的陡峭程度</td></tr>
+<tr><td>方位角 / 方向角</td><td>相对正北顺时针转过的角度</td><td>航海、航空、GPS 的定向与定位</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题 1 · 求值</h4>
+<ol>
+<li>计算：<code>sin30° + cos60° + tan45°</code>。</li>
+<li>计算：<code>sin²45° + cos²45°</code>，并用公式 <code>sin²A + cos²A = 1</code> 验证。</li>
+<li>计算：<code>tan30° × tan60°</code>，观察结果说明了什么？</li>
+</ol>
+<h4>例题 2 · 解直角三角形</h4>
+<ol start="4">
+<li>在 <code>Rt△ABC</code> 中，∠C = 90°，∠A = 30°，斜边 c = 10，求两条直角边 a、b（保留精确值）。</li>
+<li>在 <code>Rt△ABC</code> 中，∠C = 90°，直角边 a = 3、b = 4，求斜边 c 与 ∠A 的正弦、余弦、正切。</li>
+</ol>
+<h4>例题 3 · 应用</h4>
+<ol start="6">
+<li>小明在离旗杆底部 30 m 处，测得旗杆顶端的仰角为 45°，求旗杆高度。</li>
+<li>一段坡的坡角为 30°，沿坡面走了 100 m，求他上升了多少米。</li>
+<li>某人朝「北偏东 60°」方向走了 8 km，求他向东、向北各走了多少千米。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ 把对边、邻边搞反 → ⚠️ 对边、邻边是<strong>相对某个锐角</strong>而言的；先明确「考察哪个角」，再数边，切勿背死位置。</li>
+<li>❌ sinA = 对边/邻边 → ❌ sin 是「对边/斜边」，<strong>邻边/斜边</strong> 才是 cos；正切 tan 才是「对边/邻边」。</li>
+<li>❌ sin、cos、tan 的值会随三角形大小改变 → ❌ 锐角一定，边比就<strong>固定不变</strong>（相似三角形的对应边成比例），只与角有关。</li>
+<li>❌ sin60° = √3/3 → ❌ sin60° = <strong>√3/2</strong>；√3/3 是 tan30°。混淆 sin 与 tan 的表格。</li>
+<li>❌ 坡度 = 坡角的度数 → ❌ 坡度是 <strong>tan(坡角)</strong>，是「高/宽」的比值，不是角度本身。</li>
+<li>❌ 已知角不是特殊角就用手算 → ❌ 非特殊角用计算器查 <code>sin/cos/tan</code>，并注意<strong>最后一步再取近似</strong>。</li>
+<li>❌ 仰角与俯角用错、或认为两者不同 → ❌ 同一位置的仰角与俯角<strong>相等</strong>（内错角），只是观察者位置高低不同。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:6px 0 12px;color:#b45309">一、练习题</h3>
+<ol>
+<li>在 Rt△ABC 中，∠C=90°，∠A=30°，斜边 c=10，求两条直角边 a、b（保留精确值）。</li>
+<li>求值：sin²45° + cos²45°，并说明结果为什么恒等于 1。</li>
+<li>已知锐角 A 满足 sinA = 3/5，求 cosA 与 tanA。</li>
+<li>小明站在离旗杆底部 20 m 处，测得旗杆顶端仰角为 60°，求旗杆高度（保留精确值）。</li>
+<li>一段坡的坡度 i = 1:2（即 tanα = 1/2），某人沿坡面走了 50 m，求他上升了多少米。</li>
+<li>一艘船朝「北偏东 30°」方向航行 20 km，求它向东、向北各走了多少千米；这个方向用方位角表示是多少度？</li>
+</ol>
+<h3 style="margin:18px 0 12px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>由「30° 所对的直角边等于斜边的一半」：a = c·sin30° = 10 × 1/2 = 5；b = c·cos30° = 10 × √3/2 = 5√3。答：a = 5，b = 5√3。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>sin45° = cos45° = √2/2，故 sin²45° + cos²45° = 1/2 + 1/2 = 1。它恒等于 1，是因为 sin²A + cos²A = 1 就是勾股定理的「比值版」：单位斜边在竖直、水平方向的投影平方和恒为 1。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>sinA = 对边/斜边 = 3/5，设对边 = 3k、斜边 = 5k，则邻边 = √((5k)² − (3k)²) = 4k。故 cosA = 邻边/斜边 = 4/5，tanA = 对边/邻边 = 3/4。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>旗杆高 = 水平距离 × tan(仰角) = 20 × tan60° = 20√3 m。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>坡度 tanα = 1/2，即「高 : 水平 = 1 : 2」。设上升 x m，则水平前进 2x m，坡面长 = √(x² + (2x)²) = x√5 = 50，得 x = 50/√5 = 10√5 m。答：上升 10√5 m。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>「北偏东 30°」= 从正北向东偏 30°，向北方向分量更大：向北 = 20 × cos30° = 10√3 km，向东 = 20 × sin30° = 10 km。方位角是从正北顺时针转过的角度，此处恰好就是 30°。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第27章-相似/第27章-相似.html">← 上一章：第27章 相似</a><a href="../../../../index.html">回目录</a><a href="../第29章-投影与视图/第29章-投影与视图.html">下一章：第29章 投影与视图 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

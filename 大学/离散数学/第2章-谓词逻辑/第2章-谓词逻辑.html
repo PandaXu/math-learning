@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第2章 谓词逻辑 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第2章 谓词逻辑</div></header>
+<main class="container">
+<h1>第2章 谓词逻辑</h1>
+<p class="lead">大学 / 离散数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>谓词逻辑 = 用「谓词 + 量词」把<strong>对象、属性与对象间的关系</strong>形式化。它从命题逻辑的"整句真假"迈进到"谁、有什么性质、彼此什么关系"——学完本章，你要能在心里"看见"论域上的一块块<strong>区域</strong>：全称量词 ∀ 是"整块区域被填满"，存在量词 ∃ 是"区域内至少有一个点"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">2.1 谓词与量词</a><a href="#s2">2.2 谓词公式</a><a href="#s3">2.3 等值式与前束范式</a><a href="#s4">2.4 推理理论</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">2.1 谓词与量词</h2>
+<h3>命题逻辑的局限：为什么需要谓词逻辑？</h3>
+<p>命题逻辑把每个陈述句当作一个不可再分的<strong>原子命题</strong>，只关心它的真假，不关心"谁"在里面、对象之间"什么关系"。于是经典三段论——</p>
+<pre><code>所有人都会死。        （前提 1）
+苏格拉底是人。        （前提 2）
+所以，苏格拉底会死。  （结论）</code></pre>
+<p>——在命题逻辑里只能写成 <code>P, Q ⇒ R</code>，看不出 P、Q、R 内部有任何联系，因而无法由 P、Q 的"结构"推出 R。谓词逻辑把句子拆成<strong>个体词 + 谓词 + 量词</strong>，让"会死"这种性质、"是人"这种属性在对象之间<strong>流通</strong>，推理才成为可能。</p>
+<div class="insight"><strong>核心直觉：</strong>命题逻辑像"只给整句话盖章（真/假）"，谓词逻辑像"把句子拆成零件（主语、谓语、定语）再组装"，因此能表达"所有""存在""每一个对象都……"这类<strong>关于无穷多个对象的一句话</strong>。</div>
+
+<h3>个体词与个体域（论域）</h3>
+<ul>
+<li><strong>个体词</strong>：指代"对象"的词，是句子的主语。分两类：
+  <ul>
+  <li><strong>个体常元</strong>（用小写 a, b, c, … 或 s 表示）：确定的对象，如"苏格拉底""2""地球"。</li>
+  <li><strong>个体变元</strong>（用小写 x, y, z, … 表示）：取值范围待定的对象，如"任意一个人""某个数"。</li>
+  </ul></li>
+<li><strong>个体域（论域）</strong>：个体变元取值的<strong>全体对象集合</strong>，记作 D。例如"人""实数""自然数"都可以作为论域。论域不同，同一句话的真假可能完全不同。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>论域 D 就是一张"背景画布"（一条数轴、一个平面、乃至整个空间）。每个个体是画布上的<strong>一个点</strong>，个体常元是"被固定钉住的那个点"，个体变元是"可以在画布上滑动、尚未落点的游标"。</div>
+
+<h3>谓词：对象的性质与对象间的关系</h3>
+<p><strong>谓词</strong>是"说什么"的部分，用来刻画个体的<strong>性质</strong>或个体之间的<strong>关系</strong>。含 n 个个体变元的谓词叫 <strong>n 元谓词</strong>，记作 <code>P(x₁, x₂, …, xₙ)</code>，其中 P 是谓词符号。注意：<strong>单独的 P(x₁,…,xₙ) 只是"命题函数"，还不是命题</strong>，因为变元尚未确定，它没有确定的真假值。</p>
+<table>
+<tr><th>类别</th><th>含义</th><th>例子</th></tr>
+<tr><td>0 元谓词</td><td>不含变元，退化为命题</td><td>"雪是白的"</td></tr>
+<tr><td>一元谓词</td><td>个体的<strong>性质</strong>（属性）</td><td>F(x)：x 是人；M(x)：x 是偶数</td></tr>
+<tr><td>二元谓词</td><td>两个个体间的<strong>关系</strong></td><td>G(x,y)：x 大于 y；L(x,y)：x 爱 y</td></tr>
+<tr><td>n 元谓词 (n≥2)</td><td>多个个体间的关系</td><td>Add(x,y,z)：x + y = z</td></tr>
+</table>
+<div class="insight"><strong>几何含义（一元谓词 = 一块区域）：</strong>一元谓词 P(x) 在论域 D 上划出<strong>一块子集（区域）</strong>：P = { x ∈ D | P(x) 为真 }。说"x 满足 P"，就是说点 x <strong>落在这块区域里</strong>。例如论域为全体实数、P(x) 表示 "x &gt; 0"，则 P 对应数轴上<strong>原点的右侧半条直线</strong>。<br/>
+<strong>几何含义（二元谓词 = 平面上的图形）：</strong>二元谓词 R(x,y) 是笛卡尔积 D×D 的一个子集，即<strong>坐标平面 xOy 上的一块图形</strong>。例如论域为实数、R(x,y) 表示 "x &lt; y"，则 R 对应直线 y = x <strong>上方的半平面</strong>（满足 y &gt; x 的所有点）。</div>
+<div class="insight"><strong>物理含义：</strong>一元谓词是"可检测的属性/状态"——"带电""导电""是金属""在运动"，就像给每个样本做一次实验，结果要么"是"要么"否"。二元谓词是"两体之间的相互作用或约束"——"大于""相吸""碰撞""A 传给 B 能量"，物理定律几乎都是"若 A 与 B 满足某关系，则……"。</div>
+
+<h3>量词：全称量词 ∀ 与存在量词 ∃</h3>
+<p>要让命题函数变成有确定真假的<strong>命题</strong>，有两种办法：代入具体个体（如 F(s)："苏格拉底是人"），或用量词约束变元。量词只有两个，却刻画了"关于全体对象的断言"的全部基本形式：</p>
+<ul>
+<li><strong>全称量词 ∀</strong>（读"对任意""对一切""对所有"）：<code>∀x P(x)</code> 表示"对论域中的<strong>每一个</strong> x，P(x) 都成立"。</li>
+<li><strong>存在量词 ∃</strong>（读"存在""至少有一个"）：<code>∃x P(x)</code> 表示"论域中<strong>至少存在一个</strong> x，使 P(x) 成立"。</li>
+</ul>
+<p>例如论域为人类：<code>∀x (M(x) → D(x))</code> 说"所有人都会死"；<code>∃x (M(x) ∧ F(x))</code>（F = 是哲学家）说"存在一个人是哲学家"。</p>
+<div class="insight"><strong>几何含义：</strong>在"论域画布"上，<code>∀x P(x)</code> 说 P 的区域 <strong>覆盖了整个画布</strong>（P = D，区域外一个点都没有）；<code>∃x P(x)</code> 说 P 的区域 <strong>非空</strong>（至少有一个点落在区域里）。于是量词把"全称/存在"翻译成了最直观的"<strong>区域是否填满 / 区域是否有点</strong>"。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g font-size="14" font-weight="600" text-anchor="middle" fill="#334155"><text x="130" y="22">∃x P(x)</text><text x="390" y="22">∀x P(x)</text></g><g stroke="#94a3b8" fill="#f8fafc"><rect x="40" y="32" width="180" height="128" rx="10"/><rect x="300" y="32" width="180" height="128" rx="10"/></g><g font-size="12" fill="#94a3b8"><text x="56" y="50">论域 D</text><text x="316" y="50">论域 D</text></g><ellipse cx="130" cy="96" rx="55" ry="38" fill="#2563eb" fill-opacity="0.16" stroke="#2563eb" stroke-width="1.5"/><text x="130" y="100" font-size="13" fill="#2563eb" text-anchor="middle">P</text><circle cx="130" cy="96" r="6" fill="#16a34a"><animate attributeName="r" values="5;9;5" dur="1.8s" repeatCount="indefinite"/></circle><ellipse cx="390" cy="96" rx="26" ry="16" fill="#2563eb" stroke="#2563eb" stroke-width="1.5"><animate attributeName="rx" values="26;88;26" dur="6s" repeatCount="indefinite"/><animate attributeName="ry" values="16;60;16" dur="6s" repeatCount="indefinite"/><animate attributeName="fill-opacity" values="0.35;0.16;0.35" dur="6s" repeatCount="indefinite"/></ellipse><g font-size="12" fill="#2563eb" text-anchor="middle"><text x="130" y="182">区域 P 非空：至少有一个点</text><text x="390" y="182">区域 P 涨满整块画布（P = D）</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：∃ 是区域 P 里至少有一个点，∀ 是区域 P 涨满整块画布</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>∀ 对应<strong>普适定律</strong>——"对一切惯性系光速不变""对所有物体 F = ma"，这类断言要在一个字面上无穷大的样本空间上成立；∃ 对应<strong>存在性结论</strong>——"方程至少有一个解""存在这样一条路径""存在一个临界温度"，物理与数学中大量定理的目标正是证明"<strong>存在</strong>"某物。</div>
+
+<h2 id="s2">2.2 谓词公式</h2>
+<h3>合式公式（wff）的递归定义</h3>
+<p>谓词逻辑的合法表达式由以下规则<strong>递归</strong>生成（A、B 均指公式）：</p>
+<pre><code>1. 原子公式：P(x₁,…,xₙ) 是公式（P 是 n 元谓词，xᵢ 是个体变元或常元）。
+2. 若 A、B 是公式，则 ¬A、(A∧B)、(A∨B)、(A→B)、(A↔B) 都是公式。
+3. 若 A 是公式、x 是变元，则 ∀xA、∃xA 都是公式。
+4. 只有经有限次使用规则 1–3 得到的符号串才是公式。</code></pre>
+<p>谓词公式中联结词的优先级约定与命题逻辑一致：<code>¬</code> 最高，其次 <code>∧</code>、<code>∨</code>，再是 <code>→</code>、<code>↔</code>；量词 <code>∀</code>、<code>∃</code> 的辖域尽量取"紧跟在后的最小公式"。</p>
+
+<h3>辖域、约束变元与自由变元</h3>
+<ul>
+<li>在 <code>∀xA</code> 或 <code>∃xA</code> 中，量词后面的变元 x 叫<strong>指导变元</strong>，公式 A 叫该量词的<strong>辖域（作用域）</strong>。</li>
+<li>变元 x 在辖域 A 内、且与指导变元同名的一切出现，都叫<strong>约束出现</strong>（被量词"管住"）；不处于任何量词辖域内、或与指导变元不同名的出现，叫<strong>自由出现</strong>。</li>
+<li>在公式中<strong>自由出现</strong>过的变元叫<strong>自由变元</strong>，<strong>约束出现</strong>过的变元叫<strong>约束变元</strong>。一个变元可以既是自由的又是约束的（出现在不同位置）。</li>
+<li><strong>闭式（句子）</strong>：没有自由变元的公式，它是一个有确定真假的命题；含自由变元的公式仍是命题函数。</li>
+</ul>
+<pre><code>例：∀x(P(x) → ∃y Q(x,y))
+    x 在 P(x)、Q(x,y) 中的出现是约束出现；
+    y 在 Q(x,y) 中的出现是约束出现；
+    该公式无自由变元，是闭式。</code></pre>
+<div class="insight"><strong>几何含义：</strong>约束变元是被量词"圈定在辖域内"的<strong>哑变量/占位符</strong>，改个名字不影响含义（如同 <code>∫₀¹ x² dx</code> 里的 x 与 <code>∫₀¹ t² dt</code> 里的 t 完全等价）；自由变元则是"尚未被圈定、等待取值"的<strong>活动游标</strong>，它的位置决定了公式是否已成为命题。</div>
+
+<h3>约束变元的改名（换名）</h3>
+<p>为避免"同一个字母"既自由又约束、或不同量词互相干扰，可把约束变元及其辖域内的同名出现<strong>整体替换</strong>成新变元，只要不改变"哪个出现归哪个量词管"。改名后公式与原公式<strong>等值</strong>。</p>
+<pre><code>∀x(P(x) ∨ Q(y))  ⇔  ∀z(P(z) ∨ Q(y))   （把约束的 x 换成 z）
+注意：自由出现的 y 不能跟着改。</code></pre>
+
+<h2 id="s3">2.3 等值式与前束范式</h2>
+<h3>量词的否定（德摩根律的推广）</h3>
+<p>命题逻辑中 <code>¬(A∧B) ⇔ ¬A∨¬B</code> 在"全体对象"上推广，得到最常用的两个等值式：</p>
+<pre><code>¬∀x P(x)  ⇔  ∃x ¬P(x)      "不是所有 x 都满足 P"  = "存在某个 x 不满足 P"
+¬∃x P(x)  ⇔  ∀x ¬P(x)      "不存在满足 P 的 x"    = "所有 x 都不满足 P"</code></pre>
+<div class="insight"><strong>几何含义：</strong>这就是<strong>补集</strong>的直觉。说"不是整块画布都在区域 P 里"，等价于说"画布上至少有一个点在 P 的<strong>补集</strong> ¬P 里"；说"区域 P 里一个点都没有"，等价于说"所有点都落在 P 的补集里"。量词否定 = 把"区域"和"区域外"互换。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="230" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" font-size="15" font-weight="600" text-anchor="middle" fill="#0f172a">¬∀x P(x)  ⇔  ∃x ¬P(x)</text><rect x="40" y="40" width="440" height="128" rx="12" fill="#16a34a" fill-opacity="0.08" stroke="#94a3b8"/><text x="56" y="58" font-size="12" fill="#94a3b8">论域 D</text><ellipse cx="160" cy="104" rx="80" ry="44" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="1.5"/><text x="160" y="108" font-size="14" font-weight="600" fill="#2563eb" text-anchor="middle">P</text><circle cx="390" cy="104" r="16" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3 3"><animate attributeName="r" values="14;22;14" dur="1.8s" repeatCount="indefinite"/></circle><circle cx="390" cy="104" r="7" fill="#16a34a"><animate attributeName="r" values="6;11;6" dur="1.8s" repeatCount="indefinite"/></circle><text x="390" y="80" font-size="13" fill="#16a34a" text-anchor="middle">∃x ¬P(x)</text><text x="390" y="162" font-size="12" fill="#16a34a" text-anchor="middle">补集 ¬P（绿色区域）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：否定全称 = 在区域 P 的补集 ¬P 里找到至少一个点（一个反例）</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>"不是所有粒子都带电" = "存在（至少一个）不带电的粒子"；"不存在违反能量守恒的过程" = "一切过程都遵守能量守恒"。物理中的"反例思维"（想否定一条全称定律，只需找出一个反例）正是 <code>¬∀xP(x) ⇔ ∃x¬P(x)</code>。</div>
+
+<h3>量词与联结词的分配</h3>
+<pre><code>∀x(A(x) ∧ B(x))  ⇔  ∀xA(x) ∧ ∀xB(x)     （∀ 对 ∧ 可分配）
+∃x(A(x) ∨ B(x))  ⇔  ∃xA(x) ∨ ∃xB(x)     （∃ 对 ∨ 可分配）
+
+但以下只是"蕴含"，不是等值：
+∀xA(x) ∨ ∀xB(x)  ⇒  ∀x(A(x) ∨ B(x))     （反过来不成立）
+∃x(A(x) ∧ B(x))  ⇒  ∃xA(x) ∧ ∃xB(x)     （反过来不成立）</code></pre>
+<div class="insight"><strong>几何含义：</strong>∀ 对 ∧ 可分配：说"每个点既在区域 A 又在区域 B"，等于"区域 A 盖满画布，且区域 B 也盖满画布"。∃ 对 ∨ 可分配：说"有一个点落在 A 或 B"，等于"A 里有点，或 B 里有点"。反过来不成立的原因很直观：<code>∀xA(x) ∨ ∀xB(x)</code> 要求"整块画布<strong>全</strong>在 A"或"整块<strong>全</strong>在 B"（一刀切），而 <code>∀x(A(x)∨B(x))</code> 允许"画布一半归 A、一半归 B"（拼图也能盖满），后者更弱。</div>
+
+<h3>多重量词：顺序至关重要</h3>
+<pre><code>∀x∀y P(x,y)  ⇔  ∀y∀x P(x,y)     （同号全称可交换）
+∃x∃y P(x,y)  ⇔  ∃y∃x P(x,y)     （同号存在可交换）
+
+但  ∀x∃y P(x,y)   与   ∃y∀x P(x,y)   不等值！
+   ∀x∃y：每个 x 都有自己的 y（y 可以随 x 变化）
+   ∃y∀x：存在同一个 y，对一切 x 都成立</code></pre>
+<div class="insight"><strong>几何/物理含义：</strong><code>∀x∃y P(x,y)</code> 好比"<strong>每个人都有一个母亲</strong>"（母亲因人而异）；<code>∃y∀x P(x,y)</code> 好比"<strong>存在一个人，是所有人的母亲</strong>"。前者弱、几乎总成立，后者强、几乎总不成立。物理中 <code>∀x∃y</code> 是"对每个时刻都存在一个速度"（速度可随时变化），<code>∃y∀x</code> 是"存在一个速度对所有时刻都成立"（匀速），二者物理图景完全不同。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arA" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker><marker id="arB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/></marker></defs><g text-anchor="middle"><text x="130" y="26" font-size="14" font-weight="600" fill="#334155">∀x∃y P(x,y)</text><text x="130" y="44" font-size="12" fill="#6b7280">每个 x 有自己的 y</text><text x="390" y="26" font-size="14" font-weight="600" fill="#334155">∃y∀x P(x,y)</text><text x="390" y="44" font-size="12" fill="#6b7280">同一个 y 对一切 x</text></g><g stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arA)"><line x1="70" y1="80" x2="190" y2="80"/><line x1="70" y1="150" x2="190" y2="150"/><line x1="70" y1="220" x2="190" y2="220"/></g><g fill="#2563eb"><circle cx="70" cy="80" r="6"/><circle cx="70" cy="150" r="6"/><circle cx="70" cy="220" r="6"/></g><g fill="#16a34a"><circle cx="190" cy="80" r="6"/><circle cx="190" cy="150" r="6"/><circle cx="190" cy="220" r="6"/></g><g fill="#0f172a" font-size="12" text-anchor="middle"><text x="54" y="84">x₁</text><text x="54" y="154">x₂</text><text x="54" y="224">x₃</text><text x="206" y="84">y₁</text><text x="206" y="154">y₂</text><text x="206" y="224">y₃</text></g><g fill="#2563eb"><circle cx="70" cy="80" r="5"><animate attributeName="cx" values="70;190;70" dur="2.4s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="80;80;80" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle><circle cx="70" cy="150" r="5"><animate attributeName="cx" values="70;190;70" dur="2.4s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="2.4s" begin="0.8s" repeatCount="indefinite"/></circle><circle cx="70" cy="220" r="5"><animate attributeName="cx" values="70;190;70" dur="2.4s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="220;220;220" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle></g><g stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arB)"><line x1="330" y1="80" x2="450" y2="150"/><line x1="330" y1="150" x2="450" y2="150"/><line x1="330" y1="220" x2="450" y2="150"/></g><g fill="#2563eb"><circle cx="330" cy="80" r="6"/><circle cx="330" cy="150" r="6"/><circle cx="330" cy="220" r="6"/></g><circle cx="450" cy="150" r="13" fill="none" stroke="#16a34a" stroke-width="1.5"><animate attributeName="r" values="11;17;11" dur="1.8s" repeatCount="indefinite"/></circle><circle cx="450" cy="150" r="7" fill="#16a34a"/><g fill="#0f172a" font-size="12" text-anchor="middle"><text x="314" y="84">x₁</text><text x="314" y="154">x₂</text><text x="314" y="224">x₃</text><text x="470" y="154">y（唯一）</text></g><g fill="#16a34a"><circle cx="330" cy="80" r="5"><animate attributeName="cx" values="330;450;330" dur="2.4s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="80;150;80" dur="2.4s" begin="0s" repeatCount="indefinite"/></circle><circle cx="330" cy="150" r="5"><animate attributeName="cx" values="330;450;330" dur="2.4s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="150;150;150" dur="2.4s" begin="0.8s" repeatCount="indefinite"/></circle><circle cx="330" cy="220" r="5"><animate attributeName="cx" values="330;450;330" dur="2.4s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="cy" values="220;150;220" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：∀x∃y 是"每人有各自的母亲"，∃y∀x 是"存在同一个人是所有人的母亲"</figcaption></figure>
+
+<h3>前束范式（Prenex Normal Form）</h3>
+<p><strong>定义</strong>：若一个谓词公式形如</p>
+<pre><code>Q₁x₁ Q₂x₂ … Qₙxₙ  A      （其中每个 Qᵢ ∈ {∀, ∃}，A 不含量词）</code></pre>
+<p>即"一串量词打头 + 一个不含量词的核心公式"，则称它处于<strong>前束范式</strong>，Q₁x₁…Qₙxₙ 叫<strong>前束词</strong>，A 叫<strong>母式</strong>。</p>
+<p><strong>求前束范式的四步：</strong></p>
+<ol>
+<li><strong>消去 → 和 ↔</strong>：用 <code>A→B ⇔ ¬A∨B</code>、<code>A↔B ⇔ (A→B)∧(B→A)</code> 化为只含 ¬、∧、∨。</li>
+<li><strong>¬ 内移</strong>：用德摩根律和量词否定式，把 ¬ 压到原子公式前面。</li>
+<li><strong>约束变元改名</strong>：让不同量词的指导变元互不重名、且不与自由变元重名，避免"捕获"。</li>
+<li><strong>量词前移</strong>：利用辖域扩张把量词依次提到公式最前面。</li>
+</ol>
+<pre><code>例：把 ¬∀xP(x) → ∃xQ(x) 化为前束范式。
+① 消 →：  ¬¬∀xP(x) ∨ ∃xQ(x)    即  ∀xP(x) ∨ ∃xQ(x)
+② 无 ¬ 需再内移。
+③ 改名避免冲突： ∀xP(x) ∨ ∃yQ(y)
+④ 量词前移：  ∀x∃y (P(x) ∨ Q(y))</code></pre>
+<div class="insight"><strong>几何含义：</strong>前束范式把公式"拉直"成一条清晰的量词链，让"哪些点被全体扫过、哪些点被存在扫过"<strong>一目了然</strong>，便于在"画布"上逐层圈定区域。它就像把一条曲折的路径拍平成一张剖面图：先看最外层 ∀ 圈住整块画布，再看内层 ∃ 在每处打一个点。</div>
+
+<h2 id="s4">2.4 推理理论</h2>
+<h3>四条基本推理规则（量词规则）</h3>
+<p>命题逻辑的推理规则（假言推理 MP、拒取式 MT、合取、化简等）在谓词逻辑中照用，另需四条<strong>量词规则</strong>来"摘掉/加上"量词：</p>
+<table>
+<tr><th>规则</th><th>名称</th><th>形式</th><th>要点</th></tr>
+<tr><td>UI / US</td><td>全称例化（全称指定）</td><td>∀xP(x) ⇒ P(c)</td><td>c 是论域中<strong>任意</strong>个体常元</td></tr>
+<tr><td>EI / ES</td><td>存在例化（存在指定）</td><td>∃xP(x) ⇒ P(c)</td><td>c 必须是<strong>从未出现过的新常元</strong></td></tr>
+<tr><td>UG</td><td>全称推广</td><td>P(c) ⇒ ∀xP(x)</td><td>c 必须<strong>任意</strong>（非特定、非由 EI 引入）</td></tr>
+<tr><td>EG</td><td>存在推广</td><td>P(c) ⇒ ∃xP(x)</td><td>由具体个体"推回"存在</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>UI 是"从'整块画布都被 P 覆盖'里，<strong>任取一个点</strong> c，它也一定在 P 里"。EG 是"我已经找到了一个落在 P 里的点 c，所以区域 P <strong>非空</strong>"。EI 之所以要求新常元，是只承诺"<strong>有</strong>这么个点"却不说具体是谁——就像证明"存在一个解"却不必把这个解点名。</div>
+<div class="insight"><strong>物理含义：</strong>UI = 把普适定律<strong>套到具体对象</strong>上（"F=ma 对一切物体成立" → "对这个滑块也成立"）；EI = 由"存在某物"<strong>姑且命名为 c</strong> 继续推导，但 c 代表"那个神秘的未知对象"，不能假设它还有别的身份；EG = 从"这个具体解"升华到"解<strong>存在</strong>"，正是存在性定理的收尾动作。</div>
+
+<h3>经典例题：三段论的严格推导</h3>
+<pre><code>前提 1：∀x (M(x) → D(x))      （所有人都会死；M=是人，D=会死）
+前提 2：M(s)                  （苏格拉底是人；s=苏格拉底）
+结论：  D(s)                  （苏格拉底会死）
+
+推导：
+① ∀x(M(x)→D(x))        前提 1
+② M(s) → D(s)          ① 用 UI（取 c = s）
+③ M(s)                 前提 2
+④ D(s)                 ②③ 假言推理 MP</code></pre>
+<div class="insight"><strong>为什么能推出：</strong>UI 把"所有 x"落到了具体的人 s 身上，于是全称命题"瘦身"成关于 s 的条件句，再用 MP 即可。整个过程把"无穷多个对象的一句话"<strong>收束到一个对象</strong>上完成。</div>
+
+<h3>含存在量词的推理</h3>
+<pre><code>前提：∃x (P(x) ∧ Q(x))
+结论：∃x P(x) ∧ ∃x Q(x)
+
+推导：
+① ∃x(P(x)∧Q(x))        前提
+② P(c) ∧ Q(c)          ① 用 EI（c 为新常元）
+③ P(c)                 ② 化简
+④ Q(c)                 ② 化简
+⑤ ∃xP(x)               ③ EG
+⑥ ∃xQ(x)               ④ EG
+⑦ ∃xP(x) ∧ ∃xQ(x)      ⑤⑥ 合取</code></pre>
+<p><strong>注意顺序陷阱</strong>：EI 引入的新常元 c 必须"新"，且若同一证明中要先用 UI 再用 EI，应先做 EI（否则 UI 用到的常元可能与 EI 冲突，导致错误结论）。</p>
+
+<h3>推理理论小结</h3>
+<ul>
+<li>消去量词（<strong>UI、EI</strong>）→ 用命题逻辑规则推 → 再加上量词（<strong>UG、EG</strong>），是谓词逻辑证明的标准三段式。</li>
+<li><strong>UI 与 EG</strong> 最安全、几乎无限制；<strong>EI 要求新常元</strong>；<strong>UG 要求变元任意</strong>，是出错高发区。</li>
+<li>前提集合 Γ 推出结论 C 记作 <code>Γ ⇒ C</code>（语义上即 Γ ⊨ C），一个证明序列就是从 Γ 到 C 的合法规则链。</li>
+</ul>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>个体域（论域）D</td><td>背景画布（数轴/平面/空间）</td><td>研究对象的全体样本空间</td></tr>
+<tr><td>个体常元 / 变元</td><td>固定钉住的点 / 可滑动的游标</td><td>指定对象 / 待定对象</td></tr>
+<tr><td>一元谓词 P(x)</td><td>画布上的一块区域（子集）</td><td>对象的属性/状态（带电、是金属）</td></tr>
+<tr><td>二元谓词 R(x,y)</td><td>坐标平面上的图形（D×D 子集）</td><td>两体关系/相互作用（大于、相吸）</td></tr>
+<tr><td>全称量词 ∀xP(x)</td><td>区域 P 覆盖整个画布</td><td>普适定律：对所有对象成立</td></tr>
+<tr><td>存在量词 ∃xP(x)</td><td>区域 P 非空（至少一点在内）</td><td>存在性结论：至少有一个对象</td></tr>
+<tr><td>量词否定 ¬∀⇔∃¬</td><td>区域与补集互换</td><td>反例思维：证伪全称只需一个反例</td></tr>
+<tr><td>多重量词顺序</td><td>先扫哪层画布、后打哪层的点</td><td>"每人有母亲"≠"存在众人之母"</td></tr>
+<tr><td>约束/自由变元</td><td>被圈定的哑变量 / 待取值游标</td><td>积分哑变量 / 待定参数</td></tr>
+<tr><td>前束范式</td><td>把量词链拉直成剖面图</td><td>把论断结构拍平、逐层判读</td></tr>
+<tr><td>UI / EI / UG / EG</td><td>取点、命名点、覆盖全画布、确认非空</td><td>定律套用到对象 / 命名未知量 / 推广为定律 / 宣告存在</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题</h4>
+<ol>
+<li>设论域为全体实数。判断下列命题真假并说明：<code>∀x(x² ≥ 0)</code>；<code>∃x(x² &lt; 0)</code>；<code>∀x∃y(x + y = 0)</code>；<code>∃y∀x(x + y = 0)</code>。</li>
+<li>写出 <code>¬∀x∃y(x &lt; y)</code> 的等价式（把 ¬ 内移到原子公式）。</li>
+<li>把 <code>∀xP(x) → ∃xQ(x)</code> 化为前束范式。</li>
+<li>判断 <code>∀x(P(x)∨Q(x))</code> 是否等值于 <code>∀xP(x) ∨ ∀xQ(x)</code>，给出反例说明。</li>
+<li>用推理规则证明：由 <code>∀x(P(x) → Q(x))</code> 与 <code>P(a)</code> 推出 <code>Q(a)</code>。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<h4>小心这些坑</h4>
+<ul>
+<li>❌ 把「量词辖域」看错 → 例：<code>∀xP(x) ∧ Q(x)</code> 中 Q(x) 的 x 是<strong>自由</strong>的，∀ 只管 P(x)；要管住两者须加括号 <code>∀x(P(x)∧Q(x))</code>。</li>
+<li>❌ 认为 <code>¬∀xP(x) ⇔ ∀x¬P(x)</code> → ❌ 应是 <code>∃x¬P(x)</code>：否定"全称"变"存在"，量词和谓词都要翻。</li>
+<li>❌ 认为 ∀ 对 ∨、∃ 对 ∧ 可任意分配 → ❌ 只有蕴含方向成立，等值不成立（"整块同色" ≠ "每点都在 A 或 B"）。</li>
+<li>❌ 认为 <code>∀x∃y P(x,y)</code> 与 <code>∃y∀x P(x,y)</code> 等值 → ❌ 量词顺序改变语义（"每人有母亲" ≠ "存在众人之母"）。</li>
+<li>❌ 用 EI 引入的常元再套 UG 全称推广 → ❌ 由"存在某个 c"不能推广到"所有 x"。</li>
+<li>❌ EI 用了已出现过的常元 → ❌ 会偷换对象身份，导致错误结论。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>（判断题·入门）设论域为全体实数。判断 <code>∀x(x² ≥ 0)</code> 与 <code>∃x(x² &lt; 0)</code> 的真假，并各用一句"区域/画布"的几何含义解释。</li>
+<li>（符号化）用谓词 <code>M(x)</code>=“x 是金属”、<code>C(x)</code>=“x 导电”，把“所有金属都导电”形式化；并说明为什么写成 <code>∀x(M(x) ∧ C(x))</code> 是错的（提示：那会断言"一切 x 都是金属"）。</li>
+<li>（量词否定）写出 <code>¬∀xP(x)</code> 与 <code>¬∃xP(x)</code> 的等值式，把 ¬ 内移到原子公式前；并用"反例思维"解释第一条的物理含义。</li>
+<li>（分配律判断）判断哪一组等值成立、哪一组不成立，并各说明理由（不成立的给出反例）：(1) <code>∀x(A(x)∧B(x))</code> 与 <code>∀xA(x) ∧ ∀xB(x)</code>；(2) <code>∀x(A(x)∨B(x))</code> 与 <code>∀xA(x) ∨ ∀xB(x)</code>。</li>
+<li>（多重量词顺序）设论域为全体实数，<code>P(x,y)</code> 表示 "x + y = 0"。判断 <code>∀x∃y P(x,y)</code> 与 <code>∃y∀x P(x,y)</code> 的真假，并指出哪个对应"每个 x 都有自己的 y"、哪个对应"存在同一个 y 对一切 x 成立"。</li>
+<li>（综合：前束范式＋推理）(a) 把 <code>¬∀xP(x) → ∃xQ(x)</code> 化为前束范式；(b) 用推理规则（UI、MP）证明：由前提 <code>∀x(M(x) → D(x))</code> 与 <code>M(s)</code> 推出 <code>D(s)</code>。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>∀x(x²≥0)</code> 为<strong>真</strong>：平方值落在非负半轴上，"非负"这块区域覆盖了整条数轴画布；<code>∃x(x²&lt;0)</code> 为<strong>假</strong>："平方为负"这块区域里一个点都没有（空集）。所以 ∀ 真、∃ 假。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>∀x(M(x) → C(x))</code>。写成 <code>∀x(M(x)∧C(x))</code> 会读成"所有 x 都既是金属又导电"，连桌子、空气也被断言成金属，明显错误。通则：全称量词后接条件式（→），存在量词后接合取式（∧）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>¬∀xP(x) ⇔ ∃x¬P(x)</code>；<code>¬∃xP(x) ⇔ ∀x¬P(x)</code>。物理含义：要否定"所有粒子都带电"这类全称定律，只需找出一个不带电的反例（<code>∃x¬P(x)</code>），这正是"反例思维"。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>(1) <strong>成立</strong>：∀ 对 ∧ 可分配，"每个点既在 A 又在 B" ⇔ "A 盖满且 B 盖满"。(2) <strong>不成立</strong>：<code>∀x(A(x)∨B(x))</code> 只要求每个点落在 A 或 B 之一，可"一半归 A、一半归 B"拼满画布；而 <code>∀xA(x)∨∀xB(x)</code> 要求"整块全在 A"或"整块全在 B"（一刀切）。反例：论域为全体实数，A(x):"x ≥ 0"，B(x):"x &lt; 0"，则 <code>∀x(A(x)∨B(x))</code> 真（每个数要么非负要么负），但 <code>∀xA(x)</code> 假、<code>∀xB(x)</code> 也假，故右边为假。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>∀x∃y(x+y=0)</code> 为<strong>真</strong>：对任意实数 x，取 y = -x 即可，y 随 x 变化（"每个 x 都有自己的 y"）。<code>∃y∀x(x+y=0)</code> 为<strong>假</strong>：若存在同一个 y 使一切 x 都有 x+y=0，则 y = -x 须对一切 x 同时成立，这要求 y 同时等于所有数的相反数，不可能。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>(a) <code>¬∀xP(x) → ∃xQ(x)</code> ⇔ <code>¬¬∀xP(x) ∨ ∃xQ(x)</code> ⇔ <code>∀xP(x) ∨ ∃xQ(x)</code>；改名避免冲突得 <code>∀xP(x) ∨ ∃yQ(y)</code>，量词前移得 <code>∀x∃y(P(x) ∨ Q(y))</code>。(b) ① <code>∀x(M(x)→D(x))</code> 前提；② <code>M(s)→D(s)</code> 由①用 UI；③ <code>M(s)</code> 前提；④ <code>D(s)</code> 由②③用 MP。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第1章-命题逻辑/第1章-命题逻辑.html">← 上一章：第1章 命题逻辑</a><a href="../../../index.html">回目录</a><a href="../第3章-集合论/第3章-集合论.html">下一章：第3章 集合论 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+</body>
+</html>

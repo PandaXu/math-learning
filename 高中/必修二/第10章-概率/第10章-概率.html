@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第10章 概率 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第10章 概率</div></header>
+<main class="container">
+<h1>第10章 概率</h1>
+<p class="lead">高中 / 必修第二册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>概率 = 「事件区域的面积占样本空间总面积的比例」。把一次试验的所有可能结果画成一张"地图"（样本空间 Ω），随机事件就是地图上的一块区域（子集），概率就是"有利区域 ÷ 全体区域"的度量——古典概型是"每个格子一样大"的均匀度量，概率性质是面积的加减（容斥），独立性是"两维面积 = 长 × 宽"的可分离相乘。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">10.1 随机事件与概率</a><a href="#s2">10.2 古典概型</a><a href="#s3">10.3 概率的性质</a><a href="#s4">10.4 事件的独立性</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">10.1 随机事件与概率（样本空间 · 随机事件 · 事件的关系与运算）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><clipPath id="lens"><circle cx="190" cy="120" r="85"/><circle cx="310" cy="120" r="85"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle></clipPath></defs><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">容斥原理：重叠区域被算了两次</text><circle cx="190" cy="120" r="85" fill="#2563eb" opacity="0.35" stroke="#2563eb" stroke-width="2"/><circle cx="310" cy="120" r="85" fill="#16a34a" opacity="0.35" stroke="#16a34a" stroke-width="2"><animate attributeName="cx" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></circle><rect x="0" y="0" width="520" height="280" fill="#2563eb" clip-path="url(#lens)"><animate attributeName="opacity" values="0;0.6;0.6;0;0" dur="8s" repeatCount="indefinite"/></rect><text x="190" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#1e40af">A</text><text x="310" y="126" text-anchor="middle" font-size="20" font-weight="700" fill="#15803d">B<animate attributeName="x" values="380;310;310;380;380" dur="8s" repeatCount="indefinite"/></text><text x="250" y="122" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">A∩B<animate attributeName="opacity" values="0;1;1;0;0" dur="8s" repeatCount="indefinite"/></text><text x="260" y="242" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</text><text x="260" y="266" text-anchor="middle" font-size="13" fill="#6b7280">并集面积 = 两块面积之和 − 重叠面积（重叠多算了一次）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：容斥原理——两圆靠近后出现重叠 A∩B，并集面积要减去被算了两次的重叠部分</figcaption></figure>
+<h3>随机现象与随机试验</h3>
+<p>先分清两类现象：</p>
+<ul>
+<li><strong>确定性现象</strong>：在一定条件下必然发生（或必然不发生）的现象。例：标准大气压下，水加热到 100℃ 一定沸腾；实数的平方一定非负。</li>
+<li><strong>随机现象</strong>：在一定条件下，结果<strong>事先不能确定</strong>、但可以重复观察的现象。例：抛一枚硬币落下后哪面朝上、掷一颗骰子出现的点数、明天是否下雨。</li>
+</ul>
+<p><strong>随机试验</strong>（简称试验）是对随机现象的实现与观察，需满足：① 可在相同条件下<strong>重复</strong>进行；② 试验的<strong>所有可能结果是事先已知的</strong>，但不止一个；③ 每次试验恰好出现其中一个结果，<strong>事先无法断定</strong>是哪一个。</p>
+<h3>样本点与样本空间</h3>
+<ul>
+<li><strong>样本点</strong>：随机试验的每一个可能结果，通常记作 <code>ω</code>。</li>
+<li><strong>样本空间</strong>：全体样本点组成的集合，记作 <code>Ω</code>。</li>
+</ul>
+<p>例：抛一枚硬币，<code>Ω = {正面，反面}</code>；掷一颗骰子，<code>Ω = {1，2，3，4，5，6}</code>；掷两枚骰子，<code>Ω = {(i，j) | 1 ≤ i ≤ 6，1 ≤ j ≤ 6}</code>，共 <code>6 × 6 = 36</code> 个样本点。</p>
+<div class="insight"><strong>几何含义：</strong>样本空间就是"所有可能结果的完整地图"——一张把试验的每一个可能结局都标出来的点集。样本点是地图上的<strong>一个点</strong>，样本空间是这些点组成的<strong>全集</strong>。<strong>物理含义：</strong>它是"对试验的一次完整描述"——做试验之前，你知道落点一定在这张地图上，但不知道具体落在哪个点。</div>
+<h3>随机事件、基本事件、必然事件、不可能事件</h3>
+<ul>
+<li><strong>随机事件</strong>（简称事件）：样本空间 <code>Ω</code> 的一个<strong>子集</strong>，用大写字母 A、B、C 表示。</li>
+<li><strong>基本事件</strong>：只含一个样本点的事件。</li>
+<li><strong>必然事件</strong>：样本空间 <code>Ω</code> 本身，每次试验一定发生。</li>
+<li><strong>不可能事件</strong>：空集 <code>∅</code>，每次试验一定不发生。</li>
+</ul>
+<p><strong>事件 A 发生</strong>：当且仅当试验中出现的样本点<strong>属于 A</strong>。例：掷骰子，设事件 A = "出现偶数点"，则 A = {2，4，6}；若掷出点数 4（∈ A），就说 A 发生了。</p>
+<div class="insight"><strong>几何含义：</strong>随机事件 = 样本空间这张地图上的<strong>一块区域</strong>；事件发生 = 试验结果<strong>落进这块区域</strong>。基本事件是"一个格子"，必然事件是"整张地图"，不可能事件是"空区域"。</div>
+<h3>事件的关系与运算（用集合语言描述）</h3>
+<p>事件的关系与运算，本质上就是<strong>集合的关系与运算</strong>，可用韦恩图（Venn diagram）直观表示。</p>
+<table>
+<tr><th>名称</th><th>记法</th><th>含义</th></tr>
+<tr><td>包含</td><td>A ⊆ B</td><td>A 发生必然导致 B 发生；若 A ⊆ B 且 B ⊆ A，则 A = B</td></tr>
+<tr><td>并事件（和事件）</td><td>A ∪ B（或 A + B）</td><td>A 与 B 至少有一个发生</td></tr>
+<tr><td>交事件（积事件）</td><td>A ∩ B（或 AB）</td><td>A 与 B 同时发生</td></tr>
+<tr><td>互斥事件</td><td>A ∩ B = ∅</td><td>A 与 B 不能同时发生</td></tr>
+<tr><td>对立事件</td><td>A ∩ B = ∅ 且 A ∪ B = Ω</td><td>A 与 B 有且仅有一个发生，记 B = Ā（A 的补集）</td></tr>
+</table>
+<p>例（掷一颗骰子，Ω = {1，2，3，4，5，6}）：设 A = {2，4，6}（偶数点），B = {1，3，5}（奇数点），C = {4，5，6}（大于 3）。则 A 与 B <strong>互斥</strong>且<strong>对立</strong>；A ∩ C = {4，6}，A ∪ C = {2，4，5，6}。</p>
+<div class="insight"><strong>几何含义（重要）：</strong>并事件 A ∪ B 是<strong>两块区域的并集</strong>，交事件 A ∩ B 是<strong>两区域的公共重叠部分</strong>，互斥事件是<strong>两块不相交的区域</strong>，对立事件是<strong>"A 区域 + 地图上其余全部区域"恰好铺满整张地图</strong>（即 B 是 A 的补集）。<strong>物理含义：</strong>对立事件就是"非此即彼"——要么 A 发生、要么 A 不发生，二者必居其一（如"命中"与"未命中"）。</div>
+<p><strong>两个易混点</strong>：① 对立事件一定是互斥事件，但互斥事件<strong>不一定</strong>对立（互斥只要求"不能同时发生"，还须"并起来是全集"才是对立）。② 三个及以上的事件"两两互斥"与"互斥"要注意：两两互斥指任意两个都互斥。</p>
+
+<h2 id="s2">10.2 古典概型（等可能概型）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="272" viewBox="0 0 520 272" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">古典概型：每个格子等面积（等可能性）</text><rect x="20" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></rect><rect x="90" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.25s" repeatCount="indefinite"/></rect><rect x="160" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite"/></rect><rect x="230" y="46" width="62" height="62" rx="6" fill="#2563eb"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.75s" repeatCount="indefinite"/></rect><rect x="20" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="90" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="160" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="230" y="120" width="62" height="62" rx="6" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><circle cx="51" cy="77" r="10" fill="#16a34a" stroke="#ffffff" stroke-width="2"><animate attributeName="cx" values="51;121;191;261;51;121;191;261;51" dur="8s" calcMode="discrete" repeatCount="indefinite"/><animate attributeName="cy" values="77;77;77;77;151;151;151;151;77" dur="8s" calcMode="discrete" repeatCount="indefinite"/></circle><rect x="20" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="60" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="100" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="140" y="210" width="40" height="16" rx="2" fill="#2563eb"/><rect x="180" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="220" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="260" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><rect x="300" y="210" width="40" height="16" rx="2" fill="#e5e7eb" stroke="#94a3b8" stroke-width="1"/><text x="260" y="252" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">P(A) = 有利格子 4 ÷ 总格子 8 = 1/2</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：古典概型是「有利区域面积 ÷ 总面积」——蓝格为事件 A，绿点代表一次试验的结果落进某个格子</figcaption></figure>
+<h3>定义</h3>
+<p>若一个试验同时满足两个条件：</p>
+<ol>
+<li><strong>有限性</strong>：样本空间 <code>Ω</code> 只含<strong>有限个</strong>样本点；</li>
+<li><strong>等可能性</strong>：每个样本点发生的可能性<strong>相等</strong>。</li>
+</ol>
+<p>则称该试验为<strong>古典概型</strong>（等可能概型）。设事件 A 包含 <code>n(A)</code> 个样本点，样本空间 Ω 含 <code>n(Ω)</code> 个样本点，则：</p>
+<pre><code>P(A) = n(A) / n(Ω) = 事件A包含的样本点数 / 样本空间样本点总数</code></pre>
+<div class="insight"><strong>几何含义：</strong>古典概型的本质是<strong>均匀度量（等面积格子）</strong>。把每个样本点看成一块<strong>面积相等的格子</strong>（等可能性 = "每格一样大"），事件 A 的概率就是 A 所占格子数占总格子数的比例，即"<strong>A 的面积 ÷ 总面积</strong>"。<strong>物理含义：</strong>均匀硬币（两面对称）、均匀骰子（六面对称）、抽签、摸球等"<strong>公平</strong>"场景——物理上的对称性保证了数学上的等可能性，这正是均匀分布（离散版）的来源。</div>
+<h3>古典概型的计算：核心是"数数"</h3>
+<p>求 <code>n(Ω)</code> 与 <code>n(A)</code> 的方法：<strong>列举法</strong>（树状图、列表格）与<strong>排列组合</strong>。关键规则：<strong>分子与分母的计数口径必须一致</strong>——要么都"按顺序"数，要么都"不按顺序"数。</p>
+<ul>
+<li>抛一枚均匀硬币，正面朝上的概率：<code>n(Ω) = 2</code>，<code>n(A) = 1</code>，<code>P = 1/2</code>。</li>
+<li>掷一颗均匀骰子，"点数不大于 2"：<code>n(Ω) = 6</code>，A = {1，2}，<code>P = 2/6 = 1/3</code>。</li>
+<li>掷两枚均匀骰子，"点数和为 7"：36 个样本点中，和为 7 的有 (1,6)(2,5)(3,4)(4,3)(5,2)(6,1) 共 6 个，<code>P = 6/36 = 1/6</code>。</li>
+</ul>
+<div class="insight"><strong>为什么掷两枚骰子要区分"第一枚、第二枚"（把 (1,6) 与 (6,1) 看作两个样本点）？</strong>几何上，把两个骰子分别对应横、纵两维，样本空间是 <code>6 × 6</code> 的方格点阵，每个格子等面积；(1,6) 与 (6,1) 是点阵中<strong>两个不同的格子</strong>，故都要数。若把它们合并成一个，格子就不再等面积，等可能性被破坏，结果必然出错。</div>
+
+<h2 id="s3">10.3 概率的性质（公理化定义 + 统计含义）</h2>
+<h3>概率的公理化定义</h3>
+<p>对样本空间 Ω 中的每个事件 A，都赋予一个实数 <code>P(A)</code>（A 的概率），且满足：</p>
+<pre><code>(1) 非负性：P(A) ≥ 0
+(2) 规范性：P(Ω) = 1
+(3) 可加性：若 A、B 互斥，则 P(A ∪ B) = P(A) + P(B)</code></pre>
+<p>由这三条公理可推出全部概率性质：</p>
+<ol>
+<li><code>P(∅) = 0</code>（不可能事件的概率为 0）；</li>
+<li><code>0 ≤ P(A) ≤ 1</code>（任何事件的概率都在 0 到 1 之间）；</li>
+<li>若 <code>A ⊆ B</code>，则 <code>P(A) ≤ P(B)</code>；</li>
+<li>对立事件：<code>P(Ā) = 1 − P(A)</code>；</li>
+<li>互斥事件的加法（有限可加）：若 A₁，A₂，…，Aₙ 两两互斥，则 <code>P(A₁ ∪ A₂ ∪ … ∪ Aₙ) = P(A₁) + P(A₂) + … + P(Aₙ)</code>；</li>
+<li>一般加法公式（<strong>不要求互斥</strong>）：<code>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</code>。</li>
+</ol>
+<div class="insight"><strong>几何含义（关键）：</strong>把概率看成事件区域的"<strong>面积（测度）</strong>"。非负性 = 面积不会为负；规范性 = 整张地图面积记为 1；可加性 = <strong>两块不相交区域的面积 = 各自面积之和</strong>；一般加法公式 = 两区域并集的面积 = 面积A + 面积B − <strong>重叠部分</strong>（重叠被加了两次，故减一次），这正是韦恩图的<strong>容斥原理</strong>；对立事件公式 = "阴影外的面积 = 1 − 阴影面积"。</div>
+<p><strong>统计定义（物理含义）</strong>：在大量重复试验中，事件 A 发生的频率 <code>fₙ(A) = n_A / n</code>（n 次试验中 A 发生了 n_A 次）会<strong>稳定在某个常数附近</strong>，这个常数就是概率 <code>P(A)</code>。频率是概率的"<strong>测量值 / 近似值</strong>"，概率是频率的"<strong>理论稳定值 / 极限</strong>"——概率刻画随机现象的长期统计规律。</p>
+<div class="insight"><strong>物理含义：</strong>频率与概率的关系，像"多次测量取平均"逼近真实值：单次试验随机，但<strong>大量重复后规律显现</strong>（大数定律的直观）。例如抛硬币，抛 10 次可能 7 次正面（频率 0.7），抛 10000 次正面频率就非常接近 0.5。</div>
+
+<h2 id="s4">10.4 事件的独立性</h2>
+<h3>定义</h3>
+<p>设 A、B 是同一试验中的两个事件，若</p>
+<pre><code>P(A ∩ B) = P(A) · P(B)</code></pre>
+<p>则称事件 <code>A</code> 与 <code>B</code> <strong>相互独立</strong>（简称独立）。直观含义：<strong>A 发生与否不影响 B 发生的概率</strong>，反之亦然。</p>
+<h3>如何判断独立性</h3>
+<ol>
+<li><strong>定义法</strong>：验证 <code>P(A ∩ B) = P(A) · P(B)</code> 是否成立。</li>
+<li><strong>实际情境法</strong>：两次试验<strong>互不影响</strong>（有放回摸球、不同的人独立射击、两台独立设备、先后抛两次硬币等）时，通常认为相互独立。</li>
+</ol>
+<p><strong>重要性质</strong>：若 A 与 B 独立，则 A 与 B̄、Ā 与 B、Ā 与 B̄ 也都独立。</p>
+<h3>独立 ≠ 互斥</h3>
+<p>独立与互斥是<strong>两个完全不同的概念</strong>：</p>
+<ul>
+<li><strong>互斥</strong>：<code>P(A ∩ B) = 0</code>，A、B <strong>不能同时发生</strong>；</li>
+<li><strong>独立</strong>：<code>P(A ∩ B) = P(A) · P(B)</code>，A、B <strong>可以同时发生</strong>，且"一个发生不影响另一个"。</li>
+</ul>
+<p>若 <code>P(A) &gt; 0</code> 且 <code>P(B) &gt; 0</code>，则 A、B 互斥 ⇒ A、B 不独立；A、B 独立 ⇒ A、B 不互斥（独立且概率都为正的两个事件，其交事件概率 <code>P(A)·P(B) &gt; 0</code>，故必能同时发生）。</p>
+<div class="insight"><strong>几何含义：</strong>独立性 = 概率上的"<strong>乘积结构 / 正交可分离</strong>"。把 A 对应横轴上长度为 P(A) 的区间、B 对应纵轴上长度为 P(B) 的区间，则 A ∩ B 对应一个<strong>矩形</strong>，其"面积" = 长 × 宽 = <code>P(A) · P(B)</code>。独立性就是"<strong>两维之间无关联，可以分离开来相乘</strong>"——正如面积 = 底 × 高，两方向各自独立。<strong>物理含义：</strong>独立 = 两次试验<strong>互不干扰</strong>：抛第一次硬币的结果不影响抛第二次；有放回摸球第二次与第一次无关；两台设备是否故障互不影响。</div>
+<p><strong>经典例子</strong>：</p>
+<ul>
+<li>连抛两次均匀硬币，两次都正面朝上：<code>P = (1/2) × (1/2) = 1/4</code>。</li>
+<li>甲命中率 0.6、乙命中率 0.7，二人独立射击同一目标：都命中 <code>P = 0.6 × 0.7 = 0.42</code>；至少一人命中 <code>P = 1 − (1 − 0.6)(1 − 0.7) = 1 − 0.4 × 0.3 = 0.88</code>；恰有一人命中 <code>P = 0.6 × 0.3 + 0.4 × 0.7 = 0.46</code>。</li>
+</ul>
+<div class="insight"><strong>"至少一个发生"的口诀：</strong>直接算"至少一个"常常要分多类，改用<strong>对立事件</strong>更省力——"至少一人命中" = 1 − "两人都不命中" = <code>1 − P(Ā)·P(B̄)</code>。这是"面积 = 1 − 空白面积"的独立性版本。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>样本空间 Ω</td><td>所有可能结果的完整地图（全集）</td><td>一次试验的全部可能结果</td></tr>
+<tr><td>样本点 ω</td><td>地图上的一个点（一个格子）</td><td>试验的一个可能结果</td></tr>
+<tr><td>随机事件 A</td><td>地图上的一块区域（子集）</td><td>可能发生也可能不发生的现象</td></tr>
+<tr><td>事件的并 A ∪ B</td><td>两块区域的并集</td><td>A、B 至少一个发生</td></tr>
+<tr><td>事件的交 A ∩ B</td><td>两块区域的重叠部分</td><td>A、B 同时发生</td></tr>
+<tr><td>互斥事件</td><td>两块区域互不相交（无公共面积）</td><td>不能同时发生</td></tr>
+<tr><td>对立事件</td><td>区域 + 其余全部区域 = 铺满全图（补集）</td><td>非此即彼、必有一个发生</td></tr>
+<tr><td>古典概型</td><td>每格等面积的均匀度量，P = 有利面积 ÷ 总面积</td><td>等可能的公平试验（均匀硬币/骰子）</td></tr>
+<tr><td>概率 P(A)</td><td>事件区域的面积（测度），总面积为 1</td><td>频率的稳定值（长期统计规律）</td></tr>
+<tr><td>加法公式</td><td>面积相加并减去重叠（容斥原理）</td><td>互斥事件概率可加</td></tr>
+<tr><td>对立事件概率</td><td>1 − 阴影面积</td><td>用"反面"求"正面"</td></tr>
+<tr><td>事件的独立性</td><td>面积 = 长 × 宽（两维正交可分离相乘）</td><td>两次试验互不影响</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<h4>题目</h4>
+<ol>
+<li>抛两枚均匀硬币，写出样本空间 Ω，并求"至少一枚正面朝上"的概率。</li>
+<li>掷一颗均匀骰子，A = "出现偶数点"，B = "出现点数大于 3"。求 P(A)、P(B)、P(A ∩ B)、P(A ∪ B)。</li>
+<li>袋中有 3 个红球、2 个白球（除颜色外完全相同），不放回地依次摸出 2 个，求摸出的 2 个都是红球的概率。</li>
+<li>甲、乙独立射击同一目标，命中率分别为 0.6 与 0.8。求：（1）两人都命中；（2）至少一人命中；（3）恰有一人命中。</li>
+<li>从 1、2、3、4 中任取两个不同数字组成一个两位数，求：（1）这个两位数是偶数；（2）这个两位数大于 30。</li>
+<li>已知 P(A) = 0.5，P(B) = 0.4。若 A 与 B 互斥，求 P(A ∪ B)；若 A 与 B 独立，求 P(A ∪ B)。</li>
+</ol>
+<h4>参考答案</h4>
+<ol>
+<li>Ω = {正正，正反，反正，反反}；"至少一枚正面" = {正正，正反，反正}，P = 3/4。</li>
+<li>Ω = {1，…，6}，A = {2，4，6}，P(A) = 1/2；B = {4，5，6}，P(B) = 1/2；A ∩ B = {4，6}，P(A ∩ B) = 1/3；A ∪ B = {2，4，5，6}，P(A ∪ B) = 2/3（也可 1/2 + 1/2 − 1/3 = 2/3）。</li>
+<li>按顺序：n(Ω) = 5 × 4 = 20，都是红球 n(A) = 3 × 2 = 6，P = 6/20 = 3/10（也可 C(3,2)/C(5,2) = 3/10）。</li>
+<li>（1）0.6 × 0.8 = 0.48；（2）1 − 0.4 × 0.2 = 0.92；（3）0.6 × 0.2 + 0.4 × 0.8 = 0.44。</li>
+<li>共 4 × 3 = 12 个两位数。（1）偶数：个位为 2 或 4，各有 3 种十位，共 6 种，P = 6/12 = 1/2；（2）大于 30：十位为 3 或 4，各有 3 种个位，共 6 种，P = 6/12 = 1/2。</li>
+<li>互斥：P(A ∪ B) = 0.5 + 0.4 = 0.9；独立：P(A ∪ B) = 0.5 + 0.4 − 0.5 × 0.4 = 0.7。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<h4>避坑清单</h4>
+<ul>
+<li>❌ "互斥就是对立" → ✔ 对立是特殊的互斥：还须满足"并起来等于全集"。</li>
+<li>❌ "独立就是互斥" → ✔ 独立与互斥是两个不同概念，独立事件（概率均正）是<strong>能同时发生</strong>的。</li>
+<li>❌ "古典概型只要有有限个样本点就行" → ✔ 还必须<strong>等可能</strong>；不均匀骰子不满足等可能性，不是古典概型。</li>
+<li>❌ "P(A ∪ B) = P(A) + P(B) 永远成立" → ✔ 只有 A、B <strong>互斥</strong>时才成立，一般要减去 P(A ∩ B)。</li>
+<li>❌ "概率可以小于 0 或大于 1" → ✔ 任何事件都有 <code>0 ≤ P(A) ≤ 1</code>。</li>
+<li>❌ "不放回摸球也独立" → ✔ <strong>不放回</strong>抽样前后结果有关联、不独立；<strong>有放回</strong>才独立。</li>
+<li>❌ "掷两枚骰子把 (1,6) 与 (6,1) 当成同一个样本点" → ✔ 两枚骰子要区分先后，点阵是 6 × 6 = 36 个<strong>不同格子</strong>。</li>
+<li>❌ "分子分母计数口径不一致" → ✔ 数 n(A) 与 n(Ω) 必须<strong>同按顺序或同不按顺序</strong>，否则比例错。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>掷一颗均匀骰子，写出样本空间 Ω。设 A = {1，2，3}（点数不大于 3），B = {2，3，4}，求 A ∩ B 与 A ∪ B，并判断 A 与 B 是否互斥。</li>
+<li>袋中有 4 个红球、3 个白球、1 个蓝球（除颜色外完全相同），随机摸出 1 个球，求摸到红球的概率，并用「有利格子数 ÷ 总格子数」解释其几何含义。</li>
+<li>某班学生中，喜欢数学的概率 P(A) = 0.6，喜欢物理的概率 P(B) = 0.5，两科都喜欢的概率 P(A ∩ B) = 0.3。求至少喜欢一科的概率 P(A ∪ B)，并说明为什么不能直接写成 0.6 + 0.5（结合韦恩图的面积容斥）。</li>
+<li>掷一颗均匀骰子，求「点数不小于 2」的概率。说明为什么用「1 − 点数等于 1 的概率」来算更省力（结合对立事件的几何含义）。</li>
+<li>一枚均匀硬币连抛两次，设 A =「第一次正面朝上」，B =「第二次正面朝上」。写出样本空间 Ω，求 P(A)、P(B)、P(A ∩ B)，并验证 P(A ∩ B) = P(A)·P(B)，说明这如何体现「两次试验互不影响」。</li>
+<li>甲、乙两人独立射击同一目标，命中率分别为 0.7 与 0.8。求：（1）两人都未命中；（2）至少一人命中；（3）恰有一人命中。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>Ω = {1，2，3，4，5，6}。A ∩ B = {2，3}（同时属于 A、B 的公共部分）；A ∪ B = {1，2，3，4}（两块区域的并集）。因为 A ∩ B = {2，3} ≠ ∅，A 与 B 有公共样本点，能同时发生，所以<strong>不互斥</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>样本空间共 8 个样本点（红×4、白×3、蓝×1），每个球等可能。红球占 4 个「格子」，故 P = 4/8 = 1/2。几何含义：把每个球看成地图上一个等面积的格子，「有利区域（红球）的面积 ÷ 总面积」= 4 ÷ 8 = 1/2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>P(A ∪ B) = P(A) + P(B) − P(A ∩ B) = 0.6 + 0.5 − 0.3 = 0.8。不能直接相加，是因为「两科都喜欢」的人在 P(A) 与 P(B) 里被算了两次，须减去一次重叠部分——正如两区域并集的面积 = 面积A + 面积B − 重叠面积（容斥原理）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>「点数不小于 2」= {2，3，4，5，6}，其对立事件是「点数等于 1」= {1}。P(不小于 2) = 1 − P(点数等于 1) = 1 − 1/6 = 5/6。几何含义：直接数「有利区域」要数 5 格，而「空白区域（补集）只有 1 格」，用「1 − 阴影外面积」更快。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>Ω = {正正，正反，反正，反反}，共 4 个样本点。P(A) = 2/4 = 1/2，P(B) = 2/4 = 1/2，A ∩ B = {正正}，P(A ∩ B) = 1/4。验证：P(A)·P(B) = 1/2 × 1/2 = 1/4 = P(A ∩ B)，故 A 与 B 相互独立。几何含义：第一次结果对应横轴、第二次对应纵轴，A ∩ B 是长 × 宽 = 1/2 × 1/2 的矩形，两维正交可分离相乘，正是「两次试验互不影响」。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>甲未命中 = 0.3，乙未命中 = 0.2，且独立。（1）都未命中 = 0.3 × 0.2 = 0.06；（2）至少一人命中 = 1 − 都未命中 = 1 − 0.06 = 0.94（用对立事件，避开分类）；（3）恰有一人命中 = 甲中乙不中 + 甲不中乙中 = 0.7 × 0.2 + 0.3 × 0.8 = 0.14 + 0.24 = 0.38。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第9章-统计/第9章-统计.html">← 上一章：第9章 统计</a>
+<a href="../../../index.html">回目录</a>
+<a href="../../选择性必修一/第1章-空间向量与立体几何/第1章-空间向量与立体几何.html">下一章：第1章 空间向量与立体几何 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中数学</footer>
+</body>
+</html>

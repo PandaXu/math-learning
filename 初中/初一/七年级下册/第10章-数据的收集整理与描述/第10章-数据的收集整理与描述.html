@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第10章 数据的收集、整理与描述 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级下册 › 第10章 数据的收集整理与描述</div></header>
+<main class="container">
+<h1>第10章 数据的收集、整理与描述</h1>
+<p class="lead">初中 / 初一 / 七年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>数据的收集、整理与描述 = 「把大量杂乱的信息收集起来，切成一段段“箱子”，数一数每个箱子里装了多少，再画成一张“分布形状图”」。学完本章，你要能在心里“看见”一张直方图——每个小长方形的<strong>面积</strong>代表频数，整张图的轮廓就是数据分布的<strong>形状</strong>。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">10.1 全面调查与抽样调查</a><a href="#s2">10.2 频数分布表</a><a href="#s3">10.3 直方图</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+</div>
+
+<h2 id="s1">10.1 全面调查与抽样调查</h2>
+<h3>数据从哪里来？两种收集方式</h3>
+<p>统计的第一步是<strong>收集数据</strong>。要回答“全国初中生平均每天睡几小时”“这批灯泡平均能用多久”这类问题，我们不可能、也不必把每一个对象都查一遍，于是产生了两种基本的调查方式：</p>
+<ul>
+<li><strong>全面调查（普查）</strong>：对考察对象的<strong>全体</strong>逐个进行调查。例：人口普查、飞机起飞前的安检、检查全班同学的身高。</li>
+<li><strong>抽样调查</strong>：从全体对象中<strong>抽取一部分</strong>进行调查，用这部分来估计整体。例：品尝一小口判断整锅汤的咸淡、抽检一批灯泡的寿命、民意测验。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>抽样调查的本质是“用一小勺尝出整锅汤的味道”。当总体太大、调查有<strong>破坏性</strong>（灯泡寿命测完就报废）、或时间经费有限时，抽样是唯一现实的选择；全面调查只在总体较小、精度要求极高且无破坏性时才划算。</div>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="235" viewBox="0 0 520 235" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="6" y="6" width="508" height="223" rx="12" fill="#f8fafc" stroke="#e5e7eb"/><ellipse cx="235" cy="112" rx="178" ry="60" fill="#f1f5f9" stroke="#94a3b8" stroke-dasharray="5,5" fill-opacity="0.6"/><circle cx="62" cy="55" r="3.5" fill="#cbd5e1"/><circle cx="109.7" cy="66.1" r="3.5" fill="#cbd5e1"/><circle cx="141.4" cy="63.2" r="3.5" fill="#cbd5e1"/><circle cx="173.1" cy="60.3" r="3.5" fill="#cbd5e1"/><circle cx="204.8" cy="57.5" r="3.5" fill="#cbd5e1"/><circle cx="236.5" cy="68.6" r="3.5" fill="#cbd5e1"/><circle cx="268.2" cy="65.7" r="3.5" fill="#cbd5e1"/><circle cx="299.9" cy="62.8" r="3.5" fill="#cbd5e1"/><circle cx="331.6" cy="59.9" r="3.5" fill="#cbd5e1"/><circle cx="363.3" cy="57" r="3.5" fill="#cbd5e1"/><circle cx="395" cy="68.2" r="3.5" fill="#cbd5e1"/><circle cx="71.2" cy="91.1" r="3.5" fill="#cbd5e1"/><circle cx="102.9" cy="102.2" r="3.5" fill="#cbd5e1"/><circle cx="134.6" cy="99.4" r="3.5" fill="#cbd5e1"/><circle cx="166.3" cy="96.5" r="3.5" fill="#cbd5e1"/><circle cx="198" cy="93.6" r="3.5" fill="#cbd5e1"/><circle cx="229.7" cy="90.7" r="3.5" fill="#cbd5e1"/><circle cx="261.4" cy="101.8" r="3.5" fill="#cbd5e1"/><circle cx="293.1" cy="98.9" r="3.5" fill="#cbd5e1"/><circle cx="340.8" cy="96.1" r="3.5" fill="#cbd5e1"/><circle cx="372.5" cy="93.2" r="3.5" fill="#cbd5e1"/><circle cx="404.2" cy="90.3" r="3.5" fill="#cbd5e1"/><circle cx="64.4" cy="127.3" r="3.5" fill="#cbd5e1"/><circle cx="96.1" cy="138.4" r="3.5" fill="#cbd5e1"/><circle cx="143.8" cy="135.5" r="3.5" fill="#cbd5e1"/><circle cx="175.5" cy="132.6" r="3.5" fill="#cbd5e1"/><circle cx="207.2" cy="129.7" r="3.5" fill="#cbd5e1"/><circle cx="238.9" cy="126.8" r="3.5" fill="#cbd5e1"/><circle cx="270.6" cy="137.9" r="3.5" fill="#cbd5e1"/><circle cx="302.3" cy="135.1" r="3.5" fill="#cbd5e1"/><circle cx="334" cy="132.2" r="3.5" fill="#cbd5e1"/><circle cx="365.7" cy="129.3" r="3.5" fill="#cbd5e1"/><circle cx="397.4" cy="126.4" r="3.5" fill="#cbd5e1"/><circle cx="73.6" cy="163.4" r="3.5" fill="#cbd5e1"/><circle cx="105.3" cy="160.5" r="3.5" fill="#cbd5e1"/><circle cx="137" cy="171.6" r="3.5" fill="#cbd5e1"/><circle cx="168.7" cy="168.7" r="3.5" fill="#cbd5e1"/><circle cx="200.4" cy="165.8" r="3.5" fill="#cbd5e1"/><circle cx="232.1" cy="163" r="3.5" fill="#cbd5e1"/><circle cx="263.8" cy="160.1" r="3.5" fill="#cbd5e1"/><circle cx="295.5" cy="171.2" r="3.5" fill="#cbd5e1"/><circle cx="327.2" cy="168.3" r="3.5" fill="#cbd5e1"/><circle cx="374.9" cy="165.4" r="3.5" fill="#cbd5e1"/><circle cx="406.6" cy="162.5" r="3.5" fill="#cbd5e1"/><circle cx="62" cy="55" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="0.0s" repeatCount="indefinite"/></circle><circle cx="96.1" cy="138.4" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="0.5s" repeatCount="indefinite"/></circle><circle cx="137" cy="171.6" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="1.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="1.0s" repeatCount="indefinite"/></circle><circle cx="175.5" cy="132.6" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="1.5s" repeatCount="indefinite"/></circle><circle cx="198" cy="93.6" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="2.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="2.0s" repeatCount="indefinite"/></circle><circle cx="232.1" cy="163" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="2.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="2.5s" repeatCount="indefinite"/></circle><circle cx="268.2" cy="65.7" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="3.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="3.0s" repeatCount="indefinite"/></circle><circle cx="302.3" cy="135.1" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="3.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="3.5s" repeatCount="indefinite"/></circle><circle cx="327.2" cy="168.3" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="4.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="4.0s" repeatCount="indefinite"/></circle><circle cx="363.3" cy="57" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="4.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="4.5s" repeatCount="indefinite"/></circle><circle cx="365.7" cy="129.3" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="5.0s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="5.0s" repeatCount="indefinite"/></circle><circle cx="404.2" cy="90.3" r="3.5" fill="#cbd5e1"><animate attributeName="fill" values="#cbd5e1;#2563eb;#2563eb;#cbd5e1" keyTimes="0;0.12;0.8;1" dur="8s" begin="5.5s" repeatCount="indefinite"/><animate attributeName="r" values="3.5;3.5;6;6;3.5" keyTimes="0;0.12;0.8;1" dur="8s" begin="5.5s" repeatCount="indefinite"/></circle><text x="235" y="190" text-anchor="middle" font-size="12" fill="#64748b">总体（全集点）</text><circle cx="150" cy="220" r="4" fill="#cbd5e1"/><text x="161" y="224" font-size="12" fill="#334155">总体点</text><circle cx="330" cy="220" r="5" fill="#2563eb"/><text x="341" y="224" font-size="12" fill="#334155">样本点（代表性子集）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：抽样调查 = 从全集点中随机抽取代表性子集（蓝点逐个亮起），用子集的形状去推断全集的形状</figcaption></figure>
+
+<h3>四个基本概念：总体、个体、样本、样本容量</h3>
+<table>
+<tr><th>概念</th><th>含义</th><th>例子（调查某校800名学生的视力）</th></tr>
+<tr><td>总体</td><td>要考察的<strong>全体对象</strong></td><td>该校800名学生的视力情况</td></tr>
+<tr><td>个体</td><td>组成总体的<strong>每一个</strong>考察对象</td><td>每一名学生的视力情况</td></tr>
+<tr><td>样本</td><td>从总体中<strong>抽取的一部分</strong>个体</td><td>抽出的80名学生的视力情况</td></tr>
+<tr><td>样本容量</td><td>样本中<strong>个体的数目</strong>（是一个数）</td><td>80</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>把总体看成数轴（或平面）上的<strong>一整片点</strong>，个体就是其中一个点；样本是这片点里按规则取出的<strong>代表性子集</strong>，样本容量是这个子集里<strong>点的个数</strong>。抽样就是用“子集的形状”去推断“全集的形状”。</div>
+
+<h3>简单随机抽样</h3>
+<p>要使样本能代表总体，关键是<strong>每个个体被抽到的机会都相等</strong>，这叫<strong>简单随机抽样</strong>。常用的办法：</p>
+<ul>
+<li><strong>抽签法</strong>：把总体编号后随机抽取；</li>
+<li><strong>随机数法</strong>：用随机数表或计算机随机数抽取。</li>
+</ul>
+<div class="insight"><strong>核心直觉：</strong>抽样的可靠性靠的不是“抽得多”而是“抽得<strong>随机、有代表性</strong>”。样本容量要适当——太少误差大，太多又失去抽样的意义。</div>
+
+<h2 id="s2">10.2 频数分布表</h2>
+<h3>为什么要把数据“分箱”？</h3>
+<p>收集到的一堆原始数据是杂乱无章的。例如测得某班40名学生的身高，读起来只是一串数，看不出“大多数人身高在什么范围”。整理的办法是：<strong>把数据范围切成若干段（小组），数一数每段里落进了多少个数</strong>——这就得到一张<strong>频数分布表</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>频数分布表 = 把一条数轴用几个“切割点”<strong>切成等宽的小区间（箱子）</strong>，然后数每个箱子里掉了多少个数据点。<strong>每个区间是一个左闭右开的线段</strong>，频数就是该线段上点的个数。</div>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="265" viewBox="0 0 520 265" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="6" y="6" width="508" height="253" rx="12" fill="#f8fafc" stroke="#e5e7eb"/><rect x="40" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="70" y="84" text-anchor="middle" font-size="9" fill="#64748b">146≤x&lt;150</text><text x="70" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">2<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><rect x="100" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="130" y="84" text-anchor="middle" font-size="9" fill="#64748b">150≤x&lt;154</text><text x="130" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">4<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><rect x="160" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="190" y="84" text-anchor="middle" font-size="9" fill="#64748b">154≤x&lt;158</text><text x="190" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">5<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><rect x="220" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="250" y="84" text-anchor="middle" font-size="9" fill="#64748b">158≤x&lt;162</text><text x="250" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">4<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><rect x="280" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="310" y="84" text-anchor="middle" font-size="9" fill="#64748b">162≤x&lt;166</text><text x="310" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">2<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><rect x="340" y="60" width="60" height="90" fill="#eff6ff" stroke="#bfdbfe"/><text x="370" y="84" text-anchor="middle" font-size="9" fill="#64748b">166≤x&lt;170</text><text x="370" y="128" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb" opacity="0">1<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.55;0.6;0.9;1" dur="8s" repeatCount="indefinite"/></text><line x1="32" y1="150" x2="408" y2="150" stroke="#94a3b8" stroke-width="2"/><polygon points="408,150 400,146 400,154" fill="#94a3b8"/><line x1="40" y1="150" x2="40" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="40" y="174" text-anchor="middle" font-size="11" fill="#64748b">146</text><line x1="100" y1="150" x2="100" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="100" y="174" text-anchor="middle" font-size="11" fill="#64748b">150</text><line x1="160" y1="150" x2="160" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="160" y="174" text-anchor="middle" font-size="11" fill="#64748b">154</text><line x1="220" y1="150" x2="220" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="220" y="174" text-anchor="middle" font-size="11" fill="#64748b">158</text><line x1="280" y1="150" x2="280" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="280" y="174" text-anchor="middle" font-size="11" fill="#64748b">162</text><line x1="340" y1="150" x2="340" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="340" y="174" text-anchor="middle" font-size="11" fill="#64748b">166</text><line x1="400" y1="150" x2="400" y2="158" stroke="#94a3b8" stroke-width="1.5"/><text x="400" y="174" text-anchor="middle" font-size="11" fill="#64748b">170</text><circle cx="48" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.00s" repeatCount="indefinite"/></circle><circle cx="92" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.18s" repeatCount="indefinite"/></circle><circle cx="108" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.36s" repeatCount="indefinite"/></circle><circle cx="122.7" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.54s" repeatCount="indefinite"/></circle><circle cx="137.3" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.72s" repeatCount="indefinite"/></circle><circle cx="152" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="0.90s" repeatCount="indefinite"/></circle><circle cx="168" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.08s" repeatCount="indefinite"/></circle><circle cx="179" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.26s" repeatCount="indefinite"/></circle><circle cx="190" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.44s" repeatCount="indefinite"/></circle><circle cx="201" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.62s" repeatCount="indefinite"/></circle><circle cx="212" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.80s" repeatCount="indefinite"/></circle><circle cx="228" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="1.98s" repeatCount="indefinite"/></circle><circle cx="242.7" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="2.16s" repeatCount="indefinite"/></circle><circle cx="257.3" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="2.34s" repeatCount="indefinite"/></circle><circle cx="272" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="2.52s" repeatCount="indefinite"/></circle><circle cx="288" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="2.70s" repeatCount="indefinite"/></circle><circle cx="332" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="2.88s" repeatCount="indefinite"/></circle><circle cx="370" cy="12" r="4.5" fill="#16a34a"><animate attributeName="cy" values="12;150;150;12" keyTimes="0;0.12;0.75;1" dur="8s" begin="3.06s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：频数分布 = 把数轴切成等宽的“箱子”，绿色数据点逐个掉入对应区间，箱内数字即该组频数</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>就像把一堆大小不一的米粒按重量装进不同规格的袋子——<strong>每个袋子是一个“重量区间”，频数就是这只袋子里米粒的颗数</strong>。分箱后，杂乱的一堆立刻变得有条理。</div>
+
+<h3>制作频数分布表的四步</h3>
+<ol>
+<li><strong>算极差</strong>：极差 = 最大值 − 最小值，它衡量数据“铺得多开”。</li>
+<li><strong>定组距和组数</strong>：组距是每个小组两个端点之间的距离；组数 ≈ 极差 ÷ 组距（不能整除时向上取整）。组距、组数要取得适中，使数据分布看得清楚。</li>
+<li><strong>定分点</strong>：一般取比数据多一位小数的值或适当整数，保证每个数据只落在一个组里（通常按“左闭右开”处理，即含下限不含上限）。</li>
+<li><strong>列频数分布表</strong>：用“划记法（画正字）”逐个数，数出每组的<strong>频数</strong>。</li>
+</ol>
+
+<h3>概念清单</h3>
+<pre><code>极差   = 最大值 − 最小值                 （数据的“跨度”）
+组距   = 每个小组两个端点之间的距离       （“箱子”的宽度）
+组数   ≈ 极差 ÷ 组距                      （“箱子”的个数）
+频数   = 落在某个小组内的数据个数        （“箱子”里的点数）
+频率   = 频数 ÷ 数据总个数               （该组占总数的比例）
+频数之和 = 数据总个数； 频率之和 = 1 （0 ≤ 频率 ≤ 1）</code></pre>
+<p><strong>完整示例</strong>：某班40名学生的身高（cm），最大 168，最小 146。</p>
+<ul>
+<li>极差 = 168 − 146 = 22</li>
+<li>组距取 4，组数 = 22 ÷ 4 = 5.5 → 取 6 组</li>
+<li>分组（左闭右开）：146≤x&lt;150、150≤x&lt;154、……、166≤x&lt;170</li>
+</ul>
+<table>
+<tr><th>身高分组 x（cm）</th><th>划记</th><th>频数</th><th>频率</th></tr>
+<tr><td>146≤x&lt;150</td><td>正</td><td>2</td><td>0.05</td></tr>
+<tr><td>150≤x&lt;154</td><td>正一</td><td>6</td><td>0.15</td></tr>
+<tr><td>154≤x&lt;158</td><td>正正丁</td><td>12</td><td>0.30</td></tr>
+<tr><td>158≤x&lt;162</td><td>正正</td><td>10</td><td>0.25</td></tr>
+<tr><td>162≤x&lt;166</td><td>正丁</td><td>7</td><td>0.175</td></tr>
+<tr><td>166≤x&lt;170</td><td>下</td><td>3</td><td>0.075</td></tr>
+<tr><td><strong>合计</strong></td><td>——</td><td><strong>40</strong></td><td><strong>1.00</strong></td></tr>
+</table>
+<div class="insight"><strong>关键认识：</strong>频数之和必须等于数据总个数，频率之和必须等于 1——这是检查整理结果是否正确的最快办法。频率 = 频数 ÷ 总数，本质上是“该箱子的点数占全部点数的<strong>比例</strong>”。</div>
+
+<h2 id="s3">10.3 直方图</h2>
+<h3>从表格到图形：把频数画成面积</h3>
+<p>频数分布表是“数”，直方图是“形”。<strong>频数分布直方图</strong>用小长方形来表示数据：横轴表示分组，纵轴表示 <code>频数 ÷ 组距</code>。这样做的妙处在于——</p>
+<pre><code>小长方形的面积 = 底 × 高 = 组距 × (频数 ÷ 组距) = 频数</code></pre>
+<div class="insight"><strong>几何含义（本章核心！）：</strong>直方图的本质是<strong>“用面积表示频数”</strong>。每个小长方形的<strong>底 = 组距（区间宽度）</strong>，<strong>高 = 频数 ÷ 组距（单位宽度上的频数，即“频数密度”）</strong>，两者相乘恰好等于该组的频数。整张直方图的<strong>总面积 = 总频数</strong>。这就是统计里最漂亮的“数形结合”。</div>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="270" viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><rect x="6" y="6" width="508" height="258" rx="12" fill="#f8fafc" stroke="#e5e7eb"/><text x="260" y="38" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">面积 = 底 × 高 = 组距 × (频数 ÷ 组距) = 频数</text><rect x="200" y="210" width="80" height="0" fill="#2563eb" opacity="0.92"><animate attributeName="height" values="0;120;120;0" keyTimes="0;0.3;0.8;1" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="210;90;90;210" keyTimes="0;0.3;0.8;1" dur="8s" repeatCount="indefinite"/></rect><line x1="210" y1="90" x2="210" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="220" y1="90" x2="220" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="230" y1="90" x2="230" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="240" y1="90" x2="240" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="250" y1="90" x2="250" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="260" y1="90" x2="260" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="270" y1="90" x2="270" y2="210" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="100" x2="280" y2="100" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="110" x2="280" y2="110" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="120" x2="280" y2="120" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="130" x2="280" y2="130" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="140" x2="280" y2="140" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="150" x2="280" y2="150" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="160" x2="280" y2="160" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="170" x2="280" y2="170" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="180" x2="280" y2="180" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="190" x2="280" y2="190" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><line x1="200" y1="200" x2="280" y2="200" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/><rect x="200" y="90" width="80" height="120" fill="none" stroke="#1d4ed8" stroke-width="2"/><line x1="176" y1="90" x2="176" y2="210" stroke="#2563eb" stroke-width="2"/><polygon points="176,90 171.5,98 180.5,98" fill="#2563eb"/><polygon points="176,210 171.5,202 180.5,202" fill="#2563eb"/><text x="162" y="150" text-anchor="middle" font-size="12" fill="#2563eb" transform="rotate(-90 162 150)">高 = 频数 ÷ 组距</text><line x1="200" y1="228" x2="280" y2="228" stroke="#16a34a" stroke-width="2"/><polygon points="200,228 208,223.5 208,232.5" fill="#16a34a"/><polygon points="280,228 272,223.5 272,232.5" fill="#16a34a"/><text x="240" y="250" text-anchor="middle" font-size="13" fill="#16a34a">底 = 组距</text><text x="240" y="156" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff" opacity="0">面积 = 频数<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.35;0.45;0.82;1" dur="8s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：直方图用面积表示频数——底是组距、高是「频数 ÷ 组距」，两者相乘恰为频数</figcaption></figure>
+<p>实际画图时，通常采用<strong>等距分组</strong>（组距都相等），此时各长方形的高与频数成正比，习惯上纵轴直接标<strong>频数</strong>，高度就代表频数（面积仍与频数成正比）。</p>
+<pre><code>频数
+12 |              ██
+10 |           ██ ██ ██
+ 8 |        ██ ██ ██ ██
+ 6 |     ██ ██ ██ ██ ██
+ 4 |  ██ ██ ██ ██ ██ ██ ██
+ 2 | ██ ██ ██ ██ ██ ██ ██ ██
+ 0 +----+----+----+----+----+----+----→ 身高(cm)
+    146  150  154  158  162  166  170</code></pre>
+<p>图中的小长方形<strong>一个紧挨一个、中间不留缝隙</strong>——因为横轴表示的是连续变化的区间。</p>
+
+<h3>直方图 vs 条形图（必须分清）</h3>
+<table>
+<tr><th>对比项</th><th>条形图</th><th>直方图</th></tr>
+<tr><td>数据类型</td><td>分类数据（类别之间是“并列”关系）</td><td>连续数据（按数值区间分组）</td></tr>
+<tr><td>条形之间</td><td>有间隔</td><td>无间隔，紧紧挨着</td></tr>
+<tr><td>宽度的意义</td><td>宽度无意义，只比高度</td><td>宽度 = 组距，有意义；面积 = 频数</td></tr>
+<tr><td>能否交换顺序</td><td>能（类别可任意排列）</td><td>不能（区间按大小顺序排列）</td></tr>
+</table>
+
+<h3>直方图的“形状”说了什么</h3>
+<p>直方图的<strong>轮廓（形状）</strong>直接告诉我们数据分布的特征：</p>
+<ul>
+<li><strong>高峰（最高长方形）所在组</strong>：大多数数据落在哪里，即“集中趋势”。</li>
+<li><strong>是否对称</strong>：中间高、两边低且左右对称的是“对称分布（钟形）”；一边拖着长尾巴的是“偏斜分布”。</li>
+<li><strong>横轴跨度</strong>：数据分布的范围（对应极差）。</li>
+<li><strong>是单峰还是双峰</strong>：一个高峰说明数据来源较单一，两个高峰往往提示数据可能来自两类不同的群体。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>直方图就是数据的“<strong>形状照片</strong>”。看一张身高的直方图，你立刻知道“大多数人在哪一段身高区间”“特别高和特别矮的人多不多”“分布是均匀还是向一边倾斜”——就像看山的地形图：山峰在哪里，山坡朝哪边倒。</div>
+
+<h3>频数折线图</h3>
+<p>把每个小组的<strong>组中值</strong>（小组两端点的平均值）取横坐标、频数取纵坐标，描点后用线段依次连接，就得到<strong>频数折线图</strong>。它比直方图更清晰地勾勒出分布的<strong>轮廓线</strong>，便于一眼看出“高峰在哪里、两侧如何下降”。</p>
+
+<h2 id="s4">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>全面调查</td><td>考察点集中的全部点</td><td>人口普查、无破坏性的精确统计</td></tr>
+<tr><td>抽样调查</td><td>取代表性子集去推断全集</td><td>品酒尝一口、灯泡抽检、民意测验</td></tr>
+<tr><td>总体 / 样本</td><td>全部点集 vs 代表性子集</td><td>全体考察对象 vs 抽取的部分对象</td></tr>
+<tr><td>样本容量</td><td>子集中点的个数</td><td>样本中个体的数目（是一个数）</td></tr>
+<tr><td>极差</td><td>数据在数轴上的跨度（区间长度）</td><td>最大值与最小值之差，衡量“铺得多开”</td></tr>
+<tr><td>组距 / 组数</td><td>切分数轴的箱子宽度 / 箱子个数</td><td>分装的规格 / 分装的袋数</td></tr>
+<tr><td>频数</td><td>落在某区间内的点的个数</td><td>某只箱子里的个数</td></tr>
+<tr><td>频率</td><td>该区间点数的占比</td><td>该组占总数的比例（百分比）</td></tr>
+<tr><td>直方图</td><td>用矩形面积表示频数的分布图</td><td>数据分布形状的“照片”</td></tr>
+<tr><td>分布形状</td><td>高峰位置、对称性、偏斜方向</td><td>大多数值集中在哪、分布是否均匀</td></tr>
+</table>
+
+<h2 id="s5">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断下列调查属于全面调查还是抽样调查：① 了解全国初中生平均每天的睡眠时间；② 了解全班50名同学的身高；③ 检验一批灯泡的使用寿命；④ 检测某型号飞机的每个零部件。</li>
+<li>某校为了解800名七年级学生的视力，抽取了80名学生检查，指出其中的总体、个体、样本、样本容量。</li>
+<li>一组数据：12、15、13、17、20、18、16、19、14、22。求极差；若组距取 3，应分成几组？</li>
+<li>某班40名学生身高整理成频数分布表后，落在“154≤x&lt;158”一组的频数是 12。求这一组的频率；并说明所有小组的频率之和是多少。</li>
+<li>直方图与条形图有什么本质区别？为什么直方图的小长方形要紧挨着、不能留缝隙？</li>
+<li>根据 §10.2 的频数分布表，说出频数最多的是哪一组，并说明它反映的“集中趋势”。</li>
+</ol>
+</div>
+
+<h2 id="s6">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ “样本容量是抽出来的那些个体” → ❌ 样本容量是<strong>一个数</strong>（样本中个体的数目），没有单位，如“80”，不是那80个人本身。</li>
+<li>❌ “抽样调查结果不准确，所以没有用” → ❌ 只要样本<strong>具有代表性、容量适当</strong>，抽样调查就能用较小的代价较准确地估计总体；对破坏性调查，抽样是唯一可行的方法。</li>
+<li>❌ “样本越大越好，越大越准” → ❌ 样本容量要<strong>适当</strong>；一味求大会失去抽样的意义、浪费资源，且若抽样方式不当（不随机），再大也可能有偏。</li>
+<li>❌ “直方图只看高度，面积没意义” → ❌ 直方图用<strong>面积表示频数</strong>（高 = 频数 ÷ 组距）；只有等距分组时高度才与频数成正比。</li>
+<li>❌ “条形图就是直方图” → ❌ 条形图有缝隙、表示分类数据、宽度无意义；直方图无缝隙、表示连续数据的区间分布、宽度即组距。</li>
+<li>❌ “频率之和可以大于 1” → ❌ 频率之和恒等于 1，且有 0 ≤ 频率 ≤ 1；频数之和必须等于数据总个数。</li>
+<li>❌ “组距越大越好” → ❌ 组距过大则信息损失（看不清分布），过小则过于琐碎；应结合极差与数据个数合理确定，使分布清晰。</li>
+<li>❌ “分组端点可以随便写，两个组重叠也没关系” → ❌ 分组必须互不重叠、不重不漏（通常“左闭右开”），否则同一个数据会算进两组，频数之和就对不上了。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:0 0 8px">一、练习题</h3>
+<ol>
+<li>判断下列调查属于<strong>全面调查</strong>还是<strong>抽样调查</strong>：① 了解全班50名同学的视力；② 检测一批炮弹的杀伤半径；③ 了解全国七年级学生平均每天的阅读时间。</li>
+<li>某校为了了解900名七年级学生的身高，从中<strong>随机抽取90名</strong>学生测量。指出其中的总体、个体、样本、样本容量。</li>
+<li>一组数据：5、9、12、8、15、20、11、18、7、14。求这组数据的<strong>极差</strong>；若组距取 3，应分成几组？</li>
+<li>某班40名学生的一次测验成绩，整理后落在「70≤x&lt;80」一组的频数为 10。求这一组的<strong>频率</strong>，并说明所有小组的频率之和应等于多少。</li>
+<li>直方图的小长方形的<strong>高</strong>为什么取「频数 ÷ 组距」而不是直接取频数？请用「面积 = 频数」来解释。</li>
+<li>直方图与条形图有什么本质区别？若某班学生身高的直方图「中间高、两边低且大致对称」，说明数据分布有什么特征？</li>
+</ol>
+<h3 style="margin:14px 0 8px">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 全面调查——全班人数少、无破坏性，逐个调查现实可行；② 抽样调查——检测有<strong>破坏性</strong>，炮弹测完即报废；③ 抽样调查——总体太大，逐个调查不现实。判断的关键：总体是否太大、调查是否有破坏性、时间经费是否有限。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>总体：该校900名七年级学生的身高情况；个体：每一名七年级学生的身高情况；样本：抽取的90名学生的身高情况；样本容量：90（是<strong>一个数</strong>，没有单位，不是那90个人本身）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>最大值 20，最小值 5，极差 = 20 − 5 = <strong>15</strong>；组数 ≈ 极差 ÷ 组距 = 15 ÷ 3 = 5，应分成 <strong>5</strong> 组。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>频率 = 频数 ÷ 总数 = 10 ÷ 40 = <strong>0.25</strong>；所有小组的频率之和应等于 <strong>1</strong>（频数之和则等于数据总个数）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>因为直方图用<strong>面积表示频数</strong>：长方形面积 = 底 × 高 = 组距 ×（频数 ÷ 组距）= 频数。若直接取频数作高，面积就变成「组距 × 频数」，不再等于频数，面积的几何意义就丢了。只有<strong>等距分组</strong>时，各长方形高才与频数成正比，习惯上纵轴才直接标频数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>区别：条形图表示<strong>分类数据</strong>、条形间有间隔、宽度无意义、顺序可交换；直方图表示<strong>连续数据</strong>按数值区间分组、条形紧紧挨着不留缝、宽度 = 组距、面积 = 频数、顺序不可交换。「中间高、两边低且大致对称」说明数据呈<strong>对称（钟形）分布</strong>：大多数数据集中在中间区间，向两侧逐渐减少。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第9章-不等式与不等式组/第9章-不等式与不等式组.html">← 上一章：第9章 不等式与不等式组</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../../../初二/八年级上册/第11章-三角形/第11章-三角形.html">下一章：第11章 三角形 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第11章 三角形 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第11章 三角形</div></header>
+<main class="container">
+<h1>第11章 三角形</h1>
+<p class="lead">初中 / 初二 / 八年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>三角形是「三条线段首尾相接、首尾闭合」的最简刚性平面图形——三条边固定，形状就唯一确定；三内角之和恒为 180°，任意多边形都能拆成三角形，所以它是研究一切平面图形与稳定结构的"地基"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">11.1 三角形的边（三边关系）</a><a href="#s2">11.2 三角形的角（内角和与外角）</a><a href="#s3">11.3 三角形的高、中线、角平分线</a><a href="#s4">11.4 三角形的稳定性</a><a href="#s5">11.5 多边形的内角和与外角和</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">11.1 三角形的边（三边关系）</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="340" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<g font-size="12" fill="#334155">
+<line x1="20" y1="20" x2="50" y2="20" stroke="#2563eb" stroke-width="4"/>
+<text x="56" y="24">边 a（固定）</text>
+<line x1="20" y1="42" x2="50" y2="42" stroke="#16a34a" stroke-width="4"/>
+<text x="56" y="46">边 b（绕顶点 P 转动）</text>
+<line x1="20" y1="64" x2="50" y2="64" stroke="#f59e0b" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="56" y="68">第三边 c（虚线，长度随转动变化）</text>
+</g>
+<line x1="180" y1="170" x2="270" y2="170" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+<circle cx="180" cy="170" r="5" fill="#334155"/>
+<circle cx="270" cy="170" r="4" fill="#2563eb"/>
+<text x="180" y="156" font-size="13" fill="#334155" text-anchor="middle">P</text>
+<text x="270" y="156" font-size="13" fill="#2563eb" text-anchor="middle">A</text>
+<text x="225" y="162" font-size="13" fill="#2563eb" text-anchor="middle">a</text>
+<text x="144" y="150" font-size="13" fill="#16a34a">b</text>
+<g transform="translate(180,170)">
+<g>
+<animateTransform attributeName="transform" type="rotate" values="0;30;60;90;120;150;180;150;120;90;60;30;0" dur="8s" repeatCount="indefinite"/>
+<line x1="0" y1="0" x2="70" y2="0" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/>
+</g>
+</g>
+<line x1="270" y1="170" x2="250" y2="170" stroke="#f59e0b" stroke-width="3" stroke-dasharray="7 5">
+<animate attributeName="x2" values="250;240.62;215;180;145;119.38;110;119.38;145;180;215;240.62;250" dur="8s" repeatCount="indefinite"/>
+<animate attributeName="y2" values="170;205;230.62;240;230.62;205;170;205;230.62;240;230.62;205;170" dur="8s" repeatCount="indefinite"/>
+</line>
+<circle cx="250" cy="170" r="5" fill="#16a34a">
+<animate attributeName="cx" values="250;240.62;215;180;145;119.38;110;119.38;145;180;215;240.62;250" dur="8s" repeatCount="indefinite"/>
+<animate attributeName="cy" values="170;205;230.62;240;230.62;205;170;205;230.62;240;230.62;205;170" dur="8s" repeatCount="indefinite"/>
+</circle>
+<text x="280" y="315" text-anchor="middle" font-size="13" fill="#334155">转动中：第三边 c 从 |a−b|（并拢）变到 a+b（伸直），只有 c 小于 a+b（两边之和大于第三边）才能围成三角形</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：一边绕顶点转动，第三边的长度在 |a−b| 与 a+b 之间变化——「两边之和大于第三边」是三条线段能围成三角形的条件。</figcaption>
+</figure>
+<h3>什么是三角形？</h3>
+<p><strong>定义</strong>：由<strong>不在同一条直线上</strong>的三条线段<strong>首尾顺次相接</strong>所组成的图形叫做三角形。</p>
+<ul>
+<li>组成三角形的三条线段叫三角形的<strong>边</strong>，相邻两边的公共端点叫<strong>顶点</strong>，相邻两边所夹的角叫三角形的<strong>内角</strong>（简称角）。</li>
+<li>三角形用符号 <code>△</code> 表示。顶点为 A、B、C 的三角形记作 <code>△ABC</code>，读作"三角形 ABC"。</li>
+<li>三角形有三条边、三个顶点、三个内角——这是它全部的基本元素。</li>
+</ul>
+<pre><code>        A
+       / \
+      /   \
+     /     \
+    B-------C
+   △ABC：三边 AB、BC、CA；三角 ∠A、∠B、∠C</code></pre>
+<div class="insight"><strong>几何含义：</strong>三角形是"最少边数"的封闭平面图形——一条、两条线段都围不成封闭区域，三条是能"圈出一块地盘"的最低配置。因此它是多边形中最基本、最不可再拆的单元。</div>
+<h3>三边关系（核心定理）</h3>
+<p>在一个三角形中：</p>
+<pre><code>两边之和大于第三边：a + b &gt; c，b + c &gt; a，c + a &gt; b
+两边之差小于第三边：|a − b| &lt; c，|b − c| &lt; a，|c − a| &lt; b</code></pre>
+<ul>
+<li><strong>判定方法</strong>：判断三条线段能否组成三角形，只要看<strong>较短两边之和是否大于最长边</strong>即可（一次判断就够）。例：3、4、5 能成三角形（3 + 4 = 7 &gt; 5）；3、4、7 不能（3 + 4 = 7 = 7，恰好不满足"大于"）。</li>
+<li><strong>求第三边范围</strong>：已知两边 a、b，则第三边 c 满足 <code>|a − b| &lt; c &lt; a + b</code>。例：两边为 5 和 8，则第三边在 (3, 13) 之间，即 3 &lt; c &lt; 13。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>三边关系本质是"<strong>两点之间，线段最短</strong>"。把 a、b 看成从同一端点出发的两段折线，从起点到终点走直线（c）一定比绕路（a + b）短；反过来，若 a + b ≤ c，则两条短线段"够不着"接在一起，根本围不成封闭图形。</div>
+<div class="insight"><strong>物理含义：</strong>两条"绳子"接起来必须比第三条长，才能把三个点"拉成一个圈"；如果不够长，结构就"塌"成一条直线。这就是为什么三根任意长度的杆子并非都能搭成三角架——杆长必须满足"短 + 短 &gt; 长"。</div>
+<h3>三角形的分类</h3>
+<p><strong>按边分</strong>：</p>
+<ul>
+<li><strong>不等边三角形</strong>：三条边两两不等。</li>
+<li><strong>等腰三角形</strong>：有两条边相等；相等的两边叫<strong>腰</strong>，另一边叫<strong>底</strong>，两腰的夹角叫<strong>顶角</strong>，腰与底的夹角叫<strong>底角</strong>。</li>
+<li><strong>等边三角形</strong>：三条边都相等，是特殊的等腰三角形。</li>
+</ul>
+<p><strong>按角分</strong>：</p>
+<ul>
+<li><strong>锐角三角形</strong>：三个角都是锐角（&lt; 90°）。</li>
+<li><strong>直角三角形</strong>：有一个角是直角（= 90°），夹直角的两边叫<strong>直角边</strong>，直角所对的边叫<strong>斜边</strong>。</li>
+<li><strong>钝角三角形</strong>：有一个角是钝角（&gt; 90°）。</li>
+</ul>
+<div class="insight"><strong>几何/物理含义：</strong>分类不是死记，而是"给图形贴标签以便识别"。工程里说"直角三角形"立刻对应"直角、斜边、可套勾股定理"；说"等腰三角形"立刻对应"两条边一样长、受力对称"。</div>
+
+<h2 id="s2">11.2 三角形的角（内角和与外角）</h2>
+<h3>三角形内角和定理</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="330" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<polygon points="280,45 100,185 460,185" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<g fill="#334155" font-size="14">
+<text x="280" y="32" text-anchor="middle">A</text>
+<text x="88" y="202">B</text>
+<text x="472" y="202">C</text>
+</g>
+<circle cx="280" cy="45" r="5" fill="#2563eb"/>
+<circle cx="100" cy="185" r="5" fill="#16a34a"/>
+<circle cx="460" cy="185" r="5" fill="#f59e0b"/>
+<line x1="105" y1="265" x2="455" y2="265" stroke="#94a3b8" stroke-width="2"/>
+<path d="M 120 265 A 160 160 0 0 1 440 265" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="280" y="294" text-anchor="middle" fill="#334155" font-size="15">180°（平角）</text>
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;1" keyTimes="0;0.08;1" dur="8s" begin="0s" repeatCount="indefinite"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="-180,-80;0,0;0,0" keyTimes="0;0.25;1" dur="8s" begin="0s" repeatCount="indefinite"/>
+<path d="M 280 265 L 120 265 A 160 160 0 0 1 177.15 142.44 Z" fill="#16a34a" fill-opacity="0.45" stroke="#16a34a" stroke-width="1.5"/>
+<text x="150" y="212" font-size="13" fill="#16a34a" text-anchor="middle">∠B</text>
+</g>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;1" keyTimes="0;0.08;1" dur="8s" begin="0.9s" repeatCount="indefinite"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0,-220;0,0;0,0" keyTimes="0;0.25;1" dur="8s" begin="0.9s" repeatCount="indefinite"/>
+<path d="M 280 265 L 177.15 142.44 A 160 160 0 0 1 334.72 114.65 Z" fill="#2563eb" fill-opacity="0.45" stroke="#2563eb" stroke-width="1.5"/>
+<text x="256" y="130" font-size="13" fill="#2563eb" text-anchor="middle">∠A</text>
+</g>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" values="0;1;1" keyTimes="0;0.08;1" dur="8s" begin="1.8s" repeatCount="indefinite"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="180,-80;0,0;0,0" keyTimes="0;0.25;1" dur="8s" begin="1.8s" repeatCount="indefinite"/>
+<path d="M 280 265 L 334.72 114.65 A 160 160 0 0 1 440 265 Z" fill="#f59e0b" fill-opacity="0.45" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="408" y="212" font-size="13" fill="#f59e0b" text-anchor="middle">∠C</text>
+</g>
+</g>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：把三个内角 ∠A、∠B、∠C 搬到同一条直线上，恰好拼成一个平角——这就是「三角形内角和恒等于 180°」。</figcaption>
+</figure>
+<p><strong>定理</strong>：三角形的三个内角之和等于 180°。</p>
+<pre><code>∠A + ∠B + ∠C = 180°</code></pre>
+<p><strong>证明思路（转化到"平角"）</strong>：过顶点 A 作 BC 的平行线，把 ∠B、∠C 通过"同位角/内错角"搬运到 A 点处，三个角拼成一条直线，恰好是一个平角 180°。</p>
+<pre><code>   （过 A 作 BC 的平行线）
+      ∠B'  A  ∠C'  /
+        ○───○───○  /
+      \    / \    //
+       ∠B  ∠A  ∠C
+   ∠B' = ∠B（内错角），∠C' = ∠C（内错角）
+   ∠B' + ∠A + ∠C' = 平角 = 180°</code></pre>
+<div class="insight"><strong>几何含义：</strong>把三个角"剪下来、搬到一个顶点上"恰好拼成一个平角——说明三角形的三个角加起来"刚好铺满半圈"。这是"角的搬运"思想的第一次登场：用平行线把分散的角集中到一点。</div>
+<div class="insight"><strong>物理含义：</strong>内角和 180° 决定了"三个内角不能各自为政"——一个角变大，必然有别的角变小，总量守恒。航海与测量里，只要测出两个角，第三个角就被"锁定"，等于 180° 减去前两个之和，这是三角测量的基石。</div>
+<h3>推论 1：直角三角形的两锐角互余</h3>
+<p>若 ∠C = 90°，则 ∠A + ∠B = 180° − 90° = 90°，即<strong>两锐角互余</strong>。</p>
+<div class="insight"><strong>物理含义：</strong>一个直角 + 两个锐角共 180°，就像一块"90° 的角尺"加"两个能拼成 90° 的小角"。实际中常用于已知一个锐角求另一个：如坡度 30° 的斜面，其与水平面的另一个锐角就是 60°。</div>
+<h3>推论 2：三角形的外角</h3>
+<p><strong>定义</strong>：三角形的一边与另一边的延长线组成的角，叫做三角形的外角。</p>
+<ul>
+<li>每个顶点有两个互为对顶角的外角，通常各取一个。</li>
+<li>一个外角与它相邻的内角互补：<code>外角 + 相邻内角 = 180°</code>。</li>
+</ul>
+<p><strong>外角性质</strong>：</p>
+<pre><code>三角形的一个外角 = 与它不相邻的两个内角之和
+∠ACD（外角）= ∠A + ∠B</code></pre>
+<p>由此进一步推出：三角形的一个外角<strong>大于</strong>任何一个与它不相邻的内角。</p>
+<div class="insight"><strong>几何含义：</strong>外角是"站在三角形外看向内"的视角。它等于不相邻两内角之和，本质仍是内角和 180° 的另一种写法：外角把"补角"转成了"两个角之和"。</div>
+<div class="insight"><strong>物理含义：</strong>想象沿三角形边界走一圈，每到一顶点都要"拐一个外角"。三个外角加起来正好是绕了一整圈 360°——这就是外角概念背后的"转向"直觉，也是下节"多边形外角和恒为 360°"的直接来源。</div>
+
+<h2 id="s3">11.3 三角形的高、中线、角平分线</h2>
+<p>三角形有三类重要的特殊线段，都从顶点出发、作用在对边上，但"作用方式"各不相同。</p>
+<h3>高（从顶点到对边的垂线段）</h3>
+<p><strong>定义</strong>：从三角形一个顶点向它的对边（或对边所在直线）作<strong>垂线</strong>，顶点与垂足之间的线段叫做三角形的高。</p>
+<ul>
+<li>每条边都对应一条高，所以三角形有<strong>三条高</strong>。</li>
+<li>锐角三角形的三条高都在形内；直角三角形的两条直角边互为高（斜边上的高在形内）；钝角三角形有两条高落在形外（延长线上）。</li>
+<li>三条高（或高所在直线）交于一点，叫三角形的<strong>垂心</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>高 = "顶点到对边的<strong>最短距离</strong>"。因为垂线段最短，高给出了三角形"从顶到边"的垂直跨度，是计算面积（底 × 高 ÷ 2）的核心。</div>
+<div class="insight"><strong>物理含义：</strong>高就是"铅垂高度/落差"。一座三角形断面的山，高代表从山顶到山脚水平基线的<strong>竖直高度</strong>；坡度、水压、势能（mgh）都直接依赖这个垂直高度。</div>
+<h3>中线（顶点到对边中点的连线）</h3>
+<p><strong>定义</strong>：连接三角形一个顶点与它对边<strong>中点</strong>的线段叫做三角形的中线。</p>
+<ul>
+<li>三角形有<strong>三条中线</strong>，且三条中线<strong>相交于一点</strong>，这点叫三角形的<strong>重心</strong>。</li>
+<li>重心把每条中线分成 2 : 1 两段（从顶点到重心的长度是整条中线的 2/3），这个比例到后面会系统学习。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>中线把三角形分成两个"等底同高"的三角形，因此<strong>中线平分三角形面积</strong>——这是"面积守恒"的直观体现。</div>
+<div class="insight"><strong>物理含义：</strong>重心是三角形<strong>质量的平衡点</strong>：用一根针顶在重心处，三角形纸片可以保持水平不倾倒。三条中线的交点之所以是重心，正因为每条中线都把三角形分成"质量相等"的两半，三者的公共交点就是整块质量的集中点。</div>
+<h3>角平分线（平分内角的线段）</h3>
+<p><strong>定义</strong>：从三角形一个内角的顶点出发，把这个角分成两个相等的角、且与对边相交的线段，叫做三角形的角平分线。</p>
+<ul>
+<li>注意与"角的平分线"（一条射线）区分：三角形的角平分线是一条<strong>线段</strong>，顶点到对边的部分。</li>
+<li>三条角平分线<strong>相交于一点</strong>，这点叫三角形的<strong>内心</strong>（是内切圆的圆心）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>角平分线上的任意点到角两边的距离相等——它是"关于角对称"的那条对称轴（方向）。三条角平分线交于一点，意味着存在一个点到三边距离都相等，这正是内切圆的圆心。</div>
+<div class="insight"><strong>物理含义：</strong>角平分线是"角"的<strong>镜面对称轴</strong>：光线从一个镜面角的两边反射时，入射与反射路径关于角平分线对称。也可理解为"公平地劈开一个角"——把 60° 一分为二成两个 30°。</div>
+<hr/>
+<p><strong>小结</strong>：三条高交于<strong>垂心</strong>（垂直方向的汇合），三条中线交于<strong>重心</strong>（质量平衡点），三条角平分线交于<strong>内心</strong>（到三边等距）。三者"都是三条，都交于一点"，但几何与物理角色完全不同。</p>
+
+<h2 id="s4">11.4 三角形的稳定性</h2>
+<p><strong>结论</strong>：三角形具有稳定性——当三角形的三条边长确定时，三角形的<strong>形状和大小就唯一确定</strong>，不会变形；而四边形等多边形具有不稳定性，容易变形。</p>
+<div class="insight"><strong>几何含义：</strong>这是"SSS 全等"的直接结果：三边一旦给定，三个顶点之间的距离被完全锁定，三角形被"钉死"。三条边像三根互相对顶的杆，谁也动不了——所以三角形是<strong>唯一由"边"就能唯一决定形状</strong>的多边形（四边形给四边还能"压扁"成不同形状，如正方形可压成菱形）。</div>
+<div class="insight"><strong>物理含义：</strong>三角形是工程上最坚固的骨架单元。三个节点互相牵制，任一处受力都会沿三条边传递并抵消，不会像四边形那样"平行四边形式"地塌陷。因此：</div>
+<ul>
+<li>自行车车架、篮球架、桥梁桁架、屋顶屋架都用三角形结构加固。</li>
+<li>要把不稳定的四边形加固，只需在一条对角线上加一根斜杆，把它拆成两个三角形。</li>
+<li>活动衣架、伸缩门、起重机伸缩臂则<strong>故意利用四边形的可变形性</strong>，实现伸缩。</li>
+</ul>
+<p><strong>一句话</strong>：三角形"越受力越稳"，四边形"一推就变形"——前者用来<strong>加固</strong>，后者用来<strong>活动</strong>。</p>
+
+<h2 id="s5">11.5 多边形的内角和与外角和</h2>
+<h3>多边形与对角线</h3>
+<ul>
+<li>在同一平面内，由若干条线段首尾顺次相接组成的封闭图形叫<strong>多边形</strong>（如四边形、五边形、六边形……）。</li>
+<li>连接多边形<strong>不相邻</strong>两个顶点的线段叫<strong>对角线</strong>。从 n 边形的一个顶点可引出 <code>(n − 3)</code> 条对角线。</li>
+<li>n 边形共有对角线 <code>n(n − 3) ÷ 2</code> 条。</li>
+</ul>
+<h3>多边形内角和</h3>
+<p>从 n 边形的一个顶点引出所有对角线，可把它分成 <code>(n − 2)</code> 个三角形，每个三角形内角和 180°，于是：</p>
+<pre><code>n 边形内角和 = (n − 2) × 180°</code></pre>
+<table>
+<tr><th>多边形</th><th>边数 n</th><th>分成三角形数</th><th>内角和</th></tr>
+<tr><td>三角形</td><td>3</td><td>1</td><td>(3−2)×180° = 180°</td></tr>
+<tr><td>四边形</td><td>4</td><td>2</td><td>(4−2)×180° = 360°</td></tr>
+<tr><td>五边形</td><td>5</td><td>3</td><td>(5−2)×180° = 540°</td></tr>
+<tr><td>六边形</td><td>6</td><td>4</td><td>(6−2)×180° = 720°</td></tr>
+<tr><td>n 边形</td><td>n</td><td>n − 2</td><td>(n−2)×180°</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>"把多边形切成三角形"是几何里最常用的降维手段——每切一刀（加一条对角线）就多出一个三角形、多 180°。三角形是"180° 的最小单元"，任意多边形的内角和就是"三角形数 × 180°"。</div>
+<div class="insight"><strong>物理含义：</strong>内角和随边数线性增长：边数越多，图形越接近"圆"，各内角越接近平角。也可理解为把多边形"铺满"需要多少个 180° 的"半圈"。</div>
+<h3>多边形外角和（恒为 360°）</h3>
+<p>在 n 边形的每个顶点各取一个外角，这些外角的和<strong>恒等于 360°</strong>，与边数无关。</p>
+<pre><code>任意 n 边形的外角和 = 360°</code></pre>
+<p><strong>为什么？</strong>每个顶点处"内角 + 外角 = 180°"，n 个顶点共 180°×n；减去内角和 (n−2)×180°，剩下：</p>
+<pre><code>外角和 = n×180° − (n−2)×180° = 360°</code></pre>
+<div class="insight"><strong>几何含义：</strong>想象一个人沿多边形边界走一圈，每到一顶点就"转一个外角"，走完一整圈、方向回到原位，累计恰好转过 360°。边数再多、形状再怪，转一整圈永远是 360°。</div>
+<div class="insight"><strong>物理含义：</strong>外角和 = "转一整圈"的物理事实：无论路径是三角形、五边形还是圆形，绕行一周的方向改变总量都是 360°。汽车沿任意闭合跑道跑一圈，累计转向角恒为 360°。</div>
+<p><strong>正多边形</strong>：各边相等、各角也相等的多边形叫正多边形。正 n 边形每个内角 = <code>(n−2)×180° ÷ n</code>，每个外角 = <code>360° ÷ n</code>。例：正六边形每个外角 60°、每个内角 120°。</p>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>三角形（定义）</td><td>三条线段首尾相接的最简封闭图形</td><td>最少"构件"就能圈出区域的平面骨架</td></tr>
+<tr><td>三边关系</td><td>两点之间线段最短；短边够不到就围不成</td><td>杆长必须"短+短&gt;长"才能搭成不塌的架子</td></tr>
+<tr><td>第三边范围</td><td>|a−b| &lt; c &lt; a+b 的"开区间"</td><td>两杆之间允许的活动范围</td></tr>
+<tr><td>内角和 180°</td><td>三个角拼成一个平角（半圈）</td><td>三个角的总量守恒，测两角即知第三角</td></tr>
+<tr><td>外角</td><td>等于不相邻两内角之和</td><td>沿边界拐一个"转向角"</td></tr>
+<tr><td>高</td><td>顶点到对边的最短距离</td><td>铅垂高度/落差（坡度、势能）</td></tr>
+<tr><td>中线</td><td>平分面积；三条交于重心</td><td>质量平衡点，顶住不倾倒</td></tr>
+<tr><td>角平分线</td><td>到角两边距离相等；三条交于内心</td><td>角的镜面对称轴，"公平劈开"一个角</td></tr>
+<tr><td>稳定性</td><td>三边定形（SSS 唯一）</td><td>三角桁架抗变形，越受力越稳</td></tr>
+<tr><td>多边形内角和</td><td>切成 (n−2) 个三角形</td><td>边越多越接近圆，内角越接近平角</td></tr>
+<tr><td>多边形外角和</td><td>绕边界走一圈方向回到原位</td><td>闭合路径转向总量恒为 360°</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>下列各组线段能否组成三角形？① 4、5、9；② 3、4、5；③ 5、5、9。并说明理由。</li>
+<li>三角形两边分别为 5 和 8，求第三边 c 的取值范围；若第三边取整数，有哪几种可能？</li>
+<li>在 △ABC 中，∠A = 50°，∠B = 60°，求 ∠C，并求 ∠C 的外角。</li>
+<li>直角三角形的一个锐角为 37°，求另一个锐角。</li>
+<li>在 △ABC 中，∠A = 40°，∠B = 70°，求 ∠ACB 的外角，并判断该外角与 ∠A、∠B 的大小关系。</li>
+<li>求一个八边形的内角和；若它是正八边形，求每个内角与每个外角。</li>
+<li>一个多边形的内角和等于 1440°，它是几边形？它的外角和是多少？</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "只要三条线段就能组成三角形" → ❌ 必须满足"任意两边之和大于第三边"（只需验证短+短&gt;长）。如 4、5、9 不能组成三角形。</li>
+<li>❌ "第三边只要大于两边之差或小于两边之和即可" → ❌ 要同时满足两个条件，即 |a−b| &lt; c &lt; a+b。</li>
+<li>❌ "三角形内角和有时不是 180°" → ❌ 任何平面三角形的内角和恒为 180°，这是定理。</li>
+<li>❌ "外角等于相邻内角的补角，所以外角与相邻内角相等" → ❌ 外角与相邻内角<strong>互补</strong>（和为 180°），不是相等；外角等于<strong>不相邻</strong>的两个内角之和。</li>
+<li>❌ "钝角三角形的三条高都在三角形内" → ❌ 钝角三角形有两条高在形外（要延长对边）。</li>
+<li>❌ "三角形角平分线与角的平分线是一回事" → ❌ 角的平分线是射线，三角形的角平分线是线段（顶点到对边之间）。</li>
+<li>❌ "四边形也有稳定性" → ❌ 四边形具有不稳定性，会变形；三角形才稳定。</li>
+<li>❌ "多边形外角和随边数变化" → ❌ 任意多边形的外角和恒为 360°，与边数无关。</li>
+<li>❌ "n 边形内角和是 n×180°" → ❌ 是 (n−2)×180°，少算了两个"顶点处的半圈"。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:0 0 10px">一、练习题</h3>
+<ol>
+<li>下列三条线段能否组成三角形？为什么？① 2 cm、3 cm、6 cm；② 4 cm、6 cm、9 cm。</li>
+<li>三角形两边长分别为 7 和 3，第三边 c 为整数，求 c 的所有可能取值；并说明为什么「较短两边之和大于最长边」是搭成三角架的物理条件。</li>
+<li>在 △ABC 中，∠A = 80°，∠B = 45°，求 ∠C，并求 ∠C 处的外角。</li>
+<li>直角三角形的一个锐角为 28°，求另一个锐角；并说明「三角形内角和恒为 180°」如何让测量时「测两角即知第三角」。</li>
+<li>在 △ABC 中，∠A = 35°，∠B = 55°，求顶点 C 处的外角，并判断该外角与 ∠A、∠B 的大小关系。</li>
+<li>求正十二边形的内角和、每个内角、每个外角；若一个多边形的内角和等于 1980°，它是几边形？它的外角和是多少？</li>
+</ol>
+<h3 style="margin:18px 0 10px">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 不能。2 + 3 = 5 &lt; 6，较短两边之和小于最长边，围不成封闭图形（短边「够不着」）。② 能。4 + 6 = 10 &gt; 9，满足「短 + 短 &gt; 长」。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>第三边满足 |7 − 3| &lt; c &lt; 7 + 3，即 4 &lt; c &lt; 10；c 为整数，故 c = 5、6、7、8、9。物理含义：三根杆只有「较短两根之和 &gt; 最长一根」时才能首尾相接围成一个圈，否则最短两根够不着、结构塌成一条直线。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>∠C = 180° − 80° − 45° = 55°。∠C 处外角 = 180° − 55° = 125°（也等于不相邻两内角之和：80° + 45° = 125°）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>另一个锐角 = 90° − 28° = 62°。因内角和恒为 180°，直角占去 90°，两锐角互余。测量时只要测出两个角，第三个角 = 180° − 前两角之和，被「锁定」，无需再测。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>C 处外角 = ∠A + ∠B = 35° + 55° = 90°。该外角大于 ∠A（35°）和 ∠B（55°），即外角大于任何一个不相邻内角。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>正十二边形：内角和 = (12 − 2) × 180° = 1800°；每个内角 = 1800° ÷ 12 = 150°；每个外角 = 360° ÷ 12 = 30°。若内角和 1980°，则 (n − 2) × 180° = 1980°，n − 2 = 11，n = 13，是十三边形；外角和恒为 360°。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../../../初一/七年级下册/第10章-数据的收集整理与描述/第10章-数据的收集整理与描述.html">← 上一章：第10章 数据的收集整理与描述</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第12章-全等三角形/第12章-全等三角形.html">下一章：第12章 全等三角形 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

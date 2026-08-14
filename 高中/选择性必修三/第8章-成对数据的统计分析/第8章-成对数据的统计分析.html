@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第8章 成对数据的统计分析 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第三册 › 第8章 成对数据的统计分析</div></header>
+<main class="container">
+<h1>第8章 成对数据的统计分析</h1>
+<p class="lead">高中 / 选择性必修第三册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>本章用「统计的眼睛」看两组数据的关系——对两个数值变量，用<strong>散点图</strong>和<strong>相关系数 r</strong>判断「有没有关系、方向如何、关系多强」，再用<strong>最小二乘法</strong>拟合一条回归直线来「刻画并预测」；对两个分类变量，用<strong>列联表</strong>和<strong>独立性检验（χ² 统计量）</strong>判断它们「是否独立、是否有关联」。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">8.1 相关关系</a><a href="#s2">8.2 一元线性回归模型</a><a href="#s3">8.3 独立性检验与列联表</a><a href="#s4">几何与物理含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+</div>
+
+<h2 id="s1">8.1 相关关系</h2>
+<h3>从「确定的函数」到「不确定的相关」</h3>
+<p>在函数关系中，给定一个 <code>x</code> 就能<strong>唯一确定</strong>一个 <code>y</code>，例如 <code>y = 2x + 1</code>：x = 3 时，y 一定是 7。但现实世界大量变量之间的关系不是「唯一确定」，而是「<strong>大致趋势</strong>」：</p>
+<ul>
+<li>身高越高，体重<strong>一般</strong>越重——但同样身高的人体重并不唯一；</li>
+<li>施肥越多，产量<strong>一般</strong>越高——但相同施肥量下产量仍有波动；</li>
+<li>气温越高，空调耗电量<strong>一般</strong>越大——但并非严格成比例。</li>
+</ul>
+<p>这种「有关系、但不唯一确定」的关系，叫做<strong>相关关系</strong>。它介于「完全确定的函数关系」与「毫无关系」之间。</p>
+<div class="insight"><strong>物理含义：</strong>相关关系是现实世界变量之间最常见的联系方式——气温与用电量、施肥量与产量、广告投入与销量、身高与体重、父母身高与子女身高……它们「有关但不确定」，无法用一个函数完全写死，只能用统计方法去<strong>刻画方向和强弱</strong>，并用于<strong>预测</strong>。</div>
+<p>把两个变量视为研究对象时，若它们来自「同一个个体的两个属性」且是数值，就得到一组<strong>成对数据</strong>：<code>(x₁, y₁), (x₂, y₂), …, (xₙ, yₙ)</code>。本章第一部分研究的就是这类成对数据。</p>
+
+<h3>散点图：相关关系的「几何画像」</h3>
+<p>把每一对数据 <code>(xᵢ, yᵢ)</code> 在平面直角坐标系中描成一个点，全部描出后得到的点图叫做<strong>散点图</strong>。</p>
+<div class="insight"><strong>几何含义（本章一切几何直觉的起点）：</strong>散点图把「两个变量的关系」翻译成「<strong>点云的分布形态</strong>」。看一张散点图，就像看天上的星群——星星是散乱还是聚成一条带、带子是上升还是下降，一眼就能读出关系的方向与强弱。</div>
+<p>根据点云的走向，相关关系可分为：</p>
+<ul>
+<li><strong>正相关</strong>：一个变量增大，另一个也<strong>大致增大</strong>——点云从左下向右上分布。</li>
+<li><strong>负相关</strong>：一个变量增大，另一个<strong>大致减小</strong>——点云从左上向右下分布。</li>
+<li><strong>线性相关</strong>：点云大致沿一条<strong>直线</strong>分布。</li>
+<li><strong>非线性相关</strong>：点云大致沿一条<strong>曲线</strong>分布（如抛物线、指数曲线）。</li>
+<li><strong>不相关 / 无明显相关</strong>：点云杂乱无章，看不出方向。</li>
+</ul>
+<pre><code>  正相关（↗）          负相关（↘）         非线性相关（曲线）
+  y                    y                  y
+  |       .  .         |  .               |      .   .
+  |     . .            | .  .             |     .     .
+  |   . .              |   .  .           |   .       .
+  | . .                |     .  .         |  .         .
+  |________________    |______________    |________________
+             x                    x                   x</code></pre>
+
+<h3>样本相关系数 r：定量刻画线性相关的强弱</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="230" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<text x="260" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">样本相关系数 r：散点云的形态</text>
+<line x1="30" y1="200" x2="505" y2="200" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="30" y1="200" x2="30" y2="20" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="40" y1="180" x2="460" y2="54" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4">
+<animate attributeName="stroke-opacity" values="0.15;1;1;0.15" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/>
+</line>
+<g fill="#2563eb">
+<circle cx="40" cy="190" r="6"><animate attributeName="cy" values="190;180;180;190" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="100" cy="90" r="6"><animate attributeName="cy" values="90;162;162;90" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="160" cy="200" r="6"><animate attributeName="cy" values="200;144;144;200" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="220" cy="60" r="6"><animate attributeName="cy" values="60;126;126;60" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="280" cy="185" r="6"><animate attributeName="cy" values="185;108;108;185" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="340" cy="75" r="6"><animate attributeName="cy" values="75;90;90;75" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="400" cy="175" r="6"><animate attributeName="cy" values="175;72;72;175" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="460" cy="95" r="6"><animate attributeName="cy" values="95;54;54;95" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></circle>
+</g>
+<text x="260" y="222" text-anchor="middle" font-size="13" fill="#6b7280">|r| ≈ 0：散点散成圆盘，看不到线性方向<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></text>
+<text x="260" y="222" text-anchor="middle" font-size="13" fill="#16a34a">|r| ≈ 1：散点紧贴一条上升直线<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.35;0.65;1" dur="8s" repeatCount="indefinite"/></text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：|r| 越接近 1，散点越紧贴一条直线；越接近 0，散点越散成圆盘——r 正是两组离差向量「夹角余弦」的标准化</figcaption>
+</figure>
+<p>散点图只能「看个大概」，要精确度量两个变量<strong>线性相关</strong>的方向与强弱，引入<strong>样本相关系数 r</strong>：</p>
+<pre><code>           Σ (xᵢ − x̄)(yᵢ − ȳ)
+r = ────────────────────────────────
+    √[ Σ (xᵢ − x̄)² · Σ (yᵢ − ȳ)² ]
+
+（Σ 表示对 i = 1, 2, …, n 求和；x̄、ȳ 是样本均值）</code></pre>
+<p>相关系数 r 的性质：</p>
+<ul>
+<li><strong>有界性</strong>：<code>−1 ≤ r ≤ 1</code>（由柯西–施瓦茨不等式保证，分子不会超过两个平方和开根号的乘积）。</li>
+<li><strong>方向</strong>：<code>r &gt; 0</code> 为正相关，<code>r &lt; 0</code> 为负相关；r 与 <code>Σ(xᵢ−x̄)(yᵢ−ȳ)</code> 同号。</li>
+<li><strong>强弱</strong>：<code>|r|</code> 越接近 1，线性相关越强；越接近 0，线性相关越弱。</li>
+<li><strong>无量纲</strong>：r 与 x、y 的单位无关（分子分母同乘单位会约掉），所以身高和体重、气温和用电量都能用同一个尺度比较。</li>
+<li><strong>r = 0</strong> 只表示「没有<em>线性</em>相关关系」，不排除曲线关系。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>r 是「两组离差的内积的标准化」——它本质是<strong>离差向量 (xᵢ−x̄) 与 (yᵢ−ȳ) 夹角的余弦</strong>的推广。<code>|r|</code> 越接近 1，散点越紧贴在一条直线两旁；<code>|r|</code> 越接近 0，散点越「散成圆盘」。极限情形：<code>r = +1</code> 时所有点严格落在一条<strong>上升直线</strong>上，<code>r = −1</code> 时严格落在一条<strong>下降直线</strong>上。</div>
+<div class="insight"><strong>物理含义：</strong>r 的正负告诉你「方向」（同增同减，还是此消彼长），<code>|r|</code> 告诉你「靠多紧」。例：身高与体重的 r 约 0.7～0.8（较强正相关）；气温与羽绒服销量的 r 为负（负相关）；鞋子尺码与数学成绩的 r 接近 0（基本不相关）。<strong>注意：相关 ≠ 因果</strong>——r 大不代表一个变量「导致」另一个变量。</div>
+<p>在实际问题中，常用下面更「好算」的式子（与定义式等价）：</p>
+<pre><code>      Σ xᵢyᵢ − n·x̄·ȳ
+r = ────────────────────────────────
+    √(Σ xᵢ² − n·x̄²) · √(Σ yᵢ² − n·ȳ²)</code></pre>
+
+<h2 id="s2">8.2 一元线性回归模型</h2>
+<h3>从「相关」到「拟合一条直线」</h3>
+<p>当散点图呈<strong>线性相关</strong>时，我们想找一条直线<strong>最好地</strong>刻画 y 与 x 的关系，并用来做预测。由于相关关系并非完全确定，实际的观测值 y 与「直线上的理论值」之间总会有一个<strong>随机误差</strong>，于是建立模型：</p>
+<pre><code>y = bx + a + e
+
+其中 a、b 是待定参数；
+e 是随机误差，满足 E(e) = 0，D(e) = σ²（方差恒定）。</code></pre>
+<p>由样本数据估计出 a、b，得到一条直线，叫做<strong>经验回归方程（回归直线）</strong>：</p>
+<pre><code>ŷ = b̂x + â
+
+（b̂、â 分别是 b、a 的最小二乘估计）</code></pre>
+
+<h3>最小二乘法：竖直距离平方和最小</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="250" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<text x="260" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">最小二乘法：竖直距离平方和最小</text>
+<line x1="40" y1="230" x2="500" y2="230" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="40" y1="230" x2="40" y2="20" stroke="#cbd5e1" stroke-width="1"/>
+<g fill="#2563eb">
+<circle cx="90" cy="172" r="5"/>
+<circle cx="175" cy="142" r="5"/>
+<circle cx="345" cy="84" r="5"/>
+<circle cx="430" cy="52" r="5"/>
+</g>
+<circle cx="260" cy="114" r="9" fill="none" stroke="#16a34a" stroke-width="1.5"/>
+<circle cx="260" cy="114" r="5" fill="#16a34a"/>
+<text x="260" y="100" text-anchor="middle" font-size="12" fill="#16a34a">样本中心 (x̄, ȳ)</text>
+<g stroke="#16a34a" stroke-width="2" stroke-dasharray="5 4" opacity="0.9">
+<line x1="90" y1="172" x2="90" y2="171.3"><animate attributeName="y2" values="171.3;214.5;171.3;133.7;171.3" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></line>
+<line x1="175" y1="142" x2="175" y2="142.6"><animate attributeName="y2" values="142.6;164.2;142.6;123.8;142.6" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></line>
+<line x1="345" y1="84" x2="345" y2="85.4"><animate attributeName="y2" values="85.4;63.8;85.4;104.2;85.4" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></line>
+<line x1="430" y1="52" x2="430" y2="56.7"><animate attributeName="y2" values="56.7;13.5;56.7;94.3;56.7" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></line>
+</g>
+<g transform="translate(260,114)">
+<line x1="-190" y1="64" x2="190" y2="-64" stroke="#2563eb" stroke-width="3" stroke-linecap="round">
+<animateTransform attributeName="transform" attributeType="XML" type="rotate" values="0;-12;0;12;0" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/>
+</line>
+</g>
+<text x="260" y="246" text-anchor="middle" font-size="13" fill="#16a34a">回归直线过质心，Q = Σ(竖直距离)² 最小<animate attributeName="opacity" values="1;0;1;0;1" keyTimes="0;0.25;0.5;0.75;1" dur="10s" repeatCount="indefinite"/></text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：回归直线绕样本中心 (x̄,ȳ) 转动，各点竖直残差（绿虚线）随之伸缩——直线摆到最佳位置时竖直距离平方和 Q 最小</figcaption>
+</figure>
+<p>对于第 i 个点，它的<strong>残差</strong>（观测值与回归直线上预测值的竖直偏差）是：</p>
+<pre><code>eᵢ = yᵢ − ŷᵢ = yᵢ − (b̂xᵢ + â)</code></pre>
+<p>我们的目标是让所有残差的平方和<strong>最小</strong>：</p>
+<pre><code>Q = Σ (yᵢ − b xᵢ − a)²   →   取到最小值</code></pre>
+<div class="insight"><strong>几何含义：</strong>最小二乘法就是在散点图中求一条直线，使所有散点到它的「<strong>竖直距离</strong>」平方和最小——这就是「最佳拟合直线」的几何定义。注意是<strong>竖直方向</strong>的偏差，而不是点到直线的垂直距离：因为我们把 x 当作自变量（看作较精确的「输入」），误差主要发生在 y 方向（「输出」的观测误差）。</div>
+<div class="insight"><strong>物理含义：</strong>「平方和最小」是物理学中「最小能量/最小代价」思想的统计版——它惩罚大的偏差（平方放大大偏差），且可微、便于求极值。正因如此，最小二乘成为从实验数据中提取「最佳直线」的标准方法（在天文、工程测量里被高斯、勒让德用于消除观测误差）。</div>
+<p>对 Q 关于 a、b 求偏导并令其为 0，解得：</p>
+<pre><code>      Σ (xᵢ − x̄)(yᵢ − ȳ)      Σ xᵢyᵢ − n·x̄·ȳ
+b̂ = ────────────────────  =  ────────────────
+          Σ (xᵢ − x̄)²           Σ xᵢ² − n·x̄²
+
+â = ȳ − b̂·x̄</code></pre>
+<p>回归直线的两个重要性质：</p>
+<ul>
+<li><strong>回归直线必过样本中心点 (x̄, ȳ)</strong>。</li>
+<li>残差之和为 0：<code>Σ (yᵢ − ŷᵢ) = 0</code>。</li>
+<li>在所有直线中，它的残差平方和最小。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>点 <code>(x̄, ȳ)</code> 可看作整片散点云的「<strong>质心/重心</strong>」，最佳拟合直线必须穿过这个质心。斜率 <code>b̂</code> 决定直线的倾斜程度；截距 <code>â</code> 由「直线过质心」这一条件唯一确定。</div>
+<div class="insight"><strong>物理含义：</strong><code>b̂</code> 是「平均变化率」的估计——x 每增加 1 个单位，y 平均增加 <code>b̂</code> 个单位；<code>â</code> 是 x = 0 时 y 的基准水平。回归方程的核心用途是<strong>预测</strong>：给定一个新 x 值，代入得对应 y 的平均预测值 <code>ŷ</code>。但预测只能用在样本覆盖的范围内，<strong>不宜无限外推</strong>。</div>
+<p>斜率 b̂ 与相关系数 r 之间的桥梁：<code>b̂ = r · (s_y / s_x)</code>，其中 s_x、s_y 是 x、y 的样本标准差。这说明 r 的正负决定 b̂ 的正负，r 的绝对值越大、y 相对 x 波动越大，直线越陡。</p>
+
+<h3>残差分析与决定系数 R²（拟合优度）</h3>
+<p>回归直线拟合得好不好，可以用<strong>决定系数 R²</strong> 来度量：</p>
+<pre><code>           Σ (yᵢ − ŷᵢ)²      残差平方和
+R² = 1 − ──────────────  = 1 − ─────────
+           Σ (yᵢ − ȳ)²       总离差平方和</code></pre>
+<ul>
+<li><code>0 ≤ R² ≤ 1</code>，越接近 1，拟合效果越好。</li>
+<li><code>R² = 1</code>：所有点都恰好落在回归直线上（残差全为 0）。</li>
+<li><code>R² = 0</code>：回归直线解释不了 y 的任何波动（退化到只剩水平线 y = ȳ）。</li>
+<li>R² 的含义：<strong>y 的波动中有多大比例能被 x 的线性变化解释</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong><code>Σ(yᵢ − ȳ)²</code> 是各散点到<strong>水平线 y = ȳ</strong> 的竖直距离平方和，代表 y 的「总波动」；<code>Σ(yᵢ − ŷᵢ)²</code> 是各散点到<strong>回归直线</strong>的竖直距离平方和，代表「直线没解释掉的残余波动」。R² = 1 − 残余/总，衡量「<strong>直线比一条水平线多解释了多少比例的波动</strong>」。</div>
+<div class="insight"><strong>物理含义：</strong>R² 是「模型解释力」的量化指标。例：R² = 0.85 表示「y 的变化中约 85% 可以由 x 的线性变化解释，剩下 15% 来自随机误差或其他因素」。工程与科研里常用它判断拟合是否「够用」。</div>
+<h3>非线性相关的处理</h3>
+<p>若散点图呈曲线形态（如指数型、幂型），可先通过<strong>变量代换</strong>把它「拉直」成线性，再用最小二乘。例如 <code>y = c·e^(bx)</code> 两边取对数得 <code>ln y = ln c + bx</code>，令 <code>z = ln y</code>，z 对 x 就是线性的。</p>
+
+<h2 id="s3">8.3 独立性检验与列联表</h2>
+<h3>分类变量与 2×2 列联表</h3>
+<p>前面两个变量都是<strong>数值变量</strong>。但现实中还有大量<strong>分类变量</strong>——取值不是数字而是「类别」，例如：性别（男/女）、是否吸烟（是/否）、是否患病（是/否）、满意度（满意/不满意）。</p>
+<p>要研究两个分类变量是否有关联，先把样本按两个变量交叉分类、统计各类的<strong>频数</strong>，排成一张表，叫做<strong>列联表</strong>。最常用的是 <strong>2×2 列联表</strong>：</p>
+<pre><code>             Y = y₁        Y = y₂        合计
+  X = x₁        a             b          a + b
+  X = x₂        c             d          c + d
+  合计        a + c         b + d       n = a+b+c+d</code></pre>
+<div class="insight"><strong>几何含义：</strong>列联表是「<strong>二维频数分布表</strong>」——它把每个个体落到「两个分类变量交叉出的 4 个格子」里，是一张 2×2 的「频数地图」。研究两个分类变量是否有关，就是看这 4 个格子的频数分布「是否符合独立时该有的比例」。</div>
+
+<h3>独立性检验的思想</h3>
+<p>先提出一个<strong>零假设 H₀</strong>：<code>两个分类变量独立（没有关联）</code>。</p>
+<p>核心想法：<strong>在 H₀ 成立的假设下</strong>，推算出每个格子「<em>理论上该有</em>」的频数（期望频数），再拿它与「<em>实际观测到</em>」的频数比较。差距越大，就越有理由怀疑 H₀ 不成立。</p>
+<p>例如「X = x₁ 且 Y = y₁」这个格子的期望频数为：</p>
+<pre><code>期望频数 = (行合计) × (列合计) ÷ 总数
+        = (a + b)(a + c) / n</code></pre>
+<div class="insight"><strong>物理含义：</strong>独立性检验是一种「<strong>用数据做推断</strong>」的科学方法：从样本的频数出发，先假设「独立」，再看数据与这个假设的偏差大到什么程度；偏差大到「小概率事件」发生时，就以受控的犯错概率推翻「独立」，判定两变量有关联。</div>
+
+<h3>卡方统计量 χ²：偏离程度的度量</h3>
+<p>把「实际频数」与「期望频数」的偏离综合成一个数，就是<strong>卡方统计量</strong>：</p>
+<pre><code>χ² = Σ (实际频数 − 期望频数)² / 期望频数</code></pre>
+<p>对 2×2 列联表，化简后得到可直接套用的公式：</p>
+<pre><code>         n (ad − bc)²
+χ² = ─────────────────────────
+      (a+b)(c+d)(a+c)(b+d)</code></pre>
+<div class="insight"><strong>几何/代数含义：</strong>χ² 是「<strong>标准化偏差的平方和</strong>」——每一项都是 (观测 − 期望)²/期望，度量实际频数分布偏离「独立假设下的理论分布」的程度。<code>ad − bc</code> 正是 2×2 行列式，它刻画两个变量的「关联偏离」：当 <code>ad = bc</code>（即各行比例相同）时恰好独立，χ² = 0；两个变量关联越强，χ² 越大。</div>
+
+<h3>临界值与判断规则</h3>
+<p>χ² 大到什么程度才算「足够大」？需要与<strong>临界值 x_α</strong> 比较，其中 α 是显著性水平（即「错误地推翻 H₀」所允许的最大概率）。自由度为 1 的常用临界值：</p>
+<table>
+<tr><th>显著性水平 α</th><td>0.10</td><td>0.05</td><td>0.025</td><td>0.01</td><td>0.005</td><td>0.001</td></tr>
+<tr><th>临界值 x_α</th><td>2.706</td><td>3.841</td><td>5.024</td><td>6.635</td><td>7.879</td><td>10.828</td></tr>
+</table>
+<p>判断规则：</p>
+<ul>
+<li>若 <code>χ² ≥ x_α</code>，则在显著性水平 α 下，有充分证据<strong>拒绝 H₀</strong>，认为两个分类变量<strong>有关联</strong>（这样判断犯错的概率不超过 α）。</li>
+<li>若 <code>χ² &lt; x_α</code>，则没有充分证据拒绝 H₀，可以认为两个变量<strong>独立</strong>（更严谨的说法：未发现足够证据表明有关联）。</li>
+</ul>
+<h3>独立性检验的一般步骤</h3>
+<ol>
+<li>提出零假设 <code>H₀：两个分类变量独立（无关联）</code>。</li>
+<li>列出 2×2 列联表，填好各格频数 a、b、c、d 及合计。</li>
+<li>代入公式计算 χ² 统计量。</li>
+<li>选定显著性水平 α，查临界值 x_α。</li>
+<li>比较 χ² 与 x_α，下结论。</li>
+</ol>
+
+<h2 id="s4">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>成对数据</td><td>坐标平面上的 n 个点</td><td>同一个体两个属性的一次次观测记录</td></tr>
+<tr><td>散点图</td><td>数据点的「云图」</td><td>直观呈现两变量关系的形态</td></tr>
+<tr><td>相关关系</td><td>点云的整体走向（呈带状分布）</td><td>现实变量「有关但不确定」的联系</td></tr>
+<tr><td>正相关 / 负相关</td><td>点云上升 / 下降的走向</td><td>同增同减 / 此消彼长</td></tr>
+<tr><td>线性 / 非线性相关</td><td>点云沿直线 / 曲线分布</td><td>关系能否用直线近似刻画</td></tr>
+<tr><td>样本相关系数 r</td><td>点云紧贴一条直线的程度（|r|→1 越贴直线）</td><td>线性相关方向与强弱的无量纲度量</td></tr>
+<tr><td>回归直线 ŷ = b̂x + â</td><td>使竖直距离平方和最小的「最佳拟合直线」</td><td>用直线近似刻画关系并作预测</td></tr>
+<tr><td>最小二乘法</td><td>竖直偏差平方和最小的几何求解</td><td>从数据中提取最佳直线的科学准则</td></tr>
+<tr><td>斜率 b̂</td><td>直线倾斜程度（且直线过质心 (x̄, ȳ)）</td><td>x 每增 1 单位，y 平均变化 b̂ 单位</td></tr>
+<tr><td>残差 eᵢ</td><td>散点到直线的竖直偏差</td><td>观测值与预测值之间的误差</td></tr>
+<tr><td>决定系数 R²</td><td>直线比水平线多解释的波动比例</td><td>拟合优度 / 模型的解释能力</td></tr>
+<tr><td>列联表</td><td>二维频数分布表（4 个格子）</td><td>两个分类变量交叉的频数结构</td></tr>
+<tr><td>期望频数</td><td>「独立」时每个格子理论上的频数</td><td>独立假设下应有的基准比例</td></tr>
+<tr><td>卡方统计量 χ²</td><td>实际分布偏离「独立理论分布」的标准化平方和</td><td>判断两分类变量是否有关联的证据强度</td></tr>
+</table>
+
+<h2 id="s5">典型例题（自测）</h2>
+<div class="ex">
+<h4>例题 1～5</h4>
+<ol>
+<li>判断下列关系哪些是<strong>函数关系</strong>、哪些是<strong>相关关系</strong>：①正方形的面积 S 与边长 a；②某地区人均收入与汽车保有量；③人的身高与体重；④圆的周长 C 与半径 r。</li>
+<li>已知一组数据的散点图呈「从左下到右上」的带状分布，且样本相关系数 r = 0.9。问：这是正相关还是负相关？线性相关强弱如何？</li>
+<li>已知数据 x：1, 2, 3, 4, 5；y：2, 4, 5, 4, 6。求 x̄、ȳ、b̂、â，写出经验回归方程，并预测 x = 6 时 y 的值。</li>
+<li>承上题，计算样本相关系数 r，并说明线性相关的程度。</li>
+<li>为研究「吸烟与患病是否有关」，抽查 220 人得数据：吸烟且患病 40 人，吸烟未患病 60 人，不吸烟患病 30 人，不吸烟未患病 90 人。①列出 2×2 列联表；②计算 χ²；③在显著性水平 α = 0.05（临界值 3.841）下给出结论。</li>
+</ol>
+</div>
+<div class="ex">
+<h4>参考答案（供对照）</h4>
+<ol>
+<li>①④是函数关系（S = a²、C = 2πr，唯一确定）；②③是相关关系（有关但不唯一确定）。</li>
+<li>从左下到右上 → <strong>正相关</strong>；|r| = 0.9 接近 1 → <strong>线性相关很强</strong>。</li>
+<li>x̄ = 3，ȳ = 4.2，b̂ = 0.8，â = 1.8，回归方程为 <code>ŷ = 0.8x + 1.8</code>；预测 x = 6 时 <code>ŷ = 0.8×6 + 1.8 = 6.6</code>。</li>
+<li><code>r = 8 / √(10×8.8) = 8/√88 ≈ 0.853</code>，为<strong>较强正相关</strong>。</li>
+<li>①列联表：吸烟患病 40、吸烟未患病 60（合计 100）；不吸烟患病 30、不吸烟未患病 90（合计 120）。②χ² = 220×(40×90 − 60×30)² / (100×120×70×150) = 220×1800²/126000000 ≈ 5.66。③因为 5.66 ≥ 3.841，所以在 α = 0.05 下有充分证据拒绝 H₀，认为<strong>吸烟与患病有关联</strong>。</li>
+</ol>
+</div>
+
+<h2 id="s6">常见误区</h2>
+<div class="warn">
+<h4>⚠️ 这些坑别踩</h4>
+<ul>
+<li>❌「相关关系就是函数关系」→ ✅ 相关关系不唯一确定，函数关系唯一确定；两者是「有关但不确定」与「完全确定」的区别。</li>
+<li>❌「r 接近 0 就是两个变量毫无关系」→ ✅ r = 0 只说明<strong>没有线性相关</strong>；可能有曲线关系（如 y = x² 取 x 对称时 r 可为 0，但完全相关）。</li>
+<li>❌「相关系数大 = 有因果关系」→ ✅ <strong>相关 ≠ 因果</strong>：冰淇淋销量与溺水人数正相关，但共同原因是「天气热」，并非冰淇淋导致溺水。</li>
+<li>❌「随便画一条直线就是回归直线」→ ✅ 回归直线必须由<strong>最小二乘</strong>求得，且必过样本中心点 <code>(x̄, ȳ)</code>。</li>
+<li>❌「回归方程可以无限外推预测」→ ✅ 回归方程只适用于样本覆盖范围，<strong>远距离外推</strong>常常失效。</li>
+<li>❌「χ² 越大说明两个变量关联越强」→ ✅ χ² 只用来与临界值比较判断「<strong>是否有关联</strong>」，它不是关联强度的度量。</li>
+<li>❌「χ² 很小就证明了两个变量独立」→ ✅ 检验只能「以一定把握推翻独立」，<strong>不能证明独立</strong>；「不拒绝 H₀」不等于「H₀ 成立」。</li>
+<li>❌「算 χ² 时把期望频数填错」→ ✅ 期望频数 = <strong>行合计 × 列合计 ÷ 总数</strong>，而不是直接用实际频数；代入 2×2 公式时 a、b、c、d 位置要对准。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:0 0 12px;color:#b45309">一、练习题</h3>
+<ol>
+<li>判断题：①「函数关系」与「相关关系」的本质区别是什么？②「样本相关系数 r 越接近 0，说明两个变量没有任何关系」这句话对吗？请说明理由。</li>
+<li>给出三组数据，其散点图分别是：A. 从左下到右上的细窄直线带；B. 呈开口向上的抛物线状点云；C. 均匀散开的圆形点云。请分别说出每组数据的线性相关方向与强弱（或说明 r 的大致取值），并指出哪一组「没有线性相关，但可能存在曲线相关」。</li>
+<li>为什么「回归直线一定经过样本中心点 (x̄, ȳ)」？从几何上（把点云看作质心）解释这条性质的意义。</li>
+<li>已知数据：x = 1, 2, 3, 4；y = 3, 5, 6, 8。求 x̄、ȳ、b̂、â，写出经验回归方程，并预测 x = 5 时 y 的值。（提示：Σxᵢyᵢ = 3+10+18+32 = 63，Σxᵢ² = 1+4+9+16 = 30。）</li>
+<li>某回归模型的决定系数 R² = 0.81。请用「波动」的语言解释这个数值的含义：y 的波动中有多少比例能被 x 的线性变化解释？剩余部分来自哪里？</li>
+<li>为研究「性别与是否喜欢某运动是否有关」，调查 100 人：男且喜欢 35 人，男且不喜欢 15 人，女且喜欢 25 人，女且不喜欢 25 人。①列出 2×2 列联表；②写出 χ² 计算公式并算出数值；③在显著性水平 α = 0.05（临界值 3.841）下给出结论。</li>
+</ol>
+<h3 style="margin:20px 0 12px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>①函数关系是「给定 x 就能唯一确定 y」，相关关系是「有关联但不唯一确定」，即点不在一条曲线上、只在某一趋势附近波动。②不对。r 接近 0 只说明<strong>没有线性相关</strong>；两个变量仍可能存在曲线相关（如 y = x² 取对称样本时 r 可为 0，但完全相关）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>A：正相关且线性相关很强，r 接近 +1（细窄上升带）；B：线性相关很弱，r 接近 0，但存在明显的<strong>非线性（曲线）相关</strong>，正是「没有线性相关但存在曲线相关」的一组；C：无明显相关，r 接近 0，点云均匀散开，任何方向都看不到趋势。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由最小二乘解 â = ȳ − b̂x̄ 可知，当 x = x̄ 时代入 ŷ = b̂x + â 得 ŷ = b̂x̄ + ȳ − b̂x̄ = ȳ，即点 (x̄, ȳ) 必在回归直线上。几何上，(x̄, ȳ) 是整片散点云的「质心/重心」，最佳拟合直线必须穿过这个重心，才能保证它从「平均意义」上贴合整片点云。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>x̄ = (1+2+3+4)/4 = 2.5，ȳ = (3+5+6+8)/4 = 5.5。b̂ = (Σxᵢyᵢ − n·x̄·ȳ)/(Σxᵢ² − n·x̄²) = (63 − 4×2.5×5.5)/(30 − 4×6.25) = (63 − 55)/(30 − 25) = 8/5 = 1.6。â = ȳ − b̂x̄ = 5.5 − 1.6×2.5 = 5.5 − 4 = 1.5。经验回归方程为 ŷ = 1.6x + 1.5。预测 x = 5 时 ŷ = 1.6×5 + 1.5 = 9.5。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>R² = 0.81 表示：y 的波动中有约 <strong>81%</strong> 能被 x 的线性变化解释，剩下约 19% 来自随机误差或其他未纳入模型的因素。R² 越接近 1，拟合优度越高、直线比水平线 y = ȳ 多解释的波动比例越大。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>①列联表：男喜欢 35、男不喜欢 15（合计 50）；女喜欢 25、女不喜欢 25（合计 50）；列合计 60、40，总数 100。②χ² = n(ad−bc)² / [(a+b)(c+d)(a+c)(b+d)] = 100×(35×25 − 15×25)² / (50×50×60×40) = 100×(875 − 375)² / 6000000 = 100×500²/6000000 = 25000000/6000000 ≈ 4.17。③因为 4.17 ≥ 3.841，所以在 α = 0.05 下有充分证据拒绝 H₀，认为「性别与是否喜欢该运动有关联」。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第7章-随机变量及其分布/第7章-随机变量及其分布.html">← 上一章：第7章 随机变量及其分布</a>
+<a href="../../../index.html">回目录</a>
+<a href="../../../大学/高等数学/第1章-函数与极限/第1章-函数与极限.html">下一章：第1章 函数与极限 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中选择性必修第三册</footer>
+</body>
+</html>

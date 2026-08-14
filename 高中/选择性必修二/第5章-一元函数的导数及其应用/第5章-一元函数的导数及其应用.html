@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第5章 一元函数的导数及其应用 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 选择性必修第二册 › 第5章 一元函数的导数及其应用</div></header>
+<main class="container">
+<h1>第5章 一元函数的导数及其应用</h1>
+<p class="lead">高中 / 选择性必修第二册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>导数 = 函数在某一点的<strong>瞬时变化率</strong>。几何上它是曲线在该点<strong>切线的斜率</strong>，物理上它是<strong>瞬时速度</strong>（位移的导数）与<strong>瞬时加速度</strong>（速度的导数）。学完本章，你要能在心里"看见"：曲线任意一点附近都有一条恰好贴合的切线，切线的倾斜方向与倾斜程度，正是函数"正在上升还是下降、上升得多快"的答案。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">5.1 导数的概念：从平均变化率到瞬时变化率</a><a href="#s2">5.2 导数的几何意义：切线的斜率</a><a href="#s3">5.3 基本初等函数的导数公式与求导法则</a><a href="#s4">5.4 函数的单调性与导数</a><a href="#s5">5.5 函数的极值与最值</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">5.1 导数的概念：从平均变化率到瞬时变化率</h2>
+<h3>平均变化率（先看"整体快慢"）</h3>
+<p>设函数 <code>y = f(x)</code>，自变量从 <code>x₀</code> 变到 <code>x₀ + Δx</code>，函数值相应从 <code>f(x₀)</code> 变到 <code>f(x₀ + Δx)</code>。称</p>
+<pre><code>        Δy     f(x₀ + Δx) − f(x₀)
+       ──── = ───────────────────
+        Δx            Δx</code></pre>
+<p>为函数在区间 <code>[x₀, x₀ + Δx]</code> 上的<strong>平均变化率</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>平均变化率就是<strong>割线的斜率</strong>——连接曲线上的两个点 <code>(x₀, f(x₀))</code> 与 <code>(x₀+Δx, f(x₀+Δx))</code> 的那条直线的斜率。它描述的是"这一段区间上，y 平均每单位 x 变化多少"。</div>
+<div class="insight"><strong>物理含义：</strong>若 <code>s = s(t)</code> 是位移函数，则平均变化率 <code>Δs/Δt</code> 就是这段时间的<strong>平均速度</strong>。例：3 小时内走了 240 km，平均速度 = 240/3 = 80 km/h——但它只是"整体平均"，看不出每一瞬间的快慢。</div>
+<h3>瞬时变化率（导数）——平均的极限</h3>
+<p>平均速度的缺陷：它掩盖了中途的加速、减速。要让"平均"变成"瞬时"，就要让时间间隔 <code>Δt</code> 无限缩小到 0。于是：</p>
+<pre><code>                   f(x₀ + Δx) − f(x₀)
+  f'(x₀) =  lim   ───────────────────
+           Δx→0          Δx</code></pre>
+<p>这个极限值就叫函数 <code>f(x)</code> 在点 <code>x₀</code> 处的<strong>导数</strong>（瞬时变化率），记作 <code>f'(x₀)</code>，也可写作 <code>y'|_{x=x₀}</code> 或 <code>dy/dx|_{x=x₀}</code>。</p>
+<p><strong>等价的定义式</strong>（令 x = x₀ + Δx，则 Δx → 0 即 x → x₀）：</p>
+<pre><code>                   f(x) − f(x₀)
+  f'(x₀) =  lim   ─────────────
+           x→x₀       x − x₀</code></pre>
+<div class="insight"><strong>物理含义（核心！）：</strong>位移对时间求导得<strong>瞬时速度</strong>，速度对时间求导得<strong>瞬时加速度</strong>。这就是微积分最经典的来源——牛顿研究运动时发现：瞬时速度是位移函数的导数，加速度是速度函数的导数。</div>
+<div class="insight"><strong>几何含义（核心！）：</strong>让 Δx 无限变小，割线的两个端点无限靠近、最终重合为一点，割线就"转动到极限位置"变成<strong>切线</strong>。所以导数就是切线的斜率——它是"局部"的看法：把曲线在一点附近近似看成一条直线。</div>
+<h3>导函数</h3>
+<p>如果对区间内每个 x，f(x) 都可导，就得到一个以 x 为自变量的新函数 <code>f'(x)</code>，称为 <code>f(x)</code> 的<strong>导函数</strong>（简称导数）：</p>
+<pre><code>                  f(x + Δx) − f(x)
+  f'(x) =  lim   ─────────────────
+          Δx→0          Δx</code></pre>
+<p>关系：<code>f'(x₀)</code> 是导函数 <code>f'(x)</code> 在 x = x₀ 处的函数值。<strong>可导必连续</strong>（连续未必可导，例如尖点、折点处不可导）。</p>
+<p><strong>用定义求导的三个步骤</strong>：① 求增量 Δy = f(x+Δx) − f(x)；② 作比值 Δy/Δx；③ 取极限 Δx → 0。</p>
+
+<h2 id="s2">5.2 导数的几何意义：切线的斜率</h2>
+<p>函数 <code>y = f(x)</code> 在点 <code>x₀</code> 处的导数 <code>f'(x₀)</code>，等于曲线在点 <code>(x₀, f(x₀))</code> 处<strong>切线的斜率</strong>。这就是导数的几何意义。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="380" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="340" x2="500" y2="340" stroke="#94a3b8" stroke-width="2"/><line x1="40" y1="340" x2="40" y2="20" stroke="#94a3b8" stroke-width="2"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="40" y="356">0</text><text x="224" y="356">1</text><text x="408" y="356">2</text></g><text x="26" y="295" fill="#64748b" font-size="12" text-anchor="end">1</text><path d="M40,340 L86,336.9 L132,327.5 L178,311.9 L224,290 L270,261.9 L316,227.5 L362,186.9 L408,140 L454,86.9 L500,27.5" fill="none" stroke="#2563eb" stroke-width="3"/><line x1="132" y1="340" x2="316" y2="240" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" stroke-opacity="0.9"><animate attributeName="stroke-opacity" values="0;0.1;0.35;0.75;1;1;0.75;0.35;0.1;0" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="6s" repeatCount="indefinite"/></line><line x1="224" y1="290" x2="500" y2="27.5" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x2" values="500;408;334.4;279.2;242.4;224;242.4;279.2;334.4;408;500" dur="6s" repeatCount="indefinite"/><animate attributeName="y2" values="27.5;140;212;255.5;279.5;290;279.5;255.5;212;140;27.5" dur="6s" repeatCount="indefinite"/></line><circle cx="224" cy="290" r="6" fill="#2563eb"/><text x="224" y="276" fill="#1d4ed8" font-size="13" text-anchor="middle">P(1,1)</text><circle cx="500" cy="27.5" r="6" fill="#16a34a"><animate attributeName="cx" values="500;408;334.4;279.2;242.4;224;242.4;279.2;334.4;408;500" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="27.5;140;212;255.5;279.5;290;279.5;255.5;212;140;27.5" dur="6s" repeatCount="indefinite"/></circle><text x="446" y="110" fill="#16a34a" font-size="13">动点 Q</text><text x="350" y="356" fill="#6b7280" font-size="12">y = x²</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：动点 Q 沿曲线无限靠近 P 时，割线 PQ 转动到极限位置——切线，其斜率就是导数 f'(x₀)</figcaption></figure>
+<p><strong>切线方程</strong>（点斜式）：</p>
+<pre><code>  y − f(x₀) = f'(x₀) · (x − x₀)</code></pre>
+<p>切线斜率告诉我们曲线在该点"正在怎样走"：</p>
+<table>
+<tr><th>f'(x₀) 的符号</th><th>切线方向</th><th>函数在该点附近</th></tr>
+<tr><td>f'(x₀) &gt; 0</td><td>切线向右上方倾斜</td><td>上升（递增）</td></tr>
+<tr><td>f'(x₀) &lt; 0</td><td>切线向右下方倾斜</td><td>下降（递减）</td></tr>
+<tr><td>f'(x₀) = 0</td><td>切线水平</td><td>暂时"平"下来（可能是极值点或平台）</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>曲线在一点处是"上坡"还是"下坡"，坡度有多陡，全部由切线斜率（即导数）决定。|f'(x₀)| 越大，切线越陡，函数在该点变化越剧烈。</div>
+<div class="insight"><strong>物理含义：</strong>位移-时间图像上，某点切线的斜率 = 该时刻的瞬时速度；速度-时间图像上，某点切线的斜率 = 该时刻的瞬时加速度。图像的"陡峭程度"直接对应物理量的变化快慢。</div>
+<p><strong>例</strong>：曲线 y = x² 在点 (1, 1) 处，f'(1) = 2，故切线方程为 y − 1 = 2(x − 1)，即 y = 2x − 1。</p>
+
+<h2 id="s3">5.3 基本初等函数的导数公式与求导法则</h2>
+<h3>基本初等函数的导数公式</h3>
+<table>
+<tr><th>函数 f(x)</th><th>导数 f'(x)</th></tr>
+<tr><td>常数 C</td><td>0</td></tr>
+<tr><td>xⁿ（n 为实数）</td><td>n·xⁿ⁻¹</td></tr>
+<tr><td>sin x</td><td>cos x</td></tr>
+<tr><td>cos x</td><td>−sin x</td></tr>
+<tr><td>eˣ</td><td>eˣ</td></tr>
+<tr><td>aˣ（a &gt; 0 且 a ≠ 1）</td><td>aˣ · ln a</td></tr>
+<tr><td>ln x</td><td>1/x</td></tr>
+<tr><td>logₐ x（a &gt; 0 且 a ≠ 1）</td><td>1 / (x · ln a)</td></tr>
+</table>
+<h3>四则运算法则</h3>
+<pre><code>  [u(x) ± v(x)]' = u'(x) ± v'(x)
+  [u(x) · v(x)]' = u'(x)v(x) + u(x)v'(x)
+  [C · u(x)]'    = C · u'(x)          （C 为常数）
+  [u(x)/v(x)]'   = [u'(x)v(x) − u(x)v'(x)] / [v(x)]²   （v(x) ≠ 0）</code></pre>
+<p><strong>例</strong>：求 y = x³ − 2x² + 5x − 7 的导数。</p>
+<pre><code>  y' = (x³)' − (2x²)' + (5x)' − (7)'
+     = 3x² − 4x + 5</code></pre>
+<h3>复合函数的求导法则（链式法则）</h3>
+<p>若 <code>y = f(u)</code>、<code>u = g(x)</code>，则复合函数 <code>y = f(g(x))</code> 的导数为：</p>
+<pre><code>  y' = f'(u) · g'(x)，即  dy/dx = (dy/du) · (du/dx)</code></pre>
+<p>口诀：<strong>"由外向内，层层求导再相乘"</strong>——先对外层函数求导（把内层整体看作 u），再乘以内层函数的导数。</p>
+<p><strong>例</strong>：y = (2x + 1)³，设 u = 2x + 1，则 y = u³。</p>
+<pre><code>  y' = 3u² · (2x+1)' = 3(2x+1)² · 2 = 6(2x+1)²</code></pre>
+<p><strong>例</strong>：y = ln(x² + 1)，y' = [1/(x²+1)] · 2x = 2x/(x²+1)。</p>
+<div class="insight"><strong>物理含义：</strong>链式法则对应"复合变化率"——位移对时间的速度 = 位移对某个中间量（如角度）的变化率 × 中间量对时间的变化率。它是处理"变量的变量"这一普遍问题的通用工具。</div>
+
+<h2 id="s4">5.4 函数的单调性与导数</h2>
+<p>导数把"判断函数单调性"这件原本要比较函数值大小的事，变成了"只看导数符号"的简单判断：</p>
+<table>
+<tr><th>条件</th><th>结论</th></tr>
+<tr><td>在区间内 f'(x) &gt; 0</td><td>f(x) 在该区间<strong>单调递增</strong></td></tr>
+<tr><td>在区间内 f'(x) &lt; 0</td><td>f(x) 在该区间<strong>单调递减</strong></td></tr>
+<tr><td>在区间内 f'(x) = 0</td><td>f(x) 在该区间<strong>为常数</strong></td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>导数 &gt; 0 意味着每一点的切线都向右上倾斜，曲线"一路上坡"；导数 &lt; 0 意味着切线都向右下倾斜，曲线"一路下坡"。导数符号 = 切线的倾斜方向 = 函数的升降方向。</div>
+<div class="insight"><strong>物理含义：</strong>若 v(t) &gt; 0，位移 s(t) 递增（物体在正方向上前进）；若 v(t) &lt; 0，s(t) 递减（物体向反方向运动）。速度的正负决定位移的增减。</div>
+<p><strong>求单调区间的标准步骤</strong>：</p>
+<ol>
+<li>求定义域与导函数 f'(x)；</li>
+<li>令 f'(x) = 0 求出驻点（也叫临界点），这些点把定义域分成若干区间；</li>
+<li>在每个区间内取一个"测试点"代入 f'(x) 判断正负；</li>
+<li>据符号写出单调递增区间与单调递减区间。</li>
+</ol>
+<p><strong>例</strong>：f(x) = x³ − 3x² + 2，f'(x) = 3x² − 6x = 3x(x − 2)，驻点为 x = 0 与 x = 2。</p>
+<ul>
+<li>x &lt; 0 时，f'(x) &gt; 0 → 递增；</li>
+<li>0 &lt; x &lt; 2 时，f'(x) &lt; 0 → 递减；</li>
+<li>x &gt; 2 时，f'(x) &gt; 0 → 递增。</li>
+</ul>
+<p>故递增区间为 (−∞, 0) 和 (2, +∞)，递减区间为 (0, 2)。</p>
+
+<h2 id="s5">5.5 函数的极值与最值</h2>
+<h3>极值的定义</h3>
+<p>若在 x₀ 附近，f(x₀) 比周围所有函数值都大，则 f(x₀) 是<strong>极大值</strong>；比周围都小，则是<strong>极小值</strong>。极值是<strong>局部</strong>概念——"这一小片区域里的最高/最低点"，不是整个定义域的最高/最低。</p>
+<h3>极值的必要条件与充分条件</h3>
+<p><strong>必要条件</strong>：可导函数在极值点处必有 <code>f'(x₀) = 0</code>（即极值点必是<strong>驻点</strong>）。但反过来不成立——驻点未必是极值点。</p>
+<p><strong>充分条件（导数变号法）</strong>：设 x₀ 是驻点，考察 f'(x) 在 x₀ 左右的符号：</p>
+<table>
+<tr><th>x₀ 左侧 f'(x)</th><th>x₀ 右侧 f'(x)</th><th>结论</th></tr>
+<tr><td>正（+）</td><td>负（−）</td><td>f(x₀) 为<strong>极大值</strong></td></tr>
+<tr><td>负（−）</td><td>正（+）</td><td>f(x₀) 为<strong>极小值</strong></td></tr>
+<tr><td>不变号（同正或同负）</td><td>同号</td><td><strong>不是极值</strong>（如 y = x³ 在 x = 0 处）</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>极大值点是曲线"从上升到下降"的转折点——切线斜率由正变负，切线由向右上倾斜转为向右下倾斜，山顶处切线恰好水平；极小值点是"从下降到上升"的转折点（谷底）。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="400" viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="50" y1="200" x2="470" y2="200" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="390" x2="260" y2="10" stroke="#94a3b8" stroke-width="2"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="50" y="216">-2</text><text x="155" y="216">-1</text><text x="260" y="216">0</text><text x="365" y="216">1</text><text x="470" y="216">2</text></g><path d="M50,350 L81.5,186 L102.5,115.6 L155,50 L207.5,96.9 L260,200 L312.5,303.1 L365,350 L417.5,284.4 L438.5,214 L470,50" fill="none" stroke="#2563eb" stroke-width="3"/><line x1="45.6" y1="389.75" x2="54.4" y2="310.25" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x1" values="45.6;92.2;115;191.25;247.35;296.25;325;407.2;465.6;407.2;325;296.25;247.35;191.25;115;92.2;45.6" dur="8s" repeatCount="indefinite"/><animate attributeName="y1" values="389.75;154.3;50;60.3;162.05;266.5;350;323.1;89.75;323.1;350;266.5;162.05;60.3;50;154.3;389.75" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="54.4;112.8;195;223.75;272.65;328.75;405;427.8;474.4;427.8;405;328.75;272.65;223.75;195;112.8;54.4" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="310.25;76.9;50;133.4;237.95;339.6;350;245.7;10.25;245.7;350;339.6;237.95;133.4;50;76.9;310.25" dur="8s" repeatCount="indefinite"/></line><circle cx="50" cy="350" r="6" fill="#2563eb"><animate attributeName="cx" values="50;102.5;155;207.5;260;312.5;365;417.5;470;417.5;365;312.5;260;207.5;155;102.5;50" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="350;115.6;50;96.9;200;303.1;350;284.4;50;284.4;350;303.1;200;96.9;50;115.6;350" dur="8s" repeatCount="indefinite"/></circle><circle cx="155" cy="50" r="7" fill="#dc2626"><animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/></circle><text x="155" y="32" fill="#b91c1c" font-size="13" text-anchor="middle">极大值点 f'=0</text><circle cx="365" cy="350" r="7" fill="#dc2626"><animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/></circle><text x="365" y="376" fill="#b91c1c" font-size="13" text-anchor="middle">极小值点 f'=0</text><text x="452" y="360" fill="#6b7280" font-size="12">y = x³ − 3x</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：动点沿曲线走时，切线方向 = 导数的符号——上升段向右上、下降段向右下，山顶与谷底处切线水平（f'=0）</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>以竖直上抛为例，高度 h(t) 在最高点处 h'(t) = v(t) = 0（速度为零），且速度由正（上升）变负（下落）——最高点正是 h(t) 的极大值点。导数变号 = 运动方向发生反转。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="400" viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="50" y1="360" x2="470" y2="360" stroke="#94a3b8" stroke-width="2"/><line x1="50" y1="360" x2="50" y2="20" stroke="#94a3b8" stroke-width="2"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="50" y="376">0</text><text x="120" y="376">1</text><text x="190" y="376">2</text><text x="260" y="376">3</text><text x="330" y="376">4</text><text x="400" y="376">5</text><text x="470" y="376">6 t</text></g><text x="34" y="46" fill="#64748b" font-size="12" text-anchor="end">h</text><path d="M50,360 L85,262.2 L120,182.2 L155,120 L190,75.6 L225,48.9 L260,40 L295,48.9 L330,75.6 L365,120 L400,182.2 L435,262.2 L470,360" fill="none" stroke="#2563eb" stroke-width="3"/><line x1="44.1" y1="395.5" x2="55.9" y2="324.5" stroke="#16a34a" stroke-width="2.5"><animate attributeName="x1" values="44.1;111.3;173.9;224;313.9;391.3;464.1;391.3;313.9;224;173.9;111.3;44.1" dur="8s" repeatCount="indefinite"/><animate attributeName="y1" values="395.5;217.1;107.8;40;43.4;147.3;324.5;147.3;43.4;40;107.8;217.1;395.5" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="55.9;128.7;206.1;296;346.1;408.7;475.9;408.7;346.1;296;206.1;128.7;55.9" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="324.5;147.3;43.4;40;107.8;217.1;395.5;217.1;107.8;40;43.4;147.3;324.5" dur="8s" repeatCount="indefinite"/></line><circle cx="50" cy="360" r="6" fill="#2563eb"><animate attributeName="cx" values="50;120;190;260;330;400;470;400;330;260;190;120;50" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="360;182.2;75.6;40;75.6;182.2;360;182.2;75.6;40;75.6;182.2;360" dur="8s" repeatCount="indefinite"/></circle><circle cx="260" cy="40" r="7" fill="#dc2626"><animate attributeName="r" values="7;9;7" dur="2s" repeatCount="indefinite"/></circle><text x="260" y="22" fill="#b91c1c" font-size="13" text-anchor="middle">最高点：v = h'(t) = 0</text><text x="452" y="340" fill="#6b7280" font-size="12">h = 6t − t²</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：位移—时间曲线上，切线斜率 = 瞬时速度 v(t)；上抛到最高点时切线水平（v = 0），随后速度方向反转</figcaption></figure>
+<p><strong>求极值的步骤</strong>：① 求 f'(x)；② 令 f'(x) = 0 得驻点；③ 列表考察驻点左右导数符号；④ 据变号情况确定极值并计算极值。</p>
+<h3>最值（全局概念）</h3>
+<p>最值是整个区间上的最大值与最小值，是<strong>全局</strong>概念。对<strong>闭区间 [a, b] 上的连续函数</strong>，最值一定存在，且只可能在两类点取得：<strong>驻点</strong>（f'(x)=0 的点）与<strong>区间端点</strong> a、b。</p>
+<p><strong>求最值的步骤</strong>：</p>
+<ol>
+<li>求 f'(x)，解 f'(x) = 0 得所有驻点；</li>
+<li>计算 f(驻点) 与 f(a)、f(b)；</li>
+<li>比较这些函数值，最大者即最大值，最小者即最小值。</li>
+</ol>
+<p><strong>例</strong>：求 f(x) = x³ − 3x 在 [−2, 2] 上的最值。</p>
+<pre><code>  f'(x) = 3x² − 3 = 3(x − 1)(x + 1)，驻点 x = −1, 1
+  f(−2) = −2,  f(−1) = 2,  f(1) = −2,  f(2) = 2
+  最大值 = 2（在 x = −1 与 x = 2 取得），最小值 = −2（在 x = −2 与 x = 1 取得）</code></pre>
+<div class="insight"><strong>极值与最值的区别：</strong>极大值只在局部最大，可能比别的极小值还小；最值是全局。最值点若在区间内部取得，则它同时也是极值点；若最值在端点取得，则它未必是极值（端点处一般不谈极值）。</div>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>平均变化率</td><td>割线的斜率（两点连线）</td><td>平均速度</td></tr>
+<tr><td>导数 f'(x₀)</td><td>切线的斜率（割线的极限）</td><td>瞬时速度（位移的导数）、瞬时加速度（速度的导数）</td></tr>
+<tr><td>导函数 f'(x)</td><td>每一点切线斜率构成的函数</td><td>每一时刻的瞬时变化率</td></tr>
+<tr><td>切线方程</td><td>过切点、以 f'(x₀) 为斜率的直线</td><td>局部线性逼近（用直线近似曲线）</td></tr>
+<tr><td>f'(x) &gt; 0</td><td>切线向右上倾斜，曲线"上坡"</td><td>函数值递增（位移增加 / 正方向运动）</td></tr>
+<tr><td>f'(x) &lt; 0</td><td>切线向右下倾斜，曲线"下坡"</td><td>函数值递减（位移减少 / 反方向运动）</td></tr>
+<tr><td>f'(x) = 0</td><td>切线水平（山顶/谷底/平台）</td><td>瞬时变化率为零（速度为零的瞬间）</td></tr>
+<tr><td>极大值</td><td>由升转降的"山顶"</td><td>运动方向由正转反的转折点</td></tr>
+<tr><td>极小值</td><td>由降转升的"谷底"</td><td>运动方向由反转正的转折点</td></tr>
+<tr><td>最值</td><td>整个区间上的最高/最低点</td><td>整个过程的最大/最小量（如最大高度、最小成本）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>用定义求 f(x) = x² 在 x = 1 处的导数，并写出曲线在 (1, 1) 处的切线方程。</li>
+<li>求下列函数的导数：(a) y = 3x⁴ − 5x³ + 2x − 1；(b) y = x·eˣ；(c) y = sin x / x；(d) y = (x² + 1)⁵。</li>
+<li>求 f(x) = x³ − 3x² − 9x + 5 的单调区间与极值。</li>
+<li>求 f(x) = x³ − 12x 在闭区间 [−3, 3] 上的最大值与最小值。</li>
+<li>一质点作直线运动，位移 s(t) = t³ − 6t² + 9t（单位：米，t 单位：秒）。求：何时速度为 0？质点的速度 v(t) 与加速度 a(t) 表达式是什么？</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "导数就是斜率本身，和极限无关" → ❌ 导数是<strong>割线斜率当 Δx → 0 时的极限</strong>，是一种瞬时变化率，必须先有极限概念。</li>
+<li>❌ "f'(x₀) = 0 一定是极值点" → ❌ 只是必要条件。例：y = x³ 在 x = 0 处 f'(0) = 0，但不是极值（导数不变号）。</li>
+<li>❌ "极大值一定大于极小值" → ❌ 极值是局部概念，某处的极大值可能比另一处的极小值还小。</li>
+<li>❌ "求最值只要令导数为 0 就行" → ❌ 闭区间最值还必须<strong>比较区间端点</strong>的函数值，端点可能取得最值。</li>
+<li>❌ "(uv)' = u'v'" → ❌ 乘法法则不是分别求导相乘，正确是 (uv)' = u'v + uv'；同理除法也不是 (u/v)' = u'/v'。</li>
+<li>❌ "复合函数 y = (2x+1)³ 求导忘了乘内层导数" → ❌ 漏掉链式法则的 g'(x) = 2，会错得 3(2x+1)²。要"由外向内层层求导再相乘"。</li>
+<li>❌ "cos x 的导数是 sin x" → ❌ (cos x)' = −sin x，注意负号；(sin x)' = cos x。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:0 0 8px">一、练习题</h3>
+<ol>
+<li>已知位移函数 <code>s(t) = 4t²</code>（单位：米，t 为秒），求物体在 t = 1 到 t = 3 这段时间内的<strong>平均速度</strong>，并说明它在几何上对应位移—时间图像的什么？</li>
+<li>用导数定义求 <code>f(x) = x²</code> 在 x = 2 处的导数 <code>f'(2)</code>，并解释它在几何上与物理上分别表示什么。</li>
+<li>求下列函数的导数：① <code>y = 3x⁴ − 2x³ + x − 5</code>；② <code>y = x·ln x</code>；③ <code>y = sin(2x + 1)</code>。</li>
+<li>已知曲线 <code>y = x³</code>，求它在点 (1, 1) 处的<strong>切线方程</strong>，并说明切线斜率与函数在该点"升降"的关系。</li>
+<li>求 <code>f(x) = x³ − 3x²</code> 的单调区间与极值，并结合"山顶/谷底"解释极值点的几何意义。</li>
+<li>一质点作直线运动，位移 <code>s(t) = t³ − 6t² + 9t</code>（t ≥ 0，单位：米/秒）。① 求速度 <code>v(t)</code> 与加速度 <code>a(t)</code>；② 求质点在何时刻瞬时速度为 0，并判断此时运动方向是否发生反转。</li>
+</ol>
+<h3 style="margin:16px 0 6px">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>平均速度 = Δs/Δt = [s(3) − s(1)] / (3 − 1) = [4·9 − 4·1] / 2 = (36 − 4)/2 = <strong>16 m/s</strong>。几何上它是位移—时间图像上连接 (1, 4) 与 (3, 36) 两点的<strong>割线斜率</strong>，只反映整体平均快慢，看不出中途的瞬时变化。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>由定义 f'(2) = lim(Δx→0) [f(2+Δx) − f(2)]/Δx = lim [(2+Δx)² − 4]/Δx = lim [4 + 4Δx + (Δx)² − 4]/Δx = lim (4 + Δx) = <strong>4</strong>。几何上它是曲线 y = x² 在点 (2, 4) 处<strong>切线的斜率</strong>；物理上若 x 看作时间、f 看作位移，则它是 t = 2 时刻的<strong>瞬时速度</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① y' = 12x³ − 6x² + 1；② 由乘法法则 (uv)' = u'v + uv'：y' = (x)'·ln x + x·(ln x)' = ln x + x·(1/x) = <strong>ln x + 1</strong>；③ 由链式法则：y' = cos(2x+1)·(2x+1)' = <strong>2cos(2x + 1)</strong>（外层 sin u 求导得 cos u，再乘内层 2x+1 的导数 2）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>y' = 3x²，故切点 (1, 1) 处斜率 k = f'(1) = 3·1² = <strong>3</strong>。切线方程为 y − 1 = 3(x − 1)，即 <strong>y = 3x − 2</strong>。因 f'(1) = 3 &gt; 0，切线向右上倾斜，说明函数在 x = 1 附近正处于<strong>上升</strong>状态，且上升得较快（|f'(1)| = 3 表示坡度较陡）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>f'(x) = 3x² − 6x = 3x(x − 2)，驻点为 x = 0 与 x = 2。x &lt; 0 时 f'(x) &gt; 0（递增）；0 &lt; x &lt; 2 时 f'(x) &lt; 0（递减）；x &gt; 2 时 f'(x) &gt; 0（递增）。故递增区间 (−∞, 0)、(2, +∞)，递减区间 (0, 2)。x = 0 处导数由正变负，为<strong>极大值点</strong>，f(0) = 0；x = 2 处导数由负变正，为<strong>极小值点</strong>，f(2) = 8 − 12 = −4。几何上极大值点是曲线"由升转降的山顶"，极小值点是"由降转升的谷底"，两处切线均为水平（f'(x)=0）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>① 速度 v(t) = s'(t) = 3t² − 12t + 9，加速度 a(t) = v'(t) = 6t − 12。② 令 v(t) = 0：3t² − 12t + 9 = 3(t − 1)(t − 3) = 0，得 t = 1 与 t = 3（秒）。在 t = 1 处，v 由正（上升阶段）变负（下降阶段），位移由递增转递减，运动方向<strong>发生反转</strong>；在 t = 3 处，v 由负变正，位移由递减转递增，方向<strong>再次反转</strong>——这两处正对应位移函数 s(t) 的极值点（速度为零的"顶点/谷底"瞬间）。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第4章-数列/第4章-数列.html">← 上一章：第4章 数列</a>
+<a href="../../../index.html">回目录</a>
+<a href="../../选择性必修三/第6章-计数原理/第6章-计数原理.html">下一章：第6章 计数原理 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中到高中一以贯之</footer>
+</body>
+</html>

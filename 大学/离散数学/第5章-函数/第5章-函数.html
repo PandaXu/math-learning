@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第5章 函数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 离散数学 › 第5章 函数</div></header>
+<main class="container">
+<h1>第5章 函数</h1>
+<p class="lead">大学 / 离散数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>函数 = 「两个集合之间确定性的对应规则」。学完本章，你要能在心里"看见"两堆点之间的箭头：<strong>每个定义域元素恰好射出一支箭</strong>；而单射、满射、双射分别回答"陪域里每个点<strong>最多 / 至少 / 恰好</strong>收到几支箭"；复合函数是箭头路径的首尾串联，反函数是把双射的箭头倒过来；基数则是拿"一一配对"当尺子，去量无穷集合的"大小"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">5.1 函数的概念</a><a href="#s2">5.2 单射、满射、双射</a><a href="#s3">5.3 复合函数与反函数</a><a href="#s4">5.4 集合的基数</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">5.1 函数的概念</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrFn" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,3 L0,6 Z" fill="#2563eb"/></marker></defs><ellipse cx="120" cy="130" rx="78" ry="96" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><ellipse cx="400" cy="130" rx="78" ry="96" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/><text x="120" y="40" font-size="15" font-weight="700" fill="#1e40af" text-anchor="middle">定义域 A</text><text x="400" y="40" font-size="15" font-weight="700" fill="#15803d" text-anchor="middle">陪域 B</text><circle cx="92" cy="82" r="6" fill="#2563eb"/><circle cx="148" cy="122" r="6" fill="#2563eb"/><circle cx="108" cy="176" r="6" fill="#2563eb"/><text x="92" y="62" font-size="13" fill="#1e40af" text-anchor="middle">x₁</text><text x="148" y="102" font-size="13" fill="#1e40af" text-anchor="middle">x₂</text><text x="108" y="198" font-size="13" fill="#1e40af" text-anchor="middle">x₃</text><circle cx="398" cy="78" r="6" fill="#16a34a"/><circle cx="430" cy="118" r="6" fill="#16a34a"/><circle cx="392" cy="162" r="6" fill="#16a34a"/><circle cx="440" cy="192" r="6" fill="#16a34a"/><text x="398" y="58" font-size="13" fill="#15803d" text-anchor="middle">y₁</text><text x="430" y="98" font-size="13" fill="#15803d" text-anchor="middle">y₂</text><text x="392" y="186" font-size="13" fill="#15803d" text-anchor="middle">y₃</text><text x="440" y="216" font-size="13" fill="#15803d" text-anchor="middle">y₄</text><line x1="92" y1="82" x2="398" y2="78" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrFn)"/><line x1="148" y1="122" x2="430" y2="118" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrFn)"/><line x1="108" y1="176" x2="430" y2="118" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrFn)"/><circle r="5" fill="#16a34a"><animateMotion dur="1.6s" begin="0s" repeatCount="indefinite" path="M92,82 L398,78"/></circle><circle r="5" fill="#16a34a"><animateMotion dur="1.6s" begin="2s" repeatCount="indefinite" path="M148,122 L430,118"/></circle><circle r="5" fill="#16a34a"><animateMotion dur="1.6s" begin="4s" repeatCount="indefinite" path="M108,176 L430,118"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：函数 = 定义域每个点恰好射出一支箭头——A 侧三点各发一箭（处处有定义且单值），B 侧的点可收到 0 支、1 支或 2 支箭（多对一允许、一对多禁止）</figcaption></figure>
+<h3>定义</h3>
+<p>设 <code>A</code>、<code>B</code> 是两个<strong>非空集合</strong>。若存在一个规则 <code>f</code>，使 <code>A</code> 中的<strong>每一个</strong>元素 <code>x</code> 都对应 <code>B</code> 中<strong>唯一确定</strong>的元素 <code>y</code>，则称 <code>f</code> 为从 <code>A</code> 到 <code>B</code> 的<strong>函数</strong>（又称<strong>映射</strong>），记作：</p>
+<pre><code>f : A → B ,   y = f(x)</code></pre>
+<p>其中 <code>x</code> 称为<strong>自变量（原像）</strong>，<code>y = f(x)</code> 称为 <code>x</code> 在 <code>f</code> 下的<strong>像</strong>。</p>
+<h3>三个核心术语</h3>
+<table>
+<tr><th>术语</th><th>记法</th><th>含义</th></tr>
+<tr><td>定义域</td><td>dom(f) = A</td><td>所有"输入"的集合，函数必须对它<strong>处处有定义</strong></td></tr>
+<tr><td>陪域（到达域）</td><td>cod(f) = B</td><td>所有"可能输出"所在的目标集合</td></tr>
+<tr><td>值域</td><td>ran(f) = { f(x) | x ∈ A }</td><td>所有"实际被射中"的输出构成的集合，<strong>值域 ⊆ 陪域</strong></td></tr>
+</table>
+<p><strong>成为函数的两条铁律</strong>：① <strong>处处有定义</strong>——定义域 A 里每个元素都必须有像，不许"漏人"；② <strong>单值性</strong>——每个 x 只能对应<strong>唯一</strong>一个 y，不许"一对多"。</p>
+<div class="insight"><strong>几何含义：</strong>把 A、B 画成两个圈（文氏图），函数就是<strong>从 A 出发、指向 B 的一族箭头</strong>。铁律①说"A 里每个点都必须射出一支箭"；铁律②说"每个点只能射出一支箭"。方向是<strong>单向</strong>的：A 的每个点必射出一支箭，但 B 的点可以收到 0 支、1 支或多支箭——这就是"<strong>多对一允许，一对多禁止</strong>"。判断一个箭头图是不是函数，只看 <strong>A 侧是否每点恰好出一箭</strong>，完全不用管 B 侧。</div>
+<div class="insight"><strong>物理含义：</strong>函数是一台<strong>确定性机器（黑箱）</strong>：喂进一个输入，吐出一个唯一输出。同一种输入必须产生同一种输出（可重复、可预测），但不同输入可以产出相同输出。例如"身份证号"是一个函数 f(公民) = 号码——每个公民有且仅有一个号码；"考试分数"也是一个函数 f(学生) = 分数，不同学生可以同分（多对一）。而"学生 ⟶ 他的任课老师"就不是函数（一对多）。</div>
+<h3>相等函数</h3>
+<p>两个函数 <code>f</code> 与 <code>g</code> 相等，当且仅当三者全同：<strong>定义域相同、陪域相同、且对每个 x 都有 f(x) = g(x)</strong>。例：<code>f(x) = x²</code> 与 <code>g(t) = t²</code> 在相同定义域、陪域下是<strong>同一个</strong>函数——<strong>变量叫什么名字无关紧要</strong>，对应规则才是本质。</p>
+
+<h2 id="s2">5.2 单射、满射、双射</h2>
+<p>有了函数，进一步按"箭头的落点情况"给函数分类。设 <code>f : A → B</code>。</p>
+<h3>单射（injective，一对一）</h3>
+<p><strong>定义</strong>：若 A 中<strong>不同的</strong>元素必有<strong>不同的</strong>像，即</p>
+<pre><code>x₁ ≠ x₂  ⟹  f(x₁) ≠ f(x₂)
+（等价于： f(x₁) = f(x₂)  ⟹  x₁ = x₂）</code></pre>
+<p>则称 <code>f</code> 为<strong>单射</strong>。口诀：<strong>不重复</strong>——没有两个不同的输入撞到同一个输出上。</p>
+<div class="insight"><strong>几何含义：</strong>单射 = <strong>B 中每个点"至多"收到一支箭</strong>。换句话说，箭头落点互不重合、绝不"撞车"。用"水平线测试"看实数函数图像：<strong>任意一条水平线至多与图像相交一次</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>单射 = <strong>信息无损、可逆</strong>。因为每个输出都能唯一追溯到输入，所以"看到结果就能反推出原因"。指纹、身份证号、二维码编号、坐标编码都设计成单射——保证<strong>不把两个不同对象混淆成同一个</strong>。</div>
+<h3>满射（surjective，映上）</h3>
+<p><strong>定义</strong>：若值域填满整个陪域，即 <code>ran(f) = B</code>，也就是<strong>每个</strong> <code>b ∈ B</code> 都<strong>至少</strong>存在一个 <code>a ∈ A</code> 使 <code>f(a) = b</code>，则称 <code>f</code> 为<strong>满射</strong>。口诀：<strong>不遗漏</strong>——B 里没有"空着没人射中"的点。</p>
+<div class="insight"><strong>几何含义：</strong>满射 = <strong>B 中每个点"至少"收到一支箭</strong>。值域恰好等于陪域，箭头把 B 铺得满满的、没有任何漏网之点。水平线测试：<strong>任意一条水平线至少与图像相交一次</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>满射 = <strong>全覆盖、无死角</strong>。每个目标状态都"能被达到"。例如"航班 f(出发城市) = 可到达的目的地集合"若要覆盖全国，就需要每个城市都在某条航线终点；又如"哈希桶分配"希望每个桶都能被命中的那种满射性。</div>
+<h3>双射（bijective，一一对应）</h3>
+<p><strong>定义</strong>：既<strong>单射</strong>又<strong>满射</strong>的函数称为<strong>双射</strong>，也叫<strong>一一对应</strong>。此时 A 与 B 的元素<strong>两两配成对</strong>，不多不少。</p>
+<div class="insight"><strong>几何含义：</strong>双射 = <strong>B 中每个点"恰好"收到一支箭</strong>（既是"至多"又是"至少"）。两个集合之间建立了一张完美、无重复、无遗漏的<strong>配对表</strong>。实数函数图像上：<strong>任意一条水平线恰好与图像相交一次</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>双射 = <strong>可逆变换 / 完美配对</strong>。每个输入↔输出唯一互指，可以无损地"正着做"也能"倒着做"：加密与解密、编码与解码、坐标系的来回变换、元素周期表编号与化学元素的对应，本质都是双射。</div>
+<h3>实例辨析</h3>
+<table>
+<tr><th>函数</th><th>单射？</th><th>满射？</th><th>双射？</th></tr>
+<tr><td>f : ℤ→ℤ , f(x)=2x</td><td>✔（2x₁=2x₂⟹x₁=x₂）</td><td>✘（奇数 3 无原像）</td><td>✘</td></tr>
+<tr><td>f : ℝ→ℝ , f(x)=x²</td><td>✘（f(1)=f(−1)=1）</td><td>✘（负数无原像）</td><td>✘</td></tr>
+<tr><td>f : ℝ→[0,+∞) , f(x)=x²</td><td>✘</td><td>✔（非负实数都被射中）</td><td>✘</td></tr>
+<tr><td>f : ℝ→ℝ , f(x)=x³</td><td>✔</td><td>✔</td><td>✔</td></tr>
+<tr><td>f : ℤ→ℤ , f(x)=x+1</td><td>✔</td><td>✔</td><td>✔</td></tr>
+</table>
+<div class="insight"><strong>关键点：</strong>单射/满射与<strong>定义域、陪域的选取</strong>强相关。<code>f(x)=x²</code> 把陪域从 ℝ 换成 <code>[0,+∞)</code> 就从"不满射"变成"满射"——判断性质前，先看清楚函数到底是谁到谁。</div>
+<p><strong>有限集合的计数结论</strong>（为 5.4 铺垫）：若 A、B 都是有限集，则存在 <code>f:A→B</code> 且</p>
+<ul>
+<li><strong>单射</strong>存在 ⟹ <code>|A| ≤ |B|</code>；</li>
+<li><strong>满射</strong>存在 ⟹ <code>|A| ≥ |B|</code>；</li>
+<li><strong>双射</strong>存在 ⟹ <code>|A| = |B|</code>。</li>
+</ul>
+<p>直觉：A 每点射一箭、且不撞车，则 B 至少得装下 |A| 个点；B 每点都被射中，则 A 至少得派出 |B| 支箭。</p>
+
+<h2 id="s3">5.3 复合函数与反函数</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="380" viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="70" y1="330" x2="500" y2="330" stroke="#94a3b8" stroke-width="2"/><line x1="90" y1="350" x2="90" y2="40" stroke="#94a3b8" stroke-width="2"/><text x="508" y="336" font-size="13" fill="#475569" text-anchor="end">x</text><text x="84" y="42" font-size="13" fill="#475569">y</text><text x="76" y="348" font-size="13" fill="#475569">O</text><line x1="90" y1="330" x2="370" y2="50" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 5"/><text x="378" y="52" font-size="13" fill="#64748b" font-style="italic">y = x</text><line x1="90" y1="330" x2="230" y2="50" stroke="#2563eb" stroke-width="3"/><text x="236" y="52" font-size="13" fill="#2563eb" font-weight="700">f(x)=2x</text><line x1="90" y1="330" x2="370" y2="190" stroke="#16a34a" stroke-width="3"/><text x="372" y="200" font-size="13" fill="#16a34a" font-weight="700">f⁻¹(x)=x/2</text><circle r="4" fill="#f59e0b"><animate attributeName="cx" values="90;300;90" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="330;120;330" dur="8s" repeatCount="indefinite"/></circle><line stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.8"><animate attributeName="x1" values="90;230;90" dur="8s" repeatCount="indefinite"/><animate attributeName="y1" values="330;50;330" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="90;370;90" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="330;190;330" dur="8s" repeatCount="indefinite"/></line><circle r="7" fill="#2563eb"><animate attributeName="cx" values="90;230;90" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="330;50;330" dur="8s" repeatCount="indefinite"/></circle><circle r="7" fill="#16a34a"><animate attributeName="cx" values="90;370;90" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="330;190;330" dur="8s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：双射的反函数就是把箭头倒过来——f(x)=2x 与 f⁻¹(x)=x/2 的图像关于直线 y=x 对称，蓝点与绿点互为镜像、连线被 y=x 垂直平分</figcaption></figure>
+<h3>复合函数（composition）</h3>
+<p>设 <code>f : A → B</code>、<code>g : B → C</code>（注意 <code>f</code> 的陪域恰是 <code>g</code> 的定义域，才能"接得上"），定义<strong>复合</strong>：</p>
+<pre><code>(g ∘ f) : A → C ,   (g ∘ f)(x) = g( f(x) )
+
+顺序：先作用 f（内层），再作用 g（外层）——从右往左读。</code></pre>
+<div class="insight"><strong>几何含义：</strong>复合就是把箭头路径<strong>首尾相接</strong>：先沿 x → f(x) 这支箭走到 B，再沿 f(x) → g(f(x)) 这支箭走到 C，两步合成一步直达。直观上就是"<strong>走完整条流水线</strong>"。</div>
+<div class="insight"><strong>物理含义：</strong>复合 = <strong>级联系统 / 流水线</strong>：先经过一道工序再经过下一道。例如先"加热"再"压缩"是一个复合过程；"摄氏转华氏"与"华氏转开尔文"复合起来就是"摄氏转开尔文"。注意工序<strong>顺序不可颠倒</strong>——先加热后压缩 ≠ 先压缩后加热。</div>
+<p><strong>性质</strong>：</p>
+<ul>
+<li><strong>结合律</strong>：<code>(h ∘ g) ∘ f = h ∘ (g ∘ f)</code>——三台机器串起来，括号怎么加结果一样。</li>
+<li><strong>一般不交换</strong>：<code>g ∘ f ≠ f ∘ g</code>（甚至 <code>f ∘ g</code> 可能根本没定义）。例：<code>f(x)=x+1</code>、<code>g(x)=x²</code> 时 <code>(g∘f)(x)=(x+1)²</code>，而 <code>(f∘g)(x)=x²+1</code>，两者不同。</li>
+<li>复合保持"好性质"：<strong>两个单射复合仍是单射</strong>；<strong>两个满射复合仍是满射</strong>；<strong>两个双射复合仍是双射</strong>。</li>
+</ul>
+<h3>恒等函数（identity）</h3>
+<p>函数 <code>id<sub>A</sub> : A → A</code> 定义为 <code>id<sub>A</sub>(x) = x</code>——每个点<strong>射向它自己</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>恒等函数是"<strong>原地不动</strong>"的箭头：A 里每个点都画一支指向自己的小环。它是复合运算里的"乘法单位元"——任何函数先/后复合恒等函数都等于它自己：<code>f ∘ id<sub>A</sub> = f = id<sub>B</sub> ∘ f</code>。</div>
+<div class="insight"><strong>物理含义：</strong>恒等变换 = <strong>空操作 / 原样输出</strong>，像把文件"原样拷贝"一遍、坐标不动的"零位移"。</div>
+<h3>反函数（inverse function）</h3>
+<p><strong>定义</strong>：若 <code>f : A → B</code> 是<strong>双射</strong>，则存在唯一函数 <code>f⁻¹ : B → A</code>，满足：</p>
+<pre><code>f⁻¹ ∘ f = id<sub>A</sub>   且   f ∘ f⁻¹ = id<sub>B</sub>
+
+即：f⁻¹(f(x)) = x（∀x∈A），  f(f⁻¹(y)) = y（∀y∈B）</code></pre>
+<p><code>f⁻¹</code> 称为 <code>f</code> 的<strong>反函数</strong>。求法：由 <code>y = f(x)</code> 把 x 解成 y 的表达式，再交换 x 与 y。</p>
+<p><strong>核心定理</strong>：<code>f</code> 有反函数 ⟺ <code>f</code> 是双射。单射保证"倒过来的箭头不撞车"，满射保证"倒过来的箭头不漏发"——二者缺一不可。</p>
+<div class="insight"><strong>几何含义：</strong>反函数 = <strong>把每支箭头倒过来</strong>。双射保证倒转后仍然是一组合法的箭头（B 每点恰好射出一支、A 每点恰好收到一支）。对实数函数，<code>y = f(x)</code> 与 <code>y = f⁻¹(x)</code> 的图像<strong>关于直线 y = x 对称</strong>——因为反函数就是"把 x 轴角色与 y 轴角色对调"。</div>
+<div class="insight"><strong>物理含义：</strong>反函数 = <strong>逆过程 / 解码</strong>。编码的逆是解码、加密的逆是解密、压缩的逆是解压。例：摄氏↔华氏互为反函数：<code>F = (9/5)C + 32</code>，其反函数 <code>C = (5/9)(F − 32)</code>；"先把东西放进盒子"与"再从盒子取出"互为反操作。</div>
+<p><strong>性质</strong>：<code>f⁻¹</code> 也是双射，且 <code>(f⁻¹)⁻¹ = f</code>；<code>(g ∘ f)⁻¹ = f⁻¹ ∘ g⁻¹</code>（复合取反要<strong>倒序</strong>，如同"先穿袜子后穿鞋"的逆是"先脱鞋后脱袜子"）。</p>
+
+<h2 id="s4">5.4 集合的基数</h2>
+<h3>等势与基数（cardinality）</h3>
+<p><strong>定义</strong>：若存在<strong>双射</strong> <code>f : A → B</code>，则称 A 与 B <strong>等势</strong>（基数相同），记 <code>|A| = |B|</code>。基数就是"集合大小的度量"：<strong>有限集合</strong>的基数 = 元素的个数；<strong>无限集合</strong>则用"能否一一配对"来比较。</p>
+<pre><code>|A| = |B|  ⟺  存在双射 f : A → B
+|A| ≤ |B|  ⟺  存在单射 f : A → B
+|A| ≥ |B|  ⟺  存在满射 f : A → B</code></pre>
+<p><strong>康托—伯恩斯坦—施罗德定理</strong>：若 <code>|A| ≤ |B|</code> 且 <code>|B| ≤ |A|</code>，则 <code>|A| = |B|</code>。这给了我们"双向比较、得出相等"的有力工具。</p>
+<div class="insight"><strong>几何含义：</strong>基数就是<strong>拿"一一配对"当尺子</strong>量集合。两个集合能配对到"一支不多、一支不少"，就一样大；不必真的去"数个数"——这正是它适用于无穷集合的原因：<strong>无穷也可以比大小</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>基数 = 集合的<strong>"容量 / 势"</strong>。有限集是"能数完的库存量"，无限集则分层次：有的无限"能列成一张无穷清单"，有的无限"稠密到连清单都写不下"。</div>
+<h3>可数集（countable）</h3>
+<p>与<strong>自然数集 ℕ</strong> 等势的集合称为<strong>可数（可列）集</strong>，其基数记作 <code>ℵ₀</code>（读"阿列夫零"）。等价地说：能把集合所有元素<strong>排成一列</strong> <code>a₁, a₂, a₃, …</code>（给每个元素编上自然数号）。</p>
+<pre><code>ℤ 可数：0, 1, −1, 2, −2, 3, −3, …      （交错编号）
+
+ℚ 可数：按"分子+分母之和"分层、康托对角线法逐一编号
+（把每个有理数 p/q 写进一张无限表格，沿斜线 zigzag 走位，逐个数到）</code></pre>
+<p><strong>惊人结论</strong>：<code>|ℕ| = |ℤ| = |ℚ| = ℵ₀</code>——整数、有理数虽然"看起来比自然数多"，但都能与自然数一一配对，属于<strong>同一个"无穷"层级</strong>。直观原因：<strong>无穷集合的"整体可以等于它的一部分"</strong>——希尔伯特旅馆：一家有无限个房间、且已客满的旅馆，只要让 1 号房客搬到 2 号、2 号搬到 3 号…… 就总能腾出 1 号房塞进新客人，人数却"没变多"。</p>
+<h3>不可数集（uncountable）</h3>
+<p><strong>实数集 ℝ 不可数</strong>——不存在从 ℕ 到 ℝ 的双射。康托用<strong>对角线法</strong>证明（以区间 (0,1) 为例）：</p>
+<pre><code>假设 (0,1) 可数，把所有小数排成一行一行：
+
+  0.a₁₁ a₁₂ a₁₃ a₁₄ …
+  0.a₂₁ a₂₂ a₂₃ a₂₄ …
+  0.a₃₁ a₃₂ a₃₃ a₃₄ …
+     ⋮
+
+取"对角线"上的数字 a₁₁, a₂₂, a₃₃, …，
+把每一位都换成一个不同的数字，得到一个新小数 0.b₁b₂b₃…。
+它与表中每一行都在"第 i 位"上不同 → 不在表中 → 矛盾！</code></pre>
+<p>因此 <code>(0,1)</code>（进而 ℝ）不可数，其基数记作 <code>c</code>（连续统的势，<code>c = |ℝ|</code>）。且有 <code>|ℝ| &gt; |ℕ|</code>，即 <code>ℵ₀ &lt; c</code>——存在<strong>严格更大</strong>的无穷。</p>
+<pre><code>(0,1) 与 ℝ 等势：f(x) = tan( π·(x − 1/2) )
+（把有界区间"拉长"成整条实数轴，是一条双射）</code></pre>
+<div class="insight"><strong>几何含义：</strong>可数集 = 点能"<strong>一个一个排成队伍编号</strong>"（离散、可枚举）；不可数集 = 点<strong>稠密到无法编号</strong>——实数轴上的点比自然数多出整整一个层级，无论怎么排队编号都必有漏网之鱼。</div>
+<div class="insight"><strong>物理含义：</strong>可数 ↔ "<strong>离散可计数</strong>"（自然数、整数、有理数——信息上可编号存储）；不可数 ↔ "<strong>连续体</strong>"（时间轴、空间位置、温度读数的连续取值——无法用一张无穷编号表穷尽）。这正是物理里"离散量 vs 连续量"的数学根基。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>函数</td><td>从定义域出发、指向陪域的一族箭头（每点恰好一箭）</td><td>确定性黑箱：同输入必同输出</td></tr>
+<tr><td>单射</td><td>落点不重合——B 每点至多收到一支箭</td><td>信息无损、可逆（指纹、编号）</td></tr>
+<tr><td>满射</td><td>箭头铺满 B——B 每点至少收到一支箭</td><td>全覆盖、每个状态都能被达到</td></tr>
+<tr><td>双射</td><td>完美配对——B 每点恰好收到一支箭</td><td>可逆变换：加密↔解密、编码↔解码</td></tr>
+<tr><td>复合函数</td><td>箭头路径首尾相接（走完整条链）</td><td>级联流水线：多道工序顺序叠加</td></tr>
+<tr><td>反函数</td><td>把双射的箭头倒过来（关于 y=x 对称）</td><td>逆过程 / 解码、解压、逆变换</td></tr>
+<tr><td>恒等函数</td><td>每点指向自己的小环（不动）</td><td>空操作、原样输出</td></tr>
+<tr><td>基数 / 等势</td><td>用"一一配对"当尺子量大小</td><td>集合的容量 / 势（含无穷的分层）</td></tr>
+<tr><td>可数集</td><td>点可排成一列、逐个编号</td><td>离散、可枚举、可编号存储</td></tr>
+<tr><td>不可数集</td><td>稠密到无法编号</td><td>连续体（时间、空间的连续取值）</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>设 <code>f : ℤ→ℤ, f(x)=2x+1</code>。判断 f 是否为单射、满射、双射，并说明理由。</li>
+<li>设 <code>f : ℝ→ℝ, f(x)=x²−4x+3</code>。它是不是单射/满射？若把定义域、陪域适当限制，能否让它成为双射？（提示：配方）</li>
+<li>求 <code>f(x)=2x+3</code>（ℝ→ℝ）的反函数，并验证 <code>f∘f⁻¹ = id</code> 与 <code>f⁻¹∘f = id</code>。</li>
+<li>设 <code>f(x)=x+1</code>、<code>g(x)=x²</code>（都是 ℝ→ℝ）。求 <code>(g∘f)(x)</code> 与 <code>(f∘g)(x)</code>，并说明两者为何不同。</li>
+<li>证明：全体偶数集 <code>E={0,2,4,6,…}</code> 与 ℕ 等势（写出一个双射）；再说明为何 ℝ 不可数。</li>
+<li>设 <code>A={1,2,3}</code>、<code>B={a,b,c,d}</code>。回答：存在 A→B 的单射吗？满射吗？双射吗？A 与 B 基数关系如何？</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "函数就是一个公式或一张图像" → ❌ 函数的本质是<strong>集合间的确定性对应</strong>，完全可以用表格、箭头图、程序表示；公式和图像只是其中两种写法。</li>
+<li>❌ "值域 = 陪域" → ❌ 只有<strong>满射</strong>时值域才等于陪域；一般情况下 <code>ran(f) ⊆ cod(f)</code>。</li>
+<li>❌ "单射就是值域填满陪域" → ❌ 那是<strong>满射</strong>。单射说的是"不同输入给不同输出（落点不重合）"。</li>
+<li>❌ "任何函数都有反函数" → ❌ 只有<strong>双射</strong>才有反函数；<code>f(x)=x²</code>（ℝ→ℝ）没有反函数，限制到 <code>[0,+∞)→[0,+∞)</code> 后才有。</li>
+<li>❌ "复合函数满足交换律 g∘f = f∘g" → ❌ 复合<strong>一般不交换</strong>，甚至 f∘g 可能没定义；顺序从右往左：先 f 后 g。</li>
+<li>❌ "复合取反 = 直接各自取反" → ❌ <code>(g∘f)⁻¹ = f⁻¹∘g⁻¹</code>，顺序要<strong>倒过来</strong>（先脱鞋后脱袜子）。</li>
+<li>❌ "所有无穷集合一样大" → ❌ <code>|ℝ| &gt; |ℕ|</code>，无穷也有<strong>不同层级</strong>（可数 vs 不可数）。</li>
+<li>❌ "判断单射满射与定义域陪域无关" → ❌ 同一规则换定义域/陪域，性质会变（如 x² 换陪域后变满射）。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>判断下列对应是否为从 A 到 B 的<strong>函数</strong>，并指出违反了哪条"铁律"（处处有定义 / 单值性）：① 每个公民 → 他的身份证号；② 每个学生 → 他选修的所有课程；③ 每个自然数 n → n²。用"箭头图"的语言说明理由。</li>
+<li>设 <code>A={1,2,3}</code>、<code>B={a,b,c,d}</code>，箭头规则 <code>f</code>：<code>1→a, 2→b, 3→c</code>。判断 f 是否为单射、满射、双射，并用"B 中每个点收到几支箭"的几何含义解释。</li>
+<li>分别判断 <code>f:ℝ→ℝ, f(x)=x²</code>、<code>f:ℝ→[0,+∞), f(x)=x²</code>、<code>f:ℝ→ℝ, f(x)=x³</code> 的单射性、满射性、双射性，并结合"水平线测试"的几何含义说明。</li>
+<li>设 <code>f(x)=x+1</code>、<code>g(x)=x²</code>（均为 ℝ→ℝ）。求 <code>(g∘f)(x)</code> 与 <code>(f∘g)(x)</code>，说明两者为何不同，并用"流水线 / 工序顺序"的物理含义解释复合函数顺序不可颠倒。</li>
+<li>求 <code>f(x)=2x+3</code>（ℝ→ℝ）的反函数，并验证 <code>f⁻¹∘f = id</code> 与 <code>f∘f⁻¹ = id</code>。说明为什么只有双射才有反函数（结合"把箭头倒过来"的几何含义）。</li>
+<li>证明全体偶数集 <code>E={0,2,4,6,…}</code> 与 ℕ 等势（写出一个双射）；再概述康托对角线法证明 ℝ 不可数的思路，并用"拿一一配对当尺子"的含义解释可数集与不可数集的本质区别。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 是函数：每个公民有且仅有一个身份证号，满足"处处有定义"且"单值"；② 不是函数：一个学生可能对应多门课程（一对多），违反<strong>单值性</strong>——箭头图里该点射出了多支箭；③ 是函数：每个自然数 n 有唯一平方 n²。几何上判断只看定义域一侧：每个点是否<strong>恰好</strong>射出一支箭。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><strong>单射</strong>（是）：1、2、3 的像 a、b、c 两两不同，落点不撞车；<strong>满射</strong>（否）：d 没有原像，收到了 0 支箭，不满足"每个点至少一支"；故<strong>不是双射</strong>。几何含义：B 中 a、b、c 各收到恰好一支箭、d 收到 0 支——每点"至多"一支（单射）成立，但并非每点"至少"一支（满射）不成立。有限集结论也印证：|A|=3 &lt; |B|=4，只能有单射、不可能有满射/双射。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① <code>f:ℝ→ℝ, f(x)=x²</code>：非单射（<code>f(1)=f(−1)=1</code> 落点撞车）、非满射（负数无原像）；水平线 <code>y=1</code> 与图像交两点，<code>y=−1</code> 交 0 点。② <code>f:ℝ→[0,+∞), f(x)=x²</code>：仍非单射（±x 同像），但<strong>满射</strong>——每个 <code>y≥0</code> 都有原像 ±√y，值域 = 陪域；说明换陪域后性质改变。③ <code>f:ℝ→ℝ, f(x)=x³</code>：单射（<code>x₁³=x₂³⟹x₁=x₂</code>）且满射（每个实数有唯一立方根），故<strong>双射</strong>；每条水平线恰好与图像相交一次。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p><code>(g∘f)(x)=g(f(x))=g(x+1)=(x+1)²=x²+2x+1</code>；<code>(f∘g)(x)=f(g(x))=f(x²)=x²+1</code>。两者不同，因为复合<strong>一般不交换</strong>，顺序从右往左读：先作用内层 f、再作用外层 g。物理含义如同流水线："先 +1 再平方"与"先平方再 +1"是两道工序顺序相反的两条流水线，最终产品不同；几何上是箭头路径首尾相接，路径的先后次序变了，终点就不同。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由 <code>y=2x+3</code> 解出 <code>x=(y−3)/2</code>，交换 x、y 得 <code>f⁻¹(x)=(x−3)/2</code>。验证：<code>f⁻¹(f(x))=(2x+3−3)/2=x</code>；<code>f(f⁻¹(x))=2·(x−3)/2+3=x</code>，故 <code>f⁻¹∘f=id</code> 且 <code>f∘f⁻¹=id</code>。只有双射才有反函数：单射保证"倒转箭头不撞车"（每点至多一箭），满射保证"倒转箭头不漏发"（每点至少一箭），二者合起来才能把每支箭头原样倒过来仍是一组合法箭头；<code>f(x)=x²</code>（ℝ→ℝ）非双射，所以没有反函数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>双射 <code>f:ℕ→E, f(n)=2n</code>：每个自然数 n 恰好对应一个偶数 2n，每个偶数又恰好对应其一半，两两配对无重复无遗漏，故 <code>|E|=|ℕ|=ℵ₀</code>。ℝ 不可数：假设 (0,1) 可数并排成一张无限表，取"对角线"上的数字 <code>a₁₁,a₂₂,a₃₃,…</code> 并逐位改成一个不同数字，得到新小数 <code>0.b₁b₂b₃…</code>；它与表中第 i 行在第 i 位都不同，故不在表中，产生矛盾。含义：可数集能"排成一列逐个编号"（离散、可枚举），不可数集稠密到"连无穷清单都写不下"（连续体）；"一一配对"这把尺子量出无穷也有层级，<code>ℵ₀ &lt; c</code>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第4章-二元关系/第4章-二元关系.html">← 上一章：第4章 二元关系</a><a href="../../../index.html">回目录</a><a href="../第6章-代数系统/第6章-代数系统.html">下一章：第6章 代数系统 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学离散数学</footer>
+</body>
+</html>

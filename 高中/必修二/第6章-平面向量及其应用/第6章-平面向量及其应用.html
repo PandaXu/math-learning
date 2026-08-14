@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第6章 平面向量及其应用 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第二册 › 第6章 平面向量及其应用</div></header>
+<main class="container">
+<h1>第6章 平面向量及其应用</h1>
+<p class="lead">高中 / 必修第二册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>向量 = 「既有大小又有方向、可以自由平移的箭头」。学完本章，你要能把"平移、旋转、伸缩"这些几何变换，以及"位移、力、速度、功"这些物理量，统一成向量的加减、数乘与数量积运算，并最终用向量推导出余弦定理与正弦定理，去解任意三角形。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">6.1 向量的概念</a><a href="#s2">6.2 向量的加减法与数乘</a><a href="#s3">6.3 向量的数量积</a><a href="#s4">6.4 平面向量基本定理与坐标表示</a><a href="#s5">6.5 正弦定理与余弦定理</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">6.1 向量的概念</h2>
+<h3>为什么需要向量（物理含义）</h3>
+<p>物理量分两类：</p>
+<table>
+<tr><th>类别</th><th>定义</th><th>例子</th></tr>
+<tr><td>标量</td><td>只有大小、没有方向的量</td><td>质量、温度、时间、功、长度、面积</td></tr>
+<tr><td>向量</td><td>既有大小又有方向的量</td><td>位移、力、速度、加速度、电场强度</td></tr>
+</table>
+<div class="insight"><strong>核心直觉：</strong>只说"走了 5 米"没有意义，必须说"向东走 5 米"；只说"推了 10 牛的力"不够，必须说"向右推 10 牛"。<strong>向量 = 大小 + 方向</strong>，方向正是它区别于普通数字的本质。</div>
+
+<h3>向量的表示与模</h3>
+<ul>
+<li><strong>定义</strong>：既有大小又有方向的量叫做<strong>向量</strong>。</li>
+<li><strong>几何表示</strong>：用<strong>有向线段</strong>表示——带箭头的线段，箭头所指为方向，线段长度为大小（叫<strong>模</strong>）。</li>
+<li><strong>符号表示</strong>：起点为 A、终点为 B 的向量记作 <code>AB→</code>（方向从 A 指向 B）；也常用一个小写字母加箭头表示，如 <code>a→</code>、<code>b→</code>、<code>v→</code>。（印刷体用黑体 <strong>a</strong>，手写体在字母上方画箭头 a⃗。）</li>
+<li><strong>模</strong>：向量 <code>a→</code> 的大小记作 <code>|a→|</code>，恒有 <code>|a→| ≥ 0</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>向量是"带方向的长度"。有向线段的<strong>起点位置不重要</strong>，决定向量的是<strong>长度（模）与方向</strong>。同一个向量可以<strong>平移</strong>到任何位置而不改变，这是向量与"线段"最大的不同：<strong>向量是自由的、可以平移</strong>。</div>
+
+<h3>零向量与单位向量</h3>
+<ul>
+<li><strong>零向量</strong>：长度为 0 的向量，记作 <code>0→</code>。它的方向是<strong>任意的</strong>（规定零向量与任何向量平行）。</li>
+<li><strong>单位向量</strong>：长度为 1 的向量。与 <code>a→</code> 同方向的单位向量是 <code>a→ / |a→|</code>（把 <code>a→</code> 缩短到长度为 1 而不改变方向）。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>单位向量就是"只给方向、不关心大小"的箭头，例如表示"正东方向"的单位向量 <code>e→</code>。任何一个力 <code>F→</code> 都能写成 <code>F→ = |F→|·e→</code>，即"大小 × 方向"，这是后面所有分解与投影的起点。</div>
+
+<h3>相等向量、相反向量、共线向量</h3>
+<ul>
+<li><strong>相等向量</strong>：长度相等且方向相同的向量。几何上，两个相等向量经平移后可以<strong>完全重合</strong>，记作 <code>a→ = b→</code>。</li>
+<li><strong>相反向量</strong>：长度相等、方向相反的向量，<code>a→</code> 的相反向量是 <code>−a→</code>。</li>
+<li><strong>平行（共线）向量</strong>：方向相同或相反的向量，记作 <code>a→ ∥ b→</code>。它们经平移后能落在<strong>同一条直线上</strong>，所以也叫<strong>共线向量</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>"共线向量"不要求真的在同一直线上——它们只是<strong>方向相同或相反</strong>，平移后能共线即可。反之，<strong>不共线</strong>（不平行）的两个向量才能"撑起"整个平面，这正是 6.4 节"平面向量基本定理"的伏笔。</div>
+
+<h2 id="s2">6.2 向量的加减法与数乘</h2>
+<h3>加法：三角形法则与平行四边形法则</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="300" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr6b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker><marker id="arr6g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"/></marker></defs><line x1="90" y1="220" x2="200" y2="80" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"/><line x1="200" y1="80" x2="400" y2="80" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"/><line x1="90" y1="220" x2="290" y2="220" stroke="#2563eb" stroke-width="3" marker-end="url(#arr6b)"/><line x1="290" y1="220" x2="400" y2="80" stroke="#2563eb" stroke-width="3" marker-end="url(#arr6b)"/><line x1="90" y1="220" x2="400" y2="80" stroke="#16a34a" stroke-width="3.5" marker-end="url(#arr6g)"><animate attributeName="x2" values="90;400" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="220;80" dur="8s" repeatCount="indefinite"/></line><circle r="7" fill="#2563eb" stroke="#fff" stroke-width="2"><animate attributeName="cx" values="90;290;400;90" keyTimes="0;0.5;0.999;1" dur="8s" repeatCount="indefinite"/><animate attributeName="cy" values="220;220;80;220" keyTimes="0;0.5;0.999;1" dur="8s" repeatCount="indefinite"/></circle><text x="172" y="245" font-size="15" fill="#334155" font-style="italic">a→</text><text x="352" y="143" font-size="15" fill="#334155" font-style="italic">b→</text><text x="252" y="118" font-size="15" fill="#16a34a" font-weight="bold" font-style="italic">a→+b→</text><text x="76" y="242" font-size="14" fill="#94a3b8">O</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：向量加法的三角形法则——动点首尾相接走完 a→ 与 b→，和向量 a→+b→（绿线）从起点直指终点，即位移的合成。</figcaption></figure>
+<p><strong>三角形法则（首尾相接）</strong>：把 <code>b→</code> 的起点移到 <code>a→</code> 的终点，则从 <code>a→</code> 的起点到 <code>b→</code> 的终点的向量就是 <code>a→ + b→</code>。</p>
+<pre><code>三角形法则（首尾相接）：
+        C
+       / \
+ a→+b→/   \ b→
+     /     \
+    A ——→ B
+      a→</code></pre>
+<p><strong>平行四边形法则（共起点）</strong>：让 <code>a→</code> 与 <code>b→</code> 有共同起点，以它们为邻边作平行四边形，<strong>对角线</strong>（从公共起点出发的那条）就是 <code>a→ + b→</code>。</p>
+<pre><code>平行四边形法则（共起点 O）：
+    D ───── C
+    │  ↗    │
+  b→│ / a→+b→
+    │/      │
+    O ───── A
+      a→</code></pre>
+<div class="insight"><strong>物理含义（位移与力的合成）：</strong>先向东走 3 km（<code>a→</code>）再向北走 4 km（<code>b→</code>），总位移就是 <code>a→ + b→</code>，大小 = √(3² + 4²) = 5 km。<strong>力的合成</strong>同理：互成角度的两个力 <code>F1→</code>、<code>F2→</code> 的合力 = <code>F1→ + F2→</code>，这正是平行四边形定则。</div>
+<p><strong>加法运算律</strong>：</p>
+<pre><code>交换律：a→ + b→ = b→ + a→
+结合律：(a→ + b→) + c→ = a→ + (b→ + c→)</code></pre>
+<div class="insight"><strong>几何含义：</strong>交换律说明"先走 a→ 再走 b→"与"先走 b→ 再走 a→"到达同一个终点（平行四边形的两条不同路线）；结合律说明多段位移无论怎样分组合成，结果相同。</div>
+
+<h3>减法：加相反向量</h3>
+<p><strong>定义</strong>：<code>a→ − b→ = a→ + (−b→)</code>，减去一个向量等于加上它的相反向量。</p>
+<p><strong>几何（共起点时）</strong>：让 <code>a→</code>、<code>b→</code> 起点相同，则 <code>a→ − b→</code> 是从 <code>b→</code> 的终点指向 <code>a→</code> 的终点的向量——<strong>"终减起"，指向被减向量</strong>。</p>
+<div class="insight"><strong>物理含义：</strong>减法表示"相对"与"差"。两个物体的速度 <code>v1→</code>、<code>v2→</code>，则 <code>v1→ − v2→</code> 是物体 1 相对物体 2 的速度（从 <code>v2→</code> 末端指向 <code>v1→</code> 末端）；位移之差同样如此。</div>
+
+<h3>数乘（伸缩 + 方向控制）</h3>
+<p><strong>定义</strong>：实数 λ 与向量 <code>a→</code> 的乘积 <code>λa→</code> 是一个向量：</p>
+<ul>
+<li>模：<code>|λa→| = |λ|·|a→|</code>（长度伸缩 |λ| 倍）；</li>
+<li>方向：λ &gt; 0 时与 <code>a→</code> 同向；λ &lt; 0 时与 <code>a→</code> 反向；λ = 0 时 <code>λa→ = 0→</code>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>数乘 = <strong>伸缩 + （可能）反转</strong>。<code>2a→</code> 是拉长到 2 倍；<code>½a→</code> 是缩短到一半；<code>−a→</code> 是"翻转方向"（即相反向量）；<code>−2a→</code> 是先翻转再拉长 2 倍。这正对应初中"乘以负数 = 翻转 + 拉伸"的直觉，如今推广到了整个平面。</div>
+<p><strong>数乘运算律</strong>：</p>
+<pre><code>λ(μa→) = (λμ)a→          （结合律）
+(λ + μ)a→ = λa→ + μa→     （对实数分配）
+λ(a→ + b→) = λa→ + λb→    （对向量分配）</code></pre>
+<h3>向量共线定理</h3>
+<p><strong>定理</strong>：向量 <code>a→</code> 与 <code>b→</code>（<code>b→ ≠ 0→</code>）共线，当且仅当<strong>存在唯一实数 λ</strong>，使 <code>a→ = λb→</code>。</p>
+<div class="insight"><strong>几何含义：</strong>共线 ⇔ 一个向量是另一个的"伸缩"（可含反向）。这是判断三点共线的利器：A、B、C 三点共线 ⇔ <code>AB→</code> 与 <code>AC→</code> 共线 ⇔ 存在 λ 使 <code>AB→ = λ·AC→</code>。</div>
+
+<h2 id="s3">6.3 向量的数量积</h2>
+<h3>向量的夹角</h3>
+<p>把 <code>a→</code>、<code>b→</code> 平移到同一起点，它们所成的角 θ 叫做 <code>a→</code> 与 <code>b→</code> 的夹角，规定 <code>0 ≤ θ ≤ π</code>。</p>
+<ul>
+<li>θ = 0：同向；θ = π：反向；θ = π/2：垂直，记作 <code>a→ ⊥ b→</code>。</li>
+</ul>
+<h3>数量积的定义（点乘）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="280" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arr6b2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2563eb"/></marker><marker id="arr6g2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#16a34a"/></marker></defs><g font-size="13" fill="#334155"><line x1="20" y1="24" x2="44" y2="24" stroke="#2563eb" stroke-width="3"/><text x="50" y="28">力 F→</text><line x1="20" y1="48" x2="44" y2="48" stroke="#16a34a" stroke-width="3"/><text x="50" y="52">位移 s→</text><line x1="20" y1="72" x2="44" y2="72" stroke="#16a34a" stroke-width="3" stroke-dasharray="6 5"/><text x="50" y="76">有效分力 |F→|cosθ</text></g><line x1="120" y1="210" x2="400" y2="210" stroke="#16a34a" stroke-width="3.5" marker-end="url(#arr6g2)"/><text x="404" y="232" font-size="15" fill="#16a34a" font-style="italic">s→</text><line x1="120" y1="210" x2="240" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="x1" values="240;223.9;180;120;180;223.9;240" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/><animate attributeName="y1" values="210;150;106.1;90;106.1;150;210" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/><animate attributeName="x2" values="240;223.9;180;120;180;223.9;240" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/></line><line x1="120" y1="210" x2="240" y2="210" stroke="#16a34a" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#arr6g2)"><animate attributeName="x2" values="240;223.9;180;120;180;223.9;240" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/></line><line x1="120" y1="210" x2="240" y2="210" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arr6b2)"><animate attributeName="x2" values="240;223.9;180;120;180;223.9;240" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="210;150;106.1;90;106.1;150;210" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/></line><text font-size="15" fill="#2563eb" font-style="italic"><animate attributeName="x" values="254;237.9;194;134;194;237.9;254" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/><animate attributeName="y" values="206;146;102;86;102;146;206" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/>F→</text><path fill="none" stroke="#94a3b8" stroke-width="2"><animate attributeName="d" values="M150 210 A30 30 0 0 0 150 210;M150 210 A30 30 0 0 0 146 195;M150 210 A30 30 0 0 0 135 184;M150 210 A30 30 0 0 0 120 180;M150 210 A30 30 0 0 0 135 184;M150 210 A30 30 0 0 0 146 195;M150 210 A30 30 0 0 0 150 210" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/></path><text x="158" y="188" font-size="14" fill="#94a3b8" font-style="italic">θ</text><circle r="5" fill="#16a34a" cy="210"><animate attributeName="cx" values="240;223.9;180;120;180;223.9;240" keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;1" dur="8s" repeatCount="indefinite"/></circle><circle cx="120" cy="210" r="4" fill="#0f172a"/></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：数量积的物理含义——力 F→ 在位移 s→ 上的有效分力为 |F→|cosθ，力转到垂直（θ=90°）时投影为零、不做功。</figcaption></figure>
+<pre><code>a→ · b→ = |a→| · |b→| · cos θ</code></pre>
+<p><strong>结果是一个数（标量）</strong>，不是向量，所以叫"数量"积，又称<strong>点乘</strong>、<strong>内积</strong>。</p>
+<div class="insight"><strong>物理含义（功）：</strong>恒力 <code>F→</code> 作用在物体上产生位移 <code>s→</code>，则力做的功 <code>W = F→ · s→ = |F→||s→|cos θ</code>。cos θ 就是"力在位移方向上的有效分量"：θ = 0 时全力做功；θ = 90° 时（力与位移垂直）不做功。</div>
+<div class="insight"><strong>几何含义（投影）：</strong><code>|a→|cos θ</code> 是 <code>a→</code> 在 <code>b→</code> 方向上的<strong>投影（数量）</strong>。所以 <code>a→·b→ = |b→| × (a→ 在 b→ 方向上的投影)</code>，即"一个向量的模 × 另一个向量在其方向上的投影"。θ 为锐角时投影为正，钝角时投影为负。</div>
+<h3>数量积的运算律与重要结论</h3>
+<pre><code>交换律：a→ · b→ = b→ · a→
+分配律：(a→ + b→) · c→ = a→ · c→ + b→ · c→
+数乘结合：(λa→) · b→ = λ(a→ · b→) = a→ · (λb→)
+自身点乘：a→ · a→ = |a→|² ，即 |a→| = √(a→ · a→)
+垂直判定：a→ ⊥ b→  ⇔  a→ · b→ = 0</code></pre>
+<div class="warn"><h4>注意</h4><p>数量积<strong>不满足结合律</strong>：<code>(a→·b→)·c→</code> 中的 <code>(a→·b→)</code> 是标量，再乘向量是数乘；而 <code>a→·(b→·c→)</code> 是向量与标量点乘，两者一般不等。<strong>消去律也不成立</strong>：由 <code>a→·b→ = a→·c→</code> 且 <code>a→ ≠ 0→</code>，<strong>不能</strong>推出 <code>b→ = c→</code>（因为"投影相等"不等于"向量相等"）。</p></div>
+<p><strong>夹角公式</strong>：<code>cos θ = (a→·b→) / (|a→||b→|)</code>，据此可判断夹角是锐角（cos θ &gt; 0）、直角（= 0）还是钝角（cos θ &lt; 0）。</p>
+
+<h2 id="s4">6.4 平面向量基本定理与坐标表示</h2>
+<h3>平面向量基本定理（平面内一切向量的"地基"）</h3>
+<p>如果 <code>e1→</code>、<code>e2→</code> 是同一平面内<strong>不共线</strong>的两个向量，那么该平面内<strong>任一</strong>向量 <code>a→</code> 都能被<strong>唯一</strong>地表示为：</p>
+<pre><code>a→ = x·e1→ + y·e2→</code></pre>
+<div class="insight"><strong>几何含义：</strong>两个不共线的向量就像平面上"两把不重合的尺子"，它们的线性组合 <code>x·e1→ + y·e2→</code> 能"张成"整个平面，且每一点的坐标 (x, y) 唯一。这就是"二维平面需要两个独立方向"的根本原因。</div>
+<h3>正交分解与坐标表示</h3>
+<p>取互相垂直的单位向量 <code>i→</code>（沿 x 轴正向）、<code>j→</code>（沿 y 轴正向）为基，则任一向量可唯一写成：</p>
+<pre><code>a→ = x·i→ + y·j→  =  (x, y)</code></pre>
+<p>(x, y) 就是向量 <code>a→</code> 的<strong>坐标</strong>。若 <code>A(x₁, y₁)</code>、<code>B(x₂, y₂)</code>，则 <code>AB→ = (x₂ − x₁, y₂ − y₁)</code>（<strong>终点坐标减起点坐标</strong>）。</p>
+<h3>坐标运算（把几何问题化为代数）</h3>
+<p>设 <code>a→ = (x₁, y₁)</code>、<code>b→ = (x₂, y₂)</code>，则：</p>
+<pre><code>加法：a→ + b→ = (x₁ + x₂, y₁ + y₂)
+减法：a→ − b→ = (x₁ − x₂, y₁ − y₂)
+数乘：λa→ = (λx₁, λy₁)
+模：  |a→| = √(x₁² + y₁²)；|AB→| = √((x₂−x₁)² + (y₂−y₁)²)
+数量积：a→ · b→ = x₁x₂ + y₁y₂
+夹角：cos θ = (x₁x₂ + y₁y₂) / (√(x₁²+y₁²) · √(x₂²+y₂²))
+垂直：a→ ⊥ b→  ⇔  x₁x₂ + y₁y₂ = 0
+平行（共线）：a→ ∥ b→  ⇔  x₁y₂ − x₂y₁ = 0</code></pre>
+<div class="insight"><strong>核心思想：</strong>向量一旦有了坐标，长度、夹角、垂直、平行、共线这些几何问题，全部变成<strong>代数计算</strong>。这就是解析几何"以数解形"的威力——向量的坐标运算是一座"几何 ↔ 代数"的桥梁。</div>
+
+<h2 id="s5">6.5 正弦定理与余弦定理（向量的应用）</h2>
+<p>在 △ABC 中，设角 A、B、C 所对的边分别为 a、b、c（a = BC，b = CA，c = AB）。</p>
+<h3>余弦定理（用数量积推导）</h3>
+<p>取 A 为起点，设 <code>AB→ = c→</code>、<code>AC→ = b→</code>，则 <code>BC→ = AC→ − AB→ = b→ − c→</code>。两边平方（数量积）：</p>
+<pre><code>a² = |BC→|² = (b→ − c→)·(b→ − c→)
+   = b→·b→ + c→·c→ − 2·b→·c→
+   = b² + c² − 2bc·cos A</code></pre>
+<p><strong>余弦定理</strong>：</p>
+<pre><code>a² = b² + c² − 2bc·cos A
+b² = a² + c² − 2ac·cos B
+c² = a² + b² − 2ab·cos C</code></pre>
+<p>变形求角：<code>cos A = (b² + c² − a²) / (2bc)</code>（其余同理）。</p>
+<div class="insight"><strong>几何含义：</strong>余弦定理是<strong>勾股定理的推广</strong>。当 A = 90° 时 cos A = 0，得 <code>a² = b² + c²</code> 回到勾股定理；A 为锐角时 <code>a² &lt; b² + c²</code>，A 为钝角时 <code>a² &gt; b² + c²</code>。<strong>用途</strong>：已知两边及夹角求第三边，或已知三边求角。</div>
+<h3>正弦定理（用面积推导）</h3>
+<p>三角形面积 <code>S = ½·bc·sin A = ½·ac·sin B = ½·ab·sin C</code>。由此推出：</p>
+<pre><code>½bc·sin A = ½ac·sin B   ⇒   b·sin A = a·sin B   ⇒   a/sin A = b/sin B
+½ac·sin B = ½ab·sin C   ⇒   c·sin B = b·sin C   ⇒   b/sin B = c/sin C
+∴  a/sin A = b/sin B = c/sin C</code></pre>
+<p><strong>正弦定理</strong>：<code>a/sin A = b/sin B = c/sin C = 2R</code>（R 为外接圆半径）。</p>
+<div class="insight"><strong>几何含义：</strong>正弦定理说明"边与其对角正弦之比恒定"，这个比值 = 外接圆直径 2R，是三角形外接圆的一个漂亮性质。<strong>用途</strong>：已知两角一边，或两边及其中一边的对角，求其余边角。</div>
+<div class="insight"><strong>物理含义（力的分解）：</strong>斜面上的物体所受重力 G 可沿斜面方向与垂直斜面方向分解为两个分力，各分力的大小由"力三角形"的正弦（或余弦）关系给出。绳拉物体、船渡河、飞机航线等实际问题，本质都是"用正弦/余弦定理解力三角形或位移三角形"。</div>
+<h3>解三角形的四种基本情形</h3>
+<table>
+<tr><th>已知条件</th><th>适用定理</th><th>说明</th></tr>
+<tr><td>两边及夹角 (SAS)</td><td>余弦定理求第三边</td><td>唯一确定</td></tr>
+<tr><td>三边 (SSS)</td><td>余弦定理求角</td><td>唯一确定</td></tr>
+<tr><td>两角及一边 (AAS/ASA)</td><td>正弦定理</td><td>唯一确定</td></tr>
+<tr><td>两边及一边对角 (SSA)</td><td>正弦定理</td><td>可能两解、一解或无解（需讨论）</td></tr>
+</table>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>向量</td><td>带方向的有向线段（可自由平移）</td><td>位移、力、速度等"大小 + 方向"的量</td></tr>
+<tr><td>模</td><td>有向线段的长度</td><td>位移大小、力的大小、速率</td></tr>
+<tr><td>零向量</td><td>长度为 0、方向任意</td><td>"不动"、合力为 0</td></tr>
+<tr><td>单位向量</td><td>长度为 1 的方向箭头</td><td>只表示方向的"基准箭头"</td></tr>
+<tr><td>相等向量</td><td>平移后完全重合</td><td>大小方向都相同的两个量</td></tr>
+<tr><td>相反向量</td><td>方向相反、长度相等</td><td>互为相反方向的量</td></tr>
+<tr><td>共线向量</td><td>方向相同或相反（可平移到同一直线）</td><td>同向或反向的运动 / 力</td></tr>
+<tr><td>加法</td><td>三角形法则 / 平行四边形对角线</td><td>位移合成、力的合成（合力）</td></tr>
+<tr><td>减法</td><td>"终减起"，指向被减向量</td><td>相对位移、相对速度、力之差</td></tr>
+<tr><td>数乘 λa→</td><td>伸缩 |λ| 倍，λ &lt; 0 时反向</td><td>速度缩放、反向（变速、掉头）</td></tr>
+<tr><td>数量积 a→·b→</td><td>模 × 投影（|a→||b→|cos θ）</td><td>功 W = F→·s→</td></tr>
+<tr><td>垂直 a→ ⊥ b→</td><td>夹角 90°</td><td>力与位移垂直 → 不做功</td></tr>
+<tr><td>坐标表示</td><td>在正交基 i→、j→ 下的分解 (x, y)</td><td>把几何量化为数值计算</td></tr>
+<tr><td>余弦定理</td><td>勾股定理的推广</td><td>求合力大小 / 第三边、求角</td></tr>
+<tr><td>正弦定理</td><td>边对角正弦之比 = 外接圆直径</td><td>力的分解、解力三角形</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<h4>例 1（数量积与模）</h4>
+<p>已知 <code>|a→| = 3</code>、<code>|b→| = 4</code>，夹角 θ = 60°，求 <code>a→·b→</code>、<code>|a→ + b→|</code>、<code>|a→ − b→|</code>。</p>
+<p>解：<code>a→·b→ = 3 × 4 × cos 60° = 6</code>；<code>|a→+b→|² = 9 + 16 + 2×6 = 37</code> ⇒ <code>|a→+b→| = √37</code>；<code>|a→−b→|² = 9 + 16 − 2×6 = 13</code> ⇒ <code>|a→−b→| = √13</code>。</p>
+<h4>例 2（坐标运算）</h4>
+<p>已知 <code>a→ = (2, 1)</code>、<code>b→ = (−1, 3)</code>，求 <code>a→+b→</code>、<code>a→−b→</code>、<code>2a→−3b→</code>、<code>|a→|</code>、<code>a→·b→</code> 及夹角的余弦，并判断二者是否垂直、是否平行。</p>
+<p>解：<code>a→+b→ = (1, 4)</code>，<code>a→−b→ = (3, −2)</code>，<code>2a→−3b→ = (4+3, 2−9) = (7, −7)</code>；<code>|a→| = √5</code>；<code>a→·b→ = 2×(−1) + 1×3 = 1</code>；<code>cos θ = 1 / (√5 · √10) = 1/(5√2) = √2/10</code>。因 <code>a→·b→ = 1 ≠ 0</code> 不垂直；因 <code>x₁y₂ − x₂y₁ = 2×3 − 1×(−1) = 7 ≠ 0</code> 不平行。</p>
+<h4>例 3（余弦定理）</h4>
+<p>在 △ABC 中，a = 7，b = 8，c = 5，求角 A。</p>
+<p>解：<code>cos A = (b² + c² − a²) / (2bc) = (64 + 25 − 49) / (2×8×5) = 40/80 = 1/2</code>，故 <code>A = 60°</code>。</p>
+<h4>例 4（正弦定理）</h4>
+<p>在 △ABC 中，A = 30°，B = 45°，a = 2，求 b。</p>
+<p>解：由 <code>a/sin A = b/sin B</code> 得 <code>2/sin30° = b/sin45°</code>，即 <code>2/(1/2) = b/(√2/2)</code> ⇒ <code>4 = b·√2</code> ⇒ <code>b = 2√2</code>。</p>
+<h4>例 5（力的合成——物理应用）</h4>
+<p>两个力 <code>F1→ = 3 N</code>（向东）、<code>F2→ = 4 N</code>（向北）同时作用于一点，求合力的大小与方向。</p>
+<p>解：合力 <code>F→ = F1→ + F2→</code>，两力垂直，<code>|F→| = √(3² + 4²) = 5 N</code>；方向东偏北，<code>tan α = 4/3</code>。</p>
+<h4>例 6（三点共线）</h4>
+<p>判断 A(1, 2)、B(3, 6)、C(4, 8) 是否共线。</p>
+<p>解：<code>AB→ = (2, 4)</code>，<code>AC→ = (3, 6)</code>，因 <code>2×6 − 4×3 = 0</code>（且 <code>AC→ = (3/2)·AB→</code>），故三点共线。</p>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "向量有大小又有方向，所以两个向量可以比大小" → ❌ 向量<strong>不能比较大小</strong>（方向无从比起），只有<strong>模</strong>（长度）可以比大小。</li>
+<li>❌ "零向量没有方向" → ❌ 零向量的方向是<strong>任意的</strong>，规定它与任何向量平行。</li>
+<li>❌ "共线向量一定在同一条直线上" → ❌ 共线 = 平行，只需<strong>方向相同或相反</strong>，平移后能共线即可，与位置无关。</li>
+<li>❌ "a→·b→ = |a→||b→|" → ❌ 只有同向（θ = 0）时才相等，一般要乘 cos θ；垂直时点积为 0。</li>
+<li>❌ "数量积满足结合律：(a→·b→)·c→ = a→·(b→·c→)" → ❌ 不成立，因为 (a→·b→) 是标量，左边是数乘、右边是点乘。</li>
+<li>❌ "由 a→·b→ = a→·c→ 且 a→ ≠ 0→ 可得 b→ = c→" → ❌ 消去律不成立，投影相等 ≠ 向量相等。</li>
+<li>❌ "由 a→·b→ = 0 得 a→ = 0→ 或 b→ = 0→" → ❌ 也可能 a→ ⊥ b→（两个非零向量垂直时点积也为 0）。</li>
+<li>❌ "正弦定理、余弦定理只能用于直角三角形" → ❌ 它们对<strong>任意三角形</strong>都成立（勾股定理只是余弦定理在 90° 时的特例）。</li>
+<li>❌ "两向量平行 ⇔ x₁/x₂ = y₁/y₂" → ❌ 当 x₂ 或 y₂ 为 0 时比例式无意义，应写交叉相乘 <code>x₁y₂ − x₂y₁ = 0</code>。</li>
+</ul>
+</div>
+<h2 id="practice" style="font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p style="margin:4px 0 10px;font-weight:700;color:#92400e">一、练习题</p>
+<ol>
+<li>判断正误并说明理由：两个模相等的向量是否一定相等？两个方向相同的向量是否一定相等？零向量的方向是什么？</li>
+<li>某人先向东走 3 km，再向北走 4 km。用向量加法表示总位移，并求总位移的大小与方向。</li>
+<li>已知 <code>a→</code>、<code>b→</code> 不共线，实数 λ、μ 满足 (λ + 2μ)<code>a→</code> + (3λ − μ)<code>b→</code> = <code>0→</code>，求 λ、μ；并说明由此能看出不共线向量的什么重要结论。</li>
+<li>恒力 <code>F→</code> 大小为 10 N，使物体沿水平方向移动 5 m，力与位移方向成 60° 角，求力做的功；若力方向与位移垂直，功又是多少？</li>
+<li>已知 <code>a→ = (3, 4)</code>、<code>b→ = (2, −1)</code>，求 <code>|a→|</code>、<code>a→·b→</code> 与夹角余弦，并判断两向量是否垂直、是否平行。</li>
+<li>在 △ABC 中，已知 A = 30°、B = 75°、a = 4，用正弦定理求边 b；又已知 b = 8、c = 5、A = 60°，用余弦定理求边 a。</li>
+</ol>
+<p style="margin:14px 0 8px;font-weight:700;color:#92400e">二、参考答案（点击展开）</p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>两个模相等的向量<strong>不一定相等</strong>：相等向量要求<strong>长度相等且方向相同</strong>，仅模相等时方向可能不同。两个方向相同的向量也<strong>不一定相等</strong>，长度还可能不同。零向量的方向是<strong>任意的</strong>，规定它与任何向量平行。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>设向东为 <code>a→</code>、向北为 <code>b→</code>，总位移 <code>s→ = a→ + b→</code>。两段位移垂直，故 <code>|s→| = √(3² + 4²) = 5 km</code>；方向为东偏北，<code>tan α = 4/3</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由平面向量基本定理，不共线的 <code>a→</code>、<code>b→</code> 的线性组合表示唯一，故 <code>λ + 2μ = 0</code> 且 <code>3λ − μ = 0</code>，解得 <code>λ = 0、μ = 0</code>。这说明：不共线向量的线性组合若为 <code>0→</code>，则所有系数必为 0（线性无关），即"两把不重合的尺子"能独立张成整个平面。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>功 <code>W = F→·s→ = |F→||s→|cos θ = 10 × 5 × cos 60° = 25 J</code>。若力与位移垂直（θ = 90°），<code>cos 90° = 0</code>，故 <code>W = 0</code>，不做功。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p><code>|a→| = √(3² + 4²) = 5</code>；<code>a→·b→ = 3×2 + 4×(−1) = 2</code>；<code>|b→| = √(2² + (−1)²) = √5</code>；<code>cos θ = 2 / (5·√5) = 2√5/25</code>。因 <code>a→·b→ = 2 ≠ 0</code> 不垂直；因 <code>x₁y₂ − x₂y₁ = 3×(−1) − 4×2 = −11 ≠ 0</code> 不平行。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>正弦定理：<code>a/sin A = b/sin B</code>，即 <code>4/sin30° = b/sin75°</code>，得 <code>b = 8·sin75° = 8·(√6+√2)/4 = 2(√6+√2)</code>。余弦定理：<code>a² = b² + c² − 2bc·cos A = 64 + 25 − 2×8×5×cos60° = 89 − 40 = 49</code>，故 <code>a = 7</code>。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../../必修一/第5章-三角函数/第5章-三角函数.html">← 上一章：第5章 三角函数</a><a href="../../../index.html">回目录</a><a href="../第7章-复数/第7章-复数.html">下一章：第7章 复数 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 必修第二册</footer>
+</body>
+</html>

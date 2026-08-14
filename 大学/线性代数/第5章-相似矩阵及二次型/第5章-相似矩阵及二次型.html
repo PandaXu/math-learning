@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第5章 相似矩阵及二次型 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第5章 相似矩阵及二次型</div></header>
+<main class="container">
+<h1>第5章 相似矩阵及二次型</h1>
+<p class="lead">大学 / 线性代数</p>
+<div class="summary"><span class="tag">一句话总纲：</span>特征值与特征向量是线性变换的「不变方向 + 伸缩因子」；把矩阵沿这些方向「对角化」就是换到主轴坐标系；而二次型 xᵀAx 在这些主轴方向上被「旋转、消交叉项」成标准形，其正负（惯性指数）决定了曲面形状与能量函数的稳定性——正定即「碗口向上、原点为极小、系统稳定」。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">5.1 特征值与特征向量</a><a href="#s2">5.2 相似矩阵与相似对角化</a><a href="#s3">5.3 二次型及其标准形</a><a href="#s4">5.4 正定二次型</a><a href="#s5">几何与物理含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">5.1 特征值与特征向量</h2>
+<h3>定义</h3>
+<p>设 <code>A</code> 是 <code>n</code> 阶方阵。若存在数 <code>λ</code> 与<strong>非零</strong>列向量 <code>x</code>，使得</p>
+<pre><code>A x = λ x</code></pre>
+<p>则称 <code>λ</code> 为 <code>A</code> 的<strong>特征值</strong>（eigenvalue），<code>x</code> 为 <code>A</code> 的对应于 <code>λ</code> 的<strong>特征向量</strong>（eigenvector）。方程 <code>Ax = λx</code> 可改写为 <code>(λE − A)x = 0</code>，它有非零解 ⟺ 系数行列式为 0：</p>
+<pre><code>det(λE − A) = 0     （特征方程）
+f(λ) = |λE − A|      （特征多项式）</code></pre>
+<p><code>f(λ)</code> 是 λ 的 <code>n</code> 次多项式，它的根就是全部特征值（重根按重数计，即<strong>代数重数</strong>）。对每个特征值 <code>λᵢ</code>，解齐次线性方程组 <code>(λᵢE − A)x = 0</code>，得到的非零解就是对应的特征向量；其基础解系的维数称为该特征值的<strong>几何重数</strong>。</p>
+
+<div class="insight"><strong>几何含义（本章第一核心）：</strong>把方阵 A 看成空间中的一个<strong>线性变换</strong>（旋转、缩放、剪切、反射…）。方程 <code>Ax = λx</code> 说的是：向量 <code>x</code> 经过变换 A 后，<strong>方向不改变（或只反向），仅仅被拉伸/压缩了 λ 倍</strong>。因此特征向量就是线性变换的<strong>「不变方向」</strong>（特征直线），特征值就是沿该方向的<strong>「伸缩因子」</strong>：λ &gt; 0 表示同向拉伸、0 &lt; λ &lt; 1 表示同向压缩、λ &lt; 0 表示反向再拉伸、λ = 0 表示沿该方向压扁到原点（所以 λ = 0 意味着 A 不可逆）。</div>
+<div class="insight"><strong>物理含义：</strong>特征值与特征向量刻画了一个系统的<strong>「固有模式」</strong>。在振动系统中，特征向量是<strong>主振型</strong>（各质点按固定比例振动的固有形状），特征值的平方根正比于<strong>固有频率</strong>；在材料力学里，应力张量的特征向量是<strong>主方向</strong>、特征值是<strong>主应力</strong>；在刚体力学里，转动惯量张量的特征轴是<strong>主轴</strong>；在马尔可夫链与 PageRank 中，转移矩阵特征值 1 对应的特征向量是<strong>稳态分布</strong>。一句话：<strong>特征值 = 固有放大率，特征向量 = 固有模式/主轴</strong>。</div>
+
+<h3>一个完整算例（后续各节反复使用）</h3>
+<p>求 <code>A</code> 的特征值与特征向量：</p>
+<pre><code>       ┌      ┐
+  A =  │ 2  1 │
+       │ 1  2 │
+       └      ┘
+
+第一步（特征值）：解 |λE − A| = 0
+            ┌             ┐
+  λE − A =  │ λ−2    −1   │
+            │  −1   λ−2   │
+            └             ┘
+  |λE − A| = (λ−2)² − 1 = λ² − 4λ + 3 = (λ−1)(λ−3) = 0
+  ⇒  λ₁ = 1，λ₂ = 3
+
+第二步（特征向量）：
+  λ₁ = 1：解 (E − A)x = 0，即 −x₁ − x₂ = 0 ⇒ x = t(1, −1)ᵀ
+  λ₂ = 3：解 (3E − A)x = 0，即  x₁ − x₂ = 0 ⇒ x = t(1,  1)ᵀ</code></pre>
+<p>检验：<code>tr(A) = 2 + 2 = 4 = 1 + 3</code>（特征值之和 = 迹 ✓）；<code>det(A) = 4 − 1 = 3 = 1 × 3</code>（特征值之积 = 行列式 ✓）。两个特征向量 <code>(1,−1)ᵀ</code> 与 <code>(1,1)ᵀ</code> 正交，这是<strong>实对称矩阵</strong>的普遍性质。</p>
+
+<h3>核心性质</h3>
+<ol>
+<li><strong>n 阶方阵恰有 n 个特征值</strong>（重根按重数计，可能在复数范围）。</li>
+<li><strong>特征值之和 = 迹</strong>：λ₁ + λ₂ + … + λₙ = tr(A) = 主对角元之和。</li>
+<li><strong>特征值之积 = 行列式</strong>：λ₁λ₂…λₙ = det(A)。由此：<strong>A 可逆 ⟺ 所有特征值都不为 0</strong>。</li>
+<li>若 λ 是 A 的特征值，则 λᵏ 是 Aᵏ 的特征值；若 A 可逆，则 1/λ 是 A⁻¹ 的特征值。</li>
+<li>A 与 Aᵀ 有<strong>相同特征值</strong>（特征向量一般不同）。</li>
+<li><strong>不同特征值对应的特征向量线性无关</strong>。</li>
+<li>属于同一特征值 λ 的所有特征向量，再添上零向量，构成一个子空间——<strong>特征子空间</strong>（维数 = 几何重数）。</li>
+<li><strong>实对称矩阵</strong>：特征值全是实数，且不同特征值对应的特征向量<strong>两两正交</strong>（这是后面二次型正交标准化的基础）。</li>
+</ol>
+
+<div class="insight"><strong>几何反例（为什么特征向量不一定存在）：</strong>平面旋转 90° 的矩阵 <code>A = [[0,−1],[1,0]]</code>，其特征方程 <code>λ² + 1 = 0</code> 只有复根 <code>λ = ±i</code>，没有实特征值。几何上这是显然的：一个旋转会把<strong>每一个</strong>方向都转走，不存在「方向不变」的直线，所以没有实特征向量。它暗示：<strong>要讨论特征向量，最好在复数域里；而实对称矩阵保证有实特征值与实特征向量。</strong></div>
+
+<h2 id="s2">5.2 相似矩阵与相似对角化</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><line x1="175" y1="235" x2="345" y2="65" stroke="#bfdbfe" stroke-width="1" stroke-dasharray="4 4"/><line x1="175" y1="65" x2="345" y2="235" stroke="#a7f3d0" stroke-width="1" stroke-dasharray="4 4"/><line x1="260" y1="150" x2="281.2" y2="128.8" stroke="#2563eb" stroke-width="4" stroke-linecap="round"><animate attributeName="x2" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="y2" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></line><circle r="6" fill="#2563eb"><animate attributeName="cx" values="281.2;323.6;281.2" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="128.8;86.4;128.8" dur="4s" repeatCount="indefinite"/></circle><line x1="260" y1="150" x2="281.2" y2="171.2" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/><circle cx="281.2" cy="171.2" r="6" fill="#16a34a"><animate attributeName="r" values="4;6;4" dur="4s" repeatCount="indefinite"/></circle><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="352" y="50" fill="#475569" font-size="12" text-anchor="middle">方向 (1,1)</text><text x="352" y="252" fill="#475569" font-size="12" text-anchor="middle">方向 (1,−1)</text><text x="430" y="82" fill="#2563eb" font-size="13" text-anchor="middle">λ=3：方向不变，拉伸 3 倍</text><text x="430" y="222" fill="#16a34a" font-size="13" text-anchor="middle">λ=1：不伸缩</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：特征向量是线性变换的「不变方向」——沿 (1,1) 方向只被拉伸 3 倍、沿 (1,−1) 方向长度不变，方向始终保持在同一直线上</figcaption></figure>
+<h3>相似的定义与不变量</h3>
+<p>设 A、B 为 n 阶方阵，若存在<strong>可逆矩阵 P</strong>，使得</p>
+<pre><code>B = P⁻¹ A P</code></pre>
+<p>则称 A 与 B <strong>相似</strong>，记作 A ∼ B。相似是等价关系，且相似矩阵保持所有「与基选择无关」的量不变：</p>
+<ul>
+<li><strong>特征多项式、特征值相同</strong>（因此特征值也叫「相似不变量」）；</li>
+<li>行列式、迹、秩相同。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong><code>B = P⁻¹AP</code> 是「<strong>换基 → 变换 → 换回</strong>」的三段动作：P 把旧坐标换成新坐标（P⁻¹），在新基下用 A 作用，再换回旧坐标。所以 A 与 B 是<strong>同一个线性变换在不同基下的矩阵表示</strong>。既然变换是同一个，其特征值（伸缩因子）当然不变。</div>
+<div class="insight"><strong>物理含义：</strong>同一个物理系统（同一个线性作用）在不同坐标系/不同仪表下的「读数」不同，但系统的固有属性——固有频率、主应力、能量本征值——不变。相似关系就是「换坐标系描述同一个系统」。</div>
+
+<h3>相似对角化</h3>
+<p>若 A 相似于一个<strong>对角矩阵 Λ</strong>，即存在可逆 P 使</p>
+<pre><code>P⁻¹ A P = Λ = diag(λ₁, λ₂, …, λₙ)</code></pre>
+<p>则称 A <strong>可对角化</strong>。此时 Λ 的对角元恰好是 A 的<strong>全部特征值</strong>，而 P 的列向量是<strong>对应的 n 个线性无关的特征向量</strong>。等价写法（<strong>特征分解</strong>）：</p>
+<pre><code>A = P Λ P⁻¹</code></pre>
+<div class="insight"><strong>几何含义：</strong>对角化 = <strong>找到一组主轴（特征向量基）</strong>。在这组基下，线性变换 A 变得极其简单——它只是<strong>沿每个坐标轴独立地伸缩</strong>（对角元就是各轴方向的伸缩因子 λᵢ），交叉作用全部消失。形象地说：原来 A 是「边旋转边斜着拉扯」，换到主轴坐标系后变成了「规规矩矩地沿三根轴分别拉伸/压缩/翻转」。</div>
+<div class="insight"><strong>物理含义：</strong>对角化就是<strong>解耦</strong>。一个耦合的多自由度系统（各变量相互牵制），通过坐标变换 P 被分解成 n 个<strong>彼此独立的「正则模式」</strong>：每个模式独自按自己的固有频率振动、独立地衰减或增长。A = PΛP⁻¹ 读作「进入主轴系 → 各模式独立缩放 → 回到原坐标系」。</div>
+
+<h3>可对角化的判定</h3>
+<ol>
+<li><strong>充要条件</strong>：A 有 <strong>n 个线性无关的特征向量</strong>。</li>
+<li><strong>充分条件</strong>：A 有 <strong>n 个互不相同的特征值</strong> ⇒ A 必可对角化（但反过来不成立）。</li>
+<li><strong>充要条件（重数角度）</strong>：每个特征值的<strong>几何重数 = 代数重数</strong>。几何重数 &lt; 代数重数时，特征向量「不够数」，不可对角化（此时最多化成若尔当标准形，本章不展开）。</li>
+<li><strong>重要特例</strong>：<strong>实对称矩阵一定可以对角化</strong>，且可以<strong>正交对角化</strong>（即存在正交矩阵 Q 使 Q⁻¹AQ = QᵀAQ = Λ）。</li>
+</ol>
+
+<h3>对角化为什么有用：快速求幂 Aᵏ</h3>
+<pre><code>若 A = PΛP⁻¹，则 Aᵏ = P Λᵏ P⁻¹ = P diag(λ₁ᵏ, λ₂ᵏ, …, λₙᵏ) P⁻¹</code></pre>
+<p>这使矩阵高次幂、差分方程 <code>xₖ₊₁ = A xₖ</code> 的迭代、线性微分方程组 <code>x′ = A x</code> 的求解都化为「对每个独立模式单独做 λᵏ 或 e^(λt)」。例：斐波那契数列 <code>Fₖ₊₂ = Fₖ₊₁ + Fₖ</code> 用矩阵 <code>[[1,1],[1,0]]</code> 对角化，即可得到闭式通项（含黄金比 φ = (1+√5)/2）。</p>
+<div class="insight"><strong>几何含义再概括：</strong>对 Aᵏ 来说，对角化把「k 次复合变换」拆成「换到主轴 → 每根轴伸缩 λᵏ 倍 → 换回来」。λ 的绝对值决定该主轴方向是<strong>增长（|λ| &gt; 1）、衰减（|λ| &lt; 1）还是保持（|λ| = 1）</strong>——这正是动力系统稳定性的几何判据。</div>
+
+<h2 id="s3">5.3 二次型及其标准形</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><ellipse cx="260" cy="150" rx="80" ry="46" fill="#eff6ff" stroke="#2563eb" stroke-width="2" transform="rotate(45 260 150)"/><line x1="30" y1="150" x2="490" y2="150" stroke="#e2e8f0" stroke-width="1"/><line x1="260" y1="12" x2="260" y2="288" stroke="#e2e8f0" stroke-width="1"/><g><animateTransform attributeName="transform" type="rotate" values="0 260 150;45 260 150;0 260 150" dur="8s" repeatCount="indefinite"/><line x1="165" y1="150" x2="355" y2="150" stroke="#16a34a" stroke-width="3"/><polygon points="355,150 343,142 343,158" fill="#16a34a"/><line x1="260" y1="220" x2="260" y2="80" stroke="#2563eb" stroke-width="3"/><polygon points="260,80 252,92 268,92" fill="#2563eb"/></g><text x="260" y="22" fill="#334155" font-size="13" text-anchor="middle">x₂</text><text x="500" y="145" fill="#334155" font-size="13" text-anchor="middle">x₁</text><text x="150" y="42" fill="#334155" font-size="13">f = 2x₁² + 2x₁x₂ + 2x₂² = 1</text><text x="150" y="286" fill="#475569" font-size="12">旋转 45°（x = Qy）消交叉项：f = y₁² + 3y₂²</text><text x="405" y="230" fill="#16a34a" font-size="13" text-anchor="middle">长轴（λ=1）</text><text x="372" y="58" fill="#2563eb" font-size="13" text-anchor="middle">短轴（λ=3）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：二次型 f = 2x₁² + 2x₁x₂ + 2x₂² 的等值线 f=1 是斜放的椭圆，正交变换把坐标轴旋转 45° 到主轴，交叉项消失、椭圆「摆正」为标准形 f = y₁² + 3y₂²</figcaption></figure>
+<h3>二次型与对称矩阵的一一对应</h3>
+<p>只含平方项与交叉乘积项、每项都是 2 次的 n 元齐次多项式，称为<strong>二次型</strong>。任何二次型都可唯一地写成</p>
+<pre><code>f(x₁, x₂, …, xₙ) = xᵀ A x     （要求 A 为对称矩阵）</code></pre>
+<p>其中交叉项系数被<strong>对半分</strong>给 A 的两个对称位置。例：<code>f = 2x₁² + 2x₁x₂ + 2x₂²</code> 对应</p>
+<pre><code>       ┌      ┐          ┌     ┐
+  A =  │ 2  1 │    x =   │ x₁  │
+       │ 1  2 │          │ x₂  │
+       └      ┘          └     ┘
+（2x₁x₂ 的系数 2 拆成 a₁₂ = a₂₁ = 1）</code></pre>
+<div class="insight"><strong>几何含义：</strong>二次型是<strong>二次曲面（二次曲线）的方程左端</strong>。平面上的二次曲线 <code>ax² + 2bxy + cy² + 低次项 = 0</code>，其形状完全由齐次二次部分（椭圆、双曲线、抛物线）决定；空间中的二次曲面（椭球面、双曲面、锥面…）同理。交叉项 <code>xy</code> 的出现意味着坐标轴与曲面的<strong>主轴不重合</strong>（曲面「斜放着」）。</div>
+<div class="insight"><strong>物理含义：</strong>二次型几乎等同于<strong>能量</strong>：质点的动能 <code>T = ½mvᵀv</code>、多自由度小振动的势能 <code>V = ½xᵀKx</code>（K 为刚度矩阵）、刚体转动动能 <code>T = ½ωᵀIω</code>（I 为转动惯量张量）、电网络的功率、最小二乘误差都是二次型。因此研究二次型的「标准形」就是研究能量在什么坐标下最简单。</div>
+
+<h3>化标准形的两种方法</h3>
+<p>通过<strong>可逆线性变换</strong> x = Cy（C 可逆），二次型化为只含平方项的<strong>标准形</strong>：</p>
+<pre><code>f = λ₁y₁² + λ₂y₂² + … + λᵣyᵣ²   （r = rank(A)）</code></pre>
+<p><strong>方法一：配方法（拉格朗日配方法）</strong>——逐步配方消去交叉项，适用于含平方项的一般情形。</p>
+<p><strong>方法二：正交变换法（主轴法，最本质）</strong>——因 A 实对称，存在正交矩阵 Q 使 <code>QᵀAQ = Λ = diag(λ₁,…,λₙ)</code>。令 <code>x = Qy</code>，则</p>
+<pre><code>f = xᵀAx = yᵀ(QᵀAQ)y = yᵀΛy = λ₁y₁² + λ₂y₂² + … + λₙyₙ²</code></pre>
+<p>标准形的系数就是 A 的<strong>全部特征值</strong>，Q 的列是对应的<strong>正交单位特征向量</strong>。</p>
+<div class="insight"><strong>几何含义（主轴定理）：</strong>正交变换 <code>x = Qy</code> 是<strong>旋转（或反射）坐标轴</strong>，它保持长度与夹角不变。化标准形 = <strong>把坐标轴旋转到曲面的主轴方向</strong>，于是交叉项全部消失，曲面「摆正」，方程变成主轴上的标准形式。例如上例 <code>f = 2x₁² + 2x₁x₂ + 2x₂²</code> 经特征值 λ = 1, 3 化为 <code>f = y₁² + 3y₂²</code>：曲线 <code>f = 1</code> 是一个<strong>椭圆</strong>，其长短轴沿特征向量方向 <code>(1,−1)</code> 与 <code>(1,1)</code>（即旋转了 45°），半轴长分别为 1/√1 与 1/√3。</div>
+<div class="insight"><strong>物理含义：</strong>正交变换法 = <strong>转到「主轴/主方向」坐标系</strong>。转动惯量张量对角化给出<strong>主转动惯量与主轴</strong>；小振动系统的刚度矩阵对角化给出<strong>各主振型的等效刚度</strong>，使总能量写成各独立模式能量之和 <code>E = ½Σλᵢyᵢ²</code>——交叉耦合消失，每个模式可单独分析。</div>
+
+<h3>惯性定理（标准形不唯一，但「正负个数」唯一）</h3>
+<p>二次型的标准形<strong>不唯一</strong>（配方法、不同变换得到的系数可以不同），但<strong>惯性定理</strong>保证：无论用何种可逆线性变换化标准形，<strong>正系数个数 p（正惯性指数）与负系数个数 q（负惯性指数）都是唯一确定的</strong>。记 <code>r = rank(A)</code>，则 <code>p + q = r</code>，<code>p − q</code> 称为<strong>符号差</strong>。进一步可化为<strong>规范形</strong>（系数只取 ±1 或 0）：</p>
+<pre><code>f = z₁² + … + z_p² − z_{p+1}² − … − z_r²</code></pre>
+<div class="insight"><strong>几何含义：</strong>惯性指数 p、q 是二次曲面（曲线）的<strong>「型」</strong>的完整刻画：平面二次曲线中，正惯性指数决定它本质上是<strong>椭圆（p=2）还是双曲线（p=q=1）还是抛物线退化（r&lt;2）</strong>；空间二次曲面中 p、q 决定是<strong>椭球面、单叶/双叶双曲面还是锥面</strong>。缩放、旋转都改变不了这个「型」，只有 p、q 是本质的。</div>
+
+<h3>矩阵合同</h3>
+<p>若存在可逆矩阵 C 使 <code>B = CᵀAC</code>，则称 A 与 B <strong>合同</strong>。二次型经可逆线性变换 x = Cy 后，矩阵由 A 变为 <code>CᵀAC</code>，所以「二次型化标准形」=「把对称矩阵<strong>合同对角化</strong>」。正交变换是合同的特例（此时 Cᵀ = C⁻¹，合同与相似重合）。</p>
+
+<h2 id="s4">5.4 正定二次型</h2>
+<h3>定义</h3>
+<p>实二次型 <code>f = xᵀAx</code>：若对<strong>任意非零向量</strong> x，都有 <code>f(x) &gt; 0</code>，则称 f 为<strong>正定二次型</strong>，对称矩阵 A 为<strong>正定矩阵</strong>，记作 A ≻ 0。类似可定义：</p>
+<table>
+<tr><th>类型</th><th>条件（对任意 x ≠ 0）</th><th>例子 f(x₁,x₂)</th></tr>
+<tr><td>正定</td><td>f(x) &gt; 0</td><td>x₁² + 2x₂²</td></tr>
+<tr><td>负定</td><td>f(x) &lt; 0</td><td>−x₁² − x₂²</td></tr>
+<tr><td>半正定</td><td>f(x) ≥ 0（有非零 x 使 =0）</td><td>x₁²</td></tr>
+<tr><td>半负定</td><td>f(x) ≤ 0（有非零 x 使 =0）</td><td>−x₂²</td></tr>
+<tr><td>不定</td><td>有 x 使 f&gt;0，也有 x 使 f&lt;0</td><td>x₁² − x₂²</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>正定二次型 <code>f(x) = xᵀAx</code> 的图像是「<strong>原点处开口向上的碗</strong>」：原点 f(0)=0 是<strong>严格的全局极小点</strong>，沿任何方向离开原点函数值都增大。它的等值面 <code>f(x) = c &gt; 0</code> 是<strong>椭球面（椭球壳）</strong>——因为正定 ⟺ 所有特征值 λᵢ &gt; 0，标准形 <code>f = Σλᵢyᵢ²</code> 中每个主轴方向的「曲率」都为正，等值面就是各半轴长 1/√λᵢ 的椭球。<strong>不定</strong>二次型（如 <code>x₁² − x₂²</code>）则对应<strong>马鞍面</strong>：原点是鞍点，沿某方向升高、沿另一方向降低。</div>
+<div class="insight"><strong>物理含义：</strong>正定 ⟺ <strong>能量的严格极小 ⟺ 稳定平衡</strong>。弹簧势能 <code>V = ½kx²</code>（k&gt;0）正定，故平衡位置稳定；刚体转动动能 <code>T = ½ωᵀIω</code> 中转动惯量张量 I 恒正定（能量必为正）；最小二乘的误差平方和、协方差矩阵、刚度矩阵、质量矩阵也都是正定的。若势能矩阵在某平衡点<strong>不定</strong>，则该平衡点<strong>不稳定</strong>（如倒立摆、马鞍势）。</div>
+
+<h3>正定的判定（五个等价条件）</h3>
+<p>设 A 为实对称矩阵，下列命题<strong>两两等价</strong>：</p>
+<ol>
+<li>A 正定（定义：x ≠ 0 时 xᵀAx &gt; 0）；</li>
+<li><strong>A 的全部特征值都大于 0</strong>；</li>
+<li><strong>A 的各阶顺序主子式全大于 0</strong>（Sylvester / 赫尔维茨判据）；</li>
+<li><strong>正惯性指数 p = n</strong>（规范形全为 + 号）；</li>
+<li>A 与单位阵 E <strong>合同</strong>，即存在可逆 C 使 <code>A = CᵀC</code>。</li>
+</ul>
+<p><strong>顺序主子式</strong>：取 A 左上角的 k×k 子块的行列式 Δₖ（k = 1, 2, …, n）。例：</p>
+<pre><code>       ┌      ┐
+  A =  │ 2  1 │   Δ₁ = 2 &gt; 0，Δ₂ = |A| = 3 &gt; 0  ⇒ A 正定 ✓
+       │ 1  2 │
+       └      ┘
+
+       ┌      ┐
+  B =  │ 1  2 │   Δ₁ = 1 &gt; 0，Δ₂ = |B| = 1−4 = −3 &lt; 0  ⇒ B 不定（特征值 3, −1）
+       │ 2  1 │
+       └      ┘</code></pre>
+<p><strong>常用推论</strong>：正定矩阵的主对角元全为正（必要条件，但不充分）；负定 ⟺ A 的<strong>奇数阶</strong>顺序主子式为负、<strong>偶数阶</strong>为正（即 −A 正定）。</p>
+
+<hr/>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>特征值 λ</td><td>线性变换沿特征方向的伸缩因子</td><td>系统的固有放大率（固有频率²、主应力、能量本征值）</td></tr>
+<tr><td>特征向量 x</td><td>变换下方向不变的直线（不变方向/特征轴）</td><td>固有模式：主振型、主轴、主方向、稳态分布</td></tr>
+<tr><td>特征方程 |λE−A|=0</td><td>求「存在不变方向」的条件</td><td>求系统的固有值（本征值方程）</td></tr>
+<tr><td>相似 B=P⁻¹AP</td><td>同一变换在不同基下的表示</td><td>同一系统换坐标系描述，固有属性不变</td></tr>
+<tr><td>相似对角化</td><td>找到主轴系，变换变为沿各轴独立缩放</td><td>解耦：把耦合系统分解为独立正则模式</td></tr>
+<tr><td>Aᵏ = PΛᵏP⁻¹</td><td>每根主轴方向按 λᵏ 独立伸缩</td><td>迭代/动力系统的增长、衰减与稳定性</td></tr>
+<tr><td>二次型 xᵀAx</td><td>二次曲线/曲面的方程左端（形状）</td><td>能量：动能、势能、转动惯量、误差平方和</td></tr>
+<tr><td>化标准形（正交变换）</td><td>旋转坐标轴到主轴，消去交叉项</td><td>转到主方向，能量写成各独立模式之和</td></tr>
+<tr><td>惯性指数 p, q</td><td>曲面「型」的本质：椭圆/双曲线/马鞍面</td><td>能量函数正负模式的数目（本质不变量）</td></tr>
+<tr><td>合同 B=CᵀAC</td><td>二次型在不同基下的矩阵关系</td><td>同一能量函数换坐标后的矩阵表示</td></tr>
+<tr><td>正定二次型</td><td>原点为严格极小的「碗」；等值面为椭球</td><td>能量正定 ⟺ 稳定平衡、正定惯性/刚度张量</td></tr>
+<tr><td>顺序主子式判据</td><td>各维子空间截口都「开口向上」</td><td>沿任意方向能量都增大的代数判定</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>求 <code>A = [[3,1],[0,2]]</code> 的特征值、特征向量；它是否可对角化？写出 P 与 Λ。</li>
+<li>已知 3 阶方阵 A 的特征值为 1, 2, −3，求 det(A)、tr(A)、det(A⁻¹)、A² 的特征值，并判断 A 是否可逆、是否可对角化。</li>
+<li>判断 <code>A = [[1,2],[2,1]]</code> 是否可对角化；求 P 使 P⁻¹AP 为对角阵（或说明不可）。</li>
+<li>用正交变换化 <code>f = 3x₁² + 2x₁x₂ + 3x₂²</code> 为标准形，写出正交矩阵 Q 与标准形，并说明曲线 f = 1 的类型与主轴方向。</li>
+<li>用配方法化 <code>f = x₁² + 2x₁x₂ + 2x₂²</code> 为标准形，并与正交变换法比较系数。</li>
+<li>判定下列矩阵的正定性：<code>[[2,−1],[-1,2]]</code>、<code>[[1,2],[2,1]]</code>、<code>[[2,1,0],[1,3,0],[0,0,5]]</code>。</li>
+<li>设 <code>f = x₁² + x₂² + x₃² + 2x₁x₂ + 2x₁x₃</code>，求正惯性指数、负惯性指数与符号差。</li>
+<li>若 A 正定，证明 A⁻¹ 也正定、A 的主对角元全为正。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ 「特征向量可以取零向量」→ ❌ 定义要求 x 必须<strong>非零</strong>；零向量满足 Ax = λx 恒成立，无意义。</li>
+<li>❌ 「特征值都不为 0」→ ❌ λ = 0 完全可以是特征值；它恰好对应「A 不可逆」（det A = 特征值之积 = 0）。</li>
+<li>❌ 「n 个不同特征值才可对角化」→ ❌ 这是<strong>充分不必要</strong>条件；有重特征值时只要「几何重数 = 代数重数」仍可对角化。</li>
+<li>❌ 「相似矩阵有相同的特征向量」→ ❌ 相似矩阵<strong>特征值相同</strong>，但特征向量一般不同（只是经过 P 的变换）。</li>
+<li>❌ 「二次型的矩阵随便怎么写都行」→ ❌ 二次型与<strong>对称矩阵</strong>一一对应；交叉项系数必须<strong>对半拆分</strong>到对称位置。</li>
+<li>❌ 「配方法得到的标准形是唯一的」→ ❌ 标准形<strong>不唯一</strong>；唯一的是<strong>正、负惯性指数 p、q</strong>（惯性定理）。</li>
+<li>❌ 「正定矩阵只要主对角元全为正」→ ❌ 主对角元为正只是<strong>必要</strong>条件；如 <code>[[1,2],[2,1]]</code> 对角元都正但不定，必须用<strong>顺序主子式全 &gt; 0</strong> 判定。</li>
+<li>❌ 「正交变换会改变向量的长度」→ ❌ 正交变换保持长度与夹角（只是旋转/反射），因此化标准形只「摆正」曲面、不改变形状。</li>
+<li>❌ 「实对称矩阵的特征值可能是复数」→ ❌ 实对称矩阵特征值必为<strong>实数</strong>，且可正交对角化。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>设 <code>A = [[2,1],[1,2]]</code>，判断向量 <code>α₁=(1,1)ᵀ</code>、<code>α₂=(1,−1)ᵀ</code> 是否为 A 的特征向量；若是，写出对应特征值，并说明其几何含义（「不变方向」与「伸缩因子」）。</li>
+<li>已知 3 阶方阵 A 的特征值为 2、−1、3，求 <code>tr(A)</code>、<code>det(A)</code>、<code>A²</code> 的特征值，并判断 A 是否可逆。</li>
+<li>平面旋转 90° 的矩阵 <code>A = [[0,−1],[1,0]]</code> 为什么没有实特征值？请用「不变方向」的几何意义解释，并说明这与「实对称矩阵必有实特征值」是否矛盾。</li>
+<li>设 <code>A = [[3,1],[0,2]]</code>，求特征值与特征向量，判断 A 是否可对角化；若可，写出 P 与 Λ 使 <code>P⁻¹AP = Λ</code>。</li>
+<li>用正交变换化二次型 <code>f = 3x₁² + 2x₁x₂ + 3x₂²</code> 为标准形，写出正交矩阵 Q、标准形，并说明曲线 <code>f = 1</code> 的类型与主轴方向。</li>
+<li>判断矩阵 <code>B = [[2,−1],[−1,2]]</code> 与 <code>C = [[1,2],[2,1]]</code> 是否正定（分别用顺序主子式与特征值两种方法），并从物理角度解释「正定 ⟺ 稳定平衡、原点为严格极小」。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>α₁=(1,1)ᵀ</code> 是特征向量：<code>Aα₁ = (3,3)ᵀ = 3·(1,1)ᵀ</code>，对应 <code>λ = 3</code>；<code>α₂=(1,−1)ᵀ</code> 也是：<code>Aα₂ = (1,−1)ᵀ = 1·(1,−1)ᵀ</code>，对应 <code>λ = 1</code>。几何上，沿这两个方向线性变换只做伸缩（分别拉伸 3 倍、1 倍）而不改变方向，即它们是该变换的「不变方向（主轴）」，特征值即伸缩因子。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>tr(A) = 2 + (−1) + 3 = 4</code>；<code>det(A) = 2 × (−1) × 3 = −6 ≠ 0</code>，故 A 可逆；<code>A²</code> 的特征值为各特征值的平方：<code>2²=4</code>、<code>(−1)²=1</code>、<code>3²=9</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>特征方程为 <code>λ² + 1 = 0</code>，只有复根 <code>λ = ±i</code>。几何上，旋转 90° 把<strong>每一个</strong>方向都转走，不存在「方向不变」的直线，故没有实特征向量（也就没有实特征值）。这不矛盾：实对称矩阵才保证有实特征值，一般的实矩阵可以有复特征值。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>特征多项式 <code>|λE−A| = (λ−3)(λ−2)</code>，故 <code>λ₁ = 3</code>、<code>λ₂ = 2</code>。对 <code>λ=3</code>：解 <code>(3E−A)x=0</code> 得 <code>x₂=0</code>，取 <code>x = t(1,0)ᵀ</code>；对 <code>λ=2</code>：得 <code>x₁+x₂=0</code>，取 <code>x = t(−1,1)ᵀ</code>。两个特征向量线性无关，故 A 可对角化：<code>P = [[1,−1],[0,1]]</code>，<code>Λ = diag(3,2)</code>，且 <code>P⁻¹AP = Λ</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>二次型对应对称矩阵 <code>A = [[3,1],[1,3]]</code>，特征值 <code>λ₁ = 2</code>、<code>λ₂ = 4</code>，对应的正交单位特征向量为 <code>(1/√2)(1,−1)ᵀ</code> 与 <code>(1/√2)(1,1)ᵀ</code>。取 <code>Q = (1/√2)[[1,1],[−1,1]]</code>，则 <code>x = Qy</code> 化为标准形 <code>f = 2y₁² + 4y₂²</code>。曲线 <code>f = 1</code> 是<strong>椭圆</strong>，主轴沿 <code>(1,−1)</code> 与 <code>(1,1)</code> 方向（相对坐标轴旋转 45°），半轴长分别为 <code>1/√2</code> 与 <code>1/2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>B：顺序主子式 <code>Δ₁=2&gt;0</code>、<code>Δ₂=4−1=3&gt;0</code> ⇒ 正定（特征值 1、3 均 &gt; 0）。C：<code>Δ₁=1&gt;0</code>、<code>Δ₂=1−4=−3&lt;0</code> ⇒ 不定（特征值 3、−1，一正一负）。物理上，正定二次型的图像是原点处开口向上的「碗」，原点为严格极小，能量正定 ⟺ 稳定平衡；不定二次型对应马鞍面，原点为鞍点，平衡不稳定。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">← 上一章：第4章 向量组的线性相关性</a><a href="../../../index.html">回目录</a><a href="../第6章-线性空间与线性变换/第6章-线性空间与线性变换.html">下一章：第6章 线性空间与线性变换 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
+</body>
+</html>

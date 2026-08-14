@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第20章 数据的分析 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第20章 数据的分析</div></header>
+<main class="container">
+<h1>第20章 数据的分析</h1>
+<p class="lead">初中 / 初二 / 八年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>数据的分析 = 用少数几个数，替一批数据回答两个问题——「中心在哪里」（平均数 / 中位数 / 众数）和「散得有多开」（方差）。学完本章，你要能在心里"看见"：一组数据就是数轴上的一群质点，<strong>平均数 = 这群质点的重心</strong>，<strong>中位数 = 最中间的那个点</strong>，<strong>众数 = 扎堆最密的位置</strong>，而<strong>方差 = 它们离重心有多远的平方平均</strong>。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">20.1 平均数与加权平均数</a><a href="#s2">20.2 中位数</a><a href="#s3">20.3 众数</a><a href="#s4">20.4 方差</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">20.1 平均数与加权平均数</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">平均数 = 等质量质点的重心（平衡支点）</text><g><animateTransform attributeName="transform" type="rotate" values="-4 280 110;4 280 110;-4 280 110" dur="5s" repeatCount="indefinite"/><rect x="150" y="100" width="260" height="10" rx="5" fill="#64748b"/><line x1="170" y1="110" x2="170" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="280" y1="110" x2="280" y2="122" stroke="#94a3b8" stroke-width="2"/><line x1="390" y1="110" x2="390" y2="122" stroke="#94a3b8" stroke-width="2"/><circle cx="170" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="280" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cx="390" cy="134" r="12" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><text x="170" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">3</text><text x="280" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">5</text><text x="390" y="138" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">7</text></g><polygon points="280,110 258,152 302,152" fill="#16a34a"/><text x="280" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（支点）</text><line x1="60" y1="210" x2="500" y2="210" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="232">1</text><text x="115" y="232">2</text><text x="170" y="232">3</text><text x="225" y="232">4</text><text x="280" y="232">5</text><text x="335" y="232">6</text><text x="390" y="232">7</text><text x="445" y="232">8</text><text x="500" y="232">9</text></g><line x1="280" y1="210" x2="170" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;170;170;280;280" dur="5s" repeatCount="indefinite"/></line><line x1="280" y1="210" x2="390" y2="210" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG)"><animate attributeName="x2" values="280;390;390;280;280" dur="5s" repeatCount="indefinite"/></line><text x="225" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">−2</text><text x="335" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">+2</text><text x="280" y="200" text-anchor="middle" font-size="12" fill="#64748b">0</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：平均数 x̄ 是数轴上等质量质点的重心（平衡支点）——偏离量之和 (−2)+0+(+2)=0，杠杆恰好水平平衡</figcaption></figure>
+<h3>算术平均数（通常说的"平均数"）</h3>
+<p><strong>定义</strong>：n 个数据 x₁, x₂, …, xₙ 的<strong>算术平均数</strong>（简称平均数），等于这 n 个数的和除以 n，记作 <code>x̄</code>（读作"x 拔"）：</p>
+<pre><code>x̄ = (x₁ + x₂ + ⋯ + xₙ) / n</code></pre>
+<p>例：5, 8, 8, 9, 10 的平均数是 (5+8+8+9+10) ÷ 5 = 40 ÷ 5 = 8。</p>
+<div class="insight"><strong>几何含义（重心 / 平衡支点）：</strong>在数轴上，把每个数据都看成一个<strong>等质量的质点</strong>放在对应刻度上，平均数 <code>x̄</code> 恰好就是这一群质点的<strong>重心位置</strong>。如果在 x̄ 处放一个支点把整条"数轴杠杆"架起来，杠杆会<strong>刚好水平平衡</strong>。</div>
+<div class="insight"><strong>物理含义（质心 + 力矩平衡）：</strong>平均数就是物理里的<strong>质心（重心）坐标</strong>。它平衡的原因是一条硬规律：所有"偏离量"之和恒为 0，即 (x₁−x̄) + (x₂−x̄) + ⋯ + (xₙ−x̄) = 0。每个质点到重心的"力矩"（距离 × 质量）正负相互抵消，所以它既不会左倾也不会右倾——平均数正是这组数据的"平衡点"和"整体水平"的代表。</div>
+<p><strong>关键性质</strong>：所有数据与平均数的差（离均差）加起来一定等于 0。<code>x̄</code> 是唯一有这条性质的数，这也是它"不偏不倚"的根源。</p>
+
+<h3>加权平均数（有权重的平均数）</h3>
+<p>当每个数据<strong>重要程度不同</strong>时，就要给它们配上"<strong>权</strong>"（weight，记作 w），用<strong>加权平均数</strong>表示整体水平：</p>
+<pre><code>x̄ = (x₁w₁ + x₂w₂ + ⋯ + xₙwₙ) / (w₁ + w₂ + ⋯ + wₙ)</code></pre>
+<p><strong>权的含义</strong>：权 w 越大，说明这个数据越重要、对平均数的影响力越大。权可以是<strong>百分比、比例、频数（出现次数）、重要度</strong>等各种形式。</p>
+<p><strong>例（按成绩权重算总评）</strong>：平时成绩 80 分（占 30%）、期中 90 分（占 30%）、期末 85 分（占 40%），则总评：</p>
+<pre><code>x̄ = 80×0.3 + 90×0.3 + 85×0.4 = 24 + 27 + 34 = 85 分</code></pre>
+<div class="insight"><strong>几何 / 物理含义（不等质量的质心）：</strong>给不同位置的质点配上<strong>不同的质量</strong>（权 = 质量），加权平均数就是这群"<strong>不等质量质点</strong>"的重心。质量越大的点，越能把重心"拉"向自己：上面例子里期末权重最大（0.4），所以总评 85 比"三个分数直接平均 (80+90+85)÷3 = 85"更偏向期末的 85——这里两者恰好相同，但若期末改成 60 分，加权后会被明显拉低。</div>
+<p><strong>频数形式</strong>：当数据出现重复时，常用"频数"作权。若 x₁ 出现 f₁ 次、x₂ 出现 f₂ 次、…、xₖ 出现 fₖ 次，总次数 n = f₁+f₂+⋯+fₖ，则：</p>
+<pre><code>x̄ = (x₁f₁ + x₂f₂ + ⋯ + xₖfₖ) / n</code></pre>
+<p><strong>重要关系</strong>：算术平均数是加权平均数的<strong>特例</strong>——当所有权都相等（每个数据的权都是 1/n）时，加权平均数就退化为算术平均数。</p>
+
+<h2 id="s2">20.2 中位数</h2>
+<h3>定义与求法</h3>
+<p><strong>定义</strong>：把一组数据按从小到大排列后，<strong>位于正中间位置</strong>的那个数，叫做这组数据的<strong>中位数</strong>。它把数据"一刀切成两半"：一半不比它大，一半不比它小。</p>
+<ul>
+<li><strong>数据个数 n 为奇数</strong>：中位数是排序后第 (n+1)/2 个数。例：3, 5, 7 的中位数是 5。</li>
+<li><strong>数据个数 n 为偶数</strong>：中位数是中间两个数的平均数。例：3, 4, 5, 7 的中位数是 (4+5)÷2 = 4.5。</li>
+</ul>
+<div class="insight"><strong>几何含义（使"总距离"最小的点）：</strong>中位数是数轴上这样一个位置——<strong>所有数据点到它的距离之和最小</strong>（数学上叫"最小化绝对偏差和 Σ|xᵢ−m|"）。把它放到数据点里"正中间"，左右两侧的点数一样多，谁都不能靠单方面挪动来减少总距离。</div>
+<div class="insight"><strong>物理含义（最优选址 + 稳健）：</strong>想象一条街上有若干户人家，要在街上设一个"取货点"让<strong>所有人走到它的总路程最短</strong>——答案就是中位数所在的位置（一维最优选址）。另一个物理直觉是<strong>稳健（抗极端值）</strong>：中位数只看"位置次序"，一个点哪怕跑到无穷远，它也只占一个位置，<strong>不会把中心"拉偏"</strong>。因此描述"收入"这类含极端值的数据时，常用中位数而不是平均数。</div>
+<p><strong>例</strong>：数据 1, 2, 3, 4, 100 的平均数是 22（被 100 拉高），而中位数是 3（更接近大多数数据的真实水平）。这就是"稳健"的含义。</p>
+
+<h2 id="s3">20.3 众数</h2>
+<h3>定义</h3>
+<p><strong>定义</strong>：一组数据中<strong>出现次数最多</strong>的那个数据，叫做这组数据的<strong>众数</strong>。</p>
+<ul>
+<li>众数<strong>可能不止一个</strong>：若两个值出现次数并列最多，就有两个众数。例：1, 2, 2, 3, 3 的众数是 2 和 3。</li>
+<li>众数<strong>也可能没有</strong>：若每个数据都只出现一次，就没有众数。例：1, 2, 3, 4。</li>
+</ul>
+<div class="insight"><strong>几何含义（分布的高峰）：</strong>把数据点在数轴上按出现次数"堆"起来，众数就是<strong>堆得最高、最密集</strong>的那个刻度——它是这组数据"最扎堆"的位置，代表分布的"高峰"。</div>
+<div class="insight"><strong>物理含义（最可能出现的状态）：</strong>众数回答的问题是"<strong>哪一种情况最常发生</strong>"。它是"多数人的选择"：商店进货最多的鞋码、全班人数最多的身高、投票里得票最多的选项，用的都是众数。注意它只关心"出现频率"，不关心其它数据具体是多少。</div>
+<h3>三种"集中趋势"指标的区别</h3>
+<table>
+<tr><th>指标</th><th>找什么</th><th>优点</th><th>缺点</th><th>典型用途</th></tr>
+<tr><td>平均数</td><td>整体重心</td><td>用上全部数据，信息最全</td><td>易被极端值拉偏</td><td>求平均分、平均速度</td></tr>
+<tr><td>中位数</td><td>正中间位置</td><td>不受极端值影响（稳健）</td><td>只用"次序"，忽略具体大小</td><td>收入、房价的"中间水平"</td></tr>
+<tr><td>众数</td><td>出现最多</td><td>直接反映"多数"</td><td>可能多个或没有，信息有限</td><td>鞋码、尺码、投票结果</td></tr>
+</table>
+
+<h2 id="s4">20.4 方差</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="240" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="arrG2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker></defs><text x="280" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#2563eb">方差 = 各点到重心距离²的平均（散开程度）</text><line x1="280" y1="60" x2="280" y2="185" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 5"/><text x="280" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">x̄ = 5（重心）</text><line x1="60" y1="180" x2="500" y2="180" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="11" text-anchor="middle"><text x="60" y="202">1</text><text x="115" y="202">2</text><text x="170" y="202">3</text><text x="225" y="202">4</text><text x="280" y="202">5</text><text x="335" y="202">6</text><text x="390" y="202">7</text><text x="445" y="202">8</text><text x="500" y="202">9</text></g><line x1="280" y1="180" x2="225" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><line x1="280" y1="180" x2="335" y2="180" stroke="#16a34a" stroke-width="3" marker-end="url(#arrG2)"><animate attributeName="x2" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></line><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="225;60;60;225" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><circle cx="280" cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"/><circle cy="180" r="10" fill="#2563eb" stroke="#1e40af" stroke-width="1.5"><animate attributeName="cx" values="335;500;500;335" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></circle><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#16a34a">方差小 → 点挤向重心：集中、稳定<animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text><text x="280" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb">方差大 → 点散向两边：波动大<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.25;0.75;1" dur="6s" repeatCount="indefinite"/></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：方差刻画各数据点到重心 x̄=5 的散开程度——点越挤向重心方差越小、越稳定；越散向两边方差越大、波动越大</figcaption></figure>
+<h3>为什么需要"波动程度"指标？</h3>
+<p>两组数据可以有<strong>相同的平均数，却完全不同</strong>。例如甲乙两人各 5 次射击成绩：</p>
+<pre><code>甲：8, 8, 9, 9, 10      平均数 x̄ = 8.8
+乙：6, 8, 9, 10, 11     平均数 x̄ = 8.8</code></pre>
+<p>两人平均分一样，但甲的 5 次成绩挤在一起（稳定），乙的成绩大起大落（波动大）。只用"中心"不够，还需要一个数来量"<strong>散得有多开</strong>"，这就是方差。</p>
+<h3>极差（波动的最粗糙度量）</h3>
+<p><strong>极差</strong> = 最大值 − 最小值，是最简单的离散程度指标。上例甲的极差 = 10−8 = 2，乙的极差 = 11−6 = 5，乙更不稳定。但极差只用了两个数，信息损失大，因此引入更精细的<strong>方差</strong>。</p>
+<h3>方差与标准差</h3>
+<p><strong>方差</strong>：各数据与平均数之差的<strong>平方的平均数</strong>，记作 <code>s²</code>：</p>
+<pre><code>s² = (1/n)[(x₁ − x̄)² + (x₂ − x̄)² + ⋯ + (xₙ − x̄)²]</code></pre>
+<p><strong>标准差</strong>：方差的算术平方根，记作 <code>s</code>，单位与原始数据一致：</p>
+<pre><code>s = √s²</code></pre>
+<p><strong>例</strong>：求 3, 5, 7 的方差。x̄ = (3+5+7)÷3 = 5，于是 s² = [(3−5)²+(5−5)²+(7−5)²]÷3 = (4+0+4)÷3 = 8/3 ≈ 2.67，标准差 s = √(8/3) ≈ 1.63。</p>
+<p><strong>快捷公式</strong>（计算更省事）：<code>s² = (x₁² + x₂² + ⋯ + xₙ²)/n − x̄²</code>，即"平方的平均 − 平均的平方"。</p>
+<div class="insight"><strong>几何含义（离重心的平方距离）：</strong>以平均数（重心）为参照，方差 = 每个数据点到重心的<strong>距离的平方</strong>的平均值。它刻画的是一条数轴上"点群的散开程度"：点越挤向重心，方差越小；点越散向两边，方差越大。用"平方"而不是"距离本身"，是为了既消除正负抵消、又放大远处点的贡献。</div>
+<div class="insight"><strong>物理含义（转动惯量 / 稳定性）：</strong>把数据看成分布在数轴上、总质量为 1 的一群质点，方差正是这个系统<strong>绕质心转动的转动惯量</strong>——质量离转轴（质心）越远，转动越难，系统越"不稳"。标准差则相当于"<strong>回转半径</strong>"，即数据到重心的"典型距离"。所以<strong>方差小 = 数据集中 = 稳定（射击稳、机器稳、成绩稳）</strong>。</div>
+<p><strong>回到甲乙的例子</strong>：</p>
+<pre><code>甲：s² = [ (8−8.8)²+(8−8.8)²+(9−8.8)²+(9−8.8)²+(10−8.8)² ] ÷ 5
+     = (0.64+0.64+0.04+0.04+1.44) ÷ 5 = 2.80 ÷ 5 = 0.56
+乙：s² = [ (6−8.8)²+(8−8.8)²+(9−8.8)²+(10−8.8)²+(11−8.8)² ] ÷ 5
+     = (7.84+0.64+0.04+1.44+4.84) ÷ 5 = 14.80 ÷ 5 = 2.96</code></pre>
+<p>甲方差 0.56 &lt; 乙方差 2.96，所以<strong>甲的成绩更稳定</strong>。</p>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>平均数</td><td>数轴上等质量质点的重心（平衡支点）</td><td>质心坐标；力矩平衡，代表"整体水平"</td></tr>
+<tr><td>加权平均数</td><td>不等质量质点的重心，权=质量</td><td>质心；权越大越被"拉向"该点</td></tr>
+<tr><td>中位数</td><td>排序后正中间的点；使总距离最小的点</td><td>一维最优选址；抗极端值，稳健</td></tr>
+<tr><td>众数</td><td>数轴上扎堆最密、堆得最高的位置</td><td>"最可能发生的状态"，多数人的选择</td></tr>
+<tr><td>极差</td><td>最左点到最右点的跨度</td><td>波动范围的最粗糙度量</td></tr>
+<tr><td>方差</td><td>各点到重心距离平方的平均（散开程度）</td><td>绕质心的转动惯量；越小越稳定</td></tr>
+<tr><td>标准差</td><td>方差的"开方"（回到原单位）</td><td>回转半径；数据到重心的"典型距离"</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>求数据 5, 8, 8, 9, 10 的平均数、中位数和众数。</li>
+<li>某同学平时 80 分（占 30%）、期中 90 分（占 30%）、期末 85 分（占 40%），求他的加权总评。</li>
+<li>求数据 3, 5, 7 的方差与标准差（精确到 0.01）。</li>
+<li>甲乙两名射击运动员各打 5 发，甲：8, 8, 9, 9, 10；乙：6, 8, 9, 10, 11。谁发挥更稳定？</li>
+<li>求数据 1, 2, 3, 4, 100 的平均数与中位数，并说明哪一个更能代表"大多数数据"。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "平均数一定在数据中间" → ❌ 平均数会被极端值拉偏（1, 2, 3, 4, 100 的平均数 22，远超大多数数据），此时应看中位数。</li>
+<li>❌ "偶数个数据的中位数直接取中间第 n/2 个" → ❌ 偶数个时要取<strong>中间两个数的平均数</strong>（3, 4, 5, 7 的中位数是 4.5 不是 4）。</li>
+<li>❌ "众数只能有一个" → ❌ 众数可以有多个（并列最多），也可以没有（每个数都只出现一次）。</li>
+<li>❌ "方差可以是负数" → ❌ 方差是"平方的平均"，恒有 s² ≥ 0，不可能为负。</li>
+<li>❌ "方差越大越好 / 越小越好" → ❌ 看场景：追求稳定（射击、机器精度）时方差小好；追求爆发或风险收益时，大方差未必坏。</li>
+<li>❌ "权一定就是频数" → ❌ 权还可以是百分比、比例、重要程度；频数只是权的一种。</li>
+<li>❌ "计算方差时分母用 n−1" → ❌ 初中阶段按教材用<strong>总体的方差，分母是 n</strong>；n−1 是高中"样本方差"的修正，别混。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>求数据 5, 8, 8, 9, 10 的平均数、中位数和众数。</li>
+<li>某同学平时成绩 80 分（占 30%）、期中 90 分（占 30%）、期末 85 分（占 40%），求他的加权总评成绩。</li>
+<li>求数据 3, 4, 5, 7 的中位数，并说明偶数个数据求中位数时的规则。</li>
+<li>求数据 3, 5, 7 的方差与标准差（保留两位小数）。</li>
+<li>甲、乙两名射击运动员各打 5 发，成绩如下——甲：8, 8, 9, 9, 10；乙：6, 8, 9, 10, 11。谁发挥得更稳定？</li>
+<li>对数据 1, 2, 3, 4, 100，平均数和中位数哪一个更能代表"大多数数据"？结合"重心"与"抗极端值"的几何/物理含义说明理由。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>平均数 = (5+8+8+9+10) ÷ 5 = 40 ÷ 5 = 8；从小到大排序为 5, 8, 8, 9, 10，第 3 个数是中位数，即 8；出现次数最多的是 8（出现 2 次），所以众数为 8。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>加权总评 = 80×0.3 + 90×0.3 + 85×0.4 = 24 + 27 + 34 = 85 分。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>排序后为 3, 4, 5, 7，中间两个数是 4 和 5，中位数 = (4+5) ÷ 2 = 4.5。规则：数据个数为偶数时，取排序后中间两个数的平均数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>平均数 x̄ = (3+5+7) ÷ 3 = 5；方差 s² = [(3−5)² + (5−5)² + (7−5)²] ÷ 3 = (4+0+4) ÷ 3 = 8/3 ≈ 2.67；标准差 s = √(8/3) ≈ 1.63。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>甲、乙的平均数都是 8.8。甲方差 = [(8−8.8)²+(8−8.8)²+(9−8.8)²+(9−8.8)²+(10−8.8)²] ÷ 5 = 0.56；乙方差 = [(6−8.8)²+(8−8.8)²+(9−8.8)²+(10−8.8)²+(11−8.8)²] ÷ 5 = 2.96。0.56 &lt; 2.96，故甲更稳定。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>平均数 = (1+2+3+4+100) ÷ 5 = 22，中位数 = 3。中位数更能代表大多数数据：平均数作为"重心"会被极端值 100 拉偏，而中位数只看位置次序、抗极端值，因此更稳健。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第19章-一次函数/第19章-一次函数.html">← 上一章：第19章 一次函数</a><a href="../../../../index.html">回目录</a><a href="../../../初三/九年级上册/第21章-一元二次方程/第21章-一元二次方程.html">下一章：第21章 一元二次方程 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

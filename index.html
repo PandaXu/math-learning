@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>数学重学路线图 · 数据学习</title>
+<style>*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.searchbox{position:sticky;top:56px;z-index:5;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;margin:20px 0;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+.searchbox input{width:100%;padding:12px 16px;font-size:16px;border:1px solid #d1d5db;border-radius:9px}
+.searchbox input:focus{outline:2px solid #bfdbfe;border-color:#2563eb}
+#count{font-size:13px;color:#6b7280;margin:10px 2px 0}
+#results{max-height:72vh;overflow-y:auto;margin-top:4px}
+.res{padding:12px 4px;border-bottom:1px solid #f1f5f9}
+.res-title{font-size:15px;font-weight:600}
+.res-snippet{font-size:13.5px;color:#4b5563;margin-top:3px;line-height:1.65}
+.res-snippet mark{background:#fde68a;color:#111827;padding:0 2px;border-radius:3px}
+.none{color:#9ca3af;font-size:14px;padding:16px 4px}
+.chaps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 18px;margin:12px 0}
+.chaps a{color:#2563eb;font-size:14.5px}
+.chaps a::before{content:"· ";color:#9ca3af}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><span>数据学习 › 首页</span></div></header>
+<main class="container">
+<h1>数学重学路线图</h1>
+<p class="lead">几何含义 + 物理含义 · 从初一数学到大学数学（共 74 章）</p>
+
+<div class="summary"><span class="tag">目标：</span>系统重学 初中 → 高中 → 大学（高等数学 / 线性代数 / 离散数学）全部课程，每个知识点都追问三个问题：<br/>1. <strong>它是什么？</strong>（定义、公式、规则）<br/>2. <strong>它的几何含义是什么？</strong>（在图形、空间、数轴上长什么样）<br/>3. <strong>它的物理含义是什么？</strong>（对应现实世界的什么现象）</div>
+
+<div class="searchbox">
+  <input id="search" type="search" placeholder="全文模糊搜索：输入关键词，可空格分隔多个词（例：洛必达、负负得正、特征值、握手定理、梯度）…" autocomplete="off"/>
+  <div id="count"></div>
+  <div id="results" style="display:none"></div>
+</div>
+
+<div id="toc">
+  <h2>学习原则</h2>
+  <ul>
+    <li><strong>先直觉，后符号</strong>：每个概念先讲它"对应现实里的什么"，再给严格定义。</li>
+    <li><strong>几何是桥梁</strong>：代数与几何互相印证（数形结合）。</li>
+    <li><strong>物理是土壤</strong>：负数来自"亏欠"、方程来自"找平衡"、微积分来自"变化率与累积"。</li>
+    <li><strong>每章闭环</strong>：概念 → 公式 → 动图 → 典型例题 → 常见误区 → 练习卷（含答案）。</li>
+  </ul>
+
+<h2>第一部分：初中数学</h2>
+<h3>初一 · 七年级上册</h3>
+<div class="chaps">
+<a href="初中/初一/七年级上册/第1章-有理数/第1章-有理数.html">第1章 有理数</a>
+<a href="初中/初一/七年级上册/第2章-整式的加减/第2章-整式的加减.html">第2章 整式的加减</a>
+<a href="初中/初一/七年级上册/第3章-一元一次方程/第3章-一元一次方程.html">第3章 一元一次方程</a>
+<a href="初中/初一/七年级上册/第4章-几何图形初步/第4章-几何图形初步.html">第4章 几何图形初步</a>
+</div>
+<h3>初一 · 七年级下册</h3>
+<div class="chaps">
+<a href="初中/初一/七年级下册/第5章-相交线与平行线/第5章-相交线与平行线.html">第5章 相交线与平行线</a>
+<a href="初中/初一/七年级下册/第6章-实数/第6章-实数.html">第6章 实数</a>
+<a href="初中/初一/七年级下册/第7章-平面直角坐标系/第7章-平面直角坐标系.html">第7章 平面直角坐标系</a>
+<a href="初中/初一/七年级下册/第8章-二元一次方程组/第8章-二元一次方程组.html">第8章 二元一次方程组</a>
+<a href="初中/初一/七年级下册/第9章-不等式与不等式组/第9章-不等式与不等式组.html">第9章 不等式与不等式组</a>
+<a href="初中/初一/七年级下册/第10章-数据的收集整理与描述/第10章-数据的收集整理与描述.html">第10章 数据的收集整理与描述</a>
+</div>
+<h3>初二 · 八年级上册</h3>
+<div class="chaps">
+<a href="初中/初二/八年级上册/第11章-三角形/第11章-三角形.html">第11章 三角形</a>
+<a href="初中/初二/八年级上册/第12章-全等三角形/第12章-全等三角形.html">第12章 全等三角形</a>
+<a href="初中/初二/八年级上册/第13章-轴对称/第13章-轴对称.html">第13章 轴对称</a>
+<a href="初中/初二/八年级上册/第14章-整式的乘法与因式分解/第14章-整式的乘法与因式分解.html">第14章 整式的乘法与因式分解</a>
+<a href="初中/初二/八年级上册/第15章-分式/第15章-分式.html">第15章 分式</a>
+</div>
+<h3>初二 · 八年级下册</h3>
+<div class="chaps">
+<a href="初中/初二/八年级下册/第16章-二次根式/第16章-二次根式.html">第16章 二次根式</a>
+<a href="初中/初二/八年级下册/第17章-勾股定理/第17章-勾股定理.html">第17章 勾股定理</a>
+<a href="初中/初二/八年级下册/第18章-平行四边形/第18章-平行四边形.html">第18章 平行四边形</a>
+<a href="初中/初二/八年级下册/第19章-一次函数/第19章-一次函数.html">第19章 一次函数</a>
+<a href="初中/初二/八年级下册/第20章-数据的分析/第20章-数据的分析.html">第20章 数据的分析</a>
+</div>
+<h3>初三 · 九年级上册</h3>
+<div class="chaps">
+<a href="初中/初三/九年级上册/第21章-一元二次方程/第21章-一元二次方程.html">第21章 一元二次方程</a>
+<a href="初中/初三/九年级上册/第22章-二次函数/第22章-二次函数.html">第22章 二次函数</a>
+<a href="初中/初三/九年级上册/第23章-旋转/第23章-旋转.html">第23章 旋转</a>
+<a href="初中/初三/九年级上册/第24章-圆/第24章-圆.html">第24章 圆</a>
+<a href="初中/初三/九年级上册/第25章-概率初步/第25章-概率初步.html">第25章 概率初步</a>
+</div>
+<h3>初三 · 九年级下册</h3>
+<div class="chaps">
+<a href="初中/初三/九年级下册/第26章-反比例函数/第26章-反比例函数.html">第26章 反比例函数</a>
+<a href="初中/初三/九年级下册/第27章-相似/第27章-相似.html">第27章 相似</a>
+<a href="初中/初三/九年级下册/第28章-锐角三角函数/第28章-锐角三角函数.html">第28章 锐角三角函数</a>
+<a href="初中/初三/九年级下册/第29章-投影与视图/第29章-投影与视图.html">第29章 投影与视图</a>
+</div>
+<h2>第二部分：高中数学</h2>
+<h3>高中 · 必修一</h3>
+<div class="chaps">
+<a href="高中/必修一/第1章-集合与常用逻辑用语/第1章-集合与常用逻辑用语.html">第1章 集合与常用逻辑用语</a>
+<a href="高中/必修一/第2章-一元二次函数方程和不等式/第2章-一元二次函数方程和不等式.html">第2章 一元二次函数方程和不等式</a>
+<a href="高中/必修一/第3章-函数的概念与性质/第3章-函数的概念与性质.html">第3章 函数的概念与性质</a>
+<a href="高中/必修一/第4章-指数函数与对数函数/第4章-指数函数与对数函数.html">第4章 指数函数与对数函数</a>
+<a href="高中/必修一/第5章-三角函数/第5章-三角函数.html">第5章 三角函数</a>
+</div>
+<h3>高中 · 必修二</h3>
+<div class="chaps">
+<a href="高中/必修二/第6章-平面向量及其应用/第6章-平面向量及其应用.html">第6章 平面向量及其应用</a>
+<a href="高中/必修二/第7章-复数/第7章-复数.html">第7章 复数</a>
+<a href="高中/必修二/第8章-立体几何初步/第8章-立体几何初步.html">第8章 立体几何初步</a>
+<a href="高中/必修二/第9章-统计/第9章-统计.html">第9章 统计</a>
+<a href="高中/必修二/第10章-概率/第10章-概率.html">第10章 概率</a>
+</div>
+<h3>高中 · 选择性必修一</h3>
+<div class="chaps">
+<a href="高中/选择性必修一/第1章-空间向量与立体几何/第1章-空间向量与立体几何.html">第1章 空间向量与立体几何</a>
+<a href="高中/选择性必修一/第2章-直线和圆的方程/第2章-直线和圆的方程.html">第2章 直线和圆的方程</a>
+<a href="高中/选择性必修一/第3章-圆锥曲线的方程/第3章-圆锥曲线的方程.html">第3章 圆锥曲线的方程</a>
+</div>
+<h3>高中 · 选择性必修二</h3>
+<div class="chaps">
+<a href="高中/选择性必修二/第4章-数列/第4章-数列.html">第4章 数列</a>
+<a href="高中/选择性必修二/第5章-一元函数的导数及其应用/第5章-一元函数的导数及其应用.html">第5章 一元函数的导数及其应用</a>
+</div>
+<h3>高中 · 选择性必修三</h3>
+<div class="chaps">
+<a href="高中/选择性必修三/第6章-计数原理/第6章-计数原理.html">第6章 计数原理</a>
+<a href="高中/选择性必修三/第7章-随机变量及其分布/第7章-随机变量及其分布.html">第7章 随机变量及其分布</a>
+<a href="高中/选择性必修三/第8章-成对数据的统计分析/第8章-成对数据的统计分析.html">第8章 成对数据的统计分析</a>
+</div>
+<h2>第三部分：大学数学</h2>
+<h3>大学 · 高等数学</h3>
+<div class="chaps">
+<a href="大学/高等数学/第1章-函数与极限/第1章-函数与极限.html">第1章 函数与极限</a>
+<a href="大学/高等数学/第2章-导数与微分/第2章-导数与微分.html">第2章 导数与微分</a>
+<a href="大学/高等数学/第3章-微分中值定理与导数的应用/第3章-微分中值定理与导数的应用.html">第3章 微分中值定理与导数的应用</a>
+<a href="大学/高等数学/第4章-不定积分/第4章-不定积分.html">第4章 不定积分</a>
+<a href="大学/高等数学/第5章-定积分/第5章-定积分.html">第5章 定积分</a>
+<a href="大学/高等数学/第6章-定积分的应用/第6章-定积分的应用.html">第6章 定积分的应用</a>
+<a href="大学/高等数学/第7章-微分方程/第7章-微分方程.html">第7章 微分方程</a>
+<a href="大学/高等数学/第8章-空间解析几何与向量代数/第8章-空间解析几何与向量代数.html">第8章 空间解析几何与向量代数</a>
+<a href="大学/高等数学/第9章-多元函数微分法及其应用/第9章-多元函数微分法及其应用.html">第9章 多元函数微分法及其应用</a>
+<a href="大学/高等数学/第10章-重积分/第10章-重积分.html">第10章 重积分</a>
+<a href="大学/高等数学/第11章-曲线积分与曲面积分/第11章-曲线积分与曲面积分.html">第11章 曲线积分与曲面积分</a>
+<a href="大学/高等数学/第12章-无穷级数/第12章-无穷级数.html">第12章 无穷级数</a>
+</div>
+<h3>大学 · 线性代数</h3>
+<div class="chaps">
+<a href="大学/线性代数/第1章-行列式/第1章-行列式.html">第1章 行列式</a>
+<a href="大学/线性代数/第2章-矩阵及其运算/第2章-矩阵及其运算.html">第2章 矩阵及其运算</a>
+<a href="大学/线性代数/第3章-矩阵的初等变换与线性方程组/第3章-矩阵的初等变换与线性方程组.html">第3章 矩阵的初等变换与线性方程组</a>
+<a href="大学/线性代数/第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">第4章 向量组的线性相关性</a>
+<a href="大学/线性代数/第5章-相似矩阵及二次型/第5章-相似矩阵及二次型.html">第5章 相似矩阵及二次型</a>
+<a href="大学/线性代数/第6章-线性空间与线性变换/第6章-线性空间与线性变换.html">第6章 线性空间与线性变换</a>
+</div>
+<h3>大学 · 离散数学</h3>
+<div class="chaps">
+<a href="大学/离散数学/第1章-命题逻辑/第1章-命题逻辑.html">第1章 命题逻辑</a>
+<a href="大学/离散数学/第2章-谓词逻辑/第2章-谓词逻辑.html">第2章 谓词逻辑</a>
+<a href="大学/离散数学/第3章-集合论/第3章-集合论.html">第3章 集合论</a>
+<a href="大学/离散数学/第4章-二元关系/第4章-二元关系.html">第4章 二元关系</a>
+<a href="大学/离散数学/第5章-函数/第5章-函数.html">第5章 函数</a>
+<a href="大学/离散数学/第6章-代数系统/第6章-代数系统.html">第6章 代数系统</a>
+<a href="大学/离散数学/第7章-图论/第7章-图论.html">第7章 图论</a>
+<a href="大学/离散数学/第8章-树/第8章-树.html">第8章 树</a>
+<a href="大学/离散数学/第9章-组合计数/第9章-组合计数.html">第9章 组合计数</a>
+</div>
+
+</div>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 共 74 章 · 支持全文模糊搜索</footer>
+<script src="search-data.js"></script>
+<script>(function () {
+  var DATA = window.SEARCH_DATA || [];
+  var input = document.getElementById('search');
+  var results = document.getElementById('results');
+  var toc = document.getElementById('toc');
+  var countEl = document.getElementById('count');
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function mark(escText, escTerm) {
+    var lower = escText.toLowerCase();
+    var t = escTerm.toLowerCase();
+    if (!t) return escText;
+    var out = '';
+    var i = 0;
+    while (true) {
+      var j = lower.indexOf(t, i);
+      if (j < 0) { out += escText.slice(i); break; }
+      out += escText.slice(i, j) + '<mark>' + escText.slice(j, j + t.length) + '</mark>';
+      i = j + t.length;
+    }
+    return out;
+  }
+  function isSubseq(term, text) {
+    var i = 0;
+    for (var j = 0; j < text.length && i < term.length; j++) {
+      if (text[j] === term[i]) i++;
+    }
+    return i === term.length;
+  }
+  function run() {
+    var q = input.value.trim();
+    var terms = q ? q.toLowerCase().split(/[ ,，、]+/).filter(Boolean) : [];
+    if (!terms.length) {
+      results.style.display = 'none';
+      countEl.textContent = '';
+      toc.style.display = '';
+      return;
+    }
+    var out = [];
+    for (var d = 0; d < DATA.length; d++) {
+      var rec = DATA[d];
+      var title = rec.t.toLowerCase();
+      var content = rec.c.toLowerCase();
+      var score = 0, idx = -1, term0 = '';
+      for (var k = 0; k < terms.length; k++) {
+        var term = terms[k];
+        var ti = title.indexOf(term);
+        if (ti >= 0) { score += 50; if (idx < 0) { idx = ti; term0 = term; } }
+        var ci = content.indexOf(term);
+        if (ci >= 0) {
+          var occ = content.split(term).length - 1;
+          score += Math.min(occ, 8) * 3;
+          if (idx < 0) { idx = title.length + 1 + ci; term0 = term; }
+        } else if (ti < 0) {
+          if (isSubseq(term, title)) score += 4;
+          else if (isSubseq(term, content)) score += 1;
+        }
+      }
+      if (score > 0) out.push({ rec: rec, score: score, idx: idx, term0: term0 });
+    }
+    out.sort(function (a, b) { return b.score - a.score; });
+    countEl.textContent = '找到 ' + out.length + ' 条结果（按相关度排序）';
+    toc.style.display = 'none';
+    results.style.display = '';
+    if (!out.length) {
+      results.innerHTML = '<div class="none">没有匹配的内容。试试更短的关键词，或用空格分隔多个关键词。</div>';
+      return;
+    }
+    var html = '';
+    var n = Math.min(out.length, 30);
+    for (var i = 0; i < n; i++) {
+      var r = out[i];
+      var full = r.rec.t + '。' + r.rec.c;
+      var start = Math.max(0, r.idx - 20);
+      var end = Math.min(full.length, r.idx + r.term0.length + 55);
+      var snip = full.slice(start, end);
+      if (start > 0) snip = '…' + snip;
+      if (end < full.length) snip = snip + '…';
+      snip = esc(snip);
+      for (var m = 0; m < terms.length; m++) snip = mark(snip, esc(terms[m]));
+      html += '<div class="res"><a class="res-title" href="' + r.rec.p + '">' + esc(r.rec.t) + '</a><div class="res-snippet">' + snip + '</div></div>';
+    }
+    results.innerHTML = html;
+  }
+  input.addEventListener('input', run);
+  run();
+})();</script>
+</body>
+</html>

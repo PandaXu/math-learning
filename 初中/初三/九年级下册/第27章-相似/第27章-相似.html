@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第27章 相似 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级下册 › 第27章 相似</div></header>
+<main class="container">
+<h1>第27章 相似</h1>
+<p class="lead">初中 / 初三 / 九年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>相似 = 「形状相同、大小成比例的图形」。学完本章，你要能把"放大、缩小、投影、测高"这些现实动作，都翻译成"角相等 + 边成比例"这套几何语言——角决定形状，边之比（相似比 k）决定大小，而面积按 k²、位似按"中心投影"放大或缩小。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">27.1 图形的相似与相似多边形</a><a href="#s2">27.2 相似三角形（定义与平行线定理）</a><a href="#s3">27.3 相似三角形的判定</a><a href="#s4">27.4 相似三角形的性质</a><a href="#s5">27.5 相似三角形的应用</a><a href="#s6">27.6 位似</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">27.1 图形的相似与相似多边形</h2>
+<h3>什么是"相似"？（先与"全等"对照）</h3>
+<p>你已经学过<strong>全等</strong>：形状相同、大小也相同，两个图形能完全重合。而<strong>相似</strong>只要求<strong>形状相同，大小可以不同</strong>——即一个图形是另一个图形<strong>放大或缩小</strong>后得到的。</p>
+<ul>
+<li>全等：形状相同 + 大小相同（重合）。</li>
+<li>相似：形状相同 + 大小可不同（成比例放大/缩小）。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>相似就是"缩放（scaling）"这一动作。照片放大、地图按比例尺缩小、模型按比例制作，得到的图形都与原图相似。相似比 k 就是"缩放系数"：k &gt; 1 是放大，0 &lt; k &lt; 1 是缩小，k = 1 时就是全等（不缩放）。</div>
+<h3>相似图形的直观判断</h3>
+<p>把两张图片"整体放大/缩小"时，每个角都不变、每条边都按同一个倍数变。因此"形状相同"可以精确地定义为：</p>
+<pre><code>形状相同 ⇔ 对应角相等 且 对应边成比例（比例相等）</code></pre>
+<h3>相似多边形（正式定义）</h3>
+<p><strong>定义</strong>：两个边数相同的多边形，如果它们的<strong>角分别相等</strong>、<strong>边成比例</strong>，那么这两个多边形叫做<strong>相似多边形</strong>。相似多边形对应边的比叫做<strong>相似比</strong>（记作 k）。</p>
+<p>例如四边形 ABCD 与 A′B′C′D′ 相似，记作 <code>四边形ABCD ∽ 四边形A′B′C′D′</code>，且：</p>
+<pre><code>∠A = ∠A′，∠B = ∠B′，∠C = ∠C′，∠D = ∠D′
+AB/A′B′ = BC/B′C′ = CD/C′D′ = DA/D′A′ = k</code></pre>
+<p><strong>两个条件缺一不可</strong>，举反例体会：</p>
+<ul>
+<li>正方形与一般菱形：边可以都相等（成比例，k=1），但<strong>角不相等</strong>（正方形 90°，菱形不一定）→ 不相似。</li>
+<li>一般矩形与正方形：角都相等（都是 90°），但<strong>边不成比例</strong>（矩形长≠宽）→ 不相似。</li>
+<li>所有正方形彼此相似；所有等边三角形彼此相似；所有圆彼此相似。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>"对应角相等"保证<strong>形状</strong>一致（没有压扁、没有扭曲）；"对应边成比例"保证<strong>大小</strong>按同一倍数缩放（没有单方向拉伸）。角管"形"，比例管"大小"——这正是"相似"拆成两个字的含义。</div>
+<h3>相似比 k 的取值与含义</h3>
+<ul>
+<li>k &gt; 1：从原图到目标图是<strong>放大</strong>（例：1:2 的地图放大为 2 倍，k=2）。</li>
+<li>k &lt; 1：<strong>缩小</strong>（例：地图比例尺 1:10000，图上与实地的比 k = 1/10000）。</li>
+<li>k = 1：对应边相等，结合角相等即<strong>全等</strong>。所以<strong>全等是相似比 k = 1 的特殊相似</strong>。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>地图比例尺、照片放大倍数、模型比例，本质上都是"相似比 k"。地图上 1 cm 对应实地 100 m，即 k = 1 cm / 10000 cm = 1/10000。读懂相似比，就读懂了所有"按比例"的问题。</div>
+
+<h2 id="s2">27.2 相似三角形（定义与平行线定理）</h2>
+<h3>相似三角形的定义与符号</h3>
+<p>三角形是边数最少的多边形，也是相似问题里最重要的对象。三个角分别相等、三条边成比例的两个三角形叫做<strong>相似三角形</strong>。</p>
+<pre><code>△ABC ∽ △A′B′C′   ⇔
+∠A = ∠A′，∠B = ∠B′，∠C = ∠C′
+AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
+<ul>
+<li>符号 <code>∽</code> 读作"相似于"。</li>
+<li><strong>对应顶点必须写在对应位置</strong>：<code>△ABC ∽ △A′B′C′</code> 意味着 A↔A′、B↔B′、C↔C′，不能写乱，否则比例式全错。</li>
+<li>k 是相似比；反过来 <code>△A′B′C′ ∽ △ABC</code> 的相似比是 1/k。</li>
+</ul>
+<h3>平行线分线段成比例（基本事实）</h3>
+<p><strong>基本事实</strong>：两条直线被一组平行线所截，所得的<strong>对应线段成比例</strong>。</p>
+<pre><code>      A        D
+      |--------|         l₁ ∥ l₂ ∥ l₃
+      |        |         （三条平行线截两条直线）
+   B  |-----   |  E
+      |        |
+      |        |
+   C  |--------|  F
+        （示意：上下对应线段成比例）
+
+AB/BC = DE/EF     （同一条被截直线上"上段:下段"）
+AB/AC = DE/DF     （"上段:全长" 对应相等）</code></pre>
+<div class="insight"><strong>几何含义：</strong>平行线像"等距的横杠"，把两条斜线按<strong>相同的比例</strong>切成一段段。无论斜线多陡、多长，平行线截出的"分点位置比例"是一样的——这是"比例"第一次由平行线保证的几何事实。</div>
+<h3>由平行得相似（预备定理，A 字型与 8 字型）</h3>
+<p><strong>预备定理</strong>：平行于三角形一边的直线，截其他两边（或两边的延长线），所得的<strong>对应线段成比例</strong>；所构成的三角形与原三角形<strong>相似</strong>。</p>
+<pre><code>A 字型：                   8 字型（X 字型）：
+
+      A                         A      D
+     /\                        \     /
+    /  \                        \   /
+  D/____\E        DE ∥ BC        \ /    DE ∥ BC
+  /      \         ⇒             /\
+ /        \       △ADE ∽ △ABC   /  \
+B----------C                    B----C
+
+AD/AB = AE/AC = DE/BC = k</code></pre>
+<div class="insight"><strong>物理含义：</strong>"平行 → 相似"是测高的第一块基石：阳光可看作<strong>平行光</strong>，物体、影子、光线围成的三角形彼此相似（见 27.5）。这也是"平行投影"的核心性质——平行光把图形按比例投到屏上，投影图形与原图形相似。</div>
+
+<h2 id="s3">27.3 相似三角形的判定</h2>
+<p>定义要求"三角相等 + 三边成比例"，条件太多。实际判定可以"减条件"，只要抓住本质——<strong>角决定形状，边（成比例）决定大小</strong>。</p>
+<h3>四条判定定理</h3>
+<pre><code>① 预备定理（平行法）：
+   平行于三角形一边的直线截得的三角形与原三角形相似。
+
+② 三边成比例（SSS）：
+   AB/A′B′ = BC/B′C′ = CA/C′A′   ⇒  △ABC ∽ △A′B′C′
+
+③ 两边成比例且夹角相等（SAS）：
+   AB/A′B′ = AC/A′C′ 且 ∠A = ∠A′  ⇒  △ABC ∽ △A′B′C′
+
+④ 两角分别相等（AA）：
+   ∠A = ∠A′，∠B = ∠B′  ⇒  △ABC ∽ △A′B′C′
+   （两角相等 ⇒ 第三角也相等，故三角都相等）</code></pre>
+<h3>直角三角形的特殊判定（HL）</h3>
+<p>斜边和一条直角边成比例的两个直角三角形相似：</p>
+<pre><code>Rt△ 中：斜边/斜边′ = 直角边/直角边′  ⇒  两直角三角形相似</code></pre>
+<h3>与"全等判定"对照记忆</h3>
+<table>
+<tr><th>全等（形状+大小相同）</th><th>相似（形状相同、大小成比例）</th></tr>
+<tr><td>SSS（三边相等）</td><td>SSS（三边成比例）</td></tr>
+<tr><td>SAS（两边+夹角相等）</td><td>SAS（两边成比例 + 夹角相等）</td></tr>
+<tr><td>ASA / AAS（两角+一边）</td><td>AA（两角相等，角不需要边参与）</td></tr>
+<tr><td>HL（斜边+直角边相等）</td><td>HL（斜边+直角边成比例）</td></tr>
+</table>
+<div class="insight"><strong>记忆规律：</strong>把全等里的"边相等"换成"边成比例"，"角相等"保持"角相等"，就得到相似判定。因为<strong>角完全决定形状</strong>（角相等→同形），<strong>边只决定大小</strong>（边成比例→同比例）。</div>
+<h3>最容易考的 AA 判定</h3>
+<p>两角分别相等 ⇒ 相似。常用"两角"来源：</p>
+<ul>
+<li>公共角（两个三角形共用一个角）；</li>
+<li>对顶角（8 字型）；</li>
+<li>平行线得到的同位角、内错角相等；</li>
+<li>同弧（圆周角）、垂直关系等。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>现实中"量角"往往比"量整条长"容易（比如瞄准、视线夹角），所以 AA 是测绘里最实用的判据：只要两束视线（光线）的夹角一致，物与像就相似。这也解释了为什么"相似"本质上等价于"角对应相等"。</div>
+<h3>注意：SSA 不能判定相似</h3>
+<p>两边成比例，但相等的是其中一边的<strong>对角</strong>（不是夹角），不能保证相似。反例：构造两边成比例但形状明显不同的两个三角形（"圆上动点"问题中常出现两解）。判定时必须用<strong>夹角</strong>。</p>
+
+<h2 id="s4">27.4 相似三角形的性质</h2>
+<p>若 <code>△ABC ∽ △A′B′C′</code>，相似比为 k，则：</p>
+<h3>① 对应角相等，对应边成比例</h3>
+<pre><code>∠A = ∠A′，∠B = ∠B′，∠C = ∠C′
+AB/A′B′ = BC/B′C′ = CA/C′A′ = k</code></pre>
+<h3>② 对应线段（高、中线、角平分线）之比 = 相似比</h3>
+<pre><code>对应高之比   = 对应中线之比   = 对应角平分线之比 = k</code></pre>
+<div class="insight"><strong>几何含义：</strong>把图形整体放大 k 倍时，不仅边长乘 k，连<strong>图形内部任何对应的"线"（高、中线、角平分线）也一起乘 k</strong>。这就是"缩放"的均匀性：每个方向、每个部位都按同一个比例变。</div>
+<h3>③ 周长比 = 相似比</h3>
+<pre><code>C(△ABC) / C(△A′B′C′) = k
+（因为周长 = 三边之和，三边各乘 k，和也乘 k）</code></pre>
+<h3>④ 面积比 = 相似比的平方</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="260" viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<defs>
+<marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+</defs>
+<text x="65" y="142" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">k = 1</text>
+<polygon points="40,210 40,160 90,210" fill="#2563eb" fill-opacity="0.9"/>
+<text x="62" y="200" font-size="14" fill="#ffffff" text-anchor="middle">S</text>
+<text x="65" y="226" font-size="13" fill="#334155" text-anchor="middle">底 = a</text>
+<line x1="100" y1="185" x2="166" y2="185" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arr1)"/>
+<text x="230" y="96" font-size="14" font-weight="700" fill="#16a34a" text-anchor="middle">k = 2</text>
+<polygon points="180,210 180,110 280,210" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+<line x1="180" y1="160" x2="230" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="180" y1="160" x2="230" y2="160" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="230" y1="160" x2="230" y2="210" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4"/>
+<polygon points="180,210 180,160 230,210" fill="#2563eb" fill-opacity="0.9"/>
+<text x="197" y="200" font-size="12" fill="#ffffff" text-anchor="middle">S</text>
+<polygon points="180,110 180,160 230,160" fill="#16a34a" fill-opacity="0"><animate attributeName="fill-opacity" values="0;0;0.9;0.9" keyTimes="0;0.25;0.4;1" dur="6s" repeatCount="indefinite"/></polygon>
+<polygon points="280,210 230,210 230,160" fill="#16a34a" fill-opacity="0"><animate attributeName="fill-opacity" values="0;0;0.9;0.9" keyTimes="0;0.5;0.65;1" dur="6s" repeatCount="indefinite"/></polygon>
+<polygon points="180,160 230,210 230,160" fill="#16a34a" fill-opacity="0"><animate attributeName="fill-opacity" values="0;0;0.9;0.9" keyTimes="0;0.75;0.9;1" dur="6s" repeatCount="indefinite"/></polygon>
+<text x="230" y="226" font-size="13" fill="#334155" text-anchor="middle">底 = 2a</text>
+<text x="230" y="250" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">面积 = 4S = k²·S</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：面积比 = 相似比的平方——边长放大 2 倍（k = 2）时，大三角形恰好被 4 个全等小三角形铺满，面积放大 2² = 4 倍</figcaption>
+</figure>
+<pre><code>S(△ABC) / S(△A′B′C′) = k²
+（因为 S = ½·底·高，底乘 k、高乘 k，故面积乘 k²）</code></pre>
+<div class="insight"><strong>物理含义（平方律）：</strong>面积比 = 相似比的平方，这是几何里的"平方律（square law）"。生活中到处是它：正方形边长×2 → 面积×4；地图放大 2 倍 → 图幅面积×4；物体尺寸×2 → 承重面（面积）×4，而体积×8（立方律）。所以"放大一倍，面积不是翻倍而是翻四倍"，这是最容易出错的直觉陷阱。</div>
+
+<h2 id="s5">27.5 相似三角形的应用</h2>
+<h3>核心思路：把"测不了的长度"转成"可测的相似比"</h3>
+<p>测量高大物体（旗杆、树、楼、塔）或隔河的宽度时，无法直接量，就构造<strong>相似三角形</strong>，利用对应边成比例，由已知边求未知边。</p>
+<h3>应用一：影子测高（平行光 → 相似）</h3>
+<pre><code>同一时刻、同一地点，阳光是平行光：
+ 物高 / 物影长 = 人高 / 人影长 = 常数 k
+
+例：小明身高 1.5 m，影长 2 m；
+    同时测旗杆影长 10 m，求旗杆高 x。
+    1.5 / 2 = x / 10  ⇒  x = 7.5 (m)</code></pre>
+<div class="insight"><strong>物理含义：</strong>太阳光近似<strong>平行光</strong>，物体、影子与光线围成的直角三角形两两相似，所以"物高与影长之比"对同一时刻的所有物体都相等。这是"平行投影"的典型应用——相似而不一定位似。</div>
+<h3>应用二：隔河测宽 / 测不可达距离</h3>
+<p>利用 8 字型或 A 字型构造相似，测量岸上可量的小三角形，去求河对岸不可达的大三角形对应边。</p>
+<pre><code>      A
+      |\            △ADE ∽ △ABC（DE ∥ BC）
+      | \           若 AD、AE、DE 可测，AB 已知，
+      |  \          则 BC = AB · (DE/AD) 可求。
+      D---E
+      |    \
+      B-----C   （对岸）</code></pre>
+<h3>应用三：镜面反射测高 / 视线测高</h3>
+<p>把镜子平放在地面上，调整位置使人眼恰能从镜中看到树顶。由光的反射定律，入射角=反射角，构成两个相似直角三角形，从而测高。</p>
+<div class="insight"><strong>物理含义：</strong>测高问题的共同点是"用光线作边、用角度作形状、用相似比作尺子"。太阳（平行光）、镜子（反射）、视线（瞄准）提供了相等角，相似三角形把"角相等"翻译成"边成比例"，从而完成测量。</div>
+
+<h2 id="s6">27.6 位似</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="300" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<circle cx="70" cy="160" r="5" fill="#2563eb"/>
+<text x="70" y="140" font-size="13" fill="#334155" text-anchor="middle">O（位似中心）</text>
+<line x1="70" y1="160" x2="231" y2="68" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="70" y1="160" x2="277" y2="252" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+<line x1="70" y1="160" x2="162" y2="275" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="5 4"/>
+<polygon points="210,80 250,240 150,260" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 4"/>
+<polygon points="140,120 160,200 110,210" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6 4"/>
+<g transform="translate(70,160)"><g><animateTransform attributeName="transform" type="scale" values="1;2;1" dur="6s" repeatCount="indefinite"/><polygon points="70,-40 90,40 40,50" fill="#2563eb" fill-opacity="0.45"/></g></g>
+<line x1="140" y1="120" x2="160" y2="200" stroke="#16a34a" stroke-width="3"/>
+<line x1="210" y1="80" x2="250" y2="240" stroke="#2563eb" stroke-width="3"/>
+<text x="150" y="100" font-size="14" font-weight="700" fill="#16a34a" text-anchor="middle">k = 1</text>
+<text x="248" y="42" font-size="14" font-weight="700" fill="#2563eb" text-anchor="middle">k = 2</text>
+<text x="132" y="116" font-size="13" fill="#334155" text-anchor="middle">A</text>
+<text x="206" y="70" font-size="13" fill="#334155" text-anchor="middle">A′</text>
+<text x="350" y="104" font-size="14" fill="#334155" text-anchor="middle">对应点与 O 三点共线</text>
+<text x="350" y="130" font-size="14" fill="#334155" text-anchor="middle">OA′ : OA = 2 : 1 = k</text>
+<text x="350" y="156" font-size="14" fill="#16a34a" text-anchor="middle">对应边 AB ∥ A′B′</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：位似 = 中心投影——图形沿过位似中心 O 的射线同比例放大（k = 2），对应点与 O 共线、对应边互相平行</figcaption>
+</figure>
+<h3>位似的定义</h3>
+<p>两个图形不仅<strong>相似</strong>，而且<strong>对应顶点的连线都相交于同一点</strong>，对应边<strong>互相平行（或在同一条直线上）</strong>，这样的两个图形叫做<strong>位似图形</strong>，这个交点叫做<strong>位似中心</strong>，此时相似比也叫<strong>位似比</strong>。</p>
+<pre><code>        A′
+       /|
+      / |
+  A  /  |        OA、OB、OC 的延长线交于 O（位似中心）
+   \/   |        OA/OA′ = OB/OB′ = OC/OC′ = k（位似比）
+    \   |        AB ∥ A′B′，BC ∥ B′C′，AC ∥ A′C′
+     B--C
+      \
+       \  B′---C′
+        O（位似中心）</code></pre>
+<h3>位似与相似的关系</h3>
+<ul>
+<li><strong>位似图形一定是相似图形</strong>（它满足相似的全部条件）。</li>
+<li><strong>相似图形不一定是位似图形</strong>：两个全等的平移图形相似，但对应顶点连线不交于一点，不是位似。</li>
+<li>位似比 k 即相似比；位似中心可在两图形之间、外部，甚至在一个图形的边上。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>位似 = 相似 + "所有对应点都从同一点（位似中心）沿直线同比例地拉开/收拢"。可以想象从位似中心 O 发出许多射线，原图每个点沿自己的射线移动到位似图上——这是"从一个中心放大缩小"。</div>
+<h3>平面直角坐标系中的位似变换</h3>
+<p>以<strong>原点 O</strong> 为位似中心，相似比为 k 时，任意点 P(x, y) 的对应点坐标为：</p>
+<pre><code>P(x, y)  →  P′(kx, ky)      （在位似中心同侧）
+P(x, y)  →  P″(−kx, −ky)    （在位似中心异侧，关于原点对称）</code></pre>
+<p>例：△ABC 顶点 A(2,3)、B(2,1)、C(6,1)，以原点为位似中心、相似比 2 放大：</p>
+<pre><code>同侧：A′(4,6)、B′(4,2)、C′(12,2)
+异侧：A″(−4,−6)、B″(−4,−2)、C″(−12,−2)</code></pre>
+<div class="insight"><strong>物理含义（中心投影）：</strong>位似就是"中心投影 / 透视投影"的几何模型。光线从一点（位似中心）发出，物体被投到屏上，物与像成位似：<strong>小孔成像、幻灯机、放大镜（透镜）、路灯下的影子</strong>都是中心投影。对比记忆：<strong>太阳光（平行光）→ 平行投影 → 相似；灯光/透镜（点光源）→ 中心投影 → 位似。</strong>这是区分"影子为什么有的成相似、有的成位似"的关键。</div>
+<h3>位似作图要点</h3>
+<ol>
+<li>定好位似中心 O 与位似比 k。</li>
+<li>连接 O 与各顶点并延长；</li>
+<li>按 OA′ = k·OA（或反向 OA″ = −k·OA）截取对应点；</li>
+<li>顺次连接对应顶点即得位似图形。</li>
+</ol>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>相似图形</td><td>形状相同、大小可不同的图形</td><td>放大/缩小的结果（照片、模型、地图）</td></tr>
+<tr><td>相似多边形</td><td>对应角相等 + 对应边成比例</td><td>同形状、不同尺寸的两个对象</td></tr>
+<tr><td>相似比 k</td><td>对应边之比（缩放系数）</td><td>比例尺、放大倍数（k&gt;1 放大，k&lt;1 缩小）</td></tr>
+<tr><td>全等 vs 相似</td><td>全等是 k = 1 的相似</td><td>原样 vs 缩放</td></tr>
+<tr><td>平行线分线段成比例</td><td>平行线按相同比例截割直线</td><td>平行光的等比例投影</td></tr>
+<tr><td>相似三角形判定</td><td>角相等定形状、边成比例定大小</td><td>判定两图形是否"同形"（AA 最实用）</td></tr>
+<tr><td>相似三角形性质</td><td>对应高/周长比 = k，面积比 = k²</td><td>平方律：放大 2 倍，面积 4 倍</td></tr>
+<tr><td>相似的应用</td><td>由可测小三角形求不可测大边长</td><td>影子测高、隔河测宽、镜面测高</td></tr>
+<tr><td>位似</td><td>对应点连线交于位似中心</td><td>中心投影：小孔成像、幻灯机、路灯影子</td></tr>
+<tr><td>坐标系中的位似</td><td>(x, y) → (kx, ky) 或 (−kx, −ky)</td><td>以原点为中心的按比例缩放</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断对错并说明理由：① 所有正方形都相似；② 所有矩形都相似；③ 所有等边三角形都相似；④ 所有等腰三角形都相似；⑤ 所有圆都相似。</li>
+<li>已知 △ABC ∽ △DEF，相似比 k = 3，AB = 4 cm，△DEF 的周长为 15 cm。求 DE 的长，以及 △ABC 的周长；若 △ABC 的面积为 18 cm²，求 △DEF 的面积。</li>
+<li>用判定定理说明：① 三边长分别为 3、4、5 与 6、8、10 的两个三角形是否相似？② 两边为 4、6 且夹角 60° 与两边为 8、12 且夹角 60° 是否相似？③ 一个三角形两角为 50°、60°，另一个为 50°、70°，是否相似？</li>
+<li>同一时刻，身高 1.6 m 的同学影长 1.2 m，旁边旗杆影长 9 m，求旗杆高。</li>
+<li>以原点为位似中心，把点 P(3,−2) 按相似比 2 放大，写出同侧与异侧对应点的坐标；再把点 Q(−1, 4) 按相似比 1/2 缩小，写出对应点坐标。</li>
+<li>（提高）给出一个"两边成比例但对应角是其中一边对角"的反例：画两个三角形，说明仅凭 SSA 无法判定相似。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "形状相同就是大小也相同" → ❌ 那是全等；相似只要求形状相同，大小成比例。</li>
+<li>❌ "所有矩形都相似 / 所有菱形都相似" → ❌ 矩形角虽相等但边不成比例，菱形边虽成比例但角不相等；正方形、等边三角形、圆才"全体彼此相似"。</li>
+<li>❌ "两边成比例就能判定相似" → ❌ 必须是<strong>两边成比例且夹角相等</strong>（SAS）；SSA（一边的对角）不能判定。</li>
+<li>❌ "相似比是多少，面积比就是多少" → ❌ 周长比 = k，但<strong>面积比 = k²</strong>（放大 2 倍，面积 4 倍，不是 2 倍）。</li>
+<li>❌ "相似图形一定是位似图形" → ❌ 位似一定相似，但相似不一定位似；还要求对应点连线交于同一点。</li>
+<li>❌ "位似图形对应边一定平行" → ❌ 对应边互相平行<strong>或在同一条直线上</strong>（三点共线时边在同一直线上）。</li>
+<li>❌ "坐标系里放大 k 倍就是坐标乘 k，符号不用管" → ❌ 以原点为位似中心时，还有异侧情形 <code>(−kx, −ky)</code>，别漏掉关于原点对称的另一组解。</li>
+<li>❌ "写 △ABC ∽ △DEF 时顶点随便排" → ❌ 对应顶点必须写在对应位置，否则比例式对应关系全乱。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h4 style="margin:0 0 10px;color:#b45309">一、练习题</h4>
+<ol style="margin:8px 0;padding-left:24px">
+<li style="margin:8px 0"><strong>（相似图形的定义）</strong>判断下列各组图形是否一定相似，并简述理由：①两个正方形；②两个矩形；③两个菱形；④两个等边三角形；⑤两个圆。</li>
+<li style="margin:8px 0"><strong>（相似比与对应边）</strong>已知 △ABC ∽ △DEF，相似比 k = 2（即 △ABC 的各边是 △DEF 对应边的 2 倍）。若 BC = 8，求对应边 EF 的长。</li>
+<li style="margin:8px 0"><strong>（AA 判定与平行线）</strong>在 △ABC 中，D 在 AB 上、E 在 AC 上，且 DE ∥ BC。说明 △ADE ∽ △ABC，并写出三组对应边的比例式。</li>
+<li style="margin:8px 0"><strong>（判定定理综合）</strong>判断下列两个三角形是否相似，并写出依据：①三边分别为 3、4、5 与 6、8、10；②两边为 4、6 且夹角 60° 与两边为 8、12 且夹角 60°。</li>
+<li style="margin:8px 0"><strong>（性质：周长比与面积比）</strong>若 △ABC ∽ △DEF，相似比 k = 3，△ABC 的周长为 36 cm、面积为 27 cm²，求 △DEF 的周长与面积。</li>
+<li style="margin:8px 0"><strong>（位似与坐标系）</strong>以原点 O 为位似中心、相似比 k = 2，写出点 P(3, −2) 的同侧与异侧对应点坐标；再把点 Q(−1, 4) 按相似比 1/2 缩小，写出同侧对应点坐标。</li>
+</ol>
+<h4 style="margin:18px 0 10px;color:#b45309">二、参考答案（点击展开）</h4>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p style="margin:6px 0">①一定相似：所有正方形的角都是 90°、边成比例；②不一定相似：矩形角都相等（都是 90°），但邻边之比未必相等，即边不一定成比例；③不一定相似：菱形四条边可成比例（边长比相同），但角不一定相等；④一定相似：等边三角形三个角都是 60°，边成比例；⑤一定相似：所有圆彼此相似。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p style="margin:6px 0">相似比 k = AB/DE = BC/EF = 2，即 △ABC 的边是对应边的 2 倍，所以 EF = BC ÷ 2 = 8 ÷ 2 = 4。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p style="margin:6px 0">因为 DE ∥ BC，∠ADE = ∠B（同位角）、∠AED = ∠C（同位角），且 ∠A 为公共角，由 AA 判定得 △ADE ∽ △ABC；对应边比例式为 AD/AB = AE/AC = DE/BC。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p style="margin:6px 0">①相似：3/6 = 4/8 = 5/10 = 1/2，三边成比例（SSS 判定）；②相似：4/8 = 6/12 = 1/2，且夹角都是 60°，两边成比例且夹角相等（SAS 判定）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p style="margin:6px 0">周长比 = 相似比 = 3，故 △DEF 的周长 = 36 ÷ 3 = 12 cm；面积比 = 相似比的平方 = 3² = 9，故 △DEF 的面积 = 27 ÷ 9 = 3 cm²。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p style="margin:6px 0">P(3, −2) 按 k = 2 放大：同侧 P′(6, −4)，异侧 P″(−6, 4)；Q(−1, 4) 按 k = 1/2 缩小：同侧 Q′(−1/2, 2)。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第26章-反比例函数/第26章-反比例函数.html">← 上一章：第26章 反比例函数</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第28章-锐角三角函数/第28章-锐角三角函数.html">下一章：第28章 锐角三角函数 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

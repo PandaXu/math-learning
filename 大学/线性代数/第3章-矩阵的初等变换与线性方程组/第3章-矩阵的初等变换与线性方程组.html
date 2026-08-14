@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第3章 矩阵的初等变换与线性方程组 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 线性代数 › 第3章 矩阵的初等变换与线性方程组</div></header>
+<main class="container">
+<h1>第3章 矩阵的初等变换与线性方程组</h1>
+<p class="lead">大学 / 线性代数</p>
+<div class="summary"><span class="tag">一句话总纲：</span>初等变换是"不改变解集"的等价变形，矩阵的秩是"独立方程（独立信息）的个数"，而线性方程组是否有解、有多少解，完全由系数矩阵的秩 <code>r(A)</code> 与增广矩阵的秩 <code>r(A,b)</code> 这两个数字决定——本章的全部内容，就是教你用最少的行操作，把这组"数字"算出来并读懂它的几何与物理含义。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">3.1 初等变换：三种"不改变解"的操作</a><a href="#s2">3.2 初等矩阵与矩阵的等价</a><a href="#s3">3.3 行阶梯形、行最简形与高斯消元法</a><a href="#s4">3.4 矩阵的秩</a><a href="#s5">3.5 用初等变换求逆矩阵</a><a href="#s6">3.6 线性方程组解的判定定理</a><a href="#s7">3.7 齐次方程组与基础解系</a><a href="#s8">3.8 非齐次方程组解的结构</a><a href="#s9">含义总结</a><a href="#s10">典型例题</a><a href="#s11">常见误区</a>
+</div>
+
+<h2 id="s1">3.1 初等变换：三种"不改变解"的操作</h2>
+<p>解线性方程组时，我们一直在做三件"理所当然"的事：<strong>交换两个方程的顺序</strong>、<strong>把一个方程两边同乘一个非零数</strong>、<strong>把一个方程的若干倍加到另一个方程上</strong>。谁都相信这三件事不会改变方程组的解集。把它们"翻译"到矩阵的语言里，就得到矩阵的三种<strong>初等变换</strong>。</p>
+<h3>三种初等行（列）变换</h3>
+<table>
+<tr><th>名称</th><th>记号</th><th>操作内容</th><th>对方程组的对应操作</th></tr>
+<tr><td>① 交换两行（列）</td><td><code>rᵢ ↔ rⱼ</code></td><td>第 i 行与第 j 行整行对调</td><td>交换两个方程的位置</td></tr>
+<tr><td>② 倍乘行（列）</td><td><code>rᵢ × k</code>（k ≠ 0）</td><td>第 i 行每个元素同乘非零数 k</td><td>方程两边同乘非零数 k</td></tr>
+<tr><td>③ 倍加行（列）</td><td><code>rᵢ + k·rⱼ</code></td><td>第 j 行的 k 倍加到第 i 行上</td><td>把一个方程的 k 倍加到另一个方程上（消元）</td></tr>
+</table>
+<p>三种操作同样定义在<strong>列</strong>上（记号写作 <code>cᵢ</code>）。习惯上，解方程组只用<strong>行变换</strong>；行变换与列变换一起用时，可以求秩、化简矩阵，但<strong>不能混用于解方程组</strong>（列变换会打乱未知量的对应关系）。</p>
+<div class="insight"><strong>几何含义：</strong>一个 m×n 方程组本质上是 m 个超平面（每个方程一个超平面）的交集。①交换两行 = 把 m 个超平面重新编号，交集不变；②某行乘 k = 用 <code>k·(平面方程)</code> 换掉原来的平面，<strong>k ≠ 0 时描述的是同一个超平面</strong>（同一个几何对象），交集不变；③倍加行 = 用"两个平面的线性组合"换掉其中一个，这个新平面<strong>一定经过原两个平面的交线</strong>，所以交线（进而整个交集）被保留下来。一句话：<strong>初等行变换只"换方程组的写法"，不"动解集这个几何对象"。</strong></div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><g stroke="#e2e8f0" stroke-width="1"><line x1="40" y1="260" x2="500" y2="260"/><line x1="80" y1="20" x2="80" y2="300"/></g><text x="80" y="278" text-anchor="middle" fill="#94a3b8" font-size="12">O</text><line x1="40" y1="300" x2="280" y2="60" stroke="#2563eb" stroke-width="3"/><text x="286" y="58" fill="#2563eb" font-size="14" font-weight="700">L₁ (r₁)</text><line x1="80" y1="100" x2="240" y2="260" stroke="#16a34a" stroke-width="3"/><text x="80" y="92" fill="#16a34a" font-size="14" font-weight="700">L₂ (r₂)</text><text x="60" y="44" fill="#15803d" font-size="13" font-weight="700">L₂′ = L₂ + k·L₁</text><line x1="89" y1="251" x2="231" y2="109" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="7 6" opacity="0.85"><animateTransform attributeName="transform" type="rotate" values="-25 160 180;25 160 180;-25 160 180" dur="5s" repeatCount="indefinite"/></line><circle cx="160" cy="180" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><text x="172" y="174" fill="#dc2626" font-size="13" font-weight="700">P（解，不变）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：倍加行变换 L₂′ = L₂ + k·L₁ 得到的新直线始终经过原交点 P——初等行变换只改写方程组的写法，不改变解集（交点）</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>方程组常用来描述静态平衡或约束系统（如电路的基尔霍夫方程、桁架的力平衡方程）。①交换方程 = 换一换约束的书写顺序；②倍乘 = 换量纲（把"牛"换成"千牛"），物理约束不变；③倍加 = 把两个约束"叠加/消去某个变量"，相当于从一个约束里解出一个量再代入另一个约束——这正是物理上"消元代入法"的矩阵形式。初等行变换保证：<strong>物理系统的真实解（平衡点、电流、受力）一个不多、一个不少。</strong></div>
+
+<h2 id="s2">3.2 初等矩阵与矩阵的等价</h2>
+<h3>初等矩阵：对单位矩阵做一次初等变换</h3>
+<p>对单位矩阵 <code>E</code> 做<strong>一次</strong>初等变换得到的矩阵，叫<strong>初等矩阵</strong>。它只有三种，且一一对应三种初等变换：</p>
+<pre><code>E(i,j)   ：交换 E 的第 i、j 行（或列）得到的初等矩阵
+E(i(k))  ：把 E 的第 i 行（或列）乘以非零数 k
+E(ij(k)) ：把 E 的第 j 行的 k 倍加到第 i 行（或把第 i 列的 k 倍加到第 j 列）</code></pre>
+<p>例如三阶单位矩阵的三种初等矩阵：</p>
+<pre><code>E(1,3) = [0 0 1]     E(2(5)) = [1 0 0]     E(31(2)) = [1 0 0]
+         [0 1 0]               [0 5 0]               [0 1 0]
+         [1 0 0]               [0 0 1]               [2 0 1]</code></pre>
+<h3>核心定理：左乘行变换，右乘列变换</h3>
+<p>设 A 是 m×n 矩阵，对 A 作<strong>一次初等行变换</strong>，等价于用相应的 m 阶初等矩阵<strong>左乘</strong> A；对 A 作<strong>一次初等列变换</strong>，等价于用相应的 n 阶初等矩阵<strong>右乘</strong> A。</p>
+<pre><code>初等行变换：A ──► P·A   （P 为对应初等矩阵，左乘）
+初等列变换：A ──► A·Q   （Q 为对应初等矩阵，右乘）</code></pre>
+<ul>
+<li>初等矩阵<strong>都可逆</strong>，且逆矩阵仍是初等矩阵：<code>[E(i,j)]⁻¹ = E(i,j)</code>，<code>[E(i(k))]⁻¹ = E(i(1/k))</code>，<code>[E(ij(k))]⁻¹ = E(ij(−k))</code>。</li>
+<li>方阵 A 可逆 ⇔ A 可以写成<strong>有限个初等矩阵的乘积</strong>（即 A 可逆当且仅当 A 能通过初等行变换化为 E）。</li>
+</ul>
+<h3>矩阵的等价</h3>
+<p>若矩阵 A 经过有限次初等变换能变成矩阵 B，则称 A 与 B <strong>等价</strong>，记作 <code>A ~ B</code>。等价是矩阵集合上的等价关系（自反、对称、传递）。</p>
+<pre><code>A ~ B  ⇔  存在可逆矩阵 P、Q，使 B = P A Q</code></pre>
+<p>等价关系的<strong>标准形</strong>：任何一个 m×n 矩阵 A，若 r(A) = r，则 A 等价于唯一的"标准形"（分块对角）：</p>
+<pre><code>      [ Er   0 ]
+A  ~  [        ]     其中 Er 是 r 阶单位矩阵
+      [ 0    0 ]</code></pre>
+<div class="insight"><strong>几何含义：</strong>"A ~ B"意味着 A、B 是<strong>同一个线性变换在不同基下的表示</strong>。左乘可逆 P = 换像空间的基，右乘可逆 Q = 换原空间的基。标准形把任何线性变换都"归约"成最朴素的形式：前 r 个坐标原样映射到前 r 个坐标，其余坐标全部塌缩到 0——这正是"秩 r 的线性变换"最本质的模样。</div>
+<div class="insight"><strong>物理含义：</strong>等价 = <strong>坐标（参考系）的选取不影响系统的本质</strong>。同一个物理规律，在不同单位制或不同基向量描述下，系数矩阵彼此等价；标准形揭示的是与坐标选择无关的"核心自由度"个数 r。</div>
+
+<h2 id="s3">3.3 行阶梯形、行最简形与高斯消元法</h2>
+<h3>行阶梯形矩阵（echelon form）</h3>
+<p>称矩阵为<strong>行阶梯形</strong>，若满足：</p>
+<ol>
+<li>若有零行（元素全为 0 的行），零行都在矩阵的最下方；</li>
+<li>每个非零行的<strong>首非零元</strong>（该行从左往右第一个非零元素，也叫"主元"）所在的列，其下方元素全为 0；</li>
+<li>自上而下，各非零行的首非零元所在的<strong>列号严格递增</strong>（像下台阶一样）。</li>
+</ol>
+<pre><code>行阶梯形示例（● 为非零主元，* 为任意数）：
+[ ●  *  *  *  * ]
+[ 0  ●  *  *  * ]
+[ 0  0  0  ●  * ]
+[ 0  0  0  0  0 ]</code></pre>
+<p>进一步满足「每个主元都是 1，且主元所在列的其余元素全为 0」时，称为<strong>行最简形矩阵</strong>（reduced row echelon form）。</p>
+<pre><code>行最简形示例：
+[ 1  0  *  0  * ]
+[ 0  1  *  0  * ]
+[ 0  0  0  1  * ]
+[ 0  0  0  0  0 ]</code></pre>
+<h3>高斯消元法（Gauss elimination）</h3>
+<p>用<strong>初等行变换</strong>把增广矩阵化为行阶梯形（消元），必要时继续化为行最简形（回代），即可直接读出解。步骤：</p>
+<ol>
+<li>写出<strong>增广矩阵</strong> <code>(A, b)</code>；</li>
+<li>自上而下消元：把每一列主元下方的元素全消成 0，得到行阶梯形；</li>
+<li>判断：若出现 <code>0 = d（d ≠ 0）</code> 的矛盾行，则无解；</li>
+<li>否则回代，或继续化到行最简形直接读出全部解。</li>
+</ol>
+<div class="insight"><strong>几何含义：</strong>消元 = 把"任意摆放的超平面组"逐步改写成"三角(阶梯)摆放"——每个新方程只含从某列开始的未知量。阶梯形的每个"台阶"（主元）对应一个<strong>真正起约束作用的超平面方向</strong>，台阶的个数就是"独立超平面"的个数；没有台阶的列对应"自由方向"，解沿着这些方向可以无限延伸。</div>
+<div class="insight"><strong>物理含义：</strong>高斯消元是"<strong>依次解耦</strong>"：先把一个变量用其他变量表示（消去它），再代入剩下的方程，把一个耦合系统一步步降维。电路分析、结构力学中的"顺序消元/前代回代"本质上就是这个过程，阶梯形的台阶数 = 系统<strong>独立约束</strong>的个数。</div>
+
+<h2 id="s4">3.4 矩阵的秩</h2>
+<h3>定义：k 阶子式与非零子式的最高阶数</h3>
+<p>在 m×n 矩阵 A 中，任取 k 行与 k 列（k ≤ min{m,n}），位于这些行列交叉处的 k² 个元素按原相对位置构成的 k 阶行列式，称为 A 的一个<strong>k 阶子式</strong>。</p>
+<p>若 A 中存在<strong>非零</strong>的 r 阶子式，而所有 r+1 阶子式（若存在）都等于 0，则称数 r 为矩阵 A 的<strong>秩</strong>，记作 <code>r(A)</code> 或 <code>rank(A)</code>。规定零矩阵的秩为 0。</p>
+<pre><code>r(A) = r  ⇔  A 中至少有一个 r 阶子式 ≠ 0，且所有 r+1 阶子式 = 0</code></pre>
+<h3>秩的等价刻画（最重要的性质）</h3>
+<ul>
+<li><strong>行秩 = 列秩 = 秩</strong>：A 的行向量组的秩（行秩）、列向量组的秩（列秩）都等于 r(A)。也就是说，"线性无关的行最多有几条"和"线性无关的列最多有几条"是<strong>同一个数</strong>。</li>
+<li><strong>初等变换不改变秩</strong>：<code>r(PAQ) = r(A)</code>（P、Q 可逆）。于是求秩可以先做初等变换化阶梯形，<strong>秩 = 阶梯形中非零行的个数 = 主元的个数</strong>。</li>
+<li><code>r(A) = r(Aᵀ)</code>。</li>
+</ul>
+<h3>秩的性质（常用结论）</h3>
+<pre><code>0 ≤ r(A) ≤ min{m, n}
+r(AB) ≤ min{ r(A), r(B) }
+r(A + B) ≤ r(A) + r(B)
+若 A 为 n 阶方阵：A 可逆 ⇔ r(A) = n（满秩）⇔ |A| ≠ 0
+r(AᵀA) = r(A)</code></pre>
+<div class="insight"><strong>几何含义：</strong>把 A 看作线性变换 x ↦ Ax，则 <strong>r(A) = 像空间（列空间）的维数</strong> = 变换后"实际铺开"的空间维数。满秩（r = n）时变换是一一对应的（不压缩、不塌缩）；r &lt; n 时变换把 n 维空间"压扁"到 r 维，有 n−r 个方向被映射成 0。行秩=列秩的几何事实是：<strong>变换后像的维数 = 原空间中"有效方向"（不被映射成 0 的方向）的个数。</strong></div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="150" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=2（满秩）：像仍是二维平面</text><text x="390" y="30" text-anchor="middle" fill="#334155" font-size="14" font-weight="700">r(A)=1：像被压成一条线</text><polygon fill="#2563eb" opacity="0.7" stroke="#1d4ed8" stroke-width="2"><animate attributeName="points" values="110,90 190,90 190,170 110,170;110,90 200,80 180,170 90,180;110,90 190,90 190,170 110,170" dur="5s" repeatCount="indefinite"/></polygon><text x="150" y="245" text-anchor="middle" fill="#64748b" font-size="12">原二维平面 → 二维（不塌缩，面积保持）</text><polygon fill="#16a34a" opacity="0.7" stroke="#15803d" stroke-width="2"><animate attributeName="points" values="350,90 430,90 430,170 350,170;350,130 430,130 430,130 350,130;350,90 430,90 430,170 350,170" dur="5s" repeatCount="indefinite"/></polygon><text x="390" y="245" text-anchor="middle" fill="#64748b" font-size="12">压扁成一条线（1 维，面积 → 0）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：r(A) 是线性变换后像空间的维数——满秩把平面仍映成平面，秩亏（r=1）把整个平面压扁成一条线</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>秩 = 系统<strong>独立信息/独立约束</strong>的个数。一个含 m 个方程、n 个未知量的方程组，真正"管用"（不能由其他方程推出）的方程个数正是 r(A)。r(A) &lt; m 表示有 m−r 个方程是"冗余"的（多余的测量、重复的约束）；r(A) &lt; n 表示有 n−r 个未知量是"自由"的（未被约束住，可任意取值）。</div>
+
+<h2 id="s5">3.5 用初等变换求逆矩阵</h2>
+<h3>方法：A 可逆时，把 (A | E) 化为 (E | A⁻¹)</h3>
+<p>对 n 阶方阵 A，构造 n×2n 的分块矩阵 <code>(A | E)</code>，对它作<strong>初等行变换</strong>，当左半块 A 化成单位矩阵 E 时，右半块就变成了 A 的逆矩阵：</p>
+<pre><code>(A | E)  ──初等行变换──►  (E | A⁻¹)</code></pre>
+<p>原理：初等行变换 = 左乘一系列初等矩阵 Pₖ⋯P₂P₁。当这些左乘把 A 变成 E 时，Pₖ⋯P₁·A = E，故 Pₖ⋯P₁ = A⁻¹；同一组变换作用在 E 上，得到的就是 Pₖ⋯P₁·E = A⁻¹。</p>
+<p>若左半块化不出 E（出现全零行），说明 A 不可逆（r(A) &lt; n）。</p>
+<div class="insight"><strong>几何含义：</strong>求逆 = 求"逆变换"。可逆矩阵对应一个<strong>不塌缩的线性变换</strong>（满秩），它把每个向量一一映射、可以原样"倒回去"；(A | E) → (E | A⁻¹) 的过程，就是在逐步构造那个把"被变换后的坐标"拉回"原坐标"的逆映射。</div>
+<div class="insight"><strong>物理含义：</strong>逆矩阵表示"<strong>反解系统</strong>"：已知结果 b、求原因 x（x = A⁻¹b）。例如由测量的输出反推输入、由力反推位移。矩阵不可逆意味着系统存在"不可逆的信息损失"（某个方向被压成 0，无法还原）。</div>
+
+<h2 id="s6">3.6 线性方程组解的判定定理</h2>
+<h3>定理（本章的"总开关"）</h3>
+<p>设 m 个方程、n 个未知量的线性方程组 <code>Ax = b</code>，系数矩阵 A 的秩为 r(A)，增广矩阵 (A, b) 的秩为 r(A, b)。则：</p>
+<table>
+<tr><th>条件</th><th>结论</th><th>解的个数</th></tr>
+<tr><td>r(A) &lt; r(A,b)</td><td>无解</td><td>0 个</td></tr>
+<tr><td>r(A) = r(A,b) = n</td><td>有唯一解</td><td>1 个</td></tr>
+<tr><td>r(A) = r(A,b) = r &lt; n</td><td>有无穷多解</td><td>∞ 个（含 n−r 个自由未知量）</td></tr>
+</table>
+<p>其中 <code>r(A) &lt; r(A,b)</code> 的判定依据是：增广矩阵化阶梯形后出现矛盾行 <code>0 = d（d ≠ 0）</code>。因为把 (A, b) 化阶梯形时，A 部分多出一个全零行而 b 部分非零，恰好等价于 <code>r(A,b) &gt; r(A)</code>。</p>
+<h3>推论</h3>
+<ul>
+<li>方程组 <code>Ax = b</code> 有解 ⇔ <code>r(A) = r(A,b)</code>（即向量 b 能由 A 的列向量组线性表示）。</li>
+<li>当 m = n 且 |A| ≠ 0（A 可逆）时，方程组有<strong>唯一解</strong> <code>x = A⁻¹b</code>（克拉默法则的特殊情形）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>每个方程是一个超平面，解集是这些超平面的交集。唯一解 = 所有超平面<strong>恰好交于一点</strong>；无穷多解 = 超平面们<strong>交成一条直线/一个平面/一个 r 维子空间</strong>（存在 n−r 个"可自由滑动"的方向）；无解 = 至少有一个超平面<strong>与其余超平面的交集平行而不相交</strong>（"矛盾"），交集为空。秩正是"这些超平面究竟张出几维独立约束"的度量。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><text x="100" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">唯一解（交于一点）</text><text x="260" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无穷多解（两线重合）</text><text x="420" y="26" text-anchor="middle" fill="#334155" font-size="13" font-weight="700">无解（平行不相交）</text><line x1="60" y1="230" x2="180" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="60" y1="70" x2="180" y2="230" stroke="#16a34a" stroke-width="2.5"/><circle cx="120" cy="150" r="6" fill="#dc2626"><animate attributeName="r" values="5;9;5" dur="2.5s" repeatCount="indefinite"/></circle><line x1="220" y1="230" x2="340" y2="70" stroke="#2563eb" stroke-width="2.5"/><line x1="220" y1="230" x2="340" y2="70" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="10 8"><animateTransform attributeName="transform" type="translate" values="0 0;-12 16;0 0" dur="3s" repeatCount="indefinite"/></line><line x1="380" y1="90" x2="480" y2="200" stroke="#2563eb" stroke-width="2.5"/><line x1="380" y1="130" x2="480" y2="240" stroke="#16a34a" stroke-width="2.5"/><circle r="4" fill="#2563eb"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="90;200;90" dur="4s" repeatCount="indefinite"/></circle><circle r="4" fill="#16a34a"><animate attributeName="cx" values="380;480;380" dur="4s" repeatCount="indefinite"/><animate attributeName="cy" values="130;240;130" dur="4s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两个方程（两条直线）解集的三类几何形态——交于一点（唯一解）、完全重合（无穷多解）、平行不相交（无解）</figcaption></figure>
+<div class="insight"><strong>物理含义：</strong>r(A) = 独立约束数，n = 未知量（自由度）数。唯一解 = <strong>约束刚好把自由度全部锁死</strong>（静定结构）；无穷多解 = <strong>约束不足</strong>（n−r 个自由度自由，如欠约束机构、静不定系统有多组可行状态）；无解 = <strong>约束互相矛盾</strong>（如两个要求彼此冲突的力平衡条件，无任何状态能满足）。</div>
+
+<h2 id="s7">3.7 齐次方程组与基础解系</h2>
+<h3>齐次线性方程组 Ax = 0</h3>
+<p>齐次方程组<strong>必有零解</strong> x = 0。关键问题是：它有没有<strong>非零解</strong>？</p>
+<pre><code>Ax = 0 有非零解 ⇔ r(A) &lt; n
+Ax = 0 只有零解   ⇔ r(A) = n（当 m = n 时即 |A| ≠ 0）</code></pre>
+<h3>基础解系</h3>
+<p>当 r(A) = r &lt; n 时，<code>Ax = 0</code> 有无穷多解。解集的<strong>全体解构成一个 n−r 维的向量空间</strong>（零空间/核）。它的任意一组基叫<strong>基础解系</strong>：一组线性无关的解向量 η₁, η₂, …, η<sub>n−r</sub>，使得任何解都能唯一地写成它们的线性组合：</p>
+<pre><code>通解：x = k₁η₁ + k₂η₂ + … + k_{n−r}η_{n−r}   （k₁,…,k_{n−r} 为任意常数）</code></pre>
+<p><strong>求基础解系的步骤</strong>：把 A 化为行最简形，确定 r 个主元列与 n−r 个自由列；依次令每个自由未知量取 1、其余自由未知量取 0，回代解出主元未知量，得到 n−r 个解向量，即为基础解系。</p>
+<div class="insight"><strong>几何含义：</strong>齐次方程 Ax = 0 的解集是<strong>经过原点的子空间</strong>（零空间）。基础解系就是零空间的一组基，n−r 是它的维数：r 个独立约束把 n 维空间"切"到原点附近，剩下的 n−r 维是那些<strong>被 A 映射成 0 的方向</strong>。零空间越大（r 越小），变换"压扁"得越厉害。</div>
+<div class="insight"><strong>物理含义：</strong>Ax = 0 描述<strong>无外激励的平衡态</strong>（零输入、零外力的自由状态）。基础解系 = 系统的<strong>独立"自由模式"（模态）</strong>，n−r 就是系统能自由振动的独立模态数；零解是"静止"解，非零解表示"存在天然存在的、不为零却保持平衡的模式"。</div>
+
+<h2 id="s8">3.8 非齐次方程组解的结构</h2>
+<h3>解的结构定理</h3>
+<p>设 <code>Ax = b</code>（b ≠ 0）有解（即 r(A) = r(A,b)），取它的<strong>一个特解</strong> x*，则：</p>
+<pre><code>Ax = b 的通解 = 它的一个特解 x* + 对应齐次方程组 Ax = 0 的通解</code></pre>
+<p>即：</p>
+<pre><code>x = x* + k₁η₁ + k₂η₂ + … + k_{n−r}η_{n−r}</code></pre>
+<p>其中 η₁,…,η_{n−r} 是 Ax = 0 的基础解系。也就是说，<strong>非齐次通解 = 特解 + 齐次通解</strong>。</p>
+<ul>
+<li>若 r(A) = r(A,b) = n：齐次通解只有 0，故非齐次方程组有<strong>唯一解</strong> x = x*。</li>
+<li>若 r(A) = r(A,b) = r &lt; n：非齐次方程组<strong>无穷多解</strong>，自由度为 n−r。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>非齐次方程组的解集 = <strong>零空间（过原点的子空间）沿一个特解向量 x* 平移</strong>得到的一个"仿射子空间"（不经过原点的平面/直线）。所以它不再是子空间，而是子空间的平移副本；其"形状"（维数）由齐次部分决定，其"位置"由特解决定。</div>
+<div class="insight"><strong>物理含义：</strong>特解 = 系统在<strong>一个具体外激励 b</strong> 下的一个平衡状态；齐次通解 = 系统<strong>自身的自由模式</strong>（可在特解基础上叠加而不破坏平衡）。例如电路的"强迫响应（特解）+ 自由响应（齐次通解）"正是这个结构；特解给一个"基准状态"，自由模式描述围绕该状态的任意可行变化。</div>
+
+<h2 id="s9">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>初等行变换</td><td>重新编号、同平面、过交线的线性组合——不改变超平面交集（解集）</td><td>换顺序、换量纲、消元代入——不改变系统真实解</td></tr>
+<tr><td>初等矩阵</td><td>换基、缩放坐标轴、剪切（错切）操作</td><td>对参考系/单位制做的基本变换</td></tr>
+<tr><td>矩阵等价 A ~ B</td><td>同一线性变换在不同基下的表示</td><td>同一物理规律在不同坐标系/单位制下的系数矩阵</td></tr>
+<tr><td>行阶梯形</td><td>把超平面组改写为"三角(阶梯)摆放"，台阶数=独立超平面数</td><td>依次解耦/消元后的独立约束结构</td></tr>
+<tr><td>矩阵的秩 r(A)</td><td>像空间（列空间）的维数；变换后实际铺开的维数</td><td>独立信息/独立约束的个数；系统的有效自由度上限</td></tr>
+<tr><td>可逆矩阵</td><td>不塌缩、一一对应的满秩线性变换</td><td>可完全反解（由结果还原原因）的系统</td></tr>
+<tr><td>齐次解 Ax=0</td><td>过原点的子空间（零空间/核），维数 n−r</td><td>无外激励的平衡态；系统的自由模式（模态）</td></tr>
+<tr><td>基础解系</td><td>零空间的一组基（n−r 个独立方向）</td><td>系统的独立自由模式（模态）集</td></tr>
+<tr><td>非齐次通解</td><td>零空间沿特解平移得到的仿射子空间</td><td>强迫响应（特解）+ 自由响应（齐次通解）</td></tr>
+<tr><td>解的存在唯一性</td><td>点 / 子空间 / 空集（超平面交成点、交成子空间、平行不相交）</td><td>静定（唯一）、欠约束（无穷多）、矛盾（无解）</td></tr>
+</table>
+
+<h2 id="s10">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>对矩阵 A 依次作行变换 <code>r₁ ↔ r₂</code>、<code>r₃ − 2r₁</code>、<code>r₂ × (1/3)</code>，写出每次对应的初等矩阵 P₁、P₂、P₃，并求总变换矩阵 P = P₃P₂P₁。</li>
+<li>用初等行变换把矩阵化为行阶梯形与行最简形，并求其秩：<code>A = [1 2 3; 2 4 6; 1 1 1]</code>。</li>
+<li>用 (A | E) → (E | A⁻¹) 求 <code>A = [1 2; 3 4]</code> 的逆矩阵。</li>
+<li>判定方程组解的情况：<code>x₁ + x₂ + x₃ = 1</code>，<code>x₁ + 2x₂ + 3x₃ = 3</code>，<code>2x₁ + 3x₂ + 4x₃ = 5</code>（无解、唯一解还是无穷多解？）。</li>
+<li>求齐次方程组 <code>x₁ + x₂ + x₃ = 0</code>，<code>2x₁ + 2x₂ + 2x₃ = 0</code> 的基础解系与通解。</li>
+<li>设 r(A) = 2，n = 4，且 Ax = b 有解，问：解的自由度是多少？通解形式如何写？</li>
+</ol>
+</div>
+
+<h2 id="s11">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "秩就是矩阵的行数或列数" → ❌ 秩 ≤ min{m,n}，它是"独立行（列）的个数"，常小于行数、列数。</li>
+<li>❌ "初等列变换也可以用于解方程组" → ❌ 解方程组只能用<strong>行变换</strong>；列变换会打乱未知量与系数的对应，破坏解集。</li>
+<li>❌ "r(A) = r(A,b) 一定等于 n" → ❌ 等于 n 才是唯一解；等于 r &lt; n 时是无穷多解。</li>
+<li>❌ "出现全零行就是无解" → ❌ 全零行 0 = 0 是恒等式，可删去，不矛盾；只有 <code>0 = d（d ≠ 0）</code> 的矛盾行才导致无解。</li>
+<li>❌ "齐次方程组一定只有零解" → ❌ 当 r(A) &lt; n 时必有非零解；"只有零解"要求 r(A) = n。</li>
+<li>❌ "非齐次方程组的通解只是特解" → ❌ 通解 = 特解 + 齐次通解；丢掉齐次部分就漏掉了无穷多个解。</li>
+<li>❌ "基础解系的个数等于未知量个数 n" → ❌ 基础解系含 n−r(A) 个向量，与秩有关。</li>
+<li>❌ "交换两行、倍乘某行会改变行列式的值，所以也改变解" → ❌ 行变换确实会改变系数行列式（交换变号、倍乘改变倍数），但<strong>不改变解集</strong>；行列式值与"解的个数"不是一回事。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>写出三种初等行变换，并对应到"对方程组做的三件等价操作"；任选其中一种（如倍加行变换），用<strong>几何含义</strong>解释它为什么不会改变方程组的解集。</li>
+<li>对三阶矩阵 A 依次作初等行变换：<code>r₁ ↔ r₂</code>、<code>r₃ − 2r₁</code>、<code>r₂ × (1/3)</code>。写出每次变换对应的初等矩阵 P₁、P₂、P₃，并写出总变换矩阵 P = P₃P₂P₁。</li>
+<li>用初等行变换把 <code>A = [1 2 3; 2 4 6; 1 1 1]</code> 化为行阶梯形，求 r(A)，并说明 r(A) 作为线性变换的<strong>几何含义</strong>（像空间维数）。</li>
+<li>用 (A | E) → (E | A⁻¹) 的方法求 <code>A = [1 2; 3 4]</code> 的逆矩阵，并说明"矩阵不可逆"对应的<strong>物理含义</strong>。</li>
+<li>判定方程组 <code>x₁ + x₂ + x₃ = 1</code>，<code>x₁ + 2x₂ + 3x₃ = 3</code>，<code>2x₁ + 3x₂ + 4x₃ = 5</code> 是无解、唯一解还是无穷多解？用秩的判定定理说明，并给出其<strong>几何含义</strong>。</li>
+<li>设 r(A) = 2，n = 4，且 Ax = b 有解。问：解的自由度是多少？通解如何书写？并解释"非齐次通解 = 特解 + 齐次通解"的<strong>几何意义</strong>。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>三种初等行变换：① 交换两行 <code>rᵢ ↔ rⱼ</code>（交换两个方程）；② 倍乘 <code>rᵢ × k</code>（k ≠ 0，方程两边同乘非零数）；③ 倍加 <code>rᵢ + k·rⱼ</code>（一个方程的 k 倍加到另一个方程上）。以倍加为例的几何解释：每个方程是一个超平面，用"两个平面的线性组合"替换其中一个，得到的<strong>新平面一定经过原两个平面的交线</strong>，因此交线（进而整个交集，即解集）被保留，解集不变。物理上它对应"消元代入法"，不增不减真实解。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>P₁ = E(1,2) = [0 1 0; 1 0 0; 0 0 1]；P₂ = E(31(−2)) = [1 0 0; 0 1 0; −2 0 1]（把第 1 行的 −2 倍加到第 3 行）；P₃ = E(2(1/3)) = [1 0 0; 0 1/3 0; 0 0 1]。总变换矩阵 P = P₃P₂P₁，左乘依次作用，即先 P₁、再 P₂、最后 P₃。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>对 A 作行变换：r₂ − 2r₁、r₃ − r₁ 得 [1 2 3; 0 0 0; 0 −1 −2]，交换 r₂、r₃ 得行阶梯形 [1 2 3; 0 −1 −2; 0 0 0]。非零行有 2 个，故 r(A) = 2。几何含义：把 A 看作线性变换 x ↦ Ax，r(A) = 像空间（列空间）的维数 = 2，即三维空间被"压扁"到二维平面，有一个方向被映射成 0。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>[A | E] = [1 2 | 1 0; 3 4 | 0 1]；r₂ − 3r₁ → [1 2 | 1 0; 0 −2 | −3 1]；r₂ × (−1/2) → [1 2 | 1 0; 0 1 | 3/2 −1/2]；r₁ − 2r₂ → [1 0 | −2 1; 0 1 | 3/2 −1/2]。故 A⁻¹ = [−2 1; 3/2 −1/2]（验证：|A| = −2 ≠ 0，可逆）。物理含义：矩阵不可逆意味着系统存在"不可逆的信息损失"——某个方向被压成 0，无法由结果还原原因。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>增广矩阵 (A,b) = [1 1 1 | 1; 1 2 3 | 3; 2 3 4 | 5]。行变换：r₂ − r₁、r₃ − 2r₁ 得 [1 1 1 | 1; 0 1 2 | 2; 0 1 2 | 3]；r₃ − r₂ 得 [1 1 1 | 1; 0 1 2 | 2; 0 0 0 | 1]。出现矛盾行 0 = 1，故 r(A) = 2、r(A,b) = 3，r(A) &lt; r(A,b)，<strong>无解</strong>。几何含义：三个超平面（平面）中，第三个与其余两个的交线<strong>平行而不相交</strong>，交集为空。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>r(A) = r(A,b) = 2 &lt; n = 4，有解且有无穷多解，自由度 = n − r = 4 − 2 = 2。通解 x = x* + k₁η₁ + k₂η₂，其中 x* 是 Ax = b 的一个特解，η₁、η₂ 是 Ax = 0 的基础解系。几何意义：解集是零空间（过原点、维数 n−r = 2 的子空间）<strong>沿特解 x* 平移</strong>得到的仿射子空间——一个不经过原点的二维平面；其"形状"由齐次部分决定，"位置"由特解决定。物理上对应"强迫响应（特解）+ 自由响应（齐次通解）"。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第2章-矩阵及其运算/第2章-矩阵及其运算.html">← 上一章：第2章 矩阵及其运算</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第4章-向量组的线性相关性/第4章-向量组的线性相关性.html">下一章：第4章 向量组的线性相关性 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学线性代数</footer>
+</body>
+</html>

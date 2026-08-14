@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第2章 导数与微分 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第2章 导数与微分</div></header>
+<main class="container">
+<h1>第2章 导数与微分</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>导数 = 「曲线的切线斜率」= 「瞬时变化率」。学完本章，你要能在心里同时"看见"两件事：<strong>几何上</strong>，f′(x₀) 是曲线 y=f(x) 在点 x₀ 处<strong>切线的斜率</strong>；<strong>物理上</strong>，它是量在 x₀ 这一瞬的<strong>变化快慢</strong>（速度、加速度、增长率）。而微分是"以直代曲"的工具——用切线上的增量 dy 去近似曲线上的增量 Δy。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">2.1 导数的概念</a><a href="#s2">2.2 求导法则</a><a href="#s3">2.3 高阶导数</a><a href="#s4">2.4 隐函数与参数方程求导</a><a href="#s5">2.5 微分</a><a href="#s6">几何与物理含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">2.1 导数的概念</h2>
+<h3>导数从两个经典问题而来</h3>
+<p>微积分的诞生源于两个看似无关、实则同构的问题：</p>
+<ul>
+<li><strong>几何问题——切线</strong>：给定曲线 y=f(x) 上一点 P(x₀, f(x₀))，如何求过 P 的<strong>切线斜率</strong>？</li>
+<li><strong>物理问题——瞬时速度</strong>：变速直线运动中，如何求某一时刻 t₀ 的<strong>瞬时速度</strong>（而不是一段时间的平均速度）？</li>
+</ul>
+<p>两者的共同套路都是「先算<strong>平均变化率</strong>，再让时间/距离间隔趋近于 0 取<strong>极限</strong>」：</p>
+<pre><code>平均变化率 = Δy/Δx = [f(x₀+Δx) − f(x₀)] / Δx
+瞬时变化率 = lim(Δx→0) Δy/Δx</code></pre>
+
+<h3>导数的定义</h3>
+<p>设函数 y=f(x) 在点 x₀ 的某个邻域内有定义。给自变量一个增量 Δx（Δx ≠ 0），函数相应地有增量 Δy = f(x₀+Δx) − f(x₀)。若极限</p>
+<pre><code>lim(Δx→0)  Δy/Δx  =  lim(Δx→0)  [f(x₀+Δx) − f(x₀)] / Δx</code></pre>
+<p>存在，则称 f(x) 在点 x₀ 处<strong>可导</strong>，这个极限值称为 f(x) 在点 x₀ 处的<strong>导数</strong>，记作：</p>
+<pre><code>f′(x₀) ,  y′|_(x=x₀) ,  dy/dx|_(x=x₀) ,  df/dx|_(x=x₀)</code></pre>
+<p><strong>等价形式</strong>（换元 h = Δx 或直接令 x → x₀）：</p>
+<pre><code>f′(x₀) = lim(h→0) [f(x₀+h) − f(x₀)] / h
+f′(x₀) = lim(x→x₀) [f(x) − f(x₀)] / (x − x₀)</code></pre>
+<p><strong>左导数与右导数</strong>：单侧极限</p>
+<pre><code>f₋′(x₀) = lim(h→0⁻) [f(x₀+h) − f(x₀)] / h
+f₊′(x₀) = lim(h→0⁺) [f(x₀+h) − f(x₀)] / h</code></pre>
+<p><strong>可导的充要条件</strong>：f(x) 在 x₀ 处可导 ⟺ 左导数与右导数都存在且相等。</p>
+<p><strong>导函数</strong>：若 f(x) 在区间 I 内每一点都可导，则对应关系 x ↦ f′(x) 是 I 上的一个新函数，称为<strong>导函数</strong>，简称导数：</p>
+<pre><code>f′(x) = lim(h→0) [f(x+h) − f(x)] / h</code></pre>
+
+<h3>几何含义：切线的斜率</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="330" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="-20" y1="280" x2="500" y2="280" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="60" y1="27" x2="60" y2="285" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="492" y="300" fill="#6b7280" font-size="13">x</text>
+<text x="38" y="34" fill="#6b7280" font-size="13">y</text>
+<text x="70" y="16" fill="#64748b" font-size="12">蓝：曲线 y=x² 与割线 PQ　·　绿：切线（斜率 f′(x₀)=2）</text>
+<path d="M-20 271.2 L-12 272.87 L-4 274.37 L4 275.69 L12 276.83 L20 277.8 L28 278.59 L36 279.21 L44 279.65 L52 279.91 L60 280 L68 279.91 L76 279.65 L84 279.21 L92 278.59 L100 277.8 L108 276.83 L116 275.69 L124 274.37 L132 272.87 L140 271.2 L148 269.35 L156 267.33 L164 265.13 L172 262.75 L180 260.2 L188 257.47 L196 254.57 L204 251.49 L212 248.23 L220 244.8 L228 241.19 L236 237.41 L244 233.45 L252 229.31 L260 225 L268 220.51 L276 215.85 L284 211.01 L292 205.99 L300 200.8 L308 195.43 L316 189.89 L324 184.17 L332 178.27 L340 172.2 L348 165.95 L356 159.53 L364 152.93 L372 146.15 L380 139.2 L388 132.07 L396 124.77 L404 117.29 L412 109.63 L420 101.8 L428 93.79 L436 85.61 L444 77.25 L452 68.71 L460 60 L468 51.11 L476 42.05 L484 32.81 L492 23.39 L500 13.8 " fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<line x1="160" y1="280" x2="500" y2="93" stroke="#16a34a" stroke-width="2.5"/>
+<line x1="260" y1="225" x2="460" y2="60" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 5">
+<animate attributeName="x2" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y2" values="60;81.45;101.8;121.05;139.2;156.25;172.2;187.05;200.8;213.45;219.36;213.45;200.8;187.05;172.2;156.25;139.2;121.05;101.8;81.45;60" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</line>
+<circle cx="260" cy="225" r="6" fill="#16a34a"/>
+<text x="260" y="250" fill="#16a34a" font-size="13" text-anchor="middle">P</text>
+<circle cx="460" cy="60" r="5.5" fill="#2563eb">
+<animate attributeName="cx" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="cy" values="60;81.45;101.8;121.05;139.2;156.25;172.2;187.05;200.8;213.45;219.36;213.45;200.8;187.05;172.2;156.25;139.2;121.05;101.8;81.45;60" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</circle>
+<text x="460" y="46" fill="#2563eb" font-size="13" text-anchor="middle">
+<animate attributeName="x" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y" values="46;67.45;87.8;107.05;125.2;142.25;158.2;173.05;186.8;199.45;205.36;199.45;186.8;173.05;158.2;142.25;125.2;107.05;87.8;67.45;46" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+Q</text>
+<text x="340" y="150" fill="#2563eb" font-size="13">割线 PQ</text>
+<text x="176" y="190" fill="#16a34a" font-size="13" transform="rotate(-24 176 190)">切线</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：割线 PQ 随 Q 滑向 P 旋转，极限位置即切线——f′(x₀) 就是切线斜率</figcaption>
+</figure>
+<p>在曲线 y=f(x) 上取 P(x₀, f(x₀)) 与邻近点 Q(x, f(x))，割线 PQ 的斜率为 [f(x) − f(x₀)]/(x − x₀)。当 Q 沿曲线无限逼近 P（x → x₀）时，割线绕 P 旋转、极限位置就是<strong>切线</strong>。因此：</p>
+<pre><code>f′(x₀) = 曲线 y=f(x) 在点 (x₀, f(x₀)) 处切线的斜率</code></pre>
+<ul>
+<li><strong>切线方程</strong>：y − f(x₀) = f′(x₀)(x − x₀)</li>
+<li><strong>法线方程</strong>（垂直于切线）：y − f(x₀) = −(1/f′(x₀))(x − x₀)　（f′(x₀) ≠ 0）</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>导数是"<strong>割线斜率的极限</strong>"——先画一条割线（两个点），再让其中一个点滑向另一个点，割线最终定格成的直线就是切线，其斜率就是导数。f′(x₀) &gt; 0 表示曲线在该点<strong>上升</strong>，f′(x₀) &lt; 0 表示<strong>下降</strong>，f′(x₀) = 0 表示该点处切线<strong>水平</strong>。</div>
+
+<h3>物理含义：瞬时变化率</h3>
+<p>在变速直线运动中，位移 s=s(t)：</p>
+<pre><code>平均速度 = Δs/Δt = [s(t₀+Δt) − s(t₀)] / Δt
+瞬时速度 v(t₀) = s′(t₀) = lim(Δt→0) Δs/Δt</code></pre>
+<p>更一般地，导数就是<strong>瞬时变化率</strong>：y 关于 x 的导数 f′(x) 描述"当 x 变一点点时，y 变多快"。物理与工程中处处可见：</p>
+<ul>
+<li><strong>速度</strong>：位移对时间的导数 v = ds/dt</li>
+<li><strong>加速度</strong>：速度对时间的导数 a = dv/dt</li>
+<li><strong>电流</strong>：电量对时间的导数 i = dq/dt</li>
+<li><strong>增长率</strong>：人口、细菌数量对时间的导数</li>
+<li><strong>边际量</strong>（经济）：边际成本 = 总成本对产量的导数</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>导数把"一段时间内的平均快慢"压缩成"<strong>这一瞬的快慢</strong>"。速度表上的读数，就是位移函数在该时刻的导数。</div>
+
+<h3>可导与连续的关系</h3>
+<p><strong>定理</strong>：若 f(x) 在 x₀ 处可导，则 f(x) 在 x₀ 处必连续。（可导 ⟹ 连续）</p>
+<p><strong>反之不成立</strong>：连续不一定可导。经典反例是 <code>y = |x|</code> 在 x=0 处：</p>
+<pre><code>f₋′(0) = −1， f₊′(0) = +1  ⟹  左、右导数不相等，故在 x=0 不可导</code></pre>
+<p>函数在某点不可导的常见几何情形：<strong>尖点</strong>（如 |x| 的拐角）、<strong>切线垂直于 x 轴</strong>（如 y = ∛x 在 x=0 处切线为铅直线）、<strong>间断点</strong>、<strong>有振荡</strong>等。</p>
+<div class="insight"><strong>几何/物理含义：</strong>「连续」= 曲线<strong>不断裂</strong>（一笔能画下去）；「可导」= 曲线<strong>光滑</strong>（没有折角、有唯一不垂直于 x 轴的切线）。|x| 在 0 点"有个尖"，连续的线却突然折了个角——对应物理上"速度方向瞬间突变"的运动。</div>
+
+<h2 id="s2">2.2 求导法则</h2>
+<p>求导不能每次都从极限定义出发，而要建立一套"运算规则"：先记住基本初等函数的导数（公式表），再用四则运算、链式法则把复杂函数拆解求导。</p>
+
+<h3>基本初等函数的导数公式</h3>
+<table>
+<tr><th>函数 f(x)</th><th>导数 f′(x)</th><th>函数 f(x)</th><th>导数 f′(x)</th></tr>
+<tr><td>C（常数）</td><td>0</td><td>x<sup>μ</sup>（μ 为实数）</td><td>μ x<sup>μ−1</sup></td></tr>
+<tr><td>sin x</td><td>cos x</td><td>cos x</td><td>−sin x</td></tr>
+<tr><td>tan x</td><td>sec²x</td><td>cot x</td><td>−csc²x</td></tr>
+<tr><td>sec x</td><td>sec x·tan x</td><td>csc x</td><td>−csc x·cot x</td></tr>
+<tr><td>a<sup>x</sup></td><td>a<sup>x</sup> ln a</td><td>e<sup>x</sup></td><td>e<sup>x</sup></td></tr>
+<tr><td>log<sub>a</sub> x</td><td>1/(x ln a)</td><td>ln x</td><td>1/x</td></tr>
+<tr><td>arcsin x</td><td>1/√(1−x²)</td><td>arccos x</td><td>−1/√(1−x²)</td></tr>
+<tr><td>arctan x</td><td>1/(1+x²)</td><td>arccot x</td><td>−1/(1+x²)</td></tr>
+</table>
+<div class="insight"><strong>物理含义：</strong>这张表是"变化率的字典"。例如 (e<sup>x</sup>)′ = e<sup>x</sup> 说明指数增长的<strong>增长率等于自身</strong>——钱越多、涨得越快；(sin x)′ = cos x 说明正弦波的"上升快慢"恰好是相位提前 π/2 的余弦。</div>
+
+<h3>四则运算法则</h3>
+<pre><code>(u ± v)′ = u′ ± v′
+(Cu)′    = C·u′                     （C 为常数）
+(uv)′    = u′v + uv′
+(u/v)′   = (u′v − uv′)/v²            （v ≠ 0）</code></pre>
+<p><strong>例</strong>：y = x³ + 3 sin x − e<sup>x</sup> + 5，则 y′ = 3x² + 3 cos x − e<sup>x</sup>。</p>
+<div class="insight"><strong>物理含义：</strong>变化率是"线性"的——几个量叠加时，总变化率等于各变化率之和；(uv)′ = u′v + uv′ 是"<strong>两者都在变</strong>"时的乘法规则：乘积的变化 = (u 的增量)(v) + (u)(v 的增量)。</div>
+
+<h3>复合函数求导：链式法则</h3>
+<p>若 u = g(x) 在 x 处可导，y = f(u) 在对应点 u = g(x) 处可导，则复合函数 y = f(g(x)) 在 x 处可导，且</p>
+<pre><code>dy/dx = dy/du · du/dx    即    [f(g(x))]′ = f′(g(x)) · g′(x)</code></pre>
+<p><strong>例</strong>：y = ln(sin x)。外层 f(u) = ln u，内层 u = sin x：</p>
+<pre><code>y′ = (1/u) · cos x = (1/sin x)·cos x = cot x</code></pre>
+<div class="insight"><strong>物理含义：</strong>链式法则是"<strong>变化率的乘法传递</strong>"。y 随 u 变化快 f′(u)，u 随 x 变化快 g′(x)，那么 y 随 x 的变化率 = 两者相乘。类比：每小时工资 × 每天工作小时数 = 每天收入的"变化速率"。</div>
+
+<h3>反函数求导</h3>
+<p>设 y=f(x) 在区间内单调、可导且 f′(x) ≠ 0，则它的反函数 x = φ(y) 也可导，且</p>
+<pre><code>φ′(y) = 1/f′(x)    即    dx/dy = 1/(dy/dx)</code></pre>
+<p><strong>例</strong>：y = arcsin x 是 x = sin y 的反函数，故</p>
+<pre><code>(arcsin x)′ = 1/(cos y) = 1/√(1−sin²y) = 1/√(1−x²)   （因 cos y &gt; 0）</code></pre>
+<div class="insight"><strong>几何含义：</strong>y=f(x) 与其反函数 x=φ(y) 的图像<strong>关于直线 y=x 对称</strong>；一条直线的斜率 m 经 y=x 镜像后变成 1/m，所以反函数在对应点的切线斜率互为倒数。</div>
+
+<h2 id="s3">2.3 高阶导数</h2>
+<h3>定义</h3>
+<p>导函数 f′(x) 若仍可导，它的导数称为 f(x) 的<strong>二阶导数</strong>，记作 f″(x) 或 d²y/dx²。逐次求下去得到 n 阶导数：</p>
+<pre><code>f″(x) = [f′(x)]′
+f‴(x) = [f″(x)]′
+f⁽ⁿ⁾(x) = [f⁽ⁿ⁻¹⁾(x)]′   （n ≥ 2；n ≥ 4 时也记作 f⁽ⁿ⁾）</code></pre>
+<h3>物理含义：加速度</h3>
+<p>位移 s=s(t) 的一阶导数是速度 v(t)，二阶导数就是<strong>加速度</strong>：</p>
+<pre><code>v(t) = s′(t) = ds/dt
+a(t) = s″(t) = d²s/dt² = dv/dt</code></pre>
+<div class="insight"><strong>物理含义：</strong>二阶导数是"<strong>变化率的变化率</strong>"——速度变多快，即加速度。一阶导回答"走多快"，二阶导回答"越来越快还是越来越慢"。</div>
+<h3>几何含义：弯曲的方向</h3>
+<p>f″(x) 刻画曲线<strong>弯曲的方向</strong>（凹凸性，第3章将系统展开）：</p>
+<ul>
+<li>f″(x) &gt; 0：切线斜率 f′(x) 随 x <strong>递增</strong>，曲线<strong>向上凹</strong>（开口朝上）。</li>
+<li>f″(x) &lt; 0：切线斜率 f′(x) 随 x <strong>递减</strong>，曲线<strong>向下凹</strong>（开口朝下）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>f″ 是"<strong>切线斜率的变化率</strong>"——正表示切线越转越陡地向上翘，负表示越转越平/向下弯。它与曲线曲率（弯得有多急）密切相关。</div>
+<h3>常见函数的高阶导数</h3>
+<pre><code>(xⁿ)⁽ᵏ⁾ = n(n−1)…(n−k+1)·xⁿ⁻ᵏ        （k ≤ n；k &gt; n 时为 0）
+(eˣ)⁽ⁿ⁾ = eˣ
+(sin x)⁽ⁿ⁾ = sin(x + nπ/2)
+(cos x)⁽ⁿ⁾ = cos(x + nπ/2)
+(ln x)⁽ⁿ⁾ = (−1)ⁿ⁻¹·(n−1)!/xⁿ</code></pre>
+<div class="insight"><strong>物理含义：</strong>sin 每求一次导就"相位前移 π/2"——sin → cos → −sin → −cos → sin，四次一个循环，这正是简谐振动中"位移、速度、加速度"依次相差 π/2 相位的数学根源。</div>
+<h3>莱布尼茨公式（乘积的高阶导数）</h3>
+<pre><code>(uv)⁽ⁿ⁾ = Σ(k=0..n) C(n,k)·u⁽ⁿ⁻ᵏ⁾·v⁽ᵏ⁾
+C(n,k) = n!/[k!(n−k)!]</code></pre>
+<p>它与二项式定理 (a+b)<sup>n</sup> 的展开形式完全一致，只是把"幂次"换成了"求导阶数"。</p>
+
+<h2 id="s4">2.4 隐函数与参数方程求导</h2>
+<h3>隐函数求导</h3>
+<p>若方程 F(x, y) = 0 确定了一个隐函数 y = y(x)，不必（有时也无法）先解出显式 y，而是<strong>把 y 看成 x 的函数</strong>，对方程两边关于 x 求导，用链式法则处理 y，再解出 y′。</p>
+<p><strong>例</strong>：单位圆 x² + y² = 1。</p>
+<pre><code>两边对 x 求导：2x + 2y·y′ = 0
+解得：y′ = −x/y</code></pre>
+<div class="insight"><strong>几何含义：</strong>隐函数求导在<strong>不显式解出曲线方程</strong>的情况下，直接给出曲线在任一点 (x, y) 处的切线斜率。圆 x²+y²=1 在点 (x, y) 的切线斜率是 −x/y——恰是"半径斜率 y/x 的负倒数"，说明<strong>切线垂直于半径</strong>。</div>
+<h3>对数求导法</h3>
+<p>对幂指函数、连乘除、开方等情形，先取对数再求导可大大简化。原理：</p>
+<pre><code>y = f(x)  ⟹  ln|y| = ln|f(x)|  ⟹  y′/y = [ln|f(x)|]′  ⟹  y′ = y·[ln|f(x)|]′</code></pre>
+<p><strong>例</strong>：y = x<sup>x</sup>（x &gt; 0）。</p>
+<pre><code>ln y = x ln x  ⟹  y′/y = ln x + 1  ⟹  y′ = xˣ(ln x + 1)</code></pre>
+<div class="insight"><strong>物理含义：</strong>对数把"乘法变成加法、幂变成乘法"，于是复杂的增长率分解为若干简单增长率之和——在经济学中这就是"<strong>增长率叠加</strong>"（如 GDP = 价格 × 数量，其增长率 ≈ 通胀率 + 数量增长率）。</div>
+<h3>参数方程求导</h3>
+<p>设曲线由参数方程 x = φ(t)、y = ψ(t) 确定，且 φ′(t) ≠ 0，则</p>
+<pre><code>dy/dx = (dy/dt)/(dx/dt) = ψ′(t)/φ′(t)
+d²y/dx² = d(dy/dx)/dx = [d(dy/dx)/dt] / (dx/dt)</code></pre>
+<p><strong>例</strong>：椭圆 x = a cos t，y = b sin t。</p>
+<pre><code>dx/dt = −a sin t，dy/dt = b cos t
+dy/dx = (b cos t)/(−a sin t) = −(b/a) cot t</code></pre>
+<div class="insight"><strong>几何/物理含义：</strong>参数方程把曲线看成"<strong>质点随时间运动的轨迹</strong>"。dx/dt、dy/dt 是速度的两个分量，dy/dx = (dy/dt)/(dx/dt) = v<sub>y</sub>/v<sub>x</sub> 正是<strong>速度方向（轨迹切线方向）的斜率</strong>——质点运动方向永远沿轨迹切线。</div>
+
+<h2 id="s5">2.5 微分</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="520" height="330" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="-20" y1="280" x2="500" y2="280" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="60" y1="27" x2="60" y2="285" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="492" y="300" fill="#6b7280" font-size="13">x</text>
+<text x="38" y="34" fill="#6b7280" font-size="13">y</text>
+<text x="70" y="16" fill="#64748b" font-size="12">绿：dy=切线增量　·　蓝：Δy=曲线增量　·　橙：误差 o(Δx)</text>
+<path d="M-20 271.2 L-12 272.87 L-4 274.37 L4 275.69 L12 276.83 L20 277.8 L28 278.59 L36 279.21 L44 279.65 L52 279.91 L60 280 L68 279.91 L76 279.65 L84 279.21 L92 278.59 L100 277.8 L108 276.83 L116 275.69 L124 274.37 L132 272.87 L140 271.2 L148 269.35 L156 267.33 L164 265.13 L172 262.75 L180 260.2 L188 257.47 L196 254.57 L204 251.49 L212 248.23 L220 244.8 L228 241.19 L236 237.41 L244 233.45 L252 229.31 L260 225 L268 220.51 L276 215.85 L284 211.01 L292 205.99 L300 200.8 L308 195.43 L316 189.89 L324 184.17 L332 178.27 L340 172.2 L348 165.95 L356 159.53 L364 152.93 L372 146.15 L380 139.2 L388 132.07 L396 124.77 L404 117.29 L412 109.63 L420 101.8 L428 93.79 L436 85.61 L444 77.25 L452 68.71 L460 60 L468 51.11 L476 42.05 L484 32.81 L492 23.39 L500 13.8 " fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<line x1="160" y1="280" x2="500" y2="93" stroke="#16a34a" stroke-width="2.5"/>
+<line x1="260" y1="225" x2="460" y2="225" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4">
+<animate attributeName="x2" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</line>
+<line x1="460" y1="225" x2="460" y2="60" stroke="#2563eb" stroke-width="3">
+<animate attributeName="x1" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="x2" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y2" values="60;81.45;101.8;121.05;139.2;156.25;172.2;187.05;200.8;213.45;219.36;213.45;200.8;187.05;172.2;156.25;139.2;121.05;101.8;81.45;60" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</line>
+<line x1="460" y1="225" x2="460" y2="100" stroke="#16a34a" stroke-width="3">
+<animate attributeName="x1" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="x2" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y2" values="115;126;137;148;159;170;181;192;203;214;219.5;214;203;192;181;170;159;148;137;126;115" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</line>
+<line x1="460" y1="100" x2="460" y2="60" stroke="#f59e0b" stroke-width="3" stroke-dasharray="3 3">
+<animate attributeName="x1" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="x2" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y1" values="115;126;137;148;159;170;181;192;203;214;219.5;214;203;192;181;170;159;148;137;126;115" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y2" values="60;81.45;101.8;121.05;139.2;156.25;172.2;187.05;200.8;213.45;219.36;213.45;200.8;187.05;172.2;156.25;139.2;121.05;101.8;81.45;60" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</line>
+<circle cx="260" cy="225" r="6" fill="#16a34a"/>
+<text x="260" y="250" fill="#16a34a" font-size="13" text-anchor="middle">P</text>
+<circle cx="460" cy="100" r="4.5" fill="#16a34a">
+<animate attributeName="cx" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="cy" values="115;126;137;148;159;170;181;192;203;214;219.5;214;203;192;181;170;159;148;137;126;115" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</circle>
+<circle cx="460" cy="60" r="5.5" fill="#2563eb">
+<animate attributeName="cx" values="460;440;420;400;380;360;340;320;300;280;270;280;300;320;340;360;380;400;420;440;460" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="cy" values="60;81.45;101.8;121.05;139.2;156.25;172.2;187.05;200.8;213.45;219.36;213.45;200.8;187.05;172.2;156.25;139.2;121.05;101.8;81.45;60" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+</circle>
+<text x="480" y="243" fill="#64748b" font-size="12">
+<animate attributeName="x" values="360;350;340;330;320;310;300;290;280;270;265;270;280;290;300;310;320;330;340;350;360" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+Δx</text>
+<text x="430" y="162" fill="#16a34a" font-size="12" text-anchor="end">
+<animate attributeName="x" values="430;410;390;370;350;330;310;290;270;250;240;250;270;290;310;330;350;370;390;410;430" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y" values="170;175.5;181;186.5;192;197.5;203;208.5;214;219.5;222.25;219.5;214;208.5;203;197.5;192;186.5;181;175.5;170" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+dy</text>
+<text x="468" y="140" fill="#2563eb" font-size="12">
+<animate attributeName="x" values="468;448;428;408;388;368;348;328;308;288;278;288;308;328;348;368;388;408;428;448;468" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+<animate attributeName="y" values="142.5;153.23;163.4;173.03;182.1;190.63;198.6;206.03;212.9;219.23;222.18;219.23;212.9;206.03;198.6;190.63;182.1;173.03;163.4;153.23;142.5" dur="7s" keyTimes="0.0000;0.0500;0.1000;0.1500;0.2000;0.2500;0.3000;0.3500;0.4000;0.4500;0.5000;0.5500;0.6000;0.6500;0.7000;0.7500;0.8000;0.8500;0.9000;0.9500;1.0000" repeatCount="indefinite"/>
+Δy</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：微分 dy 是切线上的增量、Δy 是曲线上的增量；Δx 越小，误差 o(Δx) 越趋近于 0（以直代曲）</figcaption>
+</figure>
+<h3>定义</h3>
+<p>设 y=f(x) 在 x₀ 处可导，则函数增量 Δy 可写成：</p>
+<pre><code>Δy = f(x₀+Δx) − f(x₀) = f′(x₀)·Δx + o(Δx)</code></pre>
+<p>其中 o(Δx) 是比 Δx 更高阶的无穷小。我们称线性部分 f′(x₀)·Δx 为 f(x) 在 x₀ 处的<strong>微分</strong>，记作</p>
+<pre><code>dy = f′(x₀)·Δx = f′(x₀)·dx      （规定自变量的微分 dx = Δx）</code></pre>
+<p>因此可导与可微等价，且 dy/dx = f′(x₀)：<strong>导数就是"微分之商"</strong>（这也解释了 dy/dx 这个记号的来源）。</p>
+<h3>几何含义：切线上的增量</h3>
+<div class="insight"><strong>几何含义：</strong>当 x 从 x₀ 变到 x₀+Δx 时，曲线上的真实增量是 Δy（沿曲线走），而微分 dy 是<strong>切线上的增量</strong>（沿切线走）。用切线代替曲线——"<strong>以直代曲</strong>"，两者之差 o(Δx) 是高阶无穷小，Δx 越小越精确。</div>
+<h3>物理含义：微小变化的线性近似</h3>
+<div class="insight"><strong>物理含义：</strong>微分是"<strong>小变化量的近似</strong>"。位移 s=s(t) 中 ds = v·dt：在极短时间 dt 内，用"匀速"近似"变速"，位移 ≈ 速度 × 时间。任何量的小变化 ≈ (变化率) × (自变量小变化)。</div>
+<h3>微分的运算法则</h3>
+<pre><code>d(u ± v) = du ± dv
+d(uv) = v du + u dv
+d(u/v) = (v du − u dv)/v²
+d(f(g(x))) = f′(g(x))·g′(x)·dx = f′(u)·du</code></pre>
+<p><strong>一阶微分形式不变性</strong>：无论 u 是自变量还是中间变量，dy = f′(u) du 的形式都不变。</p>
+<h3>近似计算（线性近似）</h3>
+<p>由 Δy ≈ dy 得近似公式：</p>
+<pre><code>f(x₀+Δx) ≈ f(x₀) + f′(x₀)·Δx</code></pre>
+<p>取 x₀=0，令 Δx=x（|x| 很小），得到常用近似公式：</p>
+<pre><code>(1+x)^α ≈ 1 + αx        e^x ≈ 1 + x        ln(1+x) ≈ x
+sin x ≈ x                tan x ≈ x          arctan x ≈ x</code></pre>
+<div class="insight"><strong>物理含义：</strong>这些是"<strong>小角度/小量近似</strong>"的数学来源，如单摆小振幅时 sin θ ≈ θ、热胀冷缩、相对误差估算等，本质都是"在很小范围内用切线替代曲线"。</div>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>导数 f′(x₀)</td><td>曲线在 (x₀, f(x₀)) 处切线的斜率</td><td>瞬时变化率（瞬时速度、增长率、边际量）</td></tr>
+<tr><td>可导与连续</td><td>可导=光滑（有唯一切线）；连续=不断裂</td><td>轨迹连续但可能有"折角"（速度方向突变）</td></tr>
+<tr><td>基本求导公式</td><td>各基本曲线的"斜率函数"</td><td>各基本运动/过程的变化率规律</td></tr>
+<tr><td>四则运算法则</td><td>和差积商曲线斜率的合成</td><td>多个变化率的线性组合与乘积分解</td></tr>
+<tr><td>链式法则</td><td>复合函数切线的"斜率传递"</td><td>变化率的乘法传递（复合速率）</td></tr>
+<tr><td>反函数求导</td><td>图像关于 y=x 对称，斜率互为倒数</td><td>自变量/因变量角色互换后速率互为倒数</td></tr>
+<tr><td>高阶导数 f″</td><td>凹凸性、切线斜率的变化率、曲率</td><td>加速度（速度的变化率）</td></tr>
+<tr><td>隐函数求导</td><td>不显式解出曲线也能求切线斜率</td><td>隐式约束下变量间的变化率关系</td></tr>
+<tr><td>参数方程求导</td><td>轨迹切线方向 = 速度分量之比</td><td>运动方向：斜率 = v<sub>y</sub>/v<sub>x</sub></td></tr>
+<tr><td>微分 dy</td><td>切线上的增量（以直代曲）</td><td>微小变化的线性近似（ds = v·dt）</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li><strong>用定义求导</strong>：用导数定义求 f(x) = x² 在 x=1 处的导数。<br/>提示：f′(1) = lim(h→0) [(1+h)² − 1]/h = lim(h→0)(2h+h²)/h = 2。</li>
+<li><strong>四则运算</strong>：求 y = x³ + 3 sin x − e<sup>x</sup> + 7 的导数。<br/>答案：y′ = 3x² + 3 cos x − e<sup>x</sup>。</li>
+<li><strong>链式法则</strong>：求 y = ln(sin x) 的导数。<br/>答案：y′ = cos x / sin x = cot x。</li>
+<li><strong>对数求导</strong>：求 y = x<sup>x</sup>（x &gt; 0）的导数。<br/>答案：y′ = x<sup>x</sup>(ln x + 1)。</li>
+<li><strong>隐函数求导</strong>：由 x² + y² = r² 确定 y=y(x)，求 dy/dx，并写出圆在点 (3, 4)（r=5）处的切线斜率。<br/>答案：y′ = −x/y；在 (3,4) 处斜率 = −3/4。</li>
+<li><strong>参数方程求导</strong>：椭圆 x = a cos t，y = b sin t，求 dy/dx 及 t = π/4 处的切线斜率。<br/>答案：dy/dx = −(b/a) cot t；t=π/4 时 = −b/a。</li>
+<li><strong>高阶导数</strong>：求 y = e<sup>x</sup> cos x 的二阶导数。<br/>答案：y′ = e<sup>x</sup>(cos x − sin x)，y″ = −2e<sup>x</sup> sin x。</li>
+<li><strong>微分与近似</strong>：y = x³ 在 x=2、Δx=0.1 处，求微分 dy 与增量 Δy 的差。<br/>答案：dy = 3·2²·0.1 = 1.2；Δy = 2.1³ − 2³ = 1.261；误差 0.061（高阶小量）。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "导数就是切线" → ❌ 导数是<strong>切线的斜率</strong>（一个数），切线是过切点的一条<strong>直线</strong>（一个几何对象）。</li>
+<li>❌ "可导与连续等价" → ❌ 可导必连续，但<strong>连续不一定可导</strong>（如 y=|x| 在 0 处连续却不可导）。</li>
+<li>❌ "(f(g(x)))′ = f′(x)·g′(x)" → ❌ 链式法则必须"外层在 <strong>内层值处</strong>求导"：[f(g(x))]′ = f′(g(x))·g′(x)。</li>
+<li>❌ "(uv)′ = u′v′" → ❌ 乘积法则要"<strong>交叉相加</strong>"：(uv)′ = u′v + uv′。</li>
+<li>❌ "d²y/dx² 等于 (dy/dx)²" → ❌ d²y/dx² 是<strong>二阶导数</strong>（求导两次），(dy/dx)² 是<strong>一阶导数的平方</strong>，两者完全不同。</li>
+<li>❌ "参数方程二阶导 = ψ″(t)/φ″(t)" → ❌ 二阶导数要对 dy/dx 再对 x 求导：d²y/dx² = [d(dy/dx)/dt]/(dx/dt)，分母仍是 φ′(t)。</li>
+<li>❌ "隐函数求导忘了 y 是 x 的函数" → ❌ 对 y 求导必须乘 y′：d(y²)/dx = 2y·y′，而不是 2y。</li>
+<li>❌ "微分 dy 与增量 Δy 相等" → ❌ 一般 Δy ≠ dy；Δy = dy + o(Δx)，dy 只是 Δy 的<strong>线性主部</strong>。</li>
+<li>❌ "反函数求导 (φ)′(y) = 1/f′(y)" → ❌ 应代入原自变量 x：(φ)′(y) = 1/f′(x)，其中 x 与 y 满足 y=f(x)。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:8px 0 10px;color:#b45309">一、练习题</h3>
+<ol style="margin:8px 0 4px;padding-left:22px">
+<li style="margin:8px 0"><strong>导数定义</strong>：用导数定义求 f(x) = x² 在 x = 2 处的导数 f′(2)。（写出差商并求极限的完整过程）</li>
+<li style="margin:8px 0"><strong>几何含义</strong>：求曲线 y = x³ 在点 (1, 1) 处的<strong>切线方程</strong>与<strong>法线方程</strong>，并说明切线斜率 f′(1) 的几何意义。</li>
+<li style="margin:8px 0"><strong>物理含义</strong>：质点沿直线运动，位移 s(t) = t³（单位：米，t 为秒）。求 t = 2 时的<strong>瞬时速度</strong> v(2) 与<strong>加速度</strong> a(2)，并解释它们分别是 s(t) 的几阶导数。</li>
+<li style="margin:8px 0"><strong>隐函数求导</strong>：由圆的方程 x² + y² = 25 确定 y = y(x)。求 dy/dx，并写出圆在点 (3, 4) 处的切线斜率；再验证该切线斜率与半径斜率之积为 −1，说明几何含义。</li>
+<li style="margin:8px 0"><strong>对数求导法</strong>：求 y = xˣ（x &gt; 0）的导数 y′。</li>
+<li style="margin:8px 0"><strong>微分与近似</strong>：利用线性近似 f(x₀ + Δx) ≈ f(x₀) + f′(x₀)·Δx，估算 √4.04（取 x₀ = 4），并说明「以直代曲」的几何含义。</li>
+</ol>
+<h3 style="margin:20px 0 8px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p style="margin:6px 0 6px 14px">f′(2) = lim(h→0) [f(2+h) − f(2)]/h = lim(h→0) [(2+h)² − 4]/h = lim(h→0) [4 + 4h + h² − 4]/h = lim(h→0) (4h + h²)/h = lim(h→0) (4 + h) = 4。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p style="margin:6px 0 6px 14px">y′ = 3x²，故 f′(1) = 3，即曲线在点 (1, 1) 处切线的斜率为 3（几何上表示该点处曲线上升、上升快慢为 3）。切线方程：y − 1 = 3(x − 1)，即 <strong>y = 3x − 2</strong>。法线方程：y − 1 = −(1/3)(x − 1)，即 <strong>y = −(1/3)x + 4/3</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p style="margin:6px 0 6px 14px">v(t) = s′(t) = 3t²（位移的一阶导数，即瞬时速度），故 v(2) = 3·2² = <strong>12 m/s</strong>。a(t) = s″(t) = 6t（位移的二阶导数，即加速度），故 a(2) = 6·2 = <strong>12 m/s²</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p style="margin:6px 0 6px 14px">两边对 x 求导：2x + 2y·y′ = 0，解得 <strong>y′ = −x/y</strong>。在点 (3, 4) 处斜率 = −3/4。该点半径斜率为 4/3，两者乘积 (−3/4)·(4/3) = <strong>−1</strong>，故切线垂直于半径——这正是圆的几何性质。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p style="margin:6px 0 6px 14px">两边取对数：ln y = x ln x。两边对 x 求导：y′/y = ln x + 1。故 <strong>y′ = xˣ(ln x + 1)</strong>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p style="margin:6px 0 6px 14px">取 f(x) = √x，x₀ = 4，Δx = 0.04，则 f′(x) = 1/(2√x)，f′(4) = 1/4。故 √4.04 ≈ √4 + (1/4)·0.04 = 2 + 0.01 = <strong>2.01</strong>（真实值约 2.00998，误差极小）。几何上就是用 x=4 处的切线替代曲线，在极小区间内以直代曲。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第1章-函数与极限/第1章-函数与极限.html" style="color:#2563eb;text-decoration:none">← 上一章：第1章 函数与极限</a><a href="../../../index.html" style="color:#2563eb;text-decoration:none">回目录</a><a href="../第3章-微分中值定理与导数的应用/第3章-微分中值定理与导数的应用.html" style="color:#2563eb;text-decoration:none">下一章：第3章 微分中值定理与导数的应用 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学高等数学 · 导数与微分</footer>
+</body>
+</html>

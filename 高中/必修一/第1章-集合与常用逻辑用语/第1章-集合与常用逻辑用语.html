@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第1章 集合与常用逻辑用语 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第一册 › 第1章 集合与常用逻辑用语</div></header>
+<main class="container">
+<h1>第1章 集合与常用逻辑用语</h1>
+<p class="lead">高中 / 必修第一册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>集合 = 「用一个圈把具有共同属性的对象圈在一起」；逻辑用语 = 「用集合的包含关系读懂"如果…就…"与"所有/存在"」。学完本章，你要能看见一张 <strong>Venn 图（韦恩图）</strong>——每个命题都是一块区域，充分条件、必要条件、并集交集补集、全称与存在，全部都能还原成"圈与圈之间的包含、重叠、相减"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">1.1 集合的概念与表示</a><a href="#s2">1.2 集合间的关系</a><a href="#s3">1.3 并集、交集、补集</a><a href="#s4">1.4 充分条件与必要条件</a><a href="#s5">1.5 全称量词与存在量词</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">1.1 集合的概念与表示</h2>
+<h3>什么是集合？（物理含义：分类与归档）</h3>
+<p>把一些<strong>确定的、互不相同的</strong>对象看成一个整体，这个整体就叫<strong>集合</strong>，其中的每个对象叫<strong>元素</strong>。例如"全班同学"是一个集合，"所有自然数"是一个集合，"所有电子"也是一个集合。</p>
+<p><strong>元素的三特性</strong>：</p>
+<ul>
+<li><strong>确定性</strong>：一个对象要么属于这个集合，要么不属于，二者必居其一、不能含糊。所以"个子高的人"<strong>不是</strong>集合（多高算高没有标准），而"身高超过 1.8m 的人"<strong>是</strong>集合。</li>
+<li><strong>互异性</strong>：集合中的元素互不相同，{1, 1, 2} 只能写成 {1, 2}。</li>
+<li><strong>无序性</strong>：元素排列顺序无关，{1, 2} = {2, 1}。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>集合的本质是"<strong>按共同属性分类/归档</strong>"。你给抽屉贴标签，把同一类物体放进同一个抽屉——那个抽屉就是集合，物体就是元素。"属于"就是"被归进了这一类"。</div>
+<h3>元素与集合的关系：属于 ∈ 与不属于 ∉</h3>
+<p>若 <code>a</code> 是集合 <code>A</code> 的元素，记作 <code>a ∈ A</code>；若不是，记作 <code>a ∉ A</code>。<code>∈</code> 只用于"元素与集合"之间，不能用在两个集合之间。</p>
+<h3>常用数集（固定的"抽屉"）</h3>
+<table>
+<tr><th>记号</th><th>名称</th><th>内容</th></tr>
+<tr><td>N</td><td>自然数集</td><td>0, 1, 2, 3, …</td></tr>
+<tr><td>N* 或 N₊</td><td>正整数集</td><td>1, 2, 3, …（不含 0）</td></tr>
+<tr><td>Z</td><td>整数集</td><td>…, −2, −1, 0, 1, 2, …</td></tr>
+<tr><td>Q</td><td>有理数集</td><td>整数与分数</td></tr>
+<tr><td>R</td><td>实数集</td><td>有理数与无理数</td></tr>
+</table>
+<h3>集合的三种表示法</h3>
+<p><strong>① 列举法</strong>：把元素一一列出，写在花括号内。例：<code>{1, 2, 3}</code>、<code>{a, b, c}</code>。元素较多或有规律时可用省略号，如 <code>{1, 2, 3, …, 100}</code>。</p>
+<p><strong>② 描述法</strong>：用"元素 + 竖线 + 共同性质"表示：</p>
+<pre><code>{ x | x 满足的性质 P }</code></pre>
+<p>例：不大于 3 的自然数集 = <code>{ x | x ∈ N, x ≤ 3 }</code>；所有偶数 = <code>{ x | x = 2k, k ∈ Z }</code>。竖线左边写"代表元素"，右边写"它满足的条件"。</p>
+<p><strong>③ 图示法（Venn 图）</strong>：用一个闭合曲线（圆）圈出集合，曲线内写元素或标上集合名——这是<strong>几何含义的核心载体</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>集合 ⟷ 一个<strong>圈</strong>（闭合曲线围成的区域），元素 ⟷ <strong>区域内的点</strong>。"<code>a ∈ A</code>"就是"点 a 落在圈 A 的<strong>内部</strong>"，"<code>a ∉ A</code>"就是"点 a 在圈 A 的<strong>外部</strong>"。从此，抽象的"属于"关系变成了一目了然的"点在不在圈里"。</div>
+<h3>空集</h3>
+<p>不含任何元素的集合叫<strong>空集</strong>，记作 <code>∅</code>。规定：空集是任何集合的子集。</p>
+
+<h2 id="s2">1.2 集合间的关系</h2>
+<h3>子集、真子集、相等</h3>
+<ul>
+<li><strong>子集</strong>：若集合 A 中<strong>每一个</strong>元素都在集合 B 中，称 A 是 B 的子集，记作 <code>A ⊆ B</code>（或 B ⊇ A）。读作"A 包含于 B"。</li>
+<li><strong>真子集</strong>：若 <code>A ⊆ B</code> 且 B 中<strong>存在</strong> A 没有的元素，称 A 是 B 的真子集，记作 <code>A ⊂ B</code>（严格包含）。</li>
+<li><strong>相等</strong>：<code>A = B</code> 当且仅当 <code>A ⊆ B</code> 且 <code>B ⊆ A</code>。即"你有的我都有，我有的你都有"。</li>
+</ul>
+<p>例：<code>{1, 2} ⊆ {1, 2, 3}</code>；<code>{1, 2} ⊂ {1, 2, 3}</code>；<code>{x | x² = 1} = {1, −1}</code>。</p>
+<div class="insight"><strong>几何含义：</strong>子集 = A 的圈<strong>完全套在</strong> B 的圈<strong>里面</strong>；真子集 = A 的圈严格在 B 内部且 B 还多出一块；相等 = <strong>两个圈完全重合</strong>。判断集合关系，本质就是比"圈谁大、谁套住谁"。</div>
+<div class="insight"><strong>物理含义：</strong>子集 = "<strong>部分与整体</strong>"或"更细的分类"。例：金属 ⊆ 导体（金属都导电，是导体的一部分）；哺乳动物 ⊆ 动物。"相等" = 两个分类标准圈出了<strong>同一批对象</strong>，只是叫法不同。</div>
+<h3>几个关键结论</h3>
+<ul>
+<li>任何集合都是它自身的子集：<code>A ⊆ A</code>。</li>
+<li>空集是任何集合的子集：<code>∅ ⊆ A</code>（对任意 A）。</li>
+<li>含 n 个元素的集合，共有 <code>2ⁿ</code> 个子集，<code>2ⁿ − 1</code> 个真子集（每个元素"取或不取"两种选择）。</li>
+</ul>
+
+<h2 id="s3">1.3 并集、交集、补集</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="185" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><circle cx="315" cy="115" r="80" fill="rgba(37,99,235,0.14)" stroke="#2563eb" stroke-width="2.5"/><ellipse cx="250" cy="115" rx="17" ry="50" fill="#16a34a"><animate attributeName="opacity" values="0.15;0.55;0.15" dur="4s" repeatCount="indefinite"/></ellipse><text x="165" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">A</text><text x="335" y="120" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">B</text><circle cx="165" cy="115" r="6" fill="#2563eb"><animate attributeName="cx" values="165;250;165" dur="5s" repeatCount="indefinite"/><animate attributeName="fill" values="#2563eb;#16a34a;#2563eb" dur="5s" repeatCount="indefinite"/></circle><text x="250" y="96" fill="#16a34a" font-size="13" font-weight="bold" text-anchor="middle">A ∩ B</text><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">交集 = 两圈公共重叠部分：点进入 A∩B 才同时属于 A 与 B</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：交集是两圈的公共重叠部分——点滑入重叠区才同时属于 A 和 B</figcaption></figure>
+<h3>三种运算的定义</h3>
+<ul>
+<li><strong>并集</strong>：<code>A ∪ B = { x | x ∈ A 或 x ∈ B }</code>——由所有属于 A <strong>或</strong>属于 B 的元素组成（"或"是可兼的：两者都算）。</li>
+<li><strong>交集</strong>：<code>A ∩ B = { x | x ∈ A 且 x ∈ B }</code>——由<strong>同时</strong>属于 A 和 B 的公共元素组成。</li>
+<li><strong>补集</strong>：设全集为 U，<code>∁<sub>U</sub>A = { x | x ∈ U 且 x ∉ A }</code>——在全集中<strong>去掉</strong> A 剩下的部分。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>并集 = 两个圈<strong>全部</strong>盖住的区域；交集 = 两个圈的<strong>公共重叠</strong>部分；补集 = 在大圈（全集 U）里<strong>挖去</strong> A 之后剩下的月牙形区域。Venn 图上用阴影涂出来，三种运算立刻分明。</div>
+<div class="insight"><strong>物理含义：</strong>并集 = "<strong>任一满足即可</strong>"（并联电路：开关甲 <em>或</em> 乙闭合，灯就亮）；交集 = "<strong>同时满足才行</strong>"（串联电路：甲 <em>且</em> 乙都闭合，灯才亮）；补集 = "<strong>否定/排除</strong>"（全集是全体研究对象，补集就是"不是 A 的那批"）。</div>
+<h3>运算性质</h3>
+<p><strong>交换律</strong>：<code>A ∪ B = B ∪ A</code>，<code>A ∩ B = B ∩ A</code></p>
+<p><strong>结合律</strong>：<code>(A ∪ B) ∪ C = A ∪ (B ∪ C)</code>，<code>(A ∩ B) ∩ C = A ∩ (B ∩ C)</code></p>
+<p><strong>分配律</strong>：<code>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</code>，<code>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</code></p>
+<p><strong>德摩根律（补集与并/交的互换，最重要！）</strong>：</p>
+<pre><code>∁U(A ∪ B) = ∁U A ∩ ∁U B
+∁U(A ∩ B) = ∁U A ∪ ∁U B</code></pre>
+<p>记忆口诀："<strong>并的补 = 补的交，交的补 = 补的并</strong>"。补集进去，∪ 与 ∩ 互换。</p>
+<p>例：U = {1,2,3,4,5}，A = {1,2,3}，B = {3,4}。则 A ∪ B = {1,2,3,4}，A ∩ B = {3}，∁<sub>U</sub>A = {4,5}。</p>
+
+<h2 id="s4">1.4 充分条件与必要条件</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="210" viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><circle cx="260" cy="118" r="95" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="2.5"/><text x="260" y="34" fill="#2563eb" font-size="16" font-weight="bold" text-anchor="middle">Q（大圈）</text><g><animateTransform attributeName="transform" type="translate" values="0,0; 34,-26; 0,0; -34,26; 0,0" dur="8s" repeatCount="indefinite"/><circle cx="260" cy="118" r="44" fill="rgba(22,163,74,0.20)" stroke="#16a34a" stroke-width="2.5"/><circle cx="260" cy="118" r="5" fill="#16a34a"/><text x="260" y="122" fill="#16a34a" font-size="14" font-weight="bold" text-anchor="middle">P</text></g><text x="260" y="195" fill="#334155" font-size="13" text-anchor="middle">P ⊆ Q ⟺ p ⇒ q：小圈在哪儿，圈内点都始终在大圈里</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：充分条件是「小圈套大圈」——小圈 P 在大圈 Q 内滑动，圈内点永远落在大圈里</figcaption></figure>
+<h3>命题与推出关系 ⇒</h3>
+<p>若命题"若 p，则 q"为真，记作 <code>p ⇒ q</code>（读作 p 推出 q）。此时：</p>
+<ul>
+<li><strong>p 是 q 的充分条件</strong>——有 p 就<strong>足够</strong>保证 q。</li>
+<li><strong>q 是 p 的必要条件</strong>——要 p 成立，q <strong>必不可少</strong>（q 若不成立，p 必不成立）。</li>
+</ul>
+<p><strong>充要条件</strong>：若 <code>p ⇒ q</code> 且 <code>q ⇒ p</code>，记作 <code>p ⇔ q</code>，称 p 与 q 互为<strong>充要条件</strong>（p 与 q 等价）。</p>
+<div class="insight"><strong>几何含义（本章最重要的"数形结合"）：</strong>设 P = { x | x 满足 p }，Q = { x | x 满足 q }，则<br/>
+<code>p ⇒ q</code> ⟺ <code>P ⊆ Q</code>。<br/>
+"推出"就是"<strong>小圈套大圈</strong>"：p 的范围小，q 的范围大，落在 P 里必然落在 Q 里。于是——充分条件是<strong>小圈</strong>，必要条件是<strong>大圈</strong>，充要条件是<strong>两圈重合</strong>。判断条件类型，就是比两个集合"谁包含谁"。</div>
+<div class="insight"><strong>物理含义：</strong>充分条件 = "<strong>有它就够</strong>"（例：下雨 ⇒ 地面湿，下雨是地面湿的充分条件）；必要条件 = "<strong>没它不行</strong>"（例：灯泡发光 ⇒ 有电流通过，通电是发光的必要条件，但只有通电还不够，还要灯泡完好，所以不充分）；充要条件 = "<strong>完全等价</strong>"（例：一个数是偶数 ⇔ 它能被 2 整除）。</div>
+<h3>四种条件类型（用集合大小判断）</h3>
+<table>
+<tr><th>条件</th><th>集合关系</th><th>例子</th></tr>
+<tr><td>充分不必要</td><td>P ⊂ Q（P 真子集于 Q）</td><td>p: x &gt; 1，q: x &gt; 0</td></tr>
+<tr><td>必要不充分</td><td>Q ⊂ P（Q 真子集于 P）</td><td>p: x &gt; 0，q: x &gt; 1</td></tr>
+<tr><td>充要条件</td><td>P = Q（两圈重合）</td><td>p: x² = 1，q: |x| = 1</td></tr>
+<tr><td>既不充分也不必要</td><td>P 与 Q 互不包含（有交无套）</td><td>p: x &gt; 0，q: x &lt; 0</td></tr>
+</table>
+<p>例："<code>x &gt; 1</code> 是 <code>x &gt; 0</code> 的什么条件？"——集合 {x | x &gt; 1} ⊂ {x | x &gt; 0}，故是<strong>充分不必要</strong>条件。</p>
+
+<h2 id="s5">1.5 全称量词与存在量词</h2>
+<h3>两个量词</h3>
+<ul>
+<li><strong>全称量词 ∀</strong>：表示"<strong>所有、任意、每一个</strong>"。含 ∀ 的命题叫<strong>全称命题</strong>：<code>∀x ∈ M, p(x)</code>。</li>
+<li><strong>存在量词 ∃</strong>：表示"<strong>存在、至少有一个</strong>"。含 ∃ 的命题叫<strong>特称（存在）命题</strong>：<code>∃x ∈ M, p(x)</code>。</li>
+</ul>
+<p>例：<code>∀x ∈ R, x² ≥ 0</code>（所有实数的平方非负，真）；<code>∃x ∈ R, x² &lt; 0</code>（存在实数的平方为负，假）。</p>
+<div class="insight"><strong>几何含义：</strong>∀ 要求<strong>整个区域里的每一个点</strong>都满足性质 p（一个不漏）；∃ 只要求<strong>区域里至少有一个点</strong>满足 p（找到一个就行）。全称命题的真假 = "整片区域全涂满"；存在命题的真假 = "区域内有没有打上一个点"。</div>
+<div class="insight"><strong>物理含义：</strong>全称命题对应"<strong>普遍规律</strong>"（例：一切物体都受重力、所有电子都带负电）；存在命题对应"<strong>存在实例/反例</strong>"（例：存在一种材料在常温下超导、存在比 0 小的负数）。检验全称命题要"证遍所有"，检验存在命题"举一个例子"即可。</div>
+<h3>量词命题的否定（务必记牢的互换规则）</h3>
+<pre><code>¬(∀x ∈ M, p(x))  ⟺  ∃x ∈ M, ¬p(x)
+¬(∃x ∈ M, p(x))  ⟺  ∀x ∈ M, ¬p(x)</code></pre>
+<p>口诀："<strong>全称否定变存在，存在否定变全称，结论也要一起否</strong>"。既要换量词，又要否定结论，二者缺一不可。</p>
+<p>例：命题"∀x ∈ R, x² &gt; 0"的否定是"∃x ∈ R, x² ≤ 0"（x = 0 时成立，故原命题为假）。</p>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>集合</td><td>闭合曲线围成的区域（Venn 圈）</td><td>按共同属性分类的"抽屉"</td></tr>
+<tr><td>元素 / 属于 ∈</td><td>区域内的点 / 点在圈内</td><td>被归类的对象 / 归档关系</td></tr>
+<tr><td>空集 ∅</td><td>空无一物的区域</td><td>没有任何成员的"空抽屉"</td></tr>
+<tr><td>子集 ⊆</td><td>一个圈完全套在另一个圈内</td><td>部分与整体、更细的分类</td></tr>
+<tr><td>集合相等 =</td><td>两个圈完全重合</td><td>两种标准圈出同一批对象</td></tr>
+<tr><td>并集 ∪</td><td>两个圈的全部区域</td><td>任一满足即可（并联开关）</td></tr>
+<tr><td>交集 ∩</td><td>两个圈的公共重叠部分</td><td>同时满足才行（串联开关）</td></tr>
+<tr><td>补集 ∁</td><td>全集大圈中挖去 A 的月牙</td><td>否定 / 排除</td></tr>
+<tr><td>充分条件 ⇒</td><td>小圈套大圈（P ⊆ Q）</td><td>有它就够</td></tr>
+<tr><td>必要条件</td><td>大圈套小圈（Q ⊆ P）</td><td>没它不行</td></tr>
+<tr><td>充要条件 ⇔</td><td>两圈重合（P = Q）</td><td>完全等价</td></tr>
+<tr><td>全称量词 ∀</td><td>整个区域所有点都满足</td><td>普遍规律</td></tr>
+<tr><td>存在量词 ∃</td><td>区域内至少一个点满足</td><td>存在实例 / 反例</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>用列举法写出集合 <code>{ x | x ∈ N, x ≤ 5 }</code>；再用描述法表示"所有正偶数"。</li>
+<li>设 A = {1, 2, 3}，B = {3, 4, 5}，求 A ∪ B、A ∩ B；若全集 U = {1,2,3,4,5,6}，求 ∁<sub>U</sub>A。</li>
+<li>判断：{1, 2} 与 {2, 1} 是否相等？{0} 与 ∅ 是否相等？0 与 {0} 是否相等？</li>
+<li>判断"x &gt; 2"是"x &gt; 1"的什么条件（充分/必要/充要），并用集合包含关系说明。</li>
+<li>写出命题"∀x ∈ R, x² ≥ 0"与"∃x ∈ Z, x² = 2"的否定，并判断原命题真假。</li>
+<li>设 U = R，A = { x | x &lt; 3 }，B = { x | x &gt; 1 }，求 A ∩ B、A ∪ B，并验证德摩根律 ∁<sub>U</sub>(A ∩ B) = ∁<sub>U</sub>A ∪ ∁<sub>U</sub>B。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "∅ 与 {∅} 一样" → ❌ ∅ 是不含任何元素的集合；{∅} 是含<strong>一个</strong>元素（那个元素叫"空集"）的集合，二者完全不同。</li>
+<li>❌ "0 与 {0} 一样" → ❌ 0 是<strong>元素</strong>，{0} 是含元素 0 的<strong>集合</strong>。0 ∈ {0}，但 0 ≠ {0}。</li>
+<li>❌ "属于 ∈ 与包含 ⊆ 混用" → ❌ <code>∈</code> 用于"元素与集合"（1 ∈ {1,2}），<code>⊆</code> 用于"集合与集合"（{1} ⊆ {1,2}）。写成 1 ⊆ {1,2} 或 {1} ∈ {1,2} 都是错的。</li>
+<li>❌ "空集不是任何集合的子集" → ❌ 规定 ∅ 是任何集合的子集，但 ∅ <strong>不一定是</strong>其他集合的<strong>元素</strong>。</li>
+<li>❌ "A ⊆ B 说明 A 的元素比 B 少" → ❌ 子集允许相等：A = B 时也有 A ⊆ B。只有<strong>真</strong>子集 A ⊂ B 才要求 B 多出元素。</li>
+<li>❌ "充分条件与必要条件方向搞反" → ❌ 记"<strong>推出箭头尾巴是充分、箭头指向是必要</strong>"：p ⇒ q 中 p 是充分、q 是必要；对应 P ⊆ Q（小圈是充分）。</li>
+<li>❌ "全称命题否定只换量词不否结论" → ❌ 必须<strong>量词互换 + 结论取反</strong>："∀x, p(x)"的否定是"∃x, ¬p(x)"，漏掉结论取反就错。</li>
+<li>❌ "描述法竖线两边随意写" → ❌ 竖线左边必须是"代表元素"，右边是它的性质；且性质要能<strong>确定</strong>元素，像"好人"这类模糊标准不能构成集合。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>用列举法表示集合 <code>{ x | x ∈ N, 1 ≤ x ≤ 5 }</code>，写出它的元素；该集合有多少个子集？并判断 <code>0</code> 是否属于它、<code>∅</code> 是否是它的子集。</li>
+<li>设 <code>A = { a, b }</code>，写出 A 的所有子集与所有真子集，并用"每个元素取或不取"的几何直觉验证子集个数。</li>
+<li>设全集 <code>U = { 1, 2, 3, 4, 5, 6 }</code>，<code>A = { 1, 2, 3 }</code>，<code>B = { 3, 4, 5 }</code>，求 <code>A ∪ B</code>、<code>A ∩ B</code>、<code>∁<sub>U</sub>A</code>、<code>∁<sub>U</sub>(A ∩ B)</code>，并用 Venn 图（圈的重叠 / 挖去）解释。</li>
+<li>判断"<code>x &gt; 2</code>"是"<code>x &gt; 1</code>"的什么条件，并用"小圈套大圈"的集合包含关系说明；反过来"<code>x &gt; 1</code>"又是"<code>x &gt; 2</code>"的什么条件？</li>
+<li>用集合包含关系判断"两个三角形全等"与"两个三角形面积相等"的条件关系，并联系"下雨 ⇒ 地面湿"的物理含义说明充分 / 必要的方向。</li>
+<li>写出下列命题的否定并判断真假：① <code>∀x ∈ R, x² ≥ 0</code>；② <code>∃x ∈ Z, x² = 2</code>；③ "所有自然数都大于 0"。并用"全称否定变存在、结论一起否"的口诀解释。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>列举法：{1, 2, 3, 4, 5}。子集个数 2⁵ = 32（每个元素"取或不取"两种选择）。0 ∉ 该集合（0 不满足 1 ≤ x ≤ 5，也不在 {1..5} 中）。∅ 是它的子集（空集是任何集合的子集）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>所有子集：∅、{a}、{b}、{a, b}，共 4 个；所有真子集：∅、{a}、{b}，共 3 个。几何直觉：元素 a 有"取 / 不取"两种选择，元素 b 也两种，故 2×2 = 4 个子集；去掉 A 自身即得真子集 4 − 1 = 3。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>A ∪ B = {1, 2, 3, 4, 5}（两个圈全部盖住的区域）；A ∩ B = {3}（两个圈的公共重叠部分）；∁<sub>U</sub>A = {4, 5, 6}（全集大圈挖去 A 后剩下的月牙）；∁<sub>U</sub>(A ∩ B) = ∁<sub>U</sub>{3} = {1, 2, 4, 5, 6}。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>设 P = {x | x &gt; 2}，Q = {x | x &gt; 1}，有 P ⊂ Q（P 是小圈、Q 是大圈，小圈完全套在大圈内）。故"x &gt; 2"是"x &gt; 1"的<strong>充分不必要</strong>条件（有 x &gt; 2 必有 x &gt; 1，反之不行）；反过来"x &gt; 1"是"x &gt; 2"的<strong>必要不充分</strong>条件。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>"全等 ⇒ 面积相等"（全等三角形面积必相等），但"面积相等 ⇏ 全等"（底与高不同、乘积相同的三角形面积相等）。所以"全等"是"面积相等"的<strong>充分不必要</strong>条件。物理类比："下雨 ⇒ 地面湿"，下雨是充分条件（有它够）、地面湿是必要条件（没它不行），方向与"全等 ⇒ 面积相等"一致。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>① 否定：∃x ∈ R, x² &lt; 0，为<strong>假</strong>（原命题真：任何实数的平方 ≥ 0）。② 否定：∀x ∈ Z, x² ≠ 2，为<strong>真</strong>（原命题假：√2 不是整数）。③ 原命题"所有自然数都大于 0"为<strong>假</strong>（0 是自然数但不大于 0），其否定"存在一个自然数不大于 0"为<strong>真</strong>。规则：量词 ∀ ↔ ∃ 互换，同时结论取反，二者缺一不可。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../../../初中/初三/九年级下册/第29章-投影与视图/第29章-投影与视图.html">← 上一章：第29章 投影与视图</a><a href="../../../index.html">回目录</a><a href="../第2章-一元二次函数方程和不等式/第2章-一元二次函数方程和不等式.html">下一章：第2章 一元二次函数方程和不等式 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高中必修第一册</footer>
+</body>
+</html>

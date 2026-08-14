@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第19章 一次函数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第19章 一次函数</div></header>
+<main class="container">
+<h1>第19章 一次函数</h1>
+<p class="lead">初中 / 初二 / 八年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>一次函数 <code>y = kx + b</code> 的图象永远是一条<strong>直线</strong>：<code>k</code> 是这条直线的"倾斜程度"（斜率），决定它是上升还是下降、陡还是缓；<code>b</code> 是它与 y 轴交点的纵坐标（截距），决定它在坐标系中的上下位置。学完本章，你要能把"匀速运动、均匀变化"这类最稳定、最规律的现实变化，一眼画成一条直线，并且从这条直线里读出"变化的快慢与起点"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">19.1 函数与变量</a><a href="#s2">19.2 正比例函数</a><a href="#s3">19.3 一次函数的图象与性质</a><a href="#s4">19.4 一次函数与方程、不等式</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">19.1 函数与变量</h2>
+<h3>常量与变量</h3>
+<p>在一个变化过程中，我们把<strong>数值发生变化的量</strong>叫做<strong>变量</strong>，把<strong>数值始终不变的量</strong>叫做<strong>常量</strong>。</p>
+<table>
+<tr><th>变化过程</th><th>常量</th><th>变量</th></tr>
+<tr><td>汽车以 60 km/h 匀速行驶，路程 <code>s = 60t</code></td><td>速度 60（km/h）</td><td>时间 t、路程 s</td></tr>
+<tr><td>圆的面积 <code>S = πr²</code></td><td>圆周率 π</td><td>半径 r、面积 S</td></tr>
+<tr><td>单价 5 元/支，买 x 支笔付 y 元，<code>y = 5x</code></td><td>单价 5</td><td>数量 x、总价 y</td></tr>
+</table>
+<p><strong>关键：</strong>常量和变量是相对的，要放在"同一个变化过程"里看。上表中"速度 60"在"匀速行驶"这个语境下是常量，但若讨论"汽车变速行驶"，速度就变成了变量。</p>
+
+<h3>函数的概念（本章的地基）</h3>
+<p><strong>定义：</strong>一般地，在一个变化过程中，如果有两个变量 <code>x</code> 和 <code>y</code>，并且对于 <code>x</code> 的每一个确定的值，<code>y</code> 都有<strong>唯一确定</strong>的值与其对应，那么就说 <code>x</code> 是<strong>自变量</strong>，<code>y</code> 是 <code>x</code> 的<strong>函数</strong>。当 <code>x = a</code> 时对应的 <code>y = b</code>，<code>b</code> 就叫做当自变量取 <code>a</code> 时的<strong>函数值</strong>。</p>
+<ul>
+<li>函数是一种"对应关系/法则"，不是一个具体的数：输入一个 <code>x</code>，按规则唯一地吐出输出 <code>y</code>。</li>
+<li><strong>判断是否为函数的唯一标准</strong>：给定一个 <code>x</code>，<code>y</code> 是否<strong>唯一确定</strong>。一个 <code>x</code> 只能对应一个 <code>y</code>（但允许不同的 <code>x</code> 对应同一个 <code>y</code>）。</li>
+<li>如 <code>y = x²</code> 中 <code>x = 2</code> 只能得到 <code>y = 4</code>，是函数；而圆的方程 <code>x² + y² = 1</code> 中 <code>x = 0</code> 对应 <code>y = 1</code> 和 <code>y = -1</code> 两个值，<strong>y 不是 x 的函数</strong>。</li>
+</ul>
+<div class="insight"><strong>几何/结构含义：</strong>函数是一台"确定性机器"——同一个输入永远产出同一个输出，不允许含糊。这正是数学描述自然规律的前提：现实世界的规律必须"可重复、可预测"，函数就是"可预测性"的数学化身。</div>
+
+<h3>函数的三种表示法</h3>
+<table>
+<tr><th>表示法</th><th>形式</th><th>优点</th><th>缺点</th></tr>
+<tr><td>解析式法（关系式法）</td><td><code>y = 2x + 1</code></td><td>简洁、能算任意值、便于推理</td><td>不够直观</td></tr>
+<tr><td>列表法</td><td>把若干组对应值列成表</td><td>对应值一目了然</td><td>只能列有限组，看不出整体趋势</td></tr>
+<tr><td>图象法</td><td>在坐标平面描出点连成图形</td><td>直观、能看出整体变化趋势</td><td>读数不够精确</td></tr>
+</table>
+
+<h3>函数图象：把"关系"画成"图形"</h3>
+<p><strong>定义：</strong>对于一个函数，如果把自变量与函数的每对对应值分别作为点的横、纵坐标，那么坐标平面内由这些点组成的图形，就是这个函数的<strong>图象</strong>。</p>
+<p>画函数图象的一般步骤：<strong>①列表 → ②描点 → ③连线</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>函数图象 = 满足关系式的<strong>所有点的集合（轨迹）</strong>。两条等价的性质缺一不可：①图象上每一个点都满足函数关系式；②满足关系式的每一个点都在图象上。图象和关系式是"同一个东西的两种写法"——数（式子）与形（图形）在这里完成了统一。</div>
+<div class="insight"><strong>物理含义：</strong>函数描述一个"变化过程"，图象就是把这个过程"拍成一张照片"：横轴是自变量（通常是时间、路程等"原因量"），纵轴是因变量（"结果量"）。图象的每一段升降，都对应现实中"变快、变慢、变大、变小"的具体事件。</div>
+
+<h2 id="s2">19.2 正比例函数</h2>
+<h3>定义</h3>
+<p>形如 <code>y = kx</code>（<code>k</code> 是常数，<code>k ≠ 0</code>）的函数叫做<strong>正比例函数</strong>，其中 <code>k</code> 叫做<strong>比例系数</strong>。</p>
+<ul>
+<li>抓住三点：① <code>x</code> 的次数是 1；② 系数 <code>k ≠ 0</code>；③ 没有常数项（截距为 0）。</li>
+<li>等价形式：两个量成正比例 ⟺ 它们的比值恒定，<code>y/x = k</code>（<code>x ≠ 0</code>）。</li>
+</ul>
+
+<h3>图象：一条经过原点的直线</h3>
+<p>正比例函数的图象是一条<strong>经过原点 (0, 0)</strong> 的直线。因为只要再确定除原点外的一个点，就能画出整条直线，所以画正比例函数常取 <code>(0, 0)</code> 和 <code>(1, k)</code> 两点。</p>
+<pre><code>例：y = 2x        过 (0,0) 与 (1,2)
+     y = -x        过 (0,0) 与 (1,-1)
+
+    y = 2x（上升，k&gt;0）     y = -x（下降，k&lt;0）
+          ↗                    ↘</code></pre>
+
+<h3>性质：k 的符号与大小决定一切</h3>
+<table>
+<tr><th>k 的取值</th><th>图象经过</th><th>增减性</th><th>图象走势</th></tr>
+<tr><td>k &gt; 0</td><td>第一、三象限</td><td>y 随 x 增大而<strong>增大</strong></td><td>从左向右<strong>上升</strong></td></tr>
+<tr><td>k &lt; 0</td><td>第二、四象限</td><td>y 随 x 增大而<strong>减小</strong></td><td>从左向右<strong>下降</strong></td></tr>
+</table>
+<p>此外，<code>|k|</code> 决定直线的<strong>倾斜程度</strong>：<code>|k|</code> 越大，直线越"陡"（越靠近 y 轴）；<code>|k|</code> 越小，直线越"平缓"（越靠近 x 轴）。</p>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="310" viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="70" y1="265" x2="400" y2="265" stroke="#94a3b8" stroke-width="2"/><line x1="70" y1="265" x2="70" y2="18" stroke="#94a3b8" stroke-width="2"/><polygon points="400,265 392,260 392,270" fill="#94a3b8"/><polygon points="70,18 65,26 75,26" fill="#94a3b8"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="70" y="283">0</text><text x="115" y="283">1</text><text x="160" y="283">2</text><text x="205" y="283">3</text><text x="250" y="283">4</text></g><g fill="#64748b" font-size="12" text-anchor="end"><text x="62" y="269">0</text><text x="62" y="224">1</text><text x="62" y="179">2</text><text x="62" y="134">3</text><text x="62" y="89">4</text><text x="62" y="44">5</text></g><line x1="70" y1="265" x2="182.5" y2="40" stroke="#2563eb" stroke-width="3"/><line x1="70" y1="265" x2="317.5" y2="17.5" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/><line x1="70" y1="265" x2="385" y2="107.5" stroke="#16a34a" stroke-width="2"/><text x="196" y="36" fill="#2563eb" font-size="14" font-weight="700">k=2 陡</text><text x="326" y="20" fill="#64748b" font-size="13">k=1</text><text x="392" y="100" fill="#16a34a" font-size="14" font-weight="700">k=0.5 缓</text><line x1="70" y1="30" x2="70" y2="265" stroke="#334155" stroke-width="1.5" stroke-dasharray="5 4"><animate attributeName="x1" values="70;182.5;70" dur="6s" repeatCount="indefinite"/><animate attributeName="x2" values="70;182.5;70" dur="6s" repeatCount="indefinite"/></line><circle r="6" fill="#2563eb"><animate attributeName="cx" values="70;182.5;70" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="265;40;265" dur="6s" repeatCount="indefinite"/></circle><circle r="5" fill="#94a3b8"><animate attributeName="cx" values="70;182.5;70" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="265;152.5;265" dur="6s" repeatCount="indefinite"/></circle><circle r="5" fill="#16a34a"><animate attributeName="cx" values="70;182.5;70" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="265;208.75;265" dur="6s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：斜率 k 是"爬坡的陡度"——同一个 x 处，k 越大直线越陡、纵坐标越高</figcaption></figure>
+<div class="insight"><strong>几何含义（斜率 k 的诞生）：</strong>在直线 <code>y = kx</code> 上任取一点 <code>(x, y)</code>（原点除外），都有 <code>k = y/x</code>，也就是"<strong>纵坐标 ÷ 横坐标</strong>"。它度量的是：横坐标每前进 1 个单位，纵坐标上升（或下降）<code>k</code> 个单位——这就是<strong>斜率</strong>（倾斜的"坡度"）。k 的正负决定"朝上还是朝下"，|k| 的大小决定"爬坡有多陡"。</div>
+<div class="insight"><strong>物理含义（正比 = 均匀的稳定关系）：</strong>正比例函数刻画"两个量同步缩放"：<code>s = vt</code>（匀速直线运动中，时间翻倍路程就翻倍，速度 v 是比例系数）；<code>总价 = 单价 × 数量</code>（单价一定，总价与数量成正比）；<code>F = kx</code>（胡克定律，弹簧伸长量 x 与弹力 F 成正比）。它们共同的特征是<strong>比值恒定、没有"起步成本"</strong>——从 0 开始均匀增长。</div>
+
+<h2 id="s3">19.3 一次函数的图象与性质</h2>
+<h3>定义</h3>
+<p>形如 <code>y = kx + b</code>（<code>k</code>、<code>b</code> 是常数，<code>k ≠ 0</code>）的函数叫做<strong>一次函数</strong>。当 <code>b = 0</code> 时，<code>y = kx</code>，所以<strong>正比例函数是一次函数的特殊情况</strong>（截距为 0 的一次函数）。</p>
+<ul>
+<li>抓住两点：① 自变量 <code>x</code> 的次数是 1；② 系数 <code>k ≠ 0</code>。常数项 <code>b</code> 可以为 0，也可以为任何数。</li>
+<li>若 <code>k = 0</code>，则 <code>y = b</code> 是常数函数（图象是一条水平直线），它不再是"一次"函数。</li>
+</ul>
+
+<h3>图象与两个"定位参数"</h3>
+<p>一次函数的图象是一条<strong>直线</strong>（不经过原点的，一般直线）。这条直线完全由 <code>k</code> 和 <code>b</code> 两个数确定：</p>
+<ul>
+<li><strong>k（斜率）</strong>决定直线的<strong>倾斜方向与陡峭程度</strong>：<code>k &gt; 0</code> 上升，<code>k &lt; 0</code> 下降，<code>|k|</code> 越大越陡。</li>
+<li><strong>b（截距）</strong>决定直线与 y 轴交点的位置：直线必过点 <code>(0, b)</code>，即 <code>b</code> 是直线与 y 轴交点的<strong>纵坐标</strong>。</li>
+<li>与 x 轴交点：令 <code>y = 0</code>，解得 <code>x = -b/k</code>，即交点为 <code>(-b/k, 0)</code>。</li>
+</ul>
+
+<h3>平移关系：正比例函数"上下平移"得到一次函数</h3>
+<pre><code>y = kx        （过原点的直线）
+  │  当 b &gt; 0 时，向上平移 b 个单位
+  │  当 b &lt; 0 时，向下平移 |b| 个单位
+  ▼
+y = kx + b</code></pre>
+<p><strong>记忆口诀：</strong>一次函数就是"正比例函数这条直线，整体往上（或往下）搬了 b 个单位"。k 不变则直线的倾斜方向和陡峭程度不变，平移只改变"过不过原点"。</p>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="20" y1="200" x2="440" y2="200" stroke="#94a3b8" stroke-width="2"/><line x1="180" y1="352" x2="180" y2="8" stroke="#94a3b8" stroke-width="2"/><polygon points="440,200 432,195 432,205" fill="#94a3b8"/><polygon points="180,8 175,16 185,16" fill="#94a3b8"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="180" y="218">0</text><text x="230" y="218">1</text><text x="280" y="218">2</text><text x="330" y="218">3</text><text x="130" y="218">-1</text><text x="80" y="218">-2</text></g><g fill="#64748b" font-size="12" text-anchor="end"><text x="172" y="204">0</text><text x="172" y="154">1</text><text x="172" y="104">2</text><text x="172" y="254">-1</text></g><line x1="30" y1="350" x2="330" y2="50" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5"/><text x="368" y="26" fill="#2563eb" font-size="14" font-weight="700" text-anchor="end">y = x</text><g><line x1="30" y1="350" x2="330" y2="50" stroke="#16a34a" stroke-width="3"/><circle cx="180" cy="200" r="5" fill="#16a34a"/><animateTransform attributeName="transform" type="translate" values="0 0; 0 -100; 0 0" dur="6s" repeatCount="indefinite"/></g><text x="296" y="26" fill="#16a34a" font-size="14" font-weight="700">y = x + 2</text><line x1="180" y1="200" x2="180" y2="200" stroke="#334155" stroke-width="2"><animate attributeName="y2" values="200;100;200" dur="6s" repeatCount="indefinite"/></line><g><polygon points="180,104 174,116 186,116" fill="#334155"/><animateTransform attributeName="transform" type="translate" values="0 96; 0 -4; 0 96" dur="6s" repeatCount="indefinite"/></g><line x1="180" y1="100" x2="90" y2="100" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><text x="86" y="96" fill="#15803d" font-size="13" font-weight="700" text-anchor="end">b = 2</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：一次函数是正比例函数上下平移 b 个单位——k 不变（两线平行），起点从原点移到 (0, b)</figcaption></figure>
+<div class="insight"><strong>几何含义：</strong>这是本章最重要的"看图说话"能力——<code>k</code> 管"斜不斜、朝哪斜、多斜"，<code>b</code> 管"高不高、低不低"。两个参数各司其职：改变 <code>k</code> 是<strong>转动</strong>这条直线，改变 <code>b</code> 是<strong>上下平移</strong>这条直线。反之，看到一条直线，你就能读出它的斜率与截距，进而写出它的解析式。</div>
+
+<h3>性质：k、b 符号与图象所在象限</h3>
+<table>
+<tr><th>k 的符号</th><th>b 的符号</th><th>图象经过的象限</th><th>增减性</th></tr>
+<tr><td>k &gt; 0</td><td>b &gt; 0</td><td>第一、二、三象限</td><td>y 随 x 增大而增大</td></tr>
+<tr><td>k &gt; 0</td><td>b = 0</td><td>第一、三象限</td><td>y 随 x 增大而增大</td></tr>
+<tr><td>k &gt; 0</td><td>b &lt; 0</td><td>第一、三、四象限</td><td>y 随 x 增大而增大</td></tr>
+<tr><td>k &lt; 0</td><td>b &gt; 0</td><td>第一、二、四象限</td><td>y 随 x 增大而减小</td></tr>
+<tr><td>k &lt; 0</td><td>b = 0</td><td>第二、四象限</td><td>y 随 x 增大而减小</td></tr>
+<tr><td>k &lt; 0</td><td>b &lt; 0</td><td>第二、三、四象限</td><td>y 随 x 增大而减小</td></tr>
+</table>
+
+<h3>画法：两点确定一条直线</h3>
+<p>直线由两点唯一确定，所以画一次函数只需取两个点（通常取它与坐标轴的两个交点最省事）：</p>
+<ol>
+<li>令 <code>x = 0</code>，得 <code>y = b</code>，描出点 <code>(0, b)</code>；</li>
+<li>令 <code>y = 0</code>，得 <code>x = -b/k</code>，描出点 <code>(-b/k, 0)</code>；</li>
+<li>过这两点画直线并延长。</li>
+</ol>
+<pre><code>例：画 y = 2x + 4
+    x = 0 → y = 4     点 (0, 4)
+    y = 0 → x = -2    点 (-2, 0)
+    过 (0,4) 与 (-2,0) 画直线即可。</code></pre>
+
+<h3>待定系数法：由两点求解析式</h3>
+<p>已知直线经过两点求解析式，设 <code>y = kx + b</code>，把两点坐标代入，得到关于 <code>k</code>、<code>b</code> 的二元一次方程组，解出 <code>k</code>、<code>b</code> 即得解析式。</p>
+<pre><code>例：直线过 (1, 3) 和 (2, 5)，求解析式。
+    设 y = kx + b，代入：
+      3 = k + b
+      5 = 2k + b
+    解得 k = 2，b = 1  →  y = 2x + 1</code></pre>
+<p>更本质地，斜率可以直接由两点算出：<code>k = (y₂ − y₁)/(x₂ − x₁)</code>，这是"纵坐标的增量 ÷ 横坐标的增量"，与前面的"坡度"定义完全一致。</p>
+<div class="insight"><strong>几何含义（斜率的完整定义）：</strong>直线上任意两点 <code>(x₁, y₁)</code>、<code>(x₂, y₂)</code>（<code>x₁ ≠ x₂</code>），斜率 <code>k = (y₂ − y₁)/(x₂ − x₁) = Δy/Δx</code>。它回答的问题永远是同一个：<strong>"横坐标每增加 1，纵坐标平均变化多少？"</strong>所以直线上升时 k 为正、下降时 k 为负、越陡 |k| 越大，全部统一在这一个式子之下。</div>
+<div class="insight"><strong>物理含义（线性变化 = 均匀变化）：</strong>一次函数描述"变化速率恒定"的现象——物理中大量定律都是它：<code>s = vt + s₀</code>（匀速直线运动的位移公式，初位置 s₀ 是截距，速度 v 是斜率）；<code>v = v₀ + at</code>（匀加速运动，初速度 v₀ 是截距，加速度 a 是斜率）；<code>华氏温度 F = (9/5)C + 32</code>（截距 32 是"冰点偏移"）。它们的共同点：<strong>每单位自变量变化带来的因变量变化量固定不变</strong>，图象就是一条直线。</div>
+
+<h2 id="s4">19.4 一次函数与方程、不等式</h2>
+<p>这一节是"数与形"结合的高潮：同一个式子，既可以当作"函数"看图象，也可以当作"方程"求根，还可以当作"不等式"求范围。</p>
+
+<h3>一次函数与一元一次方程</h3>
+<p>方程 <code>kx + b = 0</code> 的解，就是直线 <code>y = kx + b</code> 与 <strong>x 轴交点的横坐标</strong>。因为"函数值为 0"恰好意味着"图象上的点落在 x 轴上（纵坐标为 0）"。</p>
+<pre><code>y = 2x + 4 与 x 轴交点：令 2x + 4 = 0 → x = -2
+  方程 2x + 4 = 0 的解就是 x = -2（交点横坐标）</code></pre>
+
+<h3>一次函数与一元一次不等式</h3>
+<p>不等式 <code>kx + b &gt; 0</code> 的解集，就是直线 <code>y = kx + b</code> 位于 <strong>x 轴上方</strong>的那一部分所对应的 <code>x</code> 的取值范围；<code>kx + b &lt; 0</code> 对应直线在 <strong>x 轴下方</strong>的部分。</p>
+
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="30" y1="220" x2="400" y2="220" stroke="#94a3b8" stroke-width="2"/><line x1="180" y1="312" x2="180" y2="20" stroke="#94a3b8" stroke-width="2"/><polygon points="400,220 392,215 392,225" fill="#94a3b8"/><polygon points="180,20 175,28 185,28" fill="#94a3b8"/><g fill="#64748b" font-size="12" text-anchor="middle"><text x="180" y="238">0</text><text x="210" y="238">1</text><text x="240" y="238">2</text><text x="150" y="238">-1</text><text x="90" y="238">-3</text></g><g fill="#64748b" font-size="12" text-anchor="end"><text x="172" y="224">0</text><text x="172" y="194">1</text><text x="172" y="164">2</text><text x="172" y="134">3</text><text x="172" y="104">4</text></g><polygon points="120,220 210,40 210,220" fill="#16a34a" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="6s" repeatCount="indefinite"/></polygon><polygon points="90,280 120,220 90,220" fill="#dc2626" opacity="0.12"><animate attributeName="opacity" values="0.05;0.2;0.05" dur="6s" repeatCount="indefinite"/></polygon><line x1="90" y1="280" x2="219" y2="22" stroke="#2563eb" stroke-width="3"/><text x="226" y="30" fill="#2563eb" font-size="14" font-weight="700">y = 2x + 4</text><line x1="120" y1="220" x2="120" y2="40" stroke="#334155" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.6"/><circle cx="120" cy="220" r="6" fill="#16a34a"><animate attributeName="r" values="5;9;5" dur="2s" repeatCount="indefinite"/></circle><text x="120" y="256" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">x = -2</text><text x="168" y="170" fill="#15803d" font-size="13" font-weight="700">2x+4 &gt; 0</text><text x="88" y="300" fill="#b91c1c" font-size="13" font-weight="700">2x+4 &lt; 0</text><circle r="5" fill="#2563eb"><animate attributeName="cx" values="90;219;90" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="280;22;280" dur="6s" repeatCount="indefinite"/></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：方程 2x+4=0 的解是直线与 x 轴交点的横坐标 x=-2；直线在 x 轴上方（绿）对应 2x+4&gt;0，下方（红）对应 2x+4&lt;0</figcaption></figure>
+<pre><code>y = 2x + 4：
+   2x + 4 &gt; 0  ⟺  x &gt; -2   （直线在 x 轴上方的部分）
+   2x + 4 &lt; 0  ⟺  x &lt; -2   （直线在 x 轴下方的部分）</code></pre>
+
+<h3>一次函数与二元一次方程组</h3>
+<p>每个二元一次方程都可化成一次函数形式（<code>y = kx + b</code>），其图象是一条直线；一个二元一次方程组的<strong>解</strong>，就是这两条直线的<strong>交点坐标</strong>。交点既满足第一条直线、又满足第二条直线，正是"公共解"。</p>
+<ul>
+<li>两直线<strong>相交</strong>（k 不相等）→ 方程组有<strong>唯一解</strong>（交点坐标）。</li>
+<li>两直线<strong>平行</strong>（k 相等、b 不等）→ 无交点 → 方程组<strong>无解</strong>。</li>
+<li>两直线<strong>重合</strong>（k、b 都相等）→ 无数交点 → 方程组有<strong>无穷多解</strong>。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>方程、不等式、函数三者的翻译字典——"求方程的解"= 找直线与 x 轴交点的横坐标；"解不等式"= 判断直线在 x 轴上方还是下方的那一段；"解方程组"= 找两条直线的公共点（交点）。<strong>解 = 交点（或交点的横坐标），解的集合 = 图象上满足条件的区域。</strong></div>
+<div class="insight"><strong>物理含义：</strong>这对应现实中的"临界值"与"比较"问题：方程的解是"何时达到某个状态"（如汽车何时行驶到 100 km）；不等式的解是"何时超过/低于某个状态"（如水温何时降到 50℃ 以下）；方程组的解是"两种变化何时相遇"（如两人何时何地追上）。解出它们，就是把"抽象的代数答案"翻译回"具体的时刻、位置、数量"。</div>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>函数</td><td>自变量 x 到函数值 y 的"唯一对应"法则；图象是满足关系式的所有点组成的图形</td><td>描述一个可预测的变化过程（输入→唯一输出）</td></tr>
+<tr><td>正比例函数 y = kx</td><td>过原点的直线；k = y/x = 斜率，决定倾斜方向与陡峭程度</td><td>正比关系：匀速运动 s = vt、总价 = 单价 × 数量、胡克定律 F = kx</td></tr>
+<tr><td>一次函数 y = kx + b</td><td>一般直线；k 管"斜与陡"，b 管"与 y 轴交点(0,b)"</td><td>均匀变化：s = vt + s₀、v = v₀ + at、华氏温度换算</td></tr>
+<tr><td>斜率 k</td><td>k = Δy/Δx，横坐标前进 1 时纵坐标的变化量；k&gt;0 上升、k&lt;0 下降、|k| 越大越陡</td><td>变化速率（速度、加速度、单价、比例系数）</td></tr>
+<tr><td>截距 b</td><td>直线与 y 轴交点的纵坐标；上下平移的距离</td><td>初始值 / 起点（初位置、初速度、起步成本）</td></tr>
+<tr><td>一次函数图象的平移</td><td>y = kx 沿 y 轴平移 |b| 个单位得到 y = kx + b</td><td>给"均匀变化"加上一个非零起点</td></tr>
+<tr><td>方程 kx + b = 0</td><td>直线与 x 轴交点的横坐标</td><td>达到"零点/基准状态"的时刻</td></tr>
+<tr><td>不等式 kx + b &gt; 0（或 &lt; 0）</td><td>直线在 x 轴上方（或下方）部分的 x 范围</td><td>超过（或低于）某一状态的取值范围</td></tr>
+<tr><td>二元一次方程组</td><td>两条直线的交点坐标</td><td>两种变化"相遇/相等"的时刻与位置</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>判断下列关系式中哪些是一次函数、哪些是正比例函数：<code>y = 2x</code>、<code>y = -3x + 1</code>、<code>y = x²</code>、<code>y = 1/x</code>、<code>y = 5</code>。</li>
+<li>已知 <code>y = (m - 2)x + m² - 4</code> 是正比例函数，求 m 的值。</li>
+<li>画出 <code>y = -2x + 4</code> 的图象，写出它与两坐标轴的交点坐标，并说出 y 随 x 的增减性。</li>
+<li>已知直线经过点 (2, 7) 和 (-1, -2)，用待定系数法求它的解析式。</li>
+<li>求直线 <code>y = 3x - 6</code> 与 x 轴交点的横坐标，并直接写出不等式 <code>3x - 6 &gt; 0</code> 的解集。</li>
+<li>两条直线 <code>y = 2x + 1</code> 与 <code>y = -x + 4</code> 交于一点，求交点坐标（即方程组 y = 2x + 1、y = -x + 4 的解）。</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "正比例函数是一次函数，所以一次函数都是正比例函数" → ❌ 反了：正比例函数是一次函数，但一次函数不一定过原点；只有 <code>b = 0</code> 时一次函数才是正比例函数。</li>
+<li>❌ "k 的绝对值越大，直线越平缓" → ❌ <code>|k|</code> 越大直线<strong>越陡</strong>（越靠近 y 轴）；<code>|k|</code> 越小越平缓。</li>
+<li>❌ "b 是直线与 x 轴交点的坐标" → ❌ b 是直线与 <strong>y 轴</strong>交点的<strong>纵坐标</strong>，交点写成 (0, b)；与 x 轴交点是 (-b/k, 0)。</li>
+<li>❌ "k &lt; 0 时，b 也一定 &lt; 0" → ❌ k 和 b 互相独立：k &lt; 0、b &gt; 0 时直线仍经过第一、二、四象限（如 y = -x + 3）。</li>
+<li>❌ "把 y = 5 也当作一次函数" → ❌ <code>y = 5</code> 是常数函数（k = 0），不是一次函数；一次函数要求 <code>k ≠ 0</code>。</li>
+<li>❌ "解不等式 2x + 4 &gt; 0 就是求直线与 x 轴交点" → ❌ 与 x 轴交点是解<strong>方程</strong> 2x + 4 = 0；解<strong>不等式</strong> 2x + 4 &gt; 0 要取直线在 x 轴<strong>上方</strong>部分对应的 x 范围（x &gt; -2）。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>下列各式中，哪些是<strong>正比例函数</strong>？哪些是<strong>一次函数</strong>？（只填序号）① <code>y = 3x</code> ② <code>y = -2x + 1</code> ③ <code>y = x²</code> ④ <code>y = 4/x</code> ⑤ <code>y = -x</code></li>
+<li>对于一次函数 <code>y = -3x + 2</code>，写出它的斜率 <code>k</code> 与截距 <code>b</code>，并求出图象与 y 轴、x 轴交点的坐标。</li>
+<li>已知函数 <code>y = 2x + 1</code>：求当 <code>x = 3</code> 时的函数值，并判断点 <code>(1, 3)</code> 是否在它的图象上。</li>
+<li>一次函数 <code>y = kx + b</code> 的图象经过点 <code>(0, -2)</code> 和 <code>(3, 4)</code>，用待定系数法求 <code>k</code>、<code>b</code>，并写出解析式。</li>
+<li>已知直线 <code>y = 2x - 6</code>：①它与 x 轴交点的横坐标是多少？②不等式 <code>2x - 6 &gt; 0</code> 的解集是什么？③这条直线经过哪些象限？</li>
+<li>求直线 <code>y = x + 1</code> 与 <code>y = -x + 3</code> 的交点坐标，并说明这等价于解哪个二元一次方程组。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>正比例函数：①、⑤（形如 <code>y = kx</code>，<code>k ≠ 0</code> 且无常数项）；一次函数：①、②、⑤（形如 <code>y = kx + b</code>，<code>k ≠ 0</code>）。③是二次函数、④是反比例函数，都不是一次函数。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>k = -3</code>，<code>b = 2</code>。与 y 轴交点：令 <code>x = 0</code>，得 <code>y = 2</code>，即 <code>(0, 2)</code>；与 x 轴交点：令 <code>y = 0</code>，得 <code>-3x + 2 = 0</code>，解得 <code>x = 2/3</code>，即 <code>(2/3, 0)</code>。因 <code>k &lt; 0</code>，y 随 x 增大而减小。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>当 <code>x = 3</code> 时，<code>y = 2×3 + 1 = 7</code>。点 <code>(1, 3)</code>：代入得 <code>y = 2×1 + 1 = 3</code>，恰好等于该点纵坐标 3，所以 <code>(1, 3)</code> 在图象上。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>设 <code>y = kx + b</code>。代入 <code>(0, -2)</code> 得 <code>b = -2</code>；代入 <code>(3, 4)</code> 得 <code>4 = 3k - 2</code>，解得 <code>k = 2</code>。故解析式为 <code>y = 2x - 2</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>①令 <code>2x - 6 = 0</code>，得 <code>x = 3</code>。②<code>2x - 6 &gt; 0 ⟺ x &gt; 3</code>（即直线位于 x 轴上方部分对应的 x 范围）。③<code>k = 2 &gt; 0</code>、<code>b = -6 &lt; 0</code>，故经过第一、三、四象限。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>解方程组 <code>y = x + 1</code>、<code>y = -x + 3</code>：由 <code>x + 1 = -x + 3</code> 得 <code>2x = 2</code>，<code>x = 1</code>，代入得 <code>y = 2</code>，交点坐标为 <code>(1, 2)</code>。它等价于解二元一次方程组 <code>{ y = x + 1,  y = -x + 3 }</code>（两条直线的交点即方程组的公共解）。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第18章-平行四边形/第18章-平行四边形.html">← 上一章：第18章 平行四边形</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第20章-数据的分析/第20章-数据的分析.html">下一章：第20章 数据的分析 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 八年级下册</footer>
+</body>
+</html>

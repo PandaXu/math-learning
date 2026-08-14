@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第8章 空间解析几何与向量代数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第8章 空间解析几何与向量代数</div></header>
+<main class="container">
+<h1>第8章 空间解析几何与向量代数</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>本章把「代数运算」与「空间几何」打通——向量是空间的"语言"，数量积量"投影/做功"、向量积量"面积/旋转"，而平面、直线、曲面、曲线都可以用方程来"描述形状与运动"。学完本章，你要能在脑中"看见"每一个方程对应什么图形、每一类运算对应什么物理量。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">1 向量及其运算</a><a href="#s2">2 数量积与向量积</a><a href="#s3">3 平面方程</a><a href="#s4">4 空间直线</a><a href="#s5">5 曲面方程</a><a href="#s6">6 空间曲线</a><a href="#s7">7 本章·几何与物理含义总结</a><a href="#s8">8 典型例题</a><a href="#s9">9 常见误区</a>
+</div>
+
+<h2 id="s1">1 向量及其运算</h2>
+<h3>1.1 向量的概念</h3>
+<p>平面解析几何用<strong>数（坐标）</strong>描述点；空间解析几何更进一步，用<strong>向量</strong>描述"既有大小又有方向的量"。向量记作 <code>a</code>、<code>AB⃗</code>（粗体或带箭头），它由<strong>大小（模）</strong>与<strong>方向</strong>两个要素决定，与起点位置无关。</p>
+<ul>
+<li><strong>模</strong>：向量 a 的长度，记作 <code>|a|</code>，恒有 <code>|a| ≥ 0</code>。</li>
+<li><strong>零向量</strong>：模为 0、方向任意的向量，记作 <code>0</code>。</li>
+<li><strong>单位向量</strong>：模为 1 的向量。</li>
+<li><strong>相等向量</strong>：大小相等且方向相同（可经平移重合）。</li>
+<li><strong>平行（共线）向量</strong>：方向相同或相反，记作 <code>a ∥ b</code>。</li>
+<li><strong>自由向量</strong>：向量只由"大小 + 方向"决定，可任意平移——这是向量法的威力所在。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>力、位移、速度、加速度、电场强度 E、磁场 B、动量都是向量。向量把"推多大劲儿"（模）与"朝哪推"（方向）打包成一个数学对象；<strong>自由向量 = 不关心作用点只看效果</strong>，正如位移只关心"从 A 到 B 的净变化"。</div>
+
+<h3>1.2 向量的坐标表示、模与方向</h3>
+<p>取空间直角坐标系，三个<strong>坐标轴单位向量</strong>记为 <code>i = (1,0,0)</code>、<code>j = (0,1,0)</code>、<code>k = (0,0,1)</code>，则任意向量唯一分解为：</p>
+<pre><code>a = a₁ i + a₂ j + a₃ k = (a₁, a₂, a₃)</code></pre>
+<p>其中 a₁、a₂、a₃ 是 a 在三条坐标轴上的<strong>投影（分量）</strong>。模与方向由分量完全确定：</p>
+<pre><code>|a| = √(a₁² + a₂² + a₃²)   ← 三维"勾股定理"（对角线长度）</code></pre>
+<p>向量的<strong>方向角</strong> α、β、γ 是 a 与三个坐标轴正方向的夹角，其余弦叫<strong>方向余弦</strong>：</p>
+<pre><code>cos α = a₁/|a|,   cos β = a₂/|a|,   cos γ = a₃/|a|
+cos²α + cos²β + cos²γ = 1   ← 方向余弦是单位向量的三个分量</code></pre>
+<p>与 a 同方向的单位向量就是方向余弦拼成的向量：</p>
+<pre><code>a° = a/|a| = (cos α, cos β, cos γ)</code></pre>
+<div class="insight"><strong>几何含义：</strong>向量的坐标 = 长方体对角线的三条边；模 = 对角线长度；方向余弦 = 对角线在三轴上的"倾斜程度"。<strong>物理含义：</strong>把速度 v 分解为 v₁、v₂、v₃，就是"总速度"在三条正交方向上的分量，方向余弦描述运动方向与坐标轴的夹角。</div>
+
+<h3>1.3 向量的加减法</h3>
+<p><strong>几何法则</strong>：</p>
+<ul>
+<li><strong>三角形法则</strong>：a + b —— 把 b 的起点接到 a 的终点，从 a 的起点指向 b 的终点。</li>
+<li><strong>平行四边形法则</strong>：以 a、b 为邻边作平行四边形，对角线即 a + b。</li>
+<li>减法 a − b = a + (−b)，其中 −b 是 b 的反向向量。</li>
+</ul>
+<p><strong>坐标运算</strong>（分量对应相加减）：</p>
+<pre><code>a ± b = (a₁ ± b₁, a₂ ± b₂, a₃ ± b₃)</code></pre>
+<p>运算律：交换律 a + b = b + a；结合律 (a + b) + c = a + (b + c)。</p>
+<div class="insight"><strong>几何含义：</strong>向量加法是"首尾相接的位移合成"——沿 a 走一段再沿 b 走一段，净效果就是 a + b。<strong>物理含义：</strong>力的合成（两个力的合力 = 向量和）、速度叠加（船速 + 水速 = 实际航速）、位移合成。平行四边形法则正是力学里求合力的作图法。</div>
+
+<h3>1.4 数乘（数与向量的乘法）</h3>
+<p>数 λ 与向量 a 相乘：</p>
+<pre><code>λa = (λa₁, λa₂, λa₃)，  模 |λa| = |λ|·|a|</code></pre>
+<ul>
+<li>λ &gt; 0：方向不变，长度伸缩为原来的 λ 倍；</li>
+<li>λ &lt; 0：方向反向，长度伸缩为原来的 |λ| 倍；</li>
+<li>λ = 0：得零向量。</li>
+</ul>
+<p><strong>平行判定</strong>：a ∥ b（b ≠ 0）当且仅当存在实数 λ 使 a = λb，即对应分量成比例：</p>
+<pre><code>a₁/b₁ = a₂/b₂ = a₃/b₃</code></pre>
+<div class="insight"><strong>几何含义：</strong>数乘是"沿同一直线的拉伸/压缩/翻转"——它不改变向量所在的直线方向（至多反向）。<strong>物理含义：</strong>F = ma：质量 m 是标量，加速度 a 是向量，力 F 与 a 共线同向；动量 p = mv 是速度 v 的数乘，方向恒与速度一致。</div>
+
+<h2 id="s2">2 数量积与向量积</h2>
+<h3>2.1 数量积（点积 · 内积）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="ch8a_arr" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2563eb"/></marker><marker id="ch8b_arr" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#16a34a"/></marker></defs><text x="20" y="30" fill="#1e3a8a" font-size="15" font-weight="bold">a · b = |a| |b| cos θ = |a| × (b 在 a 上的投影)</text><line x1="40" y1="170" x2="500" y2="170" stroke="#e5e7eb" stroke-width="1"/><line x1="200" y1="170" x2="480" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#ch8a_arr)"/><text x="488" y="164" fill="#2563eb" font-size="13" font-weight="bold">a</text><line x1="200" y1="170" x2="300" y2="170" stroke="#16a34a" stroke-width="6" stroke-linecap="round" opacity="0.9"><animate attributeName="x2" values="300;286.6;250;200;150;113.4;100;113.4;150;200;250;286.6;300" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></line><line x1="300" y1="170" x2="300" y2="170" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="x1" values="300;286.6;250;200;150;113.4;100;113.4;150;200;250;286.6;300" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/><animate attributeName="x2" values="300;286.6;250;200;150;113.4;100;113.4;150;200;250;286.6;300" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/><animate attributeName="y1" values="170;120;83.4;70;83.4;120;170;120;83.4;70;83.4;120;170" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></line><circle cx="300" cy="170" r="4.5" fill="#16a34a"><animate attributeName="cx" values="300;286.6;250;200;150;113.4;100;113.4;150;200;250;286.6;300" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></circle><line x1="200" y1="170" x2="300" y2="170" stroke="#16a34a" stroke-width="3" marker-end="url(#ch8b_arr)"><animate attributeName="x2" values="300;286.6;250;200;150;113.4;100;113.4;150;200;250;286.6;300" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/><animate attributeName="y2" values="170;120;83.4;70;83.4;120;170;120;83.4;70;83.4;120;170" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></line><path d="M 230 170 A 30 30 0 0 0 200 140" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/><text x="238" y="158" fill="#334155" font-size="13" font-style="italic">θ</text><text x="200" y="190" fill="#64748b" font-size="13">O</text><text x="176" y="224" fill="#334155" font-size="13">蓝 = a（固定）　绿 = b（旋转）　绿粗线 = 投影 |b|cosθ（θ&gt;90° 时为负）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：数量积 a·b=|a||b|cosθ —— 绿粗线是 b 在 a 上的投影长 |b|cosθ，与 |a| 相乘即恒力沿位移做的功 W=F·s。</figcaption></figure>
+<p><strong>定义</strong>：两个向量 a、b 的<strong>数量积</strong>是一个<strong>数</strong>：</p>
+<pre><code>a · b = |a| |b| cos θ   （θ 为 a、b 的夹角，0 ≤ θ ≤ π）</code></pre>
+<p><strong>坐标计算</strong>（对应分量相乘再相加）：</p>
+<pre><code>a · b = a₁b₁ + a₂b₂ + a₃b₃</code></pre>
+<p><strong>性质</strong>：</p>
+<ul>
+<li>a · a = |a|²（自己点自己是模的平方）；</li>
+<li>交换律 a · b = b · a；分配律 a · (b + c) = a·b + a·c；</li>
+<li><strong>垂直判定</strong>：a ⊥ b ⟺ a · b = 0（零向量与任何向量都"垂直"约定成立）；</li>
+<li><strong>夹角公式</strong>：cos θ = (a · b) / (|a||b|)。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>a · b = |a| × (b 在 a 方向上的<strong>投影长度</strong>)。点积就是"一个向量的长度 × 另一个向量沿它的投影"，衡量两个向量"同向程度"：同向 cos θ = 1 时最大，反向 cos θ = −1 时最小，垂直时为零。<strong>物理含义：</strong>恒力 F 沿位移 s 做的功 <code>W = F · s = |F||s|cos θ</code>——只有沿位移方向的分力才做功；点积还用于求电通量 Φ = E · S、功率等。</div>
+
+<h3>2.2 向量积（叉积 × 外积）</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="240" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><defs><marker id="ch8c_arr" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#2563eb"/></marker><marker id="ch8d_arr" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4.5 L0,9 Z" fill="#16a34a"/></marker></defs><text x="20" y="30" fill="#1e3a8a" font-size="15" font-weight="bold">|a × b| = |a| |b| sin θ = 平行四边形面积（蓝色阴影）</text><polygon points="180,170 330,170 430,170 280,170" fill="#bfdbfe" fill-opacity="0.55" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 3"><animate attributeName="points" values="180,170 330,170 430,170 280,170;180,170 330,170 416.6,120 266.6,120;180,170 330,170 380,83.4 230,83.4;180,170 330,170 330,70 180,70;180,170 330,170 280,83.4 130,83.4;180,170 330,170 243.4,120 93.4,120;180,170 330,170 230,170 80,170;180,170 330,170 243.4,120 93.4,120;180,170 330,170 280,83.4 130,83.4;180,170 330,170 330,70 180,70;180,170 330,170 380,83.4 230,83.4;180,170 330,170 416.6,120 266.6,120;180,170 330,170 430,170 280,170" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></polygon><line x1="180" y1="170" x2="330" y2="170" stroke="#2563eb" stroke-width="3" marker-end="url(#ch8c_arr)"/><text x="332" y="164" fill="#2563eb" font-size="13" font-weight="bold">a</text><line x1="180" y1="170" x2="280" y2="170" stroke="#16a34a" stroke-width="3" marker-end="url(#ch8d_arr)"><animate attributeName="x2" values="280;266.6;230;180;130;93.4;80;93.4;130;180;230;266.6;280" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/><animate attributeName="y2" values="170;120;83.4;70;83.4;120;170;120;83.4;70;83.4;120;170" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></line><circle cx="180" cy="170" r="0" fill="none" stroke="#1e40af" stroke-width="2"><animate attributeName="r" values="0;3.5;6.1;7;6.1;3.5;0;3.5;6.1;7;6.1;3.5;0" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></circle><circle cx="180" cy="170" r="0" fill="#1e40af"><animate attributeName="r" values="0;1.2;2.1;2.4;2.1;1.2;0;1.2;2.1;2.4;2.1;1.2;0" dur="8s" repeatCount="indefinite" keyTimes="0;0.0833;0.1667;0.25;0.3333;0.4167;0.5;0.5833;0.6667;0.75;0.8333;0.9167;1"/></circle><text x="196" y="150" fill="#1e40af" font-size="13" font-weight="bold">c = a×b（⊙ 垂直纸面向外）</text><path d="M 210 170 A 30 30 0 0 0 180 140" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="3 3"/><text x="216" y="158" fill="#334155" font-size="13" font-style="italic">θ</text><text x="180" y="192" fill="#64748b" font-size="13">O</text><text x="146" y="224" fill="#334155" font-size="13">蓝 = a　绿 = b　阴影面积 = |a×b| 随夹角 θ 变化（θ = 90° 时最大）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：向量积 |a×b|=|a||b|sinθ —— 蓝色阴影是以 a、b 为邻边的平行四边形面积，θ=90° 时最大；方向由右手定则给出（⊙ 垂直纸面向外）。</figcaption></figure>
+<p><strong>定义</strong>：两个向量 a、b 的<strong>向量积</strong>是一个<strong>向量</strong> c = a × b：</p>
+<ul>
+<li><strong>大小</strong>：<code>|c| = |a||b| sin θ</code>（θ 为 a、b 的夹角）；</li>
+<li><strong>方向</strong>：c 垂直于 a、b 所在的平面，方向由<strong>右手定则</strong>确定——右手四指从 a 转向 b（经小于 180° 的角），大拇指所指即 c 的方向。</li>
+</ul>
+<p><strong>坐标计算</strong>（三阶行列式展开）：</p>
+<pre><code>          | i   j   k |
+a × b = det| a₁  a₂  a₃ |
+          | b₁  b₂  b₃ |
+
+     = (a₂b₃ − a₃b₂) i + (a₃b₁ − a₁b₃) j + (a₁b₂ − a₂b₁) k</code></pre>
+<p><strong>性质</strong>（注意与点积的区别）：</p>
+<ul>
+<li><strong>反交换律</strong>：a × b = −(b × a)（交换后方向反转）；</li>
+<li>a × a = 0；分配律 a × (b + c) = a×b + a×c；</li>
+<li><strong>平行判定</strong>：a ∥ b ⟺ a × b = 0。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong><code>|a × b| = |a||b| sin θ</code> 恰等于以 a、b 为邻边的<strong>平行四边形面积</strong>（三角形面积 = 它的一半）。叉积的方向是平面的"法向"，右手定则给定向量的"转向"。<strong>物理含义：</strong>力矩 <code>M = r × F</code>（力臂 r 叉力 F，方向沿转轴）；角动量 <code>L = r × p</code>；洛伦兹力 <code>F = q v × B</code>；线速度 <code>v = ω × r</code>。叉积刻画"旋转效应"，右手定则就是"逆时针为正"的旋转方向。</div>
+
+<h3>2.3 混合积（补充）</h3>
+<p>三个向量的<strong>混合积</strong>是一个数 <code>[a b c] = (a × b) · c</code>，其坐标形式为三阶行列式：</p>
+<pre><code>          | a₁  a₂  a₃ |
+[a b c] = det| b₁  b₂  b₃ |
+          | c₁  c₂  c₃ |</code></pre>
+<div class="insight"><strong>几何含义：</strong>混合积的绝对值 |[a b c]| 等于以 a、b、c 为棱的<strong>平行六面体体积</strong>；[a b c] = 0 ⟺ 三向量<strong>共面</strong>。这是判定四点共面、三线共面的核心工具。</div>
+
+<h2 id="s3">3 平面方程</h2>
+<h3>3.1 点法式与一般式</h3>
+<p>一个平面由"一个点 + 一个垂直方向（<strong>法向量</strong> n）"完全确定。</p>
+<p><strong>点法式</strong>：过点 M₀(x₀, y₀, z₀)、法向量 n = (A, B, C) 的平面为</p>
+<pre><code>A(x − x₀) + B(y − y₀) + C(z − z₀) = 0</code></pre>
+<p>展开即得<strong>一般式</strong>：</p>
+<pre><code>Ax + By + Cz + D = 0    （法向量 n = (A, B, C)）</code></pre>
+<p>坐标轴上的平面特例：x = 0（yOz 面）、y = 0（xOz 面）、z = 0（xOy 面）；Ax + By + D = 0 表示<strong>母线平行 z 轴</strong>的平面等。</p>
+<div class="insight"><strong>几何含义：</strong>法向量 n 是平面的"朝向"——平面就是"所有与 n 垂直的向量张成的二维面"。点法式的本质是"平面上任一点到 M₀ 的向量都与 n 垂直"，即 <code>M₀M · n = 0</code>。<strong>物理含义：</strong>镜面反射面、晶面、等势面都用"法向量 + 一点"描述；n 的方向即"垂直于面的受力/压强方向"，例如斜面受到的正压力沿法线。</div>
+
+<h3>3.2 截距式</h3>
+<p>若平面在 x、y、z 轴上的截距分别为 a、b、c（均不为 0），则方程为</p>
+<pre><code>x/a + y/b + z/c = 1</code></pre>
+<p>它一目了然地给出平面与三轴的交点 (a,0,0)、(0,b,0)、(0,0,c)。</p>
+
+<h3>3.3 两平面的夹角与位置关系</h3>
+<p>设两平面法向量分别为 n₁、n₂，则：</p>
+<ul>
+<li><strong>夹角</strong>（锐角）：<code>cos θ = |n₁ · n₂| / (|n₁| |n₂|)</code>；</li>
+<li><strong>平行</strong>：n₁ ∥ n₂，即 A₁/A₂ = B₁/B₂ = C₁/C₂；</li>
+<li><strong>垂直</strong>：n₁ · n₂ = 0，即 A₁A₂ + B₁B₂ + C₁C₂ = 0；</li>
+<li><strong>重合</strong>：对应系数（含 D）成比例。</li>
+</ul>
+
+<h3>3.4 点到平面的距离</h3>
+<p>点 P(x₀, y₀, z₀) 到平面 Ax + By + Cz + D = 0 的距离：</p>
+<pre><code>d = |A x₀ + B y₀ + C z₀ + D| / √(A² + B² + C²)</code></pre>
+<div class="insight"><strong>几何含义：</strong>距离公式 = "把点代进方程取绝对值"再除以法向量的模——本质是把向量 M₀P 投影到单位法向量 n° 上。<strong>物理含义：</strong>求点到镜面、点到墙面的最短距离；也用于计算平行平面间距、力的力臂长度。</div>
+
+<h2 id="s4">4 空间直线</h2>
+<h3>4.1 点向式与参数方程</h3>
+<p>一条空间直线由"一个点 + 一个<strong>方向向量</strong> s = (m, n, p)"确定。过点 M₀(x₀, y₀, z₀)、方向向量 s = (m, n, p) 的直线：</p>
+<p><strong>点向式（对称式/标准式）</strong>：</p>
+<pre><code>(x − x₀)/m = (y − y₀)/n = (z − z₀)/p</code></pre>
+<p><strong>参数方程</strong>（引入参数 t，几何上是"沿方向的步长"）：</p>
+<pre><code>x = x₀ + m t
+y = y₀ + n t
+z = z₀ + p t</code></pre>
+<div class="insight"><strong>几何含义：</strong>方向向量 s 是直线的"走向"，点向式说"直线上每点都沿 s 方向从 M₀ 平移出去"；参数 t 就是"走了多少个 s 的步长"。<strong>物理含义：</strong>参数方程正是<strong>匀速直线运动</strong>的轨迹：<code>r(t) = r₀ + v t</code>，t 是时间，v 是速度向量——参数 t 每增加 1，质点前进一个速度向量的距离。</div>
+
+<h3>4.2 直线的一般方程（两平面交线）</h3>
+<p>空间直线也可看作两个平面相交：</p>
+<pre><code>A₁x + B₁y + C₁z + D₁ = 0
+A₂x + B₂y + C₂z + D₂ = 0</code></pre>
+<p>此时直线的<strong>方向向量 = 两法向量的叉积</strong>：</p>
+<pre><code>s = n₁ × n₂</code></pre>
+<div class="insight"><strong>几何含义：</strong>直线是"两个约束曲面（平面）的公共解集"——点同时满足两个平面方程就在交线上；方向向量垂直于两个法向量（因为直线同时躺在两个平面里）。</div>
+
+<h3>4.3 直线与平面的位置关系</h3>
+<p>直线方向向量 s = (m, n, p)，平面法向量 n = (A, B, C)：</p>
+<ul>
+<li><strong>平行</strong>：s ⊥ n，即 <code>s · n = mA + nB + pC = 0</code>（且直线上点不在平面内）；</li>
+<li><strong>垂直</strong>：s ∥ n，即 <code>m/A = n/B = p/C</code>；</li>
+<li><strong>夹角</strong>（线面角，直线与它在平面上投影的锐角）：<code>sin φ = |s · n| / (|s| |n|)</code>。</li>
+</ul>
+
+<h3>4.4 两直线的位置关系与夹角</h3>
+<p>设两直线方向向量为 s₁、s₂：</p>
+<ul>
+<li><strong>平行</strong>：s₁ ∥ s₂（对应分量成比例）；</li>
+<li><strong>垂直</strong>：s₁ · s₂ = 0；</li>
+<li><strong>夹角</strong>（锐角）：<code>cos θ = |s₁ · s₂| / (|s₁| |s₂|)</code>；</li>
+<li><strong>异面（不共面）</strong>：既不相交也不平行；判定可用混合积——取两条直线上各一点得向量 r，若 <code>[r, s₁, s₂] ≠ 0</code> 则异面，等于 0 则共面。</li>
+</ul>
+
+<h3>4.5 点到直线的距离</h3>
+<p>点 P 到过点 M₀、方向向量 s 的直线的距离：</p>
+<pre><code>d = |M₀P × s| / |s|</code></pre>
+<div class="insight"><strong>几何含义：</strong>分子 |M₀P × s| 是以 M₀P、s 为邻边的平行四边形面积，除以底边长 |s| 即得高——正是点到直线的距离。<strong>物理含义：</strong>求空间一点到力作用线的距离（力臂），力矩大小 = |M₀P × F| 正是这个思想。</div>
+
+<h2 id="s5">5 曲面方程</h2>
+<h3>5.1 曲面方程的概念</h3>
+<p>若曲面 S 上每点的坐标都满足方程 F(x, y, z) = 0，且不在 S 上的点不满足，则称 F(x, y, z) = 0 为曲面 S 的方程。</p>
+<div class="insight"><strong>核心思想：</strong>曲面方程是对空间点施加的<strong>一个约束</strong>（三个变量一个方程 → 还剩两个自由度 → 二维曲面）。用"截痕法"（用坐标平面或平行平面去截曲面，看截口曲线的形状）可以研究曲面的形态。</div>
+
+<h3>5.2 旋转曲面</h3>
+<p>一条平面曲线绕该平面内一条直线旋转一周所得的曲面，叫<strong>旋转曲面</strong>；这条直线叫<strong>旋转轴</strong>。</p>
+<p>规律：若 yOz 面上曲线 f(y, z) = 0 绕 z 轴旋转，把 y 换成 <code>±√(x² + y²)</code> 即得：</p>
+<pre><code>f(±√(x² + y²), z) = 0</code></pre>
+<p>典型例子：</p>
+<ul>
+<li><strong>球面</strong>：x² + y² + z² = R²（圆 x² + z² = R² 绕 z 轴旋转）；</li>
+<li><strong>圆锥面</strong>：z² = a²(x² + y²)（直线 z = ay 绕 z 轴旋转）；</li>
+<li><strong>旋转抛物面</strong>：z = a(x² + y²)（抛物线 z = ay² 绕 z 轴旋转）；</li>
+<li><strong>旋转双曲面</strong>：x² + y² − z² = ±1 等。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>旋转曲面上"到旋转轴等距离的点满足同一关系"，故截面是圆——方程中 x、y 以 <code>x² + y²</code>（到 z 轴距离的平方）整体出现。<strong>物理含义：</strong>旋转抛物面是"旋转对称的反射镜/天线"（卫星天线、手电筒反光镜）：焦点发出的光经反射后平行射出，或平行光汇聚到焦点；地球可近似为绕极轴旋转的椭球。</div>
+
+<h3>5.3 柱面</h3>
+<p>一条直线（<strong>母线</strong>）沿一条定曲线（<strong>准线</strong>）平行移动所形成的曲面叫<strong>柱面</strong>。母线平行于 z 轴的柱面，其方程<strong>不含 z</strong>：</p>
+<pre><code>F(x, y) = 0    （在空间中表示母线平行 z 轴的柱面）</code></pre>
+<p>例子：<strong>圆柱面</strong> x² + y² = R²；<strong>抛物柱面</strong> y = x²；<strong>椭圆柱面</strong> x²/a² + y²/b² = 1。</p>
+<div class="insight"><strong>几何含义：</strong>方程缺哪个变量，柱面的母线就平行于哪条坐标轴——因为该变量取值任意，图形沿该方向"无限平移"。<strong>物理含义：</strong>圆柱面描述管道、柱形容器的内壁；抛物柱面是抛物面天线的"槽型"（一维聚焦）变体。</div>
+
+<h3>5.4 二次曲面</h3>
+<p>三元二次方程所表示的曲面叫<strong>二次曲面</strong>。主要标准型（用截痕法可看出形状）：</p>
+<table>
+<tr><th>名称</th><th>标准方程</th><th>形状特征（截痕）</th></tr>
+<tr><td>椭球面</td><td>x²/a² + y²/b² + z²/c² = 1</td><td>各坐标面截痕均为椭圆；a=b=c 时为球面</td></tr>
+<tr><td>单叶双曲面</td><td>x²/a² + y²/b² − z²/c² = 1</td><td>水平截痕为椭圆，形似"沙漏外壁"（连通一叶）</td></tr>
+<tr><td>双叶双曲面</td><td>x²/a² + y²/b² − z²/c² = −1</td><td>分上下两叶，形似"两个碗"对扣</td></tr>
+<tr><td>椭圆抛物面</td><td>z = x²/a² + y²/b²</td><td>水平截痕为椭圆，形似"碗"</td></tr>
+<tr><td>双曲抛物面（马鞍面）</td><td>z = x²/a² − y²/b²</td><td>一个方向向上弯、一个方向向下弯，形似马鞍</td></tr>
+<tr><td>二次锥面</td><td>x²/a² + y²/b² − z²/c² = 0</td><td>顶点在原点，水平截痕为椭圆</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>二次曲面是空间里"最光滑的一类曲面"，分类本质是看二次项的符号组合（全正=椭球；一负=双曲面；缺常数项=锥面）。<strong>物理含义：</strong>椭球面近似地球形状；单叶双曲面与马鞍面用于建筑曲面结构（双曲抛物面屋顶既轻又坚固）；旋转抛物面用于雷达天线、探照灯聚焦。</div>
+
+<h2 id="s6">6 空间曲线</h2>
+<h3>6.1 空间曲线的一般方程</h3>
+<p>空间曲线可看成两个曲面相交：</p>
+<pre><code>F(x, y, z) = 0
+G(x, y, z) = 0</code></pre>
+<div class="insight"><strong>几何含义：</strong>曲线是<strong>两个约束</strong>（两个方程）对三个变量的共同限制——还剩一个自由度，即一维曲线；几何上就是"两个曲面的交线"。</div>
+
+<h3>6.2 空间曲线的参数方程</h3>
+<p>把曲线上点的坐标都表为参数 t 的函数：</p>
+<pre><code>x = x(t),   y = y(t),   z = z(t)</code></pre>
+<p>例如<strong>圆柱螺线</strong>（绕半径为 a 的圆柱等速上升）：</p>
+<pre><code>x = a cos t,   y = a sin t,   z = b t</code></pre>
+<div class="insight"><strong>几何含义：</strong>参数方程把曲线看成"动点随参数 t 扫出的轨迹"；螺旋线是"绕 z 轴匀速旋转 + 沿 z 轴匀速上升"的叠加。<strong>物理含义：</strong>质点运动的轨迹方程——t 就是时间，x(t)、y(t)、z(t) 是位置随时间的变化；螺旋线对应"旋转 + 平移"的复合运动（螺丝的螺纹、弹簧、DNA 双螺旋的抽象模型）。</div>
+
+<h3>6.3 空间曲线在坐标面上的投影</h3>
+<p>从一般方程中消去变量 z，得一个柱面 H(x, y) = 0，它与 z = 0 的交线即曲线在 <strong>xOy 面</strong>上的<strong>投影曲线</strong>：</p>
+<pre><code>H(x, y) = 0
+z = 0</code></pre>
+<p>同理可消 x、消 y 得其余两个坐标面上的投影。</p>
+<div class="insight"><strong>几何含义：</strong>投影 = "从某个方向打一束平行光，曲线在坐标面上落下的影子"；消去 z 就是"去掉高度信息、只看 x、y"。<strong>物理含义：</strong>三维运动轨迹在平面上的投影——如斜抛运动在水平面上的投影是直线、螺旋线在水平面上的投影是圆。</div>
+
+<h2 id="s7">7 本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>向量与模</td><td>空间中有方向的有向线段；模=长度</td><td>力、速度、位移、场强等"有方向的量"</td></tr>
+<tr><td>向量加减法</td><td>三角形/平行四边形法则（首尾相接）</td><td>力的合成、速度叠加、位移合成</td></tr>
+<tr><td>数乘</td><td>沿同一直线的拉伸/压缩/翻转</td><td>F=ma、p=mv（缩放大小，方向共线）</td></tr>
+<tr><td>数量积 a·b</td><td>|a|×（b 在 a 上的投影）；垂直⇔点积为0</td><td>做功 W=F·s、电通量、功率</td></tr>
+<tr><td>向量积 a×b</td><td>模=平行四边形面积；方向=右手定则法向</td><td>力矩 M=r×F、角动量、洛伦兹力、v=ω×r</td></tr>
+<tr><td>混合积 [a b c]</td><td>平行六面体体积；为零⇔共面</td><td>三向量（三力/三方向）的共面性判定</td></tr>
+<tr><td>平面方程</td><td>一个点 + 法向量；法向量是"朝向"</td><td>反射面、等势面、镜面；法线方向=正压力方向</td></tr>
+<tr><td>空间直线</td><td>一个点 + 方向向量；两平面的交线</td><td>匀速直线运动轨迹 r=r₀+vt</td></tr>
+<tr><td>点到平面距离</td><td>向量到单位法向量的投影长</td><td>点到面/墙的最短距离、力臂</td></tr>
+<tr><td>旋转曲面</td><td>曲线绕轴旋转；截面为圆</td><td>旋转抛物面天线聚焦、地球近似椭球</td></tr>
+<tr><td>柱面</td><td>母线平行于缺失变量对应的坐标轴</td><td>管道、柱形容器内壁</td></tr>
+<tr><td>二次曲面</td><td>三元二次方程的光滑曲面分类</td><td>雷达/探照灯反射面、建筑曲面结构</td></tr>
+<tr><td>空间曲线</td><td>两曲面的交线；动点的轨迹</td><td>质点运动轨迹；螺旋线=旋转+平移复合运动</td></tr>
+</table>
+
+<h2 id="s8">8 典型例题</h2>
+<div class="ex">
+<h4>例题（先自做，再看思路与答案）</h4>
+<ol>
+<li>已知 a = (1, 2, 2)、b = (2, −2, 1)，求 |a|、a · b、cos θ、a × b。</li>
+<li>求过点 (1, −1, 2) 且法向量 n = (2, 1, −1) 的平面方程，并化为一般式。</li>
+<li>求过点 (2, 0, 1) 且方向向量 s = (1, −1, 2) 的直线的点向式与参数方程。</li>
+<li>求点 P(1, 1, 1) 到平面 x + 2y + 2z − 3 = 0 的距离。</li>
+<li>求过点 (0, 0, 0) 且与两向量 a = (1, 0, 0)、b = (0, 1, 1) 所在平面垂直的单位向量。</li>
+<li>写出 z 轴上、半径为 a 的圆柱螺线参数方程，并说明其物理意义。</li>
+</ol>
+<hr/>
+<p><strong>思路与答案</strong></p>
+<ol>
+<li>|a| = √(1² + 2² + 2²) = 3；a · b = 1·2 + 2·(−2) + 2·1 = 0，故 a ⊥ b，cos θ = 0，θ = 90°；<br/>a × b = (2·1 − 2·(−2), 2·2 − 1·1, 1·(−2) − 2·2) = (6, 3, −6)。</li>
+<li>点法式：2(x − 1) + 1(y + 1) − 1(z − 2) = 0，即一般式 <code>2x + y − z + 1 = 0</code>。</li>
+<li>点向式：(x − 2)/1 = y/(−1) = (z − 1)/2；参数式：x = 2 + t，y = −t，z = 1 + 2t。</li>
+<li>d = |1 + 2·1 + 2·1 − 3| / √(1² + 2² + 2²) = |2| / 3 = 2/3。</li>
+<li>所求向量同时垂直于 a、b，故为 a × b = (0·1 − 0·1, 0·0 − 1·1, 1·1 − 0·0) = (0, −1, 1)；单位化得 (0, −1/√2, 1/√2)（取反号也可）。</li>
+<li>x = a cos t，y = a sin t，z = b t：质点在半径为 a 的圆柱面上，以角速度 1 匀速旋转、同时以速度 b 匀速上升——是"旋转 + 平移"的复合运动轨迹。</li>
+</ol>
+</div>
+
+<h2 id="s9">9 常见误区</h2>
+<div class="warn">
+<h4>这些坑，务必避开</h4>
+<ul>
+<li>❌ "向量积满足交换律 a × b = b × a" → ❌ 向量积<strong>反交换</strong>：a × b = −(b × a)，交换后方向反转。</li>
+<li>❌ "a · b = 0 说明 a 或 b 是零向量" → ❌ 更常见的是 a ⊥ b（垂直），零向量只是特例。</li>
+<li>❌ "|a × b| 是面积，所以向量积是标量" → ❌ 向量积是<strong>向量</strong>，其<strong>模</strong>才是面积；方向由右手定则唯一确定，不能随意取。</li>
+<li>❌ "两平面法向量成比例就一定平行" → ⚠️ 还要看是否<strong>重合</strong>（对应系数含常数项 D 都成比例才是同一平面）。</li>
+<li>❌ "方向余弦就是方向向量" → ❌ 方向余弦组成的是<strong>单位</strong>方向向量，其平方和为 1；方向向量可以取任意非零倍数。</li>
+<li>❌ "F(x, y) = 0 只表示 xOy 面上的曲线" → ❌ 在<strong>空间</strong>中它表示<strong>母线平行 z 轴</strong>的柱面（z 任意）。</li>
+<li>❌ "投影总是正数" → ❌ 数量积里的投影可正可负（沿反方向为负），cos θ 取 [−1, 1]，不要丢掉符号。</li>
+<li>❌ "求线面角用 cos" → ⚠️ 线与平面夹角的正弦 <code>sin φ = |s·n|/(|s||n|)</code>，用的是<strong>正弦</strong>；线与线夹角才用余弦。</li>
+<li>❌ "两直线不平行就相交" → ❌ 空间直线还可能是<strong>异面</strong>（不平行也不相交），需用混合积判定是否共面。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong></p>
+<ol>
+<li>设向量 <code>a = (2, −1, 2)</code>，求 <code>|a|</code> 及与 <code>a</code> 同方向的单位向量 <code>a°</code>。</li>
+<li>已知 <code>a = (1, 0, −1)</code>、<code>b = (1, 1, 0)</code>，求 <code>a · b</code>，判断两向量是否垂直，并求其夹角的余弦。</li>
+<li>求以 <code>a = (1, 2, 2)</code>、<code>b = (0, 1, −1)</code> 为邻边的三角形的面积（提示：<code>|a × b|</code> 是平行四边形面积）。</li>
+<li>求过点 <code>(1, 2, −1)</code> 且法向量 <code>n = (2, −1, 3)</code> 的平面方程，再求原点到该平面的距离。</li>
+<li>求过点 <code>(0, 1, 2)</code> 且方向向量 <code>s = (2, −1, 1)</code> 的直线参数方程；判断该直线与平面 <code>x + 2y + z = 0</code> 的位置关系。</li>
+<li>设 <code>a = (1, 0, 0)</code>、<code>b = (0, 1, 0)</code>、<code>c = (1, 1, 1)</code>，求混合积 <code>[a b c]</code>，判断三向量是否共面，并说明其几何含义。</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p><code>|a| = √(2² + (−1)² + 2²) = √9 = 3</code>；<code>a° = a/|a| = (2/3, −1/3, 2/3)</code>。方向余弦就是单位向量的三个分量，其平方和 = 4/9 + 1/9 + 4/9 = 1。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p><code>a · b = 1·1 + 0·1 + (−1)·0 = 1 ≠ 0</code>，故两向量不垂直。又 <code>|a| = √2</code>、<code>|b| = √2</code>，<code>cos θ = (a·b)/(|a||b|) = 1/2</code>，所以 <code>θ = 60°</code>。点积刻画的是"同向程度"：越接近同向，点积越大。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p><code>a × b = (2·(−1) − 2·1, 2·0 − 1·(−1), 1·1 − 2·0) = (−4, 1, 1)</code>，<code>|a × b| = √(16 + 1 + 1) = √18 = 3√2</code>。三角形面积 = <code>½|a × b| = (3√2)/2</code>。几何含义：<code>|a × b|</code> 是两向量张成的平行四边形面积，三角形取其一半。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>点法式：<code>2(x − 1) − 1(y − 2) + 3(z + 1) = 0</code>，化为一般式 <code>2x − y + 3z + 3 = 0</code>。原点 <code>(0,0,0)</code> 到该平面的距离 <code>d = |0 − 0 + 0 + 3| / √(2² + (−1)² + 3²) = 3/√14</code>。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>参数方程：<code>x = 2t，y = 1 − t，z = 2 + t</code>。平面法向量 <code>n = (1, 2, 1)</code>，<code>s · n = 2·1 + (−1)·2 + 1·1 = 1 ≠ 0</code>，故直线不平行于平面（s 与 n 不垂直），直线与平面相交。物理上，这就是质点沿 s 方向匀速直线运动的轨迹。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p><code>[a b c] = (a × b) · c</code>。先算 <code>a × b = (0·0 − 0·1, 0·1 − 1·0, 1·1 − 0·0) = (0, 0, 1)</code>，故 <code>[a b c] = (0,0,1)·(1,1,1) = 1 ≠ 0</code>。三向量不共面，<code>|[a b c]| = 1</code> 正是以 a、b、c 为棱的平行六面体体积。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px"><a href="../第7章-微分方程/第7章-微分方程.html">← 上一章：第7章 微分方程</a><a href="../../../index.html">回目录</a><a href="../第9章-多元函数微分法及其应用/第9章-多元函数微分法及其应用.html">下一章：第9章 多元函数微分法及其应用 →</a></nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 大学高等数学</footer>
+</body>
+</html>

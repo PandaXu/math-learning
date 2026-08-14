@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第12章 全等三角形 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级上册 › 第12章 全等三角形</div></header>
+<main class="container">
+<h1>第12章 全等三角形</h1>
+<p class="lead">初中 / 初二 / 八年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>全等 = 「平移、旋转、翻折之后能<strong>完全重合</strong>」的两个图形。学完本章，你要在脑中把"两个三角形"想象成"同一个刚体（不变形的硬纸片）被搬动、转动、翻面后落在不同位置"——所谓判定定理（SSS/SAS/ASA/AAS/HL），本质都是在回答一个问题：<strong>最少需要几个"尺寸数据"才能锁死一个三角形的形状与大小？</strong></div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">12.1 全等三角形的概念与性质</a><a href="#s2">12.2 判定：SSS（边边边）</a><a href="#s3">12.3 判定：SAS（边角边）</a><a href="#s4">12.4 判定：ASA 与 AAS</a><a href="#s5">12.5 判定：HL（斜边、直角边）</a><a href="#s6">12.6 角平分线的性质</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">12.1 全等三角形的概念与性质</h2>
+<h3>什么是全等？</h3>
+<p><strong>全等形</strong>：能够完全重合的两个图形叫做全等形。用符号 <code>≌</code> 表示，读作"全等于"。两个三角形全等，记作 <code>△ABC ≌ △DEF</code>。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="660" height="240" viewBox="0 0 660 240" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 平移 --><g transform="translate(75,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="translate" values="-75,-75;0,0;0,0;-75,-75" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 旋转 --><g transform="translate(295,135)"><polygon points="35,-60 0,30 70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="rotate" values="180 35 -3.3;0 35 -3.3;0 35 -3.3;180 35 -3.3" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><!-- 翻折 --><g transform="translate(550,135)"><line x1="0" y1="-70" x2="0" y2="40" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 4"/><polygon points="-35,-60 0,30 -70,20" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/><g><animateTransform attributeName="transform" type="scale" values="1 1;-1 1;-1 1;1 1" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/><polygon points="35,-60 0,30 70,20" fill="#2563eb" fill-opacity="0.22" stroke="#2563eb" stroke-width="2"/></g></g><g fill="#334155" font-size="14" text-anchor="middle"><text x="110" y="212">平移</text><text x="330" y="212">旋转</text><text x="550" y="212">翻折</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：同一个三角形经平移、旋转、翻折后都能与虚线三角形完全重合——全等是"刚体运动"下的不变性</figcaption></figure>
+<div class="insight"><strong>几何含义：</strong>全等 = 形状相同 <strong>且</strong> 大小相同。"完全重合"意味着两个图形之间只相差一次<strong>刚体运动</strong>——平移、旋转、翻折（轴对称）中的一种或组合。所以全等三角形是"同一个三角形换了位置、朝向或正反面"。</div>
+<div class="insight"><strong>物理含义：</strong>全等对应"<strong>刚体不变性</strong>"。一块不会变形的硬纸片、一块钢板、一个机械零件，无论你怎么搬（平移）、怎么转（旋转）、怎么翻面（镜面反射），它的形状和大小都不变。工程上两个"全等"的零件可以互相替换、互换安装；物理里"刚体"就是内部任意两点距离永远不变的物体——全等正是"距离保持不变"这一刚性条件的图形化表达。</div>
+<h3>对应顶点、对应边、对应角</h3>
+<p>两个全等三角形重合时，互相重合的顶点、边、角分别叫做<strong>对应顶点、对应边、对应角</strong>。写 <code>△ABC ≌ △DEF</code> 时，字母顺序必须与对应关系一致：A 对 D、B 对 E、C 对 F。</p>
+<pre><code>△ABC ≌ △DEF   ⟹   AB = DE,  BC = EF,  CA = FD
+                  ∠A = ∠D,  ∠B = ∠E,  ∠C = ∠F</code></pre>
+<h3>全等三角形的性质（判定之后要"用"的东西）</h3>
+<ul>
+<li><strong>对应边相等</strong>：全等三角形的三组对应边分别相等。</li>
+<li><strong>对应角相等</strong>：全等三角形的三组对应角分别相等。</li>
+<li>全等三角形的<strong>周长相等、面积相等</strong>（反之：面积相等的两个三角形<strong>不一定</strong>全等）。</li>
+<li>对应的高、中线、角平分线也分别相等。</li>
+</ul>
+<div class="insight"><strong>核心用法：</strong>"全等"是一座<strong>桥梁</strong>——我们无法直接量到的边或角，通过证明两个三角形全等，就能把"已知的边/角"搬运到"未知的边/角"上。证明题的思路是：<strong>找全等 → 得对应元素相等 → 证出结论</strong>。</div>
+
+<h2 id="s2">12.2 判定：SSS（边边边）</h2>
+<p><strong>定理</strong>：三边分别相等的两个三角形全等，简写为 <strong>SSS</strong>（Side-Side-Side）。</p>
+<pre><code>在 △ABC 与 △DEF 中：
+  AB = DE
+  BC = EF   ⟹  △ABC ≌ △DEF  (SSS)
+  CA = FD</code></pre>
+<div class="insight"><strong>几何含义：</strong>三条边的长度一旦确定，三角形就<strong>被完全锁死</strong>了——形状和大小都唯一。三条边是"刚性三角"的全部信息：给你三根确定长度的木条，只能拼出<strong>一种</strong>三角形（最多差一个翻面）。</div>
+<div class="insight"><strong>物理含义：</strong>这就是<strong>三角形的稳定性</strong>。三根杆件两端铆接后，框架<strong>不会变形</strong>，因为三边长度固定 ⟹ 三个角度也自动固定。所以自行车的车架、屋顶的桁架、起重机的吊臂、桥梁的钢架都用三角形结构来抗变形。而四边形只有四边确定时仍可被压扁（平行四边形可活动），所以窗框、伸缩门要加斜撑（对角线）拆成三角形才能稳固。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="620" height="230" viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 三角形：三边锁死 --><polygon points="95,75 45,180 145,180" fill="#2563eb" fill-opacity="0.10"/><line x1="95" y1="75" x2="45" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="45" y1="180" x2="145" y2="180" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><line x1="145" y1="180" x2="95" y2="75" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/><g stroke="#dc2626" stroke-width="3" fill="#dc2626"><animateTransform attributeName="transform" type="translate" values="0,-6;0,6;0,-6" dur="1.8s" repeatCount="indefinite"/><line x1="95" y1="26" x2="95" y2="52"/><polygon points="90,46 100,46 95,58"/></g><text x="95" y="208" fill="#334155" font-size="14" text-anchor="middle">三角形（稳定，压不动）</text><!-- 四边形：可压扁 --><polygon fill="#16a34a" fill-opacity="0.12" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" points="270,180 310,90 450,90 410,180"><animate attributeName="points" values="270,180 310,90 450,90 410,180;270,180 270,90 410,90 410,180;270,180 350,90 490,90 410,180;270,180 310,90 450,90 410,180" keyTimes="0;0.4;0.6;1" dur="4s" repeatCount="indefinite"/></polygon><text x="355" y="208" fill="#334155" font-size="14" text-anchor="middle">四边形（可压扁、变形）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：三边长度固定时三角形被"锁死"、压不动；四边形只有四边固定时仍可左右压扁——这就是三角形的稳定性</figcaption></figure>
+
+<h2 id="s3">12.3 判定：SAS（边角边）</h2>
+<p><strong>定理</strong>：两边和它们的<strong>夹角</strong>分别相等的两个三角形全等，简写为 <strong>SAS</strong>（Side-Angle-Side）。</p>
+<pre><code>在 △ABC 与 △DEF 中：
+  AB = DE
+  ∠A = ∠D    （∠A 是 AB 与 AC 的夹角）
+  AC = DF    ⟹  △ABC ≌ △DEF  (SAS)</code></pre>
+<div class="insight"><strong>几何含义：</strong>"两条边 + 它们张开的那个角"相当于<strong>极坐标定位</strong>：从一个顶点出发，给定一条边的长度（半径）、两条边之间的张角（方向）、再给定另一条边的长度，第三个顶点的位置就被唯一确定。两边夹角 = 一个"叉开的扇形"被完全钉死。</div>
+<div class="insight"><strong>物理含义：</strong>这正是"<strong>两个力（矢量）合成</strong>"的图形。两个力的大小（两边）和它们之间的夹角（夹角）一旦确定，由平行四边形/三角形法则得到的<strong>合力大小与方向就唯一确定</strong>。同理，机械臂的两段连杆长度和关节转角确定后，末端（抓手）的位置也就唯一确定——SAS 是"两个长度 + 一个转角确定姿态"的原理。</div>
+<p><strong>⚠️ 边角边必须是"夹角"</strong>：若相等的角不是两边的夹角（是其中一边的对角），记作 <strong>SSA</strong>，它<strong>不能</strong>判定全等（详见"常见误区"）。</p>
+
+<h2 id="s4">12.4 判定：ASA 与 AAS</h2>
+<h3>ASA（角边角）</h3>
+<p><strong>定理</strong>：两角和它们的<strong>夹边</strong>分别相等的两个三角形全等，简写为 <strong>ASA</strong>（Angle-Side-Angle）。</p>
+<pre><code>在 △ABC 与 △DEF 中：
+  ∠B = ∠E
+  BC = EF    （BC 是 ∠B 与 ∠C 的夹边）
+  ∠C = ∠F    ⟹  △ABC ≌ △DEF  (ASA)</code></pre>
+<div class="insight"><strong>几何含义：</strong>"两个角 + 中间夹着的那条边"确定一个三角形：两个角锁定了两条边的<strong>方向</strong>，夹边锁定了它们之间的<strong>距离</strong>，于是两条射线的交点被唯一确定。</div>
+<div class="insight"><strong>物理含义：</strong>这是<strong>三角测量（triangulation）</strong>的原理。已知一条基线（夹边）的长度，再测得它两端到同一个目标点的两个方向角（两个角），就能唯一算出目标点的位置——这正是测绘、导航、GPS 定位、雷达测距背后的几何：<strong>一个长度 + 两个角度 = 确定一个点</strong>。</div>
+<h3>AAS（角角边）</h3>
+<p><strong>定理</strong>：两角和其中<strong>一个角的对边</strong>分别相等的两个三角形全等，简写为 <strong>AAS</strong>（Angle-Angle-Side）。</p>
+<pre><code>在 △ABC 与 △DEF 中：
+  ∠A = ∠D
+  ∠B = ∠E
+  BC = EF    （BC 是 ∠A 的对边）
+  ⟹  △ABC ≌ △DEF  (AAS)</code></pre>
+<div class="insight"><strong>为什么 AAS 也成立？</strong>三角形内角和恒为 180°，已知两个角，第三个角就自动确定（∠C = 180° − ∠A − ∠B），于是"两角 + 一角对边"可以转化为"两角 + 夹边"的 ASA。所以 AAS 本质是 ASA 的推论。</div>
+<div class="insight"><strong>物理含义：</strong>只要"两个方向角 + 其中一条边的长度"确定，物体的形状就被锁定——多余的信息（第三个角）是冗余的，因为三角形内角和守恒（180°）已经给了你第三条信息。这对应物理中"约束条件"的思想：系统的自由度 = 变量个数 − 约束个数。</div>
+
+<h2 id="s5">12.5 判定：HL（斜边、直角边）</h2>
+<p><strong>定理</strong>：<strong>斜边</strong>和一条<strong>直角边</strong>分别相等的两个直角三角形全等，简写为 <strong>HL</strong>（Hypotenuse-Leg）。<strong>只适用于直角三角形</strong>。</p>
+<pre><code>在 Rt△ABC 与 Rt△DEF 中，∠C = ∠F = 90°：
+  斜边 AB = 斜边 DE
+  直角边 BC = 直角边 EF   ⟹  Rt△ABC ≌ Rt△DEF  (HL)</code></pre>
+<div class="insight"><strong>为什么 HL 能行？</strong>直角三角形中，斜边 c 和一条直角边 a 确定后，另一条直角边 b = √(c² − a²) 由勾股定理唯一确定，于是三边都定了 ⟹ 回到 SSS。</div>
+<div class="insight"><strong>物理含义：</strong>这是<strong>勾股定理（直角三角形三边关系）</strong>的直接应用。物理中"斜边 = 合力/合位移，直角边 = 两个互相垂直的分量"：只要"合量（斜边）"和"一个直角分量"确定，另一个垂直分量的大小就被唯一确定。所以 HL 本质是"直角三角形比普通三角形多一个 90° 约束，于是少需要一个数据"——约束越多，所需信息越少。</div>
+<h3>五种判定速查</h3>
+<table>
+<tr><th>判定</th><th>需要相等的量</th><th>适用</th><th>一句话记法</th></tr>
+<tr><td>SSS</td><td>三边</td><td>任意三角形</td><td>三边定形（稳定性）</td></tr>
+<tr><td>SAS</td><td>两边 + 夹角</td><td>任意三角形</td><td>两长一夹</td></tr>
+<tr><td>ASA</td><td>两角 + 夹边</td><td>任意三角形</td><td>两角夹边</td></tr>
+<tr><td>AAS</td><td>两角 + 一角对边</td><td>任意三角形</td><td>两角非夹边</td></tr>
+<tr><td>HL</td><td>斜边 + 一条直角边</td><td>直角三角形</td><td>直角专用</td></tr>
+</table>
+<div class="warn"><h4>不能判定全等的组合</h4>
+<ul>
+<li><strong>SSA（边边角）</strong>：两边和其中一边的对角相等，不能判定全等——会出现"两个不同三角形满足同样条件"（歧义）。</li>
+<li><strong>AAA（角角角）</strong>：三个角相等只能说明"形状相同"，不能说明"大小相同"，那只是<strong>相似</strong>，不是全等。</li>
+</ul>
+</div>
+
+<h2 id="s6">12.6 角平分线的性质</h2>
+<h3>性质定理</h3>
+<p><strong>角平分线上的点到这个角的两边的距离相等</strong>。</p>
+<pre><code>若 OC 是 ∠AOB 的平分线，P 在 OC 上，
+PD ⊥ OA 于 D，PE ⊥ OB 于 E，
+则 PD = PE。</code>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="560" height="320" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><!-- 角的两边与平分线 --><line x1="280" y1="260" x2="100" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="460" y2="46" stroke="#2563eb" stroke-width="2.5"/><line x1="280" y1="260" x2="280" y2="20" stroke="#334155" stroke-width="2"/><path d="M 254.3 229.4 A 40 40 0 0 1 280 220" fill="none" stroke="#94a3b8" stroke-width="1.5"/><path d="M 280 220 A 40 40 0 0 1 305.7 229.4" fill="none" stroke="#94a3b8" stroke-width="1.5"/><!-- P 沿平分线滑动：整体以 O 为中心按比例缩放 --><g transform="translate(280,260)"><g><animateTransform attributeName="transform" type="scale" values="1.35;0.7;1.35" keyTimes="0;0.5;1" dur="6s" repeatCount="indefinite"/><circle cx="0" cy="-120" r="77.1" fill="none" stroke="#16a34a" stroke-dasharray="4 4" stroke-opacity="0.45" stroke-width="1.5"/><line x1="0" y1="-120" x2="-59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><line x1="0" y1="-120" x2="59.1" y2="-70.4" stroke="#16a34a" stroke-width="3"/><polyline points="-65.5,-78.1 -57.9,-84.5 -51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><polyline points="65.5,-78.1 57.9,-84.5 51.4,-76.8" fill="none" stroke="#94a3b8" stroke-width="1.5"/><circle cx="0" cy="-120" r="5" fill="#2563eb"/><circle cx="-59.1" cy="-70.4" r="4" fill="#16a34a"/><circle cx="59.1" cy="-70.4" r="4" fill="#16a34a"/></g></g><!-- 标注 --><g fill="#334155" font-size="14"><text x="286" y="26">C</text><text x="92" y="40">A</text><text x="468" y="40">B</text><text x="286" y="277">O</text><text x="270" y="130">P</text><text x="204" y="201">D</text><text x="356" y="201">E</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：P 在角平分线 OC 上滑动，到两边 OA、OB 的垂线距离 PD = PE 始终相等（虚线圆过 D、E 两点）</figcaption></figure></pre>
+<div class="insight"><strong>几何含义：</strong>角平分线是"<strong>到角两边距离相等的点的集合（轨迹）</strong>"。它把角"等分"成两个相等的角，而"到两边距离相等"这条性质，让角平分线成为角内部的<strong>等距线</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>角平分线是一条<strong>对称轴</strong>（把一个角沿角平分线对折，两边完全重合）。在光学里，平面镜反射满足"入射角 = 反射角"，而<strong>法线正是入射线与反射线夹角的角平分线</strong>；在机械里，楔形、锥形、刀具的对称刃口都沿角平分线分布，保证两侧受力对称。</div>
+<h3>判定定理（逆定理）</h3>
+<p><strong>角的内部，到角的两边距离相等的点，在这个角的平分线上</strong>。</p>
+<pre><code>若 P 在 ∠AOB 内部，且 PD ⊥ OA、PE ⊥ OB，PD = PE，
+则 P 在 ∠AOB 的平分线上（OP 是角平分线）。</code></pre>
+<div class="insight"><strong>为什么成立？</strong>构造两个直角三角形（共用斜边 OP，一组直角边 PD = PE），由 <strong>HL</strong> 可得 Rt△OPD ≌ Rt△OPE，于是 ∠POD = ∠POE，即 OP 平分角。这是"性质"与"判定"互相印证的好例子：<strong>用 HL 证明全等，是全等与角平分线的交汇点</strong>。</div>
+<h3>角平分线的尺规作法（几何含义落地）</h3>
+<p>角平分线可以只用圆规和直尺作出，其依据正是 <strong>SSS</strong>：</p>
+<ol>
+<li>以顶点 O 为圆心，任意长为半径画弧，交 OA 于 D、OB 于 E。</li>
+<li>分别以 D、E 为圆心，<strong>相同半径</strong>（大于 DE 的一半）画弧，两弧交于 P。</li>
+<li>连接 OP，则 OP 是 ∠AOB 的平分线。</li>
+</ol>
+<div class="insight">为什么对？OD = OE（同一半径），DP = EP（同一半径），OP = OP（公共边），由 <strong>SSS</strong> 得 △ODP ≌ △OEP，故 ∠DOP = ∠EOP。作图的每一步都在"构造全等"。</div>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>全等</td><td>经平移、旋转、翻折能完全重合</td><td>刚体不变形；零件可互换安装</td></tr>
+<tr><td>对应元素</td><td>重合的顶点、边、角</td><td>同一个物体在两个姿态下的同一部位</td></tr>
+<tr><td>SSS</td><td>三边锁死形状与大小</td><td>三角形稳定性：桁架、车架抗变形</td></tr>
+<tr><td>SAS</td><td>两边 + 夹角 = 极坐标定位</td><td>两力合成 / 机械臂两连杆一关节定位</td></tr>
+<tr><td>ASA</td><td>两角 + 夹边锁定顶点</td><td>三角测量：一基线 + 两方向角定位</td></tr>
+<tr><td>AAS</td><td>两角 + 对边（转化为 ASA）</td><td>冗余约束：内角和守恒减少自由度</td></tr>
+<tr><td>HL</td><td>斜边 + 直角边（勾股定第三边）</td><td>合量与一个垂直分量确定另一分量</td></tr>
+<tr><td>角平分线性质</td><td>到两边距离相等的点的轨迹（对称轴）</td><td>反射法线、对称受力刃口、等距线</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>如图（自画），已知 AB = AC，D 是 BC 的中点。求证：△ABD ≌ △ACD，并说明 ∠B = ∠C。</li>
+<li>已知 AB = DE，AC = DF，∠A = ∠D。求证：BC = EF（用 SAS，说明用的是"夹角"）。</li>
+<li>已知 ∠B = ∠E，BC = EF，∠C = ∠F。求证：△ABC ≌ △DEF，写出对应边。</li>
+<li>已知 Rt△ABC 与 Rt△DEF 中，∠C = ∠F = 90°，斜边 AB = DE，直角边 BC = EF。求证：AC = DF。</li>
+<li>已知 OC 平分 ∠AOB，P 在 OC 上，PD ⊥ OA 于 D，PE ⊥ OB 于 E。求证：PD = PE，并说出依据。</li>
+<li>已知 △ABC 中，AD 是 BC 边上的中线，且 AB = AC。求证：AD 平分 ∠BAC（提示：用 SSS 先证 △ABD ≌ △ACD）。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "两边及一边的对角相等（SSA）能判全等" → ❌ SSA 不能判定，会产生两个不同三角形（歧义），正确的是 SAS（夹角）。</li>
+<li>❌ "三个角相等（AAA）就是全等" → ❌ 那只是相似（形状同、大小可能不同），全等还要大小相等。</li>
+<li>❌ "HL 对任意三角形都适用" → ❌ HL 只适用于<strong>直角三角形</strong>，斜边、直角边是直角三角形特有的名称。</li>
+<li>❌ "全等符号 ≌ 的字母顺序随便写" → ❌ 顺序必须与对应关系一致，乱写会搞错对应边、对应角。</li>
+<li>❌ "面积相等（或周长相等）的两个三角形一定全等" → ❌ 反过来不成立：面积相等 ≠ 全等（底高乘积相同即可，形状可不同）。</li>
+<li>❌ "角平分线上的点到角两边距离相等，所以角平分线上的点就是中点" → ❌ 是"到两边的<strong>垂线段</strong>（距离）相等"，不是到角两边的端点或到边上任意点的连线相等。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>（对应元素）若 <code>△ABC ≌ △DEF</code>，且 ∠A = 40°，∠B = 60°，AB = 5 cm。请写出 ∠D、∠E 的度数以及边 DE 的长度，并说明依据。</li>
+<li>（SSS / 稳定性）三根木条的长度分别为 3 cm、4 cm、5 cm，钉成一个三角形。用同样三根木条再钉一个三角形，这两个三角形一定全等吗？为什么？（提示：说出判定定理，并联系"三角形稳定性"。）</li>
+<li>（SAS vs SSA）已知 AB = DE = 6，AC = DF = 5。请判断：下列哪个条件能保证 △ABC ≌ △DEF？① ∠A = ∠D；② ∠B = ∠E。说明理由。</li>
+<li>（ASA / 三角测量）在 △ABC 与 △DEF 中，∠B = ∠E = 50°，BC = EF = 8，∠C = ∠F = 70°。求证 △ABC ≌ △DEF，并写出对应边。</li>
+<li>（HL）在 Rt△ABC 与 Rt△DEF 中，∠C = ∠F = 90°，斜边 AB = DE = 13，直角边 BC = EF = 5。求另一条直角边 AC 的长度，并说明两个三角形是否全等、依据是什么。</li>
+<li>（角平分线性质）OC 是 ∠AOB 的平分线，P 在 OC 上，PD ⊥ OA 于 D，PE ⊥ OB 于 E。若 PD = 4，求 PE，并说明依据。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>∠D = 40°，∠E = 60°，DE = 5 cm。依据：全等三角形的<strong>对应角相等</strong>、<strong>对应边相等</strong>；△ABC ≌ △DEF 时 A 对 D、B 对 E、AB 对 DE。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>一定全等。三边分别相等（3、4、5 对 3、4、5），由 <strong>SSS</strong>（边边边）可判定全等。三边一旦确定，三角形的形状和大小就被唯一锁死——这正是<strong>三角形的稳定性</strong>：三根定长木条只能拼出一种三角形。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>① ∠A = ∠D 能判定（两边 6、5 与它们的<strong>夹角</strong> ∠A 对应相等，用 <strong>SAS</strong>）；② ∠B = ∠E 不能判定——此时相等的角是边 AC 的对角，属于 <strong>SSA（边边角）</strong>，会产生两个不同三角形，不能判定全等。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>由 ∠B = ∠E、BC = EF（两角的<strong>夹边</strong>）、∠C = ∠F，满足 <strong>ASA</strong>，故 △ABC ≌ △DEF。对应边：AB = DE、BC = EF、AC = DF。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由勾股定理：AC = √(13² − 5²) = √(169 − 25) = √144 = 12。两个三角形全等，依据 <strong>HL</strong>（斜边和一条直角边分别相等的两个直角三角形全等）；全等后对应直角边 AC = DF = 12。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>PE = 4。依据角平分线性质定理：<strong>角平分线上的点到角两边的距离相等</strong>。P 在平分线 OC 上，PD、PE 分别是到 OA、OB 的距离，故 PD = PE。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第11章-三角形/第11章-三角形.html">← 上一章：第11章 三角形</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第13章-轴对称/第13章-轴对称.html">下一章：第13章 轴对称 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初二数学开始</footer>
+</body>
+</html>

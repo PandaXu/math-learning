@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第17章 勾股定理 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初二 › 八年级下册 › 第17章 勾股定理</div></header>
+<main class="container">
+<h1>第17章 勾股定理</h1>
+<p class="lead">初中 / 初二 / 八年级下册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>勾股定理 = 直角三角形三边上的三个正方形之间的<strong>面积守恒</strong>：两条直角边的平方和等于斜边的平方（a² + b² = c²）。学完本章，你要能在心里"看见"每个直角三角形背后那三个正方形，并把它当作一把"万能直角尺"——用来判断直角（逆定理）、求最短路径、解折叠与测量问题。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">17.1 勾股定理</a><a href="#s2">17.2 勾股定理的逆定理</a><a href="#s3">17.3 勾股定理的应用</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+</div>
+
+<h2 id="s1">17.1 勾股定理</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="480" height="440" viewBox="0 0 480 440" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <polygon points="170,130 290,130 170,290" fill="#2563eb" fill-opacity="0.10" stroke="#1e293b" stroke-width="2"/>
+  <path d="M170,148 L188,148 L188,130" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  <path d="M170,130 L290,130 L290,10 L170,10 Z" fill="#2563eb" fill-opacity="0.18" stroke="#2563eb" stroke-width="2">
+    <animate attributeName="fill-opacity" values="0.12;0.34;0.12" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M170,130 L170,290 L10,290 L10,130 Z" fill="#16a34a" fill-opacity="0.18" stroke="#16a34a" stroke-width="2">
+    <animate attributeName="fill-opacity" values="0.12;0.34;0.12" dur="3s" begin="1s" repeatCount="indefinite"/>
+  </path>
+  <path d="M290,130 L170,290 L330,410 L450,250 Z" fill="#2563eb" fill-opacity="0.10" stroke="#2563eb" stroke-width="2.5">
+    <animate attributeName="fill-opacity" values="0.05;0.22;0.05" dur="3s" begin="2s" repeatCount="indefinite"/>
+  </path>
+  <circle r="5" fill="#16a34a">
+    <animate attributeName="cx" values="290;170;290" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="130;290;130" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="230" y="122" fill="#334155" font-size="14" text-anchor="middle">a</text>
+  <text x="183" y="214" fill="#334155" font-size="14" text-anchor="middle">b</text>
+  <text x="206" y="196" fill="#334155" font-size="14" text-anchor="middle">c</text>
+  <text x="230" y="70" fill="#2563eb" font-size="14" text-anchor="middle" font-weight="bold">a² = 9</text>
+  <text x="90" y="214" fill="#16a34a" font-size="14" text-anchor="middle" font-weight="bold">b² = 16</text>
+  <text x="310" y="274" fill="#1e293b" font-size="14" text-anchor="middle" font-weight="bold">c² = 25</text>
+  <text x="240" y="430" fill="#334155" font-size="14" text-anchor="middle">a² + b² = c²　⇒　9 + 16 = 25</text>
+</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：勾股定理的面积含义——两条直角边上的正方形面积之和等于斜边上的正方形面积，即 3² + 4² = 5²</figcaption></figure>
+<h3>定理内容</h3>
+<p><strong>直角三角形</strong>的两条<strong>直角边</strong>的平方和，等于<strong>斜边</strong>的平方。</p>
+<pre><code>       A
+       /|
+      / |
+   c /  | b    直角边 a、b，斜边 c
+    /   |
+   /____|
+  B  a  C        a² + b² = c²</code></pre>
+<p>其中 <code>a</code>、<code>b</code> 是两条直角边，<code>c</code> 是斜边（直角所对的边）。中国古代把较短的直角边叫<strong>勾</strong>、较长的直角边叫<strong>股</strong>、斜边叫<strong>弦</strong>，所以"勾股定理"也叫"勾股弦定理"。西方称为<strong>毕达哥拉斯定理（Pythagorean theorem）</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>分别以直角三角形的三条边为边长，向外作三个正方形。勾股定理说的是——<strong>两条直角边上的正方形面积之和，恰好等于斜边上的正方形面积</strong>。S(勾) + S(股) = S(弦)。也就是 a² + b² = c² 里的"平方"不是抽象的运算，而是<strong>实实在在的面积</strong>。这是"数"与"形"最著名的一次结合。</div>
+<div class="insight"><strong>物理含义：</strong>勾股定理是<strong>互相垂直的两个量的合成法则</strong>。① 位移合成：先向东走 a 米、再向北走 b 米，合位移的大小 c = √(a² + b²)；② 力/速度合成：两个互相垂直的分力 F₁ ⊥ F₂，合力大小 F = √(F₁² + F₂²)；③ 平面上任意两点，若水平差为 Δx、竖直差为 Δy，则直线距离 = √(Δx² + Δy²)。一句话：<strong>垂直分量用"平方和再开方"合成</strong>。</div>
+
+<h3>历史渊源</h3>
+<p>中国约公元前 1 世纪的《周髀算经》记载了商高与周公的对话："<strong>勾三，股四，弦五</strong>"，说明早在商周时期人们已知道 3、4、5 能组成直角三角形。三国时期数学家<strong>赵爽</strong>在《勾股圆方图注》中用"弦图"给出了一个漂亮的证明。古希腊的毕达哥拉斯学派也独立发现了这一定理。</p>
+
+<h3>证明：赵爽弦图（面积法）</h3>
+<p>构造一个以斜边 c 为边长的大正方形，内部拼入 4 个全等的直角三角形（直角边 a、b），中间正好留下一个小正方形（边长为 b − a）。因为"大正方形面积 = 4 个三角形面积 + 中间小正方形面积"，所以：</p>
+<pre><code>大正方形面积 = c²
+c² = 4 × (½·a·b) + (b − a)²
+   = 2ab + (b² − 2ab + a²)
+   = a² + b²</code></pre>
+<p>于是得到 <strong>a² + b² = c²</strong>。这个证明的巧妙之处在于：<strong>只用"面积"这一个直观概念，不借助任何代数技巧</strong>，就把三边的平方关系揭示了出来。</p>
+<p>另一种等价证法（毕达哥拉斯拼图）：把两个同样的正方形（边长 a+b）分别按不同方式切成几块，发现"两块直角边正方形"和"一块斜边正方形"恰好能填满同样大的区域，说明面积相等。</p>
+
+<h3>由定理推出的两个常用结论</h3>
+<ul>
+<li><strong>斜边最长</strong>：因为 c² = a² + b² &gt; a²，也 &gt; b²，所以 c &gt; a 且 c &gt; b。直角三角形中斜边一定是<strong>最长边</strong>，且<strong>直角所对的边是斜边</strong>。</li>
+<li><strong>等腰直角三角形（45°-45°-90°）</strong>：当两条直角边相等（a = b）时，c² = a² + a² = 2a²，所以 <code>c = √2 · a</code>。即<strong>等腰直角三角形的斜边 = 直角边的 √2 倍</strong>，三边比为 <code>1 : 1 : √2</code>。</li>
+</ul>
+
+<h2 id="s2">17.2 勾股定理的逆定理</h2>
+<h3>逆定理内容</h3>
+<p>如果三角形三边长 a、b、c 满足 <strong>a² + b² = c²</strong>，那么这个三角形是<strong>直角三角形</strong>，且 <strong>c 所对的角是直角</strong>（90°）。</p>
+<p>注意：勾股定理是"<strong>由直角推出边的平方关系</strong>"，逆定理是"<strong>由边的平方关系推出直角</strong>"，方向正好相反，但两者都成立。它们是"直角"与"a² + b² = c²"之间的一对<strong>等价条件</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>逆定理给了我们一把<strong>只用长度、不用量角器就能判断直角</strong>的"尺子"。只要量出三边，算一算"两小边的平方和是否等于最大边的平方"，就能断定最大边所对的角是不是直角。这是<strong>从"数"反推"形"</strong>的典型例子。</div>
+<div class="insight"><strong>物理含义：</strong>工程与生活中"检验垂直"的实用方法——<strong>3-4-5 放线法</strong>：取 3 米、4 米、5 米三段绳（或钢尺）拉成一个三角形，若 3² + 4² = 5²，则 5 米边所对的角必为直角。木工、瓦工砌墙、测量员放样都用它来确认墙角或基线的垂直，保证结构方正。</div>
+
+<h3>为什么逆定理成立？（证明思路）</h3>
+<p>已知 △ABC 三边满足 a² + b² = c²（c 为最长边）。<strong>另作</strong>一个直角三角形 △A′B′C′，使它的两条直角边分别等于 a、b，那么由勾股定理，它的斜边长为：</p>
+<pre><code>c′ = √(a² + b²) = √(c²) = c</code></pre>
+<p>于是 △A′B′C′ 的三边为 a、b、c，与 △ABC 三边分别相等。由<strong>边边边（SSS）全等</strong>，△ABC ≌ △A′B′C′，所以 △ABC 也是直角三角形，且边长 c 所对的角是直角。</p>
+
+<h3>勾股数（Pythagorean triples）</h3>
+<p>满足 <strong>a² + b² = c²</strong> 的<strong>正整数</strong>三元组 (a, b, c) 叫做<strong>勾股数</strong>。它对应"三边都是整数"的直角三角形，是最方便计算和记忆的一类。</p>
+<table>
+<tr><th>勾股数</th><th>验证</th></tr>
+<tr><td>3, 4, 5</td><td>3² + 4² = 9 + 16 = 25 = 5²</td></tr>
+<tr><td>5, 12, 13</td><td>5² + 12² = 25 + 144 = 169 = 13²</td></tr>
+<tr><td>7, 24, 25</td><td>7² + 24² = 49 + 576 = 625 = 25²</td></tr>
+<tr><td>8, 15, 17</td><td>8² + 15² = 64 + 225 = 289 = 17²</td></tr>
+<tr><td>9, 40, 41</td><td>9² + 40² = 81 + 1600 = 1681 = 41²</td></tr>
+<tr><td>6, 8, 10（= 3,4,5 的 2 倍）</td><td>6² + 8² = 36 + 64 = 100 = 10²</td></tr>
+</table>
+<ul>
+<li><strong>放大性质</strong>：若 (a, b, c) 是勾股数，那么 (ka, kb, kc)（k 为正整数）也是勾股数。例：(3, 4, 5) 的 2 倍得 (6, 8, 10)，3 倍得 (9, 12, 15)。</li>
+<li><strong>生成公式</strong>：取两个正整数 m &gt; n，则下面一组数必是勾股数：</li>
+</ul>
+<pre><code>a = m² − n²
+b = 2mn
+c = m² + n²      （m &gt; n 为正整数）</code></pre>
+<p>例：取 m = 2、n = 1 → a = 3、b = 4、c = 5；取 m = 3、n = 2 → a = 5、b = 12、c = 13。这套公式能"批量生产"无穷多组勾股数，说明勾股数<strong>有无穷多组</strong>。</p>
+
+<h2 id="s3">17.3 勾股定理的应用</h2>
+<p>勾股定理的威力在于：<strong>凡是一个直角三角形，只要知道其中两条边，就能求出第三条边</strong>。本节讲三类最重要的应用：最短路径、折叠、测量。</p>
+
+<h3>17.3.1 最短路径问题（把曲面"展开"成平面）</h3>
+<p>典型场景：一只蚂蚁在<strong>圆柱、长方体等立体表面</strong>上，从一点爬到另一点，问最短路线是多少。</p>
+<p><strong>核心方法</strong>：因为蚂蚁只能在<strong>表面</strong>爬（不能穿进物体内部），所以要先把经过的面<strong>展开成一个平面</strong>；展开后，两点之间的最短路程就是连接两点的<strong>直线段</strong>，再用勾股定理求这条线段的长度。</p>
+<div class="insight"><strong>几何含义：</strong>曲面上的最短路径（测地线）在"展开成平面"后变成<strong>直线段</strong>。展开是一种<strong>保距变换</strong>（不改变长度），把三维表面问题"降维"成平面问题，再用"两点之间线段最短 + 勾股定理求长"解决。</div>
+<div class="insight"><strong>物理含义：</strong>蚂蚁、机器人沿表面移动，或光沿曲面传播（如光在镜面、光纤内壁反射），都沿<strong>最短路程</strong>走。展开后这条"最短路"就是直线，长度可用勾股定理算——这就是工程上"展开图 + 直线距离"求最短铺设、最短布线长度的原理。</div>
+
+<p><strong>例 A（长方体，蚂蚁从一个顶点到对角顶点）</strong>：长方体长 8、宽 6、高 3，蚂蚁从顶点 A 爬到空间对角顶点 C′，求最短路程。</p>
+<p>蚂蚁经过两个相邻的面。把这两个面展开成平面，A 与 C′ 之间是一条直角三角形的斜边。三种展开方式对应三种可能：</p>
+<pre><code>方式1（沿"长"展开）：直角边 8 和 (6+3)=9 → √(8² + 9²)  = √145
+方式2（沿"宽"展开）：直角边 6 和 (8+3)=11 → √(6² + 11²) = √157
+方式3（沿"高"展开）：直角边 3 和 (8+6)=14 → √(3² + 14²) = √205</code></pre>
+<p>三者取最小：<strong>最短路程 = √145 ≈ 12.04</strong>。<strong>关键提醒</strong>：不能直接走"空间对角线" √(8² + 6² + 3²)，因为蚂蚁在表面上爬，<strong>无法穿过长方体的内部</strong>。</p>
+
+<p><strong>例 B（圆柱，侧面展开）</strong>：圆柱高 h、底面半径 r，蚂蚁从下底圆周上一点 A 爬到上底圆周上与 A 相对的 B 点（转过 180°）。把侧面展开成矩形（宽 h、长 2πr），B 位于矩形上边的中点，水平距离为<strong>半周长 πr</strong>，最短路程：</p>
+<pre><code>L = √(h² + (πr)²)</code></pre>
+<p>这就是"圆柱侧面展开图的对角线"。</p>
+
+<h3>17.3.2 折叠问题（折叠 = 轴对称）</h3>
+<p>折叠类题目的核心认识，是搞清楚<strong>折叠的几何本质</strong>：</p>
+<ul>
+<li>沿某条折痕把图形翻折，是<strong>轴对称（镜面对称）变换</strong>。</li>
+<li><strong>折叠前后重合的两个图形全等</strong>：对应的边、角都相等。</li>
+<li><strong>折痕是"对应点连线"的垂直平分线</strong>：折痕上任一点到两个对应点的距离相等。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>折叠 = <strong>关于折痕的轴对称</strong>。抓住"折叠前后全等"和"对称点连线被折痕垂直平分"两条性质，就能把看似未知的线段"转移"到同一个直角三角形里，再用勾股定理<strong>列方程</strong>求出线段长。这是"对称 + 勾股"联用的经典套路。</div>
+<div class="insight"><strong>物理含义：</strong>折叠的数学与<strong>光的反射</strong>一模一样——把折痕看成一面<strong>镜子</strong>，折叠前后的两个点互为"镜像"，对应点与镜面垂直且到镜面等距。光的反射定律（入射角 = 反射角）正是"对称点连线被镜面垂直平分"的体现，而"光总是沿最短路径走"也可以由此解释。</div>
+
+<p><strong>例 C（沿对角线折叠，求重叠边长）</strong>：长方形 ABCD 中，AB = 8，BC = 6。沿对角线 AC 折叠，使点 B 落在 B′，AB′ 与 CD 交于点 E。求 AE 的长。</p>
+<p><strong>解</strong>：</p>
+<ol>
+<li>由折叠对称，∠EAC = ∠BAC；又 AB ∥ CD，所以 ∠BAC = ∠ACD；而 E 在 CD 上，∠ECA = ∠ACD。</li>
+<li>因此 ∠EAC = ∠ECA，△AEC 是<strong>等腰三角形</strong>，得 <strong>AE = CE</strong>。</li>
+<li>设 AE = CE = x，则 DE = CD − CE = 8 − x。在 Rt△ADE 中：AD = 6，DE = 8 − x，AE = x。</li>
+</ol>
+<pre><code>由勾股定理： x² = 6² + (8 − x)²
+             x² = 36 + 64 − 16x + x²
+             0  = 100 − 16x
+             x  = 100/16 = 25/4 = 6.25</code></pre>
+<p>所以 <strong>AE = 25/4 = 6.25</strong>。整个解题过程只用了两件事：折叠的<strong>对称/全等</strong>找出等量关系，再用<strong>勾股定理列方程</strong>。</p>
+
+<h3>17.3.3 测量问题（把现实抽象成直角三角形）</h3>
+<p>很多实际问题没有现成的直角三角形，需要我们<strong>主动构造</strong>：旗杆、大树、梯子、河宽、两点距离……把它们抽象成一条直角边（水平）、一条直角边（竖直）、一条斜边（连线），就能用勾股定理求未知量。</p>
+<div class="insight"><strong>几何含义：</strong>测量的本质是"<strong>垂直分解</strong>"——把任意两点间的距离分解成<strong>水平差 Δx</strong> 与<strong>竖直差 Δy</strong> 两个互相垂直的分量，斜距就是直角三角形的斜边。这是勾股定理在坐标与测量中最直接的几何应用。</div>
+<div class="insight"><strong>物理含义：</strong>现实中的"斜距"总是可以看成两个垂直方向位移的合成：两点间距离 = √(水平距离² + 竖直高度差²)。测量旗杆高度、梯子顶端离地高度、断树折点位置、两点实地距离，都是"已知其中两条，求第三条"。</div>
+
+<p><strong>例 D（梯子靠墙）</strong>：一架长 10 米的梯子斜靠在墙上，底端离墙脚 6 米，求梯子顶端离地多高。</p>
+<pre><code>h = √(10² − 6²) = √(100 − 36) = √64 = 8（米）</code></pre>
+<p>进一步：若梯子顶端<strong>下滑 1 米</strong>（顶端高度从 8 米变到 7 米），底端会外移多少？</p>
+<pre><code>新底端距墙 = √(10² − 7²) = √(100 − 49) = √51 ≈ 7.14（米）
+外移 ≈ 7.14 − 6 = 1.14（米）</code></pre>
+<p>注意：顶端下滑 1 米，底端并不是也外移 1 米——因为三边之间是<strong>平方</strong>关系，不是线性关系。</p>
+
+<p><strong>例 E（断树）</strong>：一棵大树在离地面 4 米处被风吹断，树梢恰好落在地面上距树根 3 米处，求大树原高。</p>
+<pre><code>折断部分长 = √(4² + 3²) = √(16 + 9) = √25 = 5（米）
+大树原高 = 4 + 5 = 9（米）</code></pre>
+
+<h3>延伸：平面直角坐标系中的两点距离公式</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <line x1="80" y1="120" x2="380" y2="120" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4">
+    <animate attributeName="x2" values="380;230;380" dur="6s" repeatCount="indefinite"/>
+  </line>
+  <line x1="380" y1="120" x2="380" y2="300" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 4">
+    <animate attributeName="x1" values="380;230;380" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="380;230;380" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="300;200;300" dur="6s" repeatCount="indefinite"/>
+  </line>
+  <line x1="80" y1="120" x2="380" y2="300" stroke="#1e293b" stroke-width="2.5">
+    <animate attributeName="x2" values="380;230;380" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="300;200;300" dur="6s" repeatCount="indefinite"/>
+  </line>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="380 120;230 120;380 120" dur="6s" repeatCount="indefinite"/>
+    <path d="M-16,0 L0,0 L0,16" fill="none" stroke="#64748b" stroke-width="1.5"/>
+  </g>
+  <circle cx="80" cy="120" r="5" fill="#1e293b"/>
+  <circle r="6" fill="#2563eb">
+    <animate attributeName="cx" values="380;230;380" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="300;200;300" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="64" y="106" fill="#334155" font-size="13" text-anchor="middle">A(x₁,y₁)</text>
+  <text fill="#2563eb" font-size="13" text-anchor="middle" font-weight="bold">
+    <animate attributeName="x" values="390;240;390" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="294;194;294" dur="6s" repeatCount="indefinite"/>
+    B(x₂,y₂)
+  </text>
+  <text y="108" fill="#2563eb" font-size="13" text-anchor="middle" font-weight="bold">
+    <animate attributeName="x" values="230;155;230" dur="6s" repeatCount="indefinite"/>
+    Δx
+  </text>
+  <text fill="#16a34a" font-size="13" text-anchor="middle" font-weight="bold">
+    <animate attributeName="x" values="392;242;392" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="210;160;210" dur="6s" repeatCount="indefinite"/>
+    Δy
+  </text>
+  <text fill="#1e293b" font-size="13" text-anchor="middle" font-weight="bold">
+    <animate attributeName="x" values="230;155;230" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="y" values="198;148;198" dur="6s" repeatCount="indefinite"/>
+    d
+  </text>
+  <text x="220" y="330" fill="#334155" font-size="13" text-anchor="middle">d = √(Δx² + Δy²)，即位移向量的模（长度）</text>
+</svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：两点距离公式——把斜距分解为水平和竖直两个垂直分量，斜边即合位移的大小（向量的模）</figcaption></figure>
+<p>把勾股定理放到坐标系里，就得到<strong>两点间距离公式</strong>：平面上 A(x₁, y₁)、B(x₂, y₂)，则</p>
+<pre><code>AB = √((x₂ − x₁)² + (y₂ − y₁)²)</code></pre>
+<p>其中 (x₂ − x₁) 是水平差、(y₂ − y₁) 是竖直差。这正是"垂直分量平方和再开方"的坐标版，物理上就是<strong>位移向量的模（长度）</strong>。</p>
+
+<h2 id="s4">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>勾股定理 a² + b² = c²</td><td>两直角边上的正方形面积之和 = 斜边上的正方形面积</td><td>互相垂直的两个量合成：合位移 = √(水平² + 竖直²)</td></tr>
+<tr><td>斜边最长</td><td>直角所对的边最长</td><td>两点间直线距离恒大于任一方向的分量</td></tr>
+<tr><td>逆定理</td><td>用三边长度判定直角（数 → 形）</td><td>3-4-5 放线法检验墙角/基线是否垂直</td></tr>
+<tr><td>勾股数</td><td>三边都是整数的直角三角形</td><td>施工放样快速构造直角，有无穷多组</td></tr>
+<tr><td>最短路径</td><td>曲面展开成平面，直线段最短</td><td>蚂蚁/光/机器人沿表面走的最短路程</td></tr>
+<tr><td>折叠问题</td><td>关于折痕的轴对称（全等 + 垂直平分）</td><td>光的镜面反射（入射角 = 反射角，光路最短）</td></tr>
+<tr><td>测量问题</td><td>把斜距分解为水平 + 竖直两个垂直分量</td><td>梯子、旗杆、断树、河宽、实地两点距离</td></tr>
+<tr><td>两点距离公式</td><td>坐标系中两点连成的直角三角形斜边</td><td>位移向量的模（长度）</td></tr>
+</table>
+
+<h2 id="s5">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>直角三角形的两条直角边分别是 5 和 12，求斜边长。</li>
+<li>直角三角形斜边为 13，一条直角边为 5，求另一条直角边。</li>
+<li>判断以 6、8、10 和 5、11、13 为三边的三角形是否分别是直角三角形，并指出直角所对的边。</li>
+<li>长方体的长、宽、高分别为 8、6、3，求蚂蚁从一顶点沿表面爬到空间对角顶点的最短路程。</li>
+<li>长方形 ABCD 中，AB = 8，BC = 6，沿 AC 折叠使 B 落在 B′，AB′ 与 CD 交于点 E，求 AE 的长。</li>
+<li>一架长 10 米的梯子靠墙，底端离墙 6 米；若顶端下滑 1 米，求底端外移多少米（结果保留根号）。</li>
+<li>等腰直角三角形的直角边为 2，求斜边；并用勾股数生成公式（取 m = 4、n = 1）写出一组勾股数。</li>
+</ol>
+</div>
+
+<h2 id="s6">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "勾股定理对任何三角形都成立" → ❌ 它<strong>只对直角三角形</strong>成立，且 a、b 必须是直角边，c 必须是斜边。</li>
+<li>❌ "a² + b² = c² 里 c 随便放哪条边" → ❌ c 必须是<strong>斜边（最长边）</strong>；用逆定理时也要先确认 c 是最大边。</li>
+<li>❌ "勾股数只有 3、4、5 一组" → ❌ 勾股数<strong>有无穷多组</strong>，如 5,12,13、8,15,17，以及任意一组的整数倍。</li>
+<li>❌ "2、3、4 也是勾股数" → ❌ 2² + 3² = 13 ≠ 16 = 4²，<strong>不满足</strong>平方和关系。</li>
+<li>❌ "蚂蚁问题直接走空间对角线 √(a² + b² + c²)" → ❌ 蚂蚁在<strong>表面</strong>爬，不能穿进内部，必须先展开成平面再求。</li>
+<li>❌ "折叠后图形变了" → ❌ 折叠是<strong>轴对称</strong>，折叠前后重合部分<strong>全等</strong>，折痕是对应点连线的<strong>垂直平分线</strong>。</li>
+<li>❌ "梯子顶端下滑 1 米，底端就外移 1 米" → ❌ 三边是<strong>平方</strong>关系，不是线性关系；下滑 1 米，底端外移约 1.14 米。</li>
+<li>❌ "开方忘记取正" → ❌ 线段长度、距离<strong>恒为正</strong>，√ 只取非负值。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p><strong>一、练习题</strong>（由易到难，共 6 题，紧扣本章知识点）</p>
+<ol>
+<li>直角三角形的两条直角边分别是 6 和 8，求斜边长，并指出斜边是哪条边。</li>
+<li>判断以下两组线段能否构成直角三角形，若能，指出直角所对的边：① 7、24、25；② 4、5、6。</li>
+<li>验证 (5, 12, 13) 是勾股数；再用勾股数生成公式（取 m = 3、n = 1）写出一组勾股数。</li>
+<li>长方体长 8、宽 6、高 3，蚂蚁从一个顶点沿表面爬到空间对角顶点，求最短路程（结果保留根号）。</li>
+<li>长方形 ABCD 中，AB = 8，BC = 6，沿对角线 AC 折叠，使点 B 落在 B′，AB′ 与 CD 交于点 E，求 AE 的长。</li>
+<li>一架长 10 米的梯子斜靠在墙上，底端离墙脚 6 米，求梯子顶端离地高度；若顶端下滑 1 米，底端会外移多少米（结果保留根号）？</li>
+</ol>
+<p><strong>二、参考答案（点击展开）</strong></p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>斜边 c = √(6² + 8²) = √100 = 10。斜边是直角所对的那条最长边。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>① 7² + 24² = 49 + 576 = 625 = 25²，是直角三角形，边长 25 所对的角是直角；② 4² + 5² = 41 ≠ 36 = 6²，不满足平方和关系，不是直角三角形。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>5² + 12² = 25 + 144 = 169 = 13²，故 (5, 12, 13) 是勾股数。取 m = 3、n = 1：a = 3² − 1² = 8，b = 2×3×1 = 6，c = 3² + 1² = 10，得勾股数 (8, 6, 10)，即 (6, 8, 10)。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>蚂蚁在表面爬，需把相邻两面展开成平面。三种展开方式的斜边分别是：√(8² + 9²) = √145，√(6² + 11²) = √157，√(3² + 14²) = √205。取最小，最短路程 = √145 ≈ 12.04。不能直接走空间对角线。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>由折叠对称得 ∠EAC = ∠ECA，故 △AEC 为等腰三角形，AE = CE。设 AE = CE = x，则 DE = 8 − x。在 Rt△ADE 中：x² = 6² + (8 − x)² → x² = 100 − 16x + x² → x = 25/4 = 6.25。所以 AE = 6.25。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>顶端高度 h = √(10² − 6²) = √64 = 8（米）。下滑 1 米后高度为 7 米，新底端距墙 = √(10² − 7²) = √51 ≈ 7.14（米），故底端外移 = √51 − 6 ≈ 1.14（米）。注意下滑 1 米不等于外移 1 米。</p></details>
+</div>
+
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第16章-二次根式/第16章-二次根式.html">← 上一章：第16章 二次根式</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../第18章-平行四边形/第18章-平行四边形.html">下一章：第18章 平行四边形 →</a>
+</nav>
+
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中数学开始</footer>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第9章 多元函数微分法及其应用 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 大学 › 高等数学 › 第9章 多元函数微分法及其应用</div></header>
+<main class="container">
+<h1>第9章 多元函数微分法及其应用</h1>
+<p class="lead">大学 / 高等数学</p>
+<div class="summary"><span class="tag">一句话总纲：</span>多元微积分把一元函数的思想搬到曲面、空间与物理场里——<strong>偏导数</strong>是"沿坐标轴方向的局部变化率"，<strong>全微分</strong>是"切平面（局部线性化）"，<strong>梯度</strong>是"上升最快的方向"，而<strong>极值与拉格朗日乘数法</strong>则是"在几何约束下寻找最值点"。学完本章，你要能在心里"看见"一张曲面，以及它上面的切平面、等高线和最陡下降方向。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">9.1 多元函数的基本概念</a><a href="#s2">9.2 偏导数</a><a href="#s3">9.3 全微分</a><a href="#s4">9.4 复合函数求导与隐函数求导</a><a href="#s5">9.5 方向导数与梯度</a><a href="#s6">9.6 多元函数的极值</a><a href="#s7">9.7 拉格朗日乘数法</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+</div>
+
+<h2 id="s1">9.1 多元函数的基本概念</h2>
+<h3>从一元到多元：为什么需要多元函数？</h3>
+<p>一元函数 <code>y = f(x)</code> 描述"一个量决定另一个量"。但现实中大多数结果由<strong>多个</strong>因素共同决定：温度随位置和时间变化、圆柱体积由半径和高共同决定、企业的利润由价格和产量共同决定。把这些因素都当成自变量，就得到<strong>多元函数</strong>。</p>
+<p><strong>定义</strong>：设 D 是平面（或空间）上的点集，若对 D 中每一点 (x, y)（或 (x, y, z)），按一定法则 f 有唯一确定的实数与之对应，则称 f 是定义在 D 上的<strong>二元（三元）函数</strong>，记作 <code>z = f(x, y)</code>。D 称为<strong>定义域</strong>，全体函数值构成<strong>值域</strong>。</p>
+<ul>
+<li><strong>二元函数</strong>：<code>z = f(x, y)</code>，如 z = x² + y²、z = √(1 − x² − y²)。</li>
+<li><strong>三元函数</strong>：<code>u = f(x, y, z)</code>，如 u = x² + y² + z²。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>二元函数 <code>z = f(x, y)</code> 的图像是三维空间中的<strong>一张曲面</strong>。每个定义域点 (x, y) 正上方高度为 z 的点 (x, y, f(x,y)) 连成曲面。例如 z = x² + y² 是一个开口向上的<strong>旋转抛物面（碗形）</strong>，z = √(x² + y²) 是<strong>圆锥面</strong>，z = √(1 − x² − y²) 是<strong>上半球面</strong>。一元函数是"一条曲线"，二元函数是"一张曲面"，这就是从一维到二维的几何升级。</div>
+<div class="insight"><strong>物理含义：</strong>二元/三元函数天然描述<strong>场</strong>：房间内每一点 (x, y, z) 的温度 <code>T = T(x, y, z)</code> 是<strong>温度场</strong>；大气中每一点的气压 <code>P = P(x, y, z)</code> 是<strong>气压场</strong>；平面板上每点的密度 <code>ρ = ρ(x, y)</code> 是<strong>密度分布</strong>。多元函数就是"给空间中每个位置赋一个数值"的数学语言。</div>
+
+<h3>平面点集与邻域</h3>
+<ul>
+<li><strong>邻域</strong>：点 P₀(x₀, y₀) 的 δ 邻域 = 到 P₀ 距离小于 δ 的所有点，即一个<strong>开圆盘</strong>（不含边界）。</li>
+<li><strong>内点 / 边界点 / 开区域 / 闭区域</strong>：与一元区间概念对应，只是从"线段"推广到"平面区域"。</li>
+<li><strong>有界区域</strong>：能被一个大圆盘完全覆盖的区域。</li>
+</ul>
+
+<h3>二元函数的极限</h3>
+<p><strong>二重极限</strong>：当点 P(x, y) <strong>沿任意路径</strong>无限趋近 P₀(x₀, y₀) 时，f(x, y) 都无限趋近同一个常数 A，则称 A 为 f 在 P₀ 处的极限，记作</p>
+<pre><code>lim        f(x, y) = A
+(x,y)→(x₀,y₀)</code></pre>
+<p>关键：点 (x, y) → (x₀, y₀) 可以沿<strong>无穷多条曲线</strong>（直线、抛物线、任意曲线）趋近，<strong>必须沿任意路径极限都相同</strong>二重极限才存在。</p>
+<div class="insight"><strong>几何含义：</strong>在曲面上，二重极限存在意味着：无论你从哪个方向"走向" (x₀, y₀) 正上方的那个点，曲面高度都收敛到同一个高度 A。若沿不同路径高度趋于不同值，曲面在该点附近是"撕裂的"或"尖刺丛生"的。</div>
+
+<h3>二元函数的连续性</h3>
+<p>若 <code>lim f(x,y) = f(x₀,y₀)</code>，则称 f 在 (x₀, y₀) 处<strong>连续</strong>。连续函数在闭区域上有<strong>最大值与最小值定理</strong>（有界闭区域上连续函数必取得最大最小值）和<strong>介值定理</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>连续 = 曲面<strong>没有断裂、没有洞</strong>，是一张"可以一笔不断画完"的连续曲面。</div>
+
+<h2 id="s2">9.2 偏导数</h2>
+<h3>偏导数的定义：固定其它变量，只看一个方向</h3>
+<p>一元导数研究"自变量变化时函数的变化率"。多元函数有多个自变量，我们一次只让<strong>一个</strong>自变量变化，把其余变量<strong>暂时冻结为常数</strong>，这样得到的变化率就是<strong>偏导数</strong>。</p>
+<p>对 <code>z = f(x, y)</code> 在点 (x₀, y₀) 处：</p>
+<pre><code>∂f        lim   f(x₀+Δx, y₀) − f(x₀, y₀)
+──(x₀,y₀) =  ─────────────────────────────
+∂x        Δx→0            Δx
+
+∂f        lim   f(x₀, y₀+Δy) − f(x₀, y₀)
+──(x₀,y₀) =  ─────────────────────────────
+∂y        Δy→0            Δy</code></pre>
+<p>偏导数也记作 <code>f_x</code>、<code>z_x</code>（对 x 的偏导）和 <code>f_y</code>、<code>z_y</code>（对 y 的偏导）。</p>
+<ul>
+<li><strong>求 ∂f/∂x</strong>：把 y 当常数，对 x 用一元求导法则。</li>
+<li><strong>求 ∂f/∂y</strong>：把 x 当常数，对 y 用一元求导法则。</li>
+</ul>
+<p>例：<code>z = x³ + 3xy + y²</code>，则 <code>∂z/∂x = 3x² + 3y</code>（把 y 当常数），<code>∂z/∂y = 3x + 2y</code>（把 x 当常数）。</p>
+
+<div class="insight"><strong>几何含义（本章最重要的图景）：</strong>把曲面 z = f(x, y) 用平面 <code>y = y₀</code>（垂直于 y 轴）截一刀，交线是一条<strong>曲线</strong>（只有 x 在变）。偏导数 <code>f_x(x₀, y₀)</code> 就是这条曲线在 x = x₀ 处的<strong>切线斜率</strong>——即"沿 x 正方向走，曲面上升有多陡"。同理 <code>f_y</code> 是用平面 <code>x = x₀</code> 截得的曲线在 y 方向的切线斜率。两个偏导数给出了曲面在 (x₀, y₀) 处沿两个坐标轴方向的"陡峭程度"。</div>
+<div class="insight"><strong>物理含义：</strong>偏导数 = <strong>保持其它因素不变时，单个因素的边际变化率</strong>。经济学里 <code>∂Q/∂L</code> 是"资本不变时增加一个劳动力带来的产量增量"（劳动的边际产出）；热力学里 <code>∂U/∂T</code> 是体积不变时内能对温度的（定容）变化率。这正是"在控制变量的前提下，看单一因素的影响力"。</div>
+
+<h3>高阶偏导数与混合偏导的次序无关性</h3>
+<p>偏导数仍然是 (x, y) 的函数，可继续求偏导，得到<strong>二阶偏导数</strong>：</p>
+<pre><code>∂²z    ∂   ∂z        ∂²z    ∂   ∂z
+─── = ── (──)   ，   ─── = ── (──)
+∂x²    ∂x  ∂x        ∂y²    ∂y  ∂y
+
+      ∂²z    ∂   ∂z           ∂²z    ∂   ∂z
+混合：─── = ── (──)   ， 混合：─── = ── (──)
+      ∂x∂y   ∂x  ∂y           ∂y∂x   ∂y  ∂x</code></pre>
+<p><strong>定理（Clairaut / Schwarz）</strong>：若两个混合偏导数 <code>f_xy</code> 与 <code>f_yx</code> 在区域 D 内<strong>连续</strong>，则它们<strong>相等</strong>：</p>
+<pre><code>∂²z      ∂²z
+───  =  ───
+∂x∂y     ∂y∂x</code></pre>
+<div class="insight"><strong>几何含义：</strong>混合偏导 f_xy 衡量"沿 x 方向的斜率，随 y 变化有多快"；f_yx 衡量"沿 y 方向的斜率，随 x 变化有多快"。次序无关性说明：<strong>曲面的"扭曲"无论先沿哪个方向度量都一样</strong>——这保证了二阶偏导数矩阵（Hessian 矩阵）是<strong>对称矩阵</strong>，是后面极值判别的几何基础。</div>
+
+<h2 id="s3">9.3 全微分</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="320" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="260" x2="400" y2="260" stroke="#94a3b8" stroke-width="1.5"/><line x1="200" y1="300" x2="200" y2="40" stroke="#94a3b8" stroke-width="1.5"/><polygon points="400,260 392,254 392,266" fill="#94a3b8"/><polygon points="200,40 194,50 206,50" fill="#94a3b8"/><text x="404" y="266" font-size="12" fill="#64748b">x</text><text x="206" y="40" font-size="12" fill="#64748b">z</text><path d="M54,54 L78,110 L102,150 L126,174 L150,182 L174,174 L198,150 L222,110 L246,54" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="54" y1="54" x2="104" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><line x1="246" y1="54" x2="296" y2="132" stroke="#e2e8f0" stroke-width="1.5"/><path d="M104,132 L128,188 L152,228 L176,248 L200,260 L224,248 L248,228 L272,188 L296,132" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="22" y="170" font-size="12" fill="#2563eb">曲面 z=f(x,y)</text><text x="355" y="80" font-size="12" fill="#16a34a">切平面</text><polygon fill="#16a34a" fill-opacity="0.15" stroke="#16a34a" stroke-width="2"><animate attributeName="points" dur="8s" repeatCount="indefinite" values="248,252.5 332,42.5 282,14.5 198,224.5;158,260 242,260 192,232 108,232;68,42.5 152,252.5 102,224.5 18,14.5;158,260 242,260 192,232 108,232;248,252.5 332,42.5 282,14.5 198,224.5"/></polygon><line stroke="#16a34a" stroke-width="3"><animate attributeName="x1" dur="8s" repeatCount="indefinite" values="248;158;68;158;248"/><animate attributeName="y1" dur="8s" repeatCount="indefinite" values="252.5;260;42.5;260;252.5"/><animate attributeName="x2" dur="8s" repeatCount="indefinite" values="332;242;152;242;332"/><animate attributeName="y2" dur="8s" repeatCount="indefinite" values="42.5;260;252.5;260;42.5"/></line><circle r="5" fill="#2563eb"><animate attributeName="cx" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="cy" dur="8s" repeatCount="indefinite" values="147.5;260;147.5;260;147.5"/></circle><text font-size="13" fill="#0f172a" text-anchor="middle"><animate attributeName="x" dur="8s" repeatCount="indefinite" values="290;200;110;200;290"/><animate attributeName="y" dur="8s" repeatCount="indefinite" values="137;249;137;249;137"/>P</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：全微分/切平面的几何意义——曲面在切点 P 附近可用切平面（绿色，方程 dz=f_x dx+f_y dy）线性逼近；P 沿曲面滑动时切平面随之倾斜，切点附近曲面 ≈ 切平面。</figcaption></figure>
+<h3>全增量与全微分的定义</h3>
+<p>当 x、y <strong>同时</strong>变化时，函数值的总变化称为<strong>全增量</strong>：</p>
+<pre><code>Δz = f(x₀+Δx, y₀+Δy) − f(x₀, y₀)</code></pre>
+<p>若 Δz 能写成"关于 Δx、Δy 的线性部分 + 高阶无穷小"：</p>
+<pre><code>Δz = A·Δx + B·Δy + o(ρ)，   其中 ρ = √(Δx² + Δy²)</code></pre>
+<p>则称 f 在 (x₀, y₀) 处<strong>可微</strong>，其中线性主部 <code>A·Δx + B·Δy</code> 称为<strong>全微分</strong>，记作</p>
+<pre><code>dz = A·Δx + B·Δy = f_x(x₀,y₀) dx + f_y(x₀,y₀) dy</code></pre>
+<p>（可微时必有 A = f_x，B = f_y，且取 Δx = dx，Δy = dy）。</p>
+
+<div class="insight"><strong>几何含义（切平面 = 局部线性近似）：</strong>全微分 dz = f_x dx + f_y dy 对应一张<strong>切平面</strong>。曲面 z = f(x, y) 在点 (x₀, y₀, z₀) 处的切平面方程为</div>
+<pre><code>z − z₀ = f_x(x₀,y₀)·(x − x₀) + f_y(x₀,y₀)·(y − y₀)</code></pre>
+<div class="insight">这张切平面是曲面在 (x₀, y₀) 附近的<strong>最佳线性近似</strong>：把曲面局部"拍平"。当 Δx、Δy 都很小时，用平面上的增量 dz 代替曲面上的真实增量 Δz，误差是比 ρ 更高阶的无穷小。可微的几何意义就是：<strong>曲面在该点足够光滑，存在唯一的切平面</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>全微分 = <strong>小变化下的"线性叠加"</strong>。当多个因素同时微小变化时，总效果约等于各因素单独作用的线性之和（一阶近似）。例：圆柱体积 V = πr²h，dV = 2πrh·dr + πr²·dh——体积的总变化 ≈ 半径变化带来的贡献 + 高度变化带来的贡献。工程上用 <code>ΔV ≈ dV</code> 估算误差和微小增量，正是"微分近似"。</div>
+
+<h3>可微、偏导存在、偏导连续三者的关系</h3>
+<ul>
+<li><strong>可微 ⇒ 偏导数存在</strong>（且全微分里的系数就是偏导数）。</li>
+<li><strong>偏导数存在 ⇏ 可微</strong>（反例：f(x,y) = √(x²+y²) 在原点偏导存在但不可微——原点处是"尖点"，没有切平面）。</li>
+<li><strong>偏导数连续 ⇒ 可微</strong>（这是判断可微最常用的<strong>充分条件</strong>）。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>偏导数存在只保证"沿两条坐标轴方向有切线"，但曲面可能沿其它方向是折的，整体没有切平面（如圆锥的顶点）。可微要求"四面八方"都能被同一张平面逼近——<strong>偏导存在是两条切线，可微是一整张切平面</strong>。</div>
+
+<h3>全微分用于近似计算</h3>
+<pre><code>f(x₀+Δx, y₀+Δy) ≈ f(x₀,y₀) + f_x(x₀,y₀)Δx + f_y(x₀,y₀)Δy</code></pre>
+<p>例：求 (1.02)^3.01 的近似值。令 f(x,y) = x^y，取 x₀=1, y₀=3, Δx=0.02, Δy=0.01，得 f ≈ 1 + 3·0.02 + 0·0.01 = 1.06。</p>
+
+<h2 id="s4">9.4 复合函数求导与隐函数求导</h2>
+<h3>多元复合函数的链式法则</h3>
+<p>设 <code>z = f(u, v)</code>，而 <code>u = u(x, y)</code>、<code>v = v(x, y)</code>，则 z 是 x、y 的复合函数。链式法则：<strong>z 对某自变量的偏导 = 经过每一条中间路径的"偏导之积"求和</strong>。</p>
+<pre><code>∂z   ∂z ∂u   ∂z ∂v
+── = ──·── + ──·──
+∂x   ∂u ∂x   ∂v ∂x
+
+∂z   ∂z ∂u   ∂z ∂v
+── = ──·── + ──·──
+∂y   ∂u ∂y   ∂v ∂y</code></pre>
+<p>若中间变量只有一个自变量（如 <code>z = f(u,v), u = u(t), v = v(t)</code>），则 z 只是 t 的一元函数，用<strong>全导数</strong>：</p>
+<pre><code>dz   ∂z du   ∂z dv
+── = ──·── + ──·──
+dt   ∂u dt   ∂v dt</code></pre>
+<p><strong>画"树形图"记链式法则</strong>：从 z 出发，画出到各中间变量、再到各自变量的所有路径；<code>∂z/∂x</code> 就是把"从 z 到 x 的所有路径"上的偏导连乘后相加。</p>
+<div class="insight"><strong>物理含义：</strong>链式法则是"变化率的传递与叠加"。z 随 x 变化，既通过 u 这条路传递（∂z/∂u · ∂u/∂x），又通过 v 这条路传递（∂z/∂v · ∂v/∂x），总变化率是<strong>各条通道的贡献之和</strong>。典型应用是<strong>相关变化率</strong>：例如矩形面积 S = xy，边长都随时间变化，则 <code>dS/dt = y·dx/dt + x·dy/dt</code>——面积变化率 = 长度贡献 + 宽度贡献。</div>
+<div class="insight"><strong>几何含义：</strong>当 (x, y) 沿某条参数曲线 <code>(x(t), y(t))</code> 移动时，曲面上对应点划出一条空间曲线，<code>dz/dt</code> 就是这条空间曲线的<strong>高度变化率（切线的 z 分量）</strong>，等于梯度沿速度方向的投影。</div>
+
+<h3>隐函数求导公式</h3>
+<p>一元隐函数：由 <code>F(x, y) = 0</code> 确定的隐函数 y = y(x)，其导数为</p>
+<pre><code>dy     F_x
+── = − ───    (F_y ≠ 0)
+dx     F_y</code></pre>
+<p>二元隐函数：由 <code>F(x, y, z) = 0</code> 确定的隐函数 z = z(x, y)，其偏导为</p>
+<pre><code>∂z     F_x        ∂z     F_y
+── = − ───   ，   ── = − ───    (F_z ≠ 0)
+∂x     F_z        ∂y     F_z</code></pre>
+<div class="insight"><strong>几何含义：</strong><code>F(x, y, z) = 0</code> 是空间中的一张曲面（如球面 x² + y² + z² = R²）。∂z/∂x 是"固定 y 后，曲面沿 x 方向的高度变化率"，即曲面与平面 y = 常数的交线切线斜率。而梯度 ∇F = (F_x, F_y, F_z) 处处<strong>垂直于等值面</strong>，隐函数求导公式本质上来自"沿曲面走时 F 保持不变"这一约束。</div>
+
+<h2 id="s5">9.5 方向导数与梯度</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="40" y1="150" x2="480" y2="150" stroke="#94a3b8" stroke-width="1.5"/><line x1="260" y1="20" x2="260" y2="285" stroke="#94a3b8" stroke-width="1.5"/><polygon points="480,150 472,144 472,156" fill="#94a3b8"/><polygon points="260,20 254,30 266,30" fill="#94a3b8"/><text x="472" y="142" font-size="12" fill="#64748b">x</text><text x="268" y="26" font-size="12" fill="#64748b">y</text><circle cx="260" cy="150" r="35" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="70" fill="none" stroke="#93c5fd" stroke-width="2"/><circle cx="260" cy="150" r="105" fill="none" stroke="#bfdbfe" stroke-width="1.5"/><circle cx="260" cy="150" r="140" fill="none" stroke="#93c5fd" stroke-width="2"/><text x="300" y="146" font-size="12" fill="#64748b">f=1</text><text x="186" y="146" font-size="12" fill="#64748b">f=4</text><text x="150" y="146" font-size="12" fill="#64748b">f=9</text><text x="115" y="146" font-size="12" fill="#64748b">f=16</text><text x="400" y="205" font-size="12" fill="#16a34a">f 增大 →</text><g><animateTransform attributeName="transform" type="rotate" from="0 260 150" to="360 260 150" dur="8s" repeatCount="indefinite"/><circle cx="330" cy="150" r="5" fill="#2563eb"/><line x1="330" y1="150" x2="388" y2="150" stroke="#2563eb" stroke-width="3"/><polygon points="394,150 384,144 384,156" fill="#2563eb"/><line x1="330" y1="150" x2="330" y2="106" stroke="#16a34a" stroke-width="3"/><polygon points="330,100 324,110 336,110" fill="#16a34a"/></g><text x="260" y="296" font-size="12" fill="#64748b" text-anchor="middle">等高线：f(x,y)=x²+y²=c（同心圆）</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：梯度 ∇f（蓝）处处与等高线垂直、指向外侧（f 增大），即函数增长最快的方向；沿等高线切线（绿）走，方向导数为 0。</figcaption></figure>
+<h3>方向导数：沿任意方向的变化率</h3>
+<p>偏导数只衡量沿坐标轴方向的变化率。更一般地，我们想知道函数沿<strong>任意方向</strong>变化有多快，这就是<strong>方向导数</strong>。</p>
+<p>设 <strong>单位方向</strong> <code>u = (cos α, cos β)</code>（二维，α、β 是方向角，cos²α + cos²β = 1），则 f 在 P₀ 沿 u 的方向导数为</p>
+<pre><code>∂f
+──│     = f_x(P₀)·cos α + f_y(P₀)·cos β
+∂l│P₀</code></pre>
+<p>三维中，方向 <code>u = (cos α, cos β, cos γ)</code>：</p>
+<pre><code>∂f
+── = f_x·cos α + f_y·cos β + f_z·cos γ
+∂l</code></pre>
+
+<h3>梯度：变化最快的方向</h3>
+<p>把三个偏导数组成一个<strong>向量</strong>，称为<strong>梯度</strong>：</p>
+<pre><code>grad f = ∇f = (f_x, f_y, f_z) = f_x i + f_y j + f_z k</code></pre>
+<p>方向导数可用梯度简洁表示为<strong>点积</strong>：</p>
+<pre><code>∂f
+── = ∇f · u = |∇f| · |u| · cos θ = |∇f| · cos θ
+∂l</code></pre>
+<p>其中 θ 是 ∇f 与方向 u 的夹角。由此得到本章<strong>最重要的结论</strong>：</p>
+<ul>
+<li>当 u 与 ∇f <strong>同向</strong>（θ = 0，cos θ = 1）时，方向导数最大，最大值为 <code>|∇f|</code> —— 梯度方向是<strong>函数增长最快的方向</strong>。</li>
+<li>当 u 与 ∇f <strong>反向</strong>（θ = π）时，方向导数最小，为 <code>−|∇f|</code> —— 负梯度方向是<strong>下降最快的方向</strong>。</li>
+<li>当 u 与 ∇f <strong>垂直</strong>（θ = π/2）时，方向导数为 0 —— 沿等值线方向函数值不变。</li>
+</ul>
+
+<div class="insight"><strong>几何含义（梯度垂直于等值线/等值面）：</strong>二维函数 z = f(x, y) 的<strong>等值线（等高线）</strong> f(x, y) = c，是把曲面用水平面 z = c 截出的曲线投影到 xy 平面。梯度 ∇f 在每一点都<strong>垂直于</strong>过该点的等值线，并<strong>指向函数值增大（高度上升）的一侧</strong>。看一张地形图：等高线密集处坡度陡（|∇f| 大），等高线稀疏处坡度缓（|∇f| 小）；梯度就像地图上"最陡的上山箭头"，永远垂直于等高线指向山顶。三维中，梯度垂直于<strong>等值面</strong> f(x, y, z) = c。</div>
+<div class="insight"><strong>物理含义（梯度是场的"驱动力"）：</strong>
+<ul>
+<li><strong>热传导</strong>：热量从高温流向低温，热流密度向量 <code>q = −k·∇T</code>（傅里叶定律），即<strong>热量沿温度梯度的反方向流动</strong>。</li>
+<li><strong>保守力场</strong>：力 = 势能的负梯度，<code>F = −∇V</code>。物体在势场中受力总指向势能下降最快的方向（水往低处流、物体向势能最低处滚）。</li>
+<li><strong>电场</strong>：电场强度 = 电势的负梯度，<code>E = −∇φ</code>。</li>
+</ul>
+梯度把"标量场"变成一个"向量场"，这个向量处处指出"标量增长最快的方向"，是理解所有"驱动力"的钥匙。</div>
+
+<h2 id="s6">9.6 多元函数的极值</h2>
+<h3>极值的定义与必要条件</h3>
+<p>若在点 (x₀, y₀) 的某邻域内，恒有 <code>f(x, y) ≤ f(x₀, y₀)</code>，则 (x₀, y₀) 是<strong>极大值点</strong>（≤ 换成 ≥ 则为极小值点）。</p>
+<p><strong>必要条件</strong>：若 f 在 (x₀, y₀) 处取得极值且偏导数存在，则</p>
+<pre><code>f_x(x₀, y₀) = 0 ，  f_y(x₀, y₀) = 0</code></pre>
+<p>满足这两个方程的点称为<strong>驻点（稳定点）</strong>。极值点必是驻点，但驻点不一定是极值点（可能是<strong>鞍点</strong>）。</p>
+<div class="insight"><strong>几何含义：</strong>驻点处两个偏导数都为 0，意味着切平面的两个方向斜率都为 0，即<strong>切平面是水平的</strong>。极值点 = 曲面的"山顶（极大）"或"谷底（极小）"；而<strong>鞍点</strong>像马鞍——沿 x 方向它是谷底、沿 y 方向却是山脊，切平面虽水平却不是极值。</div>
+
+<h3>充分条件（用二阶偏导判别，AC − B² 判别法）</h3>
+<p>设 (x₀, y₀) 是驻点，记</p>
+<pre><code>A = f_xx(x₀,y₀)，  B = f_xy(x₀,y₀)，  C = f_yy(x₀,y₀)
+Δ = AC − B²</code></pre>
+<table>
+<tr><th>条件</th><th>结论</th><th>几何形象</th></tr>
+<tr><td>Δ &gt; 0 且 A &gt; 0</td><td>极小值</td><td>谷底（碗底）</td></tr>
+<tr><td>Δ &gt; 0 且 A &lt; 0</td><td>极大值</td><td>山顶（倒扣的碗）</td></tr>
+<tr><td>Δ &lt; 0</td><td>不是极值（鞍点）</td><td>马鞍面</td></tr>
+<tr><td>Δ = 0</td><td>无法判定，需其它方法</td><td>需进一步分析</td></tr>
+</table>
+<div class="insight"><strong>几何含义：</strong>AC − B² 是 Hessian 矩阵的行列式，刻画曲面在驻点附近的<strong>弯曲方式</strong>。A &gt; 0 表示沿 x 方向"向上凹"，若四面八方都向上凹（Δ &gt; 0）就是谷底；若沿某个方向向上凹、沿另一方向向下凹（Δ &lt; 0），就是鞍点——曲面既"托着"又"压着"，两个方向弯曲相反。</div>
+<div class="insight"><strong>物理含义：</strong>极值在物理中对应<strong>平衡与最优状态</strong>：系统能量最低处是稳定平衡（极小值），能量最高处是不稳定平衡（极大值）；经济学中利润最大化、成本最小化都归结为多元函数极值问题。</div>
+
+<h3>条件极值（约束最值）</h3>
+<p>很多实际问题要在<strong>约束</strong>下求最值，例如"在表面积固定的前提下使体积最大"。这就是<strong>条件极值</strong>，其一般解法是下一节的拉格朗日乘数法。</p>
+
+<h2 id="s7">9.7 拉格朗日乘数法</h2>
+<h3>问题的提出</h3>
+<p>求目标函数 <code>z = f(x, y)</code> 在<strong>约束条件</strong> <code>g(x, y) = 0</code> 下的极值。注意：现在 (x, y) 不能在整个区域自由取值，只能取在曲线 g = 0 上。</p>
+<p>构造<strong>拉格朗日函数</strong>（λ 为拉格朗日乘数）：</p>
+<pre><code>L(x, y, λ) = f(x, y) + λ·g(x, y)</code></pre>
+<p>对 x、y、λ 分别求偏导并令其为 0：</p>
+<pre><code>∂L/∂x = f_x + λ·g_x = 0
+∂L/∂y = f_y + λ·g_y = 0
+∂L/∂λ = g(x, y) = 0</code></pre>
+<p>解这个方程组得到候选点，再比较函数值确定最值。等价地，条件可写成向量形式：</p>
+<pre><code>∇f = λ·∇g   且   g(x, y) = 0</code></pre>
+<div class="insight"><strong>几何含义（本章的精华之一）：</strong>约束 <code>g(x, y) = 0</code> 是一条曲线，目标函数 f 有一族等值线 f(x, y) = c。我们在这条曲线上找 f 最大/最小的点。想象等值线"套"在约束曲线上：当 f 的某条等值线<strong>恰好与约束曲线相切</strong>时，切点就是条件极值点。相切意味着两曲线在该点的法线方向相同，而 ∇f 正是 f 的等值线的法向，∇g 正是约束曲线的法向，于是 <code>∇f ∥ ∇g</code>，即 <code>∇f = λ·∇g</code>。这就是拉格朗日乘数法背后的几何画面：<strong>在约束上找最值 = 找 f 的等值线与约束曲线相切的点</strong>。</div>
+<div class="insight"><strong>物理含义：</strong>拉格朗日乘数法是<strong>有约束最优化</strong>的通用工具：给定周长求最大面积、给定材料求最大容积、给定预算求最大效用（经济学）、求物理系统在约束下的平衡构型（力学）等。λ 本身也有含义——它是"约束每放宽一个单位时，目标函数最值的变化率"（经济学中称为<strong>影子价格</strong>，衡量资源的边际价值）。</div>
+<p><strong>多约束情形</strong>：求 f(x, y, z) 在 <code>g₁ = 0</code>、<code>g₂ = 0</code> 下的极值，构造 <code>L = f + λ₁g₁ + λ₂g₂</code>，对 x、y、z、λ₁、λ₂ 求偏导令其为 0。几何上对应 <code>∇f = λ₁∇g₁ + λ₂∇g₂</code>。</p>
+
+<h2 id="s8">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>二元函数 z = f(x,y)</td><td>三维空间中的一张曲面</td><td>标量场：温度场、气压场、密度分布</td></tr>
+<tr><td>偏导数 f_x、f_y</td><td>沿坐标轴方向切线的斜率（两个方向的陡峭度）</td><td>控制变量下的边际变化率（边际产出、定容变化率）</td></tr>
+<tr><td>全微分 dz</td><td>切平面（局部线性近似）</td><td>多因素微小变化的线性叠加，误差估算</td></tr>
+<tr><td>可微</td><td>曲面光滑、存在唯一切平面</td><td>系统可线性化、可近似</td></tr>
+<tr><td>链式法则</td><td>沿路径的高度变化率</td><td>变化率的传递与叠加，相关变化率</td></tr>
+<tr><td>方向导数</td><td>沿任意方向切线的斜率</td><td>沿任意方向的变化率</td></tr>
+<tr><td>梯度 ∇f</td><td>垂直于等值线/等值面，指向上升最快方向</td><td>场的驱动力：热流、力、电场（F = −∇V）</td></tr>
+<tr><td>驻点</td><td>切平面水平处（山顶/谷底/鞍点）</td><td>平衡点、最优候选点</td></tr>
+<tr><td>极值</td><td>曲面的峰与谷</td><td>最优状态、稳定平衡</td></tr>
+<tr><td>拉格朗日乘数法</td><td>等值线与约束曲线相切处</td><td>约束下的最优化，影子价格</td></tr>
+</table>
+
+<h2 id="s9">典型例题（自测）</h2>
+<div class="ex">
+<h4>基础题</h4>
+<ol>
+<li>求 z = x²y + xy³ 的偏导数 ∂z/∂x、∂z/∂y，以及二阶偏导 ∂²z/∂x²、∂²z/∂x∂y。</li>
+<li>求 z = ln(x² + y²) 的全微分 dz，并用它近似计算 ln(1.02² + 1.01²) 在点 (1, 1) 附近的值。</li>
+<li>设 z = e^(uv)，u = x² + y²，v = xy，用链式法则求 ∂z/∂x。</li>
+<li>求曲面 z = x² + y² 在点 (1, 1, 2) 处的切平面方程。</li>
+</ol>
+<h4>综合题</h4>
+<ol start="5">
+<li>求 f(x, y) = x² + y² 在点 (1, 2) 处沿方向 (3, 4)（先单位化）的方向导数；并求该点处函数增长最快的方向与最大增长率。</li>
+<li>求 f(x, y) = x³ − y³ + 3x² + 3y² − 9x 的极值。</li>
+<li>求 f(x, y) = xy 在约束 x² + y² = 1 下的最大值与最小值（用拉格朗日乘数法）。</li>
+<li>证明：表面积为常数 S 的长方体中，体积最大的是立方体。</li>
+</ol>
+</div>
+
+<h2 id="s10">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "偏导数存在就能保证可微" → ❌ 偏导存在只是两条坐标方向的切线存在，曲面沿其它方向可能是折的；可微要求存在整张切平面（偏导连续才是可微的充分条件）。</li>
+<li>❌ "求 ∂z/∂x 时把 y 当 0" → ❌ 应把 y 当<strong>常数</strong>（保留它），不是当作 0。例：∂(x² + xy)/∂x = 2x + y，而不是 2x。</li>
+<li>❌ "二重极限存在 = 沿一条直线趋近的极限存在" → ❌ 必须<strong>沿任意路径</strong>极限都相同；沿两条不同路径得到不同值即可证明极限不存在。</li>
+<li>❌ "链式法则只乘一条路径" → ❌ 要<strong>把所有路径的贡献相加</strong>，漏掉任何一条中间变量都会出错。</li>
+<li>❌ "梯度是数值（标量）" → ❌ 梯度是<strong>向量</strong>，方向指向增长最快方向，大小等于最大方向导数。</li>
+<li>❌ "方向导数取负梯度方向时最大" → ❌ 负梯度方向方向导数<strong>最小</strong>（下降最快）；沿梯度方向才是最大。</li>
+<li>❌ "驻点一定是极值点" → ❌ 驻点可能是<strong>鞍点</strong>（AC − B² &lt; 0），需用二阶充分条件判别。</li>
+<li>❌ "拉格朗日乘数 λ 毫无意义" → ❌ λ 表示约束每放松一个单位时最值的变化率（影子价格），有实际经济含义。</li>
+<li>❌ "切平面方程与全微分是两个不同东西" → ❌ 二者本质相同：dz = f_x dx + f_y dy 就是切平面方程的增量形式，都来自局部线性化。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>设 z = x³ + 3xy + y²，求 ∂z/∂x 与 ∂z/∂y。</li>
+<li>设 z = ln(x² + y²)，求全微分 dz，并写出它在点 (1, 1) 处的增量关系 Δz ≈ dz。</li>
+<li>用几何语言解释：偏导数 f_x(x₀, y₀) 在曲面 z = f(x, y) 上代表什么？它与"用平面 y = y₀ 截曲面所得曲线的切线"有何关系？</li>
+<li>设 z = e^(uv)，u = x² + y²，v = xy，用链式法则求 ∂z/∂x。</li>
+<li>求 f(x, y) = x² + y² 在点 (1, 2) 处沿方向 (3, 4)（先单位化）的方向导数，并求该点函数增长最快的方向与最大增长率。</li>
+<li>求 f(x, y) = xy 在约束 x² + y² = 1 下的最大值与最小值（用拉格朗日乘数法），并结合几何含义说明极值点在何处。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>把 y 当常数对 x 求导：∂z/∂x = 3x² + 3y；把 x 当常数对 y 求导：∂z/∂y = 3x + 2y。注意"冻结"的是变量本身，不是把它当成 0。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>f_x = 2x/(x²+y²)，f_y = 2y/(x²+y²)，故 dz = (2x·dx + 2y·dy)/(x²+y²)。在 (1,1) 处 f_x = f_y = 1，所以 Δz ≈ dz = dx + dy，即 z ≈ ln 2 + (x−1) + (y−1)。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>偏导数 f_x(x₀,y₀) 是"用平面 y = y₀ 截曲面 z = f(x,y) 所得交线（一条曲线）在 x = x₀ 处的切线斜率"，即沿 x 正方向走时曲面的陡峭程度；f_y 同理是沿 y 方向的切线斜率。两者只给出两个坐标轴方向的斜率，并不保证整张切平面存在（可微要求四面八方都能被同一平面逼近）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>链式法则：∂z/∂x = ∂z/∂u · ∂u/∂x + ∂z/∂v · ∂v/∂x = v·e^(uv)·2x + u·e^(uv)·y = e^(uv)·(2xv + uy)。要点：把从 z 到 x 的每一条路径的偏导之积相加，不要漏掉任何中间变量。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>方向 (3,4) 单位化得 u = (3/5, 4/5)。f_x = 2x = 2，f_y = 2y = 4，故方向导数 = ∇f·u = 2·(3/5) + 4·(4/5) = 22/5 = 4.4。增长最快的方向即梯度方向 ∇f = (2, 4)（单位化为 (1/√5, 2/√5)），最大增长率 = |∇f| = √(2²+4²) = 2√5。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>构造 L = xy + λ(x²+y²−1)。∂L/∂x = y + 2λx = 0，∂L/∂y = x + 2λy = 0，∂L/∂λ = x²+y²−1 = 0。由前两式得 y = −2λx、x = −2λy，消去 λ 得 x² = y²，结合 x²+y² = 1 得 x² = y² = 1/2，即 x = ±1/√2、y = ±1/√2。f = xy：同号时取最大值 1/2，异号时取最小值 −1/2。几何上，这四点正是 f 的等值线（双曲线 xy = c）与单位圆相切的位置，即 ∇f ∥ ∇g 处。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第8章-空间解析几何与向量代数/第8章-空间解析几何与向量代数.html">← 上一章：第8章 空间解析几何与向量代数</a>
+<a href="../../../index.html">回目录</a>
+<a href="../第10章-重积分/第10章-重积分.html">下一章：第10章 重积分 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 高等数学</footer>
+</body>
+</html>

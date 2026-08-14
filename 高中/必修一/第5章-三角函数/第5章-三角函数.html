@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第5章 三角函数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../index.html">首页</a> › 高中 › 必修第一册 › 第5章 三角函数</div></header>
+<main class="container">
+<h1>第5章 三角函数</h1>
+<p class="lead">高中 / 必修第一册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>三角函数 = 「单位圆上周而复始的旋转运动」在坐标轴上的投影。角的终边在单位圆上旋转一圈，横坐标是余弦、纵坐标是正弦——三角函数的全部公式，本质上都是"圆上的旋转与对称"的代数表达。学完本章，你要能在心里"看见"一个点沿着单位圆匀速转圈，正弦、余弦就是它的纵、横坐标随时间往返振荡，诱导公式就是"转半圈/翻镜像"的位置关系，而 y = A sin(ωx+φ) 就是描述振动与波动的通用语言。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">5.1 任意角与弧度制</a><a href="#s2">5.2 三角函数的概念</a><a href="#s3">5.3 诱导公式</a><a href="#s4">5.4 三角函数的图象与性质</a><a href="#s5">5.5 三角恒等变换</a><a href="#s6">5.6 函数 y = A sin(ωx + φ)</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+</div>
+
+<h2 id="s1">5.1 任意角与弧度制</h2>
+<h3>角的新定义：旋转出来的角</h3>
+<p>初中把角看成"两条射线夹出的图形"，范围是 0° 到 360°。但现实中的运动是连续、可以超过一圈、也可以反向的：秒针转 3 分钟是 18 圈，即 6480°；拧螺丝既可以顺时针也可以逆时针。于是我们把角重新定义为：</p>
+<ul>
+<li><strong>角</strong>：一条射线从<strong>始边</strong>出发，绕端点<strong>旋转</strong>到<strong>终边</strong>所成的图形。旋转的量就是角的大小。</li>
+<li><strong>正角</strong>：按<strong>逆时针</strong>方向旋转得到的角。</li>
+<li><strong>负角</strong>：按<strong>顺时针</strong>方向旋转得到的角。</li>
+<li><strong>零角</strong>：没有旋转（始边与终边重合）。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>角 = 旋转的"位移量"。正负号记录的是<strong>旋转方向</strong>（逆时针为正、顺时针为负），角度的大小记录<strong>转了多少</strong>。这和"位移"有方向有大小完全同理——角就是圆周运动里的"位移"。</div>
+<h3>象限角与终边相同的角</h3>
+<p>把角的顶点放在坐标原点，始边与 x 轴正半轴重合，则终边落在第几象限，就称这个角是<strong>第几象限角</strong>（终边在坐标轴上的角叫<strong>轴线角</strong>，不属于任何象限）。</p>
+<p><strong>终边相同的角</strong>：相差整数个整圈（360°）的角，终边完全相同。所有与角 α 终边相同的角可以统一写成：</p>
+<pre><code>β = α + k·360°   (k ∈ Z)    或     β = α + 2kπ   (k ∈ Z)</code></pre>
+<div class="insight"><strong>几何含义：</strong>"终边相同的角"就是转了整数圈后又回到同一条射线。一个终边位置对应<strong>无穷多个角</strong>，它们之间只差 360° 的整数倍——几何上"位置"唯一，代数上"数值"不唯一。</div>
+<h3>弧度制：用"弧长"量角</h3>
+<p>角度制以 1/360 圆周为单位，是人为规定。弧度制则从几何本身出发：</p>
+<div class="insight"><strong>定义（几何本质）：</strong>在圆上取一段弧，若<strong>弧长等于半径</strong>，则这段弧所对的圆心角就是 <strong>1 弧度（1 rad）</strong>。弧度 = 弧长 ÷ 半径，即</div>
+<pre><code>|α| = l / r   （l 为弧长，r 为半径，α 为圆心角的弧度数）</code></pre>
+<p>因为整圆的周长是 2πr，所以整圆所对的圆心角是 <code>2πr / r = 2π</code> 弧度，即：</p>
+<pre><code>360° = 2π rad        180° = π rad        1° = π/180 rad ≈ 0.01745 rad        1 rad ≈ 57.3°</code></pre>
+<p><strong>弧长公式与扇形面积公式</strong>（弧度制下变得极其简洁）：</p>
+<pre><code>弧长  l = α·r
+扇形面积  S = ½ l·r = ½ α·r²   （α 用弧度）</code></pre>
+<div class="insight"><strong>物理/工程含义：</strong>弧度制的核心好处是"角 × 半径 = 弧长"这个线性关系。<strong>线速度与角速度</strong>之间才有简洁关系 v = ω·r、向心加速度 a = ω²r，简谐振动、交流电、波动方程里所有 ω 都是弧度制。用弧度制，三角函数求导公式 sin'x = cos x 才成立（没有任何系数污染），因此高等数学几乎只用弧度制。</div>
+
+<h2 id="s2">5.2 三角函数的概念</h2>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="250" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="20" y="28" font-size="14" font-weight="700" fill="#0f172a">图1　单位圆：正弦 = 纵坐标，余弦 = 横坐标</text>
+  <line x1="40" y1="135" x2="220" y2="135" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="130" y1="45" x2="130" y2="225" stroke="#94a3b8" stroke-width="2"/>
+  <text x="212" y="151" font-size="12" fill="#334155">x</text>
+  <text x="138" y="52" font-size="12" fill="#334155">y</text>
+  <circle cx="130" cy="135" r="80" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <circle cx="130" cy="135" r="3" fill="#334155"/>
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 130 135" to="-360 130 135" dur="8s" repeatCount="indefinite"/>
+    <line x1="130" y1="135" x2="210" y2="135" stroke="#2563eb" stroke-width="2.5"/>
+    <circle cx="210" cy="135" r="5.5" fill="#2563eb"/>
+  </g>
+  <line x1="130" y1="135" x2="210" y2="135" stroke="#16a34a" stroke-width="3">
+    <animate attributeName="x2" values="210;207.27;199.28;186.57;170;150.71;130;109.29;90;73.43;60.72;52.73;50;52.73;60.72;73.43;90;109.29;130;150.71;170;186.57;199.28;207.27;210" keyTimes="0.0000;0.0417;0.0833;0.1250;0.1667;0.2083;0.2500;0.2917;0.3333;0.3750;0.4167;0.4583;0.5000;0.5417;0.5833;0.6250;0.6667;0.7083;0.7500;0.7917;0.8333;0.8750;0.9167;0.9583;1.0000" dur="8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="210" y1="135" x2="210" y2="135" stroke="#2563eb" stroke-width="3" stroke-dasharray="5 4">
+    <animate attributeName="x1" values="210;207.27;199.28;186.57;170;150.71;130;109.29;90;73.43;60.72;52.73;50;52.73;60.72;73.43;90;109.29;130;150.71;170;186.57;199.28;207.27;210" keyTimes="0.0000;0.0417;0.0833;0.1250;0.1667;0.2083;0.2500;0.2917;0.3333;0.3750;0.4167;0.4583;0.5000;0.5417;0.5833;0.6250;0.6667;0.7083;0.7500;0.7917;0.8333;0.8750;0.9167;0.9583;1.0000" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="210;207.27;199.28;186.57;170;150.71;130;109.29;90;73.43;60.72;52.73;50;52.73;60.72;73.43;90;109.29;130;150.71;170;186.57;199.28;207.27;210" keyTimes="0.0000;0.0417;0.0833;0.1250;0.1667;0.2083;0.2500;0.2917;0.3333;0.3750;0.4167;0.4583;0.5000;0.5417;0.5833;0.6250;0.6667;0.7083;0.7500;0.7917;0.8333;0.8750;0.9167;0.9583;1.0000" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="y2" values="135;114.29;95;78.43;65.72;57.73;55;57.73;65.72;78.43;95;114.29;135;155.71;175;191.57;204.28;212.27;215;212.27;204.28;191.57;175;155.71;135" keyTimes="0.0000;0.0417;0.0833;0.1250;0.1667;0.2083;0.2500;0.2917;0.3333;0.3750;0.4167;0.4583;0.5000;0.5417;0.5833;0.6250;0.6667;0.7083;0.7500;0.7917;0.8333;0.8750;0.9167;0.9583;1.0000" dur="8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="300" y1="60" x2="330" y2="60" stroke="#16a34a" stroke-width="3"/>
+  <text x="338" y="64" font-size="13" fill="#334155">cos α = 横坐标 x</text>
+  <line x1="300" y1="90" x2="330" y2="90" stroke="#2563eb" stroke-width="3" stroke-dasharray="5 4"/>
+  <text x="338" y="94" font-size="13" fill="#334155">sin α = 纵坐标 y</text>
+  <text x="338" y="124" font-size="12" fill="#6b7280">半径 r = 1（单位圆）</text>
+  <text x="338" y="146" font-size="12" fill="#6b7280">x² + y² = 1（勾股定理）</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：单位圆上旋转的点 P，横坐标是 cos α（绿色投影）、纵坐标是 sin α（蓝色投影），随角 α 一周往返伸缩——恒有 x² + y² = 1</figcaption>
+</figure>
+<h3>从"直角三角形的边比"到"单位圆上的坐标"</h3>
+<p>初中在直角三角形里定义：sin A = 对边/斜边，cos A = 邻边/斜边，tan A = 对边/邻边。这只能处理 0°～90° 的锐角。高中用<strong>单位圆</strong>把它推广到任意角：</p>
+<ul>
+<li>以坐标原点为圆心、半径 <strong>1</strong> 的圆叫<strong>单位圆</strong>。</li>
+<li>设角 α 的终边与单位圆交于点 <strong>P(x, y)</strong>，则定义：</li>
+</ul>
+<pre><code>sin α = y        cos α = x        tan α = y / x   (x ≠ 0)</code></pre>
+<p>也就是：<strong>正弦 = 终边与单位圆交点的纵坐标；余弦 = 横坐标；正切 = 纵坐标/横坐标（即直线 OP 的斜率）。</strong></p>
+<div class="insight"><strong>几何含义（本章最重要的图景）：</strong>点 P 在单位圆上，角 α 变，P 就沿圆周旋转。P 的<strong>纵坐标</strong>就是 sin α，P 的<strong>横坐标</strong>就是 cos α。因为 P 永远在圆上，所以 <code>|x| ≤ 1</code>、<code>|y| ≤ 1</code>，即 <code>|sin α| ≤ 1</code>、<code>|cos α| ≤ 1</code>，且恒有 <code>x² + y² = 1</code>，这正是<strong>同角关系 sin²α + cos²α = 1</strong> 的几何来源。</div>
+<p>如果角的终边与以原点为圆心、<strong>r</strong> 为半径的圆交于 P(x, y)，则（<strong>比值定义</strong>，与半径无关）：</p>
+<pre><code>sin α = y / r        cos α = x / r        tan α = y / x        r = √(x² + y²)</code></pre>
+<div class="insight"><strong>为什么比值与半径无关？</strong>因为任意两个半径不同的同心圆上，同一角对应的点是"位似"的：坐标按同一比例放大缩小，y/r、x/r 的比值不变。这就是"相似三角形对应边成比例"的推广——三角函数是"方向"的函数，与"距离"无关。</div>
+<h3>三角函数值的符号（由坐标决定）</h3>
+<p>sin α 看纵坐标 y，cos α 看横坐标 x，tan α 看 y/x，所以各象限符号为：</p>
+<table>
+<tr><th>象限</th><th>sin（纵坐标）</th><th>cos（横坐标）</th><th>tan（斜率）</th></tr>
+<tr><td>第一象限</td><td>+</td><td>+</td><td>+</td></tr>
+<tr><td>第二象限</td><td>+</td><td>−</td><td>−</td></tr>
+<tr><td>第三象限</td><td>−</td><td>−</td><td>+</td></tr>
+<tr><td>第四象限</td><td>−</td><td>+</td><td>−</td></tr>
+</table>
+<p>口诀：<strong>"一全正，二正弦，三正切，四余弦"</strong>——第一象限全正，第二象限只有 sin 正，第三象限只有 tan 正，第四象限只有 cos 正。</p>
+<h3>特殊角的三角函数值（必须烂熟）</h3>
+<table>
+<tr><th>角（度/弧度）</th><th>0° (0)</th><th>30° (π/6)</th><th>45° (π/4)</th><th>60° (π/3)</th><th>90° (π/2)</th></tr>
+<tr><td>sin</td><td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td></tr>
+<tr><td>cos</td><td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td></tr>
+<tr><td>tan</td><td>0</td><td>√3/3</td><td>1</td><td>√3</td><td>不存在</td></tr>
+</table>
+<div class="insight"><strong>记忆的几何来源：</strong>30°(π/6) 对应"半个等边三角形"（30°-60°-90°，三边比 1:√3:2），45°(π/4) 对应"等腰直角三角形"（45°-45°-90°，三边比 1:1:√2）。把这些直角三角形"塞进"单位圆，坐标就一目了然，不必死记。</div>
+<h3>三角函数线（把"比值"画成"线段"）</h3>
+<ul>
+<li><strong>正弦线 MP</strong>：过 P 作 x 轴的垂线，垂足 M，有向线段 MP 的长（带符号）就是 sin α。</li>
+<li><strong>余弦线 OM</strong>：从原点 O 到 M 的有向线段，就是 cos α。</li>
+<li><strong>正切线 AT</strong>：过单位圆与 x 轴正半轴交点 A(1,0) 作切线，与终边延长线交于 T，有向线段 AT 就是 tan α。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>三角函数线把抽象的"比值"还原成圆上一条条<strong>有方向的线段</strong>，是研究三角函数性质（单调性、最值、解三角不等式）最直观的工具。</div>
+<h3>同角三角函数的基本关系</h3>
+<pre><code>平方关系：  sin²α + cos²α = 1
+商数关系：  tan α = sin α / cos α    (cos α ≠ 0)</code></pre>
+<div class="insight"><strong>几何含义：</strong>平方关系就是"点 P 在单位圆上满足 x² + y² = 1"；商数关系就是"tan = 终边斜率 = y/x = sin/cos"。这两条关系把三个函数"锁"在一起：知其一可求其余（需结合象限定符号）。</div>
+
+<h2 id="s3">5.3 诱导公式</h2>
+<p>诱导公式回答一个问题：<strong>任意角的三角函数，如何化成锐角（0～π/2）的三角函数？</strong>它的全部来源是"角的终边经过<strong>旋转与对称</strong>后，坐标如何变化"。</p>
+<h3>公式一：终边相同（绕整圈）</h3>
+<pre><code>sin(α + 2kπ) = sin α      cos(α + 2kπ) = cos α      tan(α + 2kπ) = tan α   (k ∈ Z)</code></pre>
+<div class="insight"><strong>几何含义：</strong>转整数圈回到原位，坐标不变，函数值当然不变——这就是三角函数的<strong>周期性</strong>的源头。</div>
+<h3>公式二：关于原点对称（π + α）</h3>
+<pre><code>sin(π + α) = −sin α      cos(π + α) = −cos α      tan(π + α) = tan α</code></pre>
+<div class="insight"><strong>几何含义：</strong>角 α 的终边绕原点转半圈（加 π），终点 P 变成关于原点对称的点 P'，坐标由 (x, y) 变 (−x, −y)。所以 sin、cos 都变号，而 tan = y/x = (−y)/(−x) 不变。</div>
+<h3>公式三：关于 x 轴对称（−α）</h3>
+<pre><code>sin(−α) = −sin α      cos(−α) = cos α      tan(−α) = −tan α</code></pre>
+<div class="insight"><strong>几何含义：</strong>−α 与 α 的终边关于 x 轴对称，P(x, y) 变为 P'(x, −y)。纵坐标变号（sin 变号）、横坐标不变（cos 不变）。这说明：<strong>sin 是奇函数、cos 是偶函数</strong>，根源就在这条对称。</div>
+<h3>公式四：关于 y 轴对称（π − α）</h3>
+<pre><code>sin(π − α) = sin α      cos(π − α) = −cos α      tan(π − α) = −tan α</code></pre>
+<div class="insight"><strong>几何含义：</strong>π − α 与 α 的终边关于 y 轴对称，P(x, y) 变为 P'(−x, y)。纵坐标不变（sin 不变）、横坐标变号（cos 变号）。</div>
+<h3>公式五、六：关于直线 y = x 对称（π/2 ∓ α）</h3>
+<pre><code>sin(π/2 − α) = cos α      cos(π/2 − α) = sin α
+sin(π/2 + α) = cos α      cos(π/2 + α) = −sin α</code></pre>
+<div class="insight"><strong>几何含义：</strong>π/2 − α 与 α 的终边关于直线 y = x 对称，交换横纵坐标，(x, y) → (y, x)，所以 sin、cos 互换。这正是"余角"：两角互余时，一个角的正弦等于另一个角的余弦——"co-"（余）的来历。</div>
+<h3>统一记忆：奇变偶不变，符号看象限</h3>
+<ul>
+<li>把任意角写成 <code>k·(π/2) ± α</code> 的形式（α 视为锐角）。</li>
+<li><strong>奇变偶不变</strong>：k 为<strong>奇数</strong>时，函数名变（sin ↔ cos，tan ↔ cot）；k 为<strong>偶数</strong>时，函数名不变。</li>
+<li><strong>符号看象限</strong>：把 α 看作锐角，看 <code>k·(π/2) ± α</code> 落在第几象限，取原函数在该象限的符号。</li>
+</ul>
+<div class="insight"><strong>本质：</strong>诱导公式没有引入任何新运算，它只是"对称变换改变坐标符号"的记账：转整圈、翻转关于 x 轴/y 轴/原点/对角线，共四类对称，对应四组公式。理解了"终边对称 → 坐标变号"，全部诱导公式可以现场推出来。</div>
+
+<h2 id="s4">5.4 三角函数的图象与性质</h2>
+<h3>正弦曲线：旋转投影在时间轴上的展开</h3>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center">
+<svg width="560" height="220" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+  <text x="20" y="26" font-size="14" font-weight="700" fill="#0f172a">图2　正弦波：波向右传播，质点只原地上下振动</text>
+  <line x1="0" y1="100" x2="560" y2="100" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="8" y="94" font-size="12" fill="#94a3b8">平衡位置</text>
+  <g>
+    <animateTransform attributeName="transform" type="translate" values="0 0;120 0" dur="3s" repeatCount="indefinite" calcMode="linear"/>
+    <polyline points="-240,100 -236,87.53 -232,75.6 -228,64.73 -224,55.41 -220,48.04 -216,42.94 -212,40.33 -208,40.33 -204,42.94 -200,48.04 -196,55.41 -192,64.73 -188,75.6 -184,87.53 -180,100 -176,112.47 -172,124.4 -168,135.27 -164,144.59 -160,151.96 -156,157.06 -152,159.67 -148,159.67 -144,157.06 -140,151.96 -136,144.59 -132,135.27 -128,124.4 -124,112.47 -120,100 -116,87.53 -112,75.6 -108,64.73 -104,55.41 -100,48.04 -96,42.94 -92,40.33 -88,40.33 -84,42.94 -80,48.04 -76,55.41 -72,64.73 -68,75.6 -64,87.53 -60,100 -56,112.47 -52,124.4 -48,135.27 -44,144.59 -40,151.96 -36,157.06 -32,159.67 -28,159.67 -24,157.06 -20,151.96 -16,144.59 -12,135.27 -8,124.4 -4,112.47 0,100 4,87.53 8,75.6 12,64.73 16,55.41 20,48.04 24,42.94 28,40.33 32,40.33 36,42.94 40,48.04 44,55.41 48,64.73 52,75.6 56,87.53 60,100 64,112.47 68,124.4 72,135.27 76,144.59 80,151.96 84,157.06 88,159.67 92,159.67 96,157.06 100,151.96 104,144.59 108,135.27 112,124.4 116,112.47 120,100 124,87.53 128,75.6 132,64.73 136,55.41 140,48.04 144,42.94 148,40.33 152,40.33 156,42.94 160,48.04 164,55.41 168,64.73 172,75.6 176,87.53 180,100 184,112.47 188,124.4 192,135.27 196,144.59 200,151.96 204,157.06 208,159.67 212,159.67 216,157.06 220,151.96 224,144.59 228,135.27 232,124.4 236,112.47 240,100 244,87.53 248,75.6 252,64.73 256,55.41 260,48.04 264,42.94 268,40.33 272,40.33 276,42.94 280,48.04 284,55.41 288,64.73 292,75.6 296,87.53 300,100 304,112.47 308,124.4 312,135.27 316,144.59 320,151.96 324,157.06 328,159.67 332,159.67 336,157.06 340,151.96 344,144.59 348,135.27 352,124.4 356,112.47 360,100 364,87.53 368,75.6 372,64.73 376,55.41 380,48.04 384,42.94 388,40.33 392,40.33 396,42.94 400,48.04 404,55.41 408,64.73 412,75.6 416,87.53 420,100 424,112.47 428,124.4 432,135.27 436,144.59 440,151.96 444,157.06 448,159.67 452,159.67 456,157.06 460,151.96 464,144.59 468,135.27 472,124.4 476,112.47 480,100 484,87.53 488,75.6 492,64.73 496,55.41 500,48.04 504,42.94 508,40.33 512,40.33 516,42.94 520,48.04 524,55.41 528,64.73 532,75.6 536,87.53 540,100 544,112.47 548,124.4 552,135.27 556,144.59 560,151.96 564,157.06 568,159.67 572,159.67 576,157.06 580,151.96 584,144.59 588,135.27 592,124.4 596,112.47 600,100 604,87.53 608,75.6 612,64.73 616,55.41 620,48.04 624,42.94 628,40.33 632,40.33 636,42.94 640,48.04 644,55.41 648,64.73 652,75.6 656,87.53 660,100 664,112.47 668,124.4 672,135.27 676,144.59 680,151.96 684,157.06 688,159.67 692,159.67 696,157.06 700,151.96 704,144.59 708,135.27 712,124.4 716,112.47 720,100 724,87.53 728,75.6 732,64.73 736,55.41 740,48.04 744,42.94 748,40.33 752,40.33 756,42.94 760,48.04 764,55.41 768,64.73 772,75.6 776,87.53 780,100 784,112.47 788,124.4 792,135.27 796,144.59 800,151.96" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <line x1="280" y1="40" x2="280" y2="160" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <circle cx="280" cy="100" r="6" fill="#16a34a">
+    <animate attributeName="cy" values="48.04;42.04;40;42.04;48.04;57.57;70;84.47;100;115.53;130;142.43;151.96;157.96;160;157.96;151.96;142.43;130;115.53;100;84.47;70;57.57;48.04" keyTimes="0.0000;0.0417;0.0833;0.1250;0.1667;0.2083;0.2500;0.2917;0.3333;0.3750;0.4167;0.4583;0.5000;0.5417;0.5833;0.6250;0.6667;0.7083;0.7500;0.7917;0.8333;0.8750;0.9167;0.9583;1.0000" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <text x="288" y="52" font-size="12" fill="#16a34a">质点：原地简谐振动</text>
+  <line x1="46" y1="100" x2="46" y2="40" stroke="#16a34a" stroke-width="2"/>
+  <line x1="42" y1="100" x2="50" y2="100" stroke="#16a34a" stroke-width="2"/>
+  <line x1="42" y1="40" x2="50" y2="40" stroke="#16a34a" stroke-width="2"/>
+  <text x="54" y="44" font-size="12" fill="#16a34a">振幅 A</text>
+  <line x1="150" y1="196" x2="270" y2="196" stroke="#16a34a" stroke-width="2"/>
+  <line x1="150" y1="192" x2="150" y2="200" stroke="#16a34a" stroke-width="2"/>
+  <line x1="270" y1="192" x2="270" y2="200" stroke="#16a34a" stroke-width="2"/>
+  <text x="196" y="190" font-size="12" fill="#16a34a" text-anchor="middle">周期 T（一个波长）</text>
+</svg>
+<figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：正弦波是圆周运动在竖直方向的投影展开——波向右传播，固定位置的质点只在原地做简谐振动，振幅 A、周期 T</figcaption>
+</figure>
+<p>把角 α 当作自变量 x（用弧度），把 sin x 的值画成曲线，就得到<strong>正弦曲线</strong>。它可以用"五点法"作出一个周期内的图象：</p>
+<pre><code>关键五点： (0,0)  (π/2,1)  (π,0)  (3π/2,−1)  (2π,0)</code></pre>
+<div class="insight"><strong>物理图景：</strong>想象一个点 P 在单位圆上逆时针匀速转动，它的<strong>纵坐标（高度）</strong>随时间的变化就是正弦曲线——圆周运动"投影"到竖直方向，就成了往返的简谐振动。sin x 是一条"沿水平方向无限重复的波浪线"。</div>
+<h3>余弦曲线：正弦曲线向左平移 π/2</h3>
+<pre><code>cos x = sin(x + π/2)</code></pre>
+<div class="insight"><strong>几何含义：</strong>余弦就是正弦"提前了 π/2 相位"。从单位圆看，横坐标 x（余弦）与纵坐标 y（正弦）在圆上永远相差 90° 的位置，所以两条曲线形状完全相同，只是左右错开 π/2。</div>
+<h3>正弦、余弦函数的性质汇总</h3>
+<table>
+<tr><th>性质</th><th>y = sin x</th><th>y = cos x</th></tr>
+<tr><td>定义域</td><td>R</td><td>R</td></tr>
+<tr><td>值域</td><td>[−1, 1]</td><td>[−1, 1]</td></tr>
+<tr><td>最小正周期</td><td>2π</td><td>2π</td></tr>
+<tr><td>奇偶性</td><td>奇函数（关于原点对称）</td><td>偶函数（关于 y 轴对称）</td></tr>
+<tr><td>单调递增区间</td><td>[−π/2 + 2kπ, π/2 + 2kπ]</td><td>[π + 2kπ, 2π + 2kπ]</td></tr>
+<tr><td>单调递减区间</td><td>[π/2 + 2kπ, 3π/2 + 2kπ]</td><td>[2kπ, π + 2kπ]</td></tr>
+<tr><td>最大值点</td><td>x = π/2 + 2kπ 时取 1</td><td>x = 2kπ 时取 1</td></tr>
+<tr><td>最小值点</td><td>x = 3π/2 + 2kπ 时取 −1</td><td>x = π + 2kπ 时取 −1</td></tr>
+<tr><td>对称轴</td><td>x = π/2 + kπ</td><td>x = kπ</td></tr>
+<tr><td>对称中心</td><td>(kπ, 0)</td><td>(π/2 + kπ, 0)</td></tr>
+</table>
+<div class="insight"><strong>物理含义：</strong>值域 [−1,1] 是"投影长度不超过半径"；周期 2π 是"转一整圈回到原状态"；奇偶性对应"波的对称性"（正弦波关于原点反对称、余弦波关于 y 轴对称）；单调区间就是"上升沿/下降沿"。</div>
+<h3>正切函数 y = tan x 的图象与性质</h3>
+<pre><code>定义域：x ≠ π/2 + kπ   值域：R   最小正周期：π   奇函数</code></pre>
+<div class="insight"><strong>几何含义：</strong>tan x 是终边的斜率，当终边接近竖直（x → π/2）时斜率趋于无穷，所以图象在 x = π/2 + kπ 处有<strong>竖直渐近线</strong>，曲线被切成一支支无限上升的"S 形"。周期是 π 而非 2π：因为终边反向（加 π）斜率不变。</div>
+<h3>周期性、奇偶性与对称性的深层联系</h3>
+<ul>
+<li><strong>周期函数</strong>：f(x + T) = f(x) 对一切 x 成立，最小正 T 叫最小正周期。</li>
+<li>sin、cos 的周期 2π 来自"整圈"；tan 的周期 π 来自"反向斜率不变"。</li>
+</ul>
+<div class="insight"><strong>物理含义：</strong>周期性 = 运动的重复性（钟摆、交流电、四季），是三角函数区别于其它函数的最核心特征，也是它能描述"周期现象"（振动、波、交变电流、声光信号）的根本原因。</div>
+
+<h2 id="s5">5.5 三角恒等变换</h2>
+<p>恒等变换解决"角的运算"问题：已知 α、β 的三角函数，求 α±β、2α、α/2 等的三角函数。</p>
+<h3>两角和与差的正弦、余弦、正切</h3>
+<pre><code>cos(α − β) = cos α cos β + sin α sin β
+cos(α + β) = cos α cos β − sin α sin β
+sin(α + β) = sin α cos β + cos α sin β
+sin(α − β) = sin α cos β − cos α sin β
+tan(α + β) = (tan α + tan β) / (1 − tan α tan β)
+tan(α − β) = (tan α − tan β) / (1 + tan α tan β)</code></pre>
+<div class="insight"><strong>几何含义（cos(α−β) 的证明核心）：</strong>在单位圆上取角 α、β 的终边，它们对应的两个点 A、B 间的<strong>弦长</strong>，可以用两种方式计算：一是两点间距离公式（含 cos(α−β)），二是"把角 α−β 摆正"后直接读坐标。弦长不变 → 两边相等 → 得到 cos(α−β) 公式。一句话：<strong>两角差的余弦 = "圆上两点距离"在两种坐标系下的等量表达</strong>。</div>
+<h3>二倍角公式（令 β = α）</h3>
+<pre><code>sin 2α = 2 sin α cos α
+cos 2α = cos²α − sin²α = 2cos²α − 1 = 1 − 2sin²α
+tan 2α = 2 tan α / (1 − tan²α)</code></pre>
+<div class="insight"><strong>物理含义：</strong>二倍角公式是"倍频"：把一个频率的信号 sin 2α 拆成两个同频 sin α 与 cos α 的乘积（调制、混频、谐波分析的基础）。<code>sin 2α = 2 sin α cos α</code> 是波动与信号处理里最常用的"倍角→乘积"桥梁。</div>
+<h3>降幂公式与半角公式（由 cos 2α 变形）</h3>
+<pre><code>sin²α = (1 − cos 2α) / 2        cos²α = (1 + cos 2α) / 2
+sin(α/2) = ±√((1 − cos α)/2)    cos(α/2) = ±√((1 + cos α)/2)
+tan(α/2) = sin α / (1 + cos α) = (1 − cos α) / sin α</code></pre>
+<div class="insight"><strong>几何/物理含义：</strong>降幂公式把"平方"变成"一次 + 倍角"，是求积分、算功率（平均功率 ∝ 均值 sin² = 1/2）的关键——交流电的有效值 I<sub>eff</sub> = I<sub>max</sub>/√2 就来自 sin² 的平均值等于 1/2。</div>
+<h3>辅助角公式（化一公式，极其重要）</h3>
+<pre><code>a sin x + b cos x = √(a² + b²) · sin(x + φ)
+其中  cos φ = a / √(a² + b²)， sin φ = b / √(a² + b²)，  tan φ = b / a</code></pre>
+<div class="insight"><strong>几何含义：</strong>把 (a, b) 看作平面向量，√(a²+b²) 是它的长度，φ 是它的方向角。辅助角公式就是"两个相差 90° 相位的振动，合成为一个同频率、振幅为 √(a²+b²)、初相为 φ 的振动"——<strong>同频振动的叠加仍是同频振动</strong>。这是声学干涉、电路交流分析的数学基石。</div>
+<h3>积化和差、和差化积（了解即可）</h3>
+<pre><code>sin α cos β = ½[sin(α+β) + sin(α−β)]        cos α cos β = ½[cos(α+β) + cos(α−β)]
+sin α sin β = ½[cos(α−β) − cos(α+β)]
+sin α + sin β = 2 sin((α+β)/2) cos((α−β)/2)   sin α − sin β = 2 cos((α+β)/2) sin((α−β)/2)
+cos α + cos β = 2 cos((α+β)/2) cos((α−β)/2)   cos α − cos β = −2 sin((α+β)/2) sin((α−β)/2)</code></pre>
+<div class="insight"><strong>物理含义：</strong>积化和差把"两个频率的乘积"写成"频率的和与差"（收音机的<strong>混频</strong>原理）；和差化积把"两列波的叠加"写成"拍频包络"——两个接近的频率合成后会出现<strong>拍</strong>（声音忽强忽弱的"嗡嗡"声）。</div>
+
+<h2 id="s6">5.6 函数 y = A sin(ωx + φ)</h2>
+<p>这是整个三角函数的"总装"：把振幅、频率、初相三个物理参数都放进一个函数里。</p>
+<h3>三个参数的意义</h3>
+<pre><code>y = A·sin(ωx + φ)   （A &gt; 0， ω &gt; 0）
+
+A  —— 振幅（最大偏离平衡位置的距离），值域为 [−A, A]
+ω  —— 角频率（角速度），决定周期  T = 2π/ω， 频率  f = 1/T = ω/(2π)
+φ  —— 初相（t=0 时的相位），图象由 y = A sin(ωx) 向左(φ&gt;0)或向右平移 |φ|/ω</code></pre>
+<div class="insight"><strong>物理含义（简谐振动）：</strong>弹簧振子、单摆的位移可写成 <code>x(t) = A sin(ωt + φ)</code>。A 是"摆幅多大"，ω 是"摆得多快"（由系统本身决定，如单摆 ω = √(g/l)），φ 由"起始时刻从哪开始"决定。<strong>交流电</strong> u = U<sub>m</sub> sin(ωt + φ) 中，U<sub>m</sub> 是峰值电压、ω = 2πf（f=50Hz 市电则 ω = 100π）、φ 是初相位。</div>
+<h3>图象变换：从 y = sin x 出发</h3>
+<ul>
+<li><strong>相位变换（平移）</strong>：y = sin(x + φ)，图象向左(φ&gt;0)或向右平移 |φ| 个单位。</li>
+<li><strong>周期变换（横向伸缩）</strong>：y = sin(ωx)，横坐标变为原来的 1/ω（ω&gt;1 压缩，0&lt;ω&lt;1 拉伸）。</li>
+<li><strong>振幅变换（纵向伸缩）</strong>：y = A sin x，纵坐标变为原来的 A 倍。</li>
+</ul>
+<p>综合顺序（常见规范）：<strong>先平移，后伸缩</strong>，即</p>
+<pre><code>y = sin x  →（左/右平移 |φ|）→ y = sin(x + φ) →（横坐标变 1/ω）→ y = sin(ωx + φ) →（纵坐标变 A 倍）→ y = A sin(ωx + φ)</code></pre>
+<div class="insight"><strong>易错点（几何）：</strong>"y = sin(x + φ) 到 y = sin(ωx + φ)"，自变量 x 被整体替换成 ωx，是<strong>横向伸缩</strong>，不是平移 |φ|。若从 y = sin(ωx) 直接平移，则需平移 <code>|φ|/ω</code> 个单位（因为要把 ωx + φ 提成 ω(x + φ/ω)）。<strong>平移量永远是"对 x 本身"的，必须先把系数提出来。</strong></div>
+<h3>五点法作 y = A sin(ωx + φ) 的图象</h3>
+<p>令 <code>ωx + φ</code> 依次等于 <code>0, π/2, π, 3π/2, 2π</code>，解出对应的 x 和函数值 <code>0, A, 0, −A, 0</code>，描点连线即可。</p>
+<div class="insight"><strong>物理含义：</strong>这五点对应振动在一个周期内的五个关键状态：<strong>平衡位置 → 正向最大位移 → 平衡位置 → 负向最大位移 → 平衡位置</strong>，完整刻画了一次"往返"。</div>
+
+<h2 id="s7">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理含义</th></tr>
+<tr><td>任意角</td><td>射线绕端点旋转（逆时针正、顺时针负）</td><td>旋转的"有向位移"，可超一圈、可反向</td></tr>
+<tr><td>弧度制</td><td>弧长 ÷ 半径，1 rad = 半径长的弧所对圆心角</td><td>使"角×半径=弧长"、v=ωr 等关系线性化</td></tr>
+<tr><td>sin α</td><td>终边与单位圆交点的纵坐标</td><td>圆周运动在竖直方向的投影（振动位移）</td></tr>
+<tr><td>cos α</td><td>终边与单位圆交点的横坐标</td><td>圆周运动在水平方向的投影</td></tr>
+<tr><td>tan α</td><td>终边的斜率 y/x（正切线 AT）</td><td>斜率、坡度、增益比</td></tr>
+<tr><td>sin²α + cos²α = 1</td><td>点在单位圆上：x² + y² = 1</td><td>两垂直分量平方和为总量（能量守恒）</td></tr>
+<tr><td>诱导公式</td><td>终边关于原点/x轴/y轴/对角线的对称</td><td>相位翻转、反向、镜像</td></tr>
+<tr><td>周期性 2π（tan 为 π）</td><td>转整圈（半圈）回到原状态</td><td>周期现象：振动、交流电、波动</td></tr>
+<tr><td>奇偶性</td><td>sin 关于原点、cos 关于 y 轴对称</td><td>波的对称相位</td></tr>
+<tr><td>两角和差公式</td><td>圆上两点弦长 / 旋转的合成</td><td>两个旋转（相位）的合成</td></tr>
+<tr><td>辅助角公式</td><td>向量 (a,b) 的模与方向角</td><td>同频振动的叠加（干涉）</td></tr>
+<tr><td>y = A sin(ωx + φ)</td><td>平移 + 伸缩后的正弦曲线</td><td>简谐振动 / 交流电：振幅 A、频率 ω、初相 φ</td></tr>
+</table>
+
+<h2 id="s8">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>把 −570° 化成弧度，并写成 0 ≤ θ &lt; 2π 的形式；求与 750° 终边相同的角的集合。</li>
+<li>已知角 α 的终边过点 P(−3, 4)，求 sin α、cos α、tan α。</li>
+<li>已知 sin α = 3/5，且 α 在第二象限，求 cos α 与 tan α。</li>
+<li>化简：sin(π + α)·cos(−α) + sin(π/2 − α)·cos(π − α)。</li>
+<li>求 y = 2 sin(3x − π/6) 的振幅、周期、初相，并用五点法作一个周期内的图象。</li>
+<li>求 f(x) = √3 sin x + cos x 的最大值，并化为 y = A sin(x + φ) 的形式。</li>
+</ol>
+</div>
+
+<h2 id="s9">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "角度制也能直接代入三角函数公式运算" → ❌ 诱导、和差、求导等公式<strong>只在弧度制下成立</strong>（如 sin(π/2 − α) = cos α，π 是弧度），遇到度数先换成弧度。</li>
+<li>❌ "sin(α+β) = sin α + sin β" → ❌ 正弦不是线性的，正确公式是 sin α cos β + cos α sin β。</li>
+<li>❌ "y = sin(x + φ) 到 y = sin(ωx + φ) 是向左平移 |φ|" → ❌ 这是横向伸缩（横坐标变 1/ω），平移量需先提系数算 |φ|/ω。</li>
+<li>❌ "周期由 A 决定" → ❌ A 只决定振幅（纵的伸缩），周期 T = 2π/ω 由 ω 决定。</li>
+<li>❌ "sin 在任意区间都单调" → ❌ sin 只在 [−π/2+2kπ, π/2+2kπ] 递增，须先看区间。</li>
+<li>❌ "知 sin α 即可唯一确定 α" → ❌ 同一边比对应两个象限的角（sin 为正在一、二象限），需象限或 cos 的符号辅助确定。</li>
+<li>❌ "tan 的周期是 2π" → ❌ tan 周期是 π（终边反向斜率不变）。</li>
+<li>❌ "把 φ 当平移距离直接读" → ❌ y = A sin(ωx + φ) 中相位平移量是 |φ|/ω，不是 |φ|。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3>一、练习题</h3>
+<ol>
+<li>把 −570° 化成弧度，并写成 0 ≤ θ &lt; 2π 的形式；再写出所有与 750° 终边相同的角的集合。</li>
+<li>已知角 α 的终边经过点 P(−3, 4)，求 sin α、cos α、tan α 的值。</li>
+<li>已知 sin α = 3/5，且 α 是第二象限角，求 cos α 与 tan α。</li>
+<li>化简：sin(π + α)·cos(−α) + sin(π/2 − α)·cos(π − α)。</li>
+<li>求函数 y = 2 sin(3x − π/6) 的振幅、周期、初相，并用五点法写出一个周期内五个关键点的坐标。</li>
+<li>把 f(x) = √3 sin x + cos x 化为 y = A sin(x + φ) 的形式，并求它的最大值与取得最大值时的 x 的集合。</li>
+</ol>
+<h3>二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>−570° = −570 × π/180 = −19π/6。加 2π（即 12π/6）的整数倍化到 [0, 2π)：−19π/6 + 4π = −19π/6 + 24π/6 = 5π/6，所以 θ = 5π/6。与 750° 终边相同的角：750° − 360° × 2 = 30°，故集合为 { β | β = 30° + k·360°, k ∈ Z }（弧度制为 β = π/6 + 2kπ）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>先求 r = √((−3)² + 4²) = 5。由比值定义：sin α = y/r = 4/5，cos α = x/r = −3/5，tan α = y/x = 4/(−3) = −4/3。几何含义：点 P 在第二象限，纵坐标为正、横坐标为负，故 sin 正、cos 负、tan 负，与符号口诀"二正弦"一致。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>由平方关系 sin²α + cos²α = 1 得 cos²α = 1 − (3/5)² = 16/25，即 cos α = ±4/5。因 α 在第二象限，cos α &lt; 0，故 cos α = −4/5；再由商数关系 tan α = sin α / cos α = (3/5) / (−4/5) = −3/4。几何含义：第二象限横坐标（cos）为负、纵坐标（sin）为正。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>逐项用诱导公式：sin(π + α) = −sin α；cos(−α) = cos α（cos 是偶函数）；sin(π/2 − α) = cos α（余角互换）；cos(π − α) = −cos α。原式 = (−sin α)·cos α + cos α·(−cos α) = −sin α cos α − cos²α = −cos α (sin α + cos α)。（若按教材常见版本取 sin(π/2 − α)·cos(π − α) = cos α·(−cos α)，结果即 −cos α(sin α + cos α)。）</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>对照 y = A sin(ωx + φ)：振幅 A = 2；ω = 3，周期 T = 2π/ω = 2π/3；初相 φ = −π/6。五点法：令 3x − π/6 依次取 0, π/2, π, 3π/2, 2π，解得 x 依次为 π/18, 2π/9, 7π/18, 5π/9, 13π/18，对应函数值 0, 2, 0, −2, 0。五点为 (π/18,0)、(2π/9,2)、(7π/18,0)、(5π/9,−2)、(13π/18,0)。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>辅助角公式：a = √3, b = 1，则 √(a² + b²) = √(3 + 1) = 2，tan φ = b/a = 1/√3，取 φ = π/6（此时 cos φ = √3/2、sin φ = 1/2）。故 f(x) = 2 sin(x + π/6)。最大值 2，在 x + π/6 = π/2 + 2kπ，即 x = π/3 + 2kπ (k ∈ Z) 时取得。几何含义：两个相差 90° 相位的振动合成为一个振幅为 2、初相为 π/6 的同频振动。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第4章-指数函数与对数函数/第4章-指数函数与对数函数.html">← 上一章：第4章 指数函数与对数函数</a>
+<a href="../../../index.html">回目录</a>
+<a href="../../必修二/第6章-平面向量及其应用/第6章-平面向量及其应用.html">下一章：第6章 平面向量及其应用 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初中数学到高中数学</footer>
+</body>
+</html>

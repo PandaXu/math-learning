@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第25章 概率初步 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初三 › 九年级上册 › 第25章 概率初步</div></header>
+<main class="container">
+<h1>第25章 概率初步</h1>
+<p class="lead">初中 / 初三 / 九年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>概率 = 「在所有等可能结果中，事件所占的那一份」。学完本章，你要能在心里"看见"一个转盘或一张方格表——<strong>随机事件</strong>是"结果不确定"的区域，<strong>概率</strong>是这个区域占整体的大小，<strong>列举法</strong>是把整体一格一格数清楚，<strong>频率</strong>则是用大量试验去"量"出这个大小。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">25.1 随机事件</a><a href="#s2">25.2 概率</a><a href="#s3">25.3 列举法求概率</a><a href="#s4">25.4 频率估计概率</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+</div>
+
+<h2 id="s1">25.1 随机事件</h2>
+<h3>三类事件：必然、不可能、随机</h3>
+<p>在一定的条件下，事件按照"是否一定发生"分成三类：</p>
+<table>
+<tr><th>事件类型</th><th>定义</th><th>例子（掷一枚骰子）</th></tr>
+<tr><td><strong>必然事件</strong></td><td>一定发生</td><td>"点数 &lt; 7" 一定发生</td></tr>
+<tr><td><strong>不可能事件</strong></td><td>一定不发生</td><td>"点数为 7" 一定不发生</td></tr>
+<tr><td><strong>随机事件（不确定事件）</strong></td><td>可能发生，也可能不发生</td><td>"点数为偶数" 可能发生也可能不发生</td></tr>
+</table>
+<ul>
+<li><strong>确定性事件</strong> = 必然事件 + 不可能事件（结果完全确定）。</li>
+<li><strong>随机事件</strong>：在相同条件下重复试验，每次结果<strong>事先无法确定</strong>，但它发生的"可能性大小"是有规律的——这正是本章要研究的对象。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>把所有可能的结果画成一个整体区域（叫"样本空间"），那么必然事件 = 整个区域，不可能事件 = 空集（什么也不占），随机事件 = 整体区域里的一个<strong>非空、非全体</strong>的子区域。掷骰子就像把一个大圆盘切成 6 等份，"点数为偶数"占了其中 3 份。</div>
+<div class="insight"><strong>物理含义：</strong>现实中大量现象的结果受众多微小因素影响而无法预先确定：掷硬币、抽签、明天的天气、一次测量的误差、一粒种子的发芽与否。单个结果不确定，但大量重复后却呈现出稳定的比例——这是"随机"背后隐藏的确定规律。</div>
+
+<h2 id="s2">25.2 概率</h2>
+<h3>概率的定义：可能性大小的度量</h3>
+<p><strong>概率</strong>：刻画随机事件发生<strong>可能性大小</strong>的数值，事件 A 的概率记作 <code>P(A)</code>（P 是英文 probability 的首字母）。</p>
+<p>一般地，如果一次试验有 <code>n</code> 种<strong>等可能</strong>的结果，事件 A 包含其中的 <code>m</code> 种，那么：</p>
+<pre><code>        m   事件A包含的结果数
+P(A) = ─── = ─────────────────
+        n     所有等可能结果数</code></pre>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="300" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><style>text{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}</style><path d="M 260 150 L 260 40 A 110 110 0 0 1 355.3 95.0 Z" fill="#e5e7eb" stroke="#fff" stroke-width="2"/><path d="M 260 150 L 355.262794 95 A 110 110 0 0 1 355.3 205.0 Z" fill="#2563eb" stroke="#fff" stroke-width="2"/><path d="M 260 150 L 355.262794 205 A 110 110 0 0 1 260.0 260.0 Z" fill="#e5e7eb" stroke="#fff" stroke-width="2"/><path d="M 260 150 L 260 260 A 110 110 0 0 1 164.7 205.0 Z" fill="#2563eb" stroke="#fff" stroke-width="2"/><path d="M 260 150 L 164.73720600000001 205 A 110 110 0 0 1 164.7 95.0 Z" fill="#e5e7eb" stroke="#fff" stroke-width="2"/><path d="M 260 150 L 164.73720600000001 95 A 110 110 0 0 1 260.0 40.0 Z" fill="#2563eb" stroke="#fff" stroke-width="2"/><text x="301" y="83" font-size="15" fill="#475569" text-anchor="middle" font-weight="600">1</text><text x="342" y="155" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="600">2</text><text x="301" y="227" font-size="15" fill="#475569" text-anchor="middle" font-weight="600">3</text><text x="219" y="227" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="600">4</text><text x="178" y="155" font-size="15" fill="#475569" text-anchor="middle" font-weight="600">5</text><text x="219" y="83" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="600">6</text><g><line x1="260" y1="150" x2="260" y2="52" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/><animateTransform attributeName="transform" type="rotate" from="0 260 150" to="360 260 150" dur="8s" repeatCount="indefinite"/></g><circle cx="260" cy="150" r="7" fill="#1f2937" stroke="#fff" stroke-width="2"/><text x="260" y="290" font-size="14" fill="#334155" text-anchor="middle">偶数 = 蓝色 3 份，总 6 份 → P(偶数) = 3/6 = <tspan fill="#2563eb" font-weight="700">1/2</tspan></text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：概率 = 事件区域占整体的大小 —— 指针转一圈，落在蓝色「偶数」区的机会正好是一半</figcaption></figure>
+<p>概率的取值范围：</p>
+<pre><code>0 ≤ P(A) ≤ 1
+
+P(不可能事件) = 0      P(必然事件) = 1
+随机事件：0 &lt; P(A) &lt; 1</code></pre>
+<ul>
+<li>P(A) 越接近 1，事件越<strong>可能</strong>发生；越接近 0，越<strong>不可能</strong>发生。</li>
+<li>概率是 0 到 1 之间（含端点）的实数，它是对"可能性"的量化，不是"事后"的必然结论。</li>
+</ul>
+<div class="insight"><strong>几何含义：</strong>把样本空间看作一块总大小为 1 的"地"（一条线段、一个圆盘或一张面积图），每个基本结果等可能 = 每份大小相等。于是 <code>P(A) = A 占的份数 ÷ 总份数 = A 区域的长度/面积 ÷ 总长度/面积</code>。掷骰子：总区域 6 等份，掷出偶数占 3 份，P = 3/6 = 1/2。这就是后面"几何概型"的雏形——概率就是"区域大小的比值"。</div>
+<div class="insight"><strong>物理含义：</strong>概率是大量随机现象背后的<strong>统计规律</strong>。一枚硬币"正面"概率为 1/2，不是说抛两次必有一次正面，而是抛成千上万次后正面约占一半。概率把"不确定的单次结果"翻译成"确定的长期比例"，是保险、天气预报、质量抽检、随机抽样共同的数学基础。</div>
+<h3>从 0 到 1 的"可能性标尺"</h3>
+<pre><code>0 ──────────── 0.5 ──────────── 1
+不可能   可能性很小   一半一半   可能性很大   必然
+(0)                     (1/2)             (1)</code></pre>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="190" viewBox="0 0 520 190" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><style>text{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}</style><text x="260" y="34" font-size="14" fill="#1d4ed8" text-anchor="middle" font-weight="600">随机事件：0 &lt; P(A) &lt; 1</text><rect x="40" y="99" width="440" height="22" rx="5" fill="#16a34a" opacity="0.15"/><line x1="40" y1="110" x2="480" y2="110" stroke="#94a3b8" stroke-width="3"/><line x1="40" y1="100" x2="40" y2="120" stroke="#16a34a" stroke-width="2"/><line x1="260" y1="102" x2="260" y2="118" stroke="#94a3b8" stroke-width="2"/><line x1="480" y1="100" x2="480" y2="120" stroke="#16a34a" stroke-width="2"/><circle cx="40" cy="110" r="7" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/><circle cx="480" cy="110" r="7" fill="#ffffff" stroke="#16a34a" stroke-width="2.5"/><circle cx="260" cy="110" r="6" fill="#2563eb"><animate attributeName="cx" values="40;480;40" dur="6s" repeatCount="indefinite"/></circle><g fill="#334155" font-size="13" text-anchor="middle"><text x="40" y="150">0</text><text x="260" y="150">0.5</text><text x="480" y="150">1</text><text x="40" y="168" fill="#16a34a">不可能</text><text x="260" y="168">一半一半</text><text x="480" y="168" fill="#16a34a">必然</text></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：概率是一条 0 到 1 的「可能性标尺」，随机事件落在 0 与 1 之间</figcaption></figure>
+<p>例：明天太阳从东边升起 → P = 1；明天太阳从西边升起 → P = 0；明天下雨 → 0 &lt; P &lt; 1。</p>
+
+<h2 id="s3">25.3 列举法求概率</h2>
+<h3>核心思想：把所有等可能结果"不重不漏"地列出来</h3>
+<p>求概率的关键是<strong>准确数出 n（总数）和 m（有利数）</strong>。当试验只涉及一步，或步骤较少时，直接列举即可；当涉及两步或三步时，用<strong>列表法</strong>或<strong>树状图法</strong>保证不重不漏。</p>
+<div class="insight"><strong>几何含义：</strong>列举 = 把"总区域"切成等大的格子，一格一格地数。<strong>列表法</strong>是画一张方格表（横是第一个量、纵是第二个量），每个格子对应一个等可能结果；<strong>树状图</strong>是把每步的分支画成分叉，叶子就是最终结果。格子和叶子都必须"等大小（等可能）"，数出来的 m/n 才是概率。</div>
+<div class="insight"><strong>物理含义：</strong>列举就是<strong>穷尽实际可能发生的情况</strong>：同时掷两枚骰子，物理上两枚骰子各自独立、互不影响，所以 6×6 = 36 种组合每种的"出现机会"相同；抽签时先后顺序不影响公平性。列举法保证了我们对真实世界所有可能情形的完整盘点。</div>
+<h3>方法一：直接列举（一步试验）</h3>
+<p>例：掷一枚质地均匀的骰子，求"掷出偶数"的概率。</p>
+<ul>
+<li>所有等可能结果 n = 6：1, 2, 3, 4, 5, 6。</li>
+<li>事件"偶数"包含 m = 3：2, 4, 6。</li>
+<li>P(偶数) = 3/6 = <strong>1/2</strong>。</li>
+</ul>
+<h3>方法二：列表法（两步试验）</h3>
+<p>例：同时掷两枚质地均匀的骰子，求"点数之和为 7"的概率。</p>
+<p>用表格列出第一枚的点数（行）与第二枚的点数（列），共 6×6 = 36 个格子，每个格子等可能：</p>
+<pre><code>      第二枚 →  1    2    3    4    5    6
+第一枚 ↓
+  1           (1,1)(1,2)(1,3)(1,4)(1,5)(1,6)
+  2           (2,1)(2,2)(2,3)(2,4)(2,5)(2,6)
+  3           (3,1)(3,2)(3,3)(3,4)(3,5)(3,6)
+  4           (4,1)(4,2)(4,3)(4,4)(4,5)(4,6)
+  5           (5,1)(5,2)(5,3)(5,4)(5,5)(5,6)
+  6           (6,1)(6,2)(6,3)(6,4)(6,5)(6,6)</code></pre>
+<p>和为 7 的格子（沿一条对角线）：(1,6)、(2,5)、(3,4)、(4,3)、(5,2)、(6,1)，共 6 种。</p>
+<pre><code>P(和为7) = 6/36 = 1/6</code></pre>
+<div class="insight">注意：<strong>(1,6) 和 (6,1) 是两个不同结果</strong>，都要算。骰子有"先后"或"左右"之分，36 个格子才是等可能的，不能把有序对压成无序对（否则就不等可能了）。</div>
+<h3>方法三：树状图法（两步或三步试验）</h3>
+<p>例：抛三枚硬币，求"恰好两枚正面"的概率。</p>
+<p>每枚硬币有正(H)、反(T)两种等可能结果，三步各 2 个分支，共 2×2×2 = 8 条路径：</p>
+<pre><code>第1枚    第2枚    第3枚    结果
+        ┌─ H ──── HHH
+        ├─ T ──── HHT
+   H ───┤
+        ├─ H ──── HTH
+        └─ T ──── HTT
+   ─────┤
+        ┌─ H ──── THH
+        ├─ T ──── THT
+   T ───┤
+        ├─ H ──── TTH
+        └─ T ──── TTT</code></pre>
+<p>8 种结果等可能。"恰好两枚正面"有 HHT、HTH、THH 共 3 种。</p>
+<pre><code>P(恰好两正面) = 3/8</code></pre>
+<h3>列举法的适用条件与步骤</h3>
+<ol>
+<li><strong>等可能</strong>：所有结果出现的机会必须相同（质地均匀、随机抽取、机会均等）。</li>
+<li><strong>不重不漏</strong>：列表按行列、树状图按分支，把全部结果完整列出。</li>
+<li><strong>计数</strong>：数出总结果 n 与有利结果 m。</li>
+<li><strong>代入</strong>：P(A) = m/n，并化成最简分数。</li>
+</ol>
+<p><strong>列表法 vs 树状图</strong>：列表法适合<strong>两步</strong>且每步结果较多（如两个骰子）；树状图适合<strong>两步或三步以上</strong>、每步结果较少的试验（如多次抛硬币、抽卡），路径一目了然。</p>
+
+<h2 id="s4">25.4 频率估计概率</h2>
+<h3>问题：很多事件的概率无法"数出来"</h3>
+<p>像"种子发芽""命中目标""次品率"这类事件，结果<strong>不是等可能的</strong>，无法用 m/n 直接算。这时我们反过来：<strong>做大量重复试验，用频率去估计概率</strong>。</p>
+<p><strong>频率</strong>：在 n 次重复试验中，事件 A 发生了 m 次，则</p>
+<pre><code>                m   事件发生的次数
+频率 f(A) = ─── = ─────────────────
+                n     试验总次数</code></pre>
+<h3>核心规律：频率稳定于概率</h3>
+<p>大量重复试验中，随机事件的<strong>频率会稳定在它的概率附近</strong>，试验次数越多，越接近。历史上抛硬币的著名记录：</p>
+<table>
+<tr><th>试验者</th><th>抛掷次数 n</th><th>正面次数 m</th><th>正面频率 m/n</th></tr>
+<tr><td>蒲丰</td><td>4040</td><td>2048</td><td>0.5069</td></tr>
+<tr><td>费勒</td><td>10000</td><td>4979</td><td>0.4979</td></tr>
+<tr><td>皮尔逊</td><td>24000</td><td>12012</td><td>0.5005</td></tr>
+</table>
+<p>正面频率始终围绕 <strong>0.5</strong> 上下波动，且次数越多越贴近 0.5——这就用试验"量"出了概率。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="290" viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width:100%;height:auto"><style>text{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}</style><line x1="40" y1="40" x2="40" y2="240" stroke="#94a3b8" stroke-width="2"/><line x1="40" y1="240" x2="490" y2="240" stroke="#94a3b8" stroke-width="2"/><g fill="#334155" font-size="12" text-anchor="middle"><text x="24" y="44">1</text><text x="24" y="144">0.5</text><text x="24" y="244">0</text><text x="470" y="262">试验次数 n →</text></g><line x1="40" y1="140" x2="490" y2="140" stroke="#16a34a" stroke-width="2" stroke-dasharray="6 5"/><text x="470" y="132" font-size="12" fill="#16a34a" text-anchor="end">概率 P = 0.5（真值）</text><path id="freqPath" d="M 40.0 53.0 L 47.5 83.0 L 55.0 148.7 L 62.5 206.0 L 70.0 218.1 L 77.5 179.0 L 85.0 116.4 L 92.5 72.0 L 100.0 73.5 L 107.5 118.1 L 115.0 174.6 L 122.5 206.1 L 130.0 193.3 L 137.5 146.7 L 145.0 98.2 L 152.5 79.2 L 160.0 100.4 L 167.5 146.0 L 175.0 185.2 L 182.5 193.0 L 190.0 166.3 L 197.5 124.2 L 205.0 94.9 L 212.5 96.3 L 220.0 125.7 L 227.5 162.3 L 235.0 182.2 L 242.5 173.7 L 250.0 144.2 L 257.5 114.2 L 265.0 102.9 L 272.5 116.1 L 280.0 143.6 L 287.5 166.5 L 295.0 170.6 L 302.5 155.0 L 310.0 131.2 L 317.5 115.2 L 325.0 116.4 L 332.5 132.4 L 340.0 151.6 L 347.5 161.4 L 355.0 156.6 L 362.5 142.0 L 370.0 127.9 L 377.5 123.1 L 385.0 129.5 L 392.5 141.5 L 400.0 150.8 L 407.5 152.0 L 415.0 145.6 L 422.5 136.9 L 430.0 131.7 L 437.5 132.6 L 445.0 137.8 L 452.5 143.2 L 460.0 145.4 L 467.5 143.8 L 475.0 140.4 L 482.5 137.7 L 490.0 137.0" fill="none" stroke="#2563eb" stroke-width="2.5"/><text x="120" y="60" font-size="12" fill="#2563eb">频率 f（随 n 波动，渐趋稳定）</text><circle r="6" fill="#2563eb"><animateMotion dur="12s" repeatCount="indefinite"><mpath href="#freqPath" xlink:href="#freqPath"/></animateMotion></circle></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：频率是绕水平直线上下摆动的折线，试验越多越收敛到概率 P = 0.5（大数定律）</figcaption></figure>
+<div class="insight"><strong>几何含义：</strong>把每次试验后的频率画成点、连成折线，你会看到一条<strong>围绕水平直线（概率值）上下摆动的折线</strong>，试验越多，摆幅越小、越贴近这条水平线。这条水平线 P 就是折线的"收敛目标"——频率是随机行走的曲线，概率是它渐近趋近的直线。</div>
+<div class="insight"><strong>物理含义：</strong>这是"<strong>大数定律</strong>"的直观表现：个别随机现象无规律，大量重复却呈现稳定的统计规律。掷一次硬币无法预测，掷一万次正面比例几乎必在 0.5 附近。工程上用频率估计概率：灯泡寿命合格率、零件次品率、种子发芽率、运动员命中率，都靠大量实测数据"逼近"真实的概率。</div>
+<h3>频率与概率的区别与联系</h3>
+<table>
+<tr><th></th><th>频率</th><th>概率</th></tr>
+<tr><td><strong>本质</strong></td><td>一次试验的实际统计结果</td><td>事件本身固有的可能性</td></tr>
+<tr><td><strong>取值</strong></td><td>随试验次数而变，有波动</td><td>固定的常数（客观规律）</td></tr>
+<tr><td><strong>范围</strong></td><td>0 ≤ 频率 ≤ 1</td><td>0 ≤ 概率 ≤ 1</td></tr>
+<tr><td><strong>关系</strong></td><td colspan="2">试验次数很大时，频率稳定于概率，可用频率<strong>估计</strong>概率</td></tr>
+</table>
+<p><strong>注意</strong>：频率是"测得值"（会波动），概率是"真值"（固定不变）；用频率估计概率永远是<strong>近似</strong>，不是精确相等。</p>
+
+<h2 id="s5">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>必然事件 / 不可能事件</td><td>整个区域 / 空集</td><td>一定发生 / 一定不发生的事</td></tr>
+<tr><td>随机事件</td><td>样本空间里的非空非全体子区域</td><td>结果不确定、受多因素影响的现象</td></tr>
+<tr><td>概率 P(A) = m/n</td><td>事件区域大小 ÷ 总区域大小（等份格子的占比）</td><td>大量重复后事件的稳定比例（长期规律）</td></tr>
+<tr><td>0 ≤ P(A) ≤ 1</td><td>从 0（不占）到 1（占满）的"标尺"</td><td>可能性从"不可能"到"必然"的刻度</td></tr>
+<tr><td>列举法（列表/树状图）</td><td>把总区域切成等大格子/分叉，一格一格数</td><td>穷尽真实世界所有等可能情形</td></tr>
+<tr><td>频率 = m/n</td><td>绕水平直线摆动的折线</td><td>每次实测得到的统计比例（会波动）</td></tr>
+<tr><td>频率估计概率</td><td>折线渐近趋近那条水平直线</td><td>大数定律：大量重复呈现稳定规律</td></tr>
+</table>
+
+<h2 id="s6">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>指出下列事件是必然事件、不可能事件还是随机事件：① 明天会下雨；② 太阳从东边升起；③ 掷一枚骰子掷出 7 点；④ 抽奖抽中一等奖。</li>
+<li>一个袋中有 3 个红球、2 个白球，大小质地相同。随机摸出 1 个球，求 P(红球)、P(白球)。</li>
+<li>同时掷两枚质地均匀的骰子，求：① 点数之和为 8 的概率；② 点数相同的概率。</li>
+<li>抛三枚硬币，用树状图求"至少两枚正面"的概率。</li>
+<li>某厂抽检 1000 件产品，其中 12 件次品。估计该厂产品的次品率，并说明这是"概率"还是"频率"。</li>
+<li>一枚硬币抛 100 次，正面出现 45 次。能否说"正面概率是 0.45"？为什么？</li>
+</ol>
+</div>
+
+<h2 id="s7">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "概率很大就一定会发生，概率很小就绝不会发生" → ❌ 概率大只是<strong>可能性大</strong>，不是必然；P = 0.99 的事件也可能这次不发生。</li>
+<li>❌ "抛两次硬币必有一次正面" → ❌ 概率 1/2 是<strong>长期比例</strong>，不是短期平均分配；两次都反面的概率是 1/4，完全可能。</li>
+<li>❌ "掷两枚骰子，'和为 7'和'和为 12'一样可能" → ❌ 和为 7 有 6 种组合、和为 12 只有 (6,6) 1 种，概率分别是 1/6 和 1/36，<strong>不能只看"和"这个结果就以为等可能</strong>。</li>
+<li>❌ "把 (1,6) 和 (6,1) 看成同一个结果" → ❌ 两枚骰子有先后之分，(1,6) 与 (6,1) 是<strong>两个不同的等可能结果</strong>，合并后就不等可能了，m/n 公式失效。</li>
+<li>❌ "频率 = 概率" → ❌ 频率是实测值、会随试验次数波动；概率是固定的真值。只能说"频率<strong>估计</strong>概率"，次数越多越接近，但不相等。</li>
+<li>❌ "P(A) 可以为负数或大于 1" → ❌ 任何事件的概率都在 <code>0 ≤ P(A) ≤ 1</code> 之间。</li>
+<li>❌ "概率为 0 的事件一定不会发生" → ❌ 在"有限等可能"模型里 P = 0 等价于不可能事件，但更一般地说，概率为 0 只是"可能性无限小"，未必绝对不发生（超出本章范围，先记住：本章语境下 0 对应不可能事件）。</li>
+</ul>
+</div>
+
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<h3 style="margin:6px 0 10px;color:#b45309">一、练习题</h3>
+<ol style="padding-left:24px">
+<li>（事件类型）判断下列事件是必然事件、不可能事件还是随机事件：① 掷一枚质地均匀的骰子，点数大于 0；② 掷一枚质地均匀的骰子，点数为 8；③ 明天本市会下雨。</li>
+<li>（直接列举）一个袋中装有 3 个红球、2 个白球，它们除颜色外大小、质地完全相同。随机摸出 1 个球，求 P(摸到红球) 与 P(摸到白球)。</li>
+<li>（一步概率）掷一枚质地均匀的骰子，求：① P(点数为质数)；② P(点数大于 4)。</li>
+<li>（列表法）同时掷两枚质地均匀的骰子，用列表法求"点数之和为 9"的概率。</li>
+<li>（树状图）抛三枚硬币，用树状图求"至少两枚正面朝上"的概率。</li>
+<li>（频率估计概率）某工厂抽检 2000 件产品，发现其中 26 件是次品。① 估计该厂产品的次品率；② 说明这个次品率是"概率"还是"频率"，为什么用它来估计概率。</li>
+</ol>
+<h3 style="margin:16px 0 10px;color:#b45309">二、参考答案（点击展开）</h3>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>① 必然事件（骰子点数只有 1～6，一定大于 0，对应样本空间的整个区域）；② 不可能事件（点数不可能为 8，对应空集）；③ 随机事件（可能发生也可能不发生，是样本空间里一个非空、非全体的子区域）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>共有 3 + 2 = 5 个球，每种结果等可能，n = 5。P(摸到红球) = 3/5；P(摸到白球) = 2/5。两者之和 = 1，红球占的区域是总区域的 3/5。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>总结果 n = 6（1,2,3,4,5,6）。① 质数有 2、3、5，共 m = 3 种，P(点数为质数) = 3/6 = 1/2；② 点数大于 4 的有 5、6，共 m = 2 种，P(点数大于 4) = 2/6 = 1/3。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>两枚骰子共 6×6 = 36 个等可能格子（n = 36）。"点数之和为 9"的格子有 (3,6)、(4,5)、(5,4)、(6,3)，共 m = 4 种（注意 (3,6) 与 (6,3) 是两个不同结果）。P(和为 9) = 4/36 = 1/9。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>三枚硬币共 2×2×2 = 8 条等可能路径。"至少两枚正面" = 恰好两枚正面（HHT、HTH、THH，3 种）+ 恰好三枚正面（HHH，1 种），共 m = 4 种。P(至少两正面) = 4/8 = 1/2。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>① 次品率 = 26/2000 = 0.013 = 1.3%。② 这是"频率"（一次实测得到的统计比例，会随抽样波动），不是概率；因为产品是否次品并非等可能，无法用 m/n 直接算概率，所以用大量试验测得的频率去<strong>估计</strong>概率——试验次数越多，频率越接近真实的概率（大数定律）。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<a href="../第24章-圆/第24章-圆.html">← 上一章：第24章 圆</a>
+<a href="../../../../index.html">回目录</a>
+<a href="../../九年级下册/第26章-反比例函数/第26章-反比例函数.html">下一章：第26章 反比例函数 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>

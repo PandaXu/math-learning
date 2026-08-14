@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>第1章 有理数 · 数据学习</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;line-height:1.8;color:#1f2937;background:#f7f8fa}
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb;padding:12px 24px;z-index:10}
+.crumb{max-width:900px;margin:0 auto;font-size:14px;color:#6b7280}
+.crumb a{color:#2563eb;text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:1.9rem;line-height:1.3;margin:0 0 6px;color:#111827}
+.lead{font-size:15px;color:#6b7280;margin:0 0 8px}
+h2{font-size:1.35rem;margin:40px 0 14px;color:#111827;padding-left:12px;border-left:4px solid #2563eb}
+h3{font-size:1.1rem;margin:26px 0 10px;color:#1e3a8a}
+p{margin:12px 0}
+strong{color:#0f172a}
+a{color:#2563eb}
+.summary{background:#eff6ff;border:1px solid #bfdbfe;border-left:6px solid #2563eb;border-radius:10px;padding:16px 20px;margin:20px 0}
+.summary .tag{font-weight:700;color:#1d4ed8}
+.insight{background:#ecfdf5;border:1px solid #a7f3d0;border-left:6px solid #059669;border-radius:10px;padding:12px 18px;margin:16px 0}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-left:6px solid #dc2626;border-radius:10px;padding:14px 20px;margin:20px 0}
+.warn h4{margin:0 0 8px;color:#b91c1c}
+.ex{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:14px 20px;margin:20px 0}
+.ex h4{margin:0 0 8px;color:#b45309}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
+th,td{border:1px solid #e5e7eb;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#0f172a;font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:14px;line-height:1.6;margin:14px 0}
+pre code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:not(pre)>code{font-family:"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;background:#e5e7eb;color:#111827;padding:2px 6px;border-radius:5px;font-size:.92em}
+ul,ol{margin:12px 0;padding-left:26px}
+li{margin:5px 0}
+hr{border:none;border-top:1px dashed #d1d5db;margin:32px 0}
+.toc{background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:14px 20px;margin:20px 0;font-size:14px}
+.toc b{display:block;margin-bottom:6px;color:#334155}
+.toc a{display:inline-block;margin:3px 10px 3px 0;color:#2563eb;text-decoration:none}
+.foot{text-align:center;color:#9ca3af;font-size:13px;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="crumb"><a href="../../../../index.html">首页</a> › 初中 › 初一 › 七年级上册 › 第1章 有理数</div></header>
+<main class="container">
+<h1>第1章 有理数</h1>
+<p class="lead">初中 / 初一 / 七年级上册</p>
+<div class="summary"><span class="tag">一句话总纲：</span>有理数 = 「数轴上的所有整数和分数点」。学完本章，你要能在心里"看见"一条数轴——负数在左边、正数在右边、0 在中间，每一个运算规则都能还原成数轴上的"移动、翻转、拉伸"。</div>
+
+<div class="toc"><b>本章目录</b>
+<a href="#s1">1.1 正数和负数</a><a href="#s2">1.2 有理数、数轴、相反数、绝对值</a><a href="#s3">1.3 有理数的加减法</a><a href="#s4">1.4 有理数的乘除法</a><a href="#s5">1.5 乘方与科学记数法</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+</div>
+
+<h2 id="s1">1.1 正数和负数</h2>
+<h3>为什么需要负数？（物理含义）</h3>
+<p>现实中有大量"相反意义的量"，用正负号区分方向：</p>
+<table>
+<tr><th>场景</th><th>正</th><th>负</th></tr>
+<tr><td>温度</td><td>零上 5℃ = +5</td><td>零下 5℃ = -5</td></tr>
+<tr><td>海拔</td><td>海平面以上 300m = +300</td><td>海平面以下 100m = -100</td></tr>
+<tr><td>财务</td><td>收入 200 元 = +200</td><td>支出 200 元 = -200</td></tr>
+<tr><td>运动</td><td>向东走 3km = +3</td><td>向西走 3km = -3</td></tr>
+</table>
+<div class="insight"><strong>核心直觉：</strong>正负号不是"大小"，而是 <strong>方向 + 基准点（0）</strong>。0 是"基准/分界"，它既不是正数也不是负数；正数 &gt; 0，负数 &lt; 0。</div>
+<p><strong>一句话记牢：负数是"反方向"的数。</strong>温度的 +5 和 -5 离 0 一样远，只是方向相反。</p>
+<h3>基本概念</h3>
+<ul>
+<li><strong>正数</strong>：大于 0 的数，如 +3、1/2、2.7。</li>
+<li><strong>负数</strong>：在正数前面加 "−" 号，如 −3、−1/2、−2.7。</li>
+<li><strong>0</strong>：既不是正数也不是负数，是正负的分界。</li>
+<li><strong>具有相反意义的量</strong>：必须"同类 + 单位一致"，如"上升 3m"与"下降 3m"。</li>
+</ul>
+
+<h2 id="s2">1.2 有理数、数轴、相反数、绝对值</h2>
+<h3>有理数的定义</h3>
+<p><strong>整数</strong>：…, −3, −2, −1, 0, 1, 2, 3, …（正整数、0、负整数）<br/>
+<strong>分数</strong>：能写成 a/b（a、b 是整数，b≠0）形式的数，如 1/2、−3/4。</p>
+<p><strong>有理数</strong> = 整数 + 分数。</p>
+<div class="insight"><strong>关键认识：</strong>有限小数和无限循环小数都能化成分数，所以它们都是有理数。例：0.5 = 1/2，0.333… = 1/3，−0.75 = −3/4。（反过来，像 π、√2 这种"无限不循环"的小数不是有理数，到第6章会见到。）</div>
+<h3>数轴（几何含义的核心！）</h3>
+<p><strong>数轴三要素</strong>：原点（0）、正方向（通常向右）、单位长度。把每一个有理数都对应到数轴上一个点，这就是<strong>数与形的第一次统一</strong>。</p>
+<pre><code>  -4   -3   -2   -1    0    1    2    3    4
+   |----|----|----|----|----|----|----|----|
+             ← 负方向      ↑     正方向 →
+                       原点</code></pre>
+<ul>
+<li>正数在原点<strong>右边</strong>，负数在原点<strong>左边</strong>。</li>
+<li><strong>右边的数总比左边的数大</strong>（这是比较大小的根本方法）。</li>
+<li>数轴是"一把无限长的标尺"，0 是刻度起点。</li>
+</ul>
+<h3>相反数（几何：关于原点的对称）</h3>
+<ul>
+<li>只有符号不同的两个数互为<strong>相反数</strong>，如 +3 和 −3。</li>
+<li><strong>几何含义</strong>：相反数在数轴上位于原点两侧，且到原点的距离相等——它们<strong>关于原点对称</strong>。</li>
+<li>0 的相反数是 0。</li>
+<li>记法：a 的相反数是 <code>−a</code>。注意 −a 不一定是负数：当 a = −3 时，−a = 3 是正数。</li>
+</ul>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="150" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="20" y1="88" x2="500" y2="88" stroke="#94a3b8" stroke-width="2"/><g stroke="#94a3b8" stroke-width="1"><line x1="20" y1="82" x2="20" y2="94"/><line x1="68" y1="82" x2="68" y2="94"/><line x1="116" y1="82" x2="116" y2="94"/><line x1="164" y1="82" x2="164" y2="94"/><line x1="212" y1="82" x2="212" y2="94"/><line x1="260" y1="82" x2="260" y2="94"/><line x1="308" y1="82" x2="308" y2="94"/><line x1="356" y1="82" x2="356" y2="94"/><line x1="404" y1="82" x2="404" y2="94"/><line x1="452" y1="82" x2="452" y2="94"/><line x1="500" y1="82" x2="500" y2="94"/></g><g fill="#334155" font-size="13" text-anchor="middle"><text x="20" y="112">−5</text><text x="116" y="112">−3</text><text x="260" y="112">0</text><text x="404" y="112">+3</text><text x="500" y="112">+5</text></g><line x1="260" y1="66" x2="260" y2="96" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3 3"/><text x="260" y="58" font-size="12" fill="#94a3b8" text-anchor="middle">原点（对称中心）</text><circle cx="260" cy="88" r="4" fill="#334155"/><line x1="116" y1="88" x2="260" y2="88" stroke="#16a34a" stroke-width="3"/><line x1="260" y1="88" x2="404" y2="88" stroke="#16a34a" stroke-width="3"/><text x="404" y="70" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">a</text><text x="116" y="70" font-size="14" fill="#2563eb" text-anchor="middle" font-weight="bold">−a</text><g transform="translate(260,88)"><g><animateTransform attributeName="transform" type="scale" values="1 1;-1 1;1 1" dur="4s" repeatCount="indefinite"/><circle cx="144" cy="0" r="7" fill="#2563eb"/></g></g></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：相反数关于原点对称——a 与 −a 到原点的距离相等（两条绿色线段等长），蓝点被原点镜像翻到另一侧</figcaption></figure>
+<h3>绝对值（几何：距离！）</h3>
+<p><strong>定义</strong>：数轴上，一个数对应的点<strong>到原点的距离</strong>，叫做这个数的绝对值，记作 <code>|a|</code>。</p>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="150" viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="20" y1="88" x2="500" y2="88" stroke="#94a3b8" stroke-width="2"/><g stroke="#94a3b8" stroke-width="1"><line x1="20" y1="82" x2="20" y2="94"/><line x1="68" y1="82" x2="68" y2="94"/><line x1="116" y1="82" x2="116" y2="94"/><line x1="164" y1="82" x2="164" y2="94"/><line x1="212" y1="82" x2="212" y2="94"/><line x1="260" y1="82" x2="260" y2="94"/><line x1="308" y1="82" x2="308" y2="94"/><line x1="356" y1="82" x2="356" y2="94"/><line x1="404" y1="82" x2="404" y2="94"/><line x1="452" y1="82" x2="452" y2="94"/><line x1="500" y1="82" x2="500" y2="94"/></g><g fill="#334155" font-size="13" text-anchor="middle"><text x="20" y="112">−5</text><text x="116" y="112">−3</text><text x="260" y="112">0</text><text x="404" y="112">+3</text><text x="500" y="112">+5</text></g><circle cx="260" cy="88" r="4" fill="#334155"/><text x="260" y="58" font-size="12" fill="#94a3b8" text-anchor="middle">原点 O</text><line x1="260" y1="88" x2="260" y2="88" stroke="#16a34a" stroke-width="4" stroke-linecap="round"><animate attributeName="x2" values="260;404;260;116;260" keyTimes="0;0.25;0.5;0.75;1" dur="8s" repeatCount="indefinite"/></line><circle cx="260" cy="88" r="7" fill="#2563eb"><animate attributeName="cx" values="260;404;260;116;260" keyTimes="0;0.25;0.5;0.75;1" dur="8s" repeatCount="indefinite"/></circle><text y="70" font-size="13" fill="#16a34a" text-anchor="middle" font-weight="bold"><animate attributeName="x" values="260;404;260;116;260" keyTimes="0;0.25;0.5;0.75;1" dur="8s" repeatCount="indefinite"/>距离 = |a|</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：绝对值是数轴上的点到原点 0 的距离——蓝点无论走到正半轴还是负半轴，绿色距离线段始终非负</figcaption></figure>
+<ul>
+<li>|+3| = 3，|−3| = 3（都离原点 3 个单位）；|0| = 0</li>
+</ul>
+<p><strong>分情况（代数表达）</strong>：</p>
+<pre><code>        ┌  a    (a &gt; 0)
+ |a| =  ├  0    (a = 0)
+        └ −a    (a &lt; 0)</code></pre>
+<p><strong>核心结论</strong>：</p>
+<ol>
+<li>|a| ≥ 0（距离不可能为负）。</li>
+<li>|a| = |−a|（相反数到原点距离相等）。</li>
+<li>两个负数比大小：<strong>绝对值大的反而小</strong>。例：−3 &lt; −2，因为 |−3| = 3 &gt; 2 = |−2|（−3 离 0 更远，在更左边）。</li>
+</ol>
+<div class="insight"><strong>物理含义：</strong>绝对值 = "去掉方向只留大小"。速度有方向（+3 m/s 向东、−3 m/s 向西），但"速率" = |速度| = 3 m/s，只关心快慢。</div>
+
+<h2 id="s3">1.3 有理数的加减法（数轴上的"移动"）</h2>
+<h3>加法法则</h3>
+<p><strong>同号相加</strong>：取相同符号，绝对值相加。 (+3) + (+2) = +5；(−3) + (−2) = −5</p>
+<p><strong>异号相加</strong>：取绝对值较大的符号，用大绝对值减小绝对值。 (+5) + (−3) = +2；(+3) + (−5) = −2</p>
+<p><strong>互为相反数相加</strong>：得 0。如 (+3) + (−3) = 0。</p>
+<div class="insight"><strong>几何含义：</strong>加法就是在数轴上移动。从 0 出发，"+3" 向右走 3 步，"再 −2" 向左走 2 步，最终停在 +1。</div>
+<figure style="margin:18px 0;padding:14px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center"><svg width="520" height="170" viewBox="0 0 520 170" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto"><line x1="20" y1="110" x2="500" y2="110" stroke="#94a3b8" stroke-width="2"/><g stroke="#94a3b8" stroke-width="1"><line x1="20" y1="104" x2="20" y2="116"/><line x1="68" y1="104" x2="68" y2="116"/><line x1="116" y1="104" x2="116" y2="116"/><line x1="164" y1="104" x2="164" y2="116"/><line x1="212" y1="104" x2="212" y2="116"/><line x1="260" y1="104" x2="260" y2="116"/><line x1="308" y1="104" x2="308" y2="116"/><line x1="356" y1="104" x2="356" y2="116"/><line x1="404" y1="104" x2="404" y2="116"/><line x1="452" y1="104" x2="452" y2="116"/><line x1="500" y1="104" x2="500" y2="116"/></g><g fill="#334155" font-size="13" text-anchor="middle"><text x="20" y="136">−5</text><text x="116" y="136">−3</text><text x="260" y="136">0</text><text x="404" y="136">+3</text><text x="500" y="136">+5</text></g><circle cx="260" cy="110" r="4" fill="#334155"/><line x1="260" y1="52" x2="404" y2="52" stroke="#16a34a" stroke-width="3"/><polygon points="392,46 392,58 404,52" fill="#16a34a"/><text x="332" y="40" font-size="13" fill="#16a34a" text-anchor="middle">+3：向右 3 步</text><line x1="404" y1="76" x2="356" y2="76" stroke="#dc2626" stroke-width="3"/><polygon points="364,70 364,82 356,76" fill="#dc2626"/><text x="380" y="66" font-size="13" fill="#dc2626" text-anchor="middle">−2：向左 2 步</text><circle cx="260" cy="110" r="7" fill="#2563eb"><animate attributeName="cx" values="260;404;404;356;356;260" keyTimes="0;0.25;0.45;0.6;0.85;1" dur="8s" repeatCount="indefinite"/></circle><text x="356" y="150" font-size="12" fill="#334155" text-anchor="middle">终点 +1</text></svg><figcaption style="font-size:13px;color:#6b7280;margin-top:8px">图：加法是数轴上的移动——从 0 向右走 3 步到 +3，再向左走 2 步，最终停在 +1，即 (+3) + (−2) = +1</figcaption></figure>
+<h3>减法法则：减去一个数 = 加上它的相反数</h3>
+<pre><code>a − b = a + (−b)</code></pre>
+<ul>
+<li>3 − 5 = 3 + (−5) = −2</li>
+<li>(−3) − (−5) = (−3) + (+5) = +2</li>
+</ul>
+<div class="insight"><strong>为什么？</strong>减法就是"反向移动"。减去一个正数 = 向左走；减去一个负数 = 向左的相反 = 向右走。例："−3 − (−5)"：从 −3 出发，"减去 −5" 相当于把方向翻过来向右走 5 步，到 +2。</div>
+<p><strong>口诀</strong>：减负等于加正；减正等于加负。</p>
+
+<h2 id="s4">1.4 有理数的乘除法（数轴上的"翻转与拉伸"）</h2>
+<h3>乘法法则</h3>
+<p><strong>符号规则</strong>（两数相乘）：</p>
+<ul>
+<li>同号得正：正×正=正，负×负=正</li>
+<li>异号得负：正×负=负，负×正=负</li>
+<li>任何数 × 0 = 0</li>
+</ul>
+<p>绝对值相乘，再定符号。 (−3) × (−4) = +12；(−3) × 4 = −12</p>
+<div class="insight"><strong>几何/物理含义：</strong>乘以一个负数 = <strong>方向翻转（关于原点镜像）+ 长度拉伸</strong>。3 × (−1)：把 3 翻到 −3（乘以 −1 就是"镜像翻转"）；(−3) × (−1)：把 −3 再翻一次，回到 +3。<strong>负负得正 = 翻两次回到原点另一侧（即原位）。</strong></div>
+<p><strong>多个数相乘的符号</strong>：数一数负号的个数——负号个数为<strong>偶数</strong> → 结果为正；负号个数为<strong>奇数</strong> → 结果为负。</p>
+<h3>倒数（几何：互为"倒置"）</h3>
+<ul>
+<li>乘积为 1 的两个数互为<strong>倒数</strong>，如 2 与 1/2，−3/4 与 −4/3。</li>
+<li>0 没有倒数（因为不存在数与 0 相乘得 1）。</li>
+</ul>
+<h3>除法法则：除以一个数 = 乘它的倒数</h3>
+<pre><code>a ÷ b = a × (1/b)   (b ≠ 0)</code></pre>
+<ul>
+<li>符号规则与乘法相同：同号得正，异号得负。 (−12) ÷ (−4) = +3；12 ÷ (−4) = −3</li>
+</ul>
+<p><strong>一句话</strong>：除法是乘法的逆运算，除一个数等于乘它的倒数，符号规则完全一样。</p>
+
+<h2 id="s5">1.5 有理数的乘方与科学记数法</h2>
+<h3>乘方</h3>
+<pre><code>aⁿ = a × a × … × a   (n 个 a 相乘)</code></pre>
+<ul>
+<li>a 叫<strong>底数</strong>，n 叫<strong>指数</strong>，aⁿ 读作 "a 的 n 次方"。</li>
+<li>正数的任何次幂都是正数。</li>
+<li>负数的<strong>偶次幂</strong>是正数，<strong>奇次幂</strong>是负数。 (−2)² = 4，(−2)³ = −8</li>
+<li><strong>注意</strong>：(−2)² = 4，但 −2² = −(2²) = −4（负号在括号外，先算乘方再取负）。</li>
+</ul>
+<h3>科学记数法（物理含义：书写极大/极小量）</h3>
+<p>把数写成 <strong>a × 10ⁿ</strong>（1 ≤ |a| &lt; 10，n 为整数）：</p>
+<ul>
+<li>地球到太阳的距离约 149,600,000 km = <strong>1.496 × 10⁸</strong> km</li>
+<li>光速约 300,000,000 m/s = <strong>3 × 10⁸</strong> m/s</li>
+<li>一个原子的直径约 0.0000000001 m = <strong>1 × 10⁻¹⁰</strong> m</li>
+</ul>
+<div class="insight">科学记数法的本质：<strong>10 的幂次 = 小数点的移动位数</strong>，让极大/极小的物理量一眼可读。</div>
+
+<h2 id="s6">本章 · 几何与物理含义总结</h2>
+<table>
+<tr><th>概念</th><th>几何含义</th><th>物理/现实含义</th></tr>
+<tr><td>正负数</td><td>原点两侧的方向</td><td>温度、海拔、收支的相反量</td></tr>
+<tr><td>数轴</td><td>数与点一一对应的标尺</td><td>一条有方向、有刻度、有原点的"位置轴"</td></tr>
+<tr><td>相反数</td><td>关于原点的对称点</td><td>大小相同、方向相反的两种状态</td></tr>
+<tr><td>绝对值</td><td>到原点的距离</td><td>去掉方向后的"大小"（速率、长度）</td></tr>
+<tr><td>加法</td><td>数轴上的平移（移动）</td><td>连续位移的合成</td></tr>
+<tr><td>减法</td><td>加相反数（反向移动）</td><td>反向位移</td></tr>
+<tr><td>乘法</td><td>拉伸 + 关于原点翻转</td><td>缩放与方向反转（负号=翻转）</td></tr>
+<tr><td>除法</td><td>乘倒数</td><td>按比例缩小（倒数=反向缩放）</td></tr>
+<tr><td>乘方</td><td>连乘</td><td>指数增长（面积=平方、体积=立方）</td></tr>
+<tr><td>科学记数法</td><td>——</td><td>极大/极小量的紧凑书写</td></tr>
+</table>
+
+<h2 id="s7">典型例题（自测）</h2>
+<div class="ex">
+<ol>
+<li>在数轴上标出：−3、0、+2、−1.5，并从小到大排列。</li>
+<li>求 |−7|、|+7|、|0|，并比较 −7 与 +7、−7 与 −9 的大小。</li>
+<li>计算：(−8) + (+3)、(−8) − (−3)、(−8) × (−3)、(−8) ÷ 4。</li>
+<li>判断符号：(−1)²⁰²⁴ 与 (−1)²⁰²⁵ 各是多少？</li>
+<li>把 0.000000001 用科学记数法表示；把 −2.5 × 10⁶ 写成普通数。</li>
+</ol>
+</div>
+
+<h2 id="s8">常见误区</h2>
+<div class="warn">
+<ul>
+<li>❌ "−a 一定是负数" → ❌ 当 a 是负数时 −a 是正数。</li>
+<li>❌ "绝对值是去掉负号" → ❌ 绝对值是"到原点的距离"，恒非负，是几何概念。</li>
+<li>❌ "−2² = 4" → ❌ −2² = −4，先乘方后取负；(−2)² 才是 4。</li>
+<li>❌ "0 有倒数" → ❌ 0 没有倒数，除数不能为 0。</li>
+<li>❌ "两个负数比较大小看绝对值大的就大" → ❌ 绝对值大的负数反而小。</li>
+</ul>
+</div>
+<h2 id="practice">本章练习卷（含答案）</h2>
+<div style="background:#fffbeb;border:1px solid #fde68a;border-left:6px solid #d97706;border-radius:10px;padding:18px 24px;margin:20px 0">
+<p style="margin:0 0 6px;font-weight:700;color:#b45309">一、练习题</p>
+<ol style="margin:0 0 20px">
+<li>某地一天最高气温记作 +6℃，最低气温记作 −3℃。这一天最高气温比最低气温高多少？这两个数中哪个更接近 0？</li>
+<li>在数轴上描出 −4、−1、0、+2、−2.5 五个点，并把它们从小到大排列；再写出 −4 的相反数和绝对值。</li>
+<li>计算：(−15) + (+8)、(−9) − (−4)、(−6) × (+7)、(−56) ÷ (−8)。</li>
+<li>计算：(−2)⁴ 与 −2⁴ 各等于多少？它们相等吗？为什么？</li>
+<li>把 0.000 000 025 用科学记数法表示；再把 3.6 × 10⁶ 写成普通数。</li>
+<li>从 0 出发，先"向东走 5 步"记为 +5，再"向西走 8 步"记为 −8。最终停在数轴的什么位置？这对应哪个算式？</li>
+</ol>
+<p style="margin:0 0 6px;font-weight:700;color:#b45309">二、参考答案（点击展开）</p>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第1题答案</summary><p>高 9℃：6 − (−3) = 6 + 3 = 9。更接近 0 的是 −3，因为 |−3| = 3 &lt; 6 = |+6|（离原点更近）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第2题答案</summary><p>从小到大：−4 &lt; −2.5 &lt; −1 &lt; 0 &lt; +2（数轴上右边的数总比左边的大）。−4 的相反数是 +4，绝对值 |−4| = 4（到原点的距离）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第3题答案</summary><p>(−15)+(+8)=−7（异号，取绝对值大的符号，15−8=7）；(−9)−(−4)=(−9)+(+4)=−5；(−6)×(+7)=−42（异号得负）；(−56)÷(−8)=+7（同号得正）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第4题答案</summary><p>(−2)⁴ = 16（负数的偶次幂为正），−2⁴ = −(2⁴) = −16（负号在括号外，先算乘方再取负）。它们不相等，相差一个符号。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第5题答案</summary><p>0.000 000 025 = 2.5 × 10⁻⁸（小数点向右移 8 位）；3.6 × 10⁶ = 3,600,000（小数点向右移 6 位）。</p></details>
+<details style="margin:6px 0"><summary style="cursor:pointer;color:#2563eb">查看第6题答案</summary><p>最终停在 −3（从 0 向右 5 到 +5，再向左 8 到 −3）。对应算式：(+5) + (−8) = −3。</p></details>
+</div>
+<nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:28px 0 8px;padding:14px 18px;background:#f1f5f9;border-radius:10px">
+<span style="color:#9ca3af">已是最前一章</span>
+<a href="../../../../index.html">回目录</a>
+<a href="../第2章-整式的加减/第2章-整式的加减.html">下一章：第2章 整式的加减 →</a>
+</nav>
+</main>
+<footer class="foot">数据学习 · 数学重学（几何含义 + 物理含义） · 从初一数学开始</footer>
+</body>
+</html>
