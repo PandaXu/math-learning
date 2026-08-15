@@ -399,6 +399,47 @@ details[open]>.qa-s::before{transform:rotate(45deg)}
   animation:rise .25s ease both;
 }
 
+/* ---------- 课本外 · 趣味延伸 ---------- */
+.fun{
+  border:1px dashed rgba(43,74,122,.4);
+  border-radius:8px;
+  margin:20px 0;
+  background:linear-gradient(180deg,rgba(43,74,122,.07),rgba(43,74,122,.02));
+}
+.fun-s{
+  cursor:pointer;
+  list-style:none;
+  user-select:none;
+  padding:15px 18px;
+  font-family:var(--kai);
+  font-size:1.06rem;
+  letter-spacing:.05em;
+  color:var(--indigo-deep);
+  transition:color .15s;
+}
+.fun-s::-webkit-details-marker{display:none}
+.fun-s:hover{color:var(--seal-deep)}
+.fun-seal{
+  display:inline-block;
+  width:22px;height:22px;
+  margin-right:10px;
+  background:var(--seal);
+  color:var(--paper-hi);
+  font-family:var(--kai);
+  font-size:13px;
+  line-height:22px;
+  text-align:center;
+  border-radius:3px;
+  transform:rotate(4deg);
+  vertical-align:-3px;
+}
+.fun-body{
+  padding:2px 20px 20px;
+  border-top:1px dashed rgba(43,74,122,.22);
+  animation:rise .3s ease both;
+}
+.fun-body h3{margin-top:20px}
+
 /* ---------- 翻页导航 ---------- */
 .pager{
   display:flex;
@@ -532,6 +573,8 @@ details[open]>.qa-s::before{transform:rotate(45deg)}
   table{font-size:14px}
   th,td{padding:7px 9px}
   .paper,.summary,.insight,.warn,.ex{padding:14px 15px}
+  .fun-s{padding:13px 15px}
+  .fun-body{padding:2px 15px 16px}
 }
 
 @media (prefers-reduced-motion:reduce){
