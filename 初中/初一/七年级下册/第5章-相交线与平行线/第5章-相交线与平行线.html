@@ -20,15 +20,35 @@
 <h2 id="s1">5.1 相交线、对顶角与邻补角</h2>
 <h3>两条直线相交</h3>
 <p>在同一平面内，若两条直线<strong>只有一个公共点</strong>，就说这两条直线<strong>相交</strong>，这个公共点叫做<strong>交点</strong>。两条直线相交，一共会形成 <strong>4 个角</strong>：两对<strong>对顶角</strong>、四对<strong>邻补角</strong>。</p>
-<pre><code>              B
-              |
-         ∠1   |   ∠2
-    A --------O-------- C
-         ∠4   |   ∠3
-              |
-              D
-
-直线 AB 与 CD 交于点 O，形成 ∠1、∠2、∠3、∠4 四个角。</code></pre>
+<figure class="fig">
+<svg width="520" height="340" viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="50" y1="180" x2="470" y2="180" stroke="#334155" stroke-width="2"/>
+<line x1="80" y1="324" x2="440" y2="36" stroke="#334155" stroke-width="2"/>
+<circle cx="260" cy="180" r="4" fill="#111827"/>
+<text x="270" y="176" font-size="15" fill="#111827">O</text>
+<text x="40" y="186" font-size="15" fill="#334155">C</text>
+<text x="478" y="186" font-size="15" fill="#334155">D</text>
+<text x="448" y="34" font-size="15" fill="#334155">A</text>
+<text x="58" y="334" font-size="15" fill="#334155">B</text>
+<path d="M 260 180 L 296 151 A 46 46 0 0 1 306 180 Z" fill="#2563eb" opacity="0.25">
+<animate attributeName="opacity" values="0.2;0.45;0.2" dur="4s" repeatCount="indefinite"/>
+</path>
+<text x="305" y="166" font-size="14" fill="#2563eb" font-weight="bold">∠1</text>
+<path d="M 260 180 L 296 151 A 46 46 0 0 0 214 180 Z" fill="#16a34a" opacity="0.22">
+<animate attributeName="opacity" values="0.22;0.42;0.22" dur="4s" begin="2s" repeatCount="indefinite"/>
+</path>
+<text x="234" y="100" font-size="14" fill="#16a34a" font-weight="bold">∠2</text>
+<path d="M 260 180 L 224 209 A 46 46 0 0 1 214 180 Z" fill="#2563eb" opacity="0.25">
+<animate attributeName="opacity" values="0.2;0.45;0.2" dur="4s" repeatCount="indefinite"/>
+</path>
+<text x="188" y="192" font-size="14" fill="#2563eb" font-weight="bold">∠3</text>
+<path d="M 260 180 L 306 180 A 46 46 0 0 0 224 209 Z" fill="#16a34a" opacity="0.22">
+<animate attributeName="opacity" values="0.22;0.42;0.22" dur="4s" begin="2s" repeatCount="indefinite"/>
+</path>
+<text x="264" y="248" font-size="14" fill="#16a34a" font-weight="bold">∠4</text>
+</svg>
+<figcaption class="fig-cap">图：两条直线 AB 与 CD 相交于点 O，形成 ∠1、∠2、∠3、∠4 四个角——蓝色 ∠1 与 ∠3、绿色 ∠2 与 ∠4 互为对顶角</figcaption>
+</figure>
 <div class="insight"><strong>几何含义：</strong>"相交"的本质是两条直线的方向<strong>不同</strong>，于是它们必然在某一点<strong>相遇并交叉</strong>。交点是唯一的公共点，4 个角把交点周围的"平面"分成 4 份，每一份的"张开程度"就是一个角。</div>
 <div class="insight"><strong>物理含义：</strong>两条直线相交就是生活中的"交叉结构"——<strong>十字路口</strong>（两条道路交于一点）、<strong>剪刀</strong>（两片刀刃绕转轴相交）、<strong>字母 X</strong> 的形状。交点就是那个"汇聚点"。</div>
 
@@ -118,13 +138,25 @@
 <h3>垂直：相交成直角的特殊情况</h3>
 <p>两条直线相交所成的 4 个角中，只要<strong>有一个角是直角（90°）</strong>，就说这两条直线<strong>互相垂直</strong>，其中一条直线是另一条的<strong>垂线</strong>，它们的交点叫做<strong>垂足</strong>。记作 <code>a ⊥ b</code>，或 <code>AB ⊥ CD</code>（读作"a 垂直于 b"）。</p>
 <p>注意：两条直线相交时，<strong>只要有一个角是 90°，其余三个角也必然都是 90°</strong>（因为对顶角相等、邻补角互补）。</p>
-<pre><code>          P
-          |
-          |   (垂线)
-          |
-----------O---------- l
-          |
-          |   O 是垂足，PO ⊥ l</code></pre>
+<figure class="fig">
+<svg width="520" height="230" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="60" y1="160" x2="440" y2="160" stroke="#334155" stroke-width="2"/>
+<text x="448" y="156" font-size="16" fill="#334155">l</text>
+<line x1="260" y1="36" x2="260" y2="160" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="260" cy="36" r="5" fill="#111827"/>
+<text x="252" y="28" font-size="16" fill="#111827">P</text>
+<text x="266" y="178" font-size="15" fill="#111827">O</text>
+<rect x="260" y="150" width="10" height="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<rect x="250" y="150" width="10" height="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<rect x="260" y="160" width="10" height="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<rect x="250" y="160" width="10" height="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="260" cy="46" r="5" fill="#f59e0b">
+<animate attributeName="cy" values="46;150;46" dur="4s" repeatCount="indefinite"/>
+</circle>
+<text x="294" y="118" font-size="14" fill="#2563eb">PO ⊥ l</text>
+</svg>
+<figcaption class="fig-cap">图：垂线——直线 PO 与 l 相交成直角，O 是垂足（四个角全是 90°，琥珀色圆点从 P 沿垂线滑向 O）</figcaption>
+</figure>
 <div class="insight"><strong>几何含义：</strong>垂直是"相交"中<strong>最端正</strong>的一种——两直线方向相差 90°，形成的 4 个角全相等（都是直角）。它把平面均分成 4 个全等的直角扇形。</div>
 <div class="insight"><strong>物理含义：</strong>垂直 = 生活中的<strong>"铅垂线 / 竖直方向"</strong>。建筑工人吊一根系重物的线，重力让线<strong>垂直于地面</strong>；墙要砌得"直"，就是让墙与地面垂直。角尺（直角尺）的两条边也互相垂直。</div>
 
@@ -161,9 +193,6 @@
 </svg>
 <figcaption class="fig-cap">图：垂线段最短——从点 P 到直线 l 的所有连线中，垂直于 l 的 PO 最短，其长度即点到直线的距离</figcaption>
 </figure>
-<pre><code>          P
-         /|        / |        /  |       ← PA、PB、PC 都比 PO 长
-      /   |      --A----O----B-- l   PO 是垂线段（最短），|PO| = 点到直线的距离</code></pre>
 <div class="insight"><strong>几何含义：</strong>垂线段是"点到直线上所有点"中<strong>最短的连线</strong>，即点到直线的<strong>最短路径</strong>。它把"点到线的远近"用一条线段的长度精确刻画出来。</div>
 <div class="insight"><strong>物理含义：</strong>这解释了为什么"<strong>走最近的路要直着走</strong>"：从你脚下到一条马路边，垂直走过去最近；<strong>跳远成绩</strong>测量的是落点到起跳线的<strong>垂直距离</strong>（不是斜线）；量身高也是头顶到地面的<strong>垂线段</strong>长度。</div>
 <p><strong>要点区分</strong>：<code>距离</code> 是一个<strong>数（长度）</strong>，而 <code>垂线段</code> 是一个<strong>图形（线段）</strong>。两者别混为一谈。</p>
@@ -171,18 +200,32 @@
 <h2 id="s3">5.3 同位角、内错角、同旁内角（三线八角）</h2>
 <h3>什么是"三线八角"？</h3>
 <p>两条直线 <code>l₁</code>、<code>l₂</code> 被第三条直线 <code>t</code>（叫<strong>截线</strong>）所截，一共会形成 <strong>8 个角</strong>。研究这些角之间的位置关系，是判定两条直线是否平行的基础。先看图：</p>
-<pre><code>              l₁
-   ──────────────────
-          1   2
-        4   3
-            /
-           /   t（截线）
-         5   6
-       8   7
-   ──────────────────
-              l₂
-
-l₁、l₂ 是被截线，t 是截线，共形成 ∠1～∠8 八个角。</code></pre>
+<figure class="fig">
+<svg width="520" height="360" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<line x1="60" y1="100" x2="460" y2="100" stroke="#334155" stroke-width="2"/>
+<line x1="60" y1="240" x2="460" y2="240" stroke="#334155" stroke-width="2"/>
+<line x1="110" y1="40" x2="410" y2="320" stroke="#2563eb" stroke-width="2"/>
+<text x="468" y="96" font-size="15" fill="#334155">l₁</text>
+<text x="468" y="236" font-size="15" fill="#334155">l₂</text>
+<text x="414" y="336" font-size="15" fill="#2563eb">t（截线）</text>
+<text x="202" y="88" font-size="14" fill="#111827">∠1</text>
+<text x="138" y="88" font-size="14" fill="#111827">∠2</text>
+<text x="216" y="122" font-size="14" fill="#111827">∠3</text>
+<text x="142" y="122" font-size="14" fill="#111827">∠4</text>
+<text x="330" y="220" font-size="14" fill="#111827">∠5</text>
+<text x="276" y="220" font-size="14" fill="#111827">∠6</text>
+<text x="360" y="268" font-size="14" fill="#111827">∠7</text>
+<text x="294" y="268" font-size="14" fill="#111827">∠8</text>
+<path d="M 174 100 L 192 100 A 18 18 0 0 1 187 88 Z" fill="#f59e0b" opacity="0.4">
+<animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite"/>
+</path>
+<path d="M 324 240 L 342 240 A 18 18 0 0 1 337 228 Z" fill="#f59e0b" opacity="0.4">
+<animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite"/>
+</path>
+<text x="120" y="316" font-size="13" fill="#f59e0b">∠1 与 ∠5：同位角（同在截线右侧、两条线上方）</text>
+</svg>
+<figcaption class="fig-cap">图：三线八角——l₁、l₂ 被截线 t 所截，共形成 ∠1～∠8 八个角（琥珀色标记的是同位角 ∠1 与 ∠5）</figcaption>
+</figure>
 <div class="insight"><strong>几何含义：</strong>"三线八角"不是要死记 8 个角，而是给这 8 个角<strong>按"位置关系"分类</strong>。位置相同、位置交错、位置同旁，三种关系各自对应一套"若相等/互补就能推平行"的规律。</div>
 <div class="insight"><strong>物理含义：</strong>想象一条<strong>斜插过两条铁轨的桥（截线）</strong>，桥与两条铁轨相交出 8 个角；或梯子的一根横档搭在两根竖杆上。识别这些角的位置，是判断"两条铁轨是否平行"的关键。</div>
 
