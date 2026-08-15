@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>树 = 连通且无回路的图，是"用 <code>n−1</code> 条边把 <code>n</code> 个点连成整体"的最省骨架。本章从<strong>无向树</strong>出发，层层建立<strong>生成树 → 最小生成树 → 根树/二叉树 → 哈夫曼树</strong>，让你能在心里"看见"每条边如何像树枝一样分叉而不打结，并理解它在布线、网络、数据结构与数据压缩中的物理意义。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">8.1 无向树</a><a href="#s2">8.2 生成树</a><a href="#s3">8.3 最小生成树</a><a href="#s4">8.4 根树与二叉树</a><a href="#s5">8.5 哈夫曼树</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+<a href="#s1">8.1 无向树</a><a href="#s2">8.2 生成树</a><a href="#s3">8.3 最小生成树</a><a href="#s4">8.4 根树与二叉树</a><a href="#s5">8.5 哈夫曼树</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">8.1 无向树</h2>
@@ -284,6 +284,39 @@ WPL = 45·1 + 13·3 + 12·3 + 16·3 + 9·4 + 5·4 = 224 比特
 </ul>
 </div>
 
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>1847 年：基尔霍夫为电路发明"树"（点击展开）</summary>
+<div class="fun-body">
+<p>图论里最"温柔"的概念——树，最初是为最"硬"的工程问题而生的：<strong>电路分析</strong>。1847 年，年仅 23 岁的德国物理学家<strong>基尔霍夫</strong>在论文中研究线性电路的电流分布时，遇到了一个难题：一个复杂电路里有大量回路，方程怎么列才不多不少？</p>
+<p>他的办法正是本章的语言：在网络中挑一棵<strong>生成树</strong>（覆盖所有结点、n−1 条边、无回路），那么其余每条"<strong>弦</strong>"恰好对应一个<strong>独立的基本回路</strong>（8.2 节的圈秩，m − n + 1 个）。沿着这些基本回路列基尔霍夫电压定律方程，恰好不多不少。树与弦的二分，直接来自电路方程的求解需要。</p>
+<p>他还证明了著名的<strong>基尔霍夫矩阵树定理</strong>：一张图的生成树棵数，等于它的拉普拉斯矩阵去掉任一行任一列后的行列式。19 世纪后期，凯莱在研究<strong>烷烃的同分异构体</strong>（碳原子骨架不同连法的有机物）时也独立地数起了树——8.2 节的 Cayley 公式 <code>nⁿ⁻²</code> 正出自这条化学之路。</p>
+<div class="summary"><span class="tag">一句话总结：</span>电路方程要"独立回路"，化学异构体要"骨架计数"——树在两门学科的车间里被反复锻造，最终成为图论的主角。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>最小生成树：从摩拉维亚电网到聚类算法（点击展开）</summary>
+<div class="fun-body">
+<p>8.3 节的 Kruskal、Prim 算法大名鼎鼎，但最小生成树最早的算法其实比它们早三十年：1926 年，捷克数学家<strong>布鲁夫卡</strong>（Borůvka）在规划<strong>摩拉维亚地区（今捷克境内）的乡村电网</strong>时提出算法——用总长度最短的线路把每个村庄连上电网，这正是一棵最小生成树。这是电力工程直接催生算法的经典案例。</p>
+<p>此后：1956 年，<strong>克鲁斯卡尔</strong>发表"从小到大加边、不成环就选"的贪心算法（本章 Kruskal 算法）；1957 年，<strong>普里姆</strong>给出从单个顶点向外扩张的版本（Prim 算法）。直到今天，最小生成树依然是算法课的必修内容，因为它是最早被证明"贪心策略确实最优"的问题之一。</p>
+<p>今天它的应用早已超出电缆：</p>
+<ul>
+<li><strong>布线</strong>：光缆、供水管、输油管的最低成本方案（8.3 的物理含义）；</li>
+<li><strong>聚类分析</strong>：单链接聚类算法反复合并"最近的连通块"，本质上就是在做最小生成树；</li>
+<li><strong>网络协议</strong>：以太网的生成树协议（STP）保证局域网无环冗余备份。</li>
+</ul>
+<div class="summary"><span class="tag">一句话总结：</span>为摩拉维亚农村架电网而发明的算法，如今是布线、聚类与网络设计的通用工具——工程问题养大的数学，最终服务整个行业。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">趣</span>哈夫曼的"免考"论文：一篇课程作业的遗产（点击展开）</summary>
+<div class="fun-body">
+<p>1951 年，麻省理工学院的研究生<strong>哈夫曼</strong>选修了教授<strong>法诺</strong>（Robert Fano）的一门信息论课程。据哈夫曼后来回忆，教授给了两个选择：<strong>要么参加期末考试，要么写一篇学期论文</strong>——他选了后者，题目是最优二叉编码。</p>
+<p>他研究了一整个学期，1952 年给出了答案：<strong>反复合并两个权最小的结点</strong>（8.5 节的构造过程），并证明这样得到的树带权路径长度最小，对应的编码是"前缀码"（任何码都不是另一个码的前缀，解码无歧义）。这就是今天的<strong>哈夫曼算法</strong>。</p>
+<p>这篇课程论文的遗产惊人：哈夫曼编码至今是数据压缩的基础构件——ZIP 压缩、JPEG 图像的熵编码、传真与文本传输都用到它；它也是"贪心算法正确性"的经典教学案例（8.5 节的 WPL 最小化）。一次"用论文换期末考试"的选择，换来了一种沿用七十多年的算法。</p>
+<div class="summary"><span class="tag">一句话总结：</span>一篇为了免考而写的课程论文，诞生了数据压缩世界最经典的构件之一。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p><strong>一、练习题</strong></p>

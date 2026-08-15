@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>多元微积分把一元函数的思想搬到曲面、空间与物理场里——<strong>偏导数</strong>是"沿坐标轴方向的局部变化率"，<strong>全微分</strong>是"切平面（局部线性化）"，<strong>梯度</strong>是"上升最快的方向"，而<strong>极值与拉格朗日乘数法</strong>则是"在几何约束下寻找最值点"。学完本章，你要能在心里"看见"一张曲面，以及它上面的切平面、等高线和最陡下降方向。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">9.1 多元函数的基本概念</a><a href="#s2">9.2 偏导数</a><a href="#s3">9.3 全微分</a><a href="#s4">9.4 复合函数求导与隐函数求导</a><a href="#s5">9.5 方向导数与梯度</a><a href="#s6">9.6 多元函数的极值</a><a href="#s7">9.7 拉格朗日乘数法</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+<a href="#s1">9.1 多元函数的基本概念</a><a href="#s2">9.2 偏导数</a><a href="#s3">9.3 全微分</a><a href="#s4">9.4 复合函数求导与隐函数求导</a><a href="#s5">9.5 方向导数与梯度</a><a href="#s6">9.6 多元函数的极值</a><a href="#s7">9.7 拉格朗日乘数法</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">9.1 多元函数的基本概念</h2>
@@ -262,6 +262,31 @@ dx     F_y</code></pre>
 <li>❌ "切平面方程与全微分是两个不同东西" → ❌ 二者本质相同：dz = f_x dx + f_y dy 就是切平面方程的增量形式，都来自局部线性化。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>偏导数符号 ∂ 的来历：一个"变圆了"的 d（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>本章处处写着 <code>∂f/∂x</code>。这个"变圆"的 d 与普通导数 <code>dy/dx</code> 里的 d 不同——它是专门为"多元函数、只动一个变量"造的记号，背后有一段近一个世纪的"符号接力"。</p>
+<p><strong>历史：</strong></p>
+<ul>
+<li><strong>孔多塞（Marquis de Condorcet，1743–1794）：</strong>1770 年前后在一篇关于偏差分方程的论文中<strong>首次使用 ∂</strong>——d 的变体，意在表示"一种不同的微分"。</li>
+<li><strong>勒让德（Adrien-Marie Legendre，1752–1833）：</strong>1786 年在研究曲面与最小二乘时沿用 ∂，但当时没有统一命名，也没推广开来。</li>
+<li><strong>雅可比（Carl Gustav Jacob Jacobi，1804–1851）：</strong>1841 年在论文中系统使用 ∂，并正式建议把这类导数称为"<strong>偏微分</strong>"（partial differential，即"只偏一方"的微分）——从此 ∂ 与"partial"一起成为标准，并沿用至今。</li>
+</ul>
+<p><strong>为什么需要新记号？</strong>在一元里，微分只有一个来源（dx）；在多元里，<code>df = f_x dx + f_y dy</code> 由两个方向的增量共同贡献。若仍写成 <code>df/dx</code>，就分不清"x 在变、y 冻结"与"x、y 一起变"两种情形。∂ 的作用就是提醒你：<strong>这一刀只沿一个方向切</strong>，其它变量当作常数。</p>
+<div class="insight"><strong>思考：</strong>记号是思维的脚手架。热力学中的 <code>(∂U/∂T)_V</code> 特意把"冻结的变量 V"写在括号外——"定容比热"与"定压比热"是同一个物理量在<strong>不同冻结条件</strong>下的两个偏导，数值截然不同。看得懂 ∂ 的含义，就能读懂一整类物理公式。</div>
+<div class="summary"><span class="tag">一句话总结：</span>∂ 是一个"只动一个变量"的签名——<strong>孔多塞起笔、勒让德接棒、雅可比定名</strong>，它把"多元世界里的单方向变化率"永远地从 d 中区分了出来。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>梯度的"爬山比喻"：从等高线到人工智能（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>把 z = f(x, y) 想成一座山的地形（高度 = 函数值）。你在山坡上某一点，想最快爬到山顶——朝哪个方向迈步？答案是：<strong>朝梯度 ∇f 的方向</strong>，因为梯度就是"函数增长最快的方向"；而想最快下山，就朝 <strong>−∇f</strong> 的方向走。这就是本章 9.5 节梯度概念的"画面版"。</p>
+<p><strong>等高线怎么说？</strong>地图上的等高线，是"高度相同"的曲线，即 f(x, y) = 常数的<strong>等值线</strong>。梯度有一个漂亮的几何性质：<strong>∇f 垂直于等值线</strong>，并指向高度增加的方向。所以站在山坡上，朝"垂直穿过等高线"的方向走，就是上升最快的路线——这正好解释了你爬山时为什么总想"直上直下"地切等高线。</p>
+<div class="insight"><strong>物理/工程含义：</strong>"朝负梯度走"不仅是爬山诀窍，更是现代计算的引擎。训练神经网络就是最小化一个损失函数 L(w)（w 是几百万个参数）：每轮迭代都算出梯度，让参数朝 <code>w ← w − η∇L</code> 方向迈一小步（η 是步长），重复亿万次。你手机里的语音识别、推荐系统、大语言模型，本质上都是"<strong>沿着负梯度下山</strong>"下山了无数步。19 世纪的"最速下降"直觉，在 21 世纪变成了 AI 的引擎。</div>
+<div class="summary"><span class="tag">一句话总结：</span>梯度告诉你"朝哪走升得最快"、负梯度告诉你"朝哪走降得最快"——<strong>同一句话，爬山时是经验，训练 AI 时是算法</strong>。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3>一、练习题</h3>

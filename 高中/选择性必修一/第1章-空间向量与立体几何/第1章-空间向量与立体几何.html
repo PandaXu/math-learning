@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>空间向量 = 「带方向的箭头」。学完本章，你要能把立体几何中的<strong>方向、平行、垂直、距离、夹角</strong>全部翻译成向量的<strong>加法、数乘、数量积与坐标运算</strong>——让"看不见摸不着"的空间关系变成可以算的代数式，这正是向量法的威力所在。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">1.1 空间向量及其运算</a><a href="#s2">1.2 空间向量基本定理</a><a href="#s3">1.3 空间向量及其运算的坐标表示</a><a href="#s4">1.4 用向量研究平行、垂直、距离与夹角</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+<a href="#s1">1.1 空间向量及其运算</a><a href="#s2">1.2 空间向量基本定理</a><a href="#s3">1.3 空间向量及其运算的坐标表示</a><a href="#s4">1.4 用向量研究平行、垂直、距离与夹角</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <hr/>
@@ -308,6 +308,30 @@
 <li>❌ "坐标成比例即可判平行，忽略了 0 的分量" → ❌ 判断 a⃗ ∥ b⃗ 应理解为"存在 λ 使 a⃗ = λb⃗"；坐标为 0 时不能直接写比例式，要逐分量处理。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>四元数：一个被刻在桥上的公式（点击展开）</summary>
+<div class="fun-body">
+<p><strong>直觉先行：</strong>复数 <code>a + bi</code> 能在平面里表示旋转——那么空间里的旋转，该用什么"数"来表示？在 19 世纪，这正是欧洲数学界苦苦寻找的"三维的复数"。</p>
+<p><strong>1843 年 10 月 16 日</strong>，爱尔兰数学家<strong>哈密顿</strong>（William Rowan Hamilton，1805—1865）在都柏林一座桥边散步时忽然闪过一个念头：让三个虚单位 <code>i、j、k</code> 满足</p>
+<pre><code>i² = j² = k² = ijk = −1</code></pre>
+<p>据说他把公式当场刻在桥的石头上（后来人们确实在石头上找到了刻痕）。有了它，"三维空间中的旋转"就能用<strong>四元数</strong> <code>a + bi + cj + dk</code> 干净地算出来——哈密顿为此投入了余生。</p>
+<p><strong>与本章的联系：</strong>四元数里不带实数部分 a 的那部分（<code>bi + cj + dk</code>），正是今天的<strong>空间向量</strong>；本章的数量积、向量积，都是从四元数的乘法中提炼出来的运算。四元数并没有消失：现代航天器的姿态控制、计算机图形学与游戏中的三维旋转，至今仍大量使用它。</p>
+<div class="summary"><span class="tag">一句话总结：</span>向量不是"天上掉下来的箭头"——它是哈密顿 1843 年在都柏林一座桥上"悟"出的四元数的嫡系后代。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>吉布斯与亥维赛：谁把向量变成了今天的模样？（点击展开）</summary>
+<div class="fun-body">
+<p>四元数威力强大，但用起来繁琐：乘法不满足交换律，而且"数"与"向量"两种对象混在一起。19 世纪 80 年代，两位学者几乎同时做了一件事：<strong>把四元数中"既有大小又有方向"的那部分单独提炼出来</strong>。</p>
+<ul>
+<li><strong>吉布斯</strong>（Josiah Willard Gibbs，1839—1903）：美国耶鲁大学的物理学家，1881 年起出版《向量分析基础》，系统建立了今天的向量代数与向量微积分（点积、叉积、梯度、散度、旋度）。</li>
+<li><strong>亥维赛</strong>（Oliver Heaviside，1850—1925）：英国自学成才的工程师，独立发展出同一套向量语言，并用它把麦克斯韦的电动力学方程改写为今天教科书里那组简洁对称的形式。</li>
+</ul>
+<p><strong>为什么了不起：</strong>麦克斯韦最初写下电磁理论时，用的是按 x、y、z 分量展开的一堆方程；换上向量语言后，整个方程组能写进半页纸，"电生磁、磁生电"的结构一目了然。没有这套语言，本章的<strong>方向向量、法向量、数量积判垂直</strong>都不存在。</p>
+<div class="summary"><span class="tag">一句话总结：</span>吉布斯与亥维赛各自独立地"简化"了四元数，才让向量成为今天全世界通用的数学语言。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p><strong>一、练习题</strong></p>

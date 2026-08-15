@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>重积分 = 一元定积分的「高维推广」——二重积分算「曲顶柱体的体积 / 平面薄片的质量」，三重积分算「空间物体的质量」，本质都是「分割—近似—求和—取极限」，最终把平面或空间区域上的连续量累加，化成一串可算的累次积分（二次、三次积分）。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">10.1 二重积分的概念</a><a href="#s2">10.2 二重积分的性质</a><a href="#s3">10.3 二重积分的计算（直角坐标）</a><a href="#s4">10.4 二重积分的计算（极坐标）</a><a href="#s5">10.5 三重积分的概念与计算</a><a href="#s6">10.6 柱坐标与球坐标下的三重积分</a><a href="#s7">10.7 重积分的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+<a href="#s1">10.1 二重积分的概念</a><a href="#s2">10.2 二重积分的性质</a><a href="#s3">10.3 二重积分的计算（直角坐标）</a><a href="#s4">10.4 二重积分的计算（极坐标）</a><a href="#s5">10.5 三重积分的概念与计算</a><a href="#s6">10.6 柱坐标与球坐标下的三重积分</a><a href="#s7">10.7 重积分的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">10.1 二重积分的概念</h2>
@@ -204,6 +204,36 @@ V = ∫₀  ∫₀  ∫₀  r²·sin φ  dr dφ dθ
 <li>❌ 极坐标下 θ 的范围一律写 0 到 2π → 半圆、扇形、第一象限等区域 θ 范围要按<strong>角度</strong>实际确定。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>雅可比行列式：那个"伸缩因子"的来头（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>极坐标里 <code>dσ = r dr dθ</code>、球坐标里 <code>dV = ρ²sinφ dρ dφ dθ</code>——这些多出来的"伸缩因子"不是灵机一动，而是同一个定理在三种坐标下的特殊情形。这个定理的主角，是德国数学家<strong>雅可比</strong>（Carl Gustav Jacob Jacobi，1804–1851）。</p>
+<p><strong>来头：</strong>1841 年，雅可比在论文《关于函数行列式》中系统研究了这种"偏导数排成的行列式"：</p>
+<pre><code>         ∂(x,y)     ∂x/∂u   ∂x/∂v
+J = ────── = det[ ─────   ───── ]
+         ∂(u,v)     ∂y/∂u   ∂y/∂v</code></pre>
+<p>今天它被命名为<strong>雅可比行列式</strong>。雅可比提出它的本意是研究函数的<strong>独立性与变换</strong>，但数学随后发现：多重积分的变量代换，恰恰需要它作为"伸缩因子"：</p>
+<pre><code>∬ f(x,y) dx dy = ∬ f(x(u,v), y(u,v)) · |J| du dv</code></pre>
+<p>极坐标的 <code>r</code>、柱坐标的 <code>r</code>、球坐标的 <code>ρ²sinφ</code>，全都是这个 <code>|J|</code> 的具体计算。也就是说，<strong>教材里的每一条坐标变换公式，背后站着的都是同一个人</strong>。</p>
+<div class="insight"><strong>几何含义：</strong>雅可比行列式回答的问题是"换坐标时，小格子变大变小了多少倍"：直角坐标下的小方块 (dx, dy)，在 (u, v) 网格里变成一块<strong>歪斜的平行四边形</strong>，它的面积恰好是 <code>|J| du dv</code>。|J| 就是"坐标变换对面积的局部放大率"——等于 1 的地方面积不变，大于 1 的地方"被拉伸"。</div>
+<div class="summary"><span class="tag">一句话总结：</span>极坐标、柱坐标、球坐标的伸缩因子是同一个公式的"三个分身"——<strong>雅可比 1841 年定义的一个行列式，管理着所有坐标变换下面积与体积的"汇率"</strong>。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>"弯曲的网格"：换坐标，就是在换一把会伸缩的尺子（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>为什么换坐标要乘伸缩因子？一维的情况最清楚：换元 <code>x = φ(u)</code> 时，<code>dx = φ′(u) du</code>——<code>φ′(u)</code> 是"坐标尺"在 u 处的<strong>拉伸率</strong>。u 每走一小步 du，x 轴上实际走出 φ′(u)·du，所以积出来的面积（长度）要按这个比例换算。二维、三维只是把这把"尺子"换成了"网格"：</p>
+<ul>
+<li>直角坐标网格：横平竖直的正方形，面积元 <code>dx dy</code>，处处一样大。</li>
+<li>极坐标网格：同心圆 + 射线，小格是<strong>外宽内窄的弯曲扇形</strong>——离原点越远，格子的弧边越长，面积按 <code>r</code> 放大。这就是 <code>dσ = r dr dθ</code> 中 r 的来历。</li>
+<li>球坐标网格：像地球的经纬网。经度一圈在赤道最长、在极点缩成一点，所以小格面积按 <code>ρ² sinφ</code> 缩放。</li>
+</ul>
+<p><strong>一个地图上的例子：</strong>在地球表面，1° 经度间隔在赤道对应约 111 公里，在纬度 60° 只有约 56 公里（等于 111·cos 60°）。如果你用"经纬度网格"数格子来估计某国的面积，必须逐格乘上 <code>cos φ</code> 的伸缩因子——这正是球面面积元里那个 <code>sin φ</code>（或 <code>cos(90°−φ)</code>）的物理直觉。</p>
+<div class="insight"><strong>思考：</strong>所有坐标系都是人类发明的"尺子"：选得好，问题对称性一目了然（圆盘用极坐标、球体用球坐标）；选得差，积分复杂到无法下笔。而<strong>雅可比行列式保证：不管尺子怎么换，结果始终不变</strong>——它让"换尺子"成为一种安全的解题自由。</div>
+<div class="summary"><span class="tag">一句话总结：</span>换坐标的本质是"换一把会伸缩的尺子"，伸缩因子就是它的刻度说明——<strong>弯曲的网格 + 正确的伸缩率 = 任何坐标系下都能算对体积与质量</strong>。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p style="margin:0 0 6px"><strong>一、练习题</strong></p>

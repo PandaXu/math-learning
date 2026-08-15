@@ -15,7 +15,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>一元二次方程 <code>ax² + bx + c = 0（a≠0）</code> 是「抛物线 y = ax² + bx + c 与 x 轴（高度为 0 的水平线）相交」这一几何事件的代数表达：它的每一个<strong>实根</strong>，都是抛物线与 x 轴交点的<strong>横坐标</strong>；判别式 Δ 则回答「有几个交点」。学完本章，你要能在心里同时"看见"两条路——代数上的<strong>配方 / 求根 / 因式分解</strong>，与几何上的<strong>抛物线开口、对称轴、交点</strong>，以及物理上的<strong>抛体落地、匀加速相遇</strong>等模型。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">21.1 一元二次方程的概念</a><a href="#s2">21.2 直接开平方法</a><a href="#s3">21.3 配方法</a><a href="#s4">21.4 公式法与判别式</a><a href="#s5">21.5 因式分解法</a><a href="#s6">21.6 根与系数的关系（韦达定理）</a><a href="#s7">21.7 一元二次方程的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a>
+<a href="#s1">21.1 一元二次方程的概念</a><a href="#s2">21.2 直接开平方法</a><a href="#s3">21.3 配方法</a><a href="#s4">21.4 公式法与判别式</a><a href="#s5">21.5 因式分解法</a><a href="#s6">21.6 根与系数的关系（韦达定理）</a><a href="#s7">21.7 一元二次方程的应用</a><a href="#s8">含义总结</a><a href="#s9">典型例题</a><a href="#s10">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">21.1 一元二次方程的概念</h2>
@@ -290,6 +290,35 @@ h = 20t - 5t²
 <li>❌ "忘了 a ≠ 0 的条件" → ❌ 若 a = 0 则不是二次方程，讨论根时先确认 a 是否为零。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>"代数"这个词，来自一本 1200 年前的阿拉伯数学书（点击展开）</summary>
+<div class="fun-body">
+<p>我们说的 <strong>algebra（代数）</strong>，其实来自 9 世纪巴格达学者<strong>花拉子米（al-Khwārizmī）</strong>一本教材的书名：<em>《al-jabr wa-l-muqābala》</em>（约公元 820 年）。书名里的 <strong>al-jabr</strong>，意思大致是"移项"——把方程一端的项搬到另一端。传到欧洲后，al-jabr 就慢慢演变成了 algebra（代数）。</p>
+<p>花拉子米在书里解的，正是我们这一章的一元二次方程。比如他把 <code>x² + 10x = 39</code> 这类问题，用<strong>几何配图</strong>（补正方形的图）来解，解法和我们学的配方法如出一辙。所以你在学 <code>(x + m)² = n</code> 时配的那个"补角正方形"，一千二百年前就有人用图形画过了。</p>
+<div class="summary"><span class="tag">一句话总结：</span>配方法的图形直觉不是现代发明的——它是花拉子米时代的"标准解法"，只是后来被写成了符号公式。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">趣</span>黄金比例 φ = (1+√5)/2 居然是一元二次方程的根（点击展开）</summary>
+<div class="fun-body">
+<p>把一条线段分成两段，使"整条 : 长段 = 长段 : 短段"，这个比值就是<strong>黄金比例</strong> <code>φ ≈ 1.618</code>。设长段为 1、短段为 x，列方程：</p>
+<pre><code>1/x = (1 + x)/1   →   x² + x − 1 = 0   →   x = (√5 − 1)/2
+所以  φ = 1/x = (1 + √5)/2 ≈ 1.618</code></pre>
+<p>也就是说，<strong>黄金比例就是一元二次方程 <code>x² − x − 1 = 0</code> 的正根</strong>。这也解释了为什么斐波那契数列 <code>1, 1, 2, 3, 5, 8, 13…</code> 相邻两项之比会越来越接近 φ——因为 φ 满足"自身包含自身"的方程，而黄金矩形在几何里"越分越像"。</p>
+<p>达·芬奇的《维特鲁威人》、许多名画的构图、向日葵花盘里种子的排列，都能见到这个比例（它是否真的无处不在，画家和数学家至今仍有争论，但方程本身没有争议）。</p>
+<div class="summary"><span class="tag">一句话总结：</span>一个几何问题里的"完美比例"，解出来恰好是一元二次方程的根——方程不只是在做题，它藏在审美和自然里。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>4000 年前的泥板上，古巴比伦人已经在"配方"了（点击展开）</summary>
+<div class="fun-body">
+<p>公元前 1800 年左右（比古希腊早一千多年），<strong>古巴比伦</strong>的书记员在泥板上刻下一批数学题，其中就有"已知两数之和与两数之积，求这两个数"——这正是 <code>x² − Sx + P = 0</code> 型的方程。他们的解法是：先取和的一半，再"补一个平方"，思路和配方法同源。</p>
+<p>最出名的一块泥板是 <strong>YBC 7289</strong>（现藏美国耶鲁大学），上面刻着边长为 1 的正方形的对角线长度——也就是 <code>√2</code>，精确到了约小数点后 6 位。连无理数的近似值，四千年前的人都算过。</p>
+<p>所以，"解二次方程"这件事，人类至少做了 <strong>3800 年</strong>。我们用的求根公式，是无数代人接力打磨的成果。</p>
+<div class="summary"><span class="tag">一句话总结：</span>今天作业本上的配方与公式法，源头在美索不达米亚的泥板——数学是接力跑，不是一个人发明的。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3 style="margin-top:0">一、练习题</h3>

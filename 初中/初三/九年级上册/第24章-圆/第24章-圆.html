@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>圆 = 「到定点（圆心）距离相等的所有点」组成的图形——它是最"公平"、最"对称"的图形。学完本章，你要能在心里"看见"一个圆：圆心决定位置、半径决定大小，弦与弧、角与切线、弧长与扇形面积，全部还原成"到圆心的距离"和"绕圆心转过的角"这两把尺子。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">24.1 圆的基本概念</a><a href="#s2">24.2 垂径定理</a><a href="#s3">24.3 圆心角与圆周角</a><a href="#s4">24.4 直线与圆的位置关系</a><a href="#s5">24.5 切线</a><a href="#s6">24.6 弧长与扇形面积</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a>
+<a href="#s1">24.1 圆的基本概念</a><a href="#s2">24.2 垂径定理</a><a href="#s3">24.3 圆心角与圆周角</a><a href="#s4">24.4 直线与圆的位置关系</a><a href="#s5">24.5 切线</a><a href="#s6">24.6 弧长与扇形面积</a><a href="#s7">含义总结</a><a href="#s8">典型例题</a><a href="#s9">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">24.1 圆的基本概念</h2>
@@ -200,6 +200,37 @@ S = ½ l r                    （用弧长 l 表示，很像三角形面积）</
 <li>❌ "扇形面积 S = ½lr 里 r 是底面半径" → ❌ 这里的 r 是<strong>扇形半径</strong>（在圆锥展开里是母线长），不是圆锥底面半径。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>祖冲之：把 π 算到小数点后 7 位，领先世界近千年（点击展开）</summary>
+<div class="fun-body">
+<p>公元 5 世纪（南朝宋、齐年间），数学家<strong>祖冲之</strong>把圆周率算到了一个惊人的精度。他给出两个分数近似值：</p>
+<pre><code>约率：22/7 ≈ 3.142857
+密率：355/113 ≈ 3.14159292…</code></pre>
+<p>其中 <strong>355/113 精确到小数点后第 7 位</strong>（3.1415926…）。直到 16 世纪，欧洲数学家才重新算出这个值——祖冲之之后，世界领先了差不多<strong>一千年</strong>。</p>
+<p>他是怎么算的？史书记载他"以圆径一亿为一丈"逐位给出圆周——据研究，用的正是<strong>割圆术</strong>：不断把正多边形的边数加倍来逼近圆，可能算到二万多边形甚至更多。没有计算机，全靠手算。</p>
+<div class="summary"><span class="tag">一句话总结：</span>密率 355/113 不是蒙出来的——它是"圆"这个最对称的图形，与人类耐心的一场千年博弈。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>阿基米德：用 96 边形"夹住"π（点击展开）</summary>
+<div class="fun-body">
+<p>公元前 3 世纪，<strong>阿基米德</strong>想算 π。他没有 π 这个符号，却想到一个极其朴素又极其聪明的办法：<strong>让圆被正多边形夹住</strong>——外面套一个外切正多边形（比圆大），里面放一个内接正多边形（比圆小），圆周率就一定被这两个多边形的相关比值"夹"在中间。</p>
+<p>他从正六边形出发，把边数一路翻倍到 <strong>96 边形</strong>，最终得出：</p>
+<pre><code>223/71 &lt; π &lt; 22/7    即  3.1408… &lt; π &lt; 3.1428…</code></pre>
+<p>这距今已经 <strong>2200 多年</strong>。他的"夹逼"思想至今仍是数学里最常用的武器之一——很多量没法直接算，就先把它夹住。</p>
+<div class="summary"><span class="tag">一句话总结：</span>割圆术的灵魂不是"算得多"，而是"夹得紧"——正多边形从里外两面把圆死死抱住。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">问</span>化圆为方：一个困扰人类两千年的"不可能"（点击展开）</summary>
+<div class="fun-body">
+<p>古希腊人提出过三个"尺规作图"难题：只用圆规和无刻度直尺，能不能——三等分任意角？把立方体的体积加倍？<strong>化圆为方</strong>（作一个和给定圆面积相等的正方形）？</p>
+<p>"化圆为方"看起来并不难：圆的面积是 <code>πr²</code>，只要能造出长度为 <code>√π</code> 的线段就行。但两千多年里，无数人前赴后继，全部失败。</p>
+<p>直到 <strong>1882 年</strong>，德国数学家<strong>林德曼</strong>证明：<code>π</code> 是<strong>超越数</strong>（它不满足任何整系数多项式方程），而尺规作图能造出的数全都满足某个整系数多项式方程。于是答案揭晓：<strong>化圆为方在数学上不可能</strong>，三大难题就此彻底落幕。</p>
+<div class="summary"><span class="tag">一句话总结：</span>有些问题"看似简单却永远做不出来"——数学的进步，有时就是证明"这件事做不到"。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p><strong>一、练习题</strong>（由易到难，紧扣本章知识点）</p>

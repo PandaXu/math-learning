@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>本章用「统计的眼睛」看两组数据的关系——对两个数值变量，用<strong>散点图</strong>和<strong>相关系数 r</strong>判断「有没有关系、方向如何、关系多强」，再用<strong>最小二乘法</strong>拟合一条回归直线来「刻画并预测」；对两个分类变量，用<strong>列联表</strong>和<strong>独立性检验（χ² 统计量）</strong>判断它们「是否独立、是否有关联」。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">8.1 相关关系</a><a href="#s2">8.2 一元线性回归模型</a><a href="#s3">8.3 独立性检验与列联表</a><a href="#s4">几何与物理含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+<a href="#s1">8.1 相关关系</a><a href="#s2">8.2 一元线性回归模型</a><a href="#s3">8.3 独立性检验与列联表</a><a href="#s4">几何与物理含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">8.1 相关关系</h2>
@@ -276,6 +276,47 @@ R² = 1 − ──────────────  = 1 − ─────�
 <li>❌「算 χ² 时把期望频数填错」→ ✅ 期望频数 = <strong>行合计 × 列合计 ÷ 总数</strong>，而不是直接用实际频数；代入 2×2 公式时 a、b、c、d 位置要对准。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>"回归"这个词，是怎么来的？（点击展开）</summary>
+<div class="fun-body">
+<p><strong>1886 年</strong>，英国科学家<strong>高尔顿</strong>（Francis Galton，1822—1911）发表论文《身高的遗传向平庸的回归》。他测量了大量父子身高（还做过豌豆种子实验），发现一个耐人寻味的现象：</p>
+<ul>
+<li>高个子父亲的儿子，平均身高比父亲<strong>矮</strong>一些；</li>
+<li>矮个子父亲的儿子，平均身高比父亲<strong>高</strong>一些；</li>
+<li>也就是说，子代身高有向人群平均值<strong>靠拢</strong>的趋势。</li>
+</ul>
+<p>高尔顿把这种现象称为"<strong>回归到平均</strong>"（regression to the mean），"回归"（regression）一词由此进入统计学；后来"回归分析"成了整类方法的名称——本章 8.2 节那条回归直线，正是这个词的直系后代。</p>
+<p><strong>一个必须澄清的误解：</strong>均值回归是<strong>统计现象</strong>，不是因果规律。运动员这一场超常发挥、下一场往往"正常一些"，不是因为"运气"在惩罚他，而是因为极端表现本身就很难连续复制。<strong>回归直线必过样本中心 (x̄, ȳ)</strong>——"向平均值靠拢"的几何化身，就在本章的公式里。</p>
+<div class="summary"><span class="tag">一句话总结：</span>"回归"最初的意思就是"子代向平均值靠拢"——如今它成了整类统计方法的统称。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>最小二乘法：勒让德与高斯的优先权之争（点击展开）</summary>
+<div class="fun-body">
+<p>本章 8.2 节用"竖直偏差平方和最小"求最佳直线——这个准则是怎么来的？</p>
+<ul>
+<li><strong>勒让德</strong>（Adrien-Marie Legendre，1752—1833）：1805 年在《确定彗星轨道的新方法》中<strong>第一次公开发表</strong>最小二乘法，用于从天体观测数据里拟合轨道。</li>
+<li><strong>高斯</strong>（1777—1855）：1809 年在《天体运动理论》里也给出了同一个方法，并声明自己在<strong>1795 年</strong>就开始使用，由此引发优先权之争。</li>
+</ul>
+<p>如今公认：<strong>两人各自独立发现</strong>——勒让德先发表，高斯更早使用（有日记等文献为证）。值得一提的插曲是：1801 年，意大利天文学家皮亚齐发现了小行星谷神星，观测数天后它转入太阳背后"消失"，高斯用他后来称为最小二乘的方法从少量数据预报出它的位置，次年它果然在预言处被重新找到，高斯因此声名大振。</p>
+<p><strong>与本章的联系：</strong>"最小二乘"四个字里的"二乘"就是平方——让竖直残差 <code>(yᵢ − ŷᵢ)</code> 的<strong>平方和</strong>最小，正是本章 8.2 节 <code>b̂、â</code> 公式的来源。</p>
+<div class="summary"><span class="tag">一句话总结：</span>一条"误差平方和最小"的准则，让两位大数学家隔空争了优先权，也让谷神星"失而复得"。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>相关不等于因果：为什么科学家要"做实验"（点击展开）</summary>
+<div class="fun-body">
+<p>本章 8.1 节反复强调：<strong>相关 ≠ 因果</strong>。两个变量结伴变化，原因可能藏在第三个变量里。换个例子再看一遍：</p>
+<ul>
+<li>城市的火灾损失与出动的消防车数量<strong>正相关</strong>——但绝不是消防车"导致"了损失，共同的源头是"火灾"本身；</li>
+<li>儿童的鞋码与识字量<strong>正相关</strong>——共同的原因是"年龄"在同时长大。</li>
+</ul>
+<p>既然观察数据分不清因果，科学家就要<strong>做实验</strong>：把研究对象<strong>随机</strong>分成两组，一组给治疗、一组做对照，让分组本身不带任何混杂。1948 年英国进行的链霉素治疗肺结核试验，被公认为第一个规范设计的<strong>随机对照试验</strong>——从此"随机分组"成了医学等领域的黄金标准。</p>
+<p><strong>与本章的联系：</strong>相关系数 r、回归方程刻画的是"<strong>相关</strong>"；想从数据迈向"因果"，必须引入实验设计。这也是统计学家与科学家的日常分工：<strong>统计负责测量关联，实验负责裁决因果。</strong></p>
+<div class="summary"><span class="tag">一句话总结：</span>相关是线索，因果要实验——消防车不引起火灾，年龄同时长高了鞋码和识字量。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3 class="paper-head">一、练习题</h3>

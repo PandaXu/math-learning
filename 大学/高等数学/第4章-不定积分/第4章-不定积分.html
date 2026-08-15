@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>不定积分是<strong>微分的逆运算</strong>——由「导数/变化率 f(x)」反推「原函数 F(x)」，得到的是<strong>相差任意常数的一族函数 F(x) + C</strong>；它在几何上是「由切线斜率还原整族曲线」，在物理上是「由速度还原位移、由加速度还原速度」。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">4.1 不定积分的概念与性质</a><a href="#s2">4.2 换元积分法</a><a href="#s3">4.3 分部积分法</a><a href="#s4">4.4 有理函数的积分</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+<a href="#s1">4.1 不定积分的概念与性质</a><a href="#s2">4.2 换元积分法</a><a href="#s3">4.3 分部积分法</a><a href="#s4">4.4 有理函数的积分</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">4.1 不定积分的概念与性质</h2>
@@ -325,6 +325,30 @@ sec²x dx = d(tan x)              (1/(1+x²)) dx = d(arctan x)
 <li>❌ 「循环型分部积分遇到原积分重现就以为无解」 → ❌ 此时应把原积分当未知量移项解出（系数相减），而不是死循环。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>积分号 ∫ 的来历：一个被拉长的字母 S（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>积分号 <code>∫</code> 长得像拉长的 S。这不是巧合——它本来就是拉丁文 <strong>summa</strong>（和、总和）的首字母，是莱布尼茨 1675 年 10 月 29 日前后在一份手稿中<strong>首次写下</strong>的记号，用来表示"无穷多项的和"。</p>
+<p><strong>为什么"积分"要叫"和"？</strong>在莱布尼茨看来，求面积、求总路程这类问题，本质都是把无穷多个"微小的量"<strong>累加起来</strong>：</p>
+<pre><code>∫ f(x) dx = 把所有 f(x)dx 加起来  （dx 是"微小的宽"，f(x)dx 是"细条面积"）</code></pre>
+<p>他同时创造了配套的记号：把"微小的差"记作 <code>dx</code>，把"和"记作拉长的 <code>∫</code>——这一对记号互为逆运算，正是不定积分"逆运算"思想在符号上的体现：<code>d(∫ f(x)dx) = f(x)dx</code>，<code>∫ df(x) = f(x) + C</code>。</p>
+<p><strong>中文"积分"一词：</strong>1859 年，李善兰与伟烈亚力合译《代微积拾级》（据美国数学家 Loomis 的微积分教材翻译），首次把 integral calculus 译作"<strong>积分</strong>"、differential calculus 译作"<strong>微分</strong>"——"积"取"累积、求和"之义，与拉丁文 summa 的"和"一脉相承，沿用至今已 160 多年。</p>
+<div class="summary"><span class="tag">一句话总结：</span><code>∫</code> 是莱布尼茨给"求和"画的标志，<code>dx</code> 是给"微小量"画的标志——<strong>不定积分"逆微分"的直觉，从一开始就被刻进了记号本身</strong>。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>为什么没有"万能求积分公式"？——有些积分真的"积不出来"（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>本章学了换元、分部、有理函数分解，每道题都有招。但你可能会疑惑：能不能总结出一条"万能公式"，把任何函数的积分都算出来？答案是：<strong>不能，而且不是因为技巧不够</strong>。</p>
+<p><strong>刘维尔的发现：</strong>1830 年代，法国数学家刘维尔（Joseph Liouville，1809–1882）严格证明了：以下积分<strong>不存在初等原函数</strong>（不能用有限次加减乘除、幂、指数、对数、三角函数表示）：</p>
+<pre><code>∫ e^(x²) dx      ∫ e^(−x²) dx      ∫ sin x / x dx      ∫ eˣ / x dx</code></pre>
+<p>也就是说，无论你换多少次元、分多少次部，这些"积不出来"的量都不是你没算对，而是<strong>数学结构上就不存在初等结果</strong>——它们是"另一个级别的函数"。</p>
+<div class="insight"><strong>物理含义：</strong>这些"积不出来"的积分反而在物理与工程中到处出现：<code>∫ e^(−x²)dx</code> 是正态分布与误差函数 <code>erf(x)</code>（概率论、统计物理）的核心；<code>∫ sin x / x dx</code> 是正弦积分函数 <code>Si(x)</code>（光学衍射、信号处理）。数学家的对策是：给它们<strong>起个新名字</strong>（erf、Si 等）并做成函数表/数值算法——"积不出来"于是变成了"定义了新函数"。</div>
+<p><strong>反过来看本章：</strong>换元法、分部法并不是在"碰运气"，而是刘维尔理论划定的"初等可积范围"里的系统手段。遇到表里没有、又明显可积的被积函数，多想想<strong>形式上的线索</strong>（含 f′(x)·g(f(x)) 想换元、多项式×指数/三角想分部），就是在高效地利用这块"可积领地"。</p>
+<div class="summary"><span class="tag">一句话总结：</span>求不定积分是一门"<strong>识别可积结构</strong>"的学问，而不是一劳永逸的公式库——刘维尔告诉我们哪些能积、哪些天生不能，而本章的技巧，就是处理"能积"那部分的最佳路径。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3>一、练习题</h3>

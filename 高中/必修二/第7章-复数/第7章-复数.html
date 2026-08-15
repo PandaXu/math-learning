@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>复数 = 「平面上的数」。实数只够填满一条线（数轴），而复数用一个点 <code>(a, b)</code> 填满整个平面：横轴是实轴、纵轴是虚轴，中间的 “+” 把两条轴「缝」成一个二维的数。学完本章，你要能在脑中的复平面上“看见”每一个复数——加法是向量平移、乘法是旋转+伸缩、共轭是关于实轴的镜像、模是到原点的距离。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">7.1 复数的概念</a><a href="#s2">7.2 复数的代数运算</a><a href="#s3">7.3 复平面与几何意义</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a>
+<a href="#s1">7.1 复数的概念</a><a href="#s2">7.2 复数的代数运算</a><a href="#s3">7.3 复平面与几何意义</a><a href="#s4">含义总结</a><a href="#s5">典型例题</a><a href="#s6">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">7.1 复数的概念</h2>
@@ -192,6 +192,48 @@ z̄̄ = z（取两次共轭回到自身）</code></pre>
 </ul>
 </div>
 
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>复数是被"三次方程"逼出来的——卡丹与邦贝利（点击展开）</summary>
+<div class="fun-body">
+<p>课本说"为了让三次方程求根公式里的中间量能被统一处理"，数学家引入了虚数——这不是一句空话，它是一段真实的"事故"。</p>
+<p>1545 年，意大利数学家<strong>卡尔达诺（Girolamo Cardano，1501–1576）</strong>出版了《大术》（<em>Ars Magna</em>），书中公布了三次方程的求根公式。这段历史本身就有争议：公式最早是另一位意大利数学家<strong>塔尔塔利亚（Tartaglia）</strong>发现的，卡丹在承诺保密后还是把它发表了（并注明了出处），由此引发著名的"卡丹–塔尔塔利亚之争"。</p>
+<p>更要命的是，这个公式在碰到一类方程时"卡壳"了。以方程 <code>x³ = 15x + 4</code> 为例，它明明有三个实根（4 和 −2±√3），可代入求根公式后，中间过程却出现<strong>根号下是负数</strong>的表达式 <code>√(−121)</code>——按当时的规则，这样的中间量"不存在"，公式却偏偏要靠它才能算出实根。这一疑难情形（后来叫"不可约情形"）让数学家们如坐针毡。</p>
+<p>真正动手解决的是<strong>邦贝利（Rafael Bombelli，1526–1572）</strong>。他在 1572 年出版的《代数学》（<em>L'Algebra</em>）中，大胆地把 <code>√−1</code> 当作一个普通数来运算，发现 <code>(2 + i)³ = 2 + 11i</code>，于是 <code>√(−121) = 11i</code>，中间量一开方、再抵消，实根 4 就"干干净净"地出来了。邦贝利因此被称为"第一个系统地用虚数做运算的人"——虚数不是被人想出来的，是<strong>被公式逼出来的</strong>。</p>
+<div class="summary"><span class="tag">一句话总结：</span>为了算出三个真实的根，数学家不得不先走进虚数的"迷宫"——复数从一开始就生在了"实用"之中。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>"虚数"：一个带着羞辱出生的名字（点击展开）</summary>
+<div class="fun-body">
+<p>"虚数"（imaginary number）这个名字，最初是<strong>贬称</strong>。</p>
+<ul>
+<li><strong>笛卡尔（Descartes，1596–1650）</strong>在 1637 年的《几何学》中首次使用"imaginaires"（<strong>想象的数</strong>）一词，语气里满是怀疑——负数的平方根在他看来"并不真实"；</li>
+<li><strong>莱布尼茨（Leibniz）</strong>的形容更刻薄：<code>√−1</code> 是"介于存在与不存在之间的两栖动物"；</li>
+<li>大数学家欧拉也把 <code>√−1</code> 称为"既非无也非有"的数（虽然正是他把记号 <strong>i</strong> 定了下来，并率先研究它）。</li>
+</ul>
+<p>转折点在 <strong>高斯（Gauss）</strong>：1799 年，年仅 22 岁的他在博士论文中就用复数证明了代数基本定理；1831 年，他系统地提出用平面上的点表示复数（复平面，所以也叫"高斯平面"），并指出：复数完全可以由"一对实数"定义，<strong>根本不是"想象"出来的神秘之物</strong>。从此，复数获得了完整的"合法性"。</p>
+<p>今天回头看：<strong>"虚"字描述的只是"不在实轴上"</strong>，它和实数同样真实——第 7 章课本用复平面把这点说得明明白白：i 就是"从原点竖直向上走一步"。</p>
+<div class="summary"><span class="tag">一句话总结：</span>从"两栖动物"到平面上的点，虚数用了两百年才洗去名字里的羞辱。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>欧拉公式：五个常数的一场聚会（点击展开）</summary>
+<div class="fun-body">
+<p>1748 年，欧拉在《无穷小分析引论》中写下了一个日后被反复吟诵的公式：</p>
+<pre><code>e^(iθ) = cos θ + i sin θ</code></pre>
+<p>把它代入 θ = π，便得到：</p>
+<pre><code>e^(iπ) + 1 = 0</code></pre>
+<p>这个式子被许多人称为"<strong>最美的数学公式</strong>"（物理学家费曼也盛赞它是"我们这一行的珍宝"）：</p>
+<ul>
+<li>它让 <strong>e</strong>（自然对数的底，来自指数）、<strong>π</strong>（来自圆周）、<strong>i</strong>（来自代数）、<strong>1 和 0</strong>（来自算术的起点）——五个看似毫不相干的常数同台出现；</li>
+<li>它把<strong>指数</strong>（乘法的连续化）与<strong>三角函数</strong>（圆的几何）连成一体：复平面上的"旋转"原来就是指数函数的"增长"；</li>
+<li>它是量子力学波函数、交流电路相量法、信号处理中"旋转因子"的共同来源。</li>
+</ul>
+<p>从课堂的角度看，欧拉公式就是第 7 章"三角形式 z = r(cos θ + i sin θ)"的另一种写法 <code>z = r·e^(iθ)</code>——同一个圆上的点，两种语言，一通百通。</p>
+<div class="summary"><span class="tag">一句话总结：</span>e^(iπ)+1=0 把数学里最著名的五个常数请到了一张桌上——这就是"最美公式"的分量。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3 style="margin:6px 0 10px">一、练习题</h3>

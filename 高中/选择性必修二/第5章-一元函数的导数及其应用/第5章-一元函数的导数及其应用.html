@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>导数 = 函数在某一点的<strong>瞬时变化率</strong>。几何上它是曲线在该点<strong>切线的斜率</strong>，物理上它是<strong>瞬时速度</strong>（位移的导数）与<strong>瞬时加速度</strong>（速度的导数）。学完本章，你要能在心里"看见"：曲线任意一点附近都有一条恰好贴合的切线，切线的倾斜方向与倾斜程度，正是函数"正在上升还是下降、上升得多快"的答案。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">5.1 导数的概念：从平均变化率到瞬时变化率</a><a href="#s2">5.2 导数的几何意义：切线的斜率</a><a href="#s3">5.3 基本初等函数的导数公式与求导法则</a><a href="#s4">5.4 函数的单调性与导数</a><a href="#s5">5.5 函数的极值与最值</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+<a href="#s1">5.1 导数的概念：从平均变化率到瞬时变化率</a><a href="#s2">5.2 导数的几何意义：切线的斜率</a><a href="#s3">5.3 基本初等函数的导数公式与求导法则</a><a href="#s4">5.4 函数的单调性与导数</a><a href="#s5">5.5 函数的极值与最值</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">5.1 导数的概念：从平均变化率到瞬时变化率</h2>
@@ -186,6 +186,40 @@
 <li>❌ "cos x 的导数是 sin x" → ❌ (cos x)' = −sin x，注意负号；(sin x)' = cos x。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>微积分发明权之争：牛顿与莱布尼茨（点击展开）</summary>
+<div class="fun-body">
+<p><strong>两位主角：</strong></p>
+<ul>
+<li><strong>牛顿</strong>（Isaac Newton，1643—1727）：1665—1666 年，伦敦瘟疫大流行，剑桥大学停课，牛顿回到乡下老家，在一年多里发明了他称为"流数法"的微积分。但他没有立刻发表，只以手稿在少数人之间流传。</li>
+<li><strong>莱布尼茨</strong>（Gottfried Wilhelm Leibniz，1646—1716）：1675 年前后在巴黎独立发展出微积分，并在 <strong>1684 年公开发表</strong>《求极大极小的新方法》——这是历史上第一篇正式发表的微积分论文。</li>
+</ul>
+<p><strong>争端：</strong>1699 年起，围绕"谁先发明"爆发了持续多年的优先权之争，英国皇家学会也介入调查。讽刺的是，英国数学家为了"捍卫牛顿"长期拒绝使用莱布尼茨的记号，反而把自己和欧洲大陆的数学交流隔离开来，拖慢了英国数学的发展。</p>
+<p>今天的历史结论是清晰的：<strong>两人各自独立地发明了微积分</strong>。牛顿更早（约 1665—1666），莱布尼茨更早发表（1684），而本章导数公式表里那套"求导运算"，正是这场发明留下的共同遗产。</p>
+<div class="summary"><span class="tag">一句话总结：</span>牛顿与莱布尼茨各自独立发明了微积分——真正的输家，是后来那些站队吵架的数学家。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>记号的力量：牛顿的"流数"与莱布尼茨的 dy/dx（点击展开）</summary>
+<div class="fun-body">
+<p>牛顿把瞬时变化率叫做"<strong>流数</strong>"（fluxion，即"流动之数"）：位置是"流量"，位置的变化快慢是"流数"，记号是在字母上方加一点（如 <code>ẋ</code> 表示位置对时间的变化率）。这套名词生动，但记号只对"时间"一种自变量好用，而且点多点少很难分清。</p>
+<p>莱布尼茨则把变化率写成 <code>dy/dx</code>（读作"dy 比 dx"），把微积分设计成一套<strong>符号运算</strong>：链式法则在他的记号下几乎"自己会说话"——</p>
+<pre><code>dy/dx = (dy/du) · (du/dx)</code></pre>
+<p>约分般的结构让复合求导（本章 5.3 节）一目了然。历史给出了判决：<strong>莱布尼茨的记号更成功</strong>，今天的教科书几乎全部采用 <code>dy/dx</code>、<code>f'(x)</code>（"带撇"的记法则来自拉格朗日）。</p>
+<p><strong>思考：</strong>好的记号不只是记录工具，更是<strong>思考的引擎</strong>——它把"瞬时变化率"这个困难的概念，压缩成一个可以机械操作的符号。微积分之所以能成为工程师人人会用的工具，记号功不可没。</p>
+<div class="summary"><span class="tag">一句话总结：</span>同样是发明微积分，莱布尼茨多赢了一手——他赢在记号：<code>dy/dx</code> 沿用至今，而"流数"只剩在数学史里被提起。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">问</span>贝克莱的质问："消失量的幽灵"（点击展开）</summary>
+<div class="fun-body">
+<p><strong>1734 年</strong>，爱尔兰主教、哲学家<strong>贝克莱</strong>（George Berkeley，1685—1753）发表小册子《分析家》，向微积分开火。他抓住一个真问题：计算导数时，我们先是"设 <code>Δx</code> 不是 0"，用它去除、约分；最后又"令 <code>Δx</code> 等于 0"，把它丢掉。</p>
+<p>他写道：这些"流数"到底是什么？是有限量？是无穷小？还是零？——它们都不是，它们是"<strong>已消失量的幽灵</strong>"（ghosts of departed quantities）。</p>
+<p>这批评相当犀利——牛顿的无穷小确实经不起逻辑推敲。但贝克莱并不是要"废除微积分"（他自己承认微积分的结果是对的），而是在逼数学家回答"为什么可以这样算"。这个追问最终在 19 世纪开花结果：<strong>柯西</strong>与<strong>魏尔斯特拉斯</strong>用严格的"极限"语言（<code>ε–δ</code> 定义）重建了微积分——本章 5.1 节那句"当 <code>Δx</code> 趋向 0 时，<code>Δy/Δx</code> 的极限"，正是这场重建的产物。</p>
+<div class="summary"><span class="tag">一句话总结：</span>一个看似"抬杠"的哲学质问，推动微积分用两百年时间补上了逻辑的窟窿。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3 style="margin:0 0 8px">一、练习题</h3>

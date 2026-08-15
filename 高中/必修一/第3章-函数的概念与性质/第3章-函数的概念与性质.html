@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>函数 = 两个数集之间的"唯一对应关系"——定义域是"输入"的范围、值域是"输出"的范围，单调性描述图像"上升还是下降"、奇偶性描述图像"关于谁对称"；学完本章，你要能在心里同时"看见"一条函数曲线，并把它翻译成物理量随时间、随位置变化的规律。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">3.1 函数的概念</a><a href="#s2">3.2 定义域与值域</a><a href="#s3">3.3 单调性与最大（小）值</a><a href="#s4">3.4 奇偶性</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a>
+<a href="#s1">3.1 函数的概念</a><a href="#s2">3.2 定义域与值域</a><a href="#s3">3.3 单调性与最大（小）值</a><a href="#s4">3.4 奇偶性</a><a href="#s5">含义总结</a><a href="#s6">典型例题</a><a href="#s7">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">3.1 函数的概念</h2>
@@ -191,6 +191,36 @@
 <li>❌ "闭区间上的函数一定有最大最小值" → ❌ 不一定。f(x) = 1/x 在 (0, +∞) 上无最值；即便在闭区间上，若函数在该区间有间断也可能无最值。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>"函数"这个词：莱布尼茨造词、欧拉造记号、李善兰造译名（点击展开）</summary>
+<div class="fun-body">
+<p>我们今天随口说的"函数"，是三个时代、三种语言接力完成的：</p>
+<ul>
+<li><strong>莱布尼茨造词（1673 年）</strong>：德国数学家<strong>莱布尼茨（Leibniz，1646–1716）</strong>在一份研究几何曲线的手稿中首次使用 <em>function</em> 一词，它来自拉丁语 <em>functio</em>，本义是"<strong>执行、完成、发挥作用</strong>"——他把"随曲线上的点而变化的量"叫作 function，意为"这个量在'执行'某种对应任务"。</li>
+<li><strong>欧拉造记号（1734 年）</strong>：瑞士数学家<strong>欧拉（Euler，1707–1783）</strong>首先引入记号 <code>f(x)</code>——f 是 function 的首字母，括号里装自变量，从此"函数"有了今天这副面孔。欧拉还给出了教科书沿用至今的定义：<strong>y 是 x 的函数，如果 x 取定时 y 有唯一确定的值</strong>。</li>
+<li><strong>李善兰造译名（1859 年）</strong>：清代数学家<strong>李善兰</strong>与英国传教士<strong>伟烈亚力</strong>合译《代微积拾级》时，首次把 function 译成"<strong>函数</strong>"，并加注："凡此变数中<strong>函</strong>彼变数者，则此为彼之函数。"这里的"函"是古汉语中"<strong>包含</strong>"的意思——"函数"就是"<strong>被包含在式子里的数</strong>"，一如信封（函）里装着信。</li>
+</ul>
+<p>所以"函数"这两个字，字面意思是"<strong>装在式子里的数</strong>"——今天读来略显古老，但细想与"唯一对应"的定义居然很贴切。</p>
+<div class="summary"><span class="tag">一句话总结：</span>一个拉丁词"执行"，加一个字母记号 f(x)，加一个中文"函"字，凑齐了"函数"的完整身世。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>狄利克雷函数：一个画不出图像的函数（点击展开）</summary>
+<div class="fun-body">
+<p>函数一定要有"解析式"、能画出"图像"吗？德国数学家<strong>狄利克雷（Peter Gustav Lejeune Dirichlet，1805–1859）</strong>给出了一个让人目瞪口呆的答案——他定义了一个函数 D(x)：</p>
+<pre><code>D(x) = 1，当 x 是有理数；
+D(x) = 0，当 x 是无理数。</code></pre>
+<p>这个函数：</p>
+<ul>
+<li><strong>满足函数的全部要求</strong>：定义域是全体实数 R，每个 x 都有唯一确定的函数值（有理数给 1、无理数给 0），完全是教科书定义下的合法函数；</li>
+<li><strong>却画不出图像</strong>：因为有理数和无理数在数轴上"你中有我、我中有你"地紧紧挤在一起，D(x) 的图像将在"高度 1"和"高度 0"之间无限密集地跳动——任何一支笔都无法描出它；</li>
+<li><strong>处处不连续</strong>：在任何一个点 x₀ 附近，都既有有理数又有无理数，函数值在 0 和 1 之间来回"瞬移"，永远无法稳定在某个值上。</li>
+</ul>
+<p>狄利克雷用这个例子告诉数学界：<strong>"对应关系"才是函数的本质</strong>，能不能写出公式、能不能画出图像，都是其次的。他还提出了著名的<strong>抽屉原理</strong>（鸽笼原理：把 n + 1 个物体放进 n 个抽屉，必有一个抽屉至少装两个）——这位数学家专门负责"把常识变成定理"。</p>
+<div class="summary"><span class="tag">一句话总结：</span>狄利克雷函数的存在，证明"函数"的本质是规则不是图形——第 3 章"对应说"定义的底气，正来自这里。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p><strong>一、练习题</strong></p>

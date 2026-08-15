@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>向量 = 「既有大小又有方向、可以自由平移的箭头」。学完本章，你要能把"平移、旋转、伸缩"这些几何变换，以及"位移、力、速度、功"这些物理量，统一成向量的加减、数乘与数量积运算，并最终用向量推导出余弦定理与正弦定理，去解任意三角形。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">6.1 向量的概念</a><a href="#s2">6.2 向量的加减法与数乘</a><a href="#s3">6.3 向量的数量积</a><a href="#s4">6.4 平面向量基本定理与坐标表示</a><a href="#s5">6.5 正弦定理与余弦定理</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+<a href="#s1">6.1 向量的概念</a><a href="#s2">6.2 向量的加减法与数乘</a><a href="#s3">6.3 向量的数量积</a><a href="#s4">6.4 平面向量基本定理与坐标表示</a><a href="#s5">6.5 正弦定理与余弦定理</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">6.1 向量的概念</h2>
@@ -224,6 +224,32 @@ c² = a² + b² − 2ab·cos C</code></pre>
 <li>❌ "两向量平行 ⇔ x₁/x₂ = y₁/y₂" → ❌ 当 x₂ 或 y₂ 为 0 时比例式无意义，应写交叉相乘 <code>x₁y₂ − x₂y₁ = 0</code>。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>哈密顿与四元数：一座桥上的"天启"（点击展开）</summary>
+<div class="fun-body">
+<p>今天的向量运算这么自然，它的前身其实是一段"差点跑偏"的历史。19 世纪初，数学家们热切地想给"三维空间"也找到像复数那样的乘法，但处处碰壁——三维乘法怎么定义都不自洽。</p>
+<p><strong>威廉·哈密顿（William Rowan Hamilton，1805–1865）</strong>，爱尔兰的天才数学家，在这件事上纠缠了十多年。1843 年 10 月 16 日，他陪妻子沿都柏林皇家运河散步，走到布罗汉桥（Brougham Bridge）时突然灵光一闪：</p>
+<div class="insight">放弃"交换律"（a·b = b·a 不要求成立），引入三个"虚单位" i、j、k，令 <code>i² = j² = k² = ijk = −1</code>——四元数（quaternion）就此诞生。</div>
+<p>兴奋的哈密顿当场掏出小刀，把公式刻在了桥的石栏上（那块碑文至今仍在）。四元数是第一个被人类使用的<strong>非交换代数</strong>：a·b ≠ b·a 在三维世界里竟是"正常"的。后来哈密顿花了大半辈子推广四元数，但四元数本身并没有成为主流工具。</p>
+<p>真正改变世界的是它的"副产品"：英国物理学家<strong>赫维赛德（Oliver Heaviside）</strong>和美国物理学家<strong>吉布斯（J. Willard Gibbs）</strong>先后从四元数中剥离出"向量"部分，重新定义了<strong>点乘（数量积）与叉乘（向量积）</strong>，并在 1880 年代完善成今天的<strong>向量分析</strong>——电磁学麦克斯韦方程组从此可以用向量语言优雅地书写，你手机里的 GPS 定位、飞行器姿态控制（四元数至今仍被用于航天器姿态计算），都直接受惠于此。</p>
+<div class="summary"><span class="tag">一句话总结：</span>向量的诞生，是一位数学家散步时"放弃交换律"换来的顿悟——先有四元数，后有今天的向量。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>格拉斯曼：一位中学教师，超前写出了"向量"（点击展开）</summary>
+<div class="fun-body">
+<p>在哈密顿刻桥的同年（1844 年），另一位德国人也独立地"发明"了向量代数，而他身份特殊——<strong>赫尔曼·格拉斯曼（Hermann Grassmann，1809–1877）</strong>是一位终身的中学教师，教希腊语和数学。</p>
+<p>格拉斯曼在 1844 年出版了《线性扩张论》（<em>Die lineale Ausdehnungslehre</em>），里面已经包含了：</p>
+<ul>
+<li>现代意义的<strong>向量空间</strong>概念（他称之为"扩张量"）；</li>
+<li><strong>内积</strong>（即今天的数量积 <code>a→·b→</code>）与<strong>外积</strong>（即今天的叉积 <code>a→×b→</code>）；</li>
+<li>用这套代数重新推导了整个几何——"把几何变成计算"，正是课本 6.4 节"坐标运算"的哲学源头。</li>
+</ul>
+<p>然而这部著作太超前了：书出版后<strong>几乎无人问津</strong>，数学界冷落了它整整二十年。1862 年他重写并扩充了第二版，依然反响寥寥。直到 19 世纪末，吉布斯、赫维赛德建立向量分析时，人们才猛然发现——格拉斯曼在几十年前就把这一切写好了。他一生郁郁寡欢，晚年倒是在语言学上拿了荣誉（他研究梵语语法），仿佛是对数学界迟到的眼光的一种讽刺。</p>
+<div class="summary"><span class="tag">一句话总结：</span>格拉斯曼的《线性扩张论》是一部"出版太早"的杰作——向量代数的地图早已画好，只是同行们用了五十年才学会看。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p class="paper-head">一、练习题</p>

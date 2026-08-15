@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>命题逻辑 = 把「能判断真假的陈述句」抽象成符号，用 ∧、∨、¬、→、↔ 五个联结词组合、演算、推理——它的几何形态是「布尔超立方体 {0,1}ⁿ 上的顶点与集合」，它的物理形态是「与/或/非门组成的开关电路」，学完本章你要能在"集合/几何图形"与"逻辑电路"之间自由翻译每一个公式。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">1.1 命题与联结词</a><a href="#s2">1.2 命题公式</a><a href="#s3">1.3 等值演算</a><a href="#s4">1.4 范式</a><a href="#s5">1.5 推理理论</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+<a href="#s1">1.1 命题与联结词</a><a href="#s2">1.2 命题公式</a><a href="#s3">1.3 等值演算</a><a href="#s4">1.4 范式</a><a href="#s5">1.5 推理理论</a><a href="#s6">含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">1.1 命题与联结词</h2>
@@ -253,6 +253,43 @@ m3 = p ∧ q     (11 时为真)       M3 = ¬p ∨ ¬q    (11 时为假)</code><
 <li>❌ "主析取范式与主合取范式是两种不同的公式" → ❌ 它们是<strong>同一个公式</strong>的两种等值写法（正写点集 / 负写补集），真值表完全相同。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>亚里士多德的三段论：两千四百年前的第一套"推理软件"（点击展开）</summary>
+<div class="fun-body">
+<p><strong>本章把推理写成了符号公式；而"推理可以被当作一门学问来研究"这个想法本身，起源于亚里士多德（公元前 4 世纪）。</strong>他在《工具论》的《前分析篇》里系统研究了<strong>三段论</strong>：由两个前提必然推出一个结论。他没有停留于具体例子，而是把推理抽成纯形式：</p>
+<pre><code>所有 M 都是 P；      （大前提）
+所有 S 都是 M；      （小前提）
+所以所有 S 都是 P。  （结论）</code></pre>
+<p>这里的 M、P、S 分别来自拉丁语中词（medium）、大词（praedicatum）、小词（subiectum）的首字母。亚里士多德研究的是<strong>空位</strong>：M、S、P 填进任何具体内容，只要形式对，推理就可靠。这就是本章 1.5 说的"<strong>有效推理只看形式、不看前提真假</strong>"的源头——两千多年来，逻辑的骨架几乎没有变过。</p>
+<p>你会在本章推理规则表里认出三段论的嫡系后代：<code>p → q, q → r ⇒ p → r</code>（假言三段论）就是把"所有 M 是 P、所有 S 是 M"翻译成符号的现代版本。</p>
+<div class="summary"><span class="tag">一句话总结：</span>亚里士多德把"推理"变成了可以填空的形式骨架——形式逻辑由此诞生，而本章的每个公式都是它两千四百年后的"翻译"。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">典</span>乔治·布尔与《思维规律的研究》：逻辑第一次变成 0 和 1（点击展开）</summary>
+<div class="fun-body">
+<p>1847 年，自学成才的英国数学家<strong>乔治·布尔</strong>出版《逻辑的数学分析》；1854 年，他出版更完整的《思维规律的研究》（<em>An Investigation of the Laws of Thought</em>）。在这本书里他做了一个大胆的假设：<strong>推理的过程可以像代数一样运算</strong>。</p>
+<ul>
+<li>他把"且、或、非"翻译成运算符号（今天的 ∧、∨、¬），把命题的真假翻译成取值——这套系统后来就叫<strong>布尔代数</strong>。</li>
+<li>他注意到一个特别的等式 <code>x² = x</code>（幂等律）：一个命题"和它自己且"还是它自己。在普通数里，<code>x² = x</code> 只允许 x = 0 或 x = 1——布尔敏锐地指出，这恰好说明逻辑量的取值只有两个：真与假，即 0 与 1。</li>
+<li>布尔本人做的完全是"纯逻辑"，他从未想到这套东西会用于造机器。近一个世纪后，香农（Shannon，见本章 1.1 的物理含义）才把它接上开关电路——你面前的计算机芯片，就是从这本书里的 0 和 1 出发的。</li>
+</ul>
+<div class="summary"><span class="tag">一句话总结：</span>布尔把"思考的规律"写成了一本代数书，让逻辑第一次有了与数学相同的运算规则——后来的电路、芯片都只是这份 0/1 代数遗产的执行者。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>莱布尼茨的"思维机器"之梦：三个半世纪前的预言（点击展开）</summary>
+<div class="fun-body">
+<p>17 世纪的哲学家、数学家<strong>莱布尼茨</strong>（1646–1716）比任何人都更早地认真梦想过"机器替人思考"。他提出两个相互关联的构想：</p>
+<ul>
+<li><strong>通用特征语言</strong>（characteristica universalis）：设计一套精确到不能再精确的符号，让每一个概念都能被严格表示——就像化学符号表示物质一样。</li>
+<li><strong>理性演算</strong>（calculus ratiocinator）：把"推理"变成"计算"。他设想，将来出现意见分歧时，双方只需要说"<strong>Calculemus!</strong>"（拉丁语：让我们计算吧），拿起笔算一算就能达成一致。</li>
+</ul>
+<p>这个梦想在他的时代过于超前：逻辑还停留在亚里士多德的句法，没有符号代数，更没有机器。它沉睡了约一个半世纪，直到布尔（上一则）、弗雷格（第 2 章）、香农等人一步步把"计算"落到纸面和电路上。今天你学的<strong>命题演算</strong>，正是"理性演算"的第一个实现——而它又通过电路变成了你手中的设备。</p>
+<div class="summary"><span class="tag">一句话总结：</span>莱布尼茨"用计算平息争论"的梦想，经历了逻辑代数化、形式化、电路化三步，如今以芯片的形式部分成真。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <p><strong>一、练习题</strong></p>

@@ -14,7 +14,7 @@
 <div class="summary"><span class="tag">一句话总纲：</span>导数 = 「曲线的切线斜率」= 「瞬时变化率」。学完本章，你要能在心里同时"看见"两件事：<strong>几何上</strong>，f′(x₀) 是曲线 y=f(x) 在点 x₀ 处<strong>切线的斜率</strong>；<strong>物理上</strong>，它是量在 x₀ 这一瞬的<strong>变化快慢</strong>（速度、加速度、增长率）。而微分是"以直代曲"的工具——用切线上的增量 dy 去近似曲线上的增量 Δy。</div>
 
 <div class="toc"><b>本章目录</b>
-<a href="#s1">2.1 导数的概念</a><a href="#s2">2.2 求导法则</a><a href="#s3">2.3 高阶导数</a><a href="#s4">2.4 隐函数与参数方程求导</a><a href="#s5">2.5 微分</a><a href="#s6">几何与物理含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a>
+<a href="#s1">2.1 导数的概念</a><a href="#s2">2.2 求导法则</a><a href="#s3">2.3 高阶导数</a><a href="#s4">2.4 隐函数与参数方程求导</a><a href="#s5">2.5 微分</a><a href="#s6">几何与物理含义总结</a><a href="#s7">典型例题</a><a href="#s8">常见误区</a><a href="#ext">课本外 · 典故与思考</a>
 </div>
 
 <h2 id="s1">2.1 导数的概念</h2>
@@ -312,6 +312,30 @@ sin x ≈ x                tan x ≈ x          arctan x ≈ x</code></pre>
 <li>❌ "反函数求导 (φ)′(y) = 1/f′(y)" → ❌ 应代入原自变量 x：(φ)′(y) = 1/f′(x)，其中 x 与 y 满足 y=f(x)。</li>
 </ul>
 </div>
+<h2 id="ext">课本外 · 典故与思考</h2>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">史</span>牛顿与莱布尼茨：一场跨越英吉利海峡的发明权之争（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>今天全世界用的导数记号 <code>dy/dx</code> 是莱布尼茨的，而把导数称为"变化率"的物理直觉，是牛顿先建立的——两个人各自独立地发明了微积分，却为此吵了半辈子。</p>
+<ul>
+<li><strong>牛顿（1642–1727）：</strong>约 1665–1666 年因瘟疫避居乡间时建立了"<strong>流数法</strong>"：把变量看成流动的量，导数就是流动的"<strong>流数</strong>"，物理画面是速度和加速度。但他迟迟没有系统发表，直到 1687 年的《自然哲学的数学原理》才以几何形式公之于众，流数法本身更晚才整理出版。</li>
+<li><strong>莱布尼茨（1646–1716）：</strong>1675 年前后独立发明微分与积分，1684 年在《教师学报》发表第一篇微积分论文，并创造了一整套沿用至今的记号：<code>dy/dx</code>、积分号 <code>∫</code>、记号 <code>dx</code> 表示"微小的差"。</li>
+</ul>
+<p><strong>争端：</strong>1708 年起有人公开指控莱布尼茨剽窃牛顿。莱布尼茨向英国皇家学会申诉，1712 年学会的调查报告（由牛顿本人主导撰写）判定牛顿优先。事后研究认为两人是<strong>独立发明</strong>，但这场争端让英欧数学界对立了几十年——英国固守牛顿的几何与点记号，错失了莱布尼茨记号的传播期，数学发展一度落后于大陆。</p>
+<div class="summary"><span class="tag">一句话总结：</span>同一座数学大厦，两个人各搭了一半脚手架：牛顿给了"变化率"的物理直觉，莱布尼茨给了"能运算的记号"——今天课本里的 <code>dy/dx</code>，正是这场争论的"幸存者"。</div>
+</div>
+</details>
+<details class="fun">
+<summary class="fun-s"><span class="fun-seal">思</span>莱布尼茨记号为什么"好用"？——dy/dx 不是分数，却假装是分数（点击展开）</summary>
+<div class="fun-body">
+<p><strong>先看直觉：</strong>如果导数真是"两个无穷小之比"，那么链式法则就是普通分数约分：</p>
+<pre><code>dy/dx = (dy/du) · (du/dx)   像   (a/b)(b/c) = a/c 一样"约掉" du</code></pre>
+<p>反函数求导 <code>dx/dy = 1/(dy/dx)</code> 像取倒数；换元积分里 <code>dx</code> 甚至可以真的参与变量代换。这些"假装分数"的操作，几乎全是对的——这正是莱布尼茨记号的最大价值：<strong>记号本身在替你"计算"</strong>。</p>
+<p><strong>为什么能假装？</strong>牛顿用点记号（<code>ẋ</code> 表示对时间求导）简洁却"不透明"，它只适合物理上的时间变量。莱布尼茨把求导看成"<strong>比值的极限</strong>"：<code>dy/dx = lim(Δx→0) Δy/Δx</code>。既然是比值的极限，比值能做的运算（乘除、约分），在极限下大多仍成立。而本章 2.5 节引入的<strong>微分</strong>概念，正是给这个直觉配上了严谨的底座：dy、dx 被定义为与"线性主部"有关的量，链式法则的"约分"就有了严格的证明，而不是碰巧对。</p>
+<div class="insight"><strong>物理含义：</strong>记号还承载了量纲直觉。在物理里，<code>dy/dx</code> 的"单位"确实是 (y 的单位)/(x 的单位)：速度 <code>ds/dt</code> 的单位是米/秒，加速度是 (米/秒)/秒。记号让单位换算自动浮现，工程师一眼就能看出"这是谁对谁的导数"。</div>
+<div class="summary"><span class="tag">一句话总结：</span>莱布尼茨记号赢在<strong>"形似分数而胜似分数"</strong>——它把导数"比值极限"的本质装进记号里，让链式法则、反函数、换元这些运算变得像初等算术一样自然；微分理论则保证这份直觉永远有定理兜底。</div>
+</div>
+</details>
 <h2 id="practice">本章练习卷（含答案）</h2>
 <div class="paper">
 <h3 class="paper-head">一、练习题</h3>
